@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>SL Merida | Events</title>
+<meta name="viewport" content="width=device-width;initial-scale = 1.0,maximum-scale = 1.0" />
+<link rel="stylesheet" type="text/css" href="css/fonts.css" />
+<link rel="stylesheet" type="text/css" href="css/core.css" />
+<link rel="stylesheet" type="text/css" href="css/events.css" />
+
+
+<link rel="stylesheet" type="text/css" href="css/tablet.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.carouFredSel-6.1.0-packed.js"></script>
+<script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="js/yetii-min.js"></script>
+<script type="text/javascript" src="js/tw.js"></script>
+</head>
+<body>
+
+  <!-- Top Bar Start -->
+
+  <div id="TopBar">
+  	<div class="sWidth">
+  	  <div class="fl powered">Powered by<img alt="townwizard" src="images/header/twBanner.png" /></div>
+  	  <div class="fr links">
+  	  	<a href="#">Other Townwizard Places</a> | <a href="#">About Townwizard</a>
+  	  </div>
+  	</div>
+  </div>
+
+  <!-- Top Bar End -->
+
+  <!-- Content Start -->
+
+  <div id="Content" class="sWidth">
+  	
+  	<!-- Header Start -->
+
+  	<div id="Header">
+  	  <div id="Logo" class="fl">
+  	  	<a href="#"><img alt="" src="images/mock/partnerLogo.jpg" /></a>
+  	  </div>
+  	    <div class="headerAdFlex fl">
+  	  	  <div id="Social" class="fr">
+            <div>
+              <a href="#" onclick="fb_login(); return false;"><img alt="Login with Facebook" src="images/header/fbLoginBtn.png" /></a>
+              <a href="#"><img alt="Login with Twitter" src="images/header/twtLoginBtn.png" /></a>
+              <a href="#"><img alt="Help" src="images/header/helpBtn.png" /></a>
+            </div>
+          </div>
+          <div id="UpperBannerAd" class="bannerAd">
+  	  	  	<div class="bannerCont">
+  	  	      <!-- TOP BANNER AD -->
+  	  	      <img src="images/mock/ads/bannerAd.jpg" />
+  	  	  	</div>
+  	  	  </div>
+  	    </div>
+  	    
+  	    <div id="GuideInfo" class="cr">
+  	      <div class="localCont">
+            <div id="Local" class="fl">
+  	      	  <div id="Weather" class="fr">High: 88&deg; <img alt="Partly Cloudy" src="images/weather/partlyCloudy.png" /> Low: 50&deg;</div>
+  	      	  Serving Merida, Ciudad Caucel, &amp; Surrounding Areas
+            </div>
+          </div>
+          <div class="search fr">
+  	  	    <form>
+  	  	  	  <input type="text" placeholder="Search SocialLife Merida..." />
+  	  	  	  <input type="submit" value="" class="searchBtn" />
+  	  	    </form>
+  	  	  </div>
+  	    </div>
+  	</div>
+
+  	<!-- Header End -->
+
+  	<div id="MainContent">
+  	  
+  	  <!-- Left Column Start -->
+
+  	  <div id="LeftCol" class="fl">
+  	  	<nav id="MainNav" class="display">
+  	  	  <ul>
+  	  	    <li><a id="NavHome" href="index.html">Home</a></li>
+  	  	    <li class="active">
+              <a id="NavEvents" href="events.html">Events</a>
+              
+              <!-- Navigation Sub Menu Start -->
+              
+              <ul>
+                <li><a href="#">My Calendar</a></li>
+                <li><a href="#">Favorite Places</a></li>
+                <li><a href="#">Event Types</a></li>
+                <li><a href="#">Events with Places</a></li>
+                <li><a href="#">The Weekend</a></li>
+              </ul>
+
+              <!-- Navigation Sub Menu End -->
+
+            </li>
+   	  	    <li><a id="NavOffers" href="#">Offers</a></li>
+  	  	    <li><a id="NavRest" href="restaurants.html">Restaurants</a></li>
+  	  	    <li><a id="NavBars" href="#">Bars</a></li>
+  	  	    <li><a id="NavEnt" href="#">Entertainment</a></li>
+  	  	    <li><a id="NavPeople" href="#">People</a></li>
+  	  	    <li><a id="NavBlog" href="#">Blog</a></li>
+  	  	    <li><a id="NavBest" href="#">Best in Town</a></li>
+  	  	    <li><a id="NavDir" href="#">Directory</a></li>
+  	  	   </ul>
+  	    </nav>
+  	    <div id="SideLinks">
+  	      <h4 class="display">Your Stuff</h3>
+  	      <a href="#">Favorite Places</a>
+  	      <a href="#">Your Saved Offers</a>
+  	      <a href="#">Your Events Calendar</a>
+  	      <a href="#">Your Lists</a>
+  	      <h4 class="display">Quick Links</h3>
+  	      <a href="#">Ratings &amp; Reviews</a>
+  	      <a href="#">Check-ins &amp;  Hotspots</a>
+  	      <a href="#">About [Brand Name]</a>
+  	    </div>
+  	    <div id="SideMobile" class="sect">
+  	      <h2>TownWizard Mobile!</h2>
+  	      <p>Lorem ipsum dolor sit amet adipiscing elit donec.</p>
+  	      <a href="#" target="_blank"><img alt="Download for the iPhone/iPad" src="images/sidebar/iphoneAppBtn.png" /></a>
+  	      <a href="#" target="_blank"><img alt="Download for Android" src="images/sidebar/androidAppBtn.png" /></a>
+  	    </div>
+  	    <div id="SideSocial" class="sect">
+  	      <h3 class="display">Follow Us</h3>
+  	      <a class="twitter" href="#" target="_blank"><img alt="Follow us on Twitter" src="images/sidebar/twtFollowBtn.png" /></a>
+  	      <a class="youtube" href="#" target="_blank"><img alt="Follow us on YouTube" src="images/sidebar/ytFollowBtn.png" /></a>
+  	    </div>
+  	    <div id="SideAds" class="sect">
+  	      <div class="ad space">
+  	      	<img alt="" src="images/mock/ads/180x150_1.jpg" />
+  	      </div>
+  	      <div class="ad">
+  	      	<img alt="" src="images/mock/ads/180x150_2.jpg" />
+  	      </div>
+  	      <div class="sect">
+  	      	<h3 class="display">Hotspots</h3>
+  	      	<p>Hot Spot rankings are decided by your annual votes.</p>
+  	      	<h4 class="display">Sushi</h4>
+  	      	<a href="#">Sushimaster</a>
+  	      	<a href="#">Yo! Sushi</a>
+  	      	<a href="#">Sushi Sushi Sushi</a>
+  	      	<a href="#">Ultimate Sushi</a>
+  	      	<h4 class="display">Outdoor Dining</h4>
+  	      	<a href="#">The Patio</a>
+  	      	<a href="#">Gerry's</a>
+  	      	<a href="#">The Red Chimney</a>
+  	      	<a href="#">Le Gavorche</a>
+  	      	<h4 class="display">Family Trip</h4>
+  	      	<a href="#">The Zoo</a>
+  	      	<a href="#">The Aquarium</a>
+  	      	<a href="#">Barney's Fun Shack</a>
+  	      	<a href="#">Milton Fun Park</a>
+  	      </div>
+  	      <div class="sect">
+  	      	<div class="ad space">
+  	      	  <img alt="" src="images/mock/ads/180x150_2.jpg" />
+  	      	</div>
+  	      	<div class="ad space">
+  	      	  <img alt="" src="images/mock/ads/180x150_1.jpg" />
+  	      	</div>
+  	      	<div class="ad">
+  	      	  <img alt="" src="images/mock/ads/180x150_2.jpg" />
+  	      	</div>
+  	      </div>
+  	    </div>
+  	  </div>
+
+  	  <!-- Left Column End -->
+
+  	  <div id="WidgetArea">
+
+    	  <!-- Event Finder Start -->
+
+    	  <div id="Feat" class="centerCol fl">
+    	  	<div id="Find" class="sect">
+            <h1 class="display">Events in SL Merida</h1>
+            <div id="FindForm">
+              <div>
+                <input type="text" class="search fl" placeholder="Event Search" />
+                <select class="type fl">
+                  <option>Type</option>
+                  <option>Live Music</option>
+                  <option>Festival</option>
+                  <option>Market</option>
+                </select>
+                <select class="date fl">
+                  <option>Any date</option>
+                  <option>December</option>
+                  <option>January</option>
+                  <option>February</option>
+                </select>
+                <input type="submit" class="submit fr" align="left" value="" />
+              </div>
+              <div class="sub cl">
+                <span class="bold">Popular:</span> 
+                <a href="#">Family weekend</a> | 
+                <a href="#">Gigs</a> | 
+                <a href="#">Beastie Boys</a> | 
+                <a href="#">Football</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    	  <!-- Event Finder End -->
+
+        <!-- Placeholder for Header Banner Ad in Vertical Layout Start -->
+
+        <div id="LowerBannerAd" class="bannerAd"></div>
+
+        <!-- Placeholder for Header Banner Ad in Vertical Layout End -->
+
+        <!-- Event Page Rotator Start -->
+
+        <div id="Events" class="rotator carousel fl">
+          <div class="gallery centerCol fl">
+            <a class="prev nav"><img alt="prev" src="images/marquee/marqueeArrowLt.png" /></a>
+            <a class="next nav"><img alt="next" src="images/marquee/marqueeArrowRt.png" /></a>
+            <ul>
+              <li id="item1" class="1">
+                <div class="event">
+                  <a href="event-info.html"><img alt="" src="images/mock/lists/feat3.jpg" width="100%" /></a>
+                  <div class="infoCont">
+                    <h2 class="bold">Spring Melodies Weekend With Geoff McBride, Kaci Bolls, The Babies &amp; Hugh...</h2>
+                    <p>First Note Music Hall &bull; Today 1:30 - 3pm &bull; 10 RSVPs</p>
+                    <div class="cl"></div>
+                  </div>
+                </div>
+              </li>
+              <li id="item2" class="2">
+                <div class="event">
+                  <a href="event-info.html"><img alt="" src="images/mock/lists/feat.jpg" width="100%" /></a>
+                  <div class="infoCont">
+                    <h2 class="bold">Sonic Youth: The Eternal Tour</h2>
+                    <p>Ampitheater at Alys Beach &bull; Today 8pm - 11pm &bull; 48 RSVPs</p>
+                    <div class="cl"></div>
+                  </div>
+                </div>
+              </li>
+              <li id="item3" class="3">
+                <div class="event">
+                  <a href="event-info.html"><img alt="" src="images/mock/lists/feat2.jpg" width="100%" /></a>
+                  <div class="infoCont">
+                    <h2 class="bold">Watercolor Classes with Carol Dickson</h2>
+                    <p>Bayou Arts Center &bull; March 4th 1:30 - 3pm &bull; 10 RSVPs</p>
+                    <div class="cl"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="pag">
+
+            </div>
+            <div class="cb"></div>
+          </div>
+        </div>
+        <script type="text/javascript">
+          
+          $(document).ready(function() {
+
+            $("#Events .gallery ul").carouFredSel({
+                responsive          : true,
+                auto                : true, 
+                items : {
+                    visible     : 1,
+                    width       : 420
+                }, 
+                circular            : true, 
+                infinite            : true,
+                direction           : "left", 
+                scroll : {
+                    fx              : "crossfade", 
+                    items           : 1,
+                    duration        : 1000, 
+                    pauseOnHover    : true, 
+                    easing          : "linear"
+                }, 
+                prev : "#Events .prev",
+                next : "#Events .next", 
+                pagination : {
+                    container       : "#Events .pag"
+                }, 
+                swipe : {
+                    onTouch         : true, 
+                    onMouse         : true
+                }
+            });
+
+          });
+          //$("#EvtRot .gallery ul").trigger("linkAnchors", [".galleryNav"]);
+
+        </script>
+
+        <!-- Event Page Rotator End -->
+
+        <div id="CalendarSection">
+
+          <!-- In Your Calendar Section Start -->
+
+          <div class="rightCol fr">
+            <div id="YourCalendar" class="neg sect list">
+              <div class="cont">
+                <div class="bc fr">
+                  <a href="#">Edit</a>
+                </div>
+                <h3 class="fl"><a class="heading display" href="#">In Your Calendar</a></h3>
+                <ul>
+                  <li>
+                    <h3><a class="bold" href="#">Concet: Cats!</a></h3>
+                    <p>Music Hall &bull; Today 1:30 - 3pm &bull; 10 RSVPs</p>
+                  </li>
+                  <li>
+                    <h3><a class="bold" href="#">Event name</a></h3>
+                    <p>Music Hall &bull; Today 1:30 - 3pm &bull; 10 RSVPs</p>
+                  </li>
+                  <li class="upcoming">
+                    <div class="bold fl">Upcoming</div>
+                    <div class="dates">
+                      <a href="#">6/6 Gallery Opening</a>
+                      <a href="#">7/6 Dance Show at the Anetharium</a>
+                      <a href="#">8/8 Arlo Guthrie Benefit Concert</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- In Your Calendar Section End -->
+
+          <!-- Upcoming Section Start -->
+
+          <div class="rightCol fr sr">
+            <div id="Upcoming" class="neg sect list">
+              <div class="cont">
+                <h3 class="fl"><a class="heading display" href="#">Upcoming at your Favorite Places</a></h3>
+                <ul>
+                  <li>
+                    <h3><a class="bold" href="#">Concet: Cats!</a></h3>
+                    <p>Music Hall &bull; Today 1:30 - 3pm &bull; 10 RSVPs</p>
+                  </li>
+                  <li>
+                    <h3><a class="bold" href="#">Gallery Opening</a></h3>
+                    <p>Music Hall &bull; Today 1:30 - 3pm &bull; 10 RSVPs</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upcoming Section End -->
+
+        </div>
+
+        <!-- This Week Section Start -->
+
+        <div class="centerCol fl">
+          <div id="ThisWeek" class="sect horiz list">
+            <div class="cont">
+              <div class="bc fr">
+                <span class="bold">Event Type:</span>
+                <select>
+                  <option value="All">All</option>
+                  <option>Live Music</option>
+                  <option>Festival</option>
+                  <option>Market</option>
+                </select>
+              </div>
+              <h3 class="fl"><a class="heading display" href="#">This Week</a></h3>
+              <ul>
+                <li>
+                  <div class="date fl">6/6</div>
+                  <div class="details">
+                    <div class="fr thumb"></div>
+                    <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                    <p>2pm &bull; Bayou Arts Center &bull; 10 RSVPs</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date fl">6/6</div>
+                  <div class="details">
+                    <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                    <p>2pm &bull; Bayou Arts Center &bull; 10 RSVPs</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date fl">6/6</div>
+                  <div class="details">
+                    <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                    <p>2pm &bull; Bayou Arts Center &bull; 10 RSVPs</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date fl">6/6</div>
+                  <div class="details">
+                    <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                    <p>2pm &bull; Bayou Arts Center &bull; 10 RSVPs <span class="faces"><img alt="" src="images/mock/faces/person1.jpg" /></span></p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date fl">6/6</div>
+                  <div class="details">
+                    <div class="fr thumb"></div>
+                    <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                    <p>2pm &bull; Bayou Arts Center &bull; 10 RSVPs</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date fl">6/6</div>
+                  <div class="details">
+                    <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                    <p>2pm &bull; Bayou Arts Center &bull; 10 RSVPs</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date fl">6/6</div>
+                  <div class="details">
+                    <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                    <p>2pm &bull; Bayou Arts Center &bull; 10 RSVPs <span class="faces"><img alt="" src="images/mock/faces/person1.jpg" /><img alt="" src="images/mock/faces/person2.jpg" /></span></p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date fl">6/6</div>
+                  <div class="details">
+                    <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                    <p>2pm &bull; Bayou Arts Center &bull; 10 RSVPs</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date fl"></div>
+                  <div class="details">
+                    <a class="month bold" href="#">View whole month</a>
+                  </div>
+                </li>
+              </ul>
+              <div class="cb"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- This Week Section End -->
+
+        <div id="EventsInfo" class="neg rightCol fr spread">
+
+          <!-- 300 x 100 Banner Ad Start -->
+
+          <div class="ad sect cl">
+            <img alt="" src="images/mock/ads/300x100.jpg" />
+          </div>
+
+          <!-- 300 x 100 Banner Ad End -->
+          
+          <!-- List Your Event Section Start -->
+
+          <div class="fl">
+            <div id="ListEvent" class="sect list">
+              <div class="cont">
+                <h3 class="fl"><a class="heading display" href="#">List Your Event!</a></h3>
+                <p class="cl">Vae dictasunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut f.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- List Your Event Section End -->
+
+          <!-- Who's Going Where Section Start -->
+
+          <div class="fr">
+            <div id="WhosGoing" class="sect list">
+              <div class="cont">
+                <h3 class="fl"><a class="heading display" href="#">Who's Going Where?</a></h3>
+                <ul>
+                  <li>
+                    <div class="face fl"><img alt="" src="images/mock/faces/person1.jpg" /></div>
+                    <a href="#">John is going to the Ballet 6/7</a>
+                  </li>
+                  <li>
+                    <div class="face fl"><img alt="" src="images/mock/faces/person2.jpg" /></div>
+                    <a href="#">Susie is going to Cats! 7/6</a>
+                  </li>
+                  <li>
+                    <div class="face fl"><img alt="" src="images/mock/faces/person3.jpg" /></div>
+                    <a href="#">Joan is going to Watercolor Class 7/7</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Who's Going Where Section End -->
+
+        </div>
+
+        <!-- Event Offers & Discounts Section Start -->
+
+        <div class="centerCol fl">
+          <div id="EventsOffersDiscounts" class="sect">
+            <div class="cont">
+              <div class="bc fr">
+                <span class="bold">Offer Type:</span>
+                <select>
+                  <option value="All">All</option>
+                  <option value="Offers">Offers</option>
+                  <option value="Discounts">Discounts</option>
+                </select>
+              </div>
+              <h3 class="fl"><a class="heading display" href="#">Events with Offers &amp; Discounts</a></h3>
+              <ul>
+                <li>
+                  <div class="thumb"><img alt="Cheap Abba Tickets!" src="images/mock/lists/tacos.jpg" /></div>
+                  <a class="bold" href="#">Cheap Abba Tickets!</a>
+                  <p>Lorem ispum dolor sit amet adipiscing elit donec.</p>
+                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (10)</div>
+                  <div class="liked">
+                    <p>Liked by:</p>
+                    <img alt="" src="images/mock/faces/person1.jpg" />
+                    <img alt="" src="images/mock/faces/person2.jpg" />
+                    <img alt="" src="images/mock/faces/person3.jpg" />
+                  </div>
+                </li>
+                <li>
+                  <div class="thumb"><img alt="10% Off Ballet" src="images/mock/lists/wings.jpg" /></div>
+                  <a class="bold" href="#">10% Off Ballet</a>
+                  <p>Lorem ispum dolor sit amet adipiscing elit nunc.</p>
+                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (17)</div>
+                  <div class="liked">
+                    <p>Liked by:</p>
+                    <img alt="" src="images/mock/faces/person4.jpg" />
+                    <img alt="" src="images/mock/faces/person5.jpg" />
+                    <img alt="" src="images/mock/faces/person6.jpg" />
+                  </div>
+                </li>
+                <li>
+                  <div class="currentOffers">
+                    <h4 class="bold">50 Current Offers</h4>
+                    <a class="bold" href="#">Shopping</a>
+                    <a class="bold" href="#">Restaurants</a>
+                    <a class="bold" href="#">Drinking</a>
+                    <a class="bold" href="#">Tickets</a>
+                    <a class="bold" href="#">Services</a>
+                    <a class="bold" href="#">HVAC</a>
+                    <a class="saved bold" href="#"><span class="bold">3</span> saved offers</a>
+                  </div>
+                </li>
+              </ul>
+              <div class="cb"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Offers & Discounts Section End -->
+
+        <!-- Editor's Event Highlights Section Start -->
+
+        <div class="centerCol fl">
+          <div id="EditorsEvents" class="sect horiz">
+            <div class="cont">
+              <div class="bc fr">
+                <a href="#">Archive</a>
+              </div>
+              <h3 class="fl"><a class="heading display" href="#">Editor's Event Highlights</a></h3>
+              <ul>
+                <li>
+                  <div class="thumb fr"><img alt="Ballet Comes to SL Merida" src="images/mock/lists/karaoke.jpg" /></div>
+                  <a class="bold" href="#">Ballet Comes to SL Merida</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt porta justo a euismod. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur mus.  tincidunt porta justo a euismod.</p>
+                </li>
+                <li>
+                  <div class="thumb fr"><img alt="Too Few Musicals This Year!" src="images/mock/lists/editor_mex.jpg" /></div>
+                  <a class="bold" href="#">Too Few Musicals This Year!</a>
+                  <p>Vestibulum et libero ante, eu condimentum enim. Pellentesque tempus eleifend risus nec fermentum. Integer ut aliquam odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat, dui ac euismod.</p>
+                </li>
+              </ul>
+              <div class="cb"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Editor's Event Highlights Section End -->
+
+        <!-- Best for Families Section Start -->
+
+        <div class="centerCol fl">
+          <div id="BestForFamilies" class="sect">
+            <div class="cont">
+              <div class="bc fr">
+                <a href="#">show 3 more</a>
+              </div>
+              <h3 class="fl"><a class="heading display" href="#">Best for... families</a></h3>
+              <ul>
+                <li>
+                  <div class="thumb"><img alt="Magic Mice" src="images/mock/lists/mex.jpg" /></div>
+                  <a class="bold" href="#">Magic Mice</a>
+                  <p>Lorem ispum dolor sit amet adipiscing elit donec.</p>
+                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (10)</div>
+                  <div class="liked">
+                    <p>Liked by:</p>
+                    <img alt="" src="images/mock/faces/person1.jpg" />
+                    <img alt="" src="images/mock/faces/person2.jpg" />
+                    <img alt="" src="images/mock/faces/person3.jpg" />
+                  </div>
+                </li>
+                <li>
+                  <div class="thumb"><img alt="Happy Scrappy Pups" src="images/mock/lists/rum.jpg" /></div>
+                  <a class="bold" href="#">Happy Scrappy Pups</a>
+                  <p>Lorem ispum dolor sit amet adipiscing elit nunc.</p>
+                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (17)</div>
+                  <div class="liked">
+                    <p>Liked by:</p>
+                    <img alt="" src="images/mock/faces/person4.jpg" />
+                    <img alt="" src="images/mock/faces/person5.jpg" />
+                    <img alt="" src="images/mock/faces/person6.jpg" />
+                  </div>
+                </li>
+                <li>
+                  <div class="thumb"><img alt="Childrens Parade" src="images/mock/lists/karaoke.jpg" /></div>
+                  <a class="bold" href="#">Children's Parade</a>
+                  <p>Lorem ispum dolor sit amet adipiscing elit et nunc aliquam.</p>
+                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (17)</div>
+                  <div class="liked">
+                    <p>Liked by:</p>
+                    <img alt="" src="images/mock/faces/person7.jpg" />
+                    <img alt="" src="images/mock/faces/person8.jpg" />
+                    <img alt="" src="images/mock/faces/person9.jpg" />
+                  </div>
+                </li>
+              </ul>
+              <div class="cb"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Best for Families Section End -->
+
+        <div id="LowerAds" class="neg adSect dual rightCol fr">
+
+          <!-- 300 x 250_3 Banner Ad Start -->
+
+          <div class="ad space">
+            <img alt="" src="images/mock/ads/300x250_1.jpg" />
+          </div>
+
+          <!-- 300 x 250_3 Banner Ad End -->
+
+          <!-- 300 x 250_4 Banner Ad Start -->
+
+          <div class="ad space">
+            <img alt="" src="images/mock/ads/300x250_3.jpg" />
+          </div>
+
+          <!-- 300 x 250_4 Banner Ad End -->
+
+        </div>
+
+        <div id="LowerTallAd" class="neg adSect tall rightCol fr cr">
+
+          <!-- 300 x 600 Banner Ad Start -->
+
+          <div class="ad">
+            <img alt="" src="images/mock/ads/300x600.jpg" />
+          </div>
+
+          <!-- 300 x 600 Banner Ad End -->
+
+        </div>
+
+      </div>
+
+  	  <div class="cb"></div>
+  	</div>
+  </div>
+
+  <!-- Content End -->
+
+  <!-- Footer Start -->
+
+  <div id="Footer">
+  	<div class="sWidth">
+  	  <ul>
+        <li class="about">
+          <div class="pad">
+            <h3 class="display">About Social Life Merida</h3>
+            <div class="authorPhoto fl"><img alt="" src="images/mock/editorPhoto.jpg" /></div>
+            <span>Social Life Merida is a state of mind! I love everything about our town, and love to bring you the latest and greatest of what's on in town!</span>
+            <div class="cl twt">
+              Find me on Twitter: <a href="#" target="_blank">@Susan_SLM</a>
+            </div>
+            <div class="editor bold">- Susan Jones, Editor</div>
+            <a href="#" class="more">More about Social Life Merida &gt;</a>
+          </div>
+        </li>
+        <li class="site">
+          <div class="pad">
+            <h3 class="display">Social Life Merida is a TownWizard Site</h3>
+            <span>Other TownWizard sites near this area include:</span>
+            <a href="#" target="_blank">Appalachia Now!</a>
+            <a href="#" target="_blank">Georgia On My Minda</a>
+            <a href="#" target="_blank">Great Smokey Mountains Guide</a>
+            <a class="all" href="#" target="_blank">See All 150 Partner Sites &gt;</a>
+          </div>
+        </li>
+        <li class="community">
+          <div class="pad">
+            <h3 class="display">TownWizard Brings Communities Alive</h3>
+            <span>Lorem ipsum dolor sit amet adipiscing elit donec</span>
+            <a href="#" target="_blank">Become a TownWizard Partner</a>
+            <a href="#" target="_blank">Advertiser Rates</a>
+            <a href="#" target="_blank">Partner with Us</a>
+            <a href="#" target="_blank">Help &amp; Support</a>
+          </div>
+        </li>
+      </ul>
+      <div class="legal cb bold">
+        <a class="bold" href="#" target="_blank">Terms of Use</a> | <a class="bold" href="#" target="_blank">Privacy Policy</a> | &copy; 2012 Social Life Merida &amp; TownWizard
+      </div>
+  	</div>
+  </div>
+
+  <!-- Footer End -->
+
+</body>
+</html>

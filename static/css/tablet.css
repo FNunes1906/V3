@@ -1,0 +1,166 @@
+body.tablet .rightCol.fr {
+  float:left;
+  clear:none;
+  margin-top:0;
+  margin-bottom:0;
+}
+body.tablet .rightCol.fr .ad {
+  margin-bottom:30px;
+}
+body.tablet .rightCol.fr.sr {
+  float:right;
+}
+body.tablet .rightCol.fr.adSect {
+  float:right;
+}
+body.tablet .rightCol.fr.adSect.dual {
+  clear:left;
+  margin:24px 0;
+}
+body.tablet .rightCol.fr.adSect.tall {
+  float:left;
+  clear:none;
+  margin:24px 0 0;
+}
+body.tablet .rightCol.spread {
+  max-width:none;
+  margin-bottom:0;
+}
+body.tablet .ad.sect {
+  width:100%;
+  clear:both;
+}
+body.tablet .ad.sect img {
+  margin:auto;
+}
+body.tablet .sect.grid ul li {
+  margin-right:1%;
+}
+body.tablet #Social {
+  /*margin-top:30px;*/
+  margin-top:0;
+  margin-right:20px;
+  position:relative;
+  z-index:900;
+}
+body.tablet #Social a {
+  margin-left:20px;
+}
+body.tablet #Header .headerAdFlex {
+  margin-top:17px;
+  float:none;
+  margin-left:190px;
+  width:auto;
+}
+body.tablet #Header #UpperBannerAd {
+  margin-right:0;
+}
+body.tablet #Local {
+  width:auto;
+  margin:0;
+  float:none;
+  position:relative;
+  top:8px;
+  font-size:12px;
+}
+body.tablet #Weather {
+  float:none;
+}
+body.tablet #GuideInfo {
+  position: absolute;
+  right: 0;
+  top: 84px;
+}
+body.tablet #GuideInfo #Local {
+  margin-left:0;
+}
+body.tablet #MainNav ul li.active ul li {
+  min-height:37px;
+}
+body.tablet #MainNav ul li.active ul li a {
+  line-height:39px;
+}
+body.tablet #LowerBannerAd {
+  display:block;
+  margin-bottom:30px;
+}
+body.tablet .gallery ul {
+  width:280px;
+  height:171px;
+}
+body.tablet .gallery .event .rsvpCont {
+  position:relative;
+}
+body.tablet .gallery .event .rsvp .faces {
+  width:205px;
+}
+body.tablet .gallery .event .rsvp .faces img {
+  margin-left:7px;
+}
+body.tablet .galleryNav h1 span {
+  display:none;
+}
+body.tablet .galleryNav h1 {
+  padding:2px 12px;
+}
+body.tablet .galleryNav a.saved {
+  background:none;
+  padding:8px 12px;
+}
+body.tablet .rotator {
+  margin-left:30px;
+}
+body.tablet #EvtRot {
+  margin-left:0;
+}
+body.tablet .rotator .centerCol {
+  max-width:none;
+  margin-right:0;
+}
+body.tablet #EvtRot .centerCol {
+  max-width:420px;
+  margin-right:35px;
+}
+body.tablet .centerCol .sect ul li {
+  width:32%;
+}
+body.tablet .centerCol .sect.horiz ul li, 
+body.tablet .centerCol .sect ul li .thumb img {
+  width:100%;
+}
+body.tablet .neg {
+  margin-top:0 !important;
+}
+body.tablet #FindForm input.search {
+  width:43%;
+}
+body.tablet #FindForm select {
+  width:20%;
+}
+body.tablet #FindForm .sub, 
+body.tablet #FindForm .sub a {
+  font-size:14px;
+}
+body.tablet #FindForm .sub a {
+  padding:0 15px;
+}
+body.tablet #FindForm .sub span {
+  display:block;
+  padding-bottom:15px;
+}
+body.tablet .detailFeature a {
+  margin:25px 0;
+}
+body.tablet #ShareTool .lower span a {
+  display:none;
+}
+body.tablet .detailFeature .map img {
+  width:350px;
+  height:auto;
+  padding:0 0 15px 15px;
+}
+body.tablet .detailFeature .evtTmb img {
+  width:400px;
+  height:auto;
+  padding:0 0 15px 15px;
+}

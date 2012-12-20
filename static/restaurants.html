@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>SL Merida | Restaurants</title>
+<meta name="viewport" content="width=device-width;initial-scale = 1.0,maximum-scale = 1.0" />
+<link rel="stylesheet" type="text/css" href="css/fonts.css" />
+<link rel="stylesheet" type="text/css" href="css/core.css" />
+<link rel="stylesheet" type="text/css" href="css/restaurants.css" />
+
+
+<link rel="stylesheet" type="text/css" href="css/tablet.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.carouFredSel-6.1.0-packed.js"></script>
+<script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="js/yetii-min.js"></script>
+<script type="text/javascript" src="js/tw.js"></script>
+</head>
+<body>
+
+  <!-- Top Bar Start -->
+
+  <div id="TopBar">
+  	<div class="sWidth">
+  	  <div class="fl powered">Powered by<img alt="townwizard" src="images/header/twBanner.png" /></div>
+  	  <div class="fr links">
+  	  	<a href="#">Other Townwizard Places</a> | <a href="#">About Townwizard</a>
+  	  </div>
+  	</div>
+  </div>
+
+  <!-- Top Bar End -->
+
+  <!-- Content Start -->
+
+  <div id="Content" class="sWidth">
+  	
+  	<!-- Header Start -->
+
+  	<div id="Header">
+  	  <div id="Logo" class="fl">
+  	  	<a href="#"><img alt="" src="images/mock/partnerLogo.jpg" /></a>
+  	  </div>
+  	    <div class="headerAdFlex fl">
+  	  	  <div id="Social" class="fr">
+            <div>
+              <a href="#" onclick="fb_login(); return false;"><img alt="Login with Facebook" src="images/header/fbLoginBtn.png" /></a>
+              <a href="#"><img alt="Login with Twitter" src="images/header/twtLoginBtn.png" /></a>
+              <a href="#"><img alt="Help" src="images/header/helpBtn.png" /></a>
+            </div>
+          </div>
+          <div id="UpperBannerAd" class="bannerAd">
+  	  	  	<div class="bannerCont">
+  	  	      <!-- TOP BANNER AD -->
+  	  	      <img src="images/mock/ads/bannerAd.jpg" />
+  	  	  	</div>
+  	  	  </div>
+  	    </div>
+  	    
+  	    <div id="GuideInfo" class="cr">
+  	      <div class="localCont">
+            <div id="Local" class="fl">
+  	      	  <div id="Weather" class="fr">High: 88&deg; <img alt="Partly Cloudy" src="images/weather/partlyCloudy.png" /> Low: 50&deg;</div>
+  	      	  Serving Merida, Ciudad Caucel, &amp; Surrounding Areas
+            </div>
+          </div>
+          <div class="search fr">
+  	  	    <form>
+  	  	  	  <input type="text" placeholder="Search SocialLife Merida..." />
+  	  	  	  <input type="submit" value="" class="searchBtn" />
+  	  	    </form>
+  	  	  </div>
+  	    </div>
+  	</div>
+
+  	<!-- Header End -->
+
+  	<div id="MainContent">
+  	  
+  	  <!-- Left Column Start -->
+
+  	  <div id="LeftCol" class="fl">
+  	  	<nav id="MainNav" class="display">
+  	  	  <ul>
+  	  	    <li><a id="NavHome" href="index.html">Home</a></li>
+  	  	    <li><a id="NavEvents" href="events.html">Events</a></li>
+   	  	    <li><a id="NavOffers" href="#">Offers</a></li>
+  	  	    <li class="active">
+              <a id="NavRest" href="restaurants.html">Restaurants</a>
+
+              <!-- Navigation Sub Menu Start -->
+              
+              <ul>
+                <li><a href="#">My Favorites</a></li>
+                <li><a href="#">Featured</a></li>
+                <li><a href="#">Cuisines</a></li>
+                <li><a href="#">New Places</a></li>
+              </ul>
+
+              <!-- Navigation Sub Menu End -->
+
+            </li>
+  	  	    <li><a id="NavBars" href="#">Bars</a></li>
+  	  	    <li><a id="NavEnt" href="#">Entertainment</a></li>
+  	  	    <li><a id="NavPeople" href="#">People</a></li>
+  	  	    <li><a id="NavBlog" href="#">Blog</a></li>
+  	  	    <li><a id="NavBest" href="#">Best in Town</a></li>
+  	  	    <li><a id="NavDir" href="#">Directory</a></li>
+  	  	   </ul>
+  	    </nav>
+  	    <div id="SideLinks">
+  	      <h4 class="display">Your Stuff</h3>
+  	      <a href="#">Favorite Places</a>
+  	      <a href="#">Your Saved Offers</a>
+  	      <a href="#">Your Events Calendar</a>
+  	      <a href="#">Your Lists</a>
+  	      <h4 class="display">Quick Links</h3>
+  	      <a href="#">Ratings &amp; Reviews</a>
+  	      <a href="#">Check-ins &amp;  Hotspots</a>
+  	      <a href="#">About [Brand Name]</a>
+  	    </div>
+  	    <div id="SideMobile" class="sect">
+  	      <h2>TownWizard Mobile!</h2>
+  	      <p>Lorem ipsum dolor sit amet adipiscing elit donec.</p>
+  	      <a href="#" target="_blank"><img alt="Download for the iPhone/iPad" src="images/sidebar/iphoneAppBtn.png" /></a>
+  	      <a href="#" target="_blank"><img alt="Download for Android" src="images/sidebar/androidAppBtn.png" /></a>
+  	    </div>
+  	    <div id="SideSocial" class="sect">
+  	      <h3 class="display">Follow Us</h3>
+  	      <a class="twitter" href="#" target="_blank"><img alt="Follow us on Twitter" src="images/sidebar/twtFollowBtn.png" /></a>
+  	      <a class="youtube" href="#" target="_blank"><img alt="Follow us on YouTube" src="images/sidebar/ytFollowBtn.png" /></a>
+  	    </div>
+  	    <div id="SideAds" class="sect">
+  	      <div class="ad space">
+  	      	<img alt="" src="images/mock/ads/180x150_1.jpg" />
+  	      </div>
+  	      <div class="ad">
+  	      	<img alt="" src="images/mock/ads/180x150_2.jpg" />
+  	      </div>
+  	      <div class="sect">
+  	      	<h3 class="display">Hotspots</h3>
+  	      	<p>Hot Spot rankings are decided by your annual votes.</p>
+  	      	<h4 class="display">Sushi</h4>
+  	      	<a href="#">Sushimaster</a>
+  	      	<a href="#">Yo! Sushi</a>
+  	      	<a href="#">Sushi Sushi Sushi</a>
+  	      	<a href="#">Ultimate Sushi</a>
+  	      	<h4 class="display">Outdoor Dining</h4>
+  	      	<a href="#">The Patio</a>
+  	      	<a href="#">Gerry's</a>
+  	      	<a href="#">The Red Chimney</a>
+  	      	<a href="#">Le Gavorche</a>
+  	      	<h4 class="display">Family Trip</h4>
+  	      	<a href="#">The Zoo</a>
+  	      	<a href="#">The Aquarium</a>
+  	      	<a href="#">Barney's Fun Shack</a>
+  	      	<a href="#">Milton Fun Park</a>
+  	      </div>
+  	      <div class="sect">
+  	      	<div class="ad space">
+  	      	  <img alt="" src="images/mock/ads/180x150_2.jpg" />
+  	      	</div>
+  	      	<div class="ad space">
+  	      	  <img alt="" src="images/mock/ads/180x150_1.jpg" />
+  	      	</div>
+  	      	<div class="ad">
+  	      	  <img alt="" src="images/mock/ads/180x150_2.jpg" />
+  	      	</div>
+  	      </div>
+  	    </div>
+  	  </div>
+
+  	  <!-- Left Column End -->
+
+  	  <div id="WidgetArea">
+
+    	  <!-- Event Finder Start -->
+
+    	  <div id="Feat" class="centerCol fl">
+    	  	<div id="Find" class="sect">
+            <h1 class="display">Restaurants in SL Merida</h1>
+            <div id="FindForm" class="restaurants">
+              <div>
+                <input type="text" class="search fl" placeholder="Restaurant Search" />
+                <select class="type fl">
+                  <option>Type</option>
+                  <option>All Cuisines</option>
+                  <option>Spanish</option>
+                  <option>Indian</option>
+                  <option>Italian</option>
+                  <option>Japanese</option>
+                </select>
+                <input type="submit" class="submit fr" align="left" value="" />
+              </div>
+              <div class="sub cl">
+                <span class="bold">Popular:</span> 
+                <a href="#">Family Asian</a> | 
+                <a href="#">Pizza with Parking</a> |  
+                <a href="#">Breakfast</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    	  <!-- Event Finder End -->
+
+        <!-- Placeholder for Header Banner Ad in Vertical Layout Start -->
+
+        <div id="LowerBannerAd" class="bannerAd"></div>
+
+        <!-- Placeholder for Header Banner Ad in Vertical Layout End -->
+
+        <!-- Event Page Rotator Start -->
+
+        <div id="Restaurants" class="rotator carousel fl">
+          <div class="gallery centerCol fl">
+            <a class="prev nav"><img alt="prev" src="images/marquee/marqueeArrowLt.png" /></a>
+            <a class="next nav"><img alt="next" src="images/marquee/marqueeArrowRt.png" /></a>
+            <ul>
+              <li id="item1" class="1">
+                <div class="event">
+                  <a href="venue-info.html"><img alt="" src="images/mock/lists/strapline.jpg" width="100%" /></a>
+                  <div class="infoCont">
+                    <h2 class="bold">Strapline</h2>
+                    <p>Ue dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet.</p>
+                    <div class="cl"></div>
+                  </div>
+                </div>
+              </li>
+              <li id="item2" class="2">
+                <div class="event">
+                  <a href="venue-info.html"><img alt="" src="images/mock/lists/olemole.jpg" width="100%" /></a>
+                  <div class="infoCont">
+                    <h2 class="bold">Ole Mole</h2>
+                    <p>Lorem ispum dolor sit amet adipiscing elit donec.</p>
+                    <div class="cl"></div>
+                  </div>
+                </div>
+              </li>
+              <li id="item3" class="3">
+                <div class="event">
+                  <a href="venue-info.html"><img alt="" src="images/mock/lists/shiki.jpg" width="100%" /></a>
+                  <div class="infoCont">
+                    <h2 class="bold">Shiki Asian Cuisine</h2>
+                    <p>Lorem ispum dolor sit amet adipiscing elit nunc.</p>
+                    <div class="cl"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="pag">
+
+            </div>
+            <div class="cb"></div>
+          </div>
+        </div>
+        <script type="text/javascript">
+          
+          $(document).ready(function() {
+
+            $("#Restaurants .gallery ul").carouFredSel({
+                responsive          : true,
+                auto                : true, 
+                items : {
+                    visible     : 1,
+                    width       : 420
+                }, 
+                circular            : true, 
+                infinite            : true,
+                direction           : "left", 
+                scroll : {
+                    fx              : "crossfade", 
+                    items           : 1,
+                    duration        : 1000, 
+                    pauseOnHover    : true, 
+                    easing          : "linear"
+                }, 
+                prev : "#Restaurants .prev",
+                next : "#Restaurants .next", 
+                pagination : {
+                    container       : "#Restaurants .pag"
+                }, 
+                swipe : {
+                    onTouch         : true, 
+                    onMouse         : true
+                }
+            });
+
+          });
+
+        </script>
+
+        <!-- Event Page Rotator End -->
+
+        <div id="FavPlacesSection" class="neg rightCol spread fr">
+
+          <!-- Your Favorite Places Section Start -->
+
+          <div class="rightCol fr">
+            <div id="FavPlaces" class="neg sect">
+              <div class="cont">
+                <h3 class="fl"><a class="heading display" href="#">Your Favorite Places</a></h3>
+                <div id="PlacesStatus" class="loggedOut cl">
+                  <div class="bold">You haven't set up any favorite places yet.</div>
+                  Log in to start collecting your favorite restaurants, and get notified of events and offers.
+                  <div class="social">
+                    <a href="#"><img alt="Login with Facebook" src="images/header/fbLoginBtn.png" /></a>
+                    <a href="#"><img alt="Login with Twitter" src="images/header/twtLoginBtn.png" /></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Your Favorite Places Section End -->
+
+          <!-- 300 x 100 Banner Ad Start -->
+
+          <div class="rightCol adSect fr">
+            <div class="ad sect cl">
+              <img alt="" src="images/mock/ads/300x100.jpg" />
+            </div>
+          </div>
+
+          <!-- 300 x 100 Banner Ad End -->          
+
+        </div>
+
+        <!-- Editor's Notes Section Start -->
+
+        <div class="centerCol fl">
+          <div id="EditorsNotes" class="sect horiz">
+            <div class="cont">
+              <div class="bc fr">
+                <a href="#">Archive</a>
+              </div>
+              <h3 class="fl"><a class="heading display" href="#">Editor's Notes</a></h3>
+              <ul>
+                <li>
+                  <div class="thumb fr"><img alt="Ballet Comes to SL Merida" src="images/mock/lists/karaoke.jpg" /></div>
+                  <a class="bold" href="#">New Bar in Downtown</a>
+                  <div class="rating">
+                    <div class="fr">
+                      <img alt="" src="images/stars/sampleRating.png" /> (10)
+                    </div>
+                    <h2 class="bold">SuperBar2000</h2>
+                  </div>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt porta justo a euismod. Cum sociis natoque penatibus et.</p>
+                </li>
+                <li>
+                  <div class="thumb fr"><img alt="Too Few Musicals This Year!" src="images/mock/lists/editor_mex.jpg" /></div>
+                  <a class="bold" href="#">Summer Looks Good for Seafood Options!</a>
+                  <p>Vestibulum et libero ante, eu condimentum enim. Pellentesque tempus eleifend risus nec fermentum. Integer ut aliquam odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat, dui ac euismod.</p>
+                </li>
+              </ul>
+              <div class="cb"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Editor's Notes Section End -->
+
+        <div id="PlacesInfo" class="neg rightCol fr spread">
+          
+          <!--New Lists Section Start -->
+
+          <div class="fl">
+            <div id="PlaceLists" class="sect list">
+              <div class="cont">
+                <div class="bc fr">
+                  <a href="#">Create your own lists</a>
+                </div>
+                <h3 class="fl"><a class="heading display" href="#">New Lists</a></h3>
+                <ul>
+                  <li>
+                    <div class="author fr"><img alt="" class="fl" src="images/mock/faces/person1.jpg" /> by SusieQ</div>
+                    <a class="bold" href="#">Best Coffee Shops in Town</a>
+                  </li>
+                  <li>
+                    <div class="author fr"><img alt="" class="fl" src="images/mock/faces/person2.jpg" /> by AllyH</div>
+                    <a class="bold" href="#">Best Family Day Out Ever!!!!!</a>
+                  </li>
+                  <li>
+                    <div class="author fr"><img alt="" class="fl" src="images/mock/faces/person3.jpg" /> by DanD</div>
+                    <a class="bold" href="#">Good Places for Gluten-Free People</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- New Lists Section End -->
+
+          <!-- Check-in Hotspots Section Start -->
+
+          <div class="fr">
+            <div id="Hotspots" class="sect list">
+              <div class="cont">
+                <h3 class="fl"><a class="heading display" href="#">Check-in Hotspots</a></h3>
+                <p class="cl">How many check-ins today?</p>
+                <ul>
+                  <li>
+                    <div class="num bold fl">5</div>
+                    <div class="author fr"><img alt="" class="fl" src="images/mock/faces/person1.jpg" /> is there</div>
+                    <a class="bold" href="#">Venue Name</a>
+                  </li>
+                  <li>
+                    <div class="num bold fl">10</div>
+                    <div class="author fr"><img alt="" class="fl" src="images/mock/faces/person2.jpg" /><img alt="" class="fl" src="images/mock/faces/person3.jpg" /> are there</div>
+                    <a class="bold" href="#">Lorem Ipsum Dolor Sit Amet</a>
+                  </li>
+                  <li>
+                    <div class="num bold fl">2</div>
+                    <div class="author fr"><img alt="" class="fl" src="images/mock/faces/person5.jpg" /> is there</div>
+                    <a class="bold" href="#">Adipiscing Elit Donec Nuncet</a>
+                  </li>
+                  <li>
+                    <div class="num bold fl">23</div>
+                    <div class="author fr"><img alt="" class="fl" src="images/mock/faces/person4.jpg" /> is there</div>
+                    <a class="bold" href="#">Aliquam Velez Dolor Sit Amet</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Check-in Hotspots Section End -->
+
+        </div>
+
+        <!-- Restaurant Offers & Discounts Section Start -->
+
+        <div class="centerCol fl">
+          <div id="RestaurantOffersDiscounts" class="sect">
+            <div class="cont">
+              <div class="bc fr">
+                <span class="bold">Offer Type:</span>
+                <select>
+                  <option value="All">All</option>
+                  <option value="Offers">Offers</option>
+                  <option value="Discounts">Discounts</option>
+                </select>
+              </div>
+              <h3 class="fl"><a class="heading display" href="#">Restaurant Offers &amp; Discounts</a></h3>
+              <ul>
+                <li>
+                  <div class="thumb"><img alt="Cheap Tacos!" src="images/mock/lists/tacos.jpg" /></div>
+                  <a class="bold" href="#">Cheap Tacos!</a>
+                  <p>Lorem ispum dolor sit amet adipiscing elit donec.</p>
+                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (10)</div>
+                  <div class="liked">
+                    <p>Liked by:</p>
+                    <img alt="" src="images/mock/faces/person1.jpg" />
+                    <img alt="" src="images/mock/faces/person2.jpg" />
+                    <img alt="" src="images/mock/faces/person3.jpg" />
+                  </div>
+                </li>
+                <li>
+                  <div class="thumb"><img alt="Chicken Wings 2-4-1" src="images/mock/lists/wings.jpg" /></div>
+                  <a class="bold" href="#">Chicken Wings 2-4-1</a>
+                  <p>Lorem ispum dolor sit amet adipiscing elit nunc.</p>
+                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (17)</div>
+                  <div class="liked">
+                    <p>Liked by:</p>
+                    <img alt="" src="images/mock/faces/person4.jpg" />
+                    <img alt="" src="images/mock/faces/person5.jpg" />
+                    <img alt="" src="images/mock/faces/person6.jpg" />
+                  </div>
+                </li>
+                <li>
+                  <div class="currentOffers">
+                    <h4 class="bold">20 Current Offers</h4>
+                    <a class="bold" href="#">Family Dining</a>
+                    <a class="bold" href="#">Fancy Dining</a>
+                    <a class="bold" href="#">Lunch Treats</a>
+                    <a class="bold" href="#">Breakfast Options</a>
+                    <a class="bold" href="#">Lorem Ipsum</a>
+                    <a class="saved bold" href="#"><span class="bold">3</span> saved offers</a>
+                  </div>
+                </li>
+              </ul>
+              <div class="cb"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Restaurant Offers & Discounts Section End -->
+
+        <div id="PlacesPhotos" class="neg rightCol spread fr">
+
+          <!-- 300 x 250_1 Banner Ad Start -->
+
+          <div class="rightCol adSect fr">
+            <div class="ad sect cl">
+              <img alt="" src="images/mock/ads/300x250_1.jpg" />
+            </div>
+          </div>
+
+          <!-- 300 x 250_1 Banner Ad End -->   
+
+          <!-- Latest Photos Section Start -->
+
+          <div class="rightCol fr">
+            <div id="LatestPhotoVideo" class="sect">
+              <div class="cont">
+                <h3 class="fl"><a class="heading display" href="#">Latest Photos</a></h3>
+                <div class="bc fr">
+                  <a href="#">Share your photos</a>
+                </div>
+                <ul>
+                  <li class="fl">
+                    <div class="thumb"><img alt="Fashion Parade" src="images/mock/lists/media/photo.jpg" /></div>
+                    <div class="fl"><img alt="" src="images/mock/faces/person1.jpg" /></div>
+                    <a class="author fl" href="#">Fashion Parade</a>
+                    <span class="by fl">by SusieQ</span>
+                  </li>
+                  <li class="fl">
+                    <div class="thumb"><img alt="Summer Sunset Over Portsmouth" src="images/mock/lists/media/photo.jpg" /></div>
+                    <div class="fl"><img alt="" src="images/mock/faces/person2.jpg" /></div>
+                    <a class="author fl" href="#">Summer Sunset Over Portsmouth</a>
+                    <span class="by fl">by JeremiahX</span>
+                  </li>
+                </ul>
+                <div class="cb"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latest Photos Section End -->       
+
+        </div>
+
+        <!-- Featured Section Start -->
+
+        <div class="centerCol fl">
+          <div id="Featured" class="sect">
+            <div class="cont">
+              <h3 class="fl"><a class="heading display" href="#">Featured</a></h3>
+              <ul>
+                <li>
+                  <div class="thumb"><img alt="Magic Mice" src="images/mock/lists/mex.jpg" /></div>
+                  <a class="bold" href="#">Magic Mice</a>
+                  <p>Lorem ispum dolor sit amet adipiscing elit donec.</p>
+                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (10)</div>
+                  <div class="liked">
+                    <p>Liked by:</p>
+                    <img alt="" src="images/mock/faces/person1.jpg" />
+                    <img alt="" src="images/mock/faces/person2.jpg" />
+                    <img alt="" src="images/mock/faces/person3.jpg" />
+                  </div>
+                </li>
+                <li>
+                  <div class="thumb"><img alt="Happy Scrappy Pups" src="images/mock/lists/rum.jpg" /></div>
+                  <a class="bold" href="#">Happy Scrappy Pups</a>
+                  <p>Lorem ispum dolor sit amet adipiscing elit nunc.</p>
+                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (17)</div>
+                  <div class="liked">
+                    <p>Liked by:</p>
+                    <img alt="" src="images/mock/faces/person4.jpg" />
+                    <img alt="" src="images/mock/faces/person5.jpg" />
+                    <img alt="" src="images/mock/faces/person6.jpg" />
+                  </div>
+                </li>
+                <li>
+                  <div class="thumb"><img alt="Childrens Parade" src="images/mock/lists/karaoke.jpg" /></div>
+                  <a class="bold" href="#">Children's Parade</a>
+                  <p>Lorem ispum dolor sit amet adipiscing elit et nunc aliquam.</p>
+                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (17)</div>
+                  <div class="liked">
+                    <p>Liked by:</p>
+                    <img alt="" src="images/mock/faces/person7.jpg" />
+                    <img alt="" src="images/mock/faces/person8.jpg" />
+                    <img alt="" src="images/mock/faces/person9.jpg" />
+                  </div>
+                </li>
+              </ul>
+              <div class="cb"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Section End -->
+
+        <!-- Cuisine Section Start -->
+
+        <div class="centerCol fl">
+          <div id="Cuisine" class="sect grid">
+            <div class="cont">
+              <h3 class="fl"><a class="heading display" href="#">SL Merida Cuisine</a></h3>
+              <ul>
+                <li><a href="#">Asian</a> (5)</li>
+                <li><a href="#">Asian</a> (5)</li>
+                <li><a href="#">Asian</a> (5)</li>
+                <li><a href="#">Greek</a> (5)</li>
+                <li><a href="#">Greek</a> (5)</li>
+                <li><a href="#">Greek</a> (5)</li>
+                <li><a href="#">Thai</a> (5)</li>
+                <li><a href="#">Thai</a> (5)</li>
+                <li><a href="#">Thai</a> (5)</li>
+                <li><a href="#">Afghan</a> (5)</li>
+                <li><a href="#">Afghan</a> (5)</li>
+                <li><a href="#">Afghan</a> (5)</li>
+                <li><a href="#">Mongolian</a> (5)</li>
+                <li><a href="#">Mongolian</a> (5)</li>
+                <li><a href="#">Mongolian</a> (5)</li>
+                <li><a href="#">Asian</a> (5)</li>
+                <li><a href="#">Asian</a> (5)</li>
+                <li><a href="#">Asian</a> (5)</li>
+                <li><a href="#">Greek</a> (5)</li>
+                <li><a href="#">Greek</a> (5)</li>
+                <li><a href="#">Greek</a> (5)</li>
+                <li><a href="#">Thai</a> (5)</li>
+                <li><a href="#">Thai</a> (5)</li>
+                <li><a href="#">Thai</a> (5)</li>
+                <li><a href="#">Afghan</a> (5)</li>
+                <li><a href="#">Afghan</a> (5)</li>
+                <li><a href="#">Afghan</a> (5)</li>
+                <li><a href="#">Mongolian</a> (5)</li>
+                <li><a href="#">Mongolian</a> (5)</li>
+                <li><a href="#">Mongolian</a> (5)</li>
+              </ul>
+              <div class="cb"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cuisine Section End -->
+
+        <div id="LowerAds" class="neg adSect dual rightCol fr">
+
+          <!-- 300 x 250_3 Banner Ad Start -->
+
+          <div class="ad space">
+            <img alt="" src="images/mock/ads/300x250_1.jpg" />
+          </div>
+
+          <!-- 300 x 250_3 Banner Ad End -->
+
+          <!-- 300 x 250_4 Banner Ad Start -->
+
+          <div class="ad space">
+            <img alt="" src="images/mock/ads/300x250_3.jpg" />
+          </div>
+
+          <!-- 300 x 250_4 Banner Ad End -->
+
+        </div>
+
+        <div id="LowerTallAd" class="neg adSect tall rightCol fr cr">
+
+          <!-- 300 x 600 Banner Ad Start -->
+
+          <div class="ad">
+            <img alt="" src="images/mock/ads/300x600.jpg" />
+          </div>
+
+          <!-- 300 x 600 Banner Ad End -->
+
+        </div>
+
+      </div>
+
+  	  <div class="cb"></div>
+  	</div>
+  </div>
+
+  <!-- Content End -->
+
+  <!-- Footer Start -->
+
+  <div id="Footer">
+  	<div class="sWidth">
+  	  <ul>
+        <li class="about">
+          <div class="pad">
+            <h3 class="display">About Social Life Merida</h3>
+            <div class="authorPhoto fl"><img alt="" src="images/mock/editorPhoto.jpg" /></div>
+            <span>Social Life Merida is a state of mind! I love everything about our town, and love to bring you the latest and greatest of what's on in town!</span>
+            <div class="cl twt">
+              Find me on Twitter: <a href="#" target="_blank">@Susan_SLM</a>
+            </div>
+            <div class="editor bold">- Susan Jones, Editor</div>
+            <a href="#" class="more">More about Social Life Merida &gt;</a>
+          </div>
+        </li>
+        <li class="site">
+          <div class="pad">
+            <h3 class="display">Social Life Merida is a TownWizard Site</h3>
+            <span>Other TownWizard sites near this area include:</span>
+            <a href="#" target="_blank">Appalachia Now!</a>
+            <a href="#" target="_blank">Georgia On My Minda</a>
+            <a href="#" target="_blank">Great Smokey Mountains Guide</a>
+            <a class="all" href="#" target="_blank">See All 150 Partner Sites &gt;</a>
+          </div>
+        </li>
+        <li class="community">
+          <div class="pad">
+            <h3 class="display">TownWizard Brings Communities Alive</h3>
+            <span>Lorem ipsum dolor sit amet adipiscing elit donec</span>
+            <a href="#" target="_blank">Become a TownWizard Partner</a>
+            <a href="#" target="_blank">Advertiser Rates</a>
+            <a href="#" target="_blank">Partner with Us</a>
+            <a href="#" target="_blank">Help &amp; Support</a>
+          </div>
+        </li>
+      </ul>
+      <div class="legal cb bold">
+        <a class="bold" href="#" target="_blank">Terms of Use</a> | <a class="bold" href="#" target="_blank">Privacy Policy</a> | &copy; 2012 Social Life Merida &amp; TownWizard
+      </div>
+  	</div>
+  </div>
+
+  <!-- Footer End -->
+
+</body>
+</html>
