@@ -46,6 +46,9 @@ body.tablet #Social {
 body.tablet #Social a {
   margin-left:20px;
 }
+body.tablet #Social #LoggedIn {
+  width:196px;
+}
 body.tablet #Header .headerAdFlex {
   margin-top:17px;
   float:none;

@@ -41,8 +41,16 @@
   	    <div class="headerAdFlex fl">
   	  	  <div id="Social" class="fr">
             <div>
-              <a href="#" onclick="fb_login(); return false;"><img alt="Login with Facebook" src="images/header/fbLoginBtn.png" /></a>
-              <a href="#"><img alt="Login with Twitter" src="images/header/twtLoginBtn.png" /></a>
+              <!-- Logged in with Facebook markup to replace buttons -->
+              <div id="LoggedIn" class="fl">
+                <a href="http://www.facebook.com/606818074">
+                  <img src="http://graph.facebook.com/606818074/picture">
+                </a>
+                <span>Welcome to Social Life Merida, Doug!</span><br />
+                <a class="logOut" href="javascript:void(0)" onclick="tw_logout();">Click here to sign out</a>
+              </div>
+              <a style="display:none;" href="#" onclick="fb_login(); return false;"><img alt="Login with Facebook" src="images/header/fbLoginBtn.png" /></a>
+              <a style="display:none;" href="#"><img alt="Login with Twitter" src="images/header/twtLoginBtn.png" /></a>
               <a href="#"><img alt="Help" src="images/header/helpBtn.png" /></a>
             </div>
           </div>
@@ -269,7 +277,7 @@
 
           $("#EvtRot .gallery ul").carouFredSel({
               responsive          : true,
-              auto                : false, 
+              auto                : true, 
               items : {
                   visible     : 1,
                   width       : 420, 

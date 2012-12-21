@@ -57,6 +57,23 @@ h1, h2, h3, h4, p, span, div { font-weight:normal; font-family:'AllerLightRegula
 #Social {
   margin-top:17px;
 }
+#Social #LoggedIn {
+  width:234px;
+  font-size:11px;
+}
+#Social #LoggedIn img {
+  height:45px;
+  float:left;
+  padding-right:10px;
+}
+#Social #LoggedIn .logOut {
+  margin-top:6px;
+  display:block;
+  text-decoration:underline;
+}
+#Social #LoggedIn .logOut:hover {
+  text-decoration:none;
+}
 #GuideInfo .search {
   position:relative;
   top:-7px;
