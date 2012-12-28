@@ -13,6 +13,15 @@ require(JPATH_BASE .DS.'libraries'.DS.'joomla'.DS.'database'.DS.'table'.DS.'cate
 require_once ( JPATH_BASE .DS.'components'.DS.'com_jevents'.DS.'libraries'.DS.'helper.php');
 require_once ( JPATH_BASE .DS.'components'.DS.'com_jevents'.DS.'libraries'.DS.'commonfunctions.php');
 require_once ( JPATH_BASE .DS.'administrator'.DS.'components'.DS.'com_jevents'.DS.'libraries'.DS.'categoryClass.php');
+
+/**
+Purpose: Code for Joomla menu
+Developer: Yogi
+Last Updated Date: 27-12-2012
+**/
+require('jmenu.php');
+/** Code for Joomla menu End **/
+
 require_once("configuration.php");
 
 

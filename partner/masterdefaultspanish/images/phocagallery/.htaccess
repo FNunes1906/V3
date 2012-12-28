@@ -5,7 +5,7 @@ RewriteEngine On
 #	(1) redirecting to partner specific phocagallery/thumbs
 #	(2) Override is allowed in apache vhost file
 #RewriteRule ^(.*)_t\.(.*)$ /images/phocagallery/thumbs/phoca_thumb_s_$1.$2 [L]
-RewriteRule ^(.*)_t\.(.*)$ /partner/masterdefault/images/phocagallery/thumbs/phoca_thumb_s_$1.$2 [L]
+RewriteRule ^(.*)_t\.(.*)$ /partner/masterdefaultspanish/images/phocagallery/thumbs/phoca_thumb_s_$1.$2 [L]
 #RewriteRule ^(.*)_t\.jpg$ /images/phocagallery/thumbs/phoca_thumb_s_$1.jpg [L]
 #RewriteRule ^(.*)_t\.png$ /images/phocagallery/thumbs/phoca_thumb_s_$1.png [L]
 #RewriteRule ^(.*)_t\.pjpg$ /images/phocagallery/thumbs/phoca_thumb_s_$1.pjpg [L]

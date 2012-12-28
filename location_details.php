@@ -1,6 +1,15 @@
 <?php
 
 require('jevents.php');
+
+/**
+Purpose: Code for Joomla menu
+Developer: Yogi
+Last Updated Date: 27-12-2012
+**/
+require('jmenu.php');
+/** Code for Joomla menu End **/
+
 global $var;
 include_once('./inc/var.php');
 include_once($var->inc_path.'base.php');

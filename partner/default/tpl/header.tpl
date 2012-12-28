@@ -5,16 +5,23 @@
 <?php m_show_banner('Website Top 468x60'); ?>
 </div> <!-- banner -->
 <nav>
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="events.php">Events</a></li>
-    <li><a href="restaurants.php">Restaurants</a></li>
-    <li><a href="locations.php">Places</a></li>
-    <li><a href="photo_albums.php">Photos</a></li>
-    <!--li><a href="visiting.php">Visiting</a></li-->
-    <li><a href="videos.php">Videos</a></li>
-    <!--<li><a href="contact_us.php">Contact</a></li>-->
-  </ul>
+	<?php
+	/**
+	Purpose: Joomla menu code for header
+	last Updated Date : 27-12-2012
+	Global Variable: $_SESSION['topmenu'] (Joomla menu code)
+	**/
+	global $topMenu;
+	echo $topMenu;
+	?>
+	<!--<ul>
+	<li><a href="/">Home</a></li>
+	<li><a href="events.php">Events</a></li>
+	<li><a href="restaurants.php">Restaurants</a></li>
+	<li><a href="locations.php">Places</a></li>
+	<li><a href="photo_albums.php">Photos</a></li>
+	<li><a href="videos.php">Videos</a></li>
+	</ul> -->
 </nav>
 
 <?php require ("./inc/config.php"); 

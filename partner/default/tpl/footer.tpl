@@ -5,12 +5,23 @@
     <li><?php m_show_banner('Website Footer 3'); ?></li>
     <li><?php m_show_banner('Website Footer 4'); ?></a></li>
   </ul>
-  <ul id="leftLinks">
+  
+<?php
+	/**
+	Purpose: Joomla menu code for header
+	last Updated Date : 27-12-2012
+	Global Variable: $_SESSION['topmenu'] (Joomla menu code)
+	**/
+	global $footermenu;
+	echo $footermenu;
+?>
+ 
+<!--<ul id="leftLinks">
     <li><a href="about_us.php">About Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> 
     <li><a href="links.php">Links</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> 
     <li><a href="advertise.php">Advertise</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> 
     <li><a href="contact_us.php">Contact Us</a></li>
-  </ul>
+  </ul>-->
   <ul id="rightLinks">
     <li><a href="terms_of_service.php">Terms of Use </a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> 
     <li><a href="privacy_policy.php">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> 

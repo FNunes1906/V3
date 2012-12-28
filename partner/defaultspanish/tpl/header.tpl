@@ -5,17 +5,26 @@
 <?php m_show_banner('Website Top 468x60'); ?>
 </div> <!-- banner -->
 <nav class="spanish_nav">
-  <ul>
-    <li><a href="/">INICIO</a></li>
-    <li><a href="events.php">EVENTOS</a></li>
-    <li><a href="restaurants.php">RESTAURANTES</a></li>
-    <li><a href="locations.php">LUGARES</a></li>
-    <li><a href="photo_albums.php">FOTOS</a></li>
-    <!--li><a href="visiting.php">Visiting</a></li-->
-    <li><a href="videos.php">VIDEOS</a></li>
-    <!--<li><a href="contact_us.php">Contact</a></li>-->
-  </ul>
+	<?php
+	/**
+	Purpose: Joomla menu code for header
+	last Updated Date : 27-12-2012
+	Global Variable: $_SESSION['topmenu'] (Joomla menu code)
+	**/
+	global $topMenu;
+	echo $topMenu;
+	?>
+
+	<!--<ul>
+	<li><a href="/">INICIO</a></li>
+	<li><a href="events.php">EVENTOS</a></li>
+	<li><a href="restaurants.php">RESTAURANTES</a></li>
+	<li><a href="locations.php">LUGARES</a></li>
+	<li><a href="photo_albums.php">FOTOS</a></li>
+	<li><a href="videos.php">VIDEOS</a></li>
+	</ul>-->
 </nav>
+
 <?php require ("./inc/config.php"); 
 $handle = fopen($query, "r");
 $xml = '';
