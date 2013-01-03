@@ -42,7 +42,7 @@
     while ($check_date <= $end_date) {
       $date = explode('-', $check_date);
       $data = $datamodel->getDayData($date[0], $date[1], $date[2]);
-      //print_r($data);
+	  //print_r($data);
       $print_date = false;
       for($i=0;$i<24;$i++) {
        if(count($data['hours'][$i]['events']) > 0) {

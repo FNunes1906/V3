@@ -9,14 +9,6 @@ exit;
 
 require('jevents.php');
 
-/**
-Purpose: Code for Joomla menu
-Developer: Yogi
-Last Updated Date: 27-12-2012
-**/
-require('jmenu.php');
-/** Code for Joomla menu End **/
-
 if (isset($_SESSION['__default']['application.queue'][0]['message']))
 {
 	$_SESSION['displayeventupload']="Thank you for submitting your event. Our team will review and promote your information as soon as possible! Please complete this form again to submit other events.";
