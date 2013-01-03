@@ -997,16 +997,16 @@ a.saved span {
   margin-bottom:5px;
   font-size:11px;
 }
-.detailFeature .rating {
+.detailFeature .ratingWidget {
   margin:15px 0 25px;
   font-size:12px;
 }
-.detailFeature .rating img {
+.detailFeature .ratingWidget img {
   position:relative;
   top:2px;
   margin-right:5px;
 }
-.detailFeature .rating .cust {
+.detailFeature .ratingWidget .cust {
   margin-right:40px;
 }
 .detailFeature .book a {
@@ -1014,7 +1014,7 @@ a.saved span {
   display:block;
   padding:5px 10px;
   color:#fff;
-  margin:0;
+  margin:0 !important;
 }
 .detailFeature .desc {
   padding:10px 0 0;

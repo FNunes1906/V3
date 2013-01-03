@@ -187,20 +187,155 @@
               American, Italian $
             </div>
             <h1 class="display">The Pizza Palace</h1>
-            <div class="rating">
+
+            <!-- Start New Rating Widget -->
+
+            <style type="text/css">
+
+              .ratingWidget .stars {
+                height:14px;
+                position:relative;
+                width:120px;
+              }
+              .ratingWidget .avgRating {
+                line-height:18px;
+              }
+              .ratingWidget .stars a {
+                background:url('images/stars/starsList.png') center bottom;
+                display:block;
+                float:left;
+                width:14px;
+                height:13px;
+                margin:2px 4px 1px 0 !important;
+              }
+              .ratingWidget .vote.stars a {
+                cursor:pointer;
+              }
+              .ratingWidget .stars a.filled {
+                background-position:left -13px;
+              }
+              .ratingWidget .vote.stars a.filled {
+                background-position:left top;
+              }
+
+            </style>
+
+            <script type="text/javascript">
+
+              $(document).ready(function() {
+
+                //Init Rating
+                initRating();
+
+                //Bind Rating Units
+                $('.ratingWidget .vote.stars a').mouseenter(hoverVote);
+                $('.ratingWidget .vote.stars').mouseleave(showRating);
+                $('.ratingWidget .vote.stars a').click(castVote);
+
+              });
+
+              var rating = 0;
+              var $star;
+
+              var initRating = function() {
+                $('.ratingWidget .avgRating.stars').each(function() {
+                  $star = $(this);
+                  resetIndex();
+                  var currRating = $(this).attr('data-content-rating');
+                  $(this).find('a').each(function() {
+                    if ($(this).attr('index') <= currRating) {
+                      $(this).addClass('filled');
+                    }
+                    else {
+                      $(this).removeClass('filled');
+                    }
+                  });
+                });
+              }
+
+              var resetIndex = function() {
+                var starCount = 0;
+                $star.parent().find('a').each(function() {
+                  starCount++;
+                  $(this).attr('index', starCount);
+                });
+              }
+
+              var showRating = function() {
+                $star = $(this);
+                resetIndex(); 
+                var currRating = $(this).attr('data-content-rating');
+                $(this).parent().find('a').each(function() {
+                  if($(this).attr('index') <= currRating) {
+                    $(this).addClass('filled');
+                  }
+                  else {
+                    $(this).removeClass('filled');
+                  }
+                });
+              }
+
+              var hoverVote = function(ref) {
+                $star = $(this);
+                resetIndex();
+                var vote = $(this).attr('index');
+                $(this).parent().find('a').each(function() {
+                  if($(this).attr('index') <= vote) {
+                    $(this).addClass('filled');
+                  }
+                  else {
+                    $(this).removeClass('filled');
+                  }
+                });
+              }
+
+              var castVote = function() {
+                var voteCount = 0;
+                $(this).addClass('voted');
+                $(this).parent().find('a').each(function() {
+                  voteCount++;
+                  if($(this).hasClass('voted')) {
+                    rating = voteCount;
+                    var content = $(this).parent().parent().parent().attr('data-content-id');
+                    $(this).parent().attr('data-content-rating',rating);
+                    $(this).removeClass('voted');
+
+                    alert(rating + " " + content);
+                  }
+                });
+              }
+
+            </script>
+
+
+            <div class="ratingWidget" data-content-id="12345">
               <div class="cust fl">
                 <span>Customer rating:</span>
-                <img alt="" src="images/stars/sampleRating.png" /> (10)
+                <div class="avgRating stars" data-content-rating="3">
+                  <a class="1"></a>
+                  <a class="2"></a>
+                  <a class="3"></a>
+                  <a class="4"></a>
+                  (10)
+                </div>
               </div>
               <div class="yours fl">
                 <span>Your rating:</span>
-                <img alt="" src="images/stars/sampleRating.png" />
+                <div class="vote stars" data-content-rating="0">
+                  <a class="1"></a>
+                  <a class="2"></a>
+                  <a class="3"></a>
+                  <a class="4"></a>
+                </div>
               </div>
               <div class="book fr">
                 <a class="bold" href="#">Book with OpenTable</a>
               </div>
               <div class="cb"></div>
             </div>
+
+            <!-- End New Rating Widget -->
+
             <div class="map fr">
               <!-- Map here -->
               <img alt="" src="images/mock/smallMap.jpg" />

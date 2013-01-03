@@ -6,6 +6,12 @@ $(document).ready(function() {
 
   document.addEventListener("orientationchange", updateOrientation);
 
+  /*$('.centerCol .sect').click(function() {
+    alert("sect: " + $(this).offset().top + " " + $(this).css('margin-top') + "\nleft col bottom: " + ($('#LeftCol').offset().top + $('#LeftCol').height()));
+    alert($(this).width());
+    alert($(this).attr('class'));
+  });*/
+
 });
 
 function fb_login() {
@@ -40,9 +46,10 @@ var resizeContent = function() {
     //If home event rotator exists adjust width
     if ($('#EvtRot').length) {
       killTimer1 = setTimeout(function() { 
-        $('#EvtRot .gallery, #EvtRot .gallery ul, #EvtRot .gallery ul li').css('width',$('#MainContent').width() - 550).css('height',$('#EvtRot .gallery ul li .event').height());
-        $('#EvtRot .gallery ul').parent().css('width',$('#MainContent').width() - 550).css('height',$('#EvtRot .gallery ul li .event').height() + 38);
-        $('#EvtRot .gallery .event .rsvp .faces').css('width',$('#MainContent').width() - 625);
+        $('#EvtRot .gallery, #EvtRot .gallery ul, #EvtRot .gallery ul li').css('width',$('#MainContent').width() - 285).css('height',$('#EvtRot .gallery ul li .event').height());
+        $('#EvtRot .gallery ul').parent().css('width',$('#MainContent').width() - 285).css('height',$('#EvtRot .gallery ul li .event').height() + 38);
+        $('#EvtRot .gallery .event .rsvp .faces').css('width',$('#MainContent').width() - 360);
+        $('#EvtRot .galleryNav').css('width',$('#MainContent').width() - 285);
       }, 100);
     }
 
@@ -62,8 +69,8 @@ var resizeContent = function() {
         $('#WidgetArea .centerCol .sect').each(function() {
           $(this).parent().removeClass('cb belowCol');
           if ($(this).offset().top > ($('#LeftCol').offset().top + $('#LeftCol').height() + parseFloat($(this).css('margin-top')))) {
-            $(this).parent().addClass('cb belowCol');
             $(this).css('width',$('#Content').width());
+            $(this).parent().addClass('cb belowCol').css('width',$('#Content').width());
           }
         });
       }, 100);
@@ -115,6 +122,8 @@ var resizeContent = function() {
     //If event rotator exists set to full site width
     if ($('#EvtRot').length) {
       $('#EvtRot .gallery, #EvtRot .gallery ul, #EvtRot .gallery ul li').css('width',420).css('height',268);
+      $('#EvtRot .gallery .event .rsvp .faces').css('width','345px');
+      $('#EvtRot .galleryNav').css('width','auto');
     }
 
     //Else if event page rotator exists adjust width
@@ -156,4 +165,8 @@ var updateOrientation = function() {
     $('#WidgetArea .centerCol .sect, #WidgetArea .rightCol.spread').css('width',$('#MainContent').width() - 215);
   }
 
+}
+
+var alertScreenSize = function() {
+  alert($(window).width() + "px, " + $('body').height() + "px");
 }
