@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>30A | Home</title>
+<meta name="viewport" content="width=device-width;initial-scale = 1.0,maximum-scale = 1.0" />
+<link rel="stylesheet" type="text/css" href="css/fonts.css" />
+<link rel="stylesheet" type="text/css" href="css/core.css" />
+<link rel="stylesheet" type="text/css" href="css/tablet.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.carouFredSel-6.1.0-packed.js"></script>
+<script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="js/yetii-min.js"></script>
+<script type="text/javascript" src="js/tw.js"></script>
+
+<style type="text/css">
+  
+  #TodaysEvents {
+    margin-top:-410px;
+  }
+  #Featured {
+    margin-top:-63px;
+  }
+  #MapWidget {
+    margin-top:-321px;
+  }
+
+</style>
+
+</head>
+<body>
+
+  <!-- Top Bar Start -->
+
+  <div id="TopBar">
+  	<div class="sWidth">
+  	  <div class="fl powered">Powered by<img alt="townwizard" src="images/header/twBanner.png" /></div>
+  	  <div class="fr links">
+  	  	<a href="#">Other Townwizard Places</a> | <a href="#">About Townwizard</a>
+  	  </div>
+  	</div>
+  </div>
+
+  <!-- Top Bar End -->
+
+  <!-- Content Start -->
+
+  <div id="Content" class="sWidth">
+  	
+  	<!-- Header Start -->
+
+  	<div id="Header">
+  	  <div id="Logo" class="fl">
+  	  	<a href="#"><img alt="" src="images/mock/30aLogo.jpg" /></a>
+  	  </div>
+  	    <div class="headerAdFlex fl">
+  	  	  <div id="Social" class="fr">
+            <div>
+              <!-- Logged in with Facebook markup to replace buttons -->
+              <!--div id="LoggedIn" class="fl">
+                <a href="http://www.facebook.com/606818074">
+                  <img src="http://graph.facebook.com/606818074/picture">
+                </a>
+                <span>Welcome to Social Life Merida, Doug!</span><br />
+                <a class="logOut" href="javascript:void(0)" onclick="tw_logout();">Click here to sign out</a>
+              </div-->
+              <a href="#" onclick="fb_login(); return false;"><img alt="Login with Facebook" src="images/header/fbLoginBtn.png" /></a>
+              <a href="#"><img alt="Login with Twitter" src="images/header/twtLoginBtn.png" /></a>
+              <a href="#"><img alt="Help" src="images/header/helpBtn.png" /></a>
+            </div>
+          </div>
+          <div id="UpperBannerAd" class="bannerAd">
+  	  	  	<div class="bannerCont">
+  	  	      <!-- TOP BANNER AD -->
+  	  	      <img src="images/mock/ads/bannerAd.jpg" />
+  	  	  	</div>
+  	  	  </div>
+  	    </div>
+  	    
+  	    <div id="GuideInfo" class="cr">
+  	      <div class="localCont">
+            <div id="Local" class="fl">
+  	      	  <div id="Weather" class="fr">High: 88&deg; <img alt="Partly Cloudy" src="images/weather/partlyCloudy.png" /> Low: 50&deg;</div>
+  	      	  Serving Scenic Highway 30A &amp; Surrounding Areas
+            </div>
+          </div>
+          <div class="search fr">
+  	  	    <form>
+  	  	  	  <input type="text" placeholder="Search 30A..." />
+  	  	  	  <input type="submit" value="" class="searchBtn" />
+  	  	    </form>
+  	  	  </div>
+  	    </div>
+  	</div>
+
+  	<!-- Header End -->
+
+  	<div id="MainContent">
+  	  
+  	  <!-- Left Column Start -->
+
+  	  <div id="LeftCol" class="fl">
+  	  	<nav id="MainNav" class="display">
+  	  	  <ul>
+  	  	    <li class="active"><a id="NavHome" href="index.html">Home</a></li>
+  	  	    <li><a id="NavEvents" href="events.html">Events</a></li>
+   	  	    <li><a id="NavOffers" href="#">Offers</a></li>
+  	  	    <li><a id="NavRest" href="restaurants.html">Restaurants</a></li>
+  	  	    <li><a id="NavBars" href="#">Bars</a></li>
+  	  	    <li><a id="NavEnt" href="#">Entertainment</a></li>
+  	  	    <li><a id="NavPeople" href="#">People</a></li>
+  	  	    <li><a id="NavBlog" href="#">Blog</a></li>
+  	  	    <li><a id="NavBest" href="#">Best in Town</a></li>
+  	  	    <li><a id="NavDir" href="#">Directory</a></li>
+  	  	   </ul>
+  	    </nav>
+  	    <div id="SideLinks">
+  	      <h4 class="display">Your Stuff</h3>
+  	      <a href="#">Favorite Places</a>
+  	      <a href="#">Your Saved Offers</a>
+  	      <a href="#">Your Events Calendar</a>
+  	      <a href="#">Your Lists</a>
+  	      <h4 class="display">Quick Links</h3>
+  	      <a href="#">Ratings &amp; Reviews</a>
+  	      <a href="#">Check-ins &amp;  Hotspots</a>
+  	      <a href="#">About [Brand Name]</a>
+  	    </div>
+  	    <div id="SideMobile" class="sect">
+  	      <h2>TownWizard Mobile!</h2>
+  	      <p>Lorem ipsum dolor sit amet adipiscing elit donec.</p>
+  	      <a href="#" target="_blank"><img alt="Download for the iPhone/iPad" src="images/sidebar/iphoneAppBtn.png" /></a>
+  	      <a href="#" target="_blank"><img alt="Download for Android" src="images/sidebar/androidAppBtn.png" /></a>
+  	    </div>
+  	    <div id="SideSocial" class="sect">
+  	      <h3 class="display">Follow Us</h3>
+  	      <a class="twitter" href="#" target="_blank"><img alt="Follow us on Twitter" src="images/sidebar/twtFollowBtn.png" /></a>
+  	      <a class="youtube" href="#" target="_blank"><img alt="Follow us on YouTube" src="images/sidebar/ytFollowBtn.png" /></a>
+  	    </div>
+  	    <div id="SideAds" class="sect">
+  	      <div class="ad space">
+  	      	<img alt="" src="images/mock/ads/180x150_1.jpg" />
+  	      </div>
+  	      <div class="ad">
+  	      	<img alt="" src="images/mock/ads/180x150_2.jpg" />
+  	      </div>
+  	      <div class="sect">
+  	      	<h3 class="display">Hotspots</h3>
+  	      	<p>Hot Spot rankings are decided by your annual votes.</p>
+  	      	<h4 class="display">Sushi</h4>
+  	      	<a href="#">Sushimaster</a>
+  	      	<a href="#">Yo! Sushi</a>
+  	      	<a href="#">Sushi Sushi Sushi</a>
+  	      	<a href="#">Ultimate Sushi</a>
+  	      	<h4 class="display">Outdoor Dining</h4>
+  	      	<a href="#">The Patio</a>
+  	      	<a href="#">Gerry's</a>
+  	      	<a href="#">The Red Chimney</a>
+  	      	<a href="#">Le Gavorche</a>
+  	      	<h4 class="display">Family Trip</h4>
+  	      	<a href="#">The Zoo</a>
+  	      	<a href="#">The Aquarium</a>
+  	      	<a href="#">Barney's Fun Shack</a>
+  	      	<a href="#">Milton Fun Park</a>
+  	      </div>
+  	      <div class="sect">
+  	      	<div class="ad space">
+  	      	  <img alt="" src="images/mock/ads/180x150_2.jpg" />
+  	      	</div>
+  	      	<div class="ad space">
+  	      	  <img alt="" src="images/mock/ads/180x150_1.jpg" />
+  	      	</div>
+  	      	<div class="ad">
+  	      	  <img alt="" src="images/mock/ads/180x150_2.jpg" />
+  	      	</div>
+  	      </div>
+  	    </div>
+  	  </div>
+
+  	  <!-- Left Column End -->
+
+  	  <div id="WidgetArea">
+
+      <!-- Placeholder for Header Banner Ad in Vertical Layout Start -->
+
+      <div id="LowerBannerAd" class="bannerAd"></div>
+
+      <!-- Placeholder for Header Banner Ad in Vertical Layout End -->
+
+      <!-- Feature Image Start -->
+
+      <div id="EvtRot" class="carousel fl">
+        <div class="gallery centerCol fl">
+          <img class="featureImg" alt="" src="http://30a.com/wp-content/uploads/2012/11/Living-or-Dying.jpg" />
+        </div>
+        <div class="galleryNav rightCol fr">
+          <h1 class="display"><span class="bold">Photos/Quotes</span>Living or Dying?</h1>
+          <ul>
+            <li class="1 active">
+              <a>Which one are <u>you</u> doing?</a>
+            </li>
+          </ul>
+          <div class="sharingSmall">
+            <span class='st_facebook_large'></span>
+            <span class='st_twitter_large'></span>
+            <span class='st_linkedin_large'></span>
+            <span class='st_pinterest_large'></span>
+            <span class='st_email_large'></span>
+
+            <script type="text/javascript">var switchTo5x=false;</script>
+            <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+            <script type="text/javascript">stLight.options({publisher: "ur-b1681119-5390-f344-f500-b8393d38b80e"});</script>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Image End -->
+
+      <div class="adSect rightCol fr">
+
+        <!-- 300 x 100 Banner Ad Start -->
+
+        <div class="ad space">
+          <img alt="" src="images/mock/ads/300x100.jpg" />
+        </div>
+
+        <!-- 300 x 100 Banner Ad End -->
+
+        <!-- 300 x 250_1 Banner Ad Start -->
+
+        <div class="ad">
+          <img alt="" src="images/mock/ads/300x250_1.jpg" />
+        </div>
+
+        <!-- 300 x 250_1 Banner Ad End -->
+
+      </div>
+
+      <!--Special Events Section Start -->
+
+      <div class="rightCol cr fr">
+        <div id="PlaceLists" class="sect list">
+          <div class="cont">
+            <h3 class="fl"><a class="heading display" href="#">Special Events</a></h3>
+            <ul>
+              <li>
+                <a class="bold" href="#">Jan 18-20: 30A Songwriters Festival</a>
+              </li>
+              <li>
+                <a class="bold" href="#">Jan: Escape to Create</a>
+              </li>
+              <li>
+                <a class="bold" href="#">Mar 3: Seaside 5K &amp; Half-Marathon</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Special Events Section End -->
+
+
+  	  <!-- Today's Events Section Start -->
+
+      <div class="centerCol fl">
+        <div id="TodaysEvents" class="neg sect horiz list">
+          <div class="cont">
+            <h3 class="fl"><a class="heading display" href="#">Today's Events</a></h3>
+            <div class="bc fr">
+              <a href="#">See all events</a>
+            </div>
+            <ul>
+              <li>
+                <div class="date fl">5:00 PM</div>
+                <div class="details">
+                  <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                  <p>Bayou Arts Center</p>
+                </div>
+              </li>
+              <li>
+                <div class="date fl">5:45 PM</div>
+                <div class="details">
+                  <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                  <p>Bayou Arts Center</p>
+                </div>
+              </li>
+              <li>
+                <div class="date fl">6:00 PM</div>
+                <div class="details">
+                  <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                  <p>Bayou Arts Center</p>
+                </div>
+              </li>
+              <li>
+                <div class="date fl">6:00 PM</div>
+                <div class="details">
+                  <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                  <p>Bayou Arts Center</p>
+                </div>
+              </li>
+              <li>
+                <div class="date fl">6:15 PM</div>
+                <div class="details">
+                  <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                  <p>Bayou Arts Center</p>
+                </div>
+              </li>
+              <li>
+                <div class="date fl">6:30 PM</div>
+                <div class="details">
+                  <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                  <p>Bayou Arts Center</p>
+                </div>
+              </li>
+              <li>
+                <div class="date fl">6:45 PM</div>
+                <div class="details">
+                  <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                  <p>Bayou Arts Center</p>
+                </div>
+              </li>
+              <li>
+                <div class="date fl">7:00 PM</div>
+                <div class="details">
+                  <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                  <p>Bayou Arts Center</p>
+                </div>
+              </li>
+            </ul>
+            <div class="cb"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Today's Events Section End -->
+
+
+  	  <!--Hot Spots Section Start -->
+
+      <div class="centerCol fl">
+        <div id="HotSpots" class="sect">
+          <div class="cont">
+            <h3 class="fl"><a class="heading display" href="#">30A Hot Spots</a></h3>
+            <div class="bc fr">
+              <a href="#">See all</a>
+            </div>
+            <ul>
+              <li>
+                <div class="thumb"><img alt="Magic Mice" src="images/mock/lists/mex.jpg" /></div>
+                <a class="bold" href="#">Hot Spots for Sushi</a>
+                <p>Lorem ispum dolor sit amet adipiscing elit donec.</p>
+              </li>
+              <li>
+                <div class="thumb"><img alt="Happy Scrappy Pups" src="images/mock/lists/rum.jpg" /></div>
+                <a class="bold" href="#">Hot Spots for Outdoor Dining</a>
+                <p>Lorem ispum dolor sit amet adipiscing elit nunc.</p>
+              </li>
+              <li>
+                <div class="thumb"><img alt="Childrens Parade" src="images/mock/lists/karaoke.jpg" /></div>
+                <a class="bold" href="#">Hot Spots to Workout</a>
+                <p>Lorem ispum dolor sit amet adipiscing elit et nunc aliquam.</p>
+              </li>
+            </ul>
+            <div class="cb"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hot Spots Section End -->
+
+
+      <!-- 300 x 250_2 Banner Ad Start -->
+
+      <div class="adSect rightCol fr cr">
+        <div class="ad space">
+          <img alt="" src="images/mock/ads/300x250_2.jpg" />
+        </div>
+      </div>
+
+      <!-- 300 x 250_2 Banner Ad End -->
+
+
+      <!-- Official Gear Section Start -->
+
+      <div class="rightCol fr cr">
+        <div id="OfficialGear" class="sect list">
+          <div class="cont">
+            <h3 class="fl"><a class="heading display" href="#">Official 30A&reg; Gear</a></h3>
+            <ul>
+              <li>
+                <a class="bold" href="#">30A Stickers</a>
+              </li>
+              <li>
+                <a class="bold" href="#">30A Shirts</a>
+              </li>
+              <li>
+                <a class="bold" href="#">30A Tervis Tumblers</a>
+              </li>
+              <li>
+                <a class="bold" href="#">30A Hats</a>
+              </li>
+              <li>
+                <a class="bold" href="#">30A YOLO Boards</a>
+              </li>
+              <li>
+                <a class="bold" href="#">More 30A Gear</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Official Gear Section End -->
+
+  	  
+      <!--Featured Activities Section Start -->
+
+      <div class="centerCol fl">
+        <div id="Featured" class="neg sect">
+          <div class="cont">
+            <h3 class="fl"><a class="heading display" href="#">Featured Activities</a></h3>
+            <div class="bc fr">
+              <a href="#">See all</a>
+            </div>
+            <ul>
+              <li>
+                <div class="thumb"><img alt="Magic Mice" src="images/mock/lists/mex.jpg" /></div>
+                <a class="bold" href="#">Eco Tours</a>
+                <p>Lorem ispum dolor sit amet adipiscing elit donec.</p>
+              </li>
+              <li>
+                <div class="thumb"><img alt="Happy Scrappy Pups" src="images/mock/lists/rum.jpg" /></div>
+                <a class="bold" href="#">Justin Gaffrey Studio / Gallery</a>
+                <p>Lorem ispum dolor sit amet adipiscing elit nunc.</p>
+              </li>
+              <li>
+                <div class="thumb"><img alt="Childrens Parade" src="images/mock/lists/karaoke.jpg" /></div>
+                <a class="bold" href="#">Seaside Repertory Theatre</a>
+                <p>Lorem ispum dolor sit amet adipiscing elit et nunc aliquam.</p>
+              </li>
+            </ul>
+            <div class="cb"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Activities Section End -->
+
+  	  
+      <!--Most Popular Section Start -->
+
+      <div class="centerCol fl">
+        <div id="MostPopular" class="sect">
+          <div class="cont">
+            <h3 class="fl"><a class="heading display" href="#">Most Popular</a></h3>
+            <div class="bc fr">
+              <a href="#">See all</a>
+            </div>
+            <ul>
+              <li>
+                <div class="thumb"><img alt="Magic Mice" src="images/mock/lists/mex.jpg" /></div>
+                <a class="bold" href="#">New YOLO Board Original Video</a>
+                <p>Lorem ispum dolor sit amet adipiscing elit donec.</p>
+              </li>
+              <li>
+                <div class="thumb"><img alt="Happy Scrappy Pups" src="images/mock/lists/rum.jpg" /></div>
+                <a class="bold" href="#">Curious Dolphins Taking a Good Look</a>
+                <p>Lorem ispum dolor sit amet adipiscing elit nunc.</p>
+              </li>
+              <li>
+                <div class="thumb"><img alt="Childrens Parade" src="images/mock/lists/karaoke.jpg" /></div>
+                <a class="bold" href="#">World's Most Interesting 30A Fan</a>
+                <p>Lorem ispum dolor sit amet adipiscing elit et nunc aliquam.</p>
+              </li>
+            </ul>
+            <div class="cb"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Most Popular Section End -->
+
+
+  	  <div class="adSect dual rightCol fr cr">
+
+  	  	<!-- 300 x 250_3 Banner Ad Start -->
+
+  	  	<div class="ad space">
+  	  	  <img alt="" src="images/mock/ads/300x250_1.jpg" />
+  	  	</div>
+
+  	  	<!-- 300 x 250_3 Banner Ad End -->
+
+  	  	<!-- 300 x 250_4 Banner Ad Start -->
+
+  	  	<div class="ad space">
+  	  	  <img alt="" src="images/mock/ads/300x250_3.jpg" />
+  	  	</div>
+
+  	  	<!-- 300 x 250_4 Banner Ad End -->
+
+  	  </div>
+
+  	  <div class="adSect tall rightCol fr cr">
+
+  	  	<!-- 300 x 600 Banner Ad Start -->
+
+  	  	<div class="ad">
+  	  	  <img alt="" src="images/mock/ads/300x600.jpg" />
+  	  	</div>
+
+  	  	<!-- 300 x 600 Banner Ad End -->
+
+  	  </div>
+
+  	  <!-- Map Section Start -->
+
+  	  <div class="centerCol fl">
+  	  	<div id="MapWidget" class="neg sect">
+  	  	  <div class="cont">
+            <div class="bc fr">
+              <a href="#">Enlarge Map</a>
+  	  	    </div>
+    	  	  <h3 class="fl"><a class="heading nobg display" href="#">Map</a></h3>
+    	  	  <span class="view fl">View: <a href="#" class="bold">Offers</a> | <a href="#">Events</a></span>
+    	  	  <div id="MapContainer" class="cb">
+    	  	  	<img width="100%" alt="" src="images/mock/map.jpg" />
+    	  	  </div>
+          </div>
+  	  	</div>
+  	  </div>
+
+  	  <!-- Map Section End -->
+
+
+  	  </div>
+
+  	  <div class="cb"></div>
+  	</div>
+  </div>
+
+  <!-- Content End -->
+
+  <!-- Footer Start -->
+
+  <div id="Footer">
+  	<div class="sWidth">
+  	  <ul>
+        <li class="about">
+          <div class="pad">
+            <h3 class="display">About Social Life Merida</h3>
+            <div class="authorPhoto fl"><img alt="" src="images/mock/editorPhoto.jpg" /></div>
+            <span>Social Life Merida is a state of mind! I love everything about our town, and love to bring you the latest and greatest of what's on in town!</span>
+            <div class="cl twt">
+              Find me on Twitter: <a href="#" target="_blank">@Susan_SLM</a>
+            </div>
+            <div class="editor bold">- Susan Jones, Editor</div>
+            <a href="#" class="more">More about Social Life Merida &gt;</a>
+          </div>
+        </li>
+        <li class="site">
+          <div class="pad">
+            <h3 class="display">Social Life Merida is a TownWizard Site</h3>
+            <span>Other TownWizard sites near this area include:</span>
+            <a href="#" target="_blank">Appalachia Now!</a>
+            <a href="#" target="_blank">Georgia On My Minda</a>
+            <a href="#" target="_blank">Great Smokey Mountains Guide</a>
+            <a class="all" href="#" target="_blank">See All 150 Partner Sites &gt;</a>
+          </div>
+        </li>
+        <li class="community">
+          <div class="pad">
+            <h3 class="display">TownWizard Brings Communities Alive</h3>
+            <span>Lorem ipsum dolor sit amet adipiscing elit donec</span>
+            <a href="#" target="_blank">Become a TownWizard Partner</a>
+            <a href="#" target="_blank">Advertiser Rates</a>
+            <a href="#" target="_blank">Partner with Us</a>
+            <a href="#" target="_blank">Help &amp; Support</a>
+          </div>
+        </li>
+      </ul>
+      <div class="legal cb bold">
+        <a class="bold" href="#" target="_blank">Terms of Use</a> | <a class="bold" href="#" target="_blank">Privacy Policy</a> | &copy; 2012 Social Life Merida &amp; TownWizard
+      </div>
+  	</div>
+  </div>
+
+  <!-- Footer End -->
+
+</body>
+</html>

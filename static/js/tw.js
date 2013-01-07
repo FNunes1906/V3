@@ -46,10 +46,11 @@ var resizeContent = function() {
     //If home event rotator exists adjust width
     if ($('#EvtRot').length) {
       killTimer1 = setTimeout(function() { 
-        $('#EvtRot .gallery, #EvtRot .gallery ul, #EvtRot .gallery ul li').css('width',$('#MainContent').width() - 285).css('height',$('#EvtRot .gallery ul li .event').height());
-        $('#EvtRot .gallery ul').parent().css('width',$('#MainContent').width() - 285).css('height',$('#EvtRot .gallery ul li .event').height() + 38);
-        $('#EvtRot .gallery .event .rsvp .faces').css('width',$('#MainContent').width() - 360);
+        $('#EvtRot .gallery').css('width',$('#MainContent').width() - 285).css('height',$('#EvtRot .gallery .featureImg').height());
+        $('#EvtRot .gallery .featureImg').css('width','100%').css('height','auto');
+        $('#EvtRot .gallery .featureImg').parent().css('width',$('#MainContent').width() - 285).css('height',$('#EvtRot .gallery .featureImg').height());
         $('#EvtRot .galleryNav').css('width',$('#MainContent').width() - 285);
+        $('#EvtRot .galleryNav .sharingSmall').css('width',$('#MainContent').width() - 285);
       }, 100);
     }
 
@@ -87,12 +88,12 @@ var resizeContent = function() {
     if ($(window).width() < 845 ) {
       $('.rightCol .sect').not('.rightCol.spread .ad.sect').css('width',$('#MainContent').width() - 529);
       $('#ShareTool .side').css('font-size',0);
-      $('body.tablet .sect.list ul li a, body.tablet #PlacesInfo ul li a').css('line-height','15px');
+      $('body.tablet .sect.list ul li a, body.tablet #PlacesInfo ul li a').not('body.tablet .sect.horiz.list ul li a').css('line-height','15px');
     }
     else {
       $('.rightCol .sect').not('.rightCol .ad.sect').css('width',300);
       $('#ShareTool .side').css('font-size','12px');
-      $('body.tablet .sect.list ul li a, body.tablet #PlacesInfo ul li a').css('line-height','25px');
+      $('body.tablet .sect.list ul li a, body.tablet #PlacesInfo ul li a').not('body.tablet .sect.horiz.list ul li a').css('line-height','25px');
     }
   }
 
@@ -121,9 +122,9 @@ var resizeContent = function() {
 
     //If event rotator exists set to full site width
     if ($('#EvtRot').length) {
-      $('#EvtRot .gallery, #EvtRot .gallery ul, #EvtRot .gallery ul li').css('width',420).css('height',268);
-      $('#EvtRot .gallery .event .rsvp .faces').css('width','345px');
-      $('#EvtRot .galleryNav').css('width','auto');
+      $('#EvtRot .gallery, #EvtRot .gallery .featureImg').css('width',420).css('height',280);
+      $('#EvtRot .galleryNav').css('width','300px');
+      $('#EvtRot .galleryNav .sharingSmall').css('width','272px');
     }
 
     //Else if event page rotator exists adjust width
@@ -145,6 +146,10 @@ var resizeContent = function() {
         $('#WidgetArea .centerCol .sect').parent().removeClass('cb belowCol');
       }
     }
+
+    //Fix list item line heights
+    $('.sect.list ul li a, #PlacesInfo ul li a').not('.sect.horiz.list ul li a').css('line-height','13px');
+  
   }
 
   //Correct any quirks with a quick refresh after each change

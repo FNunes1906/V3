@@ -433,13 +433,13 @@ a.saved span {
   margin-right:14px;
 }
 .sect.horiz.list ul li .date {
-  width:30px;
+  width:60px;
   padding-right:5px;
   font-size:12px;
 }
 .sect.horiz.list ul li .details {
   font-size:12px;
-  padding-left:35px;
+  padding-left:65px;
 }
 .sect.horiz.list ul li .details .thumb {
   background:#f1f1f1;
@@ -679,6 +679,10 @@ a.saved span {
   width:420px;
   margin-bottom:30px;
 }
+.gallery .featureImg {
+  width:100%;
+  display:block;
+}
 .gallery .nav {
   background:#00bae8;
   position:absolute;
@@ -768,7 +772,10 @@ a.saved span {
   height: 14px;
 }
 .galleryNav {
+  background:#D5D5D5;
   position:relative;
+  height:280px;
+  width:300px;
 }
 .galleryNav .full {
   background:url('../images/grayArrowSm.png') no-repeat right center;
@@ -808,8 +815,9 @@ a.saved span {
 .galleryNav ul li a {
   display:block;
   font-size:12px;
+  line-height:16px;
   color:#000;
-  padding:8px 0 8px 12px;
+  padding:8px 12px 8px 8px;
 }
 .galleryNav ul li a span {
   display:block;
@@ -1118,6 +1126,16 @@ a.saved span {
 }
 #ShareTool .lower .btn {
   width:38px;
+}
+.sharingSmall {
+  background:#E9E9E9;
+  padding:14px;
+  width:272px;
+  position:absolute;
+  bottom:0;
+}
+.sharingSmall span {
+  margin:0 3px;
 }
 
 /* ------------------------------------------------------------------- */
