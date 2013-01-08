@@ -5,12 +5,24 @@
     <li><?php m_show_banner('Website Footer 3'); ?></li>
     <li><?php m_show_banner('Website Footer 4'); ?></a></li>
   </ul>
-  <ul id="leftLinks">
-    <li><a href="about_us.php">Acerca de Nosotros</a>&nbsp;|&nbsp;</li> 
-    <li><a href="links.php">Enlaces</a>&nbsp;|&nbsp;</li> 
-    <li><a href="advertise.php">Anunciar</a>&nbsp;|&nbsp;</li> 
-    <li><a href="contact_us.php">Contacte con Nosotros</a></li>
-  </ul>
+
+<?php
+/**
+* Purpose: Joomla menu code for header
+* last Updated Date : 27-12-2012
+* Global Variable: $_SESSION['topmenu'] (Joomla menu code)
+**/
+global $footermenu;?>
+<ul id="leftLinks">
+	<li><?= $footermenu;?> </li>
+</ul>
+<!-- <ul id="leftLinks">
+	<li><a href="about_us.php">Acerca de Nosotros</a>&nbsp;|&nbsp;</li> 
+	<li><a href="links.php">Enlaces</a>&nbsp;|&nbsp;</li> 
+	<li><a href="advertise.php">Anunciar</a>&nbsp;|&nbsp;</li> 
+	<li><a href="contact_us.php">Contacte con Nosotros</a></li>
+</ul> -->
+  
   <ul id="rightLinks">
     <li><a href="terms_of_service.php">Términos de Uso </a>&nbsp;|&nbsp;</li> 
     <li><a href="privacy_policy.php">Política de Privacidad</a>&nbsp;|&nbsp;</li> 
