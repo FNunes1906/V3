@@ -4,6 +4,9 @@ body.tablet .rightCol.fr {
   margin-top:0;
   margin-bottom:0;
 }
+body.tablet #BlogCol.rightCol.fr {
+  float:right;
+}
 body.tablet .rightCol.fr .ad {
   margin-bottom:30px;
 }
@@ -176,13 +179,26 @@ body.tablet .rotator {
 body.tablet .rotator .gallery {
   margin-bottom:0;
 }
-body.tablet .galleryNav ul li a {
+body.tablet #Blog .sect .description h1 span {
+  float:none;
+  line-height: 14px;
+  margin-bottom: 5px;
+}
+body.tablet #Blog .sect .description ul li h3 {
+  font-size:18px;
+}
+body.tablet #Blog .sect .description ul li a, 
+body.tablet #Blog .sect .description ul li p {
   font-size:16px;
   line-height:22px;
 }
+body.tablet #Blog .sect .featureImg img {
+  width:100%;
+}
 body.tablet .sharingSmall {
   padding:14px 0;
+  width:100%;
 }
 body.tablet .sharingSmall span {
-  margin:0 3%;
+  margin:7px 3%;
 }
