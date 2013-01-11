@@ -2,8 +2,8 @@
 
 define("TOWNWIZARD_DB_USERS_URL", "http://www.townwizardconnect.com/users");
 define("TOWNWIZARD_DB_USER_LOGIN_URL", "http://www.townwizardconnect.com/users/login");
-define("TOWNWIZARD_DB_USER_LOGIN_WITH_URL", "http://www.townwizardconnect.com/users/loginwith");
 define("TOWNWIZARD_DB_FB_LOGIN_URL", "http://www.townwizardconnect.com/login/fb");
+define("TOWNWIZARD_DB_TWITTER_LOGIN_URL", "http://www.townwizardconnect.com/login/twitter");
 define("TOWNWIZARD_DB_RATINGS_URL", "http://www.townwizardconnect.com/ratings");
 define("TOWNWIZARD_DB_RSVPS_URL", "http://www.townwizardconnect.com/rsvps");
 
@@ -229,7 +229,7 @@ function tw_get_rsvps_by_event($event_id, $event_date = NULL) {
 }
 
 /***
-    Gets a user from the service by id (which can be numeric id or email).    
+    Get a user from the service by id (which can be numeric id or email).    
 
     Return:    
         - user object for HTTP status 200 (Ok) when a user is found
@@ -245,7 +245,7 @@ function tw_get_user($id) {
 }
 
 /***
-    Gets a user from the service by id, and put the users' name to the session.
+    Get a user from the service by id, and put the user's name to the session.
 ***/
 function tw_login_with_id($id) {
     $user = tw_get_user($id);
@@ -253,7 +253,7 @@ function tw_login_with_id($id) {
 }
 
 /***
-    Makes a request to Town Wizard DB to look for a user by the email and password.
+    Make a request to Town Wizard DB to look for a user by the email and password.
     If user is found, put the user's name to the session.
 
     Return:
@@ -261,16 +261,11 @@ function tw_login_with_id($id) {
       - "failure" on HTTP status 404 (user not found)
       - error message on HTTP status 500 (server error) or when the server is down
 ***/
-function tw_login($post) {
-    if(!empty($post['townwizard_login'])) {
-        $url = TOWNWIZARD_DB_USER_LOGIN_URL;
-        $parameters = Array();
-        $parameters['email'] = $post['email'];
-        $parameters['password'] = $post['password'];        
-    } else {
-        $url = TOWNWIZARD_DB_USER_LOGIN_WITH_URL;
-        $parameters = $post;
-    }
+function tw_login($post) {    
+    $url = TOWNWIZARD_DB_USER_LOGIN_URL;
+    $parameters = Array();
+    $parameters['email'] = $post['email'];
+    $parameters['password'] = $post['password'];
     
     $json = json_encode($parameters);
 
@@ -296,7 +291,8 @@ function tw_login($post) {
 /***
     Remove user name from the session, and return "success".
 ***/
-function tw_logout() {    
+function tw_logout() {
+    unset($_SESSION['tw_user_image_url']);
     unset($_SESSION['tw_user_name']);
     unset($_SESSION['tw_user']);
     return "success";
@@ -309,11 +305,23 @@ function _tw_login($user) {
         $user_name = $user -> firstName;    
     } else if($user -> username) {
         $user_name = $user -> username;
+    } else if ($user -> name) {
+        $user_name = $user -> name;
     } else {
         $user_name = substr($user -> email, 0, strpos($user -> email, '@'));
     }
     $_SESSION['tw_user_name'] = $user_name;
     $_SESSION['tw_user'] = $user;
+    if($user->loginType == 'FACEBOOK') {
+        $_SESSION['tw_user_image_url'] = 'http://graph.facebook.com/'.$user->externalId.'/picture';
+    } else if($user -> loginType == 'TWITTER') {
+        $user_url = 'http://api.twitter.com/1/users/show.json?user_id='.$user->externalId;
+        list($status, $response_msg) = _tw_get_json($user_url);
+        if($status == 200) {
+            $user = json_decode($response_msg);
+            $_SESSION['tw_user_image_url'] = $user->profile_image_url;
+        }
+    }
 }
 
 
@@ -334,8 +342,12 @@ function _tw_post_json($url, $json) {
     return array($status_code, $response_msg);
 }
 
-function _tw_get_json($url, $id) {
-    $ch = curl_init("$url/$id");
+function _tw_get_json($url, $id = NULL) {
+    if(!empty($id)) {
+        $ch = curl_init("$url/$id");
+    } else {
+        $ch = curl_init("$url");
+    }
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response_msg = curl_exec($ch);
     $status = curl_getinfo($ch);

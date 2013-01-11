@@ -14,15 +14,14 @@
 <div style="float:right;">
     <?php if($_SESSION['tw_user_name']) { ?>
         <?php echo "Welcome, {$_SESSION['tw_user_name']}!"; ?><br/>
-        <?php $user = $_SESSION['tw_user']; ?>
-        <a href="<?php echo 'http://www.facebook.com/'.$user->externalId; ?>">
-            <img src="<?php echo 'http://graph.facebook.com/'.$user->externalId.'/picture'; ?>"/>
-        </a><br/>
+        <?php $user = $_SESSION['tw_user']; ?>        
+        <img src="<?php echo $_SESSION['tw_user_image_url']; ?>"/></br>        
         <a href="javascript:void(0)" onclick="tw_logout();">Sign out</a>
     <?php }  else { ?>
         <a href="javascript:void(0)" onclick="$('#login_dialog').hide();$('#registration_dialog').show();">Register</a> | 
         <a href="javascript:void(0)" onclick="$('#registration_dialog').hide();$('#login_dialog').show();">Sign in</a><br/>
         <a href="javascript:void(0)" onclick="fb_login();">Sign in with Facebook</a><br/>
+        <a href="javascript:void(0)" onclick="twitter_login();">Sign in with Twitter</a><br/>
     <?php } ?>
 </div>
 <?php require("townwizard-db-api/sample_pages/fb/register.tpl"); ?>

@@ -69,6 +69,10 @@
     window.open("/townwizard-db-api/fb-login.php", "_blank", "height=200,width=400,status=no,toolbar=no,menubar=no");
   }
 
+  function twitter_login() {
+    window.open("/townwizard-db-api/twitter-login.php", "_blank", "height=200,width=400,status=no,toolbar=no,menubar=no");
+  }
+
   function tw_login_with(user_data) {
     $.ajax({
         url: "townwizard-db-api/login.php",
