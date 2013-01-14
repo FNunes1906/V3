@@ -23,6 +23,15 @@
 </head>
 <body>
 
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
   <!-- Top Bar Start -->
 
   <div id="TopBar">
@@ -65,13 +74,13 @@
   	    <div id="GuideInfo" class="cr">
   	      <div class="localCont">
             <div id="Local" class="fl">
-  	      	  <div id="Weather" class="fr">High: 88&deg; <img alt="Partly Cloudy" src="images/weather/partlyCloudy.png" /> Low: 50&deg;</div>
+  	      	  <div id="Weather" class="fr bold">Current Temp: 80&deg;  <img alt="Partly Cloudy" src="images/weather/partlyCloudy.png" /> <span class="range bold">High: 88&deg; / Low: 50&deg;</span></div>
   	      	  Serving Merida, Ciudad Caucel, &amp; Surrounding Areas
             </div>
           </div>
           <div class="search fr">
   	  	    <form>
-  	  	  	  <input type="text" placeholder="Search SocialLife Merida..." />
+  	  	  	  <input type="text" placeholder="Search SocialLife Merida Events..." />
   	  	  	  <input type="submit" value="" class="searchBtn" />
   	  	    </form>
   	  	  </div>
@@ -114,7 +123,7 @@
   	  	   </ul>
   	    </nav>
   	    <div id="SideLinks">
-  	      <h4 class="display">Your Stuff</h3>
+  	      <h4 class="display">My Stuff</h3>
   	      <a href="#">Favorite Places</a>
   	      <a href="#">Your Saved Offers</a>
   	      <a href="#">Your Events Calendar</a>
@@ -330,9 +339,6 @@
                   <a class="5"></a>
                 </div>
               </div>
-              <div class="book fr">
-                <a class="bold" href="#">Book with OpenTable</a>
-              </div>
               <div class="cb"></div>
             </div>
 
@@ -354,16 +360,7 @@
             <div class="people cb">
               <div class="likes fl">
                 <span>Liked by:</span>
-                <img alt="" src="images/mock/faces/person1.jpg" />
-                <img alt="" src="images/mock/faces/person2.jpg" />
-                <img alt="" src="images/mock/faces/person3.jpg" />
-                <img alt="" src="images/mock/faces/person4.jpg" />
-                <img alt="" src="images/mock/faces/person5.jpg" />
-                <img alt="" src="images/mock/faces/person6.jpg" />
-                <img alt="" src="images/mock/faces/person7.jpg" />
-                <img alt="" src="images/mock/faces/person8.jpg" />
-                <img alt="" src="images/mock/faces/person9.jpg" />
-                <img alt="" src="images/mock/faces/person10.jpg" />
+                <div class="fb-like" data-href="http://www.apple.com" data-send="false" data-width="50%" data-show-faces="true"></div>
               </div>
               <div class="checkins fl">
                 <div class="pad">
@@ -401,16 +398,18 @@
                   <span class='st_tumblr_large' displayText='Tumblr'>Share on Tumblr</span>
                 </div>
                 <div class="side fl">
-                  <span class='st_googleplus_large' displayText='Foursquare Save'>Share on Google+</span>
-                  <div class="cl"></div>
-                  <span class='favorites_large'><span class="favBtn btn fl"></span>Add to Favorites</span>
-                  <div class="cl"></div>                  
+                  <span class='st_googleplus_large' displayText='Google Plus'>Share on Google+</span>
+                  <div class="cl"></div> 
+                  <span class='cal_large' displayText='Add to Cal'><span class="calBtn btn fl"></span>Add to Cal (.ics)</span>
+                  <div class="cl"></div>               
                   <span class='st_email_large' displayText='Email'>Email Info</span>
                 </div>
                 <div class="lower cl">
-                  <span class='error_large'><span class="errorBtn btn fl"></span><span class="bold error">See an error?</span> <a href="#">Contact us to correct it</a></span>
+                  <a href="#" class='error_large'><span class="errorBtn btn fl"></span><span class="bold error">Is Our Info Wrong?</span> <span class="hideSm error">Contact us to correct it</a>
                   <div class="cl"></div>
-                  <span class='print_large'><span class="printBtn btn fl"></span>Print this Page</span>
+                  <a href="#"><span class='favorites_large'><span class="favBtn btn fl"></span>Add to My Favorites</span></a>
+                  <div class="cl"></div>
+                  <a href="#"><span class='print_large'><span class="printBtn btn fl"></span>Print this Page</span></a>
                 </div>
               </div>
             </div>

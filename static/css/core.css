@@ -620,7 +620,7 @@ a.saved span {
 .newLists ul li .author img {
   margin-right:5px;
 }
-#ListEvent p {
+#SubmitEvent p {
   padding-top:15px;
   font-size:13px;
   line-height:18px;
@@ -1142,14 +1142,21 @@ a.saved span {
 #ShareTool span a:hover {
   text-decoration:underline;
 }
+#ShareTool .calBtn {
+  background:url('../images/header/calIcon.png') no-repeat center top;
+  margin:0 3px 0 0;
+}
 #ShareTool .favorites_large {
-  margin-left:3px;
+  display:block;
 }
 #ShareTool .favBtn {
-  background:url('../images/header/favoritesIcon.png') no-repeat left top;
+  background:url('../images/header/favoritesIcon.png') no-repeat center top;
+}
+#ShareTool .error_large {
+  display:block;
 }
 #ShareTool .errorBtn.btn {
-  background:url('../images/header/errorIcon.png') no-repeat center top;
+  background:url('../images/header/questionIcon.png') no-repeat center top;
 }
 #ShareTool .printBtn.btn {
   background:url('../images/header/printIcon.png') no-repeat center top;
@@ -1159,7 +1166,10 @@ a.saved span {
   width:32px;
   cursor:pointer;
 }
-#ShareTool .btn:hover {
+#ShareTool .btn:hover, 
+#ShareTool .favorites_large:hover .btn, 
+#ShareTool .error_large:hover .btn, 
+#ShareTool .print_large:hover .btn {
   opacity:0.6;
   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
   filter: alpha(opacity=60);

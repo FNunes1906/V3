@@ -70,6 +70,9 @@ body.tablet #Local {
 body.tablet #Weather {
   float:none;
 }
+body.tablet #Weather .range {
+  display:block;
+}
 body.tablet #GuideInfo {
   position: absolute;
   right: 0;
@@ -160,7 +163,7 @@ body.tablet #FindForm .sub span {
 body.tablet .detailFeature a {
   margin:25px 0;
 }
-body.tablet #ShareTool .lower span a {
+body.tablet #ShareTool .lower span.hideSm {
   display:none;
 }
 body.tablet .detailFeature .map img {
@@ -201,4 +204,10 @@ body.tablet .sharingSmall {
 }
 body.tablet .sharingSmall span {
   margin:7px 3%;
+}
+body.tablet .ratingWidget .stars.vote a { 
+  margin:0 40px 0 0 !important;
+}
+body.tablet .ratingWidget .stars.vote {
+  width:280px;
 }
