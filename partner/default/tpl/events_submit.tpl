@@ -11,17 +11,17 @@ if($msg!='') {?>
 <?php } ?>
 
 <!--Jevent Form Starts-->
-<div style="padding:10px"></div>
-<h2>Send Us Your Events</h2>
+<div style="padding:5px 0px"></div>
+<h1 class="display send">Send Us Your Events</h1>
 <div id="jevents" >
 <form action="" method="post" name="adminForm" enctype='multipart/form-data' onSubmit="return form_validation()">
-<div style='width:500px;'>
-<div class="adminform" align="left" style="width:600px">
+<div>
+<div class="adminform" align="left" >
 
-	<table width="94%" cellpadding="5" cellspacing="2" border="1"  class="adminform" id="jevadminform">
+	<table width="65%" cellpadding="5" cellspacing="2" border="0"  class="adminform" id="jevadminform">
 	<tr>
 		<td align="left">Event Name:</td>
-		<td align="right"><input class="inputbox" type="text" name="title" size="60" maxlength="255" value="<?=$postValues['title']?>" /></td>
+		<td align="right"><input class="inputbox" type="text" name="title" size="41" maxlength="255" value="<?=$postValues['title']?>" /></td>
 		<td colspan="2"><input type="hidden" name="priority" value="0" /></td>
 	</tr>
 	<tr>
@@ -49,7 +49,7 @@ if($msg!='') {?>
 	</tr>
 	<tr>
 		<td valign="top" align="left" colspan="4">
-		  	<div style="clear:both;width:551px">
+		  	<div style="clear:both;width:408px">
 				<fieldset class="jev_sed">
 					<legend>Start, End, Duration</legend>
 					<span>
@@ -137,12 +137,13 @@ if($msg!='') {?>
 							<input type="radio" name="end_ampm" id="endAM" value="am" <?=$end_ampm_check['am']?>  onclick="toggleAMPM('endAM');"  />am 
 							<input type="radio" name="end_ampm" id="endPM" value="pm" <?=$end_ampm_check['pm']?> onClick="toggleAMPM('endPM');" />pm	
 							</span>
-							<span style="margin-left:10px">
-								<span><input type="checkbox" id='noendtime' name='noendtime'  onclick="noendtimetog();" <?php if($postValues['noendtime']==1) {echo 'checked'; }?> value="1" />
-								<span >No specific end time</span>
+							
+						</div>
+						<span style="margin-left:10px">
+								<span><br/><br/><input type="checkbox" id='noendtime' name='noendtime'  onclick="noendtimetog();" <?php if($postValues['noendtime']==1) {echo 'checked'; }?> value="1" />
+										<span>No specific end time</span>
 								</span>
 							</span>
-						</div>
 						</fieldset>
 					</div>
 				</fieldset>
@@ -152,9 +153,9 @@ if($msg!='') {?>
 		</td>
 	</tr>
 	<tr>
-		<td style="vertical-align:top" align="left">Description</td>
+		
 		<td colspan="3">
-			<div id='jeveditor' style="width:457px"><textarea id="jevcontent" name="jevcontent" cols="70" rows="10" style="width:100%;height:230px;" class="mceEditor"><?=$postValues['jevcontent']?></textarea>
+			<div id='jeveditor' style="width:404px">Description:<br/><br/><textarea id="jevcontent" name="jevcontent" cols="70" rows="10" style="width:100%;height:230px;" class="mceEditor"><?=$postValues['jevcontent']?></textarea>
 			</div>       	
 		</td>
 	</tr>
@@ -162,7 +163,7 @@ if($msg!='') {?>
 		<td width="130" align="left" style="vertical-align:top;">Location</td>
 		<td colspan="3">
 			<input type="hidden" name="location" id="locn" value=""/>
-			<input type="text" name="evlocation_notused" disabled="disabled" id="evlocation" value=" -- " style="float:left"/>
+			<input type="text" name="evlocation_notused" disabled="disabled" id="evlocation" value=" -- " style="float:left;margin-top: 2px;"/>
 			<div class="button2-left">
 				<div class="blank"><a href="javascript:selectLocation('' ,'/indexiphone.php?option=com_jevlocations&amp;task=locations.select&amp;tmpl=component','750','500')" title="Select Location"  >select</a>
 				</div>
@@ -176,11 +177,11 @@ if($msg!='') {?>
 	</tr>
 	<tr class="jevplugin_anonusername">
 		<td valign="top"  width="130" align="left">Your name</td>
-		<td colspan="3"><input size="50" type="text" name="custom_anonusername" id="custom_anonusername" value="<?=$postValues['custom_anonusername']?>" /></td>
+		<td colspan="3"><input size="41" type="text" name="custom_anonusername" id="custom_anonusername" value="<?=$postValues['custom_anonusername']?>" /></td>
 	</tr>
 	<tr class="jevplugin_anonemail">
 		<td valign="top"  width="130" align="left">Your email address</td>
-		<td colspan="3"><input size="50" type="text" name="custom_anonemail" id="custom_anonemail" value="<?=$postValues['custom_anonemail']?>" /></td>
+		<td colspan="3"><input size="41" type="text" name="custom_anonemail" id="custom_anonemail" value="<?=$postValues['custom_anonemail']?>" /></td>
 	</tr>
 	
 	<!--#DD#-->
@@ -217,6 +218,7 @@ if($msg!='') {?>
 
 	</tr></tbody>
 </table>
+</div>
 </form>
 
 </div>

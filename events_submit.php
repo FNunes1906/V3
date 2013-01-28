@@ -15,14 +15,6 @@ require_once ( JPATH_BASE .DS.'components'.DS.'com_jevents'.DS.'libraries'.DS.'c
 require_once ( JPATH_BASE .DS.'administrator'.DS.'components'.DS.'com_jevents'.DS.'libraries'.DS.'categoryClass.php');
 require_once("configuration.php");
 
-/**
-Purpose: Code for Joomla menu
-Developer: Yogi
-Last Updated Date: 27-12-2012
-**/
-require('jmenu.php');
-/** Code for Joomla menu End **/
-
 
 
 //#DD# 
@@ -43,6 +35,32 @@ _init();
 $mainframe =& JFactory::getApplication('site');
 $mainframe->initialise();
 $session =& JFactory::getSession();
+
+/* Joomla menu start*/ 
+global $topmenu;
+global $leftmenu;
+global $footermenu;
+global $bottommenu1;
+global $bottommenu2;
+
+jimport( 'joomla.application.module.helper' );
+
+$moduletop = JModuleHelper::getModules('twtopmenu');
+$topmenu = JModuleHelper::renderModule($moduletop[0]);
+ 
+$moduleleft = JModuleHelper::getModules('twleftmenu');
+$leftmenu = JModuleHelper::renderModule($moduleleft[0]);
+
+$modulefooter = JModuleHelper::getModules('twfootermenu');
+$footermenu = JModuleHelper::renderModule($modulefooter[0]);
+
+$modulebottom1 = JModuleHelper::getModules('twbottommenu1');
+$bottommenu1 = JModuleHelper::renderModule($modulebottom1[0]);
+
+$modulebottom2 = JModuleHelper::getModules('twbottommenu2');
+$bottommenu2 = JModuleHelper::renderModule($modulebottom2[0]);
+/* Joomla menu end*/
+
 
 $jconfig = new JConfig();
 define(DB_HOST, $jconfig->host);
@@ -252,33 +270,6 @@ global $msg;
 	return true;
 }
 
-/*
-#DD#
-if(!$validCode){
-	$postValues = $_POST;
-	if($_POST['action']=='Save' || $_POST['action']=='Ahorrar')
-	{
-		$msg="Invalid varification code.";
-	}	
-	
-}else{
-	$postValue = array();
-	$postValue['title'] = ''; 
-	$postValue['catid'] = '';
-	$postValue['allDayEvent'] = '';
-	$postValue['publish_up'] = '';
-	$postValue['start_12h'] = '';
-	$postValue['publish_up'] = '';
-	$postValue['end_12h'] = '';
-	$postValue['noendtime'] = '';
-	$postValue['jevcontent'] = '';
-	$postValue['custom_anonusername'] = '';
-	$postValue['custom_anonemail'] = '';
-}
-#DD#
-*/
-
-
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -295,7 +286,7 @@ if(!$validCode){
   document.createElement('aside');
   document.createElement('footer');
 </script>
-<link rel="stylesheet" type="text/css" href="common/templatecolor/<?php echo $_SESSION['style_folder_name'];?>/css/all.css" media="screen" />
+<!-- <link rel="stylesheet" type="text/css" href="common/templatecolor/<?php echo $_SESSION['style_folder_name'];?>/css/all.css" media="screen" /> -->
 <link href="/templates/rt_quantive_j15/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 <link rel="stylesheet" href="/administrator/templates/khepri/css/icon.css" type="text/css" />
 <link rel="stylesheet" href="/administrator/components/com_jevents/assets/css/eventsadmin.css" type="text/css" />
@@ -313,6 +304,21 @@ if(!$validCode){
 <link rel="stylesheet" href="/templates/rt_quantive_j15/css/fusionmenu.css" type="text/css" />
 <link rel="stylesheet" href="/modules/mod_rokajaxsearch/css/rokajaxsearch.css" type="text/css" />
 <link rel="stylesheet" href="/modules/mod_rokajaxsearch/themes/blue/rokajaxsearch-theme.css" type="text/css" />
+
+<!-- set css and js path for new design v3 -->
+
+<meta name="viewport" content="width=device-width;initial-scale = 1.0,maximum-scale = 1.0" />
+<link rel="stylesheet" type="text/css" href="common/<?php echo $_SESSION['style_folder_name'];?>/css/fonts.css" />
+<link rel="stylesheet" type="text/css" href="common/<?php echo $_SESSION['style_folder_name'];?>/css/core.css" />
+<link rel="stylesheet" type="text/css" href="common/<?php echo $_SESSION['style_folder_name'];?>/css/tablet.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="common/<?php echo $_SESSION['style_folder_name'];?>/js/jquery.carouFredSel-6.1.0-packed.js"></script>
+<script type="text/javascript" src="common/<?php echo $_SESSION['style_folder_name'];?>/js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="common/<?php echo $_SESSION['style_folder_name'];?>/js/yetii-min.js"></script>
+<script type="text/javascript" src="common/<?php echo $_SESSION['style_folder_name'];?>/js/tw.js"></script>
+
+<!-- End css and js path for new design v3 -->
+
 
 
 <style type="text/css">
@@ -463,21 +469,69 @@ function form_validation() {
 	<?php m_header(); ?> <!-- header -->
 </header>
 
-<div id="wrapper">
-<aside>
-    <?php m_aside(); ?>
-</aside> <!-- left Column -->
-<section><!-- Right Column -->
+<!-- Content Start -->
+<div id="Content" class="sWidth">
+	<div id="MainContent">
+	  	<aside>
+	    	<?php m_aside(); ?>
+		</aside> <!-- left Column -->
+		
+		<div id="WidgetArea">
+			<section>
+				
+				 <?php
+					/* Code added for Events_submit.tpl */
+					//require($var->tpl_path."events_submit.tpl");
+					?>
+					
+					<!-- Submit event Section Start -->
+				<div class="centerCol fl">
+          			<div id="ThisWeek" class="sect horiz list">
+           				 <div class="cont">
+				 
+							 <?php require($var->tpl_path."events_submit.tpl"); ?>
+						 </div>
+          			</div>
+        		</div>
 
- <?php
-	/* Code added for Events_submit.tpl */
-	require($var->tpl_path."events_submit.tpl");
-	?>
-</section> <!-- rightColumn -->
-</div> <!-- wrapper -->
+       			 <!-- Submit even Section End -->
+					
+				<div id="LowerAds" class="neg adSect dual rightCol fr cr">
+
+			 		<!-- 300 x 250_3 Banner Ad Start -->
+
+				          <?php for($i=1;$i<=3;++$i):?>
+							<div class="ad space">
+				  	      		<?php m_show_banner("Website right $i"); ?>
+							</div>
+							<?php endfor; ?>
+			          <!-- 300 x 250_4 Banner Ad End -->
+
+				</div>
+
+				<div id="LowerTallAd" class="neg adSect tall rightCol fr cr">
+
+							          <!-- 300 x 600 Banner Ad Start -->
+
+							          <div class="ad">
+							            <?php m_show_banner('Website right 4'); ?>
+							          </div>
+
+							          <!-- 300 x 600 Banner Ad End -->
+
+				</div>						         
+								
+								 
+				</section> 
+		</div>
+	</div> 
+</div> <!-- Content end -->
+<div id="Footer">
+	<div class="sWidth">
+		<footer>
+			<?php m_footer(); ?> <!-- footer -->
+		</footer>
+	</div>
 </div>
-<footer>
-	<?php m_footer(); ?> <!-- footer -->
-</footer>
 </body>
 </html>

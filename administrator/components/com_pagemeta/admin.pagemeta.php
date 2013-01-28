@@ -180,6 +180,10 @@ function globalseting(){
     <td width="80%"><input type="text" name="android" class="inputbox" size="50" value="<?=$row['android']?>" /></td>
   </tr>
   <tr>
+    <td width="20%" class="key"><label>Header Color:</label></td>
+    <td width="80%"><input type="text" name="Header_color" class="inputbox" size="50" value="<?=$row['Header_color']?>" /></td>
+  </tr>
+  <tr>
     <td width="20%" class="key"><label>DISTANCE UNIT:</label></td>
     <td width="80%">
       <?php
@@ -283,8 +287,8 @@ function save(){
 		}	
 	}
 	elseif(isset($_POST['global'])){
-	
-		$query = "UPDATE #__pageglobal SET site_name ='".$_POST['site_name']."', email ='".$_POST['email']."', googgle_map_api_keys ='".addslashes($_POST['googgle_map_api_keys'])."', location_code ='".$_POST['location_code']."', beach ='".$_POST['beach']."', photo_mini_slider_cat ='".$_POST['photo_mini_slider_cat']."', photo_upload_cat ='".$_POST['photo_upload_cat']."', facebook ='".$_POST['facebook']."', iphone ='".$_POST['iphone']."', android ='".$_POST['android']."', distance_unit ='".$_POST['dunit']."', weather_unit ='".$_POST['wunit']."',time_zone ='".$_POST['timezone']."' WHERE id='1'";
+		
+		$query = "UPDATE #__pageglobal SET site_name ='".$_POST['site_name']."', email ='".$_POST['email']."', googgle_map_api_keys ='".addslashes($_POST['googgle_map_api_keys'])."', location_code ='".$_POST['location_code']."', beach ='".$_POST['beach']."', photo_mini_slider_cat ='".$_POST['photo_mini_slider_cat']."', photo_upload_cat ='".$_POST['photo_upload_cat']."', facebook ='".$_POST['facebook']."', iphone ='".$_POST['iphone']."', android ='".$_POST['android']."', Header_color='".$_POST['Header_color']."', distance_unit ='".$_POST['dunit']."', weather_unit ='".$_POST['wunit']."',time_zone ='".$_POST['timezone']."' WHERE id='1'";
 		
 		$db->setQuery( $query );
 		

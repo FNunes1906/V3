@@ -60,7 +60,11 @@ function load_config() {
   $var->iphone = $pageglobal['iphone'];
   $var->android = $pageglobal['android'];
   $var->googgle_analytics=$pageglobal['googgle_map_api_keys'];
-
+  $var->Header_color =$pageglobal['Header_color'];
+  $var->distance_unit=$pageglobal['dunit'];
+  $var->weather_unit=$pageglobal['wunit'];
+  $var->time_zone=$pageglobal['timezone'];
+   
   $var->page_title = isset($pagemeta['title'])?$pagemeta['title']:'';
   $var->metadesc = isset($pagemeta['metadesc'])?$pagemeta['metadesc']:'';
   $var->keywords = isset($pagemeta['keywords'])?$pagemeta['keywords']:'';

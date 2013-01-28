@@ -38,13 +38,21 @@ class JElementFilelist extends JElement
 		jimport( 'joomla.filesystem.folder' );
 		jimport( 'joomla.filesystem.file' );
 
+		/*	Developer: Rinkal
+				Purpose: Code change for menu icon images
+				Last Updated Date: 23-01-2013
+			*/
+		
 		// path to images directory
-		$path		= JPATH_ROOT.DS.$node->attributes('directory');
+		//$path		= JPATH_ROOT.DS.$node->attributes('directory');
+		$path		= JPATH_ROOT.DS."partner/".$_SESSION['partner_folder_name'].DS.$node->attributes('directory');
 		$filter		= $node->attributes('filter');
 		$exclude	= $node->attributes('exclude');
 		$stripExt	= $node->attributes('stripext');
 		$files		= JFolder::files($path, $filter);
-
+		
+		/* code ended by Rinkal */
+		
 		$options = array ();
 
 		if (!$node->attributes('hide_none'))

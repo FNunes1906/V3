@@ -48,8 +48,9 @@ $data['_date'] = $temp[0];
 ?>
 
 <!DOCTYPE HTML>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
 <title><?php echo $var->site_name.' | '.$var->page_title; ?></title>
 <link rel="image_src" href="http://<?php echo $_SERVER['HTTP_HOST']?>/partner/<?php echo $_SESSION['partner_folder_name']?>/images/logo/logo.png" />  
 <meta property="og:image" content="http://<?php echo $_SERVER['HTTP_HOST']?>/partner/<?php echo $_SESSION['partner_folder_name']?>/images/logo/logo.png"/>
@@ -69,12 +70,30 @@ $data['_date'] = $temp[0];
   document.createElement('aside');
   document.createElement('footer');
 </script>
+
+<!-- set css and js path for new design v3 -->
+
+<meta name="viewport" content="width=device-width;initial-scale = 1.0,maximum-scale = 1.0" />
+<link rel="stylesheet" type="text/css" href="common/<?php echo $_SESSION['style_folder_name'];?>/css/fonts.css" />
+<link rel="stylesheet" type="text/css" href="common/<?php echo $_SESSION['style_folder_name'];?>/css/core.css" />
+<link rel="stylesheet" type="text/css" href="common/<?php echo $_SESSION['style_folder_name'];?>/css/tablet.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="common/<?php echo $_SESSION['style_folder_name'];?>/js/jquery.carouFredSel-6.1.0-packed.js"></script>
+<script type="text/javascript" src="common/<?php echo $_SESSION['style_folder_name'];?>/js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="common/<?php echo $_SESSION['style_folder_name'];?>/js/yetii-min.js"></script>
+<script type="text/javascript" src="common/<?php echo $_SESSION['style_folder_name'];?>/js/tw.js"></script>
+
+<!-- End css and js path for new design v3 -->
+
+<!-- V2 css and js 
 <link rel="stylesheet" type="text/css" href="<?php echo $web_root;?>common/templatecolor/<?php echo $_SESSION['style_folder_name'];?>/css/all.css" media="screen" />
-<!--[if IE 7]><link rel="stylesheet" type="text/css" href="common/templatecolor/<?php echo $_SESSION['style_folder_name'];?>/css/ie7.css" media="screen" /><![endif]-->
 <link rel="stylesheet" type="text/css" href="<?php echo $web_root;?>common/css/jquery-ui.css" media="screen" />
 <script type="text/javascript" src="<?php echo $web_root;?>common/js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo $web_root;?>common/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<?php echo $web_root;?>common/js/default.js"></script>
+
+ End V2 css and js -->
+
 <!-- use favicon icon for v2 -->
 <link rel="shortcut icon" href="partner/<?php echo $_SESSION['partner_folder_name'];?>/images/favicon.ico" />
 
@@ -116,25 +135,26 @@ $data['_date'] = $temp[0];
 <header>
 	<?php m_header(); ?> <!-- header -->
 </header>
-<div id="wrapper">
-	<aside>
-    	<?php m_aside(); ?>
-	</aside> <!-- left Column -->
-	<section>
-	
-    <?php 
-	
-	m_featured_event(); 
-	
-	?> <!-- featuredEvent -->
-    <?php m_photos_mini(); ?>  <!-- photos -->
-    <br /><br />
-    <?php m_events_this_week(); ?>
-	</section> <!-- rightColumn -->
-</div> <!-- wrapper -->
-<footer>
-	<?php m_footer(); ?> <!-- footer -->
-</footer>
+
+<!-- Content Start -->
+<div id="Content" class="sWidth">
+	<div id="MainContent">
+	  	<aside>
+	    	<?php m_aside(); ?>
+		</aside> <!-- left Column -->
+		
+		
+	</div>
+</div>
+  
+<div id="Footer">
+	<div class="sWidth">
+		<footer>
+			<?php m_footer(); ?> <!-- footer -->
+		</footer>
+	</div>
+</div>
 
 </body>
+
 </html>

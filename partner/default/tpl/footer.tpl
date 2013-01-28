@@ -1,33 +1,49 @@
-<div id="footerWrap">
-  <ul id="footerAds">
-    <li><?php m_show_banner('Website Footer 1'); ?></li>
-    <li><?php m_show_banner('Website Footer 2'); ?></li>
-    <li><?php m_show_banner('Website Footer 3'); ?></li>
-    <li><?php m_show_banner('Website Footer 4'); ?></a></li>
-  </ul>
-  
 <?php
 /**
 * Purpose: Joomla menu code for header
 * last Updated Date : 27-12-2012
 * Global Variable: $_SESSION['topmenu'] (Joomla menu code)
 **/
-global $footermenu;?>
-<ul id="leftLinks">
-	<li><?= $footermenu;?> </li>
+global $footermenu;
+global $bottommenu1;
+global $bottommenu2;
+
+function m_footer_intro() {
+  global $var;
+  $header = "About ".$var->site_name;
+  $intro = db_fetch("select introtext from `jos_content` where `title` = 'Footer Page Introduction'");
+  echo "<h3>".$header."</h3>";
+  echo $intro;
+  
+ }
+
+?>
+<ul id="bottom_mod">
+	 <li class="about">
+          <div class="pad">
+		  	<?php m_footer_intro(); ?>
+            
+          </div>
+        </li>
+        <li class="site">
+          <div class="pad">
+            <h3 class="display"><?php echo $var->site_name." is a TownWizard Site" ?></h3>
+            <span>Other TownWizard sites near this area include:</span>
+            <?=$bottommenu1;?> 
+            <a class="all" href="http://www.townwizard.com/locations/" target="_blank">See All Partner Sites &gt;</a>
+          </div>
+        </li>
+        <li class="community">
+          <div class="pad">
+            <h3 class="display">TownWizard Brings Communities Alive</h3>
+            <?=$bottommenu2;?> 
+          </div>
+        </li>
 </ul>
  
-<!--  <ul id="leftLinks">
-    <li><a href="about_us.php">About Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> 
-    <li><a href="links.php">Links</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> 
-    <li><a href="advertise.php">Advertise</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> 
-    <li><a href="contact_us.php">Contact Us</a></li>
-  </ul>
--->
-  <ul id="rightLinks">
-    <li><a href="terms_of_service.php">Terms of Use </a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> 
-    <li><a href="privacy_policy.php">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> 
-    <li>&copy;&nbsp;<?PHP $time = time () ; $year= date("Y",$time); echo $year . "&nbsp;" . $var->site_name; ?></li>
-    <li id="partner"><a href="http://www.townwizard.com/" target="_blank">Town Wizard Partner</a></li>
-  </ul>
-</div> <!-- footerWrap -->
+<div class="footer_tag">
+	<div class="legal bold">
+	       <?=$footermenu;?> 
+	</div>
+  	<div class="twlogo bold">| &copy;&nbsp;<?PHP $time = time () ; $year= date("Y",$time); echo $year . "&nbsp;" . $var->site_name; ?> TownWizard</div>
+</div>
