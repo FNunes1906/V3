@@ -325,7 +325,8 @@ function mosRecurseVIMenu($id, $level, & $children, & $open, & $indents, & $para
 
 			// show menu with menu expanded - submenus visible
 			if (!$params->get('expand_menu')) {
-				if (in_array($row->id, $open)) {
+				if (in_array($row->id, $open)) 
+					{
 					mosRecurseVIMenu($row->id, $level +1, $children, $open, $indents, $params);
 				}
 			} else {

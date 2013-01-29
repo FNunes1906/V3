@@ -81,7 +81,7 @@ class modBannersHelper
 		}
 		else if (BannerHelper::isImage( $item->imageurl ))
 		{
-			$image 	= '<img src="'.$baseurl.'images/banners/'.$item->imageurl.'" alt="'.JText::_('Banner').'" />';
+			$image 	= '<img src="'.$baseurl.'partner/'.$_SESSION['partner_folder_name'].'/images/banners/'.$item->imageurl.'" alt="'.JText::_('Banner').'" />';
 			if ($item->clickurl)
 			{
 				switch ($params->get( 'target', 1 ))

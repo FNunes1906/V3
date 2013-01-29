@@ -212,7 +212,7 @@ input:-ms-placeholder,
 
 #MainNav ul {
   list-style:none;
-  border-left:1px solid #c7c7c7;
+ /* border-left:1px solid #c7c7c7;*/
   border-top:1px solid #c7c7c7;
 }
 #MainNav ul li {
@@ -220,35 +220,43 @@ input:-ms-placeholder,
   display:block;
   width:179px;
   min-height:37px;
+  border-bottom:1px dotted #D4D4D4;
 }
 #MainNav ul li.active, 
 #MainNav ul li:hover {
-  background:#000;
+  background:#000; 
 }
 
+/* modified by rinkal*/
 
-#MainNav ul li a span{
+#MainNav ul li ul li{ border-bottom:0px dotted #D4D4D4 !important;}
+#MainNav ul li.active ul li span{padding-left: 47px !important;}
+#MainNav ul li ul li.active, 
+#MainNav ul li ul li:hover {
+  background:none repeat scroll 0 0 #f1f1f1 !important;
+}
+#MainNav ul li a span span{
   background-repeat:no-repeat;
   background-position:7px top;
   font-family:'AllerDisplayRegular';
   color:#000;
   text-transform:uppercase;
   font-size:12px;
-  padding-left:47px;
+  padding-left:48px;
   display:block;
   line-height:36px;
-  border-bottom:1px dotted #d4d4d4;
+ /* border-bottom:1px dotted #d4d4d4;*/
 }
 #MainNav ul li a span:hover, 
 #MainNav ul li.active a span{
-  border-bottom:1px solid #000;
-  border-left:1px solid #000;
+ /* border-bottom:1px solid #000;
+  border-left:1px solid #000;*/
   background-position:7px bottom;
   color:#fff;
 }
 #MainNav ul li.active ul {
   border-left:0 none;
-  border-bottom:1px dotted #d4d4d4;
+  /*border-bottom:1px dotted #d4d4d4;*/
 }
 #MainNav ul li.active ul li {
   min-height:26px;
@@ -262,7 +270,7 @@ input:-ms-placeholder,
   text-transform:none;
   line-height:26px;
 }
-#MainNav ul li.active ul li a:hover {
+#MainNav ul li.active ul li a span:hover {
   background:#f1f1f1;
   text-decoration:underline;
 }
@@ -271,8 +279,9 @@ input:-ms-placeholder,
 	date:23-01-2013
 */
 
-div.menu_img_hover:hover{
+li.active span.menu_img_hover,span.menu_img_hover:hover{
 	background-position: 5% bottom !important;
+	color:#FFF !important;;
 }
 
 /* .item28 a span { background:url('../images/nav/home.png'); }
@@ -549,12 +558,7 @@ a.saved span {
 .ad img {
   display:block;
 }
-#LeftCol .ad.space {
-  margin-bottom:10px;
-}
-#WidgetArea .ad.space {
-  margin-bottom:30px;
-}
+
 #MapWidget .view {
   font-size:10px;
   text-transform:uppercase;
@@ -1325,8 +1329,7 @@ text-align:center;
 
 /**
 Developer: Rinkal
-Purpose: Code for event submit title
-Last Updated Date:24-01-2013
+Last Updated Date:29-01-2013
 **/
 h1.send {
     font-size: 18px;
@@ -1351,3 +1354,30 @@ h1.send {
 	  margin-left: 5px;
     margin-right: 5px;
 }
+
+#LeftCol .ad.space .module{
+  margin-bottom:10px;
+}
+#WidgetArea .ad.space .module{
+  margin-bottom:30px;
+}
+
+.sect .blog .description h1 {
+    background: none repeat scroll 0 0 #E9E9E9;
+    color: #0B121F;
+    font-size: 24px;
+    line-height: 20px;
+    padding: 12px;
+    text-transform: uppercase;
+}
+
+.sect .blog {
+    background: none repeat scroll 0 0 #E9E9E9;
+ }
+ 
+.sect .blog .contentheading{ color: #0B121F;
+    line-height: 20px;
+    padding: 12px;
+    text-transform: uppercase;}
+	
+.blog img{ width:420px; display:block;}
