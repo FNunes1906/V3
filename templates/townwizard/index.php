@@ -11,12 +11,13 @@
 
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
-//echo "http://".$_SERVER['HTTP_HOST'].'/inc/var.php';
+
 global $var;
 //echo "<pre>";
 //print_r($_SERVER);
-include_once('/inc/var.php');
-include_once('/inc/base.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/inc/var.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
+
 _init();
 ?>
 <!DOCTYPE html>
