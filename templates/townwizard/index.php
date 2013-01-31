@@ -207,7 +207,7 @@ _init();
 
       <!-- Event Rotator Start -->
 		
-  	  <div id="EvtRot" class="carousel fl">
+  	  <div id="Events" class="carousel fl">
   	  	 <?php if($this->countModules('slider')) : ?>
           <div class="gallery centerCol fl">
           	     <jdoc:include type="modules" name="slider" style="rounded" />

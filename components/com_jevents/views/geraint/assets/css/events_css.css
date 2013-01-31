@@ -184,17 +184,28 @@ div.eventstyle {
 /***************************
 * List style
 **************************/
+#jevents_header{display:none;}
+.heading{clear:left !important;}
+.bc {
+    font-size: 12px;
+    width: 152px;
+}
+.bc span {
+    float: left;
+	}
+.bc table {	
+	float: right;
+    width: 89px !important;
+	}
 ul.ev_ul {
 	list-style:none;
 	padding:0px;
 	margin:5px;
 }
 ul.ev_ul li.ev_td_li {
-  	border-style:solid;
-  	border-width:0 0 0 5px;
-  	margin-bottom:1px;
-  	padding-left:2px;
-  	background-image:none
+    float: none !important;
+    margin: 10px 0 20px !important;
+    width: 100% !important;
 }
 a.ev_link_cat:link {
     font-size:12px;
@@ -214,42 +225,34 @@ a.ev_link_cat:hover  {
     color: Black;
 }
 a.ev_link_row:link {
-    font-size:12px;
-    font-family: Verdana;
-    color: Gray;
-    text-decoration:none;
+	font-size:13px;
+    font-family: 'AllerBold',Arial,sans-serif;
+    color: #00467F;
+    text-decoration:underline;
+	line-height: 13px;
+	font-weight: normal !important;
 }
-a.ev_link_row:visited  {
-    font-size:12px;
-    font-family: Verdana;
-    color: Gray;
-    text-decoration:none;
-}
-a.ev_link_row:hover  {
-    font-size:12px;
-    font-family: Verdana;
-    color: Black;
+.ev_td_right ul .ev_td_li{
+    font-size: 12px;
+    line-height: 15px;
+    margin: 7px 0;
+	width: 100% !important;
 }
 a.ev_link_unpublished {
     color:red;
     text-decoration:none;
 }
 a.ev_link_weekday:link {
-    font-size:12px;
-    font-family: Verdana;
-    color: Gray;
-    text-decoration:none;
+   font-size: 12px;
+    padding-right: 5px;
+    width: 60px;
 }
-a.ev_link_weekday:visited  {
-    font-size:12px;
-    font-family: Verdana;
-    color: Gray;
-    text-decoration:none;
+.fl {
+    float: left;
 }
-a.ev_link_weekday:hover  {
-    font-size:12px;
-    font-family: Verdana;
-    color: Black;
+.details {
+    font-size: 12px;
+    padding-left: 65px;
 }
 .ev_fieldset {
     font-family: Arial;

@@ -7,7 +7,10 @@ $data = $this->datamodel->getCatData( $this->catids,false, $this->limit, $this->
 
 $Itemid = JEVHelper::getItemid();
 
-?><div class="jev_catselect" ><?php echo $data['catname']; $this->viewNavCatText( $this->catids, JEV_COM_COMPONENT, 'cat.listevents', $this->Itemid );?></div><?php
+?>
+<div class="bc fr" ><span class="bold">Event Type:</span><?php $this->viewNavCatText( $this->catids, JEV_COM_COMPONENT, 'cat.listevents', $this->Itemid );?></div>
+<?php echo "<h3 class='fl heading display'>THIS WEEK</h3>";?>
+<?php
 if (count($data['catids'])==1 && $data['catids'][0]!=0 && strlen($data['catdesc'])>0){
 	echo "<div class='jev_catdesc'>".$data['catdesc']."</div>";
 }
@@ -27,17 +30,20 @@ if( $num_events > 0 ){
 		}
 
 		if( $event_day_month_year <> $chdate ){
-			$date =JEventsHTML::getDateFormat( $row->yup(), $row->mup(), $row->dup(), 1 );
-			echo '<tr><td class="ev_td_left">'.$date.'</td>' . "\n";
-			echo '<td align="left" valign="top" class="ev_td_right"><ul class="ev_ul">' . "\n";
+			$date =JEventsHTML::getDateFormat( $row->yup(), $row->mup(), $row->dup(), 5 );
+			//echo '<tr><td class="ev_td_left">'.$date.'</td>' . "\n";
+			//echo '<td align="left" valign="top" class="ev_td_right"><ul class="ev_ul">' . "\n";
+			echo '<ul class="ev_ul">' . "\n";
 		}
 
-		$listyle = 'style="border-color:'.$row->bgcolor().';"';
-		echo "<li class='ev_td_li' $listyle>\n";
-		if (!$this->loadedFromTemplate('icalevent.list_row', $row, 0)){
-			$this->viewEventRowNew ( $row,'view_detail',JEV_COM_COMPONENT, $Itemid);
-		}
-		echo "</li>\n";
+		//$listyle = 'style="border-color:'.$row->bgcolor().';"';
+		echo "<li class='ev_td_li' $listyle><div class='date fl'>$date </div><div class='details'>\n";
+			if (!$this->loadedFromTemplate('icalevent.list_row', $row, 5)){
+				$this->viewEventRowNew ( $row);
+				echo "&nbsp;::&nbsp;";
+				$this->viewEventCatRowNew($row);
+			}
+		echo "</div></li>\n";
 
 		$chdate = $event_day_month_year;
 	}
@@ -57,6 +63,6 @@ echo '</tr></table><br />' . "\n";
 echo '<br /><br />' . "\n";
 
 // Create the pagination object
-if ($data["total"]>$data["limit"]){
-	$this->paginationForm($data["total"], $data["limitstart"], $data["limit"]);
-}
+//if ($data["total"]>$data["limit"]){
+//	$this->paginationForm($data["total"], $data["limitstart"], $data["limit"]);
+//}

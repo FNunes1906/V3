@@ -1,66 +1,53 @@
+<link href="/templates/rt_quantive_j15/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<link rel="stylesheet" href="/administrator/templates/khepri/css/icon.css" type="text/css" />
+<link rel="stylesheet" href="/administrator/components/com_jevents/assets/css/eventsadmin.css" type="text/css" />
+<link rel="stylesheet" href="/media/system/css/modal.css" type="text/css" />
+<link rel="stylesheet" href="/components/com_jevents/assets/css/dashboard.css" type="text/css" />
+<link rel="stylesheet" href="/plugins/system/rokbox/themes/light/rokbox-style.css" type="text/css" />
+<link rel="stylesheet" href="/components/com_gantry/css/joomla.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/joomla.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/style8.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/light-body.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/demo-styles.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/template.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/template-firefox.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/typography.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/fusionmenu.css" type="text/css" />
+<link rel="stylesheet" href="/modules/mod_rokajaxsearch/css/rokajaxsearch.css" type="text/css" />
+<link rel="stylesheet" href="/modules/mod_rokajaxsearch/themes/blue/rokajaxsearch-theme.css" type="text/css" />
 <?php
 define( '_JEXEC', 1 );
 define('JPATH_BASE', dirname(__FILE__) );
 define( 'DS', DIRECTORY_SEPARATOR );
-
 require_once ( JPATH_BASE .DS.'includes'.DS.'defines.php' );
 require_once ( JPATH_BASE .DS.'includes'.DS.'framework.php');
 require_once ( JPATH_BASE .DS.'libraries'.DS.'joomla'.DS.'utilities'.DS.'utility.php');
-require(JPATH_BASE .DS.'libraries'.DS.'joomla'.DS.'database'.DS.'table.php');
+require_once(JPATH_BASE .DS.'libraries'.DS.'joomla'.DS.'database'.DS.'table.php');
 require(JPATH_BASE .DS.'libraries'.DS.'joomla'.DS.'database'.DS.'table'.DS.'category.php');
-//require(JPATH_BASE .DS.'language'.DS.'en-GB'.DS.'en-GB.com_jevents.ini');
-
 require_once ( JPATH_BASE .DS.'components'.DS.'com_jevents'.DS.'libraries'.DS.'helper.php');
 require_once ( JPATH_BASE .DS.'components'.DS.'com_jevents'.DS.'libraries'.DS.'commonfunctions.php');
 require_once ( JPATH_BASE .DS.'administrator'.DS.'components'.DS.'com_jevents'.DS.'libraries'.DS.'categoryClass.php');
 require_once("configuration.php");
 
 
-
 //#DD# 
 //session_start();  // Start the session where the code will be stored.
-include("securimage/securimage.php");
+include(JPATH_BASE .DS.'securimage/securimage.php');
 $img = new Securimage();
 $validCode = $img->check($_POST['code']);
-//#DD# 
+//echo "<pre>";
+//print_r($_SESSION);
 
 // move global var here for v2
 global $var;
-include_once('./inc/var.php');
-include_once($var->inc_path.'base.php');
+include_once(JPATH_BASE .DS.'/inc/var.php');
+include_once(JPATH_BASE .DS.'/inc/base.php');
 _init();
 // end v2 code
-
 
 $mainframe =& JFactory::getApplication('site');
 $mainframe->initialise();
 $session =& JFactory::getSession();
-
-/* Joomla menu start*/ 
-global $topmenu;
-global $leftmenu;
-global $footermenu;
-global $bottommenu1;
-global $bottommenu2;
-
-jimport( 'joomla.application.module.helper' );
-
-$moduletop = JModuleHelper::getModules('twtopmenu');
-$topmenu = JModuleHelper::renderModule($moduletop[0]);
- 
-$moduleleft = JModuleHelper::getModules('twleftmenu');
-$leftmenu = JModuleHelper::renderModule($moduleleft[0]);
-
-$modulefooter = JModuleHelper::getModules('twfootermenu');
-$footermenu = JModuleHelper::renderModule($modulefooter[0]);
-
-$modulebottom1 = JModuleHelper::getModules('twbottommenu1');
-$bottommenu1 = JModuleHelper::renderModule($modulebottom1[0]);
-
-$modulebottom2 = JModuleHelper::getModules('twbottommenu2');
-$bottommenu2 = JModuleHelper::renderModule($modulebottom2[0]);
-/* Joomla menu end*/
-
 
 $jconfig = new JConfig();
 define(DB_HOST, $jconfig->host);
@@ -69,19 +56,19 @@ define(DB_PASSWORD,$jconfig->password);
 define(DB_NAME,$jconfig->db);
 $conn=mysql_connect(DB_HOST,DB_USER,DB_PASSWORD) or die(mysql_error());
 $db=mysql_select_db(DB_NAME) or die(mysql_error());
-
 // Query for default ics record.
 $ics_query=mysql_query("select * from jos_jevents_icsfile where isdefault='1' and state='1'");
 $ics_res=mysql_fetch_array($ics_query);
 $ics=$ics_res['ics_id'];
 
 $msg="";
-
 if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
 	
 	$postRecheck = checkPostParameter($_POST,$validCode);
-
+	//$postRecheck = checkPostParameter($_POST);
+	
 	if($postRecheck){
+	
 		$title=$_POST['title'];
 		$allDayEvent=$_POST['allDayEvent'];
 		$custom_field4=$_POST['custom_field4'];
@@ -180,7 +167,9 @@ if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
 		$cat->load($vevent->catid);
 		
 			if(!empty($last_id) && (!empty($last_id1))) {
-				require_once($var->tpl_path."events_submit_mail.tpl");
+				//require_once($var->tpl_path."events_submit_mail.tpl");
+				$msg='Thank you for submitting your event. Our team will review and promote your information as soon as possible! Please complete this form again to submit other events.';
+				$subject= 'New Event Submission ';
 				$adminuser = $cat->getAdminUser();
 				$adminEmail	= $adminuser->email;
 				//$adminEmail	= 'rinkal.gandhi@aaditsoftware.com';
@@ -225,6 +214,9 @@ if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
 			}
 	}else{
 		$postValues = $_POST;
+		//echo "<pre>";
+		//print_r($_POST);
+		//exit;
 	}
 }
 
@@ -237,8 +229,9 @@ if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
 #Date          : 27-06-2012
 #Version       : 1.0
 */
-
+//echo $validCode."hello";
 function checkPostParameter($postValue,$validCode){
+//function checkPostParameter($postValue){
 global $msg;
 
 	if(empty($postValue['title']) || $postValue['title'] == ""){
@@ -260,10 +253,10 @@ global $msg;
 	if(!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $postValue['custom_anonemail'])){ 
 		$msg="Invalid Email Address!<br/>";
 		return false;
-	}
+		}
 	if(!$validCode){
 		$msg="Invalid varification code.";
-		return false;
+		return true; // if you want start captcha then return false
 	}
 
 	
@@ -271,72 +264,6 @@ global $msg;
 }
 
 ?>
-<!DOCTYPE HTML>
-<html>
-<head>
-<title><?php echo $var->site_name.' | '.$var->page_title; ?></title>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-<meta name="keywords" content="<?php echo $var->keywords; ?>" />
-<meta name="description" content="<?php echo $var->metadesc; ?>" />
-<script>
-  document.createElement('header');
-  document.createElement('nav');
-  document.createElement('section');
-  document.createElement('article');
-  document.createElement('aside');
-  document.createElement('footer');
-</script>
-<!-- <link rel="stylesheet" type="text/css" href="common/templatecolor/<?php echo $_SESSION['style_folder_name'];?>/css/all.css" media="screen" /> -->
-<link href="/templates/rt_quantive_j15/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-<link rel="stylesheet" href="/administrator/templates/khepri/css/icon.css" type="text/css" />
-<link rel="stylesheet" href="/administrator/components/com_jevents/assets/css/eventsadmin.css" type="text/css" />
-<link rel="stylesheet" href="/media/system/css/modal.css" type="text/css" />
-<link rel="stylesheet" href="/components/com_jevents/assets/css/dashboard.css" type="text/css" />
-<link rel="stylesheet" href="/plugins/system/rokbox/themes/light/rokbox-style.css" type="text/css" />
-<link rel="stylesheet" href="/components/com_gantry/css/joomla.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/joomla.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/style8.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/light-body.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/demo-styles.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/template.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/template-firefox.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/typography.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/fusionmenu.css" type="text/css" />
-<link rel="stylesheet" href="/modules/mod_rokajaxsearch/css/rokajaxsearch.css" type="text/css" />
-<link rel="stylesheet" href="/modules/mod_rokajaxsearch/themes/blue/rokajaxsearch-theme.css" type="text/css" />
-
-<!-- set css and js path for new design v3 -->
-
-<meta name="viewport" content="width=device-width;initial-scale = 1.0,maximum-scale = 1.0" />
-<link rel="stylesheet" type="text/css" href="common/<?php echo $_SESSION['style_folder_name'];?>/css/fonts.css" />
-<link rel="stylesheet" type="text/css" href="common/<?php echo $_SESSION['style_folder_name'];?>/css/core.css" />
-<link rel="stylesheet" type="text/css" href="common/<?php echo $_SESSION['style_folder_name'];?>/css/tablet.css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript" src="common/<?php echo $_SESSION['style_folder_name'];?>/js/jquery.carouFredSel-6.1.0-packed.js"></script>
-<script type="text/javascript" src="common/<?php echo $_SESSION['style_folder_name'];?>/js/jquery.touchSwipe.min.js"></script>
-<script type="text/javascript" src="common/<?php echo $_SESSION['style_folder_name'];?>/js/yetii-min.js"></script>
-<script type="text/javascript" src="common/<?php echo $_SESSION['style_folder_name'];?>/js/tw.js"></script>
-
-<!-- End css and js path for new design v3 -->
-
-
-
-<style type="text/css">
-<!--
-#rt-main-surround ul.menu li.active > a, #rt-main-surround ul.menu li.active > .separator, #rt-main-surround ul.menu li.active > .item, #rt-main-surround .square4 ul.menu li:hover > a, #rt-main-surround .square4 ul.menu li:hover > .item, #rt-main-surround .square4 ul.menu li:hover > .separator, .roktabs-links ul li.active span {color:#3636eb;}
-a, #rt-main-surround ul.menu a:hover, #rt-main-surround ul.menu .separator:hover, #rt-main-surround ul.menu .item:hover {color:#3636eb;}
--->
-</style>
-<style type="text/css">
-/* overriding edit event header logo */
-div#toolbar-box div.header.icon-48-jevents {
-  background-image: none!important;
-  padding-left:1px!important;
-  color:#666;
-  line-height:48px;
-  background-color: #FFF;
-}
-</style>
 <script type="text/javascript" src="/includes/js/joomla.javascript.js"></script>
 <script type="text/javascript" src="/media/system/js/mootools.js"></script>
 <script type="text/javascript" src="/administrator/components/com_jevents/assets/js/editical.js?v=1.5.4"></script>
@@ -362,7 +289,7 @@ div#toolbar-box div.header.icon-48-jevents {
 <script type="text/javascript" src="/plugins/system/pc_includes/ajax_1.3.js"></script>
 <link href="/indexiphone.php?option=com_jevents&amp;task=modlatest.rss&amp;format=feed&amp;type=rss&amp;Itemid=111&amp;modid=0"  rel="alternate"  type="application/rss+xml" title="JEvents - RSS 2.0 Feed" />
 <link href="/indexiphone.php?option=com_jevents&amp;task=modlatest.rss&amp;format=feed&amp;type=atom&amp;Itemid=111&amp;modid=0"  rel="alternate"  type="application/rss+xml" title="JEvents - Atom Feed" />
-<script type="text/javascript" src="common/js/event_submit.js"></script>
+<script type="text/javascript" src="/common/js/event_submit.js"></script>
 
 <script type="text/javascript" language="javascript">
 function gotoindex(str){
@@ -460,78 +387,238 @@ function form_validation() {
 		document.adminForm.custom_anonemail.focus();
 		return (false);
 	}
+	
+	if (document.adminForm.code.value=="")
+	{
+		alert ("Please Enter Captcha !");
+		document.adminForm.title.focus();
+		return false;
+	}
 }
 </script>
-<?php include("ga.php"); ?>
-</head>
-<body>
-<header>
-	<?php m_header(); ?> <!-- header -->
-</header>
+<?php
+// Print Message after event form submission starts.
+if($msg!='') {?>
+<table cellpadding="0" cellspacing="0" width="100%" style="border: 2px solid rgb(255, 0, 0); height:40px;margin-bottom">
+	<tr>
+		<td style="padding:8px">
+			<font color="#FF0000"><b><?php echo $msg; ?></b></font>
+		</td>
+	</tr>
+</table>
+<?php } ?>
 
-<!-- Content Start -->
-<div id="Content" class="sWidth">
-	<div id="MainContent">
-	  	<aside>
-	    	<?php m_aside(); ?>
-		</aside> <!-- left Column -->
-		
-		<div id="WidgetArea">
-			<section>
+<!--Jevent Form Starts-->
+<div style="padding:5px 0px"></div>
+<h1 class="display send">Send Us Your Events</h1>
+<div id="jevents" >
+<form action="" method="post" name="adminForm" enctype='multipart/form-data' onSubmit="return form_validation()">
+<div>
+<div class="adminform" align="left" >
+
+	<table width="65%" cellpadding="5" cellspacing="2" border="0"  class="adminform" id="jevadminform">
+	<tr>
+		<td align="left">Event Name:</td>
+		<td align="right"><input class="inputbox" type="text" name="title" size="41" maxlength="255" value="<?=$postValues['title']?>" /></td>
+		<td colspan="2"><input type="hidden" name="priority" value="0" /></td>
+	</tr>
+	<tr>
+		<td valign="top" align="left">Categories</td>
+			<?php $cat_query=mysql_query("select * from jos_categories where section='com_jevents' and published='1'");?> 
+		<td style="width:200px" >
+			<select name="catid" id="catid">
+				<option value="0" >Choose Category</option>
+				<?php while($row=mysql_fetch_array($cat_query)) { 
+				if($postValues['catid']==$row['id']){
+					$selectedVal = 'selected';
+				}else{
+					$selectedVal = '';
+				}
+				?>
 				
-				 <?php
-					/* Code added for Events_submit.tpl */
-					//require($var->tpl_path."events_submit.tpl");
-					?>
-					
-					<!-- Submit event Section Start -->
-				<div class="centerCol fl">
-          			<div id="ThisWeek" class="sect horiz list">
-           				 <div class="cont">
-				 
-							 <?php require($var->tpl_path."events_submit.tpl"); ?>
-						 </div>
-          			</div>
-        		</div>
-
-       			 <!-- Submit even Section End -->
-					
-				<div id="LowerAds" class="neg adSect dual rightCol fr cr">
-
-			 		<!-- 300 x 250_3 Banner Ad Start -->
-
-				          <?php for($i=1;$i<=3;++$i):?>
-							<div class="ad space">
-				  	      		<?php m_show_banner("Website right $i"); ?>
+				<option value="<?php echo $row['id']?>" <?=$selectedVal?> ><?php echo $row['name']?></option>
+				<?php } ?>
+			</select>
+		</td>
+		<td colspan="2"></td>
+	</tr>
+	<tr>
+		<td colspan='4'><input type="hidden" name="ics_id" value="<?php echo $ics?>" /></td>		
+	</tr>
+	<tr>
+		<td valign="top" align="left" colspan="4">
+		  	<div style="clear:both;width:408px">
+				<fieldset class="jev_sed">
+					<legend>Start, End, Duration</legend>
+					<span>
+						<span >All day Event or Unspecified time</span>
+						<span><input type="checkbox" id='allDayEvent' name='allDayEvent' <?php if($postValues['allDayEvent']=='on') {echo 'checked'; }?>  onclick="alldayeventtog()" />
+						</span>
+					</span>
+					<span style="margin:20px" class='checkbox12h'>
+						<span><input type="hidden" id='view12Hour' name='view12Hour' checked='checked' onClick="toggleView12Hour();" value="1"/></span>
+					</span>
+					<div>
+						<fieldset>
+							<legend>Start date</legend>
+							<div style="float:left">
+								<?php 
+									if(empty($postValues['publish_up'])){ 
+										$publish_up_value = date("Y-m-d");
+									}else{ 
+										$publish_up_value = $postValues['publish_up']; 
+									} 
+								?>
+								<input type="text" name="publish_up" id="publish_up" value="<?php echo $publish_up_value;?>" maxlength="10" onChange="var elem = $('publish_up');checkDates(elem);" size="10"  />         
 							</div>
-							<?php endfor; ?>
-			          <!-- 300 x 250_4 Banner Ad End -->
-
-				</div>
-
-				<div id="LowerTallAd" class="neg adSect tall rightCol fr cr">
-
-							          <!-- 300 x 600 Banner Ad Start -->
-
-							          <div class="ad">
-							            <?php m_show_banner('Website right 4'); ?>
-							          </div>
-
-							          <!-- 300 x 600 Banner Ad End -->
-
-				</div>						         
+							<div style="float:left;margin-left:11px!important;">Start Time&nbsp;
+								<span id="start_12h_area" style="display:inline">
 								
-								 
-				</section> 
-		</div>
-	</div> 
-</div> <!-- Content end -->
-<div id="Footer">
-	<div class="sWidth">
-		<footer>
-			<?php m_footer(); ?> <!-- footer -->
-		</footer>
-	</div>
+								<?php 
+									if(empty($postValues['start_12h'])){ 
+										$start_12h_value = '08:00';
+									}else{ 
+										$start_12h_value = $postValues['start_12h']; 
+									} 
+
+									if($postValues['start_ampm']=='pm'){ 
+										$start_ampm_check = 'checked="checked"';
+									} 
+
+									$end_ampm_check = array();
+									if($postValues['start_ampm']=='pm'){ 
+										$end_ampm_check['pm'] = 'checked="checked"';
+										$end_ampm_check['am'] = '';
+									}else{
+										$end_ampm_check['pm'] = '';
+										$end_ampm_check['am'] = 'checked="checked"';
+									}
+								?>
+
+								<input class="inputbox" type="text" name="start_12h" id="start_12h" size="8" maxlength="8"  value="<?=$start_12h_value?>" onChange="check12hTime(this);" />
+								<input type="radio" name="start_ampm" id="startAM" value="am" <?=$end_ampm_check['am']?> checked="checked" onClick="toggleAMPM('startAM');"  />am  <input type="radio" name="start_ampm" id="startPM" value="pm" <?=$end_ampm_check['pm']?> onClick="toggleAMPM('startPM');"  />pm		</span>
+							</div>
+						</fieldset>
+					</div>
+					<div>
+						<fieldset><legend>End date</legend>
+						<div style="float:left">
+						<?php 
+							if(empty($postValues['publish_down'])){ 
+								$publish_down_value = date("Y-m-d");
+							}else{ 
+								$publish_down_value = $postValues['publish_down']; 
+							} 
+						?>
+					<input type="text" name="publish_down" id="publish_down" value="<?php echo $publish_down_value;?>" maxlength="10" onChange="var elem = $('publish_up');checkDates(elem);" size="10"  />         
+						</div>
+						<div style="float:left;margin-left:11px!important">End Time&nbsp;
+							<span id="end_12h_area" style="display:inline">
+							<?php 
+								if(empty($postValues['end_12h'])){ 
+									$end_12h_value = '05:00';
+								}else{ 
+									$end_12h_value = $postValues['end_12h']; 
+								} 
+
+								$end_ampm_check = array();
+								if($postValues['end_ampm']=='am'){ 
+									$end_ampm_check['am'] = 'checked="checked"';
+									$end_ampm_check['pm'] = '';
+								}else{
+									$end_ampm_check['am'] = '';
+									$end_ampm_check['pm'] = 'checked="checked"';
+								}
+
+							?>
+							<input class="inputbox" type="text" name="end_12h" id="end_12h" size="8" maxlength="8"  value="<?php echo $end_12h_value;?>" onChange="check12hTime(this);" />
+							<input type="radio" name="end_ampm" id="endAM" value="am" <?=$end_ampm_check['am']?>  onclick="toggleAMPM('endAM');"  />am 
+							<input type="radio" name="end_ampm" id="endPM" value="pm" <?=$end_ampm_check['pm']?> onClick="toggleAMPM('endPM');" />pm	
+							</span>
+							
+						</div>
+						<span style="margin-left:10px">
+								<span><br/><br/><input type="checkbox" id='noendtime' name='noendtime'  onclick="noendtimetog();" <?php if($postValues['noendtime']==1) {echo 'checked'; }?> value="1" />
+										<span>No specific end time</span>
+								</span>
+							</span>
+						</fieldset>
+					</div>
+				</fieldset>
+			</div>
+			<div style="clear:both;"></div>
+
+		</td>
+	</tr>
+	<tr>
+		
+		<td colspan="3">
+			<div id='jeveditor' style="width:404px">Description:<br/><br/><textarea id="jevcontent" name="jevcontent" cols="70" rows="10" style="width:100%;height:230px;" class="mceEditor"><?=$postValues['jevcontent']?></textarea>
+			</div>       	
+		</td>
+	</tr>
+	<tr id="jeveditlocation">
+		<td width="130" align="left" style="vertical-align:top;">Location</td>
+		<td colspan="3">
+			<input type="hidden" name="location" id="locn" value=""/>
+			<input type="text" name="evlocation_notused" disabled="disabled" id="evlocation" value=" -- " style="float:left;margin-top: 2px;"/>
+			<div class="button2-left">
+				<div class="blank"><a href="javascript:selectLocation('' ,'/indexiphone.php?option=com_jevlocations&amp;task=locations.select&amp;tmpl=component','750','500')" title="Select Location"  >select</a>
+				</div>
+			</div>
+			<div class="button2-left">
+				<div class="blank"><a href="javascript:removeLocation();" title="Remove Location"  >remove</a>
+				</div>
+			</div>
+			<div style="font-size:10px; vertical-align:top;float:left;">If your location is not listed, please include the full address in the description.</div>
+	         </td>
+	</tr>
+	<tr class="jevplugin_anonusername">
+		<td valign="top"  width="130" align="left">Your name</td>
+		<td colspan="3"><input size="41" type="text" name="custom_anonusername" id="custom_anonusername" value="<?=$postValues['custom_anonusername']?>" /></td>
+	</tr>
+	<tr class="jevplugin_anonemail">
+		<td valign="top"  width="130" align="left">Your email address</td>
+		<td colspan="3"><input size="41" type="text" name="custom_anonemail" id="custom_anonemail" value="<?=$postValues['custom_anonemail']?>" /></td>
+	</tr>
+	
+	<!--#DD#-->
+	<tr class="jevplugin_anonemail">	
+	<td>&nbsp;</td>
+	<td>
+		<div style="font-size: 11px; vertical-align: top; float: left;">Type the characters you see in the picture below.</div><br>
+			<img id="siimage" align="left" style="width:150px;" style="padding-right: 5px; border: 0" src="securimage/securimage_show.php?sid=<?php echo md5(time()) ?>" />
+			<a tabindex="-1" style="border-style: none" href="#" title="Refresh Image" onClick="document.getElementById('siimage').src = 'securimage/securimage_show.php?sid=' + Math.random(); return false"><img src="securimage/images/refresh.gif" alt="Reload Image" border="0" onClick="this.blur()" align="bottom" /></a>
+		</td>
+	</tr>
+	<tr class="jevplugin_anonemail">	
+	<td>Verification Code</td>
+	<td>
+		<input type="text" value="" id="code" name="code" size="25">
+		<br><br>
+		</td>
+	</tr>
+	<!--#DD#-->
+	
+	
+	</table>
 </div>
-</body>
-</html>
+<input type="hidden" name="custom_field4" value="0" />
+
+<table align="left" style="" width="30%" cellpadding="0" cellspacing="0">
+<tbody><tr>
+		<td id="toolbar-save" valign="top"style="padding-right:3px">
+			<a style="cursor:pointer;height:21px;"><input src="images/save-btn.gif" type="submit" name="action" value="Save" class="button"/></a>
+		</td>
+		<td id="toolbar-save" valign="top"style="padding-right:3px">
+			<a style="cursor:pointer;height:21px;">
+			<input type="button" name="can" id="can" value="Cancel" class="button" onClick="gotoindex(this.id)"/></a>
+		</td>
+
+	</tr></tbody>
+</table>
+</div>
+</form>
+
+</div>
+<!--Jevent Form Ends-->

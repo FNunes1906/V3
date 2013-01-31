@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd">
+<install type="component" version="1.5.0">
+	<name>PHP</name>
+	<!-- The following elements are optional and free of formatting conttraints -->
+	<creationDate>Dec 2010</creationDate>
+	<author>Fiji Web Design</author>
+	<authorEmail>gabe@fijiwebdesign.com</authorEmail>
+	<authorUrl>http://www.fijiwebdesign.com/</authorUrl>
+	<copyright>(C) 2010 Fiji Web Design&#8482;. All rights reserved.</copyright>
+	<license>GNU/GPL</license>
+	<!--  The version string is recorded in the components table -->
+	<version>0.2</version>
+	<!-- The description is optional and defaults to the name -->
+	<description><![CDATA[
+	<p>
+	Creates Custom PHP Pages.
+	</p>
+	<h3>Change Log</h3>
+	<h4>0.2</h4>
+	<ul>
+		<li>Added Code Editor with syntax hilighting (CodeMirror)</li>
+		<li>Added editable descriptions to files</li>
+		<li>Fixed bug with toolbar not visible after save or apply of files.</li>
+		<li>Linked files to edit view in Page Management view</li>
+		<li>Other fixes and UI changes</li>
+	</ul>
+	<h4>0.1</h4>
+	<ul>
+		<li>Initial Build</li>
+	</ul>
+	]]></description>
+
+	<!-- Custom Install Script to execute 
+	<installfile>install.eventlist.php</installfile>
+	-->
+	<!-- Custom Uninstall Script to execute 
+	<uninstallfile>uninstall.eventlist.php</uninstallfile>
+  -->
+	<!-- Install Database Section 
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">install.mysql.utf8.sql</file>
+			<file driver="mysql">install.mysql.nonutf8.sql</file>
+		</sql>
+	</install>
+	-->
+	<!-- Uninstall Database Section 
+	<uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8">uninstall.mysql.utf8.sql</file>
+			<file driver="mysql">uninstall.mysql.nonutf8.sql</file>
+		</sql>
+	</uninstall>
+-->
+	<!-- Site Main File Copy Section-->
+	<files>
+<filename>php.html.php</filename>
+<filename>images/loading.gif</filename>
+<filename>images/phplogo.jpg</filename>
+<filename>php.php</filename>
+<filename>js/mootools.js</filename>
+<filename>js/ie_pngfix.js</filename>
+<filename>includes/json.pear.php</filename>
+<filename>files/example.html</filename>
+<filename>files/example.php</filename>
+<filename>files/index.html</filename>
+	</files>
+	 
+	<!-- Site Main Language File Copy Section 
+	<languages>
+		<language tag="en-GB">en-GB.com_php.ini</language>
+	</languages>
+	-->
+	
+	<!-- Site Main Media File Copy Section 
+	<media destination="com_helloworld">
+		<filename>helloworld.png</filename>
+	</media>
+-->
+	<administration>
+	
+		<!-- Administration Menu Section -->
+		<menu>PHP Pages</menu>
+		<submenu>
+			<!-- Note that all & must be escaped to &amp; for the file to be valid XML and be parsed by the installer -->
+			<menu link="option=com_php&amp;task=index">Manage Pages</menu>
+			<menu link="option=com_php&amp;task=help">Help</menu>
+			<menu link="option=com_php&amp;task=about">About</menu>
+		</submenu>
+		
+		<!-- Administration Main File Copy Section -->
+		<!-- Note the folder attribute: This attribute describes the folder
+			to copy FROM in the package to install therefore files copied
+			in this section are copied from /admin/ in the package -->
+		<files folder="admin">
+<filename>admin.php.html.php</filename>
+<filename>admin.php.php</filename>
+<filename>compat.php</filename>
+<filename>config.xml</filename>
+<filename>install.php.php</filename>
+<filename>toolbar.php.html.php</filename>
+<filename>toolbar.php.php</filename>
+<filename>uninstall.php.php</filename>
+<filename>libs/codemirror/contrib/lua/index.html</filename>
+<filename>libs/codemirror/contrib/lua/LICENSE</filename>
+<filename>libs/codemirror/contrib/lua/css/luacolors.css</filename>
+<filename>libs/codemirror/contrib/lua/js/parselua.js</filename>
+<filename>libs/codemirror/contrib/php/index.html</filename>
+<filename>libs/codemirror/contrib/php/LICENSE</filename>
+<filename>libs/codemirror/contrib/php/css/phpcolors.css</filename>
+<filename>libs/codemirror/contrib/php/js/parsephp.js</filename>
+<filename>libs/codemirror/contrib/php/js/parsephphtmlmixed.js</filename>
+<filename>libs/codemirror/contrib/php/js/tokenizephp.js</filename>
+<filename>libs/codemirror/contrib/python/index.html</filename>
+<filename>libs/codemirror/contrib/python/LICENSE</filename>
+<filename>libs/codemirror/contrib/python/css/pythoncolors.css</filename>
+<filename>libs/codemirror/contrib/python/js/parsepython.js</filename>
+<filename>libs/codemirror/css/csscolors.css</filename>
+<filename>libs/codemirror/css/docs.css</filename>
+<filename>libs/codemirror/css/jscolors.css</filename>
+<filename>libs/codemirror/css/people.jpg</filename>
+<filename>libs/codemirror/css/sparqlcolors.css</filename>
+<filename>libs/codemirror/css/xmlcolors.css</filename>
+<filename>libs/codemirror/js/codemirror.js</filename>
+<filename>libs/codemirror/js/editor.js</filename>
+<filename>libs/codemirror/js/highlight.js</filename>
+<filename>libs/codemirror/js/mirrorframe.js</filename>
+<filename>libs/codemirror/js/parsecss.js</filename>
+<filename>libs/codemirror/js/parsedummy.js</filename>
+<filename>libs/codemirror/js/parsehtmlmixed.js</filename>
+<filename>libs/codemirror/js/parsejavascript.js</filename>
+<filename>libs/codemirror/js/parsesparql.js</filename>
+<filename>libs/codemirror/js/parsexml.js</filename>
+<filename>libs/codemirror/js/select.js</filename>
+<filename>libs/codemirror/js/stringstream.js</filename>
+<filename>libs/codemirror/js/tokenize.js</filename>
+<filename>libs/codemirror/js/tokenizejavascript.js</filename>
+<filename>libs/codemirror/js/undo.js</filename>
+<filename>libs/codemirror/js/util.js</filename>
+<filename>libs/json/pear_json.php</filename>
+		</files>
+		
+		<!-- Administration Language File Copy Section 
+		<languages folder="admin">
+			<language tag="en-GB">en-GB.com_php.ini</language>
+		</languages>
+		-->
+		
+		<!-- Administration Main Media File Copy Section -->
+		<media folder="admin" destination="com_helloworld/images">
+	  	<filename>images/parent_menu_icon.png</filename>
+		</media>
+		-->
+	</administration>
+</install>

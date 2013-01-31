@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<params>
+		<param name="menu_image" type="imagelist" directory="/images/stories/nav" hide_default="1" default="" label="Menu Image" description="A small image to be placed to the left or right of your menu item, images must be in images/stories/" />
+		<param name="pageclass_sfx" type="text" default="" label="Page Class Suffix" description="A suffix to be applied to the css classes of the page, this allows individual page styling" />
+		<param name="back_button" type="list" default="" label="Back Button" description="Show/Hide a Back Button, that returns you to the previously view page">
+			<option value="">Use Global</option>
+			<option value="0">Hide</option>
+			<option value="1">Show</option>
+		</param>
+		<param name="show_page_header" type="radio" default="1" label="Show Page Header" description="Show/Hide the pages Title">
+			<option value="0">Hide</option>
+			<option value="1">Show</option>
+		</param>
+		<param name="page_header" type="text" size="30" default="" label="Page Header" description="Text to display at the top of the page. If left blank, the Menu name will be used instead" />
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		<param name="file" type="filelist" directory="/components/com_php/files/" default="" label="PHP File" description="Choose the PHP File to Load" />
+		<param name="show_copy" type="radio" default="1" label="Display Attribution" description="Show/Hide the Fiji Web Design Attribution">
+			<option value="0">Hide</option>
+			<option value="1">Show</option>
+		</param>
+	</params>
+</config>
