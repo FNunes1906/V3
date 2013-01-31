@@ -453,54 +453,7 @@ class JFolder
 		return $arr;
 	}
 	
-	function files1($path1, $filter = '.', $recurse = false, $fullpath = false, $exclude = array('.svn', 'CVS'))
-	{
-		// Initialize variables
-		$arr = array();
-
-		// Check to make sure the path valid and clean
-		$path = JPath::clean($path);
-
-		// Is the path a folder?
-		if (!is_dir($path)) {
-			JError::raiseWarning(21, 'JFolder::files: ' . JText::_('Path is not a folder'), 'Path: ' . $path);
-			return false;
-		}
-
-		// read the source directory
-		$handle = opendir($path);
-		while (($file = readdir($handle)) !== false)
-		{
-			if (($file != '.') && ($file != '..') && (!in_array($file, $exclude))) {
-				$dir = $path . DS . $file;
-				$isDir = is_dir($dir);
-				if ($isDir) {
-					if ($recurse) {
-						if (is_integer($recurse)) {
-							$arr2 = JFolder::files($dir, $filter, $recurse - 1, $fullpath);
-						} else {
-							$arr2 = JFolder::files($dir, $filter, $recurse, $fullpath);
-						}
-						
-						$arr = array_merge($arr, $arr2);
-					}
-				} else {
-					if (preg_match("/$filter/", $file)) {
-						if ($fullpath) {
-							$arr[] = $path . DS . $file;
-						} else {
-							$arr[] = $file;
-						}
-					}
-				}
-			}
-		}
-		closedir($handle);
-
-		asort($arr);
-		return $arr;
-	}
-
+	
 	/**
 	 * Utility function to read the folders in a folder.
 	 *

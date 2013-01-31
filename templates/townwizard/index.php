@@ -207,20 +207,26 @@ _init();
 
       <!-- Event Rotator Start -->
 		
-  	  <div id="Events" class="carousel fl">
-  	  	 <?php if($this->countModules('slider')) : ?>
-          <div class="gallery centerCol fl">
-          	     <jdoc:include type="modules" name="slider" style="rounded" />
-                 <div class="cb"></div>
-           </div>
-          <?php endif; ?>
+	 <?php if($this->countModules('right')): ?>	
+  	  <div id="Events" class="carousel fr">
+	  <?php else: ?>
+		<div id="Events" class="carousel fl">
+		 <?php endif; ?>
+  	  	 <?php
+		  if ( JRequest::getVar('view') === 'range' AND JRequest::getVar('Itemid') === '97' ) {
+		 	 if($this->countModules('slider')) : ?>
+		          <div class="gallery centerCol fl">
+		          	     <jdoc:include type="modules" name="slider" style="rounded" />
+		                 <div class="cb"></div>
+		           </div>
+          <?php endif;} ?>
           <?php if($this->countModules('right')) : ?>
             <div class="galleryNav rightCol fr">
              	<jdoc:include type="modules" name="right" style="rounded" />
             </div>
             <?php endif; ?>
       </div>
-      
+     
 
   	  <!-- Event Rotator End -->
       

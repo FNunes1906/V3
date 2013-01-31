@@ -17,5 +17,13 @@ defined('_JEXEC') or die('Restricted access');
 // Include the syndicate functions only once
 require_once (dirname(__FILE__).DS.'helper.php');
 
+$p = new modFeaEventHelper($params);
+
 $FeaturedSlider = modFeaEventHelper::getFeaturedSlider();
+
+$registry	=& JRegistry::getInstance("jevents");
+$registry->setValue("jevents.activeprocess","mod_feaslider");
+$registry->setValue("jevents.moduleid", $module->id);
+$registry->setValue("jevents.moduleparams", $params);
+
 require(JModuleHelper::getLayoutPath('mod_feaslider'));

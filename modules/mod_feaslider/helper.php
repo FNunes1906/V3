@@ -18,6 +18,26 @@ defined('_JEXEC') or die('Restricted access');
 
 class modFeaEventHelper
 {
+	private $params = null;
+	
+	function modFeaEventHelper($params){
+		$this->params = $params;
+		// setup for all required function and classes
+		$file = JPATH_SITE . '/components/com_jevents/mod.defines.php';
+		if (file_exists($file) ) {
+			include_once($file);
+			include_once(JEV_LIBS."/modfunctions.php");
+
+		} else {
+			die ("JEvents Calendar\n<br />This module needs the JEvents component");
+		}
+
+		// load language constants
+		JEVHelper::loadLanguage('modfilter');
+		
+	}
+
+
 	function getFeaturedSlider()
 	{
 	$query_featuredeve="SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%d/%m') as Date,DATE_FORMAT(rpt.startrepeat,'%h:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%h:%i%p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND cf.value = 1 AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";

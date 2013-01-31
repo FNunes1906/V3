@@ -1,22 +1,23 @@
 <?php 
 defined('_JEXEC') or die('Restricted access');
 
+
+$cfg	 = & JEVConfig::getInstance();
 $data = $this->data;
+$data1 = $this->datamodel->getWeekData($this->year, $this->month, $this->day);
 
 $Itemid = JEVHelper::getItemid();
+//echo "<pre>";
+//print_r($data1);
 
-echo "<div id='cal_title'>". JText::_('JEV_EVENTSFOR') ."</div>\n";
+echo "<h3 class='fl heading display'>THIS WEEK</h3>";
+if (count($data1['catids'])==1 && $data1['catids'][0]!=0 && strlen($data1['catdesc'])>0){
+	echo "<div class='jev_catdesc'>".$data1['catdesc']."</div>";
+}
+//echo "<div id='cal_title'>". JText::_('JEV_EVENTSFOR') ."</div>\n";
 ?>
-<table align="center" width="90%" cellspacing="0" cellpadding="5" class="ev_table">
-    <tr valign="top">
-        <td colspan="2"  align="center" class="cal_td_daysnames">
-           <!-- <div class="cal_daysnames"> -->
-            <?php echo JEventsHTML::getDateFormat( $this->startyear, $this->startmonth, $this->startday, 1 )  ;?>
-            &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
-            <?php echo JEventsHTML::getDateFormat( $this->endyear, $this->endmonth, $this->endday, 1 ) ;?>
-            <!-- </div> -->
-        </td>
-    </tr>
+<table align="center" width="100%" cellspacing="0" cellpadding="5" class="ev_table">
+    
     <?php
     $num_events = count($data['rows']);
     $chdate ="";
@@ -35,13 +36,13 @@ echo "<div id='cal_title'>". JText::_('JEV_EVENTSFOR') ."</div>\n";
     		}
 
     		if( $event_day_month_year <> $chdate ){
-    			$date =JEventsHTML::getDateFormat( $row->yup(), $row->mup(), $row->dup(), 1 );
-    			echo '<tr><td class="ev_td_left">'.$date.'</td>' . "\n";
-    			echo '<td align="left" valign="top" class="ev_td_right"><ul class="ev_ul">' . "\n";
+    			$date =JEventsHTML::getDateFormat( $row->yup(), $row->mup(), $row->dup(), 5 );
+    			echo '<tr>' . "\n";
+    			echo '<td align="left" valign="top" class="ev_td_right"><ul class="ev_ul1">' . "\n";
     		}
 
     		$listyle = 'style="border-color:'.$row->bgcolor().';"';
-    		echo "<li class='ev_td_li' $listyle>\n";
+    		echo "<li class='ev_td_li' $listyle><div class='date fl'>".$date."</div><div class='details'>\n";
     		if (!$this->loadedFromTemplate('icalevent.list_row', $row, 0)){
     			$this->viewEventRowNew ( $row,'view_detail',JEV_COM_COMPONENT, $Itemid);
     		}

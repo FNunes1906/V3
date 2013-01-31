@@ -4,6 +4,7 @@
 
 table#jevents_body{
     width:100%;
+	margin-top: -3px;
 }
 .jeventslight{
 	color:#000000;
@@ -188,7 +189,7 @@ div.eventstyle {
 .heading{clear:left !important;}
 .bc {
     font-size: 12px;
-    width: 152px;
+    width: 155px;
 }
 .bc span {
     float: left;
@@ -261,21 +262,21 @@ a.ev_link_weekday:link {
     font-weight: bold;
     /* color: black; */
 }
-.ev_table {
+/*.ev_table {
     border-right: 1px solid black;
     border-left: 1px solid black;
     border-bottom: 1px solid black;
-}
+}*/
 .ev_table td {
     padding:5px;
 }
 .ev_td_right {
-	/*background-color: #FFDEAD;*/
-    border-top: 1px solid #000000;
+	/*background-color: #FFDEAD;
+    border-top: 1px solid #000000;*/
 }
 .ev_td_left {
-    border-right: 1px solid #000000;
-    border-top: 1px solid #000000;
+    /*border-right: 1px solid #000000;
+    border-top: 1px solid #000000;*/
     font-family: Arial;
     font-size: 12px;
     font-style: normal;
@@ -654,3 +655,29 @@ div.jevtt_text{
 		display:none;
 	}
 }
+
+/* For Event detail page added by Rinkal*/
+
+#EventDetail img{
+	 max-height: 50%;
+    max-width: 50%;
+	
+}
+
+.detailFeature .desc {
+	width:auto !important;
+}
+
+.detailFeature .address {
+    clear: both;
+	}
+	
+#EventPhotoGallery{
+	border-top: 3px solid #000 !important;
+}
+
+#jevents_body ul,.ev_table ul {
+	margin-top:0px !important;
+}
+
+#jevents_body h3{ padding-bottom: 15px;}

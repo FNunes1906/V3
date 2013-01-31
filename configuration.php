@@ -71,7 +71,7 @@ class JConfig {
 		
 		$dblink = mysql_select_db("master");
 		
-		$queryMaster = "SELECT * FROM v3_master WHERE site_url LIKE '$pageURL'";
+		$queryMaster = "SELECT * FROM master WHERE site_url LIKE '$pageURL'";
 		
 		$result = mysql_query($queryMaster);
 		

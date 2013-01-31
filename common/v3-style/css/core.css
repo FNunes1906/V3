@@ -386,6 +386,18 @@ a.saved span {
   font-weight: normal;
   color:#000;clear: both;
 }
+
+/*.module h3 {
+  background:url('../images/grayArrowLg.png') no-repeat right top;
+  padding-right:15px;
+  text-transform:uppercase;
+  display:block;
+  font-size: 14px;
+  font-weight: normal;
+  color:#000;clear: both;
+  font-family: 'AllerDisplayRegular',Arial,sans-serif;
+}
+*/
 #MainContent .sect .heading.nobg {
   background:0 none;
 }
@@ -1015,19 +1027,20 @@ a.saved span {
 /* ------------------------------------------------------------------- */
 
 
-/* Search Box */
+/* Search Box added bu rinkal */
 
-#FindForm {
+#FindForm,.module_event {
   background:#f1f1f1;
   padding:15px 19px;
+  margin-bottom: 20px;
 }
-#FindForm input.search {
+.module_event input.evsearch {
   height:24px;
   line-height:24px;
   font-size:14px;
   margin-right:12px;
   padding:0 5px;
-  width:34%;
+  width:90%;
 }
 #FindForm.restaurants input.search {
   width:58%;
@@ -1381,3 +1394,15 @@ h1.send {
     text-transform: uppercase;}
 	
 .blog img{ width:420px; display:block;}
+
+#MainContent .sect .componentheading {
+    background: url("../images/grayArrowLg.png") no-repeat scroll right top transparent;
+	font-family: 'AllerDisplayRegular',Arial,sans-serif;
+    color: #000000;
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    padding-right: 15px;
+    text-transform: uppercase;
+	float: left;
+}
