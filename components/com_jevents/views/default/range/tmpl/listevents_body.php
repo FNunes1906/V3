@@ -4,18 +4,12 @@ defined('_JEXEC') or die('Restricted access');
 
 $cfg	 = & JEVConfig::getInstance();
 $data = $this->data;
-$data1 = $this->datamodel->getWeekData($this->year, $this->month, $this->day);
-
-$Itemid = JEVHelper::getItemid();
-//echo "<pre>";
-//print_r($data1);
 
 echo "<h3 class='fl heading display'>THIS WEEK</h3>";
-if (count($data1['catids'])==1 && $data1['catids'][0]!=0 && strlen($data1['catdesc'])>0){
-	echo "<div class='jev_catdesc'>".$data1['catdesc']."</div>";
-}
+
 //echo "<div id='cal_title'>". JText::_('JEV_EVENTSFOR') ."</div>\n";
 ?>
+<div class="bc fr" ><span class="bold">Event Type:</span><?php $this->viewNavCatText( $this->catids, JEV_COM_COMPONENT, 'cat.listevents', $this->Itemid );?></div>
 <table align="center" width="100%" cellspacing="0" cellpadding="5" class="ev_table">
     
     <?php

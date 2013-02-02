@@ -37,6 +37,7 @@ _init();
 <link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/css/fonts.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/css/core.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/css/tablet.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/css/events.css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/js/jquery.carouFredSel-6.1.0-packed.js"></script>
 <script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/js/jquery.touchSwipe.min.js"></script>
@@ -87,7 +88,7 @@ _init();
   <div id="TopBar" style="background:url('<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/images/header/whitezig_zag.png') repeat-x scroll left bottom <?php echo $var->Header_color; ?>;height: 50px;">
   	<div class="sWidth">
   	  <div class="fl powered">Powered by<img alt="townwizard" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/images/header/twBanner.png" /></div>
-		  <?php if($this->countModules('top')) : ?>
+		  <?php if($this->countModules('top')): ?>
           <div class="fr links">
             <jdoc:include type="modules" name="top" style="rounded" />
           </div>
@@ -143,7 +144,7 @@ _init();
 					<div id="Weather" class="fr">
 	  				<?php
 						echo str_replace('N/A','--',$data[weather][cc][tmp]) . "&#176; ";
-						echo " <a href='http://www.weather.com/weather/today/$var->location_code' target='_blank'><img  SRC='common/images/weather/" . $data[weather][cc][icon] . ".png' height='25' border='0' style='vertical-align: middle;'></a>";
+						echo " <a href='http://www.weather.com/weather/today/$var->location_code' target='_blank'><img  SRC='/common/images/weather/" . $data[weather][cc][icon] . ".png' height='25' border='0' style='vertical-align: middle;'></a>";
 					?>
 					</div> 
 	  	      	    <?php echo $var->beach; ?> 
@@ -205,31 +206,33 @@ _init();
 
   	  <div id="WidgetArea">
 
-      <!-- Event Rotator Start -->
-		
-	 <?php if($this->countModules('right')): ?>	
-  	  <div id="Events" class="carousel fr">
-	  <?php else: ?>
-		<div id="Events" class="carousel fl">
-		 <?php endif; ?>
-  	  	 <?php
-		  if ( JRequest::getVar('view') === 'range' AND JRequest::getVar('Itemid') === '97' ) {
-		 	 if($this->countModules('slider')) : ?>
-		          <div class="gallery centerCol fl">
-		          	     <jdoc:include type="modules" name="slider" style="rounded" />
-		                 <div class="cb"></div>
-		           </div>
-          <?php endif;} ?>
-          <?php if($this->countModules('right')) : ?>
-            <div class="galleryNav rightCol fr">
+       <!-- Event Rotator Start -->
+ 	<?php if(JRequest::getVar('Itemid') == 97 && JRequest::getVar('task') == 'range.listevents'):?>
+  
+ 	<div class="fl">
+	<?php if($this->countModules('searchevent')) : ?>
+	            <div>
+	                  <jdoc:include type="modules" name="searchevent" style="rounded" />
+	                   <div class="cb"></div>
+	             </div>
+          	<?php endif; ?>
+       		
+			<?php if($this->countModules('slider')) : ?>
+	            <div>
+	                  <jdoc:include type="modules" name="slider" style="rounded" />
+	                   <div class="cb"></div>
+	             </div>
+          	<?php endif; ?>
+    </div>
+       	<?php endif; ?>     
+     <!-- Event Rotator End -->
+     
+	 <?php if($this->countModules('right')) : ?>
+            <div class="rightCol fr">
              	<jdoc:include type="modules" name="right" style="rounded" />
             </div>
             <?php endif; ?>
-      </div>
-     
-
-  	  <!-- Event Rotator End -->
-      
+	  
       <!-- Main body start -->
             <div class="centerCol fl">
             		<div id="Try3" class="sect">
@@ -243,9 +246,15 @@ _init();
               	   </div>
              </div>
   	  <!-- Main body end -->	
-
-  	 
-  	  <div class="adSect rightCol fr">
+ 	<?php if(JRequest::getVar('Itemid') == 97 && JRequest::getVar('task') == 'range.listevents'):?>
+				<?php if($this->countModules('slider')) : ?>
+					<div id="neg" class="adSect rightCol fr">
+				<?php else: ?>
+					<div class="adSect rightCol fr">	
+				<?php endif; ?>
+	<?php else: ?>
+				<div class="adSect rightCol fr">	
+	<?php endif; ?>		
 
   	  	<!-- 300 x 100 Banner Ad Start -->
 		<?php if($this->countModules('banner3')) : ?>

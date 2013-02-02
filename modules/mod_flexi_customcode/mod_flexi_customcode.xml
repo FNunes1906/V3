@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+  <name>Flexi Custom Code</name>
+  <author>RBO Team</author>
+  <creationDate>December 16th, 2010</creationDate>
+  <copyright>RumahBelanja @ 2010 - Free Joomla Module</copyright>
+  <license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+  <authorEmail>rumahbelanja@gmail.com</authorEmail>
+  <authorUrl>www.rumahbelanja.com</authorUrl>
+  <version>1.0</version>
+  <description>FLEXICUSTOMCODE</description>
+	<files>
+		<filename module="mod_flexi_customcode">mod_flexi_customcode.php</filename>
+		<filename>index.html</filename>
+    	<filename>helper.php</filename>
+    	<filename>tmpl/default.php</filename>
+    	<filename>tmpl/index.html</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.mod_flexi_customcode.ini</language>
+	</languages>
+    <params>
+		<param name="moduleclass_sfx" type="text" default="" label="MODULECLASSSUFFIX" description="PARAMMODULECLASSSUFFIX" />
+		<param name="code_area" type="textarea" default="" label="CODE" cols="40" rows="20" description="CODEDESC" />
+  		<param name="use_php" type="list" default="1" label="USEPHP" description="USEPHPDESC">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		<param name="userlevel" type="radio" default="1" label="SHOWTO" description="SHOWTODESC" >
+			<option value="0">REGISTERED</option>
+			<option value="1">ALL</option>
+			<option value="2">GUEST</option>
+		</param>
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		<param name="clean_js" type="list" default="1" label="CLEANJS" description="CLEANJSDESC">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		<param name="clean_css" type="list" default="1" label="CLEANCSS" description="CLEANCSSDESC">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		<param name="clean_all" type="list" default="1" label="CLEANHTML" description="CLEANHTMLDESC">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+	</params>
+	<params group="advanced">
+		<param name="cache" type="list" default="1" label="CACHING" description="PARAMENABLECACHE">
+			<option value="1">GLOBAL</option>
+			<option value="0">NOCACHING</option>
+		</param>
+		<param name="cache_time" type="text" default="900" label="CACHETIME" description="CACHETIME_DESC" />
+	</params>
+</install>

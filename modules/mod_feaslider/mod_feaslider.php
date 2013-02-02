@@ -1,4 +1,5 @@
 <?php
+ini_set("display_errors",0);
 /**
 * @version		$Id: mod_feaslider.php 14401 2010-01-26 14:10:00Z louis $
 * @package		Joomla
@@ -14,16 +15,43 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
+$timeZoneArray 	= explode(':',$timezone);
+$totalHours 	= date("H") + $timeZoneArray[0];
+$totalMinutes = date("i") + $timeZoneArray[1];
+$totalSeconds = date("s") + $timeZoneArray[2];
+
+if ($_REQUEST['d']=="")
+$today=date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+else
+$today=$_REQUEST['d'];
+if ($_REQUEST['m']=="")
+$tomonth=date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
+else
+$tomonth=$_REQUEST['m'];
+if ($_REQUEST['Y']=="")
+$toyear=date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
+else
+$toyear=$_REQUEST['Y'];
+
+//#DD#
+$_REQUEST['eventdate'] = trim($_REQUEST['eventdate']);
+
+if(!empty($_REQUEST['eventdate'])){
+    $today = date('d',strtotime($_REQUEST['eventdate']));
+    $tomonth = date('m',strtotime($_REQUEST['eventdate']));
+    $toyear = date('Y',strtotime($_REQUEST['eventdate']));
+}
+
+
 // Include the syndicate functions only once
 require_once (dirname(__FILE__).DS.'helper.php');
 
-$p = new modFeaEventHelper($params);
+$FeaturedSlider = modFeaEventHelper::getFeaturedSlider($toyear,$tomonth,$today);
 
-$FeaturedSlider = modFeaEventHelper::getFeaturedSlider();
-
-$registry	=& JRegistry::getInstance("jevents");
-$registry->setValue("jevents.activeprocess","mod_feaslider");
-$registry->setValue("jevents.moduleid", $module->id);
-$registry->setValue("jevents.moduleparams", $params);
+	// Title link
+	/*global $Itemid;
+	$rowlink = $event->viewDetailLink($event->yup(),$event->mup(),$event->dup(),false);
+	$rowlink = JRoute::_($rowlink.$view->datamodel->getCatidsOutLink());
+	ob_start()*/;
 
 require(JModuleHelper::getLayoutPath('mod_feaslider'));

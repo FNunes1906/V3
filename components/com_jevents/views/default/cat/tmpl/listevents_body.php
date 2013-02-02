@@ -4,12 +4,17 @@ defined('_JEXEC') or die('Restricted access');
 $cfg	 = & JEVConfig::getInstance();
 
 $data = $this->datamodel->getCatData( $this->catids,false, $this->limit, $this->limitstart);
-
 $Itemid = JEVHelper::getItemid();
 
 ?>
 <div class="bc fr" ><span class="bold">Event Type:</span><?php $this->viewNavCatText( $this->catids, JEV_COM_COMPONENT, 'cat.listevents', $this->Itemid );?></div>
-<?php echo "<h3 class='fl heading display'>THIS WEEK</h3>";?>
+<?php 
+if ( JRequest::getVar('task') === 'cat.listevents' ){
+	echo "<h3 class='fl heading display'>Event List".$data['catdesc']."</h3>";
+}
+
+?>
+
 <?php
 if (count($data['catids'])==1 && $data['catids'][0]!=0 && strlen($data['catdesc'])>0){
 	echo "<div class='jev_catdesc'>".$data['catdesc']."</div>";
