@@ -58,19 +58,19 @@
   	    </div>
   	    
   	    <div id="GuideInfo" class="cr">
-  	      <div class="localCont">
+          <div class="localCont">
             <div id="Local" class="fl">
-  	      	  <div id="Weather" class="fr">High: 88&deg; <img alt="Partly Cloudy" src="images/weather/partlyCloudy.png" /> Low: 50&deg;</div>
-  	      	  Serving Merida, Ciudad Caucel, &amp; Surrounding Areas
+              <div id="Weather" class="fr bold">Current Temp: 80&deg;  <img alt="Partly Cloudy" src="images/weather/partlyCloudy.png" /> <span class="range bold">High: 88&deg; / Low: 50&deg;</span></div>
+              Serving Merida, Ciudad Caucel, &amp; Surrounding Areas
             </div>
           </div>
           <div class="search fr">
-  	  	    <form>
-  	  	  	  <input type="text" placeholder="Search SocialLife Merida..." />
-  	  	  	  <input type="submit" value="" class="searchBtn" />
-  	  	    </form>
-  	  	  </div>
-  	    </div>
+            <form>
+              <input type="text" placeholder="Search SocialLife Merida Events..." />
+              <input type="submit" value="" class="searchBtn" />
+            </form>
+          </div>
+        </div>
   	</div>
 
   	<!-- Header End -->
@@ -109,7 +109,7 @@
   	  	   </ul>
   	    </nav>
   	    <div id="SideLinks">
-  	      <h4 class="display">Your Stuff</h3>
+  	      <h4 class="display">My Stuff</h3>
   	      <a href="#">Favorite Places</a>
   	      <a href="#">Your Saved Offers</a>
   	      <a href="#">Your Events Calendar</a>
@@ -182,7 +182,25 @@
             <div id="FindForm" class="restaurants">
               <div>
                 <input type="text" class="search fl" placeholder="Restaurant Search" />
-                <select class="type fl">
+
+                <!-- Includes for Mobiscroll Select and Darepicker -->
+                <link href="css/mobiscroll-2.4.custom.min.css" rel="stylesheet" type="text/css" />
+                <script src="js/mobiscroll-2.4.custom.min.js" type="text/javascript"></script>
+
+                <script type="text/javascript">
+                  $(document).ready(function() {
+                    var themeSkinSel = getTheme();
+
+                    $('#RestaurantType').mobiscroll().select({
+                        theme: themeSkinSel, 
+                        display: 'modal', 
+                        animate: 'pop', 
+                        mode: 'scroller', 
+                        inputClass: 'type fl'
+                    });
+                  });
+                </script>
+                <select id="RestaurantType" class="type fl">
                   <option>Type</option>
                   <option>All Cuisines</option>
                   <option>Spanish</option>

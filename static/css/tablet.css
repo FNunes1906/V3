@@ -91,6 +91,9 @@ body.tablet #LowerBannerAd {
   display:block;
   margin-bottom:30px;
 }
+body.tablet #LowerBannerAd.min img {
+  width:310px;
+}
 body.tablet #EvtRot {
   max-width:755px;
 }
@@ -144,10 +147,10 @@ body.tablet .neg {
   margin-top:0 !important;
 }
 body.tablet #FindForm input.search {
-  width:43%;
+  width:48%;
 }
-body.tablet #FindForm select {
-  width:20%;
+body.tablet #FindForm .type {
+  width:27%;
 }
 body.tablet #FindForm .sub, 
 body.tablet #FindForm .sub a {
@@ -210,4 +213,14 @@ body.tablet .ratingWidget .stars.vote a {
 }
 body.tablet .ratingWidget .stars.vote {
   width:280px;
+}
+
+
+
+body.min .rightCol {
+  float:none !important;
+}
+body.min #Footer ul li {
+  float:none;
+  width:100%;
 }

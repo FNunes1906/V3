@@ -32,8 +32,8 @@ var resizeContent = function() {
     $('body').addClass('tablet');
 
     //Set Top Bar and Footer backgrounds to full screen width
-    $('#TopBar').css('width',$('#Content').width() + 10);
-    $('#Footer').css('width',$('#Content').width() + 10);
+    //$('#TopBar').css('width',$('#Content').width() + 10);
+    //$('#Footer').css('width',$('#Content').width() + 10);
 
     //Move guide text next to logo after upper banner ad is moved to lower ad space 
     if (!$('#UpperBannerAd').hasClass('tabletLayout')) {
@@ -85,14 +85,18 @@ var resizeContent = function() {
 
     //Shrink right column content for screen sizes below 845px
     if ($(window).width() < 845 ) {
+      //$('body').addClass('min');
       $('.rightCol .sect').not('.rightCol.spread .ad.sect, #BlogCol.rightCol .sect').css('width',$('#MainContent').width() - 529);
       $('#ShareTool .side').css('font-size',0);
       $('body.tablet .sect.list ul li a, body.tablet #PlacesInfo ul li a').not('body.tablet .sect.horiz.list ul li a').css('line-height','15px');
+      //$('#LowerBannerAd').addClass('min');
     }
     else {
+      //$('body').removeClass('min');
       $('.rightCol .sect').not('.rightCol .ad.sect').css('width',300);
       $('#ShareTool .side').css('font-size','12px');
       $('body.tablet .sect.list ul li a, body.tablet #PlacesInfo ul li a').not('body.tablet .sect.horiz.list ul li a').css('line-height','25px');
+      //$('#LowerBannerAd').removeClass('min');
     }
   }
 
@@ -108,8 +112,8 @@ var resizeContent = function() {
   	$('body').removeClass('tablet');
 
     //Sets Top Bar and Footer backgrounds to full site width
-  	$('#TopBar').css('width','100%');
-    $('#Footer').css('width','100%');
+  	//$('#TopBar').css('width','100%');
+    //$('#Footer').css('width','100%');
   	
     //Moves upper banner ad back to header spot and places guide text below
     if ($('#UpperBannerAd').hasClass('tabletLayout')) {
@@ -170,6 +174,14 @@ var updateOrientation = function() {
     $('#WidgetArea #Blog.centerCol .sect').css('width',$('#MainContent').width() - 555);
   }
 
+}
+
+var getTheme = function() {
+  //Sniff user platform and set most appropriate skin for mobiscroll datepicker
+  //..
+  //..
+
+  return "default";
 }
 
 var alertScreenSize = function() {

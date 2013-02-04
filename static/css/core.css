@@ -1,7 +1,7 @@
 /* Resets and global Styles */
 
 * { margin:0; padding:0; }
-.sWidth { max-width:970px; min-width:758px; padding:0 5px; margin:auto; }
+.sWidth { max-width:970px; min-width:768px; padding:0 5px; margin:auto; }
 .fl { float:left; }
 .fr { float:right; }
 .cl { clear:left; }
@@ -997,17 +997,20 @@ a.saved span {
   font-size:14px;
   margin-right:12px;
   padding:0 5px;
-  width:34%;
+  width:37%;
+  border: 2px inset rgba(238, 238, 238, .25);
 }
 #FindForm.restaurants input.search {
-  width:58%;
+  width:46%;
 }
-#FindForm select {
-  height:28px;
-  line-height:30px;
+#FindForm select, 
+#FindForm .type {
+  height:24px;
+  line-height:26px;
   font-size:14px;
   margin-right:12px;
-  width:22%;
+  padding:0 5px;
+  width:30%;
 }
 #FindForm input.submit {
   background:url('../images/header/searchBtnLg.png') no-repeat left top;
@@ -1028,6 +1031,17 @@ a.saved span {
 }
 #FindForm .sub a:hover {
   text-decoration:none;
+}
+#FindForm #DatePicker a {
+  background:url('../images/header/calBtnLg.png') no-repeat left top;
+  width:34px;
+  height:30px;
+  display:block;
+  text-indent:-20000px;
+  cursor:pointer;
+}
+#FindForm #DatePicker input {
+  display:none;
 }
 
 /* ------------------------------------------------------------------- */
