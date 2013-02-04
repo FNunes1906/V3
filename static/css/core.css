@@ -1,7 +1,7 @@
 /* Resets and global Styles */
 
 * { margin:0; padding:0; }
-.sWidth { max-width:970px; min-width:768px; padding:0 5px; margin:auto; }
+.sWidth { max-width:970px; min-width:758px; padding:0 5px; margin:auto; }
 .fl { float:left; }
 .fr { float:right; }
 .cl { clear:left; }
