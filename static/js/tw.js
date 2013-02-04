@@ -32,8 +32,8 @@ var resizeContent = function() {
     $('body').addClass('tablet');
 
     //Set Top Bar and Footer backgrounds to full screen width
-    //$('#TopBar').css('width',$('#Content').width() + 10);
-    //$('#Footer').css('width',$('#Content').width() + 10);
+    $('#TopBar').css('width',$('#Content').width() + 10);
+    $('#Footer').css('width',$('#Content').width() + 10);
 
     //Move guide text next to logo after upper banner ad is moved to lower ad space 
     if (!$('#UpperBannerAd').hasClass('tabletLayout')) {
@@ -112,8 +112,8 @@ var resizeContent = function() {
   	$('body').removeClass('tablet');
 
     //Sets Top Bar and Footer backgrounds to full site width
-  	//$('#TopBar').css('width','100%');
-    //$('#Footer').css('width','100%');
+  	$('#TopBar').css('width','100%');
+    $('#Footer').css('width','100%');
   	
     //Moves upper banner ad back to header spot and places guide text below
     if ($('#UpperBannerAd').hasClass('tabletLayout')) {
