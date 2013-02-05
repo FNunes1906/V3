@@ -178,10 +178,20 @@ var updateOrientation = function() {
 
 var getTheme = function() {
   //Sniff user platform and set most appropriate skin for mobiscroll datepicker
-  //..
-  //..
 
-  return "default";
+  if (navigator.userAgent.match(/(Linux|arm)/)) {
+    return "android-ics";
+  }
+  else if (navigator.userAgent.match(/(Windows|MSIE)/)) {
+    return "wp";
+  }
+  else if (navigator.userAgent.match(/(AppleWebKit|iPad|Macintosh)/)) {
+    return "ios";
+  }
+  else {
+    return "default";
+  }
+
 }
 
 var alertScreenSize = function() {
