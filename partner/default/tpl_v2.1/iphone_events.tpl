@@ -1,7 +1,3 @@
-<?php 
-setlocale(LC_TIME,"spanish");
-$todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
-?>
 <div id="featuredEvents">
 	<div class="flexslider-container">
 		<div class="flexslider">
@@ -33,6 +29,8 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 			##Image FEtched for slide show##
 				$imageurl= strstr($featureevdetail['description'],'http');
 				$singleimagearray = explode('"',$imageurl);
+				if($singleimagearray[0] == ""){
+					$singleimagearray[0] = "/components/com_shines_v2.1/images/nofe_image.png"; }
 			##end##
 
 			if ((int) ($featureevdetail['location'])){
@@ -45,7 +43,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 			$displayTime = '';
 
 			if($fearow[timestart]=='12:00 AM' && $fearow[timeend]=='11:59PM')
-            {    $displayTime.='Todo el día';}
+            {    $displayTime.='All Day Event';}
 			else{
 				$displayTime.= ltrim($fearow[timestart], "0");
 				
@@ -61,7 +59,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 			}else{
 			if($featureevent[$f] == 1 && $imagecount<5){?> 
 		    	<li>
-					<img style="height:300px;" src="<?=$singleimagearray[0]?>" />
+					<img style="height:200px;" src="<?=$singleimagearray[0]?>" />
 		    		<div class="flex-caption">
 		    			<h1><?=$featureevdetail['summary']?></h1>
 		    			<h2><?=$rowfealocdetail['title']?></h2>
@@ -86,7 +84,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 
 	<form name='events' id='events' action='events.php' method='post'>
 		<input type="text" value="" class="mobiscroll ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-d scroller" id="date1" name="eventdate" style="width:0px;height:0px;border:0px;background:#333333;position: absolute;top: -100px;">
-		<button data-theme="a" id="show" class="ui-btn-hidden button" aria-disabled="false" style="width:100%;">Ver Eventos por día</button>
+		<button data-theme="a" id="show" class="ui-btn-hidden button" aria-disabled="false" style="width:100%;">Check Events By Day</button>
 	</form>
 	
 </div>
@@ -126,7 +124,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 			#DD#
 			$displayTime = '';
 			if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59PM')
-            {    $displayTime.='Todo el día';}
+            {    $displayTime.='All Day Event';}
 			else{
 				$displayTime.= ltrim($row[timestart], "0");
 				
@@ -146,15 +144,15 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		<h3>
 			<?=$displayTime?> &bull;
 			<?php echo $categoryname[$n]; ?>
-			<ul class="btnList"><li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>">llamar</a</li>
+			<ul class="btnList"><li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>">call</a</li>
 				
 			<?php
 	 			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 				if(stripos($ua,'android') == true) { ?>
  			<?php } else { ?>
-			<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">facturar</a></li>
+			<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">check in</a></li>
 				<?php } ?>
-			<li><a class="button small" href="events_details.php?eid=<?=$row['rp_id']?>&d=<?=$today?>&m=<?=$tomonth?>&Y=<?=$toyear?>&lat=<?=$lat1?>&lon=<?=$lon1?>">m&#225;s info</a></li></ul>
+			<li><a class="button small" href="events_details.php?eid=<?=$row['rp_id']?>&d=<?=$today?>&m=<?=$tomonth?>&Y=<?=$toyear?>&lat=<?=$lat1?>&lon=<?=$lon1?>">more info</a></li></ul>
 		</h3> 
 				<!--<?=round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1')?>&nbsp;<?=$dunit?></td> Away -->
     </li>
