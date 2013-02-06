@@ -59,6 +59,8 @@ function load_config() {
   $var->facebook = $pageglobal['facebook'];
   $var->iphone = $pageglobal['iphone'];
   $var->android = $pageglobal['android'];
+  $var->twitter = $pageglobal['twitter'];
+  $var->youtube = $pageglobal['youtube'];
   $var->googgle_analytics=$pageglobal['googgle_map_api_keys'];
   $var->Header_color =$pageglobal['Header_color'];
   $var->distance_unit=$pageglobal['dunit'];

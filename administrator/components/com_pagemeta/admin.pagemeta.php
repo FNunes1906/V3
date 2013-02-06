@@ -136,87 +136,59 @@ function globalseting(){
 <form method="post" action="" name="adminForm">
 <input type="hidden" name="task" value="" />	
 <input type="hidden" name="global"  value="1" />
-<table class="admintable" cellspacing="1">
+<table class="pagemetatable" cellspacing="1">
   <tr>
-    <td width="20%" class="key"><label>SITE NAME:</label></td>
+    <td width="20%" class="key"><label>site name:</label></td>
     <td width="80%"><input type="text" name="site_name" class="inputbox" size="50" value="<?=$row['site_name']?>" /></td>
   </tr>
   <tr>
-    <td width="20%" class="key"><label>EMAIL:</label></td>
+    <td width="20%" class="key"><label>e-mail:</label></td>
     <td width="80%"><input type="text" name="email" class="inputbox" size="50" value="<?=$row['email']?>" /></td>
   </tr>
   <tr>
-    <td width="20%" class="key"><label>GOOGLE ANALITICS CODE:</label></td>
+    <td width="20%" class="key"><label>google analytics code:</label></td>
     <td width="80%"><input type="text" name="googgle_map_api_keys" class="inputbox" size="50" maxlength="25" value="<?=$row['googgle_map_api_keys']?>" />
     <img src="../partner/<?php echo $_SESSION['partner_folder_name'];?>/images/edit_f2.png" height="18" title="Enter Only UA code in the box, Example: UA-29293639-3" />
     </td>
   </tr>
   <tr>
-    <td width="20%" class="key"><label>LOCATION CODE:</label></td>
+    <td width="20%" class="key"><label>location code:</label></td>
     <td width="80%"><input type="text" name="location_code" class="inputbox" size="50" value="<?=$row['location_code']?>" /></td>
   </tr>
   <tr>
-    <td width="20%" class="key"><label>CITY NAME:</label></td>
+    <td width="20%" class="key"><label>city name:</label></td>
     <td width="80%"><input type="text" name="beach" class="inputbox" size="50" value="<?=$row['beach']?>" /></td>
   </tr>
   <tr>
-    <td width="20%" class="key"><label>PHOTO MINI SLIDER CATEGORY:</label></td>
+    <td width="20%" class="key"><label>mini photo slider category:</label></td>
     <td width="80%"><input type="text" name="photo_mini_slider_cat" class="inputbox" size="50" value="<?=$row['photo_mini_slider_cat']?>" /></td>
   </tr>
   <tr>
-    <td width="20%" class="key"><label>PHOTO UPLOAD CATEGORY:</label></td>
+    <td width="20%" class="key"><label>photo upload category:</label></td>
     <td width="80%"><input type="text" name="photo_upload_cat" class="inputbox" size="50" value="<?=$row['photo_upload_cat']?>" /></td>
   </tr>
   <tr>
-    <td width="20%" class="key"><label>FACEBOOK LINK:</label></td>
+    <td width="20%" class="key"><label>facebook link:</label></td>
     <td width="80%"><input type="text" name="facebook" class="inputbox" size="50" value="<?=$row['facebook']?>" /></td>
   </tr>
   <tr>
-    <td width="20%" class="key"><label>IPHONE DOWNLOAD LINK:</label></td>
+    <td width="20%" class="key"><label>IPhone app download link:</label></td>
     <td width="80%"><input type="text" name="iphone" class="inputbox" size="50" value="<?=$row['iphone']?>" /></td>
   </tr>
   <tr>
-    <td width="20%" class="key"><label>ANDROID DOWNLOAD LINK:</label></td>
+    <td width="20%" class="key"><label>android app download link:</label></td>
     <td width="80%"><input type="text" name="android" class="inputbox" size="50" value="<?=$row['android']?>" /></td>
   </tr>
   <tr>
-    <td width="20%" class="key"><label>Header Color:</label></td>
-    <td width="80%"><input type="text" name="Header_color" class="inputbox" size="50" value="<?=$row['Header_color']?>" /></td>
+    <td width="20%" class="key"><label>Twitter Follow up:</label></td>
+    <td width="80%"><input type="text" name="twitter" class="inputbox" size="50" value="<?=$row['twitter']?>" /></td>
   </tr>
   <tr>
-    <td width="20%" class="key"><label>DISTANCE UNIT:</label></td>
-    <td width="80%">
-      <?php
-      if ($row['distance_unit'] == 'Kms') { ?>
-      <input name="dunit" type="radio" value="Kms" checked />Kms&nbsp;<input name="dunit" type="radio" value="Miles" />Miles
-      <?php } ?> 
-      <?php
-      if ($row['distance_unit'] == 'Miles') { ?>
-      <input name="dunit" type="radio" value="Kms"/>Kms&nbsp;<input name="dunit" type="radio" value="Miles" checked />Miles
-      <?php } ?>
-      <?php if ($row['distance_unit'] == '') { ?>
-      <input name="dunit" type="radio" value="Kms"/>Kms&nbsp;<input name="dunit" type="radio" value="Miles" checked />Miles
-      <?php } ?>
-    <td>
-  </tr>
-    <tr>
-    <td width="20%" class="key"><label>WEATHER UNIT:</label></td>
-    <td width="80%">
-      <?php
-      if ($row['weather_unit'] == 'm') { ?>
-      <input name="wunit" type="radio" value="m" checked />C&nbsp;<input name="wunit" type="radio" value="s" />F
-      <?php } ?> 
-      <?php
-      if ($row['weather_unit'] == 's') { ?>
-      <input name="wunit" type="radio" value="m"/>C&nbsp;<input name="wunit" type="radio" value="s" checked />F
-      <?php } ?>
-      <?php if ($row['weather_unit'] == '') { ?>
-      <input name="wunit" type="radio" value="m"/>C&nbsp;<input name="wunit" type="radio" value="s" checked />F
-      <?php } ?>
-   <td>
+    <td width="20%" class="key"><label>youtube Follow up:</label></td>
+    <td width="80%"><input type="text" name="youtube" class="inputbox" size="50" value="<?=$row['youtube']?>" /></td>
   </tr>
   <tr>
-  	<td width="20%" class="key"><label>TIME ZONE:</label></td>
+  	<td width="20%" class="key"><label>time zone:</label></td>
 	<td width="80%">
 <?php 
 
@@ -261,7 +233,42 @@ function globalseting(){
 		</select>
 	</td>
   </tr>
-  
+	<tr>
+    <td width="20%" class="key"><label>Header Color:</label></td>
+    <td width="80%"><input type="text" name="Header_color" class="inputbox" size="10" value="<?=$row['Header_color']?>" /></td>
+  </tr>
+  <tr>
+    <td width="20%" class="key"><label>distance unit:</label></td>
+    <td width="80%">
+      <?php
+      if ($row['distance_unit'] == 'Kms') { ?>
+      <input name="dunit" type="radio" value="Kms" checked />Kms&nbsp;<input name="dunit" type="radio" value="Miles" />Miles
+      <?php } ?> 
+      <?php
+      if ($row['distance_unit'] == 'Miles') { ?>
+      <input name="dunit" type="radio" value="Kms"/>Kms&nbsp;<input name="dunit" type="radio" value="Miles" checked />Miles
+      <?php } ?>
+      <?php if ($row['distance_unit'] == '') { ?>
+      <input name="dunit" type="radio" value="Kms"/>Kms&nbsp;<input name="dunit" type="radio" value="Miles" checked />Miles
+      <?php } ?>
+    <td>
+  </tr>
+    <tr>
+    <td width="20%" class="key"><label>weather unit:</label></td>
+    <td width="80%">
+      <?php
+      if ($row['weather_unit'] == 'm') { ?>
+      <input name="wunit" type="radio" value="m" checked />C&nbsp;<input name="wunit" type="radio" value="s" />F
+      <?php } ?> 
+      <?php
+      if ($row['weather_unit'] == 's') { ?>
+      <input name="wunit" type="radio" value="m"/>C&nbsp;<input name="wunit" type="radio" value="s" checked />F
+      <?php } ?>
+      <?php if ($row['weather_unit'] == '') { ?>
+      <input name="wunit" type="radio" value="m"/>C&nbsp;<input name="wunit" type="radio" value="s" checked />F
+      <?php } ?>
+   <td>
+  </tr>
 </table>
 </form>
 <?
@@ -288,7 +295,7 @@ function save(){
 	}
 	elseif(isset($_POST['global'])){
 		
-		$query = "UPDATE #__pageglobal SET site_name ='".$_POST['site_name']."', email ='".$_POST['email']."', googgle_map_api_keys ='".addslashes($_POST['googgle_map_api_keys'])."', location_code ='".$_POST['location_code']."', beach ='".$_POST['beach']."', photo_mini_slider_cat ='".$_POST['photo_mini_slider_cat']."', photo_upload_cat ='".$_POST['photo_upload_cat']."', facebook ='".$_POST['facebook']."', iphone ='".$_POST['iphone']."', android ='".$_POST['android']."', Header_color='".$_POST['Header_color']."', distance_unit ='".$_POST['dunit']."', weather_unit ='".$_POST['wunit']."',time_zone ='".$_POST['timezone']."' WHERE id='1'";
+		$query = "UPDATE #__pageglobal SET site_name ='".$_POST['site_name']."', email ='".$_POST['email']."', googgle_map_api_keys ='".addslashes($_POST['googgle_map_api_keys'])."', location_code ='".$_POST['location_code']."', beach ='".$_POST['beach']."', photo_mini_slider_cat ='".$_POST['photo_mini_slider_cat']."', photo_upload_cat ='".$_POST['photo_upload_cat']."', facebook ='".$_POST['facebook']."', iphone ='".$_POST['iphone']."', android ='".$_POST['android']."', Header_color='".$_POST['Header_color']."', distance_unit ='".$_POST['dunit']."', weather_unit ='".$_POST['wunit']."', twitter ='".$_POST['twitter']."', youtube ='".$_POST['youtube']."',time_zone ='".$_POST['timezone']."' WHERE id='1'";
 		
 		$db->setQuery( $query );
 		
