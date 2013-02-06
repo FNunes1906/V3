@@ -923,6 +923,50 @@ a.saved span {
 /* ------------------------------------------------------------------- */
 
 
+/* Submit Form */
+
+#SubmitForm h1 {
+  font-size:18px;
+  margin-bottom:8px;
+}
+#SubmitForm .form {
+  margin:30px 0 0;
+}
+#SubmitForm label {
+  height:30px;
+  margin-bottom:30px;
+  line-height:30px;
+}
+#SubmitForm input {
+  height:30px;
+  line-height:30px;
+  width:60%;
+  padding:0 5px;
+  font-size:14px;
+  margin-bottom:30px;
+  border: 2px inset rgba(238, 238, 238, .25);
+}
+#SubmitForm textarea {
+  height:130px;
+  line-height:18px;
+  width:60%;
+  padding:0 5px;
+  font-size:13px;
+  margin-bottom:30px;
+  resize:vertical;
+  border: 2px inset rgba(238, 238, 238, .25);
+}
+#SubmitForm #DatePicker {
+  width:65%;
+}
+#SubmitForm #DatePicker input {
+  width:74%;
+  margin-left:17px;
+}
+
+/* ------------------------------------------------------------------- */
+
+
 /* Most Popular Tabs */
 
 #popular-tabs {
@@ -1032,7 +1076,7 @@ a.saved span {
 #FindForm .sub a:hover {
   text-decoration:none;
 }
-#FindForm #DatePicker a {
+#DatePicker a {
   background:url('../images/header/calBtnLg.png') no-repeat left top;
   width:34px;
   height:30px;

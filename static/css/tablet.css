@@ -163,6 +163,9 @@ body.tablet #FindForm .sub span {
   display:block;
   padding-bottom:15px;
 }
+body.tablet #SubmitForm #DatePicker input {
+  width:79%;
+}
 body.tablet .detailFeature a {
   margin:25px 0;
 }
