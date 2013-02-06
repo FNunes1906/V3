@@ -594,3 +594,25 @@ a img.calendar {
 
 /* System Notice Messages */
 #system-message dd.notice ul { color: #c00; background: #EFE7B8 url(../images/notice-note.png) 4px top no-repeat; border-top: 3px solid #F0DC7E; border-bottom: 3px solid #F0DC7E;}
+
+table.pagemetatable td.key, table.pagemetatable td.paramlist_key {
+    background-color: #F6F6F6;
+    border-bottom: 1px solid #E9E9E9;
+    border-right: 1px solid #E9E9E9;
+    color: #666666;
+    font-weight: bold;
+    text-align: left;
+    width: 170px;
+	text-transform: capitalize;
+}
+table.pagemetatable td {
+    padding: 3px;
+}
+table.pagemetatable td.key, table.pagemetatable td.paramlist_key {
+    color: #000000;
+    font-weight: bold;
+    text-align: left;
+}
+table.pagemetatable td {
+    padding: 3px;
+}
