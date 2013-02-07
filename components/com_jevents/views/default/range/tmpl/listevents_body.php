@@ -5,11 +5,11 @@ defined('_JEXEC') or die('Restricted access');
 $cfg	 = & JEVConfig::getInstance();
 $data = $this->data;
 
-echo "<h3 class='fl heading display'>THIS WEEK</h3>";
+echo "<h3 class='fl heading display'>".JText::_('JEV_VIEWBYWEEK')."</h3>";
 
-//echo "<div id='cal_title'>". JText::_('JEV_EVENTSFOR') ."</div>\n";
+/*echo "<div id='cal_title'>". JText::_('JEV_EVENTSFOR') ."</div>\n";	*/
 ?>
-<div class="bc fr" ><span class="bold">Event Type:</span><?php $this->viewNavCatText( $this->catids, JEV_COM_COMPONENT, 'cat.listevents', $this->Itemid );?></div>
+<div class="bc fr" ><span class="bold"><?php echo JText::_('JEV_VIEWBYCAT');?>:</span><?php $this->viewNavCatText( $this->catids, JEV_COM_COMPONENT, 'cat.listevents', $this->Itemid );?></div>
 <table align="center" width="100%" cellspacing="0" cellpadding="5" class="ev_table">
     
     <?php

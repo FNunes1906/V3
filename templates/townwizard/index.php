@@ -19,30 +19,64 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/var.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 
 _init();
+
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" >
 <head>
 <jdoc:include type="head" />
 
-<title><?php echo $var->site_name.' | '.$var->page_title; ?></title>
+
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <meta name="keywords" content="<?php echo $var->keywords; ?>" />
 <meta name="description" content="<?php echo $var->metadesc; ?>" />
 <meta name="description" content="<?php echo $var->extra_meta; ?>" />
+<meta property="og:image" content="http://<?php echo $_SERVER['HTTP_HOST']?>/partner/<?php echo $_SESSION['partner_folder_name']?>/images/logo/logo.png"/>
 
 <!-- set css and js path for new design v3 -->
 
 <meta name="viewport" content="width=device-width;initial-scale = 1.0,maximum-scale = 1.0" />
-<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/css/fonts.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/css/core.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/css/tablet.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/css/events.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/css/fonts.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/css/core.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/css/tablet.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/css/events.css" />
+
+<!-- Add css for location image pop up -->
+<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/css/jquery.fancybox.css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/js/jquery.carouFredSel-6.1.0-packed.js"></script>
-<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/js/jquery.touchSwipe.min.js"></script>
-<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/js/yetii-min.js"></script>
-<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/js/tw.js"></script>
+<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/js/jquery.carouFredSel-6.1.0-packed.js"></script>
+<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/js/yetii-min.js"></script>
+<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/js/tw.js"></script>
+
+<!-- Add jQuery library for location image pop up -->
+<!--<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/js/jquery-1.9.0.min.js"></script>-->
+<!-- Add fancyBox main JS and CSS files -->
+<!--<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/js/jquery.fancybox.js?v=2.1.4"></script>
+<script type="text/javascript">
+       $(document).ready(function() {
+               /* Simple image gallery. Uses default settings*/
+               $('.fancybox').fancybox();
+               // Disable opening and closing animations, change title type
+               $(".fancybox-effects-b").fancybox({
+                       openEffect  : 'none',
+                       closeEffect        : 'none',
+                       helpers : {
+                               title : {
+                                       type : 'over'
+                               }}});});
+</script>-->
+<!-- Add jQuery library for location image pop up END-->
+
+<!-- Share This -->
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">
+	stLight.options({
+		publisher:'7de16a21-9cb3-4dfe-b961-18e0c43d99c0',
+	});
+</script>
+<!-- Share This End-->
 
 <!-- End css and js path for new design v3 -->
 
@@ -79,15 +113,25 @@ _init();
 <!--  CODE for SAFARI BROWSER DETECTION END -->
 
 <!--  Town wizard Google Analytic code -->
+<?php include("ga.php"); ?>
 
 </head>
 
 <body>
-
+ <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);	
+}(document, 'script', 'facebook-jssdk'));</script>
+  
+ 			  
  <!-- Top Bar Start -->
-  <div id="TopBar" style="background:url('<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/images/header/whitezig_zag.png') repeat-x scroll left bottom <?php echo $var->Header_color; ?>;height: 50px;">
+  <div id="TopBar" style="background:url('<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/whitezig_zag.png') repeat-x scroll left bottom <?php echo $var->Header_color; ?>;height: 50px;">
   	<div class="sWidth">
-  	  <div class="fl powered">Powered by<img alt="townwizard" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name'];?>/images/header/twBanner.png" /></div>
+  	  <div class="fl powered"><?php echo JText::_("TW_POWERED_BY") ?><img alt="townwizard" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/twBanner.png" /></div>
 		  <?php if($this->countModules('top')): ?>
           <div class="fr links">
             <jdoc:include type="modules" name="top" style="rounded" />
@@ -111,9 +155,9 @@ _init();
 	  	     <div class="headerAdFlex fl">
 	  	  	  <div id="Social" class="fr">
 	            <div>
-	              <a href="#" onClick="fb_login(); return false;"><img alt="Login with Facebook" src="common/<?php echo $_SESSION['style_folder_name']?>/images/header/fbLoginBtn.png" /></a>
-	              <a href="#"><img alt="Login with Twitter" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name']?>/images/header/twtLoginBtn.png" /></a>
-	              <a href="#"><img alt="Help" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/common/<?php echo $_SESSION['style_folder_name']?>/images/header/helpBtn.png" /></a>
+	              <a href="#" onClick="fb_login(); return false;"><img alt="Login with Facebook" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/fbLoginBtn.png" /></a>
+	              <a href="#"><img alt="Login with Twitter" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/twtLoginBtn.png" /></a>
+	              <a href="#"><img alt="Help" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/helpBtn.png" /></a>
 	            </div>
 	          </div>
               <?php if($this->countModules('banner1')) : ?>
@@ -173,32 +217,24 @@ _init();
 				</div>
 				<?php endif; ?>
                
-                <?php if($var->android != "" || $var->iphone != ""):?>
                 <div id="SideMobile" class="sect">
-                  <h2>TownWizard Mobile!</h2>
-                  <p>Click here to download Apps.</p>
-                  <?php if($var->iphone != ""):?>
-                    <a href="<?php echo $var->iphone?>" target="_blank"><img alt="Download for the iPhone/iPad" src="common/<?php echo $_SESSION['style_folder_name'];?>/images/sidebar/iphoneAppBtn.png" /></a>
+                  <h2>TownWizard <?php echo JText::_("TW_MOBILE") ?>!</h2>
+                  <p><?php echo JText::_("TW_CLICKHERE") ?>.</p>
+                  <?php if($var->iphone && $var->iphone != ""):?>
+                    <a href="<?php echo $var->iphone?>" target="_blank"><img alt="Download for the iPhone/iPad" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/iphoneAppBtn.png" /></a>
                   <?php endif;?>
                   
-                  <?php if($var->android != ""):?>
-                  <a href="<?php echo $var->android?>" target="_blank"><img alt="Download for Android" src="common/<?php echo $_SESSION['style_folder_name'];?>/images/sidebar/androidAppBtn.png" /></a>
+                  <?php if($var->android && $var->android != ""):?>
+                  <a href="<?php echo $var->android?>" target="_blank"><img alt="Download for Android" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/androidAppBtn.png" /></a>
                   <?php endif;?>
+                  
                 </div>
-                  <?php endif;?>
-
                 
-                <?php if($var->youtube != "" || $var->twitter != ""):?>
-                  <div id="SideSocial" class="sect">
-                  <h3 class="display">Follow Us</h3>
-                   <?php if($var->twitter != ""):?>
-                  <a class="twitter" href="<?php echo $var->twitter ?>" target="_blank"><img alt="Follow us on Twitter" src="common/<?php echo $_SESSION['style_folder_name'];?>/images/sidebar/twtFollowBtn.png" /></a>
-                  <?php endif;?>
-                  <?php if($var->youtube != ""):?>
-                  <a class="youtube" href="<?php echo $var->youtube ?>" target="_blank"><img alt="Follow us on YouTube" src="common/<?php echo $_SESSION['style_folder_name'];?>/images/sidebar/ytFollowBtn.png" /></a>
-                  <?php endif;?>
+                <div id="SideSocial" class="sect">
+                  <h3 class="display"><?php echo JText::_("TW_FOLLOWUS") ?></h3>
+                  <a class="twitter" href="#" target="_blank"><img alt="Follow us on Twitter" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/twtFollowBtn.png" /></a>
+                  <a class="youtube" href="#" target="_blank"><img alt="Follow us on YouTube" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/ytFollowBtn.png" /></a>
                 </div>
-                  <?php endif;?>
                 
                 <?php if($this->countModules('banner2')) : ?>
                 <div id="SideAds" class="sect">
@@ -213,12 +249,17 @@ _init();
   	  <!-- Left Column End -->
 
   	  <div id="WidgetArea">
+		 <!-- Placeholder for Header Banner Ad in Vertical Layout Start -->
 
+     	<div id="LowerBannerAd" class="bannerAd"></div>
+
+      <!-- Placeholder for Header Banner Ad in Vertical Layout End -->
+	  
        <!-- Event Rotator Start -->
  	<?php if(JRequest::getVar('Itemid') == 97 && JRequest::getVar('task') == 'range.listevents'):?>
   
  	<div class="fl">
-	<?php if($this->countModules('searchevent')) : ?>
+			<?php if($this->countModules('searchevent')) : ?>
 	            <div>
 	                  <jdoc:include type="modules" name="searchevent" style="rounded" />
 	                   <div class="cb"></div>
@@ -235,25 +276,44 @@ _init();
        	<?php endif; ?>     
      <!-- Event Rotator End -->
      
-	 <?php if($this->countModules('right')) : ?>
-            <div class="rightCol fr">
-             	<jdoc:include type="modules" name="right" style="rounded" />
-            </div>
-            <?php endif; ?>
+	 <?php if(JRequest::getVar('task') == 'range.listevents') :?>
+		 <?php if($this->countModules('right')) : ?>
+	            <div class="rightCol fr">
+	             	<jdoc:include type="modules" name="right" style="rounded" />
+	            </div>
+	      <?php endif; ?>
+	  <?php endif; ?>
 	  
       <!-- Main body start -->
             <div class="centerCol fl">
             		<div id="Try3" class="sect">
-                    	<div class="cont">
-                             <jdoc:include type="message" />
-                            
-							 <jdoc:include type="component" />
-							
-                             <div class="cb"></div>
+                    	<?php if( JRequest::getVar( 'view' ) == 'frontpage' ) { ?>
+						 <div class="description">
+						<?php } else { ?>
+						<div class="cont">	
+						<?php } ?>
+	                             <jdoc:include type="message" />
+	                            
+								 <jdoc:include type="component" />
+								
+	                            
                          </div>
+						 
               	   </div>
              </div>
   	  <!-- Main body end -->	
+	  
+	  
+	  <?php if(JRequest::getVar('evid') != '') :?>
+	  
+			 <?php if($this->countModules('ev_right')) : ?>
+		            <div class="rightCol fr">
+		             	<jdoc:include type="modules" name="ev_right" style="rounded" />
+		            </div>
+		      <?php endif; ?>
+			 
+	 <?php endif; ?>	
+	  
  	<?php if(JRequest::getVar('Itemid') == 97 && JRequest::getVar('task') == 'range.listevents'):?>
 				<?php if($this->countModules('slider')) : ?>
 					<div id="neg" class="adSect rightCol fr">
@@ -264,33 +324,33 @@ _init();
 				<div class="adSect rightCol fr">	
 	<?php endif; ?>		
 
-  	  	<!-- 300 x 100 Banner Ad Start -->
-		<?php if($this->countModules('banner3')) : ?>
-  	  	<div class="ad space">
-  	  		 <jdoc:include type="modules" name="banner3" style="rounded" />
-        </div>
-       <?php endif; ?>
+		  	  	<!-- 300 x 100 Banner Ad Start -->
+				<?php if($this->countModules('banner3')) : ?>
+		  	  	<div class="ad space">
+		  	  		 <jdoc:include type="modules" name="banner3" style="rounded" />
+		        </div>
+		       <?php endif; ?>
 
-  	  	<!-- 300 x 100 Banner Ad End -->
+		  	  	<!-- 300 x 100 Banner Ad End -->
 
   	  </div>
 
   	  
 
-  	   <div class="adSect tall rightCol fr cr">
+		  	   <div class="adSect tall rightCol fr cr">
 
-            <!-- 300 x 600 Banner Ad Start -->
-    		<?php if($this->countModules('banner4')) : ?>
-            <div class="ad">
-              <jdoc:include type="modules" name="banner4" style="rounded" />
-            </div>
-           <?php endif; ?>
-    
-            <!-- 300 x 600 Banner Ad End -->
+		            <!-- 300 x 600 Banner Ad Start -->
+		    		<?php if($this->countModules('banner4')) : ?>
+		            <div class="ad">
+		              <jdoc:include type="modules" name="banner4" style="rounded" />
+		            </div>
+		           <?php endif; ?>
+		    
+		            <!-- 300 x 600 Banner Ad End -->
 
-  	  </div>
-  	  </div>
-
+		  	  </div>
+  	  
+		</div>
   	  <div class="cb"></div>
   	</div>
   </div>
@@ -305,7 +365,7 @@ _init();
     	<?php if($this->countModules('footer1')) : ?>
         <li class="about">
           <div class="pad">
-          	<h3 class="display"><?php echo "About ".$var->site_name; ?></h3>
+          	<h3 class="display"><?php echo JText::_("TW_ABOUT").' '.$var->site_name; ?></h3>
            	<jdoc:include type="modules" name="footer1" style="rounded" />
            </div>
          </li>
@@ -315,16 +375,16 @@ _init();
         <li class="site">
           <div class="pad">
          		<h3 class="display"><?php echo $var->site_name." is a TownWizard Site" ?></h3>
-                <span>Other TownWizard sites near this area include:</span>
+                <span><?php echo JText::_("TW_OTHER_TW") ?></span>
            		<jdoc:include type="modules" name="footer2" style="rounded" />
-                <a class="all" href="http://www.townwizard.com/locations/" target="_blank">See All Partner Sites &gt;</a>
+                <a class="all" href="http://www.townwizard.com/locations/" target="_blank"><?php echo JText::_("TW_SEE_ALL_PARTNER") ?> &gt;</a>
            </div>
          </li>
          <?php endif; ?>
           <?php if($this->countModules('footer3')) : ?>
             <li class="community">
               <div class="pad">
-                    <h3 class="display">TownWizard Brings Communities Alive</h3>
+                    <h3 class="display"><?php echo JText::_("TW_COMMUNITY") ?></h3>
                     <jdoc:include type="modules" name="footer3" style="rounded" />
               </div>
             </li>

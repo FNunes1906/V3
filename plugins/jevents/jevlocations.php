@@ -986,7 +986,7 @@ SCRIPT;
 						// folder relative to media folder
 						$locparams = JComponentHelper::getParams("com_jevlocations");
 						$folder = "jevents/jevlocations";
-						return '<img src="'.$mediabase.'/'.$folder.'/thumbnails/thumb_'.$row->_jevlocation->$field.'" />' ;
+						return '<div class="photoGallerySect sect" id="EventPhotoGallery"><div class="cont"><h3 class="fl"><a href="#" class="heading display">'.JText::_("JEV_PHOTOGALLERY").'</a></h3><div class="bc fr"></div><p style="clear: both;"><div id="loc_img"><a class="fancybox-effects-b" href="'.$mediabase.'/'.$folder.'/'.$row->_jevlocation->$field.'"><img src="'.$mediabase.'/'.$folder.'/thumbnails/thumb_'.$row->_jevlocation->$field.'" /></a></div></p><div class="cb"></div></div></div>' ;
 					}
 				}
 				// list version

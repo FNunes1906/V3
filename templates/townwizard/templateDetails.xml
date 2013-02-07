@@ -31,6 +31,8 @@
 		<position>search</position>
 		<position>menu</position>
 		<position>slider</position>
+		<position>ev_right</position>
+		<position>searchevent</position>
 		<position>user1</position>
 		<position>user2</position>
 		<position>user3</position>
