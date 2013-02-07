@@ -1,6 +1,7 @@
 /* Resets and global Styles */
 
-* { margin:0; padding:0; }
+
+* { margin:0; padding:0;outline:none; }
 .sWidth { max-width:970px; min-width:758px; padding:0 5px; margin:auto; }
 .fl { float:left; }
 .fr { float:right; }
@@ -112,13 +113,26 @@ input:-ms-placeholder,
   margin:0 15px;
   width:468px;
 }
+
+/* developer:RInkal
+	purpose:modified for weather icon
+	date:23-01-2013
+*/
+
 #Weather {
   position:relative;
-  top:-14px;
+  /*top:-14px;*/
+ 
 }
+
+/* developer:RInkal
+	purpose:For menu icon scrolling
+	date:23-01-2013
+*/
+
 #Weather img {
   position:relative;
-  top:6px;
+ /* top:6px;*/
 }
 
 /* ------------------------------------------------------------------- */
@@ -198,7 +212,7 @@ input:-ms-placeholder,
 
 #MainNav ul {
   list-style:none;
-  border-left:1px solid #c7c7c7;
+ /* border-left:1px solid #c7c7c7;*/
   border-top:1px solid #c7c7c7;
 }
 #MainNav ul li {
@@ -206,38 +220,48 @@ input:-ms-placeholder,
   display:block;
   width:179px;
   min-height:37px;
+  border-bottom:1px dotted #D4D4D4;
 }
 #MainNav ul li.active, 
 #MainNav ul li:hover {
-  background:#000;
+  background:#000; 
 }
-#MainNav ul li a {
+
+/* modified by rinkal*/
+
+#MainNav ul li ul li{ border-bottom:0px dotted #D4D4D4 !important;}
+#MainNav ul li.active ul li span{padding-left: 47px !important;}
+#MainNav ul li ul li.active, 
+#MainNav ul li ul li:hover {
+  background:none repeat scroll 0 0 #f1f1f1 !important;
+}
+#MainNav ul li a span span{
   background-repeat:no-repeat;
   background-position:7px top;
   font-family:'AllerDisplayRegular';
   color:#000;
   text-transform:uppercase;
   font-size:12px;
-  padding-left:47px;
+  padding-left:48px;
   display:block;
-  line-height:39px;
-  border-bottom:1px dotted #d4d4d4;
+  line-height:36px;
+ /* border-bottom:1px dotted #d4d4d4;*/
 }
-#MainNav ul li a:hover, 
-#MainNav ul li.active a {
-  border-bottom:1px solid #000;
-  border-left:1px solid #000;
+#MainNav ul li a span:hover, 
+#MainNav ul li.active a span{
+ /* border-bottom:1px solid #000;
+  border-left:1px solid #000;*/
   background-position:7px bottom;
   color:#fff;
 }
 #MainNav ul li.active ul {
   border-left:0 none;
-  border-bottom:1px dotted #d4d4d4;
+  /*border-bottom:1px dotted #d4d4d4;*/
 }
 #MainNav ul li.active ul li {
   min-height:26px;
 }
-#MainNav ul li.active ul li a {
+#MainNav ul li.active ul li a span{
   font-family:'AllerLightRegular';
   border-bottom:0 none;
   border-left:0 none;
@@ -246,22 +270,32 @@ input:-ms-placeholder,
   text-transform:none;
   line-height:26px;
 }
-#MainNav ul li.active ul li a:hover {
+#MainNav ul li.active ul li a span:hover {
   background:#f1f1f1;
   text-decoration:underline;
 }
-#NavHome { background:url('../images/nav/home.png'); }
+/* developer:RInkal
+	purpose:For menu icon scrolling
+	date:23-01-2013
+*/
+
+li.active span.menu_img_hover,span.menu_img_hover:hover{
+	background-position: 5% bottom !important;
+	color:#FFF !important;;
+}
+
+/* .item28 a span { background:url('../images/nav/home.png'); }
+.item29 a span  { background-image:url('../images/nav/events.png'); }
+.item18 a span { background-image:url('../images/nav/rest.png'); }
+.item30 a span { background-image:url('../images/nav/bars.png'); }
 #NavBest { background-image:url('../images/nav/best.png'); }
 #NavBlog { background-image:url('../images/nav/blog.png'); }
 #NavDir { background-image:url('../images/nav/dir.png'); }
-#NavEnt { background-image:url('../images/nav/ent.png'); }
-#NavEvents { background-image:url('../images/nav/events.png'); }
+.item82 a span { background-image:url('../images/nav/ent.png'); }
+.item83 a span { background-image:url('../images/nav/ent.png'); }
 #NavOffers { background-image:url('../images/nav/offers.png'); }
 #NavPeople { background-image:url('../images/nav/people.png'); }
-#NavRest { background-image:url('../images/nav/rest.png'); }
-#NavBars { background-image:url('../images/nav/bars.png'); }
-
-/* ------------------------------------------------------------------- */
+ ------------------------------------------------------------------- */
 
 
 /* Main content general styles  */
@@ -323,6 +357,7 @@ a.saved span {
 #MainContent .sect {
   border-top:3px solid #000;
   border-left:1px solid #d6d6d6;
+  clear: both;
 }
 #MainContent .sect.tabs {
   border-top:3px solid #d6d6d6;
@@ -349,8 +384,20 @@ a.saved span {
   display:block;
   font-size: 14px;
   font-weight: normal;
-  color:#000;
+  color:#000;clear: both;
 }
+
+/*.module h3 {
+  background:url('../images/grayArrowLg.png') no-repeat right top;
+  padding-right:15px;
+  text-transform:uppercase;
+  display:block;
+  font-size: 14px;
+  font-weight: normal;
+  color:#000;clear: both;
+  font-family: 'AllerDisplayRegular',Arial,sans-serif;
+}
+*/
 #MainContent .sect .heading.nobg {
   background:0 none;
 }
@@ -523,12 +570,7 @@ a.saved span {
 .ad img {
   display:block;
 }
-#LeftCol .ad.space{
-  margin-bottom:10px;
-}
-#WidgetArea .ad.space {
-  margin-bottom:30px;
-}
+
 #MapWidget .view {
   font-size:10px;
   text-transform:uppercase;
@@ -913,8 +955,8 @@ a.saved span {
 }
 .sharingSmall {
   background:#E9E9E9;
-  padding:10px;
-  width:400px;
+  padding:10px 0 0;
+  width:396px;
 }
 .sharingSmall span {
   margin:0 5px;
@@ -985,19 +1027,20 @@ a.saved span {
 /* ------------------------------------------------------------------- */
 
 
-/* Search Box */
+/* Search Box added bu rinkal */
 
-#FindForm {
+#FindForm,.module_event {
   background:#f1f1f1;
   padding:15px 19px;
+  margin-bottom: 20px;
 }
-#FindForm input.search {
+.module_event input.evsearch {
   height:24px;
   line-height:24px;
   font-size:14px;
   margin-right:12px;
   padding:0 5px;
-  width:34%;
+  width:90%;
 }
 #FindForm.restaurants input.search {
   width:58%;
@@ -1119,7 +1162,7 @@ a.saved span {
 /* Share Tool */
 
 #ShareTool {
-  padding-top:15px;
+  padding-top:15px; overflow: hidden;
 }
 #ShareTool .side {
   width:50%;
@@ -1185,6 +1228,7 @@ a.saved span {
   margin-top:75px;
   color:#fff;
   padding-top:28px;
+  overflow: hidden;
 }
 #Footer a {
   color:#92d9fe;
@@ -1209,10 +1253,11 @@ a.saved span {
   line-height:14px;
   display:block;
 }
-#Footer ul li h3 {
+#Footer ul li h3,#Footer ul li h2 {
   text-transform:uppercase;
   margin-bottom:15px;
   font-size:12px;
+  font-family: 'AllerDisplayRegular',Arial,sans-serif;
 }
 #Footer ul li.about {
   font-size:11px;
@@ -1248,7 +1293,25 @@ a.saved span {
   font-size:12px;
   text-transform:uppercase;
   padding-top:40px;
+  float:left;
 }
+
+.twlogo{
+text-align:center;
+  color:#fff;
+  font-size:12px;
+  text-transform:uppercase;
+  padding-top:40px;
+  float:left;
+}
+
+.footer_tag{
+	margin: auto;
+    overflow: hidden;
+    width: 430px;
+	clear: both;
+}
+
 #Footer .legal a {
   color:#fff;
   font-size:12px;
@@ -1277,3 +1340,100 @@ a.saved span {
 
 /* ------------------------------------------------------------------- */
 
+/**
+Developer: Rinkal
+Last Updated Date:29-01-2013
+**/
+h1.send {
+    font-size: 18px;
+    margin-bottom: 12px;
+	padding-left: 10px;
+}
+
+#jevents{
+	color:#000;
+}
+
+#jevents .button{
+	background: none repeat scroll 0 0 #000000;
+    border: 1px solid #000000;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 5px 8px;
+}
+
+.button2-left{
+	  margin-left: 5px;
+    margin-right: 5px;
+}
+
+#LeftCol .ad.space .module{
+  margin-bottom:10px;
+}
+#WidgetArea .ad.space .module{
+  margin-bottom:30px;
+}
+
+.sect .blog .description h1 {
+    background: none repeat scroll 0 0 #E9E9E9;
+    color: #0B121F;
+    font-size: 24px;
+    line-height: 20px;
+    padding: 12px;
+    text-transform: uppercase;
+}
+
+.sect .blog {
+    background: none repeat scroll 0 0 #E9E9E9; padding: 12px;font-size: 12px;
+ }
+ 
+.sect .blog .contentheading{ color: #0B121F;font-size: 22px;
+font-family: 'AllerDisplayRegular',Arial,sans-serif;
+    line-height: 20px;
+   vertical-align: top;
+    text-transform: uppercase;
+	 padding-bottom: 12px;}
+	
+.blog img{ max-width:392px; display:block;}
+
+.article_separator{
+	display: none;
+}
+
+.article_separator{
+	border-top:1px solid #000; display: block;margin-top: 10px;
+}
+
+
+.createdate{display: block; text-align: right;
+font-family: 'AllerBold',Arial,sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+	line-height: 23px;}
+
+#MainContent .sect .componentheading {
+    background: url("../images/grayArrowLg.png") no-repeat scroll right top transparent;
+	font-family: 'AllerDisplayRegular',Arial,sans-serif;
+    color: #000000;
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    padding-right: 15px;
+    text-transform: uppercase;
+	float: left;
+}
+
+#neg{
+	margin-top:-406px;
+}
+
+
+
+.addthis_32x32_style .dummy .at300bs, .addthis_32x32_style .at300bs, .addthis_32x32_style .at15t{
+	width: 38px !important;
+}
+
+._5v4{
+	width:415px !important;
+}

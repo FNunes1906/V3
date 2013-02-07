@@ -8,10 +8,10 @@ $canEdit	= ($this->user->authorize('com_content', 'edit', 'content', 'all') || $
 <?php endif; ?>
 
 <?php if ($canEdit || $this->item->params->get('show_title') || $this->item->params->get('show_pdf_icon') || $this->item->params->get('show_print_icon') || $this->item->params->get('show_email_icon')) : ?>
-<table class="contentpaneopen<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>">
+<table cellspacing="0" cellpadding="0" class="contentpaneopen<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>">
 <tr>
 	<?php if ($this->item->params->get('show_title')) : ?>
-	<td class="contentheading<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>" width="100%">
+	<td class="contentheading<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>" width="72%">
 		<?php if ($this->item->params->get('link_titles') && $this->item->readmore_link != '') : ?>
 		<a href="<?php echo $this->item->readmore_link; ?>" class="contentpagetitle<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>">
 			<?php echo $this->escape($this->item->title); ?></a>
@@ -19,6 +19,13 @@ $canEdit	= ($this->user->authorize('com_content', 'edit', 'content', 'all') || $
 			<?php echo $this->escape($this->item->title); ?>
 		<?php endif; ?>
 	</td>
+	<?php endif; ?>
+	<?php if ($this->item->params->get('show_create_date')) : ?>
+	
+		<td valign="top" colspan="2" class="createdate">
+			<?php echo JHTML::_('date', $this->item->created, JText::_('DATE_FORMAT_LC3')); ?>
+		</td>
+	
 	<?php endif; ?>
 
 	<?php if ($this->item->params->get('show_pdf_icon')) : ?>
@@ -94,13 +101,6 @@ endif; ?>
 </tr>
 <?php endif; ?>
 
-<?php if ($this->item->params->get('show_create_date')) : ?>
-<tr>
-	<td valign="top" colspan="2" class="createdate">
-		<?php echo JHTML::_('date', $this->item->created, JText::_('DATE_FORMAT_LC2')); ?>
-	</td>
-</tr>
-<?php endif; ?>
 
 <?php if ($this->item->params->get('show_url') && $this->item->urls) : ?>
 <tr>
@@ -147,5 +147,13 @@ endif; ?>
 <?php if ($this->item->state == 0) : ?>
 </div>
 <?php endif; ?>
-<span class="article_separator">&nbsp;</span>
+
 <?php echo $this->item->event->afterDisplayContent; ?>
+<div class="sharingSmall">
+              <span class='st_facebook_large'></span>
+              <span class='st_twitter_large'></span>
+              <span class='st_linkedin_large'></span>
+              <span class='st_pinterest_large'></span>
+              <span class='st_email_large'></span>
+            </div>
+<span class="article_separator">&nbsp;</span>
