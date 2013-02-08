@@ -217,6 +217,9 @@ body.tablet .ratingWidget .stars.vote a {
 body.tablet .ratingWidget .stars.vote {
   width:280px;
 }
+body.tablet #SearchResults li .thumb img {
+  width:300px;
+}
 
 
 

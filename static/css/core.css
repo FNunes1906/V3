@@ -316,6 +316,14 @@ a.saved span {
   -webkit-border-radius: 8px;
   border-radius: 8px;
 }
+.topSect h1 {
+  font-size:18px;
+  margin-bottom:8px;
+}
+.topSect h2 {
+  font-size:14px;
+  margin-bottom:12px;
+}
 .currentOffers .saved {
   font-size:11px !important;
   padding:0;
@@ -925,10 +933,6 @@ a.saved span {
 
 /* Submit Form */
 
-#SubmitForm h1 {
-  font-size:18px;
-  margin-bottom:8px;
-}
 #SubmitForm .form {
   margin:30px 0 0;
 }
@@ -1086,6 +1090,19 @@ a.saved span {
 }
 #FindForm #DatePicker input {
   display:none;
+}
+
+/* ------------------------------------------------------------------- */
+
+
+/* Search Results */
+
+#SearchResults h2 {
+  margin-bottom:2px;
+}
+#SearchResults h3 {
+  font-size:12px;
+  margin-bottom:12px;
 }
 
 /* ------------------------------------------------------------------- */
