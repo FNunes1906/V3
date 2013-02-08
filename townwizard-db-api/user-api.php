@@ -235,8 +235,11 @@ function tw_get_rsvps_by_event($event_id, $event_date = NULL) {
         - user object for HTTP status 200 (Ok) when a user is found
         - NULL for HTTP statuses 404 (Not found) and 500 (server error)
 ***/
-function tw_get_user($id) {
-    list($status, $response_msg) = _tw_get_json(TOWNWIZARD_DB_USERS_URL, $id);
+function tw_get_user($id, $ip = NULL) {
+    if(!empty($ip)) $uid = id.'?ip='.$ip;
+    else $uid = $id;
+    
+    list($status, $response_msg) = _tw_get_json(TOWNWIZARD_DB_USERS_URL, $uid);
     if($status == 200) {
         $user = json_decode($response_msg);
         return $user;
@@ -248,7 +251,7 @@ function tw_get_user($id) {
     Get a user from the service by id, and put the user's name to the session.
 ***/
 function tw_login_with_id($id) {
-    $user = tw_get_user($id);
+    $user = tw_get_user($id, $_SERVER['REMOTE_ADDR']);
     _tw_login($user);
 }
 
