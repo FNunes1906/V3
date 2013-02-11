@@ -116,8 +116,18 @@ print_r($_SESSION);
 
 
 <script>
-function fb_login() {
+  function fb_login() {
     window.open("/townwizard-db-api/fb-login.php", "_blank", "height=400,width=700,status=no,toolbar=no,menubar=no");
+  }
+
+  function tw_logout() {
+      $.ajax({
+          url: "townwizard-db-api/logout.php",
+          type: "get",
+          complete: function() {
+            window.location.reload();
+          }
+      });
   }
 </script>
 

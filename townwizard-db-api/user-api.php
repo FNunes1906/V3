@@ -236,11 +236,11 @@ function tw_get_rsvps_by_event($event_id, $event_date = NULL) {
         - NULL for HTTP statuses 404 (Not found) and 500 (server error)
 ***/
 function tw_get_user($id, $ip = NULL) {
-    if(!empty($ip)) $uid = id.'?ip='.$ip;
+    if(!empty($ip)) $uid = $id.'?ip='.$ip;
     else $uid = $id;
     
     list($status, $response_msg) = _tw_get_json(TOWNWIZARD_DB_USERS_URL, $uid);
-    if($status == 200 || status == 201) {
+    if($status == 200 || $status == 201) {
         $user = json_decode($response_msg);
         return $user;
     }
