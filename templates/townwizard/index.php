@@ -13,14 +13,11 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 global $var;
-//echo "<pre>";
-//print_r($_SERVER);
+
 include_once($_SERVER['DOCUMENT_ROOT'].'/inc/var.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 
 _init();
-
-print_r($_SESSION);
 
 ?>
 <!DOCTYPE html>
@@ -176,20 +173,24 @@ print_r($_SESSION);
 	            <div>
 	              <!--<a href="#" onClick="fb_login(); return false;"><img alt="Login with Facebook" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/fbLoginBtn.png" /></a>-->
 					<!-- FB LOGIN START -->
-					<div style="float:right;">
+					
+					<div id="LoggedIn" class="fl">
 						<?php if($_SESSION['tw_user_name']) { ?>
-						<?php echo "Welcome, {$_SESSION['tw_user_name']}!"; ?><br/>
-						<?php $user = $_SESSION['tw_user']; ?>        
-						<img src="<?php echo $_SESSION['tw_user_image_url']; ?>"/></br>        
-						<a href="javascript:void(0)" onclick="tw_logout();">Sign out</a>
-					<?php }  else { ?>
-						<!--<a href="javascript:void(0)" onclick="$('#login_dialog').hide();$('#registration_dialog').show();">Register</a> | 
-						<a href="javascript:void(0)" onclick="$('#registration_dialog').hide();$('#login_dialog').show();">Sign in</a><br/>-->
-						<!--<a href="javascript:void(0)" onclick="fb_login();">Sign in with Facebook</a><br/>-->
-						<a href="javascript:void(0)" onclick="fb_login();"><img alt="Login with Facebook" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/fbLoginBtn.png" /></a>
-						<!--<a href="javascript:void(0)" onclick="twitter_login();">Sign in with Twitter</a><br/>-->
+							<img style="float:right;" src="<?php echo $_SESSION['tw_user_image_url']; ?>">
+                			<span>Welcome to Townwizard <?php echo $_SESSION['tw_user_name']; ?>!</span><br>
+							<a class="logOut" href="javascript:void(0)" onclick="tw_logout();">Click here to sign out</a>
+							<?php $user = $_SESSION['tw_user']; ?>                      				
+						<?php }  else { ?>
+							<!--<a href="javascript:void(0)" onclick="$('#login_dialog').hide();$('#registration_dialog').show();">Register</a> | 
+							<a href="javascript:void(0)" onclick="$('#registration_dialog').hide();$('#login_dialog').show();">Sign in</a><br/>-->
+							<!--<a href="javascript:void(0)" onclick="fb_login();">Sign in with Facebook</a><br/>-->
+							<a href="javascript:void(0)" onclick="fb_login();"><img style="float:right;" alt="Login with Facebook" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/fbLoginBtn.png" /></a>
+							<!--<a href="javascript:void(0)" onclick="twitter_login();">Sign in with Twitter</a><br/>-->
 					<?php } ?>
 					</div>
+					
+					
+					
 				  <!-- FB LOGIN END -->
 				  
 				  <!--<a href="#"><img alt="Login with Twitter" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/twtLoginBtn.png" /></a>
