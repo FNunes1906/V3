@@ -240,7 +240,7 @@ function tw_get_user($id, $ip = NULL) {
     else $uid = $id;
     
     list($status, $response_msg) = _tw_get_json(TOWNWIZARD_DB_USERS_URL, $uid);
-    if($status == 200) {
+    if($status == 200 || status == 201) {
         $user = json_decode($response_msg);
         return $user;
     }

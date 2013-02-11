@@ -20,6 +20,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 
 _init();
 
+print_r($_SESSION);
+
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" >
@@ -112,6 +114,13 @@ _init();
 	</script>
 <!--  CODE for SAFARI BROWSER DETECTION END -->
 
+
+<script>
+function fb_login() {
+    window.open("/townwizard-db-api/fb-login.php", "_blank", "height=400,width=700,status=no,toolbar=no,menubar=no");
+  }
+</script>
+
 <!--  Town wizard Google Analytic code -->
 <?php include("ga.php"); ?>
 
@@ -155,10 +164,27 @@ _init();
 	  	     <div class="headerAdFlex fl">
 	  	  	  <div id="Social" class="fr">
 	            <div>
-	              <a href="#" onClick="fb_login(); return false;"><img alt="Login with Facebook" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/fbLoginBtn.png" /></a>
-	              <a href="#"><img alt="Login with Twitter" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/twtLoginBtn.png" /></a>
+	              <!--<a href="#" onClick="fb_login(); return false;"><img alt="Login with Facebook" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/fbLoginBtn.png" /></a>-->
+					<!-- FB LOGIN START -->
+					<div style="float:right;">
+						<?php if($_SESSION['tw_user_name']) { ?>
+						<?php echo "Welcome, {$_SESSION['tw_user_name']}!"; ?><br/>
+						<?php $user = $_SESSION['tw_user']; ?>        
+						<img src="<?php echo $_SESSION['tw_user_image_url']; ?>"/></br>        
+						<a href="javascript:void(0)" onclick="tw_logout();">Sign out</a>
+					<?php }  else { ?>
+						<!--<a href="javascript:void(0)" onclick="$('#login_dialog').hide();$('#registration_dialog').show();">Register</a> | 
+						<a href="javascript:void(0)" onclick="$('#registration_dialog').hide();$('#login_dialog').show();">Sign in</a><br/>-->
+						<!--<a href="javascript:void(0)" onclick="fb_login();">Sign in with Facebook</a><br/>-->
+						<a href="javascript:void(0)" onclick="fb_login();"><img alt="Login with Facebook" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/fbLoginBtn.png" /></a>
+						<!--<a href="javascript:void(0)" onclick="twitter_login();">Sign in with Twitter</a><br/>-->
+					<?php } ?>
+					</div>
+				  <!-- FB LOGIN END -->
+				  
+				  <!--<a href="#"><img alt="Login with Twitter" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/twtLoginBtn.png" /></a>
 	              <a href="#"><img alt="Help" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/helpBtn.png" /></a>
-	            </div>
+	            --></div>
 	          </div>
               <?php if($this->countModules('banner1')) : ?>
 	          <div id="UpperBannerAd" class="bannerAd">
