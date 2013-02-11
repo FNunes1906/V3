@@ -220,6 +220,26 @@ body.tablet .ratingWidget .stars.vote {
 body.tablet #SearchResults li .thumb img {
   width:300px;
 }
+body.tablet #SearchResults .ratingWidget .stars a {
+  margin:2px 36px 1px 0 !important;
+}
+body.tablet #SearchResults h2 {
+  font-size:20px;
+}
+body.tablet #SearchResults h3, 
+body.tablet #SearchResults a {
+  font-size:18px;
+  line-height:28px;
+  margin-bottom:25px;
+  word-wrap:break-word;
+}
+body.tablet #SearchResults .bc {
+  float:none;
+  font-size:14px;
+}
+body.tablet #SearchResults .venueName {
+  float:none;
+}
 
 
 

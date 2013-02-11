@@ -181,34 +181,36 @@
             <h1 class="display">Restaurants in SL Merida</h1>
             <div id="FindForm" class="restaurants">
               <div>
-                <input type="text" class="search fl" placeholder="Restaurant Search" />
+                <form action="search-results-restaurants.html">
+                  <input type="text" class="search fl" placeholder="Restaurant Search" />
 
-                <!-- Includes for Mobiscroll Select and Darepicker -->
-                <link href="css/mobiscroll-2.4.custom.min.css" rel="stylesheet" type="text/css" />
-                <script src="js/mobiscroll-2.4.custom.min.js" type="text/javascript"></script>
+                  <!-- Includes for Mobiscroll Select and Darepicker -->
+                  <link href="css/mobiscroll-2.4.custom.min.css" rel="stylesheet" type="text/css" />
+                  <script src="js/mobiscroll-2.4.custom.min.js" type="text/javascript"></script>
 
-                <script type="text/javascript">
-                  $(document).ready(function() {
-                    var themeSkinSel = getTheme();
+                  <script type="text/javascript">
+                    $(document).ready(function() {
+                      var themeSkinSel = getTheme();
 
-                    $('#RestaurantType').mobiscroll().select({
-                        theme: themeSkinSel, 
-                        display: 'modal', 
-                        animate: 'pop', 
-                        mode: 'scroller', 
-                        inputClass: 'type fl'
+                      $('#RestaurantType').mobiscroll().select({
+                          theme: themeSkinSel, 
+                          display: 'modal', 
+                          animate: 'pop', 
+                          mode: 'scroller', 
+                          inputClass: 'type fl'
+                      });
                     });
-                  });
-                </script>
-                <select id="RestaurantType" class="type fl">
-                  <option>Type</option>
-                  <option>All Cuisines</option>
-                  <option>Spanish</option>
-                  <option>Indian</option>
-                  <option>Italian</option>
-                  <option>Japanese</option>
-                </select>
-                <input type="submit" class="submit fr" align="left" value="" />
+                  </script>
+                  <select id="RestaurantType" class="type fl">
+                    <option>Type</option>
+                    <option>All Cuisines</option>
+                    <option>Spanish</option>
+                    <option>Indian</option>
+                    <option>Italian</option>
+                    <option>Japanese</option>
+                  </select>
+                  <input type="submit" class="submit fr" align="left" value="" />
+                </form>
               </div>
               <div class="sub cl">
                 <span class="bold">Popular:</span> 
