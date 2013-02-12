@@ -179,10 +179,10 @@ _init();
 	            <div>
 					<!-- SOCIAL LOGIN START -->
 					<?php if($_SESSION['tw_user_name']) { ?>
-						<div id="LoggedIn" class="fl" style="font-size:11.5px;">
+						<div id="LoggedIn" class="fl" style="font-size:11.5px; width:270px; text-align: right;">
 							<img style="float:right;padding:0px;" src="<?php echo $_SESSION['tw_user_image_url']; ?>">
-                			<span>Welcome to <?php echo $var->site_name.' '.$_SESSION['tw_user_name']; ?>!</span><br>
-							<a class="logOut" href="javascript:void(0)" onclick="tw_logout();">Click here to sign out</a>
+                			<span style="padding-right:60px; display: block;">Welcome to <?php echo $var->site_name.' '.$_SESSION['tw_user_name']; ?>!</span>
+							<span><a style="padding-right:60px;"   class="logOut" href="javascript:void(0)" onclick="tw_logout();">Click here to sign out</a></span>
 							<?php $user = $_SESSION['tw_user']; ?>                      				
 						</div>	
 					<?php }  else { ?>
