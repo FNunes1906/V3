@@ -410,24 +410,24 @@ if($msg!='') {?>
 
 <!--Jevent Form Starts-->
 <div style="padding:5px 0px"></div>
-<h1 class="display send">Send Us Your Events</h1>
-<div id="jevents" >
+<h1 class="display send"><?php echo JText::_('JEV_SENDEVNTS'); ?></h1>
+<div id="jevents" style="font-size: 12px;">
 <form action="" method="post" name="adminForm" enctype='multipart/form-data' onSubmit="return form_validation()">
 <div>
 <div class="adminform" align="left" >
 
 	<table width="65%" cellpadding="5" cellspacing="2" border="0"  class="adminform" id="jevadminform">
 	<tr>
-		<td align="left">Event Name:</td>
+		<td align="left"><?php echo JText::_('JEV_EVNAME'); ?>:</td>
 		<td align="right"><input class="inputbox" type="text" name="title" size="41" maxlength="255" value="<?=$postValues['title']?>" /></td>
 		<td colspan="2"><input type="hidden" name="priority" value="0" /></td>
 	</tr>
 	<tr>
-		<td valign="top" align="left">Categories</td>
+		<td valign="top" align="left"><?php echo JText::_('JEV_EVCAT'); ?></td>
 			<?php $cat_query=mysql_query("select * from jos_categories where section='com_jevents' and published='1'");?> 
 		<td style="width:200px" >
 			<select name="catid" id="catid">
-				<option value="0" >Choose Category</option>
+				<option value="0" ><?php echo JText::_('JEV_CHOOSE'); ?></option>
 				<?php while($row=mysql_fetch_array($cat_query)) { 
 				if($postValues['catid']==$row['id']){
 					$selectedVal = 'selected';
@@ -449,9 +449,9 @@ if($msg!='') {?>
 		<td valign="top" align="left" colspan="4">
 		  	<div style="clear:both;width:408px">
 				<fieldset class="jev_sed">
-					<legend>Start, End, Duration</legend>
+					<legend><?php echo JText::_('JEV_EVSED'); ?></legend>
 					<span>
-						<span >All day Event or Unspecified time</span>
+						<span ><?php echo JText::_('JEV_UNTIME'); ?></span>
 						<span><input type="checkbox" id='allDayEvent' name='allDayEvent' <?php if($postValues['allDayEvent']=='on') {echo 'checked'; }?>  onclick="alldayeventtog()" />
 						</span>
 					</span>
@@ -460,7 +460,7 @@ if($msg!='') {?>
 					</span>
 					<div>
 						<fieldset>
-							<legend>Start date</legend>
+							<legend><?php echo JText::_('JEV_STDATE'); ?></legend>
 							<div style="float:left">
 								<?php 
 									if(empty($postValues['publish_up'])){ 
@@ -471,7 +471,7 @@ if($msg!='') {?>
 								?>
 								<input type="text" name="publish_up" id="publish_up" value="<?php echo $publish_up_value;?>" maxlength="10" onChange="var elem = $('publish_up');checkDates(elem);" size="10"  />         
 							</div>
-							<div style="float:left;margin-left:11px!important;">Start Time&nbsp;
+							<div style="float:left;margin-left:11px!important;"><?php echo JText::_('JEV_STTIME'); ?>&nbsp;
 								<span id="start_12h_area" style="display:inline">
 								
 								<?php 
@@ -501,7 +501,7 @@ if($msg!='') {?>
 						</fieldset>
 					</div>
 					<div>
-						<fieldset><legend>End date</legend>
+						<fieldset><legend><?php echo JText::_('JEV_ENDDATE'); ?></legend>
 						<div style="float:left">
 						<?php 
 							if(empty($postValues['publish_down'])){ 
@@ -512,7 +512,7 @@ if($msg!='') {?>
 						?>
 					<input type="text" name="publish_down" id="publish_down" value="<?php echo $publish_down_value;?>" maxlength="10" onChange="var elem = $('publish_up');checkDates(elem);" size="10"  />         
 						</div>
-						<div style="float:left;margin-left:11px!important">End Time&nbsp;
+						<div style="float:left;margin-left:11px!important"><?php echo JText::_('JEV_ENDTIME'); ?>&nbsp;
 							<span id="end_12h_area" style="display:inline">
 							<?php 
 								if(empty($postValues['end_12h'])){ 
@@ -536,10 +536,10 @@ if($msg!='') {?>
 							<input type="radio" name="end_ampm" id="endPM" value="pm" <?=$end_ampm_check['pm']?> onClick="toggleAMPM('endPM');" />pm	
 							</span>
 							
-						</div>
+						</div><br/>
 						<span style="margin-left:10px">
-								<span><br/><br/><input type="checkbox" id='noendtime' name='noendtime'  onclick="noendtimetog();" <?php if($postValues['noendtime']==1) {echo 'checked'; }?> value="1" />
-										<span>No specific end time</span>
+								<span><br/><input type="checkbox" id='noendtime' name='noendtime'  onclick="noendtimetog();" <?php if($postValues['noendtime']==1) {echo 'checked'; }?> value="1" />
+										<span><?php echo JText::_('JEV_NOENDTIME'); ?></span>
 								</span>
 							</span>
 						</fieldset>
@@ -553,32 +553,32 @@ if($msg!='') {?>
 	<tr>
 		
 		<td colspan="3">
-			<div id='jeveditor' style="width:404px">Description:<br/><br/><textarea id="jevcontent" name="jevcontent" cols="70" rows="10" style="width:100%;height:230px;" class="mceEditor"><?=$postValues['jevcontent']?></textarea>
+			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea id="jevcontent" name="jevcontent" cols="70" rows="10" style="width:100%;height:230px;" class="mceEditor"><?=$postValues['jevcontent']?></textarea>
 			</div>       	
 		</td>
 	</tr>
 	<tr id="jeveditlocation">
-		<td width="130" align="left" style="vertical-align:top;">Location</td>
+		<td width="130" align="left" style="vertical-align:top;"><?php echo JText::_('JEV_LOC'); ?></td>
 		<td colspan="3">
 			<input type="hidden" name="location" id="locn" value=""/>
-			<input type="text" name="evlocation_notused" disabled="disabled" id="evlocation" value=" -- " style="float:left;margin-top: 2px;"/>
+			<input type="text" name="evlocation_notused" disabled="disabled" id="evlocation" value=" -- " style="float:left;margin-top: 2px;width: 128px;"/>
 			<div class="button2-left">
-				<div class="blank"><a href="javascript:selectLocation('' ,'/indexiphone.php?option=com_jevlocations&amp;task=locations.select&amp;tmpl=component','750','500')" title="Select Location"  >select</a>
+				<div class="blank"><a href="javascript:selectLocation('' ,'/indexiphone.php?option=com_jevlocations&amp;task=locations.select&amp;tmpl=component','750','500')" title="Select Location"  ><?php echo JText::_('JEV_SELECT'); ?></a>
 				</div>
 			</div>
 			<div class="button2-left">
-				<div class="blank"><a href="javascript:removeLocation();" title="Remove Location"  >remove</a>
+				<div class="blank"><a href="javascript:removeLocation();" title="Remove Location"  ><?php echo JText::_('JEV_REMOVE'); ?></a>
 				</div>
 			</div>
-			<div style="font-size:10px; vertical-align:top;float:left;">If your location is not listed, please include the full address in the description.</div>
+			<div style="font-size:10px; vertical-align:top;float:left;"><?php echo JText::_('JEV_LOCDES'); ?></div>
 	         </td>
 	</tr>
 	<tr class="jevplugin_anonusername">
-		<td valign="top"  width="130" align="left">Your name</td>
+		<td valign="top"  width="130" align="left"><?php echo JText::_('JEV_YOURNAME'); ?></td>
 		<td colspan="3"><input size="41" type="text" name="custom_anonusername" id="custom_anonusername" value="<?=$postValues['custom_anonusername']?>" /></td>
 	</tr>
 	<tr class="jevplugin_anonemail">
-		<td valign="top"  width="130" align="left">Your email address</td>
+		<td valign="top"  width="130" align="left"><?php echo JText::_('JEV_YOUREMAIL'); ?></td>
 		<td colspan="3"><input size="41" type="text" name="custom_anonemail" id="custom_anonemail" value="<?=$postValues['custom_anonemail']?>" /></td>
 	</tr>
 	
@@ -586,13 +586,13 @@ if($msg!='') {?>
 	<tr class="jevplugin_anonemail">	
 	<td>&nbsp;</td>
 	<td>
-		<div style="font-size: 11px; vertical-align: top; float: left;">Type the characters you see in the picture below.</div><br>
+		<div style="font-size: 11px; vertical-align: top; float: left;"><?php echo JText::_('JEV_CAP'); ?></div><br>
 			<img id="siimage" align="left" style="width:150px;" style="padding-right: 5px; border: 0" src="securimage/securimage_show.php?sid=<?php echo md5(time()) ?>" />
 			<a tabindex="-1" style="border-style: none" href="#" title="Refresh Image" onClick="document.getElementById('siimage').src = 'securimage/securimage_show.php?sid=' + Math.random(); return false"><img src="securimage/images/refresh.gif" alt="Reload Image" border="0" onClick="this.blur()" align="bottom" /></a>
 		</td>
 	</tr>
 	<tr class="jevplugin_anonemail">	
-	<td>Verification Code</td>
+	<td><?php echo JText::_('JEV_VERI_CODE'); ?></td>
 	<td>
 		<input type="text" value="" id="code" name="code" size="25">
 		<br><br>
@@ -608,11 +608,11 @@ if($msg!='') {?>
 <table align="left" style="" width="30%" cellpadding="0" cellspacing="0">
 <tbody><tr>
 		<td id="toolbar-save" valign="top"style="padding-right:3px">
-			<a style="cursor:pointer;height:21px;"><input src="images/save-btn.gif" type="submit" name="action" value="Save" class="button"/></a>
+			<a style="cursor:pointer;height:21px;"><input src="images/save-btn.gif" type="submit" name="action" value="<?php echo JText::_('JEV_SEND'); ?>" class="button"/></a>
 		</td>
 		<td id="toolbar-save" valign="top"style="padding-right:3px">
 			<a style="cursor:pointer;height:21px;">
-			<input type="button" name="can" id="can" value="Cancel" class="button" onClick="gotoindex(this.id)"/></a>
+			<input type="button" name="can" id="can" value="<?php echo JText::_('JEV_CANCEL'); ?>" class="button" onClick="gotoindex(this.id)"/></a>
 		</td>
 
 	</tr></tbody>

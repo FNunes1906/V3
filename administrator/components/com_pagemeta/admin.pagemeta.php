@@ -1,4 +1,5 @@
 <?php
+
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 $task	= JRequest::getCmd('task');
@@ -24,7 +25,6 @@ switch ($task) {
 		break;
 }
 
-
 function listmeta(){
 	$db	=& JFactory::getDBO();
 	$query = "SELECT * FROM #__pagemeta";
@@ -47,20 +47,20 @@ function listmeta(){
     <th>Extra Meta</th>    
   </tr>
   </thead>
-  <? for($i=0;$i<sizeof($row);$i++){?>
+  <?php for($i=0;$i<sizeof($row);$i++){?>
   <tr>
-    <td><?=$row[$i]['id']?></td>
-    <td align="center"><input type="checkbox" name="cid" onclick="isChecked(this.checked);" value="<?=$row[$i]['id']?>" /></td>    
-    <td><?=$row[$i]['uri']?></td>
-    <td><?=$row[$i]['title']?></td>
-    <td><?=$row[$i]['metadesc']?></td>
-    <td><?=$row[$i]['keywords']?></td>  
-    <td><?=$row[$i]['extra_meta']?></td>    
+    <td><?php echo $row[$i]['id'];?></td>
+    <td align="center"><input type="checkbox" name="cid" onclick="isChecked(this.checked);" value="<?php echo $row[$i]['id'];?>" /></td>    
+    <td><?php echo $row[$i]['uri'];?></td>
+    <td><?php echo $row[$i]['title'];?></td>
+    <td><?php echo $row[$i]['metadesc'];?></td>
+    <td><?php echo $row[$i]['keywords'];?></td>  
+    <td><?php echo $row[$i]['extra_meta'];?></td>    
   </tr>
-  <? }?>
+  <?php }?>
 </table>
 </form>
-<?	
+<?php	
 }
 
 function add( ){
@@ -90,7 +90,7 @@ function add( ){
   </tr>
 </table>
 </form>
-<?
+<?php
 }
 function edit(){
 	$db	=& JFactory::getDBO();
@@ -100,31 +100,31 @@ function edit(){
 ?>
 <form method="post" action="" name="adminForm">
 <input type="hidden" name="task" value="" />	
-<input type="hidden" name="mid"  value="<?=$_POST['cid']?>" />
+<input type="hidden" name="mid"  value="<?php echo $_POST['cid'];?>" />
 <table class="admintable" cellspacing="1">
   <tr>
     <td width="20%" class="key"><label>URL:</label></td>
-    <td width="80%"><input type="text" name="url" class="inputbox" size="50" value="<?=$row['uri']?>" /></td>
+    <td width="80%"><input type="text" name="url" class="inputbox" size="50" value="<?php echo $row['uri'];?>" /></td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>Title:</label></td>
-    <td width="80%"><input type="text" name="title" class="inputbox" size="50" value="<?=$row['title']?>" /></td>
+    <td width="80%"><input type="text" name="title" class="inputbox" size="50" value="<?php echo $row['title'];?>" /></td>
   </tr>
    <tr>
     <td width="20%" class="key"><label>Meta Description:</label></td>
-    <td width="80%"><textarea name="metadesc" class="inputbox" rows="3" cols="50"><?=$row['metadesc']?></textarea></td>
+    <td width="80%"><textarea name="metadesc" class="inputbox" rows="3" cols="50"><?php echo $row['metadesc'];?></textarea></td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>Keywords:</label></td>
-    <td width="80%"><textarea name="keywords" class="inputbox" rows="3" cols="50"><?=$row['keywords']?></textarea></td>
+    <td width="80%"><textarea name="keywords" class="inputbox" rows="3" cols="50"><?php echo $row['keywords'];?></textarea></td>
   </tr>  
   <tr>
     <td width="20%" class="key"><label>Extra Meta:</label></td>
-    <td width="80%"><textarea name="extra_meta" class="inputbox" rows="3" cols="50"><?=$row['extra_meta']?></textarea></td>
+    <td width="80%"><textarea name="extra_meta" class="inputbox" rows="3" cols="50"><?php echo $row['extra_meta'];?></textarea></td>
   </tr> 
 </table>
 </form>
-<?
+<?php
 }
 
 function globalseting(){
@@ -139,53 +139,53 @@ function globalseting(){
 <table class="pagemetatable" cellspacing="1">
   <tr>
     <td width="20%" class="key"><label>site name:</label></td>
-    <td width="80%"><input type="text" name="site_name" class="inputbox" size="50" value="<?=$row['site_name']?>" /></td>
+    <td width="80%"><input type="text" name="site_name" class="inputbox" size="50" value="<?php echo $row['site_name'];?>" /></td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>e-mail:</label></td>
-    <td width="80%"><input type="text" name="email" class="inputbox" size="50" value="<?=$row['email']?>" /></td>
+    <td width="80%"><input type="text" name="email" class="inputbox" size="50" value="<?php echo $row['email'];?>" /></td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>google analytics code:</label></td>
-    <td width="80%"><input type="text" name="googgle_map_api_keys" class="inputbox" size="50" maxlength="25" value="<?=$row['googgle_map_api_keys']?>" />
+    <td width="80%"><input type="text" name="googgle_map_api_keys" class="inputbox" size="50" maxlength="25" value="<?php echo $row['googgle_map_api_keys'];?>" />
     <img src="../partner/<?php echo $_SESSION['partner_folder_name'];?>/images/edit_f2.png" height="18" title="Enter Only UA code in the box, Example: UA-29293639-3" />
     </td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>location code:</label></td>
-    <td width="80%"><input type="text" name="location_code" class="inputbox" size="50" value="<?=$row['location_code']?>" /></td>
+    <td width="80%"><input type="text" name="location_code" class="inputbox" size="50" value="<?php echo $row['location_code'];?>" /></td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>city name:</label></td>
-    <td width="80%"><input type="text" name="beach" class="inputbox" size="50" value="<?=$row['beach']?>" /></td>
+    <td width="80%"><input type="text" name="beach" class="inputbox" size="50" value="<?php echo $row['beach'];?>" /></td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>mini photo slider category:</label></td>
-    <td width="80%"><input type="text" name="photo_mini_slider_cat" class="inputbox" size="50" value="<?=$row['photo_mini_slider_cat']?>" /></td>
+    <td width="80%"><input type="text" name="photo_mini_slider_cat" class="inputbox" size="50" value="<?php echo $row['photo_mini_slider_cat'];?>" /></td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>photo upload category:</label></td>
-    <td width="80%"><input type="text" name="photo_upload_cat" class="inputbox" size="50" value="<?=$row['photo_upload_cat']?>" /></td>
+    <td width="80%"><input type="text" name="photo_upload_cat" class="inputbox" size="50" value="<?php echo $row['photo_upload_cat'];?>" /></td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>facebook link:</label></td>
-    <td width="80%"><input type="text" name="facebook" class="inputbox" size="50" value="<?=$row['facebook']?>" /></td>
+    <td width="80%"><input type="text" name="facebook" class="inputbox" size="50" value="<?php echo $row['facebook'];?>" /></td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>IPhone app download link:</label></td>
-    <td width="80%"><input type="text" name="iphone" class="inputbox" size="50" value="<?=$row['iphone']?>" /></td>
+    <td width="80%"><input type="text" name="iphone" class="inputbox" size="50" value="<?php echo $row['iphone'];?>" /></td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>android app download link:</label></td>
-    <td width="80%"><input type="text" name="android" class="inputbox" size="50" value="<?=$row['android']?>" /></td>
+    <td width="80%"><input type="text" name="android" class="inputbox" size="50" value="<?php echo $row['android'];?>" /></td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>Twitter Follow up:</label></td>
-    <td width="80%"><input type="text" name="twitter" class="inputbox" size="50" value="<?=$row['twitter']?>" /></td>
+    <td width="80%"><input type="text" name="twitter" class="inputbox" size="50" value="<?php echo $row['twitter'];?>" /></td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>youtube Follow up:</label></td>
-    <td width="80%"><input type="text" name="youtube" class="inputbox" size="50" value="<?=$row['youtube']?>" /></td>
+    <td width="80%"><input type="text" name="youtube" class="inputbox" size="50" value="<?php echo $row['youtube'];?>" /></td>
   </tr>
   <tr>
   	<td width="20%" class="key"><label>time zone:</label></td>
@@ -228,14 +228,14 @@ function globalseting(){
 		<select size="1" class="inputbox" id="offset" name="timezone">
 			<?php
 			foreach($timezoneTable as $key => $value){?>
-					 <option <?php echo ($row['time_zone'] == $key)?"selected='selected'":''?> value="<?=$key?>"><?=$value?></option>
+					 <option <?php echo ($row['time_zone'] == $key)?"selected='selected'":''?> value="<?php echo $key;?>"><?php echo $value;?></option>
 			<?php }?>
 		</select>
 	</td>
   </tr>
 	<tr>
     <td width="20%" class="key"><label>Header Color:</label></td>
-    <td width="80%"><input type="text" name="Header_color" class="inputbox" size="10" value="<?=$row['Header_color']?>" /></td>
+    <td width="80%"><input type="text" name="Header_color" class="inputbox" size="10" value="<?php echo $row['Header_color'];?>" /></td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>distance unit:</label></td>
@@ -251,7 +251,7 @@ function globalseting(){
       <?php if ($row['distance_unit'] == '') { ?>
       <input name="dunit" type="radio" value="Kms"/>Kms&nbsp;<input name="dunit" type="radio" value="Miles" checked />Miles
       <?php } ?>
-    <td>
+    </td>
   </tr>
     <tr>
     <td width="20%" class="key"><label>weather unit:</label></td>
@@ -271,7 +271,7 @@ function globalseting(){
   </tr>
 </table>
 </form>
-<?
+<?php
 }
 
 

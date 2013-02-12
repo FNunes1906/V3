@@ -45,13 +45,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			
 			?> 
 				<!--This code is for slider part-->
-		    	<li id="item<?=$imagecount?>" class="<?=$imagecount?>">
+		    	<li id="item<?php echo $imagecount;?>" class="<?php echo $imagecount;?>">
 					<div class="event">
-					<a href="/events/icalrepeat.detail/<?=$fearow['Eyear']?>/<?=$fearow['Emonth']?>/<?=$fearow['EDate']?>/<?=$fearow['rp_id']?>"><img style="height:268px; width: 100%;" src="<?=$singleimagearray[0]?>" /></a>
-					<!-- <a href="/index.php?option=com_jevents&task=icalrepeat.detail&evid=<?=$fearow['rp_id']?>&Itemid=97&year=<?=$fearow['Eyear']?>&month=<?=$fearow['Emonth']?>&day=<?=$fearow['EDate']?>"><img style="height: 268px;width: 420px;" src="<?=$singleimagearray[0]?>" /></a> -->
+					<a href="/events/icalrepeat.detail/<?php echo $fearow['Eyear'];?>/<?php echo $fearow['Emonth'];?>/<?php echo $fearow['EDate'];?>/<?php echo $fearow['rp_id'];?>"><img style="height:268px; width: 100%;" src="<?php echo $singleimagearray[0];?>" /></a>
+					<!-- <a href="/index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=97&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img style="height: 268px;width: 420px;" src="<?php echo $singleimagearray[0];?>" /></a> -->
 		    		<div class="infoCont">
-		    			<h2 class="bold"><?=$fearow['summary']?></h2>
-		    			<p><?=$fearow['title']?> &bull; <?=$fearow['Date']?> &bull; <?=$displayTime?> </p>
+		    			<h2 class="bold"><?php echo $fearow['summary']?></h2>
+		    			<p><?php echo $fearow['title'];?> &bull; <?php echo $fearow['Date'];?> &bull; <?php echo $displayTime;?> </p>
 						<div class="cl"></div>
 		    		</div>
 					</div>
