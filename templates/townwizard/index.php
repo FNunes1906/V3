@@ -113,19 +113,25 @@ _init();
 
 
 <script>
-  function fb_login() {
-    window.open("/townwizard-db-api/fb-login.php", "_blank", "height=400,width=700,status=no,toolbar=no,menubar=no");
-  }
+	/* Facebook login function */
+	function fb_login() {
+		window.open("/townwizard-db-api/fb-login.php", "_blank", "height=400,width=600,status=no,toolbar=no,menubar=no");
+	}
 
-  function tw_logout() {
-      $.ajax({
-          url: "townwizard-db-api/logout.php",
-          type: "get",
-          complete: function() {
-            window.location.reload();
-          }
-      });
-  }
+	/* Twitter login function */
+	function twitter_login() {
+		window.open("/townwizard-db-api/twitter-login.php", "_blank", "height=400,width=600,status=no,toolbar=no,menubar=no");
+	}
+  	
+	function tw_logout() {
+		$.ajax({
+			url: "townwizard-db-api/logout.php",
+			type: "get",
+			complete: function() {
+			window.location.reload();
+			}
+		});
+	}
 </script>
 
 <!--  Town wizard Google Analytic code -->
@@ -171,31 +177,24 @@ _init();
 	  	     <div class="headerAdFlex fl">
 	  	  	  <div id="Social" class="fr">
 	            <div>
-	              <!--<a href="#" onClick="fb_login(); return false;"><img alt="Login with Facebook" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/fbLoginBtn.png" /></a>-->
-					<!-- FB LOGIN START -->
-					
-					<div id="LoggedIn" class="fl">
-						<?php if($_SESSION['tw_user_name']) { ?>
-							<img style="float:right;" src="<?php echo $_SESSION['tw_user_image_url']; ?>">
-                			<span>Welcome to Townwizard <?php echo $_SESSION['tw_user_name']; ?>!</span><br>
+					<!-- SOCIAL LOGIN START -->
+					<?php if($_SESSION['tw_user_name']) { ?>
+						<div id="LoggedIn" class="fl" style="font-size:11.5px;">
+							<img style="float:right;padding:0px;" src="<?php echo $_SESSION['tw_user_image_url']; ?>">
+                			<span>Welcome to <?php echo $var->site_name.' '.$_SESSION['tw_user_name']; ?>!</span><br>
 							<a class="logOut" href="javascript:void(0)" onclick="tw_logout();">Click here to sign out</a>
 							<?php $user = $_SESSION['tw_user']; ?>                      				
-						<?php }  else { ?>
-							<!--<a href="javascript:void(0)" onclick="$('#login_dialog').hide();$('#registration_dialog').show();">Register</a> | 
-							<a href="javascript:void(0)" onclick="$('#registration_dialog').hide();$('#login_dialog').show();">Sign in</a><br/>-->
-							<!--<a href="javascript:void(0)" onclick="fb_login();">Sign in with Facebook</a><br/>-->
-							<a href="javascript:void(0)" onclick="fb_login();"><img style="float:right;" alt="Login with Facebook" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/fbLoginBtn.png" /></a>
-							<!--<a href="javascript:void(0)" onclick="twitter_login();">Sign in with Twitter</a><br/>-->
+						</div>	
+					<?php }  else { ?>
+						<div>
+							<a href="javascript:void(0)" onclick="fb_login();"><img alt="Login with Facebook" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/fbLoginBtn.png" /></a>
+							<a href="javascript:void(0)" onclick="twitter_login();"><img alt="Login with Twitter" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/twtLoginBtn.png" /></a>
+						</div>	
 					<?php } ?>
-					</div>
-					
-					
-					
-				  <!-- FB LOGIN END -->
-				  
-				  <!--<a href="#"><img alt="Login with Twitter" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/twtLoginBtn.png" /></a>
-	              <a href="#"><img alt="Help" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/helpBtn.png" /></a>
-	            --></div>
+						
+				  <!-- SOCIAL LOGIN END -->
+	              <!-- <a href="#"><img alt="Help" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/helpBtn.png" /></a> -->
+	            </div>
 	          </div>
               <div id="UpperBannerAd" class="bannerAd">
 	  	  	  	<?php if($this->countModules('banner1')) : ?>
