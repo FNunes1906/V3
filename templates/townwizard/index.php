@@ -72,7 +72,7 @@ _init();
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">
 	stLight.options({
-		publisher:'7de16a21-9cb3-4dfe-b961-18e0c43d99c0',
+		publisher:'fe72f22e-436e-4b4e-9486-bbcb87276adc',
 	});
 </script>
 <!-- Share This End-->
@@ -197,14 +197,16 @@ _init();
 	              <a href="#"><img alt="Help" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/helpBtn.png" /></a>
 	            --></div>
 	          </div>
-              <?php if($this->countModules('banner1')) : ?>
-	          <div id="UpperBannerAd" class="bannerAd">
-	  	  	  	<div class="bannerCont">
+              <div id="UpperBannerAd" class="bannerAd">
+	  	  	  	<?php if($this->countModules('banner1')) : ?>
+				<div class="bannerCont">
 	  	  	      <!-- TOP BANNER AD -->
 	  	  	    	 <jdoc:include type="modules" name="banner1" style="rounded" />
          		 </div>
+				 <?php else: ?>
+					 <img alt="Default Banner" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/default_banner.png" />
+				  <?php endif; ?>
 	  	  	  </div>
-              <?php endif; ?>
 	  	    </div>
 	  	    
 			<?php require ("./inc/config.php"); 

@@ -1161,6 +1161,12 @@ a.saved span {
 
 /* Share Tool */
 
+.error_large span{
+	 line-height:18px !important;
+	 font-size: 12px !important;
+	  margin-top: -5px;
+}
+
 #ShareTool {
   padding-top:15px; overflow: hidden;
 }
@@ -1172,6 +1178,7 @@ a.saved span {
   line-height:32px;
   height:32px;
   margin-bottom:10px;
+  font-size: 10px;
 }
 #ShareTool span .stButton {
   float:left;
@@ -1192,7 +1199,7 @@ a.saved span {
   background:url('../images/header/favoritesIcon.png') no-repeat left top;
 }
 #ShareTool .errorBtn.btn {
-  background:url('../images/header/errorIcon.png') no-repeat center top;
+  background:url('../images/header/questionIcon.png') no-repeat center top;
 }
 #ShareTool .printBtn.btn {
   background:url('../images/header/printIcon.png') no-repeat center top;
@@ -1436,4 +1443,140 @@ font-family: 'AllerBold',Arial,sans-serif;
 
 ._5v4{
 	width:415px !important;
+}
+
+/* Submit Form */
+
+#system-message ul{
+	margin-top: 10px !important;
+	margin-bottom: 10px !important;
+}
+
+#system-message li{ float: none; width: auto;}
+
+#userForm h1 {
+  font-size:18px;
+  margin-bottom:8px;
+}
+#userForm .form {
+  margin:30px 0 0;
+}
+#userForm label {
+  height:30px;
+ /* margin-bottom:30px;*/
+  line-height:30px;
+  min-width: 152px;
+}
+#userForm input[type=text] {float: right;
+  height:30px;
+  line-height:30px;
+  width:58%;
+  padding:0 5px;
+  font-size:14px;
+  margin-bottom:30px;
+  border: 2px inset rgba(238, 238, 238, .25);
+}
+#userForm textarea {float: right;
+  height:130px;
+  line-height:18px;
+  width:58%;
+  padding:0 5px;
+  font-size:13px;
+  margin-bottom:30px;
+  resize:vertical;
+  border: 2px inset rgba(238, 238, 238, .25);
+}
+#userForm #DatePicker {
+  width:65%;
+}
+#userForm #DatePicker input {
+  width:74%;
+  margin-left:17px;
+}
+
+dt.notice {
+    background: url("../images/grayArrowLg.png") no-repeat scroll 12% 30% transparent;
+    clear: both;
+    color: #000000;
+    display: block;
+    font-family: 'AllerDisplayRegular',Arial,sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    padding-right: 15px;
+    text-transform: uppercase;
+}
+
+.formError{
+	padding-left:9px;
+}
+
+#captchaTxt48,#captchaTxt37{
+	width: 58% !important;
+}
+
+#txtcal15_0 {
+	 margin-left: 5px;
+    width: 50% !important;
+}
+
+.yui-calcontainer{
+	margin-top: 32px;
+}
+
+.btnCal {
+    background: url("../images/header/calBtnLg.png") no-repeat scroll left top transparent;
+    border: medium none;
+    float: right;
+    height: 30px;
+    width: 34px;
+	}
+	
+#Submit,.rsform-submit-button{
+	background: none repeat scroll 0 0 #000000;
+    border: 1px solid #000000;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 5px 8px;
+	margin-top: 10px;
+}
+/* ------------------------------------------------------------------- */
+
+#EventDetail{
+	width:410px !important;
+}
+
+/**
+Developer: Akash
+Last Updated Date:29-01-2013
+**/
+#GuideInfo .submit{display:none;}
+#WidgetArea .submit{
+	background: url("../images/header/searchBtnLg.png") no-repeat scroll left top transparent;
+    border: 0 none;
+    cursor: pointer;
+    height: 30px;
+    width: 34px;
+}
+#WidgetArea input.evsearch{
+    border: 2px inset rgba(238, 238, 238, 0.25);
+    font-size: 14px;
+    height: 24px;
+    line-height: 24px;
+    margin-right: 12px;
+    padding: 0 5px;
+    width: 85%;
+}
+#WidgetArea #category_fv{
+    border: 2px inset rgba(238, 238, 238, 0.25);
+    font-size: 14px;
+    height: 27px;
+    line-height: 24px;
+    margin-right: 12px;
+    padding: 0 0 0 5px;
+    width: 100%;
+	font-size: 13px !important;
+}
+.module_event form {
+	overflow:hidden;
 }

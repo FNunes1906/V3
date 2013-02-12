@@ -16,21 +16,20 @@ if (count($filterHTML)>0){
 	JHTML::script("mod_jevents_filter.js","modules/mod_jevents_filter/",true);
 	?>
 	<form action="<?php echo $form_link;?>" id="jeventspost" name="jeventspost" method="post">
-	<table cellpadding="0" cellspacing="0" border="0">
+	<div>
 	<?php	
 	foreach ($filterHTML as $filter){
 		if (!isset($filter["title"])) continue;
-		echo "<tr>";
-		//if (strlen($filter["title"])>0) echo "<td>".$filter["title"]."</td>";
-		//else echo "<td/>";
-		echo "<td>".$filter["html"]."</td></tr>";
+
+
+		echo "<div class='fl'>".$filter["html"]."</div>";
 	}
 	
-	//echo "<tr>";
-	//echo "<td >".'<input class="modfilter_button" type="submit" value="'.JText::_('ok').'" />'."</td>";
-	//echo "</tr>";
+
+	echo '<input class="submit fr" type="submit" value="" />';
+
 	?>
-	</table>
+	</div>
 	</form>
 	<?php 
 }
