@@ -1514,7 +1514,7 @@ dt.notice {
 	width: 58% !important;
 }
 
-#txtcal15_0 {
+#txtcal0 {
 	 margin-left: 5px;
     width: 50% !important;
 }
@@ -1567,7 +1567,7 @@ Last Updated Date:29-01-2013
     padding: 0 5px;
     width: 85%;
 }
-#WidgetArea #category_fv{
+.module_event #category_fv{
     border: 2px inset rgba(238, 238, 238, 0.25);
     font-size: 14px;
     height: 27px;
