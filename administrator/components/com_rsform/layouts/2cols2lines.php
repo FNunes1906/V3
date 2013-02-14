@@ -1,7 +1,7 @@
 <?php
 /**
-* @version 1.2.0
-* @package RSform!Pro 1.2.0
+* @version 1.4.0
+* @package RSform!Pro 1.4.0
 * @copyright (C) 2007-2009 www.rsjoomla.com
 * @license GPL, http://www.gnu.org/copyleft/gpl.html
 */
@@ -9,42 +9,53 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-	$db = JFactory::getDBO();
-
-	// Select components
-	$db->setQuery("SELECT #__rsform_properties.PropertyValue, #__rsform_components.ComponentId, #__rsform_components.ComponentTypeId FROM #__rsform_components LEFT JOIN #__rsform_properties ON #__rsform_properties.ComponentId=#__rsform_components.ComponentId WHERE #__rsform_components.FormId=".$formId." AND #__rsform_properties.PropertyName='NAME' AND #__rsform_components.Published=1 ORDER BY #__rsform_components.Order");
-	$info = $db->loadAssocList();
-
-	$db->setQuery("SELECT `Required` FROM #__rsform_forms WHERE `FormId`='".(int) $formId."'");
-	$required = $db->loadResult();
-	
-	$outLeft ='';
-	$outLeft.="<div>\n";
-
-	$outRight ='';
-	$outRight.="<div>\n";
-
-	$out = '<div class="componentheading">{global:formtitle}</div>'."\n";
-	$out.='{error}'."\n";
-	$out.= '<table border="0">'."\n";
-
-	$i = 0;
-	foreach ($info as $r)
+$pages_array = array();
+$page = 0;
+if (!empty($pagefields))
+	foreach ($quickfields as $quickfield)
 	{
-		$componentProperties=RSgetComponentProperties($r['ComponentId']);
-		if(in_array($r['ComponentTypeId'],$RSadapter->config['component_ids']))
-		{
-			$tmp = '';
-			$tmp.= "\t\t\t\t{".$r['PropertyValue'].":caption}".((isset($componentProperties['REQUIRED']) && $componentProperties['REQUIRED']=='YES') ? ' '.(isset($required) ? $required : '(*)') : "" )."<br/>\n";
-			$tmp.= "\t\t\t\t{".$r['PropertyValue'].":body}<br/>\n";
-			$tmp.= "\t\t\t\t{".$r['PropertyValue'].":validation}\n";
-			$tmp.= "\t\t\t\t{".$r['PropertyValue'].":description}<br/>\n";
+		$pages_array[$page][] = $quickfield;
+		if (in_array($quickfield, $pagefields))
+			$page++;
+	}
+else
+	$pages_array[0] = $quickfields;
 
-			if ($i%2) $outRight .= $tmp;
-			else $outLeft .= $tmp;
+$out = '<div class="componentheading">{global:formtitle}</div>'."\n";
+$out.='{error}'."\n";
+
+foreach ($pages_array as $page_num => $items)
+{
+	$out.= '<!-- Do not remove this ID, it is used to identify the page so that the pagination script can work correctly -->'."\n";
+	$out.= '<table border="0" id="rsform_'.$formId.'_page_'.$page_num.'">'."\n";
 	
-			$i ++;
+	$outLeft ="<div>\n";
+	$outRight="<div>\n";
+	
+	$i = 0;
+	foreach ($items as $quickfield)
+	{
+		$tmp = "\t\t\t\t".'<div class="formField rsform-block rsform-block-'.JFilterOutput::stringURLSafe($quickfield).'">'."\n";
+		if (in_array($quickfield, $pagefields))
+		{
+			$tmp.= "\t\t\t\t{".$quickfield.":body}<br/>\n";
 		}
+		else
+		{
+			$required = in_array($quickfield, $requiredfields) ? ' '.(isset($this->_form->Required) ? $this->_form->Required : '(*)') : "";
+			$tmp.= "\t\t\t\t{".$quickfield.":caption}".$required."<br/>\n";
+			$tmp.= "\t\t\t\t{".$quickfield.":body}<br/>\n";
+			$tmp.= "\t\t\t\t{".$quickfield.":validation}\n";
+			$tmp.= "\t\t\t\t{".$quickfield.":description}<br/>\n";
+		}
+		$tmp .= "\t\t\t\t".'</div>'."\n";
+		
+		if ($i%2)
+			$outRight .= $tmp;
+		else
+			$outLeft .= $tmp;
+
+		$i++;
 	}
 
 	$outLeft.="\t\t\t</div>";
@@ -59,12 +70,16 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	$out .= "\t\t</td>\n";
 	$out .= "\t</tr>\n";
 	$out .= "</table>\n";
+}
 	
+if ($out != $this->_form->FormLayout && $this->_form->FormId)
+{
 	// Clean it
-	$cleanout = $db->getEscaped($out);
 	// Update the layout
-	$db->setQuery("UPDATE #__rsform_forms SET FormLayout='".$cleanout."' WHERE FormId=".$formId);
+	$db = JFactory::getDBO();
+	$db->setQuery("UPDATE #__rsform_forms SET FormLayout='".$db->getEscaped($out)."' WHERE FormId=".$this->_form->FormId);
 	$db->query();
+}
 	
-	return $out;
+return $out;
 ?>

@@ -255,24 +255,32 @@ _init();
 				</div>
 				<?php endif; ?>
                
+                <?php if($var->android != "" || $var->iphone != ""):?>
                 <div id="SideMobile" class="sect">
-                  <h2>TownWizard <?php echo JText::_("TW_MOBILE") ?>!</h2>
-                  <p><?php echo JText::_("TW_CLICKHERE") ?>.</p>
-                  <?php if($var->iphone && $var->iphone != ""):?>
-                    <a href="<?php echo $var->iphone?>" target="_blank"><img alt="Download for the iPhone/iPad" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/iphoneAppBtn.png" /></a>
+                  <h2>TownWizard Mobile!</h2>
+                  <p>Click here to download Apps.</p>
+                  <?php if($var->iphone != ""):?>
+                    <a href="<?php echo $var->iphone?>" target="_blank"><img alt="Download for the iPhone/iPad" src="common/<?php echo $_SESSION['style_folder_name'];?>/images/sidebar/iphoneAppBtn.png" /></a>
                   <?php endif;?>
                   
-                  <?php if($var->android && $var->android != ""):?>
-                  <a href="<?php echo $var->android?>" target="_blank"><img alt="Download for Android" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/androidAppBtn.png" /></a>
+                  <?php if($var->android != ""):?>
+                  <a href="<?php echo $var->android?>" target="_blank"><img alt="Download for Android" src="common/<?php echo $_SESSION['style_folder_name'];?>/images/sidebar/androidAppBtn.png" /></a>
                   <?php endif;?>
-                  
                 </div>
+                  <?php endif;?>
+
                 
-                <div id="SideSocial" class="sect">
-                  <h3 class="display"><?php echo JText::_("TW_FOLLOWUS") ?></h3>
-                  <a class="twitter" href="#" target="_blank"><img alt="Follow us on Twitter" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/twtFollowBtn.png" /></a>
-                  <a class="youtube" href="#" target="_blank"><img alt="Follow us on YouTube" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/ytFollowBtn.png" /></a>
+                <?php if($var->youtube != "" || $var->twitter != ""):?>
+                  <div id="SideSocial" class="sect">
+                  <h3 class="display">Follow Us</h3>
+                   <?php if($var->twitter != ""):?>
+                  <a class="twitter" href="<?php echo $var->twitter ?>" target="_blank"><img alt="Follow us on Twitter" src="common/<?php echo $_SESSION['style_folder_name'];?>/images/sidebar/twtFollowBtn.png" /></a>
+                  <?php endif;?>
+                  <?php if($var->youtube != ""):?>
+                  <a class="youtube" href="<?php echo $var->youtube ?>" target="_blank"><img alt="Follow us on YouTube" src="common/<?php echo $_SESSION['style_folder_name'];?>/images/sidebar/ytFollowBtn.png" /></a>
+                  <?php endif;?>
                 </div>
+                  <?php endif;?>
                 
                 <?php if($this->countModules('banner2')) : ?>
                 <div id="SideAds" class="sect">
