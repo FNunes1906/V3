@@ -1,47 +1,68 @@
 <?php
 /**
-* @version 1.2.0
-* @package RSform!Pro 1.2.0
-* @copyright (C) 2007-2009 www.rsjoomla.com
+* @version 1.4.0
+* @package RSform!Pro 1.4.0
+* @copyright (C) 2007-2011 www.rsjoomla.com
 * @license GPL, http://www.gnu.org/copyleft/gpl.html
 */
 
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
+	
+$out = '<div class="componentheading">{global:formtitle}</div>'."\n";
+$out.='{error}'."\n";
+$out.='<table border="0">'."\n";
 
-	$db = JFactory::getDBO();
+$page_num = 0;
+if (!empty($pagefields))
+{
+	$out .= "\t".'<!-- Do not remove this ID, it is used to identify the page so that the pagination script can work correctly -->'."\n";
+	$out .= "\t".'<tbody id="rsform_'.$formId.'_page_'.$page_num.'">'."\n";
+}
 	
-	// Select components
-	$db->setQuery("SELECT #__rsform_properties.PropertyValue, #__rsform_components.ComponentId, #__rsform_components.ComponentTypeId FROM #__rsform_components LEFT JOIN #__rsform_properties ON #__rsform_properties.ComponentId=#__rsform_components.ComponentId WHERE #__rsform_components.FormId=".$formId." AND #__rsform_properties.PropertyName='NAME' AND #__rsform_components.Published=1 ORDER BY #__rsform_components.Order");
-	$info = $db->loadAssocList();
-	
-	$db->setQuery("SELECT `Required` FROM #__rsform_forms WHERE `FormId`='".(int) $formId."'");
-	$required = $db->loadResult();
-	
-	$out = '<div class="componentheading">{global:formtitle}</div>'."\n";
-	$out.='{error}'."\n";
-	$out.='<table border="0">'."\n";
-	
-	foreach ($info as $r)
+foreach ($quickfields as $quickfield)
+{
+	if (in_array($quickfield, $pagefields))
 	{
-		//build validation message
-		$componentProperties=RSgetComponentProperties($r['ComponentId']);
-		if(in_array($r['ComponentTypeId'],$RSadapter->config['component_ids']))
+		$page_num++;
+		$last_page  = $quickfield == end($pagefields);
+		$last_field = $quickfield == end($quickfields);
+		
+		$out.= "\t".'<tr class="rsform-block rsform-block-'.JFilterOutput::stringURLSafe($quickfield).'">'."\n";
+		$out.= "\t\t<td>&nbsp;</td>\n";
+		$out.= "\t\t<td>{".$quickfield.":body}</td>\n";
+		$out.= "\t\t<td>&nbsp;</td>\n";
+		$out.= "\t</tr>\n";
+		
+		$out .= "\t".'</tbody>'."\n";
+		if (!$last_page || !$last_field)
 		{
-			$out.= "\t<tr>\n";
-			$out.= "\t\t<td>{".$r['PropertyValue'].":caption}".((isset($componentProperties['REQUIRED']) && $componentProperties['REQUIRED']=='YES') ? ' '.(isset($required) ? $required : '(*)') : "")."</td>\n";
-			$out.= "\t\t<td>{".$r['PropertyValue'].":body}<div class=\"formClr\"></div>{".$r['PropertyValue'].":validation}</td>\n";
-			$out.= "\t\t<td>{".$r['PropertyValue'].":description}</td>\n";
-			$out.= "\t</tr>\n";
+			$out .= '<!-- Do not remove this ID, it is used to identify the page so that the pagination script can work correctly -->'."\n";
+			$out .= "\t".'<tbody id="rsform_'.$formId.'_page_'.$page_num.'">'."\n";
 		}
+			
+		continue;
 	}
-	$out.= "</table>\n";
 	
-	// Clean it
-	$cleanout = $db->getEscaped($out);
-	// Update the layout
-	$db->setQuery("UPDATE #__rsform_forms SET FormLayout='".$cleanout."' WHERE FormId=".$formId);
-	$db->query();
+	$required = in_array($quickfield, $requiredfields) ? ' '.(isset($this->_form->Required) ? $this->_form->Required : '(*)') : "";
+	$out.= "\t".'<tr class="rsform-block rsform-block-'.JFilterOutput::stringURLSafe($quickfield).'">'."\n";
+	$out.= "\t\t<td>{".$quickfield.":caption}".$required."</td>\n";
+	$out.= "\t\t<td>{".$quickfield.":body}<div class=\"formClr\"></div>{".$quickfield.":validation}</td>\n";
+	$out.= "\t\t<td>{".$quickfield.":description}</td>\n";
+	$out.= "\t</tr>\n";
+}
+if (!empty($pagefields))
+	$out .= "\t".'</tbody>'."\n";
+$out.= "</table>\n";
 
-	return $out;
+if ($out != $this->_form->FormLayout && $this->_form->FormId)
+{
+	// Clean it
+	// Update the layout
+	$db = JFactory::getDBO();
+	$db->setQuery("UPDATE #__rsform_forms SET FormLayout='".$db->getEscaped($out)."' WHERE FormId=".$this->_form->FormId);
+	$db->query();
+}
+
+return $out;
 ?>

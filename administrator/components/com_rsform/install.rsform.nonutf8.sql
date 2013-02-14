@@ -19,11 +19,35 @@ CREATE TABLE IF NOT EXISTS `#__rsform_component_type_fields` (
   `ComponentTypeFieldId` int(11) NOT NULL auto_increment,
   `ComponentTypeId` int(11) NOT NULL default '0',
   `FieldName` text NOT NULL,
-  `FieldType` enum('hidden','hiddenparam','textbox','textarea','select') NOT NULL default 'hidden',
+  `FieldType` enum('hidden','hiddenparam','textbox','textarea','select','emailattach') NOT NULL default 'hidden',
   `FieldValues` text NOT NULL,
   `Ordering` int(11) NOT NULL default '0',
   PRIMARY KEY  (`ComponentTypeFieldId`),
   KEY `ComponentTypeId` (`ComponentTypeId`)
+);
+
+CREATE TABLE IF NOT EXISTS `#__rsform_conditions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `form_id` int(11) NOT NULL,
+  `action` varchar(16) NOT NULL,
+  `block` tinyint(1) NOT NULL,
+  `component_id` int(11) NOT NULL,
+  `condition` varchar(16) NOT NULL,
+  `lang_code` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `form_id` (`form_id`),
+  KEY `component_id` (`component_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `#__rsform_condition_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `condition_id` int(11) NOT NULL,
+  `component_id` int(11) NOT NULL,
+  `operator` varchar(16) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `condition_id` (`condition_id`),
+  KEY `component_id` (`component_id`)
 );
 
 CREATE TABLE IF NOT EXISTS `#__rsform_config` (
@@ -36,14 +60,18 @@ CREATE TABLE IF NOT EXISTS `#__rsform_config` (
 CREATE TABLE IF NOT EXISTS `#__rsform_forms` (
   `FormId` int(11) NOT NULL auto_increment,
   `FormName` text NOT NULL,
-  `FormLayout` text NOT NULL,
+  `FormLayout` longtext NOT NULL,
   `FormLayoutName` text NOT NULL,
   `FormLayoutAutogenerate` tinyint(1) NOT NULL default '1',
+  `CSS` text NOT NULL,
+  `JS` text NOT NULL,
   `FormTitle` text NOT NULL,
-  `Published` tinyint(4) NOT NULL default '1',
+  `Published` tinyint(1) NOT NULL default '1',
   `Lang` varchar(255) NOT NULL default '',
   `ReturnUrl` text NOT NULL,
+  `ShowThankyou` tinyint(1) NOT NULL default '1',
   `Thankyou` text NOT NULL,
+  `ShowContinue` tinyint(1) NOT NULL default '1',
   `UserEmailText` text NOT NULL,
   `UserEmailTo` text NOT NULL,
   `UserEmailCC` varchar(255) NOT NULL,
@@ -67,12 +95,42 @@ CREATE TABLE IF NOT EXISTS `#__rsform_forms` (
   `ScriptProcess` text NOT NULL,
   `ScriptProcess2` text NOT NULL,
   `ScriptDisplay` text NOT NULL,
+  `UserEmailScript` text NOT NULL,
+  `AdminEmailScript` text NOT NULL,
+  `AdditionalEmailsScript` text NOT NULL,
   `MetaTitle` tinyint(1) NOT NULL,
   `MetaDesc` text NOT NULL,
   `MetaKeywords` text NOT NULL,
   `Required` varchar(255) NOT NULL default '(*)',
   `ErrorMessage` text NOT NULL,
+  `MultipleSeparator` varchar(64) NOT NULL default '\\n',
+  `TextareaNewLines` tinyint(1) NOT NULL default '1',
+  `CSSClass` varchar(255) NOT NULL,
+  `CSSId` varchar(255) NOT NULL default 'userForm',
+  `CSSName` varchar(255) NOT NULL,
+  `CSSAction` text NOT NULL,
+  `CSSAdditionalAttributes` text NOT NULL,
+  `AjaxValidation` tinyint(1) NOT NULL,
+  `ThemeParams` text NOT NULL,
+  `Keepdata` tinyint(1) NOT NULL default '1',
+  `Backendmenu` tinyint(1) NOT NULL,
+  `ConfirmSubmission` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY  (`FormId`)
+);
+
+CREATE TABLE IF NOT EXISTS `#__rsform_emails` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `formId` int(11) NOT NULL,
+  `from` varchar(255) NOT NULL,
+  `fromname` varchar(255) NOT NULL,
+  `replyto` varchar(255) NOT NULL,
+  `to` varchar(255) NOT NULL,
+  `cc` varchar(255) NOT NULL,
+  `bcc` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `mode` tinyint(1) NOT NULL,
+  `message` text NOT NULL,
+  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `#__rsform_properties` (
@@ -91,6 +149,8 @@ CREATE TABLE IF NOT EXISTS `#__rsform_submissions` (
   `UserIp` varchar(15) NOT NULL default '',
   `Username` varchar(255) NOT NULL default '',
   `UserId` text NOT NULL,
+  `Lang` varchar(255) NOT NULL,
+  `confirmed` tinyint(1) NOT NULL,
   PRIMARY KEY  (`SubmissionId`),
   KEY `FormId` (`FormId`)
 );
@@ -106,13 +166,30 @@ CREATE TABLE IF NOT EXISTS `#__rsform_submission_values` (
   KEY `SubmissionId` (`SubmissionId`)
 );
 
+CREATE TABLE IF NOT EXISTS `#__rsform_submission_columns` (
+  `FormId` int(11) NOT NULL,
+  `ColumnName` varchar(255) NOT NULL,
+  `ColumnStatic` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`FormId`,`ColumnName`,`ColumnStatic`)
+);
+
 CREATE TABLE IF NOT EXISTS `#__rsform_mappings` (
-  `MappingId` int(11) NOT NULL auto_increment,
-  `ComponentId` int(11) NOT NULL,
-  `MappingTable` text NOT NULL,
-  `MappingColumn` text NOT NULL,
-  PRIMARY KEY  (`MappingId`),
-  KEY `ComponentId` (`ComponentId`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `formId` int(11) NOT NULL,
+  `connection` tinyint(1) NOT NULL,
+  `host` varchar(255) NOT NULL,
+  `port` int(10) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `database` varchar(255) NOT NULL,
+  `method` tinyint(1) NOT NULL,
+  `table` varchar(255) NOT NULL,
+  `data` text NOT NULL,
+  `wheredata` text NOT NULL,
+  `extra` text NOT NULL,
+  `andor` text NOT NULL,
+  `ordering` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 );
 
 REPLACE INTO `#__rsform_component_types`
@@ -132,7 +209,8 @@ VALUES
 (12, 'imageButton'),
 (13, 'submitButton'),
 (14, 'password'),
-(15, 'ticket');
+(15, 'ticket'),
+(41, 'pageBreak');
 
 REPLACE INTO `#__rsform_component_type_fields`
 (`ComponentTypeFieldId`, `ComponentTypeId`, `FieldName`, `FieldType`, `FieldValues`, `Ordering`)
@@ -142,7 +220,7 @@ VALUES
 (4, 1, 'REQUIRED', 'select', 'NO\r\nYES', 3),
 (5, 1, 'SIZE', 'textbox', '20', 4),
 (6, 1, 'MAXSIZE', 'textbox', '', 5),
-(7, 1, 'VALIDATIONRULE', 'select', '//<code>\r\nreturn RSgetValidationRules();\r\n//</code>', 6),
+(7, 1, 'VALIDATIONRULE', 'select', '//<code>\r\nreturn RSFormProHelper::getValidationRules();\r\n//</code>', 6),
 (8, 1, 'VALIDATIONMESSAGE', 'textarea', 'INVALIDINPUT', 7),
 (9, 1, 'ADDITIONALATTRIBUTES', 'textarea', '', 8),
 (10, 1, 'DEFAULTVALUE', 'textarea', '', 9),
@@ -153,7 +231,7 @@ VALUES
 (15, 2, 'REQUIRED', 'select', 'NO\r\nYES', 3),
 (16, 2, 'COLS', 'textbox', '50', 4),
 (17, 2, 'ROWS', 'textbox', '5', 5),
-(18, 2, 'VALIDATIONRULE', 'select', '//<code>\r\nreturn RSgetValidationRules();\r\n//</code>', 6),
+(18, 2, 'VALIDATIONRULE', 'select', '//<code>\r\nreturn RSFormProHelper::getValidationRules();\r\n//</code>', 6),
 (19, 2, 'VALIDATIONMESSAGE', 'textarea', 'INVALIDINPUT', 7),
 (20, 2, 'ADDITIONALATTRIBUTES', 'textarea', '', 8),
 (21, 2, 'DEFAULTVALUE', 'textarea', '', 9),
@@ -214,7 +292,7 @@ VALUES
 (76, 9, 'FILESIZE', 'textbox', '', 3),
 (77, 9, 'REQUIRED', 'select', 'NO\r\nYES', 4),
 (78, 9, 'ACCEPTEDFILES', 'textarea', '', 5),
-(79, 9, 'DESTINATION', 'textbox', '//<code>\r\nreturn $RSadapter->config[''absolute_path''].''/components/com_rsform/uploads/'';\r\n//</code>', 6),
+(79, 9, 'DESTINATION', 'textbox', '//<code>\r\nreturn JPATH_SITE.DS.''components''.DS.''com_rsform''.DS.''uploads''.DS;\r\n//</code>', 6),
 (80, 9, 'ADDITIONALATTRIBUTES', 'textarea', '', 7),
 (81, 9, 'DESCRIPTION', 'textarea', '', 8),
 (82, 9, 'COMPONENTTYPE', 'hidden', '9', 9),
@@ -268,16 +346,28 @@ VALUES
 (154, 12, 'DESCRIPTION', 'textarea', '', 10),
 (155, 6, 'POPUPLABEL', 'textbox', '...', 6),
 (157, 15, 'CHARACTERS', 'select', 'ALPHANUMERIC\r\nALPHA\r\nNUMERIC', 3),
-(158, 9, 'ATTACHUSEREMAIL', 'select', 'NO\r\nYES', 100),
-(159, 9, 'ATTACHADMINEMAIL', 'select', 'NO\r\nYES', 101),
 (160, 2, 'WYSIWYG', 'select', 'NO\r\nYES', 11),
 (161, 8, 'SIZE', 'textbox', '15', 12),
-(162, 8, 'IMAGETYPE', 'select', 'FREETYPE\r\nNOFREETYPE\r\nINVISIBLE', 3);
+(162, 8, 'IMAGETYPE', 'select', 'FREETYPE\r\nNOFREETYPE\r\nINVISIBLE', 3),
+(163, 13, 'BUTTONTYPE', 'select', 'TYPEINPUT\nTYPEBUTTON', 9),
+(164, 7, 'BUTTONTYPE', 'select', 'TYPEINPUT\nTYPEBUTTON', 6);
 
-REPLACE INTO `#__rsform_config`
+INSERT IGNORE INTO `#__rsform_config`
 (`ConfigId`, `SettingName`, `SettingValue`)
 VALUES
 (1, 'global.register.code', ''),
 (2, 'global.debug.mode', '0'),
-(3, 'global.iis', '1'),
-(4, 'global.editor', '1');
+(3, 'global.iis', '0'),
+(4, 'global.editor', '1'),
+(100, 'global.codemirror', '0');
+
+CREATE TABLE IF NOT EXISTS `#__rsform_translations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `form_id` int(11) NOT NULL,
+  `lang_code` varchar(32) NOT NULL,
+  `reference` varchar(255) NOT NULL,
+  `reference_id` varchar(255) NOT NULL,
+  `value` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `form_id` (`form_id`)
+);

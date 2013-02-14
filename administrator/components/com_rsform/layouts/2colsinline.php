@@ -1,52 +1,67 @@
 <?php
 /**
-* @version 1.2.0
-* @package RSform!Pro 1.2.0
-* @copyright (C) 2007-2009 www.rsjoomla.com
+* @version 1.4.0
+* @package RSform!Pro 1.4.0
+* @copyright (C) 2007-2011 www.rsjoomla.com
 * @license GPL, http://www.gnu.org/copyleft/gpl.html
 */
 
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-	$db = JFactory::getDBO();
+$pages_array = array();
+$page = 0;
+if (!empty($pagefields))
+	foreach ($quickfields as $quickfield)
+	{
+		$pages_array[$page][] = $quickfield;
+		if (in_array($quickfield, $pagefields))
+			$page++;
+	}
+else
+	$pages_array[0] = $quickfields;
+
+$out = '<div class="componentheading">{global:formtitle}</div>'."\n";
+$out.='{error}'."\n";
 	
-	// Select components
-	$db->setQuery("SELECT #__rsform_properties.PropertyValue, #__rsform_components.ComponentId, #__rsform_components.ComponentTypeId FROM #__rsform_components LEFT JOIN #__rsform_properties ON #__rsform_properties.ComponentId=#__rsform_components.ComponentId WHERE #__rsform_components.FormId=".$formId." AND #__rsform_properties.PropertyName='NAME' AND #__rsform_components.Published=1 ORDER BY #__rsform_components.Order");
-	$info = $db->loadAssocList();
-
-	$db->setQuery("SELECT `Required` FROM #__rsform_forms WHERE `FormId`='".(int) $formId."'");
-	$required = $db->loadResult();
+foreach ($pages_array as $page_num => $items)
+{
+	$out.= '<!-- Do not remove this ID, it is used to identify the page so that the pagination script can work correctly -->'."\n";
+	$out.= '<table border="0" id="rsform_'.$formId.'_page_'.$page_num.'">'."\n";
 	
-	$outLeft ='';
-	$outLeft.='<table border="0">'."\n";
-
-	$outRight ='';
-	$outRight.='<table border="0">'."\n";
-
-	$out = '<div class="componentheading">{global:formtitle}</div>'."\n";
-	$out.='{error}'."\n";
-	$out.= '<table border="0">'."\n";
+	$outLeft  ='<table border="0">'."\n";
+	$outRight ='<table border="0">'."\n";
 
 	$i = 0;
-	foreach ($info as $r)
+	foreach ($items as $quickfield)
 	{
-		$componentProperties=RSgetComponentProperties($r['ComponentId']);
-		if(in_array($r['ComponentTypeId'],$RSadapter->config['component_ids']))
+		$tmp = '';
+		if (in_array($quickfield, $pagefields))
 		{
-			$tmp = '';
-			$tmp.= "\t\t\t\t<tr>\n";
-			$tmp.= "\t\t\t\t\t<td>{".$r['PropertyValue'].":caption}".((isset($componentProperties['REQUIRED']) && $componentProperties['REQUIRED']=='YES') ? ' '.(isset($required) ? $required : '(*)') : "")."</td>\n";
-			$tmp.= "\t\t\t\t\t<td>{".$r['PropertyValue'].":body}<br/>\n";
-			$tmp.= "\t\t\t\t\t{".$r['PropertyValue'].":validation}</td>\n";
-			$tmp.= "\t\t\t\t\t<td>{".$r['PropertyValue'].":description}</td>\n";
+			$tmp.= "\t\t\t\t".'<tr class="rsform-block rsform-block-'.JFilterOutput::stringURLSafe($quickfield).'">'."\n";
+			$tmp.= "\t\t\t\t\t<td>&nbsp;</td>\n";
+			$tmp.= "\t\t\t\t\t<td>{".$quickfield.":body}</td>\n";
+			$tmp.= "\t\t\t\t\t<td>&nbsp;</td>\n";
 			$tmp.= "\t\t\t\t</tr>\n";
-	
-			if($i%2) $outRight .= $tmp;
-			else $outLeft .= $tmp;
-	
-			$i ++;
 		}
+		else
+		{
+			$required = in_array($quickfield, $requiredfields) ? ' '.(isset($this->_form->Required) ? $this->_form->Required : '(*)') : "";
+			
+			$tmp.= "\t\t\t\t".'<tr class="rsform-block rsform-block-'.JFilterOutput::stringURLSafe($quickfield).'">'."\n";
+			$tmp.= "\t\t\t\t\t<td>{".$quickfield.":caption}".$required."</td>\n";
+			$tmp.= "\t\t\t\t\t<td>{".$quickfield.":body}<br/>\n";
+			$tmp.= "\t\t\t\t\t{".$quickfield.":validation}</td>\n";
+			$tmp.= "\t\t\t\t\t<td>{".$quickfield.":description}</td>\n";
+			$tmp.= "\t\t\t\t</tr>\n";
+		}
+
+		if ($i%2)
+			$outRight .= $tmp;
+		else
+			$outLeft .= $tmp;
+
+		$i++;
 	}
 
 	$outLeft.="\t\t\t</table>\n";
@@ -61,12 +76,16 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	$out .= "\t\t</td>\n";
 	$out .= "\t</tr>\n";
 	$out .= "</table>\n";
+}
 	
+if ($out != $this->_form->FormLayout && $this->_form->FormId)
+{
 	// Clean it
-	$cleanout = $db->getEscaped($out);
 	// Update the layout
-	$db->setQuery("UPDATE #__rsform_forms SET FormLayout='".$cleanout."' WHERE FormId=".$formId);
+	$db = JFactory::getDBO();
+	$db->setQuery("UPDATE #__rsform_forms SET FormLayout='".$db->getEscaped($out)."' WHERE FormId=".$this->_form->FormId);
 	$db->query();
+}
 	
-	return $out;
+return $out;
 ?>
