@@ -220,6 +220,9 @@ body.tablet .ratingWidget .stars.vote {
 body.tablet #SearchResults li .thumb img {
   width:300px;
 }
+body.tablet #SearchResults .ratingWidget {
+  position:static;
+}
 body.tablet #SearchResults .ratingWidget .stars a {
   margin:2px 36px 1px 0 !important;
 }
