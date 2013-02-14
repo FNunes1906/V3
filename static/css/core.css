@@ -57,6 +57,32 @@ h1, h2, h3, h4, p, span, div { font-weight:normal; font-family:'AllerLightRegula
 #Social {
   margin-top:17px;
 }
+#Social .fbLogin {
+  background:url('../images/header/fbLoginBtn.png') no-repeat left top;
+  width:121px;
+  height:45px;
+  display:block;
+  position:relative;
+  padding-right:4px;
+}
+#Social .twtLogin {
+  background:url('../images/header/twtLoginBtn.png') no-repeat left top;
+  width:113px;
+  height:45px;
+  display:block;
+  position:relative;
+  padding-right:4px;
+}
+#Social .fbLogin span, 
+#Social .twtLogin span {
+  font-size:10px;
+  color:#666;
+  text-transform:uppercase;
+  line-height:10px;
+  position:absolute;
+  top:10px;
+  left:39px;
+}
 #Social #LoggedIn {
   width:234px;
   font-size:11px;
