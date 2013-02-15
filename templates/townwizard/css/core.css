@@ -1546,6 +1546,8 @@ dt.notice {
 	width:410px !important;
 }
 
+#Feat{overflow: hidden;padding-bottom: 10px;}
+
 /**
 Developer: Akash
 Last Updated Date:29-01-2013
@@ -1595,7 +1597,7 @@ box-shadow: 0 0 14px #333333;
 }
 #pop{
 display: block;
-
+width: 100px;
 padding: 6px;
 border-radius: 5px;
 text-decoration: none;
@@ -1608,3 +1610,5 @@ text-decoration: none;
     text-indent: -999px;
     top: -25px;
     width: 24px;}
+	
+	
