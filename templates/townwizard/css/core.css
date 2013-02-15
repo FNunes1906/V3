@@ -1580,3 +1580,31 @@ Last Updated Date:29-01-2013
 .module_event form {
 	overflow:hidden;
 }
+
+#loc_img img{
+    max-height: 100%;
+    max-width: 100%;
+ padding : 2px;
+ border: 1px solid #333333;
+}
+#overlay_form{
+position: absolute;
+border: 5px solid #333;
+background: #333;
+box-shadow: 0 0 14px #333333;
+}
+#pop{
+display: block;
+
+padding: 6px;
+border-radius: 5px;
+text-decoration: none;
+}
+#close{background: url('../images/fancybox_sprite.png') no-repeat scroll 0% 0% ;
+    height: 24px;
+    padding: 5px;
+    position: absolute;
+    right: -19px;
+    text-indent: -999px;
+    top: -25px;
+    width: 24px;}
