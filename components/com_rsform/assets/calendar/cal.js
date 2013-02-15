@@ -73,9 +73,13 @@ function rsfp_init(formId, calendarParams)
 
 	var Cal = Array();
 	for(i=0;i<calendarLayouts.length;i++)
-	{		
-		Cal[i] = new rsf_CALENDAR.widget.Calendar("cal"+ formId + '_' + i,"cal" + formId + '_' + i + "Container");		
-		Cal[i].cfg.setProperty("navigator", true);
+	{
+		Cal[i] = new rsf_CALENDAR.widget.Calendar("cal"+ formId + '_' + i,"cal" + formId + '_' + i + "Container");
+		if (typeof rsfp_navConfig == 'undefined') {
+			Cal[i].cfg.setProperty("navigator", true);
+		} else {
+			Cal[i].cfg.setProperty("navigator", rsfp_navConfig);
+		}
 		Cal[i].cfg.setProperty("MONTHS_SHORT", MONTHS_SHORT);
 		Cal[i].cfg.setProperty("MONTHS_LONG", MONTHS_LONG);
 		Cal[i].cfg.setProperty("WEEKDAYS_1CHAR", WEEKDAYS_1CHAR);

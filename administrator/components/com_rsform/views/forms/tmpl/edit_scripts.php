@@ -14,20 +14,20 @@ defined('_JEXEC') or die('Restricted access');
 		<td><?php echo JText::_('RSFP_SCRIPTS_DISPLAY_DESC'); ?></td>
 	</tr>
 	<tr>
-		<td colspan="2"><textarea class="codemirror-php" rows="20" cols="75" name="ScriptDisplay" id="ScriptDisplay" style="width:100%;"><?php echo $this->escape($this->form->ScriptDisplay);?></textarea></td>
+		<td colspan="2"><textarea class="rs_textarea codemirror-php" rows="20" cols="75" name="ScriptDisplay" id="ScriptDisplay" style="width:100%;"><?php echo $this->escape($this->form->ScriptDisplay);?></textarea></td>
 	</tr>
 	<tr>
 		<td width="250" style="width: 250px;" align="right" class="key"><?php echo JText::_('RSFP_SCRIPTS_PROCESS'); ?></td>
 		<td><?php echo JText::_('RSFP_SCRIPTS_PROCESS_DESC'); ?></td>
 	</tr>
 	<tr>
-		<td colspan="2"><textarea class="codemirror-php" rows="20" cols="75" name="ScriptProcess" id="ScriptProcess" style="width:100%;"><?php echo $this->escape($this->form->ScriptProcess);?></textarea></td>
+		<td colspan="2"><textarea class="rs_textarea codemirror-php" rows="20" cols="75" name="ScriptProcess" id="ScriptProcess" style="width:100%;"><?php echo $this->escape($this->form->ScriptProcess);?></textarea></td>
 	</tr>
 	<tr>
 		<td width="250" style="width: 250px;" align="right" class="key"><?php echo JText::_('RSFP_SCRIPTS_PROCESS2'); ?></td>
 		<td><?php echo JText::_('RSFP_SCRIPTS_PROCESS2_DESC'); ?></td>
 	</tr>
 	<tr>
-		<td colspan="2"><textarea class="codemirror-php" rows="20" cols="75" name="ScriptProcess2" id="ScriptProcess2" style="width:100%;"><?php echo $this->escape($this->form->ScriptProcess2);?></textarea></td>
+		<td colspan="2"><textarea class="rs_textarea codemirror-php" rows="20" cols="75" name="ScriptProcess2" id="ScriptProcess2" style="width:100%;"><?php echo $this->escape($this->form->ScriptProcess2);?></textarea></td>
 	</tr>
 </table>

@@ -55,16 +55,18 @@ function resetForm()
 	<table class="adminform">
 		<tr>
 			<td width="100%">
+				<div class="rs_left">
 				<?php echo JText::_('RSFP_VIEW_SUBMISSIONS_FOR'); ?> <?php echo $this->lists['forms']; ?>
 				<?php echo JText::_('RSFP_SHOW_SUBMISSIONS_LANGUAGE'); ?> <?php echo $this->lists['Languages']; ?>
 				<?php echo JText::_( 'SEARCH' ); ?>
-				<input type="text" name="search" id="search" value="<?php echo $this->escape($this->filter); ?>" class="text_area" onChange="document.adminForm.submit();" />
+				<input type="text" class="rs_inp rs_10" name="search" id="search" value="<?php echo $this->escape($this->filter); ?>" class="text_area" onchange="document.adminForm.submit();" />
 				<?php echo JText::_( 'DATE' ); ?> <?php echo $this->calendars['from']; ?> <?php echo JText::_('TO'); ?> <?php echo $this->calendars['to']; ?>
-				<button onclick="this.form.submit();"><?php echo JText::_( 'Go' ); ?></button>
-				<button onclick="resetForm();this.form.submit();"><?php echo JText::_( 'Reset' ); ?></button>
+				</div>
+				<button class="rs_button rs_left" type="button" onclick="this.form.submit();"><?php echo JText::_( 'Go' ); ?></button>
+				<button class="rs_button rs_left" type="button" onclick="resetForm();this.form.submit();"><?php echo JText::_( 'Reset' ); ?></button>
 			</td>
 			<td nowrap="nowrap">
-				<button type="button" onclick="toggleCustomizeColumns();"><?php echo JText::_('RSFP_CUSTOMIZE_COLUMNS'); ?></button>
+				<button class="rs_button" type="button" onclick="toggleCustomizeColumns();"><?php echo JText::_('RSFP_CUSTOMIZE_COLUMNS'); ?></button>
 				<div id="columnsContainer">
 				<div id="columnsDiv">
 					<input type="checkbox" onclick="toggleCheckColumns();" id="checkColumns" /> <label for="checkColumns"><strong><?php echo JText::_('RSFP_CHECK_ALL'); ?></strong></label><br />
@@ -79,7 +81,7 @@ function resetForm()
 					</label><br />
 					<?php $i++; ?>
 				<?php } ?>
-				<button type="button" onclick="submitbutton('submissions.columns')"><?php echo JText::_('Submit'); ?></button>
+				<button class="rs_button" type="button" onclick="submitbutton('submissions.columns')"><?php echo JText::_('Submit'); ?></button>
 				</div>
 				</div>
 			</td>
@@ -90,10 +92,10 @@ function resetForm()
 	<table class="adminlist">
 		<thead>
 		<tr>
-			<th width="5"><?php echo JText::_('#'); ?></th>
-			<th width="5"><input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->submissions); ?>);" /></th>
+			<th width="1%" nowrap="nowrap"><?php echo JText::_('#'); ?></th>
+			<th width="1%" nowrap="nowrap"><input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->submissions); ?>);" /></th>
 			<?php foreach ($this->staticHeaders as $header) { ?>
-			<th <?php echo !$this->isHeaderEnabled($header, 1) ? 'style="display: none"' : ''; ?> class="title" nowrap="nowrap" width="5"><?php echo JHTML::_('grid.sort', JText::_('RSFP_'.$header), $header, $this->sortOrder, $this->sortColumn, 'submissions.manage'); ?></th>
+			<th width="1%" nowrap="nowrap" <?php echo !$this->isHeaderEnabled($header, 1) ? 'style="display: none"' : ''; ?> class="title"><?php echo JHTML::_('grid.sort', JText::_('RSFP_'.$header), $header, $this->sortOrder, $this->sortColumn, 'submissions.manage'); ?></th>
 			<?php } ?>
 			<?php foreach ($this->headers as $header) { ?>
 			<th <?php echo !$this->isHeaderEnabled($header, 0) ? 'style="display: none"' : ''; ?> class="title">
@@ -108,10 +110,10 @@ function resetForm()
 		$k = 0;
 		foreach ($this->submissions as $submissionId => $submission) { ?>
 			<tr class="row<?php echo $k; ?>">
-				<td align="center" width="30"><?php echo $this->pagination->getRowOffset($i); ?></td>
-				<td><?php echo JHTML::_('grid.id', $i, $submissionId); ?></td>
+				<td width="1%" nowrap="nowrap" align="center"><?php echo $this->pagination->getRowOffset($i); ?></td>
+				<td width="1%" nowrap="nowrap"><?php echo JHTML::_('grid.id', $i, $submissionId); ?></td>
 				<?php foreach ($this->staticHeaders as $header) { ?>
-				<td <?php echo !$this->isHeaderEnabled($header, 1) ? 'style="display: none"' : ''; ?> nowrap="nowrap"><?php echo $submission[$header]; ?></td>
+				<td width="1%" nowrap="nowrap" <?php echo !$this->isHeaderEnabled($header, 1) ? 'style="display: none"' : ''; ?>><?php echo $submission[$header]; ?></td>
 				<?php } ?>
 				<?php foreach ($this->headers as $header) { ?>
 				<td <?php echo !$this->isHeaderEnabled($header, 0) ? 'style="display: none"' : ''; ?>><?php echo isset($submission['SubmissionValues'][$header]['Value']) ? $submission['SubmissionValues'][$header]['Value'] : ''; ?></td>

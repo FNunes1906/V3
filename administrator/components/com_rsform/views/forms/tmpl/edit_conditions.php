@@ -13,12 +13,7 @@ defined('_JEXEC') or die('Restricted access');
 <br />
 <div id="conditionscontent" style="overflow: auto;">
 <?php } ?>
-<div class="button2-left">
-	<div class="blank">
-		<a rel="{handler: 'iframe', size: {x: 800, y: 600}}" href="index.php?option=com_rsform&amp;view=conditions&amp;layout=edit&amp;formId=<?php echo $this->formId; ?>&amp;tmpl=component" class="modal"><?php echo JText::_('RSFP_FORM_CONDITION_NEW'); ?></a>
-	</div>
-</div>
-
+<button type="button" class="rs_button" onclick="openRSModal('<?php echo JRoute::_('index.php?option=com_rsform&view=conditions&layout=edit&formId='.$this->formId.'&tmpl=component'); ?>', 'Conditions', '800x600')"><?php echo JText::_('RSFP_FORM_CONDITION_NEW'); ?></button>
 <br /><br />
 
 	<table class="adminlist" id="conditionsTable">
@@ -34,18 +29,11 @@ defined('_JEXEC') or die('Restricted access');
 		<?php foreach ($this->conditions as $row) { ?>
 		<tr class="row<?php echo $k; ?>">
 			<td>
-			<a rel="{handler: 'iframe', size: {x: 800, y: 600}}" href="index.php?option=com_rsform&amp;view=conditions&amp;layout=edit&amp;formId=<?php echo $this->formId; ?>&amp;cid=<?php echo $row->id; ?>&amp;tmpl=component" class="modal">
-				(<?php echo JText::_('RSFP_CONDITION_'.$row->action); ?>) <?php echo $this->escape($row->ComponentName); ?>
-			</a>
+				<a href="#" onclick="openRSModal('<?php echo JRoute::_('index.php?option=com_rsform&view=conditions&layout=edit&tmpl=component&formId='.$this->formId.'&cid='.$row->id); ?>', 'Conditions', '800x600'); return false;">(<?php echo JText::_('RSFP_CONDITION_'.$row->action); ?>) <?php echo $this->escape($row->ComponentName); ?></a>
 			</td>
-			<td align="center" width="1%" nowrap="nowrap">
-				<a rel="{handler: 'iframe', size: {x: 800, y: 600}}" href="index.php?option=com_rsform&amp;view=conditions&amp;layout=edit&amp;formId=<?php echo $this->formId; ?>&amp;cid=<?php echo $row->id; ?>&amp;tmpl=component" class="modal">
-					<?php echo JText::_('EDIT'); ?>
-				</a>
-				/ 
-				<a href="javascript: void(0)" onclick="if (confirm('<?php echo JText::_('RSFP_CONDITION_DELETE_SURE', true); ?>')) conditionDelete(<?php echo $this->formId; ?>,<?php echo $row->id; ?>);">
-					<?php echo JText::_('DELETE'); ?>
-				</a>
+			<td align="center" width="20%" nowrap="nowrap">
+				<button type="button" class="rs_button rs_left" onclick="openRSModal('<?php echo JRoute::_('index.php?option=com_rsform&view=conditions&layout=edit&tmpl=component&formId='.$this->formId.'&cid='.$row->id); ?>', 'Conditions', '800x600')"><?php echo JText::_('EDIT'); ?></button>
+				<button type="button" class="rs_button rs_left" onclick="if (confirm('<?php echo JText::_('RSFP_CONDITION_DELETE_SURE', true); ?>')) conditionDelete(<?php echo $this->formId; ?>,<?php echo $row->id; ?>);"><?php echo JText::_('DELETE'); ?></button>
 			</td>
 		</tr>
 		<?php $k=1-$k; ?>

@@ -67,6 +67,7 @@ class RSFormViewForms extends JView
 			$this->assignRef('tabposition', JRequest::getInt('tabposition', 0));
 			$this->assignRef('tab', JRequest::getInt('tab', 0));
 			$this->assignRef('form', $this->get('form'));
+			$this->assignRef('form_post', $this->get('formPost'));
 			
 			$this->assign('hasSubmitButton', $this->get('hasSubmitButton'));
 			
@@ -87,6 +88,10 @@ class RSFormViewForms extends JView
 			$lists['MetaTitle'] = JHTML::_('select.booleanlist', 'MetaTitle', 'class="inputbox"', $this->form->MetaTitle);
 			$lists['TextareaNewLines'] = JHTML::_('select.booleanlist', 'TextareaNewLines', 'class="inputbox"', $this->form->TextareaNewLines);
 			$lists['AjaxValidation'] = JHTML::_('select.booleanlist', 'AjaxValidation', 'class="inputbox"', $this->form->AjaxValidation);
+			
+			$lists['post_enabled'] 	= JHTML::_('select.booleanlist', 'form_post[enabled]', 'class="inputbox"', $this->form_post->enabled);
+			$lists['post_method'] 	= JHTML::_('select.booleanlist', 'form_post[method]', 'class="inputbox"', $this->form_post->method, JText::_('RSFP_POST_METHOD_POST'), JText::_('RSFP_POST_METHOD_GET'));
+			$lists['post_silent'] 	= JHTML::_('select.booleanlist', 'form_post[silent]', 'class="inputbox"', $this->form_post->silent);
 			
 			$this->assignRef('themes', $this->get('themes'));
 			

@@ -17,3 +17,8 @@ label
 	float: none !important;
 	display: inline !important;
 }
+
+fieldset img {
+	float: none !important;
+	margin: 0 !important;
+}

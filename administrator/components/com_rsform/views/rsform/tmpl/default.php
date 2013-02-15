@@ -89,7 +89,7 @@ JHTML::_('behavior.tooltip');
 				</table>
 			</td>
 		    <td width="50%" valign="top" align="center">
-			    <table border="1" width="100%" class="thisform">
+			    <table width="100%" class="rsproduct">
 					<tr class="thisform">
 			            <th class="cpanel" colspan="2"><?php echo _RSFORM_PRODUCT; ?>  <?php echo _RSFORM_VERSION; ?> rev <?php echo _RSFORM_REVISION; ?></th>
 			         </tr>
@@ -122,24 +122,16 @@ JHTML::_('behavior.tooltip');
 						</td>
 						<td>
 							<?php if (!$this->code) { ?>
-								<input type="text" name="code" value="" size="50" />
+								<input id="rs_code" type="text" name="code" value="" size="50" />
+								<input class="rs_button" type="button" name="register" value="<?php echo JText::_('RSFP_UPDATE_CODE');?>" onclick="submitbutton('saveRegistration');"/>
 							<?php } else { ?>
 								<?php echo $this->escape($this->code); ?>
-							<?php } ?>
-						</td>
-			         </tr>
-			         <tr class="<?php echo !$this->code ? 'thisformError' : 'thisformOk'; ?>">
-						<td valign="top">&nbsp;</td>
-						<td>
-							<?php if ($this->code) { ?>
-								<input type="submit" name="modify_register" value="<?php echo JText::_('RSFP_MODIFY_CODE');?>" /><br/>
-							<?php } else { ?>
-								<input type="button" name="register" value="<?php echo JText::_('RSFP_UPDATE_CODE');?>" onclick="submitbutton('saveRegistration');"/>
+								<input class="rs_button" type="submit" name="modify_register" value="<?php echo JText::_('RSFP_MODIFY_CODE');?>" /><br/>
 							<?php } ?>
 						</td>
 			         </tr>
 			      </table>
-				  <p align="center"><a href="http://www.rsjoomla.com/joomla-components/joomla-security.html" target="_blank"><img src="components/com_rsform/assets/images/rsfirewall-approved.gif" align="middle" alt="RSFirewall! Approved"/></a></p>
+				  <p align="center"><a href="http://www.rsjoomla.com/joomla-components/joomla-security.html?utm_source=rsform&amp;utm_medium=banner_approved&amp;utm_campaign=rsfirewall" target="_blank"><img src="components/com_rsform/assets/images/rsfirewall-approved.png" align="middle" alt="RSFirewall! Approved"/></a></p>
 		      </td>
 		   </tr>
 		</table>

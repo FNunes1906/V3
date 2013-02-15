@@ -19,10 +19,10 @@ function submitbutton(task)
 </script>
 
 <form enctype="multipart/form-data" action="index.php?option=com_rsform" method="post" name="adminForm">
-	<div>
-		<h2><?php echo JText::_('RSFP_BACKUP_RESTORE_INSTRUCTIONS'); ?></h2>
+	<fieldset>
+		<legend><?php echo JText::_('RSFP_BACKUP_RESTORE_INSTRUCTIONS'); ?></legend>
 		<?php echo JText::sprintf('RSFP_BACKUP_RESTORE_INSTRUCTIONS_DESC', JText::_('RSFP_BACKUP_GENERATE'), JText::_('RSFP_RESTORE')); ?>
-	</div>
+	</fieldset>
 	
 	<?php echo $this->tabs->startPane('backuprestore-pane'); ?>
 	
@@ -46,7 +46,7 @@ function submitbutton(task)
 	        foreach ($this->forms as $row) { ?>
 	        <tr class="row<?php echo $k; ?>">
 				<td><?php echo JHTML::_('grid.id', $i, $row->FormId); ?></td>
-	            <td><?php echo !empty($row->FormTitle) ? strip_tags($row->FormTitle) : '<em>no title</em>'; ?></td>
+	            <td><label for="cb<?php echo $i; ?>"><?php echo !empty($row->FormTitle) ? strip_tags($row->FormTitle) : '<em>no title</em>'; ?></label></td>
 	            <td><?php echo $row->FormName; ?></td>
 	            <td><?php echo $row->_allSubmissions; ?></td>
 	        </tr>
@@ -55,16 +55,12 @@ function submitbutton(task)
 				$k=1-$k;
 	        }
 			?>
-			<tfoot>
 			<tr>
-				<td colspan="4">
-				<input type="radio" name="submissions" id="forms" value="0" checked="checked" /><label for="forms"> <?php echo JText::_('RSFP_BACKUP_FORMS');?></label>
-				<input type="radio" name="submissions" id="submissions" value="1"/><label for="submissions"> <?php echo JText::_('RSFP_BACKUP_FORMS_SUBMISSIONS');?></label>
-				<button class="button" type="button" onclick="submitbutton('backup.download')"><?php echo JText::_('RSFP_BACKUP_GENERATE'); ?></button>
-				</td>
+				<td width="1%"><input type="checkbox" name="submissions" id="submissions" value="1" /></td>
+				<td colspan="3"><label for="submissions"><strong class="rsform_notok"><?php echo JText::_('RSFP_BACKUP_SUBMISSIONS');?></strong></label></td>
 			</tr>
-			</tfoot>
 	        </table>
+			<button class="rs_button" type="button" onclick="submitbutton('backup.download')"><?php echo JText::_('RSFP_BACKUP_GENERATE'); ?></button>
 		</td>
 	</tr>
 	<?php } else { ?>
@@ -85,14 +81,16 @@ function submitbutton(task)
 	<table class="adminheading" width="100%">
 	<?php if ($this->writable) { ?>
 	<tr>
-		<td align="left">
-		<?php echo JText::_('RSFP_PACKAGE_FILE');?>
-		<input class="text_area" name="userfile" type="file" size="70"/>
-		<button class="button" type="button" onclick="submitbutton('restore.process')"><?php echo JText::_('RSFP_RESTORE');?></button>
-		</td>
+		<td align="left" width="1%" nowrap="nowrap"><label for="userfile"><?php echo JText::_('RSFP_PACKAGE_FILE');?></label></td>
+		<td><input class="text_area" name="userfile" id="userfile" type="file" size="70"/></td>
 	</tr>
 	<tr>
+		<td>&nbsp;</td>
 		<td><input type="checkbox" id="overwrite_checkbox" name="overwrite" value="1"/> <label for="overwrite_checkbox"><?php echo JText::_('RSFP_OVERWRITE_FORMS');?></label></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><button class="rs_button" type="button" onclick="submitbutton('restore.process')"><?php echo JText::_('RSFP_RESTORE');?></button></td>
 	</tr>
 	<?php } else { ?>
 	<tr>

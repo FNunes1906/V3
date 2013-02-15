@@ -24,7 +24,7 @@ defined('_JEXEC') or die('Restricted access');
 				<?php if ($header == 'confirmed') { ?>
 				<?php echo JHTML::_('select.booleanlist','formStatic['.$header.']','class="inputbox"',$this->staticFields->$header); ?>
 				<?php } else { ?>
-				<input class="inputbox" type="text" name="formStatic[<?php echo $header; ?>]" value="<?php echo $this->staticFields->$header; ?>" size="105" />
+				<input class="rs_inp rs_80" type="text" name="formStatic[<?php echo $header; ?>]" value="<?php echo $header == 'DateSubmitted' ? RSFormProHelper::getDate($this->staticFields->$header) : $this->staticFields->$header; ?>" size="105" />
 				<?php } ?>
 			</td>
 		</tr>

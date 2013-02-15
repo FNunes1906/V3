@@ -51,10 +51,10 @@ CREATE TABLE IF NOT EXISTS `#__rsform_condition_details` (
 );
 
 CREATE TABLE IF NOT EXISTS `#__rsform_config` (
-  `ConfigId` int(11) NOT NULL auto_increment,
+  `ConfigId` int(11) DEFAULT NULL,
   `SettingName` varchar(64) NOT NULL default '',
   `SettingValue` text NOT NULL,
-  PRIMARY KEY  (`ConfigId`)
+  PRIMARY KEY (`SettingName`)
 );
 
 CREATE TABLE IF NOT EXISTS `#__rsform_forms` (
@@ -131,6 +131,15 @@ CREATE TABLE IF NOT EXISTS `#__rsform_emails` (
   `mode` tinyint(1) NOT NULL,
   `message` text NOT NULL,
   PRIMARY KEY (`id`)
+);
+
+CREATE TABLE IF NOT EXISTS `#__rsform_posts` (
+  `form_id` int(11) NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  `method` tinyint(1) NOT NULL,
+  `silent` tinyint(1) NOT NULL,
+  `url` text NOT NULL,
+  PRIMARY KEY (`form_id`)
 );
 
 CREATE TABLE IF NOT EXISTS `#__rsform_properties` (
@@ -359,7 +368,8 @@ VALUES
 (2, 'global.debug.mode', '0'),
 (3, 'global.iis', '0'),
 (4, 'global.editor', '1'),
-(100, 'global.codemirror', '0');
+(100, 'global.codemirror', '0'),
+(111, 'auto_responsive', '1');
 
 CREATE TABLE IF NOT EXISTS `#__rsform_translations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

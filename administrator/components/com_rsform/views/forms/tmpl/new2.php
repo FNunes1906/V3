@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
 		document.getElementById('FormLayoutImage').src = 'components/com_rsform/assets/images/layouts/' + layout + '.gif';
 		document.getElementById('FormLayoutXHTML').style.display = 'none';
 		
-		if (layout.indexOf('xhtml') != -1)
+		if (layout.indexOf('xhtml') != -1 || layout == 'responsive')
 			document.getElementById('FormLayoutXHTML').style.display = '';
 	}
 	
@@ -87,7 +87,7 @@ defined('_JEXEC') or die('Restricted access');
 		<table class="admintable">
 			<tr>
 				<td width="350" style="width: 350px;" align="right" class="key"><?php echo JText::_('RSFP_WHATS_FORM_TITLE'); ?></td>
-				<td><input type="text" class="inputbox" size="55" name="FormTitle" value="" /></td>
+				<td><input class="rs_inp" type="text" class="inputbox" size="55" name="FormTitle" value="" /></td>
 			</tr>
 			<tr>
 				<td colspan="2"><?php echo JText::_('RSFP_WHATS_FORM_TITLE_DESC'); ?></td>
@@ -101,6 +101,7 @@ defined('_JEXEC') or die('Restricted access');
 					<input type="radio" id="formLayout2cols2lines" name="FormLayout" value="2cols2lines" onclick="changeLayout(this.value)" /> <label for="formLayout2cols2lines"><?php echo JText::_('RSFP_LAYOUT_2COLS2LINES');?></label>
 					<input type="radio" id="formLayoutInlineXhtml" name="FormLayout" value="inline-xhtml" onclick="changeLayout(this.value)" /> <label for="formLayoutInlineXhtml"><?php echo JText::_('RSFP_LAYOUT_INLINE_XHTML');?></label>
 					<input type="radio" id="formLayout2linesXhtml" name="FormLayout" value="2lines-xhtml" onclick="changeLayout(this.value)" /> <label for="formLayout2linesXhtml"><?php echo JText::_('RSFP_LAYOUT_2LINES_XHTML');?></label>
+					<input type="radio" id="formLayoutResponsive" name="FormLayout" value="responsive" onclick="changeLayout(this.value)" /> <label for="formLayoutResponsive"><?php echo JText::_('RSFP_LAYOUT_RESPONSIVE');?></label>
 				</td>
 			</tr>
 			<tr>
@@ -120,7 +121,7 @@ defined('_JEXEC') or die('Restricted access');
 			</tr>
 			<tr>
 				<td width="350" style="width: 350px;" align="right" class="key"><?php echo JText::_('RSFP_WHERE_EMAIL_RESULTS'); ?></td>
-				<td><input type="text" class="inputbox" size="55" name="AdminEmailTo" value="<?php echo $this->adminEmail; ?>" /></td>
+				<td><input class="rs_inp" type="text" class="inputbox" size="55" name="AdminEmailTo" value="<?php echo $this->adminEmail; ?>" /></td>
 			</tr>
 			<tr>
 				<td colspan="2"><?php echo JText::_('RSFP_WHERE_EMAIL_RESULTS_DESC'); ?></td>
@@ -142,7 +143,7 @@ defined('_JEXEC') or die('Restricted access');
 			</tr>
 			<tr id="RedirectTo1" style="display: none;">
 				<td width="350" style="width: 350px;" align="right" class="key"><?php echo JText::_('RSFP_SUBMISSION_REDIRECT_WHERE'); ?></td>
-				<td><input type="text" class="inputbox" size="55" name="ReturnUrl" value="" /></td>
+				<td><input class="rs_inp" type="text" class="inputbox" size="55" name="ReturnUrl" value="" /></td>
 			</tr>
 			<tr id="RedirectTo2" style="display: none;">
 				<td colspan="2"><?php echo JText::_('RSFP_SUBMISSION_REDIRECT_WHERE_DESC'); ?></td>
@@ -157,7 +158,7 @@ defined('_JEXEC') or die('Restricted access');
 			</tr>
 		</table>
 		
-		<p><button type="button" onclick="submitbutton('forms.new.stepthree');"><?php echo JText::_('Next'); ?></button></p>
+		<p><button class="rs_button rs_left" type="button" onclick="submitbutton('forms.new.stepthree');"><?php echo JText::_('Next'); ?></button></p>
 	
 	<input type="hidden" name="option" value="com_rsform" />
 	<input type="hidden" name="task" value="forms.new.stepthree" />

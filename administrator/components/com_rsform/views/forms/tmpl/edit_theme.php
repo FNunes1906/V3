@@ -8,6 +8,9 @@
 
 defined('_JEXEC') or die('Restricted access');
 ?>
+<div class="rsform_error" id="rsform_themes_disabled" <?php if ($this->form->FormLayoutName != 'responsive') { ?>style="display: none;"<?php } ?>>
+<?php echo JText::_('RSFP_THEMES_DISABLED'); ?>
+</div>
 <table class="adminlist">
 <thead>
 	<tr>
@@ -25,7 +28,7 @@ defined('_JEXEC') or die('Restricted access');
 	foreach ($this->themes as $theme) { ?>
 	<tr class="row<?php echo $k; ?>">
 		<td width="5">
-			<input type="radio" id="theme<?php echo $i; ?>" name="ThemeName" value="<?php echo $theme->directory; ?>" <?php echo $this->form->ThemeParams->get('name') == $theme->directory ? 'checked="checked"' : ''; ?> />
+			<input type="radio" id="theme<?php echo $i; ?>" <?php if ($this->form->FormLayoutName == 'responsive') { ?>disabled="disabled"<?php } ?> name="ThemeName" value="<?php echo $theme->directory; ?>" <?php echo $this->form->ThemeParams->get('name') == $theme->directory ? 'checked="checked"' : ''; ?> />
 			<?php if (isset($theme->css)) foreach ($theme->css as $css) { ?>
 				<input type="hidden" name="ThemeCSS[<?php echo $theme->directory; ?>][]" value="<?php echo $this->escape($css); ?>" />
 			<?php } ?>

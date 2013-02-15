@@ -155,7 +155,7 @@ class RSFormModelSubmissions extends JModel
 				$submissionIds[] = $result->SubmissionId;
 				
 				$this->_data[$result->SubmissionId]['FormId'] = $result->FormId;
-				$this->_data[$result->SubmissionId]['DateSubmitted'] = $result->DateSubmitted;
+				$this->_data[$result->SubmissionId]['DateSubmitted'] = RSFormProHelper::getDate($result->DateSubmitted);
 				$this->_data[$result->SubmissionId]['UserIp'] = $result->UserIp;
 				$this->_data[$result->SubmissionId]['Username'] = $result->Username;
 				$this->_data[$result->SubmissionId]['UserId'] = $result->UserId;
@@ -366,7 +366,7 @@ class RSFormModelSubmissions extends JModel
 			list($replace, $with) = RSFormProHelper::getReplacements($cid, true);
 			list($replace2, $with2) = $this->getReplacements($submission->UserId);
 			$replace = array_merge($replace, $replace2, array('{global:date_added}', '{global:submissionid}', '{global:submission_id}', '{detailspdf}','{global:confirmed}'));
-			$with 	 = array_merge($with, $with2, array($submission->DateSubmitted, $cid, $cid, '<a href="'.$pdf_link.'">',$confirmed));
+			$with 	 = array_merge($with, $with2, array(RSFormProHelper::getDate($submission->DateSubmitted), $cid, $cid, '<a href="'.$pdf_link.'">',$confirmed));
 			
 			if ($format == 'pdf' && preg_match_all('#{detailspdf}(.*?){\/detailspdf}#is', $template_formdetail, $matches))
 				foreach ($matches[0] as $fullmatch)
@@ -393,4 +393,3 @@ class RSFormModelSubmissions extends JModel
 		return !empty($itemid) ? '&Itemid='.$itemid : '';
 	}
 }
-?>

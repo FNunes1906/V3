@@ -34,7 +34,6 @@ class RSFormControllerComponents extends RSFormController
 		
 		$params = JRequest::getVar('param', array(), 'post', 'none', JREQUEST_ALLOWRAW);
 		$params['EMAILATTACH'] = !empty($params['EMAILATTACH']) ? implode(',',$params['EMAILATTACH']) : '';
-		array_walk($params, array('RSFormProHelper', 'escapeArray'));
 		
 		$just_added = false;
 		if ($componentIdToEdit < 1)
@@ -50,6 +49,42 @@ class RSFormControllerComponents extends RSFormController
 		
 		$model = $this->getModel('forms');
 		$lang  = $model->getLang();
+		
+		if (!$just_added && isset($params['ITEMS'])) {
+			$db->setQuery("SELECT cd.* FROM #__rsform_condition_details cd LEFT JOIN #__rsform_conditions c ON (cd.condition_id=c.id) WHERE cd.component_id='".$componentIdToEdit."' AND c.lang_code=".$db->quote($lang));
+			if ($conditions = $db->loadObjectList()) {
+				$data 		= RSFormProHelper::getComponentProperties($componentIdToEdit);
+				$oldvalues 	= RSFormProHelper::explode(RSFormProHelper::isCode($data['ITEMS']));
+				$newvalues 	= RSFormProHelper::explode(RSFormProHelper::isCode($params['ITEMS']));
+				
+				foreach ($oldvalues as $i => $oldvalue) {
+					$oldvalue = reset(explode('|', $oldvalue, 2));
+					$oldvalue = str_replace(array('[c]', '[g]'), '', $oldvalue);
+					
+					$oldvalues[$i] = $oldvalue;
+				}
+				
+				foreach ($newvalues as $i => $newvalue) {
+					$newvalue = reset(explode('|', $newvalue, 2));
+					$newvalue = str_replace(array('[c]', '[g]'), '', $newvalue);
+					
+					$newvalues[$i] = $newvalue;
+				}
+				
+				foreach ($conditions as $condition) {
+					$pos = array_search($condition->value, $oldvalues);
+					if ($pos !== false && isset($newvalues[$pos])) {
+						$newvalue = $newvalues[$pos];
+						if ($condition->value != $newvalue) {
+							$db->setQuery("UPDATE #__rsform_condition_details SET `value`=".$db->quote($newvalue)." WHERE id='".$condition->id."'");
+							$db->query();
+						}
+					}
+				}
+			}
+		}
+		
+		array_walk($params, array('RSFormProHelper', 'escapeArray'));
 		if ($model->_form->Lang != $lang)
 			$model->saveFormPropertyTranslation($formId, $componentIdToEdit, $params, $lang, $just_added);
 		
@@ -69,7 +104,11 @@ class RSFormControllerComponents extends RSFormController
 			}
 		}
 		
-		$this->setRedirect('index.php?option=com_rsform&task=forms.edit&formId='.$formId);
+		$link = 'index.php?option=com_rsform&task=forms.edit&formId='.$formId;
+		if (JRequest::getVar('tmpl') == 'component')
+			$link .= '&tmpl=component';
+		
+		$this->setRedirect($link);
 	}
 	
 	function saveOrdering()

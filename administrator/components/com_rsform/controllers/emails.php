@@ -29,9 +29,8 @@ class RSFormControllerEmails extends RSFormController
 		if ($this->getTask() == 'apply')
 			return $this->setRedirect('index.php?option=com_rsform&task=forms.emails&cid='.$row->id.'&formId='.$row->formId.'&tmpl=component&update=1');
 		
-		$close = RSFormProHelper::isJ16() ? 'window.parent.SqueezeBox.close();' : 'window.parent.document.getElementById(\'sbox-window\').close();';
 		$document =& JFactory::getDocument();
-		$document->addScriptDeclaration('window.parent.updateemails('.$row->formId.');'.$close);
+		$document->addScriptDeclaration('window.opener.updateemails('.$row->formId.');window.close();');
 	}
 	
 	function remove()

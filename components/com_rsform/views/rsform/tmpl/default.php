@@ -8,3 +8,13 @@
 
 defined('_JEXEC') or die('Restricted access');
 ?>
+<?php if ($this->isJ16) { ?>
+	<?php if ($this->params->get('show_page_heading', 0)) { ?>
+		<h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
+	<?php } ?>
+<?php } else { ?>
+	<?php if ($this->params->get('show_page_title', 0)) { ?>
+		<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>"><?php echo $this->escape($this->params->get('page_title')); ?></div>
+	<?php } ?>
+<?php } ?>
+<?php echo RSFormProHelper::displayForm($this->formId); ?>

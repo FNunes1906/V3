@@ -63,14 +63,10 @@ class RSFormControllerMappings extends RSFormController
 		$row = $model->save();
 
 		$html  = '<script type="text/javascript">';
+		$html .= 'window.close();';
 		
-		if ($row === false)
-			$html .= RSFormProHelper::isJ16() ? 'window.parent.SqueezeBox.close();' : 'window.parent.document.getElementById(\'sbox-window\').close()';
-		else
-		{
-			$html .= 'window.parent.ShowMappings('.$row->formId.')'."\n";
-			$html .= RSFormProHelper::isJ16() ? 'window.parent.SqueezeBox.close();' : 'window.parent.document.getElementById(\'sbox-window\').close()';
-		}
+		if ($row !== false)
+			$html .= 'window.opener.ShowMappings('.$row->formId.')'."\n";
 		
 		$html .= '</script>';
 		

@@ -221,6 +221,15 @@ class RSFormModelForms extends JModel
 		return $this->_form;
 	}
 	
+	function getFormPost()
+	{
+		$formId = JRequest::getInt('formId');
+		
+		$post = JTable::getInstance('RSForm_Posts', 'Table');
+		$post->load($formId, false);
+		return $post;
+	}
+	
 	function autoGenerateLayout()
 	{
 		$formId = $this->_form->FormId;
@@ -478,6 +487,21 @@ class RSFormModelForms extends JModel
 		
 		if ($form->store())
 		{
+			// Post to another location
+			$formId = $post['formId'];
+			$db 	=& JFactory::getDBO();
+			
+			$db->setQuery("SELECT form_id FROM #__rsform_posts WHERE form_id='".(int) $formId."'");
+			if (!$db->loadResult())
+			{
+				$db->setQuery("INSERT INTO #__rsform_posts SET form_id='".(int) $formId."'");
+				$db->query();
+			}
+			$row =& JTable::getInstance('RSForm_Posts', 'Table');
+			$row->form_id = $formId;
+			$row->bind(JRequest::getVar('form_post', array(), 'default', 'none', JREQUEST_ALLOWRAW));
+			$row->store();
+			
 			// Trigger event
 			$mainframe->triggerEvent('rsfp_onFormSave', array(&$form));
 			return true;

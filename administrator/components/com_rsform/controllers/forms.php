@@ -273,6 +273,9 @@ class RSFormControllerForms extends RSFormController
 			break;
 		}
 		
+		if (JRequest::getVar('tmpl') == 'component')
+			$link .= '&tmpl=component';
+		
 		$this->setRedirect($link, JText::_('RSFP_FORM_SAVED'));
 	}
 	
@@ -456,7 +459,13 @@ class RSFormControllerForms extends RSFormController
 				}
 			}
 			
-			//foreach ($relations as $oldComponentId => $newComponentId)
+			// copy post to location
+			$db->setQuery("SELECT * FROM #__rsform_posts WHERE form_id='".$formId."'");
+			if ($post = $db->loadObject())
+			{
+				$db->setQuery("INSERT INTO #__rsform_posts SET `form_id`='".(int) $newFormId."', `enabled`='".(int) $post->enabled."', `method`='".(int) $post->method."', `silent`='".(int) $post->silent."', `url`=".$db->quote($post->url));
+				$db->query();
+			}
 		}
 		
 		$this->setRedirect('index.php?option=com_rsform&task=forms.manage', JText::sprintf('RSFP_FORMS_COPIED', $total));

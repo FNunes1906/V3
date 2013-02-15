@@ -9,8 +9,8 @@
 defined('_JEXEC') or die('Restricted access');
 ?>
 <script type="text/javascript">
-if (window.parent.showConditions)
-	window.parent.showConditions(<?php echo $this->formId; ?>);
+if (window.opener && window.opener.showConditions)
+	window.opener.showConditions(<?php echo $this->formId; ?>);
 	
 <?php if ($this->close) { ?>
 rsform_close_box();
@@ -117,11 +117,7 @@ function rsform_change_field() {
 }
 
 function rsform_close_box() {
-	<?php if (RSFormProHelper::isJ16()) { ?>
-	window.parent.SqueezeBox.close();
-	<?php } else { ?>
-	window.parent.document.getElementById('sbox-window').close();
-	<?php } ?>
+	window.close();
 }
 </script>
 
@@ -134,10 +130,12 @@ function rsform_close_box() {
 <form name="adminForm" id="adminForm" method="post" action="index.php">
 	<div id="rsform_conditions">
 	<p>
-		<button onclick="submitform('apply');" type="button">Apply</button>
-		<button onclick="submitform('save');" type="button">Save</button>
-		<button onclick="rsform_close_box();" type="button">Close</button>
+		<button class="rs_button rs_left" onclick="submitform('apply');" type="button">Apply</button>
+		<button class="rs_button rs_left" onclick="submitform('save');" type="button">Save</button>
+		<button class="rs_button rs_left" onclick="rsform_close_box();" type="button">Close</button>
 	</p>
+	<p><br /><br /></p>
+	<span class="rsform_clear_both"></span>
 	<p>
 		<?php echo JText::sprintf('RSFP_SHOW_FIELD_IF_THE_FOLLOWING_MATCH', $this->lists['action'], $this->lists['block'], $this->lists['allfields'], $this->lists['condition']); ?> <a href="javascript: void(0);" onclick="rsform_add_condition();"><img class="rsform_align_middle" src="components/com_rsform/assets/images/add.png" alt="" /></a>
 	</p>

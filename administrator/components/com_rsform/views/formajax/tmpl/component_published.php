@@ -7,5 +7,5 @@
 */
 
 defined('_JEXEC') or die('Restricted access');
-echo JHTML::_('grid.published', $this->field, $this->i, 'tick.png', 'publish_x.png', 'components.');
-?>
+
+echo str_replace('href="#"', 'href="javascript:void(0);"', JHTML::_('grid.published', $this->field, $this->i, 'tick.png', 'publish_x.png', 'components.'));

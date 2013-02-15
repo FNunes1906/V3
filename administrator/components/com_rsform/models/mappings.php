@@ -158,13 +158,15 @@ class RSFormModelMappings extends JModel
 			
 			
 			$database2 = JDatabase::getInstance($options);
-			
-			if (is_a($database2,'JException'))
+				
+			if (is_a($database2,'JException') || is_a($database2,'JError'))
 				return $database2->getMessage();
+			
+			if (RSFormProHelper::isJ16() && $database2->getErrorNum())
+				return $database2->getErrorMsg();
 			
 			return $database2;
 		}
 		return $database;
 	}
 }
-?>

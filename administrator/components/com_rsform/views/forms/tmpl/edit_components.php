@@ -79,7 +79,7 @@ defined('_JEXEC') or die('Restricted access');
 								<span><?php echo $this->pagination->orderDownIcon( $i, $n, true, 'orderdown', 'Move Down', 'ordering' ); ?></span>
 								<input type="text" name="order[]" size="5" value="<?php echo $field->ordering; ?>" disabled="disabled" class="text_area" style="text-align:center" />
 							</td>
-							<td align="center"><?php echo JHTML::_('grid.published', $field, $i, 'tick.png', 'publish_x.png', 'components.'); ?></td>
+							<td align="center"><?php /* Joomla! hacks as usual... */ echo str_replace('href="#"', 'href="javascript:void(0);"', JHTML::_('grid.published', $field, $i, 'tick.png', 'publish_x.png', 'components.')); ?></td>
 							<td align="center"><?php echo $field->required; ?></td>
 							<td align="center"><?php echo $field->validation; ?></td>
 						</tr>

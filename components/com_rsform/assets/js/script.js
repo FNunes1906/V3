@@ -154,10 +154,10 @@ function ajaxValidation(form, page)
 			totalPages = parseInt(response[3]);
 			rsfp_changePage(formId, page, totalPages, false);
 		}
-		
-		for (var i=0; i<submits.length; i++)
-			submits[i].disabled = false;
 	}
+	
+	for (var i=0; i<submits.length; i++)
+		submits[i].disabled = false;
 	
 	if (success == false && document.getElementById('rsform_error_' + formId))
 	{

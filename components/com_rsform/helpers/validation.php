@@ -52,6 +52,20 @@ class RSFormProValidations
 		return true;
 	}
 	
+	function alphaaccented($value, $extra=null, $data=null) {
+		if (preg_match('#[^[:alpha:] ]#u', $value)) {
+			return false;
+		}
+		return true;
+	}
+	
+	function alphanumericaccented($value, $extra=null, $data=null) {
+		if (preg_match('#[^[:alpha:]0-9 ]#u', $value)) {
+			return false;
+		}
+		return true;
+	}
+	
 	function email($email,$extra=null,$data=null)
 	{
 		jimport('joomla.mail.helper');
@@ -193,4 +207,3 @@ class RSFormProValidations
 		return preg_match($pattern, $value);
 	}
 }
-?>

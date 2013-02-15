@@ -112,6 +112,13 @@ class RSFormProBackup
 								$xml .= RSFormProBackup::createXMLEntry('#__rsform_condition_details', $detail, array('id'))."\n";
 					}
 			}
+			
+			//LOAD POSTS
+			$db->setQuery("SELECT * FROM #__rsform_posts WHERE `form_id`='".$form_row->FormId."'");
+			if ($post = $db->loadObject())
+			{
+				$xml .= RSFormProBackup::createXMLEntry('#__rsform_posts',$post)."\n";
+			}
 		}
 		
 		$xml .= '</tasks>'."\n";
@@ -203,6 +210,15 @@ class RSFormProBackup
 					$v = end(explode('.', $v, 2));
 					$v = "{ComponentId}.".$v;
 				}
+				if ($k == 'form_id')
+				{
+					$v = '{FormId}';
+				}
+			}
+			
+			// Post to another location
+			if ($tb_name == '#__rsform_posts')
+			{		
 				if ($k == 'form_id')
 				{
 					$v = '{FormId}';

@@ -161,12 +161,12 @@ function toggleCheckColumns()
 		</td>
 	</tr>
 	<tr>
-		<td><input type="button" onclick="submitbutton('submissions.export.task');" name="Export" value="<?php echo JText::_('RSFP_EXPORT');?>" /></td>
+		<td><button type="button" class="rs_button" onclick="submitbutton('submissions.export.task');" name="Export"><?php echo JText::_('RSFP_EXPORT');?></button></td>
 	</tr>
 	</table>
 	<?php echo $this->tabs->endPanel(); ?>
 	<?php echo $this->tabs->startPanel(JText::_($this->exportType == 'csv' ? 'RSFP_EXPORT_CSV_OPTIONS' : 'RSFP_EXPORT_OPTIONS'), 'export-options'); ?>
-	<table class="admintable">
+	<table class="admintable" width="100%">
 	<tr>
 		<td width="200" style="width: 200px;" align="right" class="key">
 			<span class="hasTip" title="<?php echo JText::_('RSFP_EXPORT_HEADERS_DESC'); ?>">
@@ -185,7 +185,7 @@ function toggleCheckColumns()
 			</span>
 		</td>
 		<td>
-			<input type="text" style="text-align: center" onkeyup="updateCSVPreview();" name="ExportDelimiter" value="," size="5" />
+			<input type="text" class="rs_inp rs_5" style="text-align: center" onkeyup="updateCSVPreview();" name="ExportDelimiter" value="," size="5" />
 		</td>
 	</tr>
 	<tr>
@@ -195,7 +195,7 @@ function toggleCheckColumns()
 			</span>
 		</td>
 		<td>
-			<input type="text" style="text-align: center" onkeyup="updateCSVPreview();" name="ExportFieldEnclosure" value="&quot;" size="5" />
+			<input type="text" class="rs_inp rs_5" style="text-align: center" onkeyup="updateCSVPreview();" name="ExportFieldEnclosure" value="&quot;" size="5" />
 		</td>
 	</tr>
 	<?php } ?>

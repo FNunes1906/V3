@@ -33,11 +33,12 @@ class RSFormController extends JController
 		$doc->addScript(JURI::root(true).'/administrator/components/com_rsform/assets/js/jquery.js');
 		$doc->addScript(JURI::root(true).'/administrator/components/com_rsform/assets/js/tablednd.js');
 		$doc->addScript(JURI::root(true).'/administrator/components/com_rsform/assets/js/jquery.scrollto.js');
-		$doc->addScript(JURI::root(true).'/administrator/components/com_rsform/assets/js/script.js');
+		$doc->addScript(JURI::root(true).'/administrator/components/com_rsform/assets/js/script.js?v=44');
 		
-		$doc->addStyleSheet(JURI::root(true).'/administrator/components/com_rsform/assets/css/style.css');
+		$doc->addStyleSheet(JURI::root(true).'/administrator/components/com_rsform/assets/css/style.css?v=44');
 		if (RSFormProHelper::isJ16())
 			$doc->addStyleSheet(JURI::root(true).'/administrator/components/com_rsform/assets/css/style16.css');
+		$doc->addStyleSheet(JURI::root(true).'/administrator/components/com_rsform/assets/css/rsdesign.css');
 	}
 	
 	function display()

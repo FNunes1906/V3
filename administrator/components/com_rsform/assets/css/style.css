@@ -13,11 +13,6 @@
 	display: inline;
 }
 
-.rsform_preview
-{
-	background: url(../images/icon-16-frontpage.png) no-repeat;
-}
-
 .rsform_add_menu
 {
 	background: url(../images/icon-16-menu.png) no-repeat;
@@ -33,9 +28,28 @@
 	background: url(../images/icon-16-trash.png) no-repeat;
 }
 
-.rsform_edit
-{
-	background: url(../images/icon-16-edit.png) no-repeat;
+.rs_button span {
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 25px;
+	display: block;
+}
+
+.rs_button span.rsform_edit {
+	background-image: url(../images/icon-16-edit.png);
+}
+
+.rs_button span.rsform_preview {
+	background-image: url(../images/icon-16-frontpage.png);
+}
+
+a.rsform_preview {
+	background: url(../images/icon-16-frontpage.png) no-repeat center left;
+}
+
+td.key {
+	width: 25%;
+	padding-right: 1%;
 }
 
 .rsform_upload
@@ -259,18 +273,22 @@ table.adminrsform th {
 }
 table.adminrsform td { padding: 3px; }
 
-#state
-{
+#state {
+	background: #fff;
+	font-weight: bold;
+	position: fixed;
+    z-index: 999;
 	top: 5px;
 	right: 5px;
-    position: absolute;
-    z-index:999;
-    width: 150px;
-    color: #fff;
-    font-weight: bold;
-    height: 20px;
-    text-align:right;
-    padding-top:6px;
+	line-height: 35px;
+	height: 35px;
+	padding: 1px;
+	border: solid 1px #c7c7c7;
+	color: #707070;
+}
+
+#state img {
+	vertical-align: middle;
 }
 
 #rsform_loading
@@ -278,43 +296,37 @@ table.adminrsform td { padding: 3px; }
 	padding: 5px;
 }
 
-div.componentEdit
-{
+div.componentEdit {
 	background: #fff;
 }
 
-.rsform_dragged td
-{
+.rsform_dragged td {
 	background: #E7FFCC !important;
 }
 
-.rsform_dropped td
-{
+.rsform_dropped td {
 	background: red !important;
 }
 
-div.rsform_layout_box
-{
-	border: 1px solid #cccccc;
+div.rsform_layout_box {
 	width: 185px;
 	margin: 5px;
 	padding: 2px;
 	float: left;
 }
 
-#formLayout
-{
+#formLayout {
 	width: 800px;
 	height: 450px;
 }
 
-#columnsContainer, .dropdownContainer
-{
+#columnsContainer,
+.dropdownContainer {
 	position: relative;
 }
 
-#columnsDiv, .dropdownContainer div
-{
+#columnsDiv,
+.dropdownContainer div {
 	position: absolute;
 	background: #F9F9F9;
 	border: solid 1px #c7c7c7;
@@ -322,54 +334,49 @@ div.rsform_layout_box
 	display: none;
 	top: 0;
 	left: 0;
+	z-index: 999;
 }
 
-.dropdownContainer div
-{
+.dropdownContainer div {
 	padding: 0px;
 }
 
-.dropdownContainer div a
-{
+.dropdownContainer div a {
 	display: block;
 	padding: 6px;
 }
 
-.dropdownContainer div a:hover
-{
+.dropdownContainer div a:hover {
 	color: #fff;
 	background: #c7c7c7;
 	text-decoration: none;
 }
 
-#previewExportDiv
-{
+#previewExportDiv {
 	background: #fff;
 	border: solid 1px #c7c7c7;
 }
 
-#previewExportDiv pre
-{
+#previewExportDiv pre {
 	color: #000;
 }
 
-tr.rsform_page td
-{
+tr.rsform_page td {
 	border-bottom: dashed 1px #000 !important;
 }
 
-#quickFieldsDiv
-{
+#quickFieldsDiv {
 	display: none;
 }
 
-#QuickAdd1, #QuickAdd2, #QuickAdd3, #QuickAdd4
-{
+#QuickAdd1,
+#QuickAdd2,
+#QuickAdd3,
+#QuickAdd4 {
 	width: 200px;
 }
 
-a.folder
-{
+a.folder {
 	background: url(../images/folder.gif) no-repeat;
 	padding-left: 20px;
 	display: block;
@@ -377,8 +384,7 @@ a.folder
 	margin-right: 10px;
 }
 
-a.file
-{
+a.file {
 	background: url(../images/file.gif) no-repeat;
 	padding-left: 20px;
 	display: block;
@@ -388,8 +394,7 @@ a.file
 
 /* NEW DESIGNS CSS */
 
-#rsform_container
-{
+#rsform_container {
 	border: 1px solid #e2e2e2;
 	margin: 10px;
 	padding: 10px;
@@ -451,6 +456,7 @@ ul#rsform_maintabs li a#properties span {
 ul#rsform_firstleftnav {
 	width: 250px;
 	margin-right: -100%;
+	margin-top: 0px;
 	}
 
 ul#rsform_firstleftnav  li a {	
@@ -469,7 +475,7 @@ ul.rsform_leftnav {
 	list-style: none;
 	float: left;
 	padding: 0;
-	}
+}
 	
 ul.rsform_leftnav li {
 	float: none;
@@ -617,6 +623,10 @@ ul.rsform_leftnav li a#conditions span {
 	background: url(../images/icons/conditions.png) no-repeat 10px center;
 }
 
+ul.rsform_leftnav li a#postscript span {
+	background: url(../images/icons/postscript.png) no-repeat 10px center;
+}
+
 ul.rsform_leftnav li a#constantcontact span {
 	background: url(../images/icons/constantcontact.png) no-repeat 10px center;
 }
@@ -700,40 +710,11 @@ div#rsform_fixed select {
 	font-size: 11px;
 	padding: 5px;
 }
-	
-div#rsform_fixed .rsform_btn {
-	display: block;
-	margin-top: 5px;
-	border: 1px solid #6b7474;
-	padding: 6px 10px;
-	font-size: 10px;
-	font-weight: bold;
-	cursor: pointer;	
-	clear: both;
-	margin-left: 310px;
-	background: #b1bbbb url(../images/btnbg.gif) repeat-x left top;
-	color: #283232;
-}
-
-div#rsform_fixed .rsform_btn_disabled {
-	display: block;
-	margin-top: 5px;
-	border: 1px solid #cccccc;
-	padding: 6px 10px;
-	font-size: 10px;
-	font-weight: bold;
-	cursor: pointer; 
-	clear: both;
-	margin-left: 310px;
-	background: #b1bbbb url(../images/btnbg2.gif) repeat-x left top;
-	color: #b4b4b4;
-}
 
 div#rsform_fixed p.rsfp_error {
-	padding: 8px 5px;	
+	padding: 8px 5px 8px 25px;
 	border: 1px dotted red;
 	background: #ffe7e7 url(../images/icons/error.png) no-repeat 5px center;
-	text-indent: 20px;
 	color: red;
 }
 	
@@ -760,7 +741,7 @@ div#rsform_fixed {
 }
 
 div#rsform_textboxdiv, div#rsform_textareadiv {
-	width: 728px;
+	width: 468px;
 	float: left;	
 	border-right: 1px solid #e7e7e7;
 	border-top: 1px solid #e7e7e7;	
@@ -805,7 +786,7 @@ ul.rsform_secondarytabs li a.active {
 }
 
 div#rsform_secondarytabcontent {
-	width: 709px;
+	/*width: 709px;*/
 	min-height: 414px;
 	background: #f3f3f3;
 	border: 1px solid #e2e2e2;
@@ -849,4 +830,14 @@ a.rsform_close {
 
 .rsform_align_middle {
 	vertical-align: middle;
+}
+
+.rsform_clear_both {
+	display: block;
+	clear: both;
+	width: 100%;
+	height: 1px;
+	font-size: 1px;
+	line-height: 1px;
+	background: none;
 }

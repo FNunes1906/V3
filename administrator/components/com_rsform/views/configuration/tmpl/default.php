@@ -48,21 +48,9 @@ function submitbutton(pressbutton)
 				</span>
 			</td>
 			<td>
-				<input name="rsformConfig[global.register.code]" value="<?php echo $this->code; ?>" size="100" maxlength="50" /><br />
+				<input class="rs_inp rs_80" name="rsformConfig[global.register.code]" value="<?php echo $this->code; ?>" size="100" maxlength="50" /><br />
 			</td>
 		</tr>
-		<?php /*
-		<tr>
-			<td width="200" style="width: 200px;" align="right" class="key">
-				<span class="hasTip" title="<?php echo JText::_('RSFP_DEBUG_DESC'); ?>">
-					<?php echo JText::_('RSFP_DEBUG'); ?>
-				</span>
-			</td>
-			<td>
-				<?php echo $this->lists['global.debug.mode']; ?>
-			</td>
-		</tr>
-		*/ ?>
 		<tr>
 			<td width="200" style="width: 200px;" align="right" class="key">
 				<span class="hasTip" title="<?php echo JText::_('RSFP_IIS_DESC'); ?>">
@@ -92,6 +80,16 @@ function submitbutton(pressbutton)
 			</td>
 			<td>
 				<?php echo $this->lists['global.codemirror']; ?>
+			</td>
+		</tr>
+		<tr>
+			<td width="200" style="width: 200px;" align="right" class="key">
+				<span class="hasTip" title="<?php echo JText::_('RSFP_ENABLE_AUTO_RESPONSIVE_DESC'); ?>">
+					<?php echo JText::_('RSFP_ENABLE_AUTO_RESPONSIVE'); ?>
+				</span>
+			</td>
+			<td>
+				<?php echo $this->lists['auto_responsive']; ?>
 			</td>
 		</tr>
 	</table>

@@ -33,7 +33,9 @@ defined('_JEXEC') or die('Restricted access');
 		<td><?php echo $this->template; ?></td>
 	</tr>
 	<tr>
-		<td align="center" class="sectiontablefooter<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>"><?php echo $this->pagination->getPagesLinks(); ?></td>
+		<td align="center" class="sectiontablefooter<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
+			<div class="pagination"><?php echo $this->pagination->getPagesLinks(); ?></div>
+		</td>
 	</tr>
 	<tr>
 		<td align="center"><?php echo $this->pagination->getPagesCounter(); ?></td>

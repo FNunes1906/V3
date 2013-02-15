@@ -21,19 +21,21 @@ function rsform_close_window()
 
 <div id="rsmembership_explorer">
 	<form action="index.php?option=com_rsform&amp;controller=files&amp;task=display" method="post" name="adminForm" enctype="multipart/form-data">
-	<button type="button" onclick="rsform_close_window();"><?php echo JText::_('CLOSE'); ?></button>
+	<button type="button" class="rs_button" onclick="rsform_close_window();"><?php echo JText::_('CLOSE'); ?></button>
 		<?php if ($this->canUpload) { ?>
 		<table class="adminform">
 		<tr>
-			<th colspan="2"><?php echo JText::_('Upload File'); ?></th>
+			<th colspan="3"><?php echo JText::_('Upload File'); ?></th>
 		</tr>
 		<tr>
 			<td width="120">
 				<label for="upload"><?php echo JText::_('File'); ?>:</label>
 			</td>
-			<td>
+			<td width="1%" nowrap="nowrap">
 				<input class="input_box" id="upload" name="upload" type="file" size="57" />
-				<input class="button" type="button" value="<?php echo JText::_('Upload File'); ?>" onclick="submitbutton('upload')" />
+			</td>
+			<td>
+				<input class="rs_button" type="button" value="<?php echo JText::_('Upload File'); ?>" onclick="submitbutton('upload')" />
 			</td>
 		</tr>
 		</table>

@@ -27,14 +27,14 @@ function submitbutton(task)
 	<table class="adminlist">
 		<thead>
 		<tr>
-			<th width="5"><?php echo JText::_('#'); ?></th>
-			<th width="5"><input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->forms); ?>);" /></th>
+			<th width="1%" nowrap="nowrap"><?php echo JText::_('#'); ?></th>
+			<th width="1%" nowrap="nowrap"><input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->forms); ?>);" /></th>
 			<th class="title"><?php echo JHTML::_('grid.sort', JText::_('RSFP_FORM_TITLE'), 'FormTitle', $this->sortOrder, $this->sortColumn, 'forms.manage'); ?></th>
 			<th class="title"><?php echo JHTML::_('grid.sort', JText::_('RSFP_FORM_NAME'), 'FormName', $this->sortOrder, $this->sortColumn, 'forms.manage'); ?></th>
-			<th width="5" class="title"><?php echo JHTML::_('grid.sort', JText::_('PUBLISHED'), 'Published', $this->sortOrder, $this->sortColumn, 'forms.manage'); ?></th>
-			<th class="title" width="80"><?php echo JText::_('RSFP_SUBMISSIONS'); ?></th>
+			<th width="1%" nowrap="nowrap" class="title"><?php echo JHTML::_('grid.sort', JText::_('PUBLISHED'), 'Published', $this->sortOrder, $this->sortColumn, 'forms.manage'); ?></th>
+			<th width="1%" nowrap="nowrap" class="title"><?php echo JText::_('RSFP_SUBMISSIONS'); ?></th>
 			<th class="title" width="300"><?php echo JText::_('TOOLS'); ?></th>
-			<th width="65" class="title"><?php echo JHTML::_('grid.sort', JText::_('RSFP_FORM_ID'), 'FormId', $this->sortOrder, $this->sortColumn, 'forms.manage'); ?></th>
+			<th width="1%" nowrap="nowrap" class="title"><?php echo JHTML::_('grid.sort', JText::_('RSFP_FORM_ID'), 'FormId', $this->sortOrder, $this->sortColumn, 'forms.manage'); ?></th>
 		</tr>
 		</thead>
 	<?php
@@ -46,12 +46,12 @@ function submitbutton(task)
 		$row->FormTitle = strip_tags($row->FormTitle);
 		?>
 		<tr class="row<?php echo $k; ?>">
-			<td><?php echo $this->pagination->getRowOffset($i); ?></td>
-			<td><?php echo JHTML::_('grid.id', $i, $row->FormId); ?></td>
+			<td width="1%" nowrap="nowrap"><?php echo $this->pagination->getRowOffset($i); ?></td>
+			<td width="1%" nowrap="nowrap"><?php echo JHTML::_('grid.id', $i, $row->FormId); ?></td>
 			<td><a href="index.php?option=com_rsform&amp;task=forms.edit&amp;formId=<?php echo $row->FormId; ?>"><?php echo !empty($row->FormTitle) ? $row->FormTitle : '<em>no title</em>'; ?></a></td>
 			<td><?php echo $row->FormName; ?></td>
-			<td align="center"><?php echo JHTML::_('grid.published', $row, $i, 'tick.png', 'publish_x.png', 'forms.'); ?></td>
-			<td><a href="index.php?option=com_rsform&amp;task=submissions.manage&amp;formId=<?php echo $row->FormId; ?>">
+			<td width="1%" nowrap="nowrap" align="center"><?php echo JHTML::_('grid.published', $row, $i, 'tick.png', 'publish_x.png', 'forms.'); ?></td>
+			<td width="1%" nowrap="nowrap"><a href="index.php?option=com_rsform&amp;task=submissions.manage&amp;formId=<?php echo $row->FormId; ?>">
 					<?php echo JText::sprintf('RSFP_TODAY_SUBMISSIONS', $row->_todaySubmissions); ?><br/>
 					<?php echo JText::sprintf('RSFP_MONTH_SUBMISSIONS', $row->_monthSubmissions); ?><br/>
 					<?php echo JText::sprintf('RSFP_ALL_SUBMISSIONS', $row->_allSubmissions); ?><br/>
@@ -67,7 +67,7 @@ function submitbutton(task)
 				<?php } ?>
 				<a class="rsform_icon rsform_clear" href="index.php?option=com_rsform&amp;task=submissions.clear&amp;formId=<?php echo $row->FormId; ?>" onclick="return (confirm('<?php echo JText::_('VALIDDELETEITEMS', true); ?>'));"><?php echo JText::_('RSFP_CLEAR_SUBMISSIONS'); ?></a>
 			</td>
-			<td><?php echo $row->FormId; ?></td>
+			<td width="1%" nowrap="nowrap"><?php echo $row->FormId; ?></td>
 		</tr>
 	<?php
 		$i++;

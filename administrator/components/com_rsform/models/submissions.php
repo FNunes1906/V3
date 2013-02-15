@@ -19,6 +19,7 @@ class RSFormModelSubmissions extends JModel
 	var $_db = null;
 	
 	var $firstFormId = 0;
+	var $allFormIds = array();
 	
 	var $export = false;
 	var $rows = 0;
@@ -209,7 +210,7 @@ class RSFormModelSubmissions extends JModel
 				$submissionIds[] = $result->SubmissionId;
 				
 				$this->_data[$result->SubmissionId]['FormId'] = $result->FormId;
-				$this->_data[$result->SubmissionId]['DateSubmitted'] = $result->DateSubmitted;
+				$this->_data[$result->SubmissionId]['DateSubmitted'] = RSFormProHelper::getDate($result->DateSubmitted);
 				$this->_data[$result->SubmissionId]['UserIp'] = $result->UserIp;
 				$this->_data[$result->SubmissionId]['Username'] = $result->Username;
 				$this->_data[$result->SubmissionId]['UserId'] = $result->UserId;
@@ -302,14 +303,20 @@ class RSFormModelSubmissions extends JModel
 	function getHeadersEnabled()
 	{
 		$return = new stdClass();
+		$return->staticHeaders = array();
+		$return->headers = array();
 		
 		$formId = $this->getFormId();
 		
-		$this->_db->setQuery("SELECT ColumnName FROM #__rsform_submission_columns WHERE FormId='".$formId."' AND ColumnStatic='1'");
-		$return->staticHeaders = $this->_db->loadResultArray();
+		$this->_db->setQuery("SELECT ColumnName, ColumnStatic FROM #__rsform_submission_columns WHERE FormId='".$formId."'");
+		$results = $this->_db->loadObjectList();
 		
-		$this->_db->setQuery("SELECT ColumnName FROM #__rsform_submission_columns WHERE FormId='".$formId."' AND ColumnStatic='0'");
-		$return->headers = $this->_db->loadResultArray();
+		foreach ($results as $result) {
+			if ($result->ColumnStatic)
+				$return->staticHeaders[] = $result->ColumnName;
+			else
+				$return->headers[] = $result->ColumnName;
+		}
 		
 		return $return;
 	}
@@ -324,9 +331,13 @@ class RSFormModelSubmissions extends JModel
 	
 	function addConfirmedHeader()
 	{
-		$formId = $this->getFormId();
-		$this->_db->setQuery("SELECT ConfirmSubmission FROM #__rsform_forms WHERE FormId='".$formId."'");
-		return (bool) $this->_db->loadResult();
+		static $found = null;
+		if (is_null($found)) {
+			$formId = $this->getFormId();
+			$this->_db->setQuery("SELECT ConfirmSubmission FROM #__rsform_forms WHERE FormId='".$formId."'");
+			$found = (bool) $this->_db->loadResult();
+		}
+		return $found;
 	}
 	
 	function getTotal()
@@ -371,8 +382,10 @@ class RSFormModelSubmissions extends JModel
 		$query .= " ORDER BY `".$sortColumn."` ".$sortOrder;
 		
 		$results = $this->_getList($query);
-		foreach ($results as $result)
+		foreach ($results as $result) {
 			$return[] = JHTML::_('select.option', $result->FormId, $result->FormTitle);
+			$this->allFormIds[] = $result->FormId;
+		}
 		
 		if (!empty($results[0]->FormId))
 			$this->firstFormId = $results[0]->FormId;
@@ -410,14 +423,9 @@ class RSFormModelSubmissions extends JModel
 			$this->getForms();
 		
 		$formId = $mainframe->getUserStateFromRequest($option.'.submissions.formId', 'formId', $this->firstFormId, 'int');
-		if ($formId)
-		{
-			$this->_db->setQuery("SELECT FormId FROM #__rsform_forms WHERE FormId='".$formId."'");
-			if (!$this->_db->loadResult())
-			{
-				$formId = $this->firstFormId;
-				$mainframe->setUserState($option.'.submissions.formId', $formId);
-			}
+		if ($formId && !in_array($formId, $this->allFormIds)) {
+			$formId = $this->firstFormId;
+			$mainframe->setUserState($option.'.submissions.formId', $formId);
 		}
 		
 		return $formId;
@@ -574,7 +582,7 @@ class RSFormModelSubmissions extends JModel
 					if ($isPDF)
 						$new_field[1] = RSFormProHelper::htmlEscape($value);
 					else
-						$new_field[1] = '<input class="inputbox" size="105" type="text" name="form['.$name.']" value="'.RSFormProHelper::htmlEscape($value).'" />';
+						$new_field[1] = '<input class="rs_inp rs_80"" size="105" type="text" name="form['.$name.']" value="'.RSFormProHelper::htmlEscape($value).'" />';
 				break;
 				
 				case 'textArea':
@@ -589,7 +597,7 @@ class RSFormModelSubmissions extends JModel
 					elseif (isset($data['WYSIWYG']) && $data['WYSIWYG'] == 'YES')
 						$new_field[1] = RSFormProHelper::WYSIWYG('form['.$name.']', RSFormProHelper::htmlEscape($value), '', 600, 100, 60, 10);
 					else
-						$new_field[1] = '<textarea rows="10" cols="60" name="form['.$name.']">'.RSFormProHelper::htmlEscape($value).'</textarea>';
+						$new_field[1] = '<textarea style="width: 95%" class="rs_textarea" rows="10" cols="60" name="form['.$name.']">'.RSFormProHelper::htmlEscape($value).'</textarea>';
 				break;
 				
 				case 'selectList':
@@ -610,7 +618,10 @@ class RSFormModelSubmissions extends JModel
 						if(preg_match('/\[g\]/',$item))
 						{
 							$item = str_replace('[g]', '', $item);
-							$options[] = JHTML::_('select.optgroup', $item);
+							$optgroup = new stdClass();
+							$optgroup->value = '<OPTGROUP>';
+							$optgroup->text = $item;
+							$options[] = $optgroup;
 							continue;
 						}
 						
@@ -713,7 +724,7 @@ class RSFormModelSubmissions extends JModel
 						$new_field[1] = $value;
 						break;
 					}
-					$new_field[1]  = '<input class="inputbox" size="105" type="text" name="form['.$name.']" value="'.RSFormProHelper::htmlEscape($value).'" />';
+					$new_field[1]  = '<input class="rs_inp rs_80" size="105" type="text" name="form['.$name.']" value="'.RSFormProHelper::htmlEscape($value).'" />';
 					$new_field[1] .= '<br /><input size="45" type="file" name="upload['.$name.']" />';
 				break;
 			}
@@ -779,9 +790,13 @@ class RSFormModelSubmissions extends JModel
 		jimport('joomla.filesystem.file');
 		jimport('joomla.filesystem.folder');
 		
+		$app	= JFactory::getApplication();
+		$offset = $app->getCfg('offset');
 		$cid    = $this->getSubmissionId();
 		$form   = JRequest::getVar('form', array(), 'post', 'none', JREQUEST_ALLOWRAW);
-		$static  = JRequest::getVar('formStatic', array(), 'post', 'none', JREQUEST_ALLOWRAW);
+		$static = JRequest::getVar('formStatic', array(), 'post', 'none', JREQUEST_ALLOWRAW);
+		$date	= JFactory::getDate($static['DateSubmitted'], $offset);
+		$static['DateSubmitted'] = $date->toMySQL();
 		$formId = JRequest::getInt('formId');
 		$files  = JRequest::getVar('upload', array(), 'files', 'none', JREQUEST_ALLOWRAW);
 		

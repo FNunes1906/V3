@@ -20,7 +20,7 @@ defined('_JEXEC') or die('Restricted access');
 			</tr>
 		</table>
 		
-		<button type="submit"><?php echo JText::_('Finish'); ?></button>
+		<button class="rs_button" type="submit"><?php echo JText::_('Finish'); ?></button>
 	</fieldset>
 	
 	<input type="hidden" name="option" value="com_rsform" />

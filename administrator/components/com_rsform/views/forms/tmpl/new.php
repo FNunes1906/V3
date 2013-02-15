@@ -12,9 +12,9 @@ defined('_JEXEC') or die('Restricted access');
 	<fieldset>
 		<h3><?php echo JText::_('RSFP_NEW_FORM_STEP_1'); ?></h3>
 		<p><?php echo JText::_('RSFP_NEW_FORM_STEP_1_DESC'); ?></p>
-		<button type="submit"><?php echo JText::_('Next'); ?></button>
-		<button type="button" onclick="submitform('forms.new.stepfinal');"><?php echo JText::_('RSFP_SKIP_WIZARD'); ?></button>
-		<button type="button" onclick="submitform('forms.cancel');"><?php echo JText::_('Cancel'); ?></button>
+		<button class="rs_button rs_left" type="submit"><?php echo JText::_('Next'); ?></button>
+		<button class="rs_button rs_left" type="button" onclick="submitform('forms.new.stepfinal');"><?php echo JText::_('RSFP_SKIP_WIZARD'); ?></button>
+		<button class="rs_button rs_left" type="button" onclick="submitform('forms.cancel');"><?php echo JText::_('Cancel'); ?></button>
 	</fieldset>
 	
 	<input type="hidden" name="option" value="com_rsform" />

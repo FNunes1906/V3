@@ -43,6 +43,7 @@ class RSFormViewConfiguration extends JView
 		$lists['global.iis'] 		= JHTML::_('select.booleanlist','rsformConfig[global.iis]','class="inputbox"', RSFormProHelper::getConfig('global.iis'));
 		$lists['global.editor'] 	= JHTML::_('select.booleanlist','rsformConfig[global.editor]','class="inputbox"', RSFormProHelper::getConfig('global.editor'));
 		$lists['global.codemirror'] = JHTML::_('select.booleanlist','rsformConfig[global.codemirror]','class="inputbox"', RSFormProHelper::getConfig('global.codemirror'));
+		$lists['auto_responsive'] 	= JHTML::_('select.booleanlist','rsformConfig[auto_responsive]','class="inputbox"', RSFormProHelper::getConfig('auto_responsive'));
 		
 		$this->assignRef('lists', $lists);
 		

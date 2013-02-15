@@ -20,7 +20,7 @@ function initRSFormPro()
 	$$('a.rsmodal').each(function(el) {
 			el.addEvent('click', function(e) {
 				new Event(e).stop();
-				window.open(el.href, 'Richtext', 'width=600, height=500');
+				openRSModal(el.href);
 			});
 		});
 		
@@ -91,8 +91,7 @@ function tidyOrder(update_php)
 	if (!update_php)
 		update_php = false;
 		
-	document.getElementById('state').innerHTML='Processing...';
-	document.getElementById('state').style.color='rgb(255,0,0)';
+	stateLoading();
 	
 	var params = new Array();
 	
@@ -134,15 +133,13 @@ function tidyOrder(update_php)
 				if (document.getElementById('FormLayoutAutogenerate').checked == true)
 					generateLayout(formId, 'no');
 					
-				document.getElementById('state').innerHTML='Status: ok';
-				document.getElementById('state').style.color='';
+				stateDone();
 			}
 		}
 	}
 	else
 	{
-		document.getElementById('state').innerHTML='Status: ok';
-		document.getElementById('state').style.color='';
+		stateDone();
 	}
 }
 
@@ -152,8 +149,7 @@ function tidyOrderMp(update_php)
 	if (!update_php)
 		update_php = false;
 		
-	document.getElementById('state').innerHTML='Processing...';
-	document.getElementById('state').style.color='rgb(255,0,0)';
+	stateLoading();
 	
 	var params = new Array();
 	
@@ -191,15 +187,13 @@ function tidyOrderMp(update_php)
 		{
 			if(xml.readyState==4)
 			{					
-				document.getElementById('state').innerHTML='Status: ok';
-				document.getElementById('state').style.color='';
+				stateDone();
 			}
 		}
 	}
 	else
 	{
-		document.getElementById('state').innerHTML='Status: ok';
-		document.getElementById('state').style.color='';
+		stateDone();
 	}
 }
 
@@ -275,8 +269,7 @@ function displayTemplate(componentTypeId,componentId)
 		jQuery(el).removeClass('active');
 	});
 	
-	document.getElementById('state').innerHTML='Processing...';
-	document.getElementById('state').style.color='rgb(255,0,0)';
+	stateLoading();
 
 	document.getElementById('componentIdToEdit').value=-1;
 	
@@ -306,8 +299,7 @@ function displayTemplate(componentTypeId,componentId)
 			document.getElementById('rsfptabcontent1').innerHTML = response[1];
 			document.getElementById('rsfptabcontent2').innerHTML = response[2];
 			
-			document.getElementById('state').innerHTML='Status: ok';
-			document.getElementById('state').style.color='';
+			stateDone();
 			
 			//set the active tab
 			jQuery('#rsfpc'+componentTypeId).addClass('active');
@@ -380,8 +372,7 @@ function f_filterResults(n_win, n_docel, n_body) {
 
 function removeComponent(formId,componentId)
 {
-	document.getElementById('state').innerHTML='Processing...';
-	document.getElementById('state').style.color='rgb(255,0,0)';
+	stateLoading();
 	xml=buildXmlHttp();
 	xml.onreadystatechange=function()
     {
@@ -398,8 +389,7 @@ function removeComponent(formId,componentId)
 			
 			tidyOrder(true);
 			
-			document.getElementById('state').innerHTML='Status: ok';
-			document.getElementById('state').style.color='';
+			stateDone();
 		}
     }
 	xml.open('GET','index.php?option=com_rsform&task=components.remove&ajax=1&cid[]='+componentId+'&formId='+formId+'&randomTime='+Math.random(),true);
@@ -411,8 +401,6 @@ function processComponent(componentType)
 	for (var i=0; i<document.getElementsByName('componentSaveButton').length; i++)
 	{
 		document.getElementsByName('componentSaveButton')[i].disabled = true;
-		jQuery(document.getElementsByName('componentSaveButton')[i]).removeClass('rsform_btn');
-		jQuery(document.getElementsByName('componentSaveButton')[i]).addClass('rsform_btn_disabled');
 	}
 	
 	if (isset(document.getElementById('rsformerror0')))
@@ -424,8 +412,7 @@ function processComponent(componentType)
 	if (isset(document.getElementById('rsformerror3')))
 		document.getElementById('rsformerror3').style.display = 'none';
 	
-	document.getElementById('state').innerHTML='Processing...';
-	document.getElementById('state').style.color='rgb(255,0,0)';
+	stateLoading();
 	
 	xml=buildXmlHttp();
 
@@ -465,14 +452,11 @@ function processComponent(componentType)
 				document.getElementById('rsformerror'+parseInt(response[0])).innerHTML = response[1];
 				document.getElementById('rsformerror'+parseInt(response[0])).style.display = '';
 				
-				document.getElementById('state').innerHTML='Status: ok';
-				document.getElementById('state').style.color='';
+				stateDone();
 				
 				for (var i=0; i<document.getElementsByName('componentSaveButton').length; i++)
 				{
 					document.getElementsByName('componentSaveButton')[i].disabled = false;
-					jQuery(document.getElementsByName('componentSaveButton')[i]).removeClass('rsform_btn_disabled');
-					jQuery(document.getElementsByName('componentSaveButton')[i]).addClass('rsform_btn');
 				}
 			}
 			else
@@ -483,8 +467,7 @@ function processComponent(componentType)
 
 function changeFormAutoGenerateLayout(formId)
 {
-	document.getElementById('state').innerHTML='Processing...';
-	document.getElementById('state').style.color='rgb(255,0,0)';
+	stateLoading();
 	var layouts=document.getElementsByName('FormLayoutName');
 	var layoutName='';
 	for(i=0;i<layouts.length;i++)
@@ -509,8 +492,7 @@ function changeFormAutoGenerateLayout(formId)
 				if (typeof(window.codemirror_html) != 'undefined') window.codemirror_html.setOption('readOnly', false);
 			}
 
-			document.getElementById('state').innerHTML='Status: ok';
-			document.getElementById('state').style.color='';
+			stateDone();
 		}
 	}
 	xml.open('GET','index.php?option=com_rsform&task=forms.changeAutoGenerateLayout&formId='+formId+'&randomTime='+Math.random()+'&formLayoutName='+layoutName,true);
@@ -519,8 +501,6 @@ function changeFormAutoGenerateLayout(formId)
 
 function generateLayout(formId,alert)
 {
-	document.getElementById('state').innerHTML='Processing...';
-	document.getElementById('state').style.color='rgb(255,0,0)';
 	if(alert!='no')
 	{
 		var answer=confirm("Pressing the 'Generate layout' button will ERASE your current layout. Are you sure you want to continue?");
@@ -531,6 +511,7 @@ function generateLayout(formId,alert)
 		if (document.getElementsByName('FormLayoutName')[i].checked)
 			layoutName = document.getElementsByName('FormLayoutName')[i].value;
 
+	stateLoading();
 	xml=buildXmlHttp();
 	xml.onreadystatechange=function()
 	{
@@ -538,8 +519,7 @@ function generateLayout(formId,alert)
 		{
 			document.getElementById('formLayout').value=xml.responseText;
 			if (typeof(window.codemirror_html) != 'undefined') window.codemirror_html.setValue(xml.responseText);
-			document.getElementById('state').innerHTML='Status: ok';
-			document.getElementById('state').style.color='';
+			stateDone();
 		}
 	}
 	xml.open('GET','index.php?option=com_rsform&task=layouts.generate&layoutName='+layoutName+'&formId='+formId+'&randomTime='+Math.random(),true);
@@ -548,8 +528,11 @@ function generateLayout(formId,alert)
 
 function saveLayoutName(formId,layoutName)
 {
-	document.getElementById('state').innerHTML='Processing...';
-	document.getElementById('state').style.color='rgb(255,0,0)';
+	for (var i=0; i<document.getElementsByName('ThemeName').length; i++)
+		document.getElementsByName('ThemeName')[i].disabled = layoutName == 'responsive' ? true : false;
+	document.getElementById('rsform_themes_disabled').style.display = layoutName == 'responsive' ? '' : 'none';
+	
+	stateLoading();
 	xml=buildXmlHttp();
 	xml.open('GET','index.php?option=com_rsform&task=layouts.save.name&formId='+formId+'&randomTime='+Math.random()+'&formLayoutName='+layoutName,true);
 	xml.send(null);
@@ -559,12 +542,21 @@ function saveLayoutName(formId,layoutName)
 		{
 			if(document.getElementById('FormLayoutAutogenerate').checked==true)
 				generateLayout(formId, 'no');
-			document.getElementById('state').innerHTML='Status: ok';
-			document.getElementById('state').style.color='';
+			stateDone();
 		}
 	}
 	
 	
+}
+
+function stateLoading()
+{
+	document.getElementById('state').style.display = '';
+}
+
+function stateDone()
+{
+	document.getElementById('state').style.display = 'none';
 }
  
 function refreshCaptcha(componentId, captchaPath)
@@ -952,8 +944,7 @@ function mpColumns(table)
 
 function mappingdelete(formid,mid)
 {
-	document.getElementById('state').innerHTML='Processing...';
-	document.getElementById('state').style.color='rgb(255,0,0)';
+	stateLoading();
 	
 	params = 'formId='+formid+'&mid='+mid+'&tmpl=component&randomTime=' + Math.random();
 	
@@ -970,15 +961,7 @@ function mappingdelete(formid,mid)
 		if (xmlHttp.readyState==4)
 		{
 			document.getElementById('mappingcontent').innerHTML = xmlHttp.responseText;
-			document.getElementById('state').innerHTML='Status: ok';
-			document.getElementById('state').style.color='';
-			
-			$$('a.modal').each(function(el) {
-				el.addEvent('click', function(e) {
-					new Event(e).stop();
-					SqueezeBox.fromElement(el);
-				});
-			});
+			stateDone();
 			
 			jQuery('#mappingTable tbody').tableDnD({
 				onDragClass: 'rsform_dragged',
@@ -994,8 +977,7 @@ function mappingdelete(formid,mid)
 
 function ShowMappings(formid)
 {
-	document.getElementById('state').innerHTML='Processing...';
-	document.getElementById('state').style.color='rgb(255,0,0)';
+	stateLoading();
 	
 	params = 'formId='+formid+'&tmpl=component&randomTime=' + Math.random();
 	
@@ -1012,15 +994,7 @@ function ShowMappings(formid)
 		if (xmlHttp.readyState==4)
 		{
 			document.getElementById('mappingcontent').innerHTML = xmlHttp.responseText;
-			document.getElementById('state').innerHTML='Status: ok';
-			document.getElementById('state').style.color='';
-			
-			$$('a.modal').each(function(el) {
-				el.addEvent('click', function(e) {
-					new Event(e).stop();
-					SqueezeBox.fromElement(el);
-				});
-			});
+			stateDone();
 			
 			jQuery('#mappingTable tbody').tableDnD({
 				onDragClass: 'rsform_dragged',
@@ -1098,8 +1072,7 @@ function mappingWhere(table)
 
 function removeEmail(id,fid)
 {
-	document.getElementById('state').innerHTML='Processing...';
-	document.getElementById('state').style.color='rgb(255,0,0)';
+	stateLoading();
 	
 	var params = new Array();
 	params.push('cid=' + id);
@@ -1120,17 +1093,8 @@ function removeEmail(id,fid)
 	{//Call a function when the state changes.
 		if (xmlHttp.readyState==4)
 		{
-			document.getElementById('state').innerHTML='Status: ok';
-			document.getElementById('state').style.color='';
-			document.getElementById('emailscontent').innerHTML = xmlHttp.responseText;
-			
-			$$('a.modal').each(function(el) {
-				el.addEvent('click', function(e) {
-					new Event(e).stop();
-					SqueezeBox.fromElement(el);
-				});
-			});
-			
+			stateDone();
+			document.getElementById('emailscontent').innerHTML = xmlHttp.responseText;			
 		}
 	}
 	xmlHttp.send(params);
@@ -1138,11 +1102,9 @@ function removeEmail(id,fid)
 
 function updateemails(fid)
 {
-	var state   = document.getElementById('state');
 	var content = document.getElementById('emailscontent');
 	
-	state.innerHTML='Processing...';
-	state.style.color='rgb(255,0,0)';
+	stateLoading();
 	
 	var params = new Array();
 	params.push('formId=' + fid);
@@ -1162,17 +1124,8 @@ function updateemails(fid)
 	{//Call a function when the state changes.
 		if (xmlHttp.readyState==4)
 		{
-			state.innerHTML='Status: ok';
-			state.style.color='';
+			stateDone();
 			content.innerHTML = xmlHttp.responseText;
-			
-			$$('a.modal').each(function(el) {
-				el.addEvent('click', function(e) {
-					new Event(e).stop();
-					SqueezeBox.fromElement(el);
-				});
-			});
-			
 		}
 	}
 	xmlHttp.send(params);
@@ -1249,8 +1202,7 @@ function initCodeMirror()
 
 function conditionDelete(formid,cid)
 {
-	document.getElementById('state').innerHTML='Processing...';
-	document.getElementById('state').style.color='rgb(255,0,0)';
+	stateLoading();
 	
 	params = 'formId='+formid+'&cid='+cid+'&tmpl=component&randomTime=' + Math.random();
 	
@@ -1267,15 +1219,7 @@ function conditionDelete(formid,cid)
 		if (xmlHttp.readyState==4)
 		{
 			document.getElementById('conditionscontent').innerHTML = xmlHttp.responseText;
-			document.getElementById('state').innerHTML='Status: ok';
-			document.getElementById('state').style.color='';
-			
-			$$('a.modal').each(function(el) {
-				el.addEvent('click', function(e) {
-					new Event(e).stop();
-					SqueezeBox.fromElement(el);
-				});
-			});
+			stateDone();
 		}
 	}
 	xmlHttp.send(params);
@@ -1283,8 +1227,7 @@ function conditionDelete(formid,cid)
 
 function showConditions(formid)
 {
-	document.getElementById('state').innerHTML='Processing...';
-	document.getElementById('state').style.color='rgb(255,0,0)';
+	stateLoading();
 	
 	params = 'formId='+formid+'&tmpl=component&randomTime=' + Math.random();
 	
@@ -1301,18 +1244,21 @@ function showConditions(formid)
 		if (xmlHttp.readyState==4)
 		{
 			document.getElementById('conditionscontent').innerHTML = xmlHttp.responseText;
-			document.getElementById('state').innerHTML='Status: ok';
-			document.getElementById('state').style.color='';
-			
-			$$('a.modal').each(function(el) {
-				el.addEvent('click', function(e) {
-					new Event(e).stop();
-					SqueezeBox.fromElement(el);
-				});
-			});
+			stateDone();
 		}
 	}
 	xmlHttp.send(params);
+}
+
+function openRSModal(href, type, size) {
+	if (!type)
+		type = 'Richtext';
+	if (!size)
+		size = '600x500';
+	size = size.split('x');
+	width = size[0];
+	height = size[1];
+	window.open(href, type, 'width=' + width + ', height=' + height + ',scrollbars=1');
 }
 
 jQuery(document).ready(initCodeMirror);

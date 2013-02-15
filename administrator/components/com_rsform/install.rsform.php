@@ -1095,6 +1095,10 @@ $correct_sql = version_compare($your_sql, '4.2');
 		<p>Thank you for choosing RSForm! Pro.</p>
 		<p>New in this version:</p>
 		<ul id="rsform_changelog">
+			<li>Improved backend design</li>
+			<li>New "Responsive" layout</li>
+			<li>New "RSForm! Pro PDF" plugin that allows you to create a PDF and attach it to emails</li>
+			<li>Built-in ability to do silent posts</li>
 			<li>Conditional fields<br /><small>Specify which field you want to show or hide based on a set of conditions.</small></li>
 			<li>Select if buttons should be using &lt;input&gt; or &lt;button&gt; tags</li>
 			<li>Basic support for Joomla! 2.5 ACL</li>
@@ -1422,7 +1426,7 @@ if ($db->loadResult())
 
 $db->setQuery("SHOW COLUMNS FROM `#__rsform_forms` WHERE `Field`='FormLayout'");
 $result = $db->loadObject();
-if (strtolower($result->Type == 'text'))
+if (strtolower($result->Type) == 'text')
 {
 	$db->setQuery("ALTER TABLE `#__rsform_forms` CHANGE `FormLayout` `FormLayout` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL");
 	$db->query();
@@ -1716,6 +1720,23 @@ if (!$db->loadResult())
 		$db->query();
 		
 		$db->setQuery("INSERT INTO #__rsform_properties SET `ComponentId`='".$componentId."', `PropertyName`='DISPLAYPROGRESSMSG', `PropertyValue`='<div>\r\n <p><em>Page <strong>{page}</strong> of {total}</em></p>\r\n <div class=\"rsformProgressContainer\">\r\n  <div class=\"rsformProgressBar\" style=\"width: {percent}%;\"></div>\r\n </div>\r\n</div>'");
+		$db->query();
+	}
+}
+
+// R44 - goodbye ConfigId!
+$db->setQuery("SHOW FIELDS FROM `#__rsform_config` LIKE 'ConfigId'");
+if ($result = $db->loadObject())
+{
+	if (strtoupper($result->Key) == 'PRI')
+	{
+		$db->setQuery("ALTER TABLE `#__rsform_config` CHANGE `ConfigId` `ConfigId` INT( 11 ) NULL");
+		$db->query();
+		
+		$db->setQuery("ALTER TABLE `#__rsform_config` DROP PRIMARY KEY");
+		$db->query();
+		
+		$db->setQuery("ALTER TABLE `#__rsform_config` ADD PRIMARY KEY (`SettingName`)");
 		$db->query();
 	}
 }

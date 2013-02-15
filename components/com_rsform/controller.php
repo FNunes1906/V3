@@ -20,9 +20,11 @@ class RSFormController extends JController
 		
 		$this->_db = JFactory::getDBO();
 		
+		/*
 		$view = JRequest::getVar('view', 'rsform');
 		if ($view == 'rsform')
 			$this->registerDefaultTask('showForm');
+		*/
 		
 		$doc =& JFactory::getDocument();
 		$doc->addScript(JURI::root(true).'/components/com_rsform/assets/js/script.js');
@@ -46,17 +48,10 @@ class RSFormController extends JController
 		$mainframe->triggerEvent('rsfp_f_onSwitchTasks');
 	}
 	
+	/* deprecated */
 	function showForm()
 	{
-		$mainframe =& JFactory::getApplication();
 		
-		if (!$formId = JRequest::getInt('formId', 0, 'get'))
-		{
-			$params = clone($mainframe->getParams('com_rsform'));
-			$formId = $params->get('formId');
-		}
-		
-		echo RSFormProHelper::displayForm($formId);
 	}
 	
 	function submissionsViewFile()
@@ -129,6 +124,11 @@ class RSFormController extends JController
 		echo "\n";
 		
 		$invalid = RSFormProHelper::validateForm($formId);
+		
+		//Trigger Event - onBeforeFormValidation
+		$mainframe = JFactory::getApplication();
+		$mainframe->triggerEvent('rsfp_f_onBeforeFormValidation', array(array('invalid'=>&$invalid)));
+		
 		if (count($invalid))
 		{
 			foreach ($invalid as $i => $componentId)
