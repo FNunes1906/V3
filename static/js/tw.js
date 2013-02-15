@@ -6,6 +6,10 @@ $(document).ready(function() {
 
   document.addEventListener("orientationchange", updateOrientation);
 
+  //Bind Twitter/Facebook help tooltip
+  jQuery('.helpBtn').click(showTip);
+
+
   /*$('.centerCol .sect').click(function() {
     alert("sect: " + $(this).offset().top + " " + $(this).css('margin-top') + "\nleft col bottom: " + ($('#LeftCol').offset().top + $('#LeftCol').height()));
     alert($(this).width());
@@ -192,6 +196,19 @@ var getTheme = function() {
     return "default";
   }
 
+}
+
+var showTip = function() {
+  jQuery('#Darkness').fadeIn('fast',function() {
+    jQuery('#HelpTT').fadeIn();
+    jQuery('#HelpTT .close, #Darkness, .socialLinks a').click(hideTip);
+  });
+}
+
+var hideTip = function() {
+  jQuery('#HelpTT').fadeOut('fast',function() {
+    jQuery('#Darkness').fadeOut();
+  });
 }
 
 var alertScreenSize = function() {

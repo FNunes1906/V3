@@ -56,6 +56,7 @@ h1, h2, h3, h4, p, span, div { font-weight:normal; font-family:'AllerLightRegula
 }
 #Social {
   margin-top:17px;
+  position:relative;
 }
 #Social .fbLogin {
   background:url('../images/header/fbLoginBtn.png') no-repeat left top;
@@ -292,6 +293,90 @@ input:-ms-placeholder,
 
 /* Main content general styles  */
 
+#Darkness {
+  background:rgba(0,0,0,.5);
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:4000;
+  top:0;
+  left:0;
+  display:none;
+}
+#HelpTT {
+  background:#e6e6e6;
+  -webkit-box-shadow:0 0 15px rgba(0,0,0,.31);
+  -moz-box-shadow:0 0 15px rgba(0,0,0,.31);
+  box-shadow:0 0 15px rgba(0,0,0,.31);
+  -webkit-border-radius:10px;
+  border-radius:10px; 
+  border:solid 2px rgb(0, 186, 232);
+  width:800px;
+  height:auto;
+  position:absolute;
+  top:40%;
+  left:50%;
+  margin-left:-400px;
+  z-index:4001;
+  padding-bottom:20px;
+  display:none;
+}
+#HelpTT .close {
+  background:#e6e6e6;
+  -webkit-box-shadow:0 0 15px rgba(0,0,0,.31);
+  -moz-box-shadow:0 0 15px rgba(0,0,0,.31);
+  box-shadow:0 0 15px rgba(0,0,0,.31);
+  -webkit-border-radius:50px;
+  border-radius:50px; 
+  border:solid 2px rgb(0, 186, 232);
+  width:18px;
+  height:18px;
+  display:block;
+  position:absolute;
+  top:-10px;
+  right:-10px;
+  font-size:12px;
+  line-height:16px;
+  text-align:center;
+  cursor:pointer;
+}
+#HelpTT span {
+  padding:10px;
+  font-size:18px;
+  line-height:28px;
+  display:block;
+  text-align:center;
+}
+#HelpTT .socialLinks {
+  margin:20px 35%;
+  text-align:center;
+}
+#HelpTT .socialLinks a {
+  display:block;
+  height:45px;
+  display:block;
+  position:relative;
+  text-align:center;
+}
+#HelpTT .fbLogin {
+  background:url('../images/header/fbLoginBtn.png') no-repeat left top;
+  width:121px;
+}
+#HelpTT .twtLogin {
+  background:url('../images/header/twtLoginBtn.png') no-repeat left top;
+  width:113px;
+}
+#HelpTT .fbLogin span, 
+#HelpTT .twtLogin span {
+  font-size:10px;
+  color:#666;
+  text-transform:uppercase;
+  line-height:10px;
+  position:absolute;
+  top:10px;
+  left:39px;
+  padding:0;
+}
 #MainContent {
   padding-top:20px;
 }

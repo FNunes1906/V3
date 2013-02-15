@@ -243,6 +243,24 @@ body.tablet #SearchResults .bc {
 body.tablet #SearchResults .venueName {
   float:none;
 }
+body.tablet #HelpTT {
+  width:80%;
+  margin-left:0;
+  top:10%;
+  left:10%;
+}
+body.tablet #HelpTT .socialLinks {
+  margin:20px auto;
+  width:121px;
+}
+body.tablet #HelpTT .socialLinks a {
+  display:block;
+  float:none !important;
+}
+body.tablet #HelpTT .socialLinks a.twtLogin {
+  margin-left:4px;
+  margin-top:20px;
+}
 
 
 
