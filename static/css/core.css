@@ -313,7 +313,7 @@ input:-ms-placeholder,
   border:solid 2px rgb(0, 186, 232);
   width:800px;
   height:auto;
-  position:absolute;
+  position:fixed;
   top:40%;
   left:50%;
   margin-left:-400px;
