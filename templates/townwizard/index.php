@@ -49,22 +49,38 @@ _init();
 <script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/js/tw.js"></script>
 
 <!-- Add jQuery library for location image pop up -->
-<!--<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/js/jquery-1.9.0.min.js"></script>-->
-<!-- Add fancyBox main JS and CSS files -->
-<!--<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/js/jquery.fancybox.js?v=2.1.4"></script>
+
 <script type="text/javascript">
-       $(document).ready(function() {
-               /* Simple image gallery. Uses default settings*/
-               $('.fancybox').fancybox();
-               // Disable opening and closing animations, change title type
-               $(".fancybox-effects-b").fancybox({
-                       openEffect  : 'none',
-                       closeEffect        : 'none',
-                       helpers : {
-                               title : {
-                                       type : 'over'
-                               }}});});
-</script>-->
+ 
+$(document).ready(function(){
+//open popup
+$("#pop").click(function(){
+$("#overlay_form").fadeIn(500);
+positionPopup();
+});
+ 
+//close popup
+$("#close").click(function(){
+$("#overlay_form").fadeOut(500);
+});
+});
+ 
+//position the popup at the center of the page
+function positionPopup(){
+if(!$("#overlay_form").is(':visible')){
+return;
+}
+$("#overlay_form").css({
+left: ($(window).width() - $('#overlay_form').width()) / 2,
+top: ($(window).width() - $('#overlay_form').width()) / 6,
+position:'absolute'
+});
+}
+ 
+//maintain the popup at center of the page when browser resized
+$(window).bind('resize',positionPopup);
+ 
+</script>
 <!-- Add jQuery library for location image pop up END-->
 
 <!-- Share This -->
@@ -257,14 +273,14 @@ _init();
                
                 <?php if($var->android != "" || $var->iphone != ""):?>
                 <div id="SideMobile" class="sect">
-                  <h2>TownWizard Mobile!</h2>
-                  <p>Click here to download Apps.</p>
+                  <h2>TownWizard <?php echo JText::_("TW_MOBILE") ?>!</h2>
+                  <p><?php echo JText::_("TW_CLICKHERE") ?>.</p>
                   <?php if($var->iphone != ""):?>
-                    <a href="<?php echo $var->iphone?>" target="_blank"><img alt="Download for the iPhone/iPad" src="common/<?php echo $_SESSION['style_folder_name'];?>/images/sidebar/iphoneAppBtn.png" /></a>
+                    <a href="<?php echo $var->iphone?>" target="_blank"><img alt="Download for the iPhone/iPad" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/iphoneAppBtn.png" /></a>
                   <?php endif;?>
                   
                   <?php if($var->android != ""):?>
-                  <a href="<?php echo $var->android?>" target="_blank"><img alt="Download for Android" src="common/<?php echo $_SESSION['style_folder_name'];?>/images/sidebar/androidAppBtn.png" /></a>
+                  <a href="<?php echo $var->android?>" target="_blank"><img alt="Download for Android" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/androidAppBtn.png" /></a>
                   <?php endif;?>
                 </div>
                   <?php endif;?>
@@ -272,12 +288,12 @@ _init();
                 
                 <?php if($var->youtube != "" || $var->twitter != ""):?>
                   <div id="SideSocial" class="sect">
-                  <h3 class="display">Follow Us</h3>
+                  <h3 class="display"><?php echo JText::_("TW_FOLLOWUS") ?></h3>
                    <?php if($var->twitter != ""):?>
-                  <a class="twitter" href="<?php echo $var->twitter ?>" target="_blank"><img alt="Follow us on Twitter" src="common/<?php echo $_SESSION['style_folder_name'];?>/images/sidebar/twtFollowBtn.png" /></a>
+                  <a class="twitter" href="<?php echo $var->twitter ?>" target="_blank"><img alt="Follow us on Twitter" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/twtFollowBtn.png" /></a>
                   <?php endif;?>
                   <?php if($var->youtube != ""):?>
-                  <a class="youtube" href="<?php echo $var->youtube ?>" target="_blank"><img alt="Follow us on YouTube" src="common/<?php echo $_SESSION['style_folder_name'];?>/images/sidebar/ytFollowBtn.png" /></a>
+                  <a class="youtube" href="<?php echo $var->youtube ?>" target="_blank"><img alt="Follow us on YouTube" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/ytFollowBtn.png" /></a>
                   <?php endif;?>
                 </div>
                   <?php endif;?>

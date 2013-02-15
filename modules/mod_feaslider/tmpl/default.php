@@ -10,8 +10,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 
 <div id="Events" class="rotator carousel fl">
     <div class="gallery centerCol fl">
-            <a class="prev nav" style="background:<?php echo $var->Header_color; ?>"><img alt="prev" src="common/<?php echo $_SESSION['style_folder_name'];?>/images/marquee/marqueeArrowLt.png" /></a>
-            <a class="next nav" style="background:<?php echo $var->Header_color; ?>"><img alt="next" src="common/<?php echo $_SESSION['style_folder_name'];?>/images/marquee/marqueeArrowRt.png" /></a>
+            <a class="prev nav" style="background:<?php echo $var->Header_color; ?>"><img alt="prev" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/marquee/marqueeArrowLt.png" /></a>
+            <a class="next nav" style="background:<?php echo $var->Header_color; ?>"><img alt="next" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/marquee/marqueeArrowRt.png" /></a>
         <ul>
 			<?php
 			
