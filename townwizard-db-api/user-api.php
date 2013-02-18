@@ -152,8 +152,8 @@ function tw_create_rsvp($post) {
     $parameters['eventId'] = $post['eventId'];
     $parameters['value'] = $post['value'];
     $event_date = $post['eventDate'];
-    if(!empty($eventDate)) {
-        $parameters['eventDate'] = $eventDate * 1000;
+    if(!empty($event_date)) {
+        $parameters['eventDate'] = $event_date * 1000;
     }
 
     $json = json_encode($parameters);
