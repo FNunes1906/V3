@@ -235,7 +235,7 @@ function tw_get_rsvps_by_event($event_id, $event_date = NULL) {
         - user object for HTTP status 200 (Ok) when a user is found
         - NULL for HTTP statuses 404 (Not found) and 500 (server error)
 ***/
-function tw_get_user($id, $ip = NULL) {
+function tw_get_user($id, $ip = NULL) { 
     if(!empty($ip)) $uid = $id.'?ip='.$ip;
     else $uid = $id;
     
@@ -301,6 +301,23 @@ function tw_logout() {
     return "success";
 }
 
+/***
+    Get the external user image url (Faceook, Twitter, etc)
+***/
+function tw_get_user_image_url($user) {
+    if($user->loginType == 'FACEBOOK') {
+         return 'http://graph.facebook.com/'.$user->externalId.'/picture';
+    } else if($user -> loginType == 'TWITTER') {
+        $user_url = 'http://api.twitter.com/1/users/show.json?user_id='.$user->externalId;
+        list($status, $response_msg) = _tw_get_json($user_url);
+        if($status == 200) {
+            $user = json_decode($response_msg);
+            return $user->profile_image_url;
+        }
+    }
+    return NULL;
+}
+
 // Private functions
 ////////////////////
 function _tw_login($user) {
@@ -315,16 +332,7 @@ function _tw_login($user) {
     }
     $_SESSION['tw_user_name'] = $user_name;
     $_SESSION['tw_user'] = $user;
-    if($user->loginType == 'FACEBOOK') {
-        $_SESSION['tw_user_image_url'] = 'http://graph.facebook.com/'.$user->externalId.'/picture';
-    } else if($user -> loginType == 'TWITTER') {
-        $user_url = 'http://api.twitter.com/1/users/show.json?user_id='.$user->externalId;
-        list($status, $response_msg) = _tw_get_json($user_url);
-        if($status == 200) {
-            $user = json_decode($response_msg);
-            $_SESSION['tw_user_image_url'] = $user->profile_image_url;
-        }
-    }
+    $_SESSION['tw_user_image_url'] = tw_get_user_image_url($user);
 }
 
 
