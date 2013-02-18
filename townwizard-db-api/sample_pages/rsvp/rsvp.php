@@ -1,7 +1,7 @@
 <?php
 
-require_once('../../jevents.php');
-include_once('../user-api.php');
+require_once('../../../jevents.php');
+include_once('../../user-api.php');
 
 ?>
 
@@ -24,7 +24,7 @@ include_once('../user-api.php');
 
 <?php } else { 
 
-    tw_create_rsvp($_POST);
+    echo tw_create_rsvp($_POST);
     
     echo var_dump(tw_get_rsvps_by_user());
     echo '<br/>';
