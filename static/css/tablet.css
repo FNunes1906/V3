@@ -182,6 +182,20 @@ body.tablet .detailFeature .evtTmb img {
   height:auto;
   padding:0 0 15px 15px;
 }
+body.tablet .detailFeature .evtTmb .rsvpBtn {
+  margin-left:12px;
+}
+body.tablet .detailFeature .people .likes {
+  width:45%;
+}
+body.tablet .detailFeature .people .checkins, 
+body.tablet .detailFeature .people .rsvps {
+  width:55%;
+}
+body.tablet .detailFeature .people .checkins .pad, 
+body.tablet .detailFeature .people .rsvps .pad {
+  padding-left:2px;
+}
 body.tablet .rotator {
   margin-bottom:30px;
 }
@@ -243,24 +257,17 @@ body.tablet #SearchResults .bc {
 body.tablet #SearchResults .venueName {
   float:none;
 }
-body.tablet #HelpTT {
+body.tablet .takeOverlay {
   width:80%;
   margin-left:0;
   top:10%;
   left:10%;
 }
-body.tablet #HelpTT .socialLinks {
+body.tablet .takeOverlay .socialLinks {
   margin:20px auto;
   width:121px;
 }
-body.tablet #HelpTT .socialLinks a {
-  display:block;
-  float:none !important;
-}
-body.tablet #HelpTT .socialLinks a.twtLogin {
-  margin-left:4px;
-  margin-top:20px;
-}
+
 
 
 

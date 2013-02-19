@@ -303,7 +303,7 @@ input:-ms-placeholder,
   left:0;
   display:none;
 }
-#HelpTT {
+.takeOverlay {
   background:#e6e6e6;
   -webkit-box-shadow:0 0 15px rgba(0,0,0,.31);
   -moz-box-shadow:0 0 15px rgba(0,0,0,.31);
@@ -311,17 +311,17 @@ input:-ms-placeholder,
   -webkit-border-radius:10px;
   border-radius:10px; 
   border:solid 2px rgb(0, 186, 232);
-  width:800px;
+  width:500px;
   height:auto;
   position:fixed;
   top:40%;
   left:50%;
-  margin-left:-400px;
+  margin-left:-250px;
   z-index:4001;
   padding-bottom:20px;
   display:none;
 }
-#HelpTT .close {
+.takeOverlay .close {
   background:#e6e6e6;
   -webkit-box-shadow:0 0 15px rgba(0,0,0,.31);
   -moz-box-shadow:0 0 15px rgba(0,0,0,.31);
@@ -340,34 +340,45 @@ input:-ms-placeholder,
   text-align:center;
   cursor:pointer;
 }
-#HelpTT span {
+.takeOverlay span {
   padding:10px;
   font-size:18px;
   line-height:28px;
   display:block;
   text-align:center;
 }
-#HelpTT .socialLinks {
-  margin:20px 35%;
-  text-align:center;
+.takeOverlay h5 {
+  font-size:16px;
+  margin-bottom:15px;
 }
-#HelpTT .socialLinks a {
+.takeOverlay .details {
+  font-size:13px;
+  line-height:18px;
+}
+.takeOverlay .socialLinks {
+  margin:20px 37%;
+  text-align:center;
+  height:auto;
+}
+.takeOverlay .socialLinks a {
   display:block;
   height:45px;
   display:block;
   position:relative;
   text-align:center;
 }
-#HelpTT .fbLogin {
+.takeOverlay .fbLogin {
   background:url('../images/header/fbLoginBtn.png') no-repeat left top;
   width:121px;
 }
-#HelpTT .twtLogin {
+.takeOverlay .twtLogin {
   background:url('../images/header/twtLoginBtn.png') no-repeat left top;
   width:113px;
+  margin-left:4px;
+  margin-top:20px;
 }
-#HelpTT .fbLogin span, 
-#HelpTT .twtLogin span {
+.takeOverlay .fbLogin span, 
+.takeOverlay .twtLogin span {
   font-size:10px;
   color:#666;
   text-transform:uppercase;
@@ -376,6 +387,34 @@ input:-ms-placeholder,
   top:10px;
   left:39px;
   padding:0;
+}
+.takeOverlay .rsvp {
+  margin:40px 35% 20px;
+  text-align:left;
+  height:auto;
+}
+.takeOverlay .rsvp a {
+  display:block;
+  height:30px;
+  padding-left:35px;
+  font-size:14px;
+  color:#666;
+  text-transform:uppercase;
+  line-height:30px;
+  text-align:left;
+  margin:20px 0;
+}
+.takeOverlay .rsvp a:hover {
+  text-decoration:underline;
+}
+.takeOverlay a.yes {
+  background:url('../images/header/yesBtn.png') no-repeat left top;
+}
+.takeOverlay a.no {
+  background:url('../images/header/noBtn.png') no-repeat left top;
+}
+.takeOverlay a.maybe {
+  background:url('../images/header/maybeBtn.png') no-repeat left top;
 }
 #MainContent {
   padding-top:20px;
@@ -1283,6 +1322,25 @@ a.saved span {
   width:200px;
   height:156px;
 }
+.detailFeature .evtTmb .rsvpBtn {
+  background:url('../images/header/rsvpBtn.png') no-repeat left top;
+  text-align:left;
+  height:30px;
+  padding-left:35px;
+  font-size:12px;
+  line-height:30px;
+  display:block;
+  color:#000;
+  text-decoration:underline;
+  margin-left:15px;
+}
+.detailFeature .evtTmb .rsvpBtn:hover {
+  text-decoration:none;
+}
+.detailFeature .evtTmb .rsvpBtn img {
+  width:auto;
+  height:auto;
+}
 .detailFeature .address {
   margin:30px 0;
 }
@@ -1292,12 +1350,20 @@ a.saved span {
 .detailFeature .people {
   position:relative;
 }
-.detailFeature .people .checkins, 
 .detailFeature .people .likes {
-  width:50%;
+  width:55%;
 }
-.detailFeature .people .checkins .pad {
+.detailFeature .people .checkins, 
+.detailFeature .people .rsvps {
+  width:45%;
+}
+.detailFeature .people .checkins .pad, 
+.detailFeature .people .rsvps .pad {
   padding-left:10px;
+}
+.detailFeature .people .checkins img {
+  width:30px;
+  height:30px;
 }
 
 /* ------------------------------------------------------------------- */

@@ -8,6 +8,8 @@ $(document).ready(function() {
 
   //Bind Twitter/Facebook help tooltip
   jQuery('.helpBtn').click(showTip);
+  //Bind additional modal tootltips
+  jQuery('.rsvpBtn').click(showTip);
 
 
   /*$('.centerCol .sect').click(function() {
@@ -199,14 +201,17 @@ var getTheme = function() {
 }
 
 var showTip = function() {
+  var refPanel = '#' + jQuery(this).data('ref-panel');
   jQuery('#Darkness').fadeIn('fast',function() {
-    jQuery('#HelpTT').fadeIn();
-    jQuery('#HelpTT .close, #Darkness, .socialLinks a').click(hideTip);
+    jQuery(refPanel).fadeIn();
+    jQuery(refPanel + ' .close, #Darkness, .socialLinks a').click(function() {
+      hideTip(refPanel);
+    });
   });
 }
 
-var hideTip = function() {
-  jQuery('#HelpTT').fadeOut('fast',function() {
+var hideTip = function(refPanel) {
+  jQuery(refPanel).fadeOut('fast',function() {
     jQuery('#Darkness').fadeOut();
   });
 }
