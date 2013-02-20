@@ -10,6 +10,8 @@ $(document).ready(function() {
   jQuery('.helpBtn').click(showTip);
   //Bind additional modal tootltips
   jQuery('.rsvpBtn').click(showTip);
+  jQuery('#LoginPanel .socialLinks a').click(showTip);
+  jQuery('.checkins .seeAll').click(showTip);
 
 
   /*$('.centerCol .sect').click(function() {
@@ -200,19 +202,31 @@ var getTheme = function() {
 
 }
 
-var showTip = function() {
-  var refPanel = '#' + jQuery(this).data('ref-panel');
+var showTip = function(refPanel) {
+  if (typeof(refPanel) != "string") {
+    var refPanel = '#' + jQuery(this).data('ref-panel');
+  }
   jQuery('#Darkness').fadeIn('fast',function() {
     jQuery(refPanel).fadeIn();
-    jQuery(refPanel + ' .close, #Darkness, .socialLinks a').click(function() {
+    jQuery(refPanel + ' .close, #Darkness, ' + refPanel + ' .socialLinks a').click(function() {
       hideTip(refPanel);
     });
+    if (refPanel == "#LoginPanel") {
+      jQuery(refPanel + ' .socialLinks a').unbind('click').click(passLoginGate);
+    }
   });
 }
 
 var hideTip = function(refPanel) {
   jQuery(refPanel).fadeOut('fast',function() {
     jQuery('#Darkness').fadeOut();
+  });
+}
+
+var passLoginGate = function() {
+  var refPanel = '#' + jQuery(this).data('ref-panel');
+  jQuery('.takeOverlay').fadeOut('fast', function() {
+    showTip(refPanel);
   });
 }
 

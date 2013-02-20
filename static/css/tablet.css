@@ -184,6 +184,7 @@ body.tablet .detailFeature .evtTmb img {
 }
 body.tablet .detailFeature .evtTmb .rsvpBtn {
   margin-left:12px;
+  font-size:14px;
 }
 body.tablet .detailFeature .people .likes {
   width:45%;
@@ -267,7 +268,15 @@ body.tablet .takeOverlay .socialLinks {
   margin:20px auto;
   width:145px;
 }
-
+body.tablet .detailFeature .people .checkins .seeAll {
+  font-size:14px;
+  line-height:32px;
+  text-decoration:underline;
+  margin:0 0 0 15px;
+}
+body.tablet .detailFeature .people .checkins .seeAll:hover {
+  text-decoration:none;
+}
 
 
 

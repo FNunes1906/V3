@@ -416,6 +416,24 @@ input:-ms-placeholder,
 .takeOverlay a.maybe {
   background:url('../images/header/maybeBtn.png') no-repeat left top;
 }
+#AttendancePanel .attendeeList {
+  
+  text-align:left;
+  height:300px;
+  overflow:auto;
+}
+#AttendancePanel .attendeeList .attendee {
+  clear:both;
+  margin-bottom:15px;
+  width:50%;
+  margin:auto;
+}
+#AttendancePanel .attendeeList .attendee img {
+  width:50px;
+  height:50px;
+  margin-bottom:15px;
+  margin-right:30px;
+}
 #MainContent {
   padding-top:20px;
 }
@@ -1364,7 +1382,17 @@ a.saved span {
 .detailFeature .people .checkins img {
   width:30px;
   height:30px;
+  margin-right:4px;
 }
+.detailFeature .people .checkins .seeAll {
+  font-size:11px;
+  line-height:32px;
+  text-decoration:underline;
+}
+.detailFeature .people .checkins .seeAll:hover {
+  text-decoration:none;
+}
+
 
 /* ------------------------------------------------------------------- */
 
