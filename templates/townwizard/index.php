@@ -19,6 +19,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 
 _init();
 
+include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php')
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" >
@@ -148,18 +149,6 @@ $(window).bind('resize',positionPopup);
 			}
 		});
 	}
-	
-	/* Function for RSVP */
-	function tw_create_rsvp() {
-		alert("hello1");
-		$.ajax({
-			url: "townwizard-db-api/sample_pages/rsvp/rsvp.php",
-			type: "POST",
-			complete: function() {
-			window.location.reload();
-			}
-		});
-	}
 
 </script>
 
@@ -170,20 +159,6 @@ $(document).ready(function(){
   });
 });
 </script>
-
-<style type="text/css"> 
-#panel,#flip
-{
-padding:5px;
-text-align:center;
-background-color:#f8f8f8;
-}
-#panel
-{
-padding:50px;
-display:none;
-}
-</style>
 
 <!--  Town wizard Google Analytic code -->
 <?php include("ga.php"); ?>
@@ -392,37 +367,19 @@ display:none;
 	                             <jdoc:include type="message" />
 	                            
 								 <jdoc:include type="component" />
+								 
+								<!-- RSVP CODE BEGIN -->
+								<?php //include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
+								<!-- RSVP CODE END -->
 								
-								
-								<?php if($_SESSION['tw_user_name']){ ?> 
-									<!-- Code for RSVP begin here --> 
-									<!-- <form id="rsvp_form" method="POST" onsubmit="tw_create_rsvp();"> -->
-									<form id="rsvp_form" method="POST" action="townwizard-db-api/sample_pages/rsvp/rsvp.php">
-										Please enter your reponse.<br/><br/>
-										<input type="hidden" value="3380" name="eventId" />
-										<input type="hidden" value="" name="eventDate" />
-										<b>Yes <input type="radio" name="value" value="Y"/>
-										No <input type="radio" name="value" value="N" />
-										May be <input type="radio" name="value" value="M" />&nbsp;&nbsp;
-										</b>
-										<input type="submit" name="Submit" />
-									</form>
-									 <?php //echo tw_get_rsvps_by_user(); ?>
-									 <!-- Code for RSVP End here --> 
-								<?php }else{ ?>
-								
-									<div id="flip"><strong>RSVP This Event</strong></div>
-									<div id="panel">
-										<a href="javascript:void(0)" onclick="fb_login();"><img alt="Login with Facebook" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/fbLoginBtn.png" /></a>
-										<a href="javascript:void(0)" onclick="twitter_login();"><img alt="Login with Twitter" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/twtLoginBtn.png" /></a></div>
-									</div>
-								<?php }?>
-								
-								
-	                            
                          </div>
 						 
               	   </div>
+				   <!-- Code for Location category count module begin -->
+				   <?php if($this->countModules('user1')) : ?>
+                		<jdoc:include type="modules" name="user1" style="xhtml" />
+        			<?php endif; ?>
+				 	<!-- Code for Location category count module end -->	
              </div>
   	  <!-- Main body end -->	
 	  

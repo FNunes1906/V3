@@ -1609,6 +1609,50 @@ text-decoration: none;
     right: -19px;
     text-indent: -999px;
     top: -25px;
-    width: 24px;}
+    width: 24px;
+}
+
+/* RSVP CSS Begin */
+.cont .rsvpBtn{
+	background: url('../images/header/rsvpBtn.png') no-repeat left top;
+	text-align: left;
+	height: 30px;
+	padding-left: 35px;
+	font-size: 12px;
+	line-height: 30px;
+	display: block;
+	color: #000;
+	text-decoration: underline;
+	margin-left: 15px;
+}
+
+
+.cont .checkins{
+	width: 45%;
+}
+
+.cont .checkins .pad{
+	padding-left: 10px;
+}
+
+.cont .checkins .pad .seeAll {
+	font-size: 11px;
+	line-height: 32px;
+	text-decoration: underline;
+}
+
+.cont .checkins .pad span{
+	display: block;
+	margin-bottom: 5px;
+	font-size: 11px;	
+}
+
+.cont .checkins .pad img{
+	width: 30px;
+	height: 30px;
+	margin-right: 4px;	
+}
+
+/* RSVP CSS End
 	
 	

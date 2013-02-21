@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.0.0">
+	<name>Townwiz Location Slider</name>
+	<author>Akash Barot</author>
+	<creationDate>Jan 2013</creationDate>
+	<copyright>Copyright (C) 2013 - 2014 Open Source Matters. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>akashbarot@gmail.com</authorEmail>
+	<authorUrl>www.akashbarot.com</authorUrl>
+	<version>1.0.0</version>
+	<description>Townwiz Location Slider</description>
+	<files>
+		<filename module="mod_location_slider">mod_location_slider.php</filename>
+		<filename>helper.php</filename>
+		<folder>tmpl</folder>
+	</files>
+	<params>
+		<param name="modlatest_inccss" type="radio" default="1" label="Include Events Latest CSS" description="Tells the module if the module Events Latest CSS should be included or not.">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+	</params>
+</install>

@@ -306,7 +306,8 @@ function tw_logout() {
 ***/
 function tw_get_user_image_url($user) {
     if($user->loginType == 'FACEBOOK') {
-         return 'http://graph.facebook.com/'.$user->externalId.'/picture';
+         //return 'http://graph.facebook.com/'.$user->externalId.'/picture';
+         return 'http://graph.facebook.com/'.number_format($user->externalId,0,'','').'/picture';
     } else if($user -> loginType == 'TWITTER') {
         $user_url = 'http://api.twitter.com/1/users/show.json?user_id='.$user->externalId;
         list($status, $response_msg) = _tw_get_json($user_url);
