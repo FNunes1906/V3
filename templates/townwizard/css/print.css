@@ -1,0 +1,41 @@
+a {
+    color: #00467F;
+    text-decoration: none;
+}
+
+.fl {
+    float: left;
+}
+
+h1{
+ 	font-size:13px;
+}
+#Feat{
+	font-family:arial;
+	font-size:12px;
+}
+
+.bold {
+  font-weight:bold;
+}
+
+#EventPhotoGallery {
+	clear:both;
+}
+
+#EventPhotoGallery .heading {
+    background: url("../images/grayArrowLg.png") no-repeat scroll right 50% transparent;
+    color: #000000;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    padding-right: 15px;
+    text-transform: uppercase;
+}
+.printBtn {
+    background: url("../images/header/printIcon.png") no-repeat scroll center top transparent;
+    float: right;
+    height: 32px;
+    margin-right: 10px;
+    width: 32px;
+}

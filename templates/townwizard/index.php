@@ -94,6 +94,19 @@ $(window).bind('resize',positionPopup);
 </script>
 <!-- Share This End-->
 
+<!-- Code for Print Icon begin -->
+<script type="text/javascript">     
+        function PrintDiv() {    
+           var divToPrint = document.getElementById('jevents_body');
+           var popupWin = window.open('', 'My Event', 'width=550,height=450');
+           popupWin.document.open();
+           popupWin.document.write('<html><head><title>My Event</title><link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/css/print.css" /></head><body>' + '<input class="printBtn" type="button" value="" onclick="window.print();" />' + divToPrint.innerHTML +  '</html>');
+            popupWin.document.close();
+                }
+</script>
+<!-- Code for Print Icon end -->
+
+
 <!-- End css and js path for new design v3 -->
 
 <!-- use favicon icon for v2 -->
