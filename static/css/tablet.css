@@ -277,6 +277,14 @@ body.tablet .detailFeature .people .checkins .seeAll {
 body.tablet .detailFeature .people .checkins .seeAll:hover {
   text-decoration:none;
 }
+body.tablet #AttendancePanel .attendeeList .attendee {
+  width:70%;
+  line-height:22px;
+  margin-bottom:15px;
+}
+body.tablet #AttendancePanel .attendeeList .attendee img {
+  margin-right:15px;
+}
 
 
 
