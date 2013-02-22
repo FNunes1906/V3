@@ -1797,6 +1797,25 @@ text-decoration: none;
 }
 /* Over LAY RSVP  End */
 
+
+
+#yogi{
+	position: relative;
+	
+}
+.clickrsvp{
+	position: absolute;
+	width:200px;
+	right:0;
+	top: -152px;
+}
+
+.clickrsvp1{
+	position: absolute;
+	width:420px;
+	right:0;
+	top: -95px;
+}
 /* RSVP End */
 
 /* FB - Twitter Login top section start */
