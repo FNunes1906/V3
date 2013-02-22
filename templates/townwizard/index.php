@@ -230,9 +230,9 @@ jQuery(document).ready(function(){
 						</div>	
 					<?php }  else { ?>
 						<div>
-							<a class="fbLogin fl" href="#"><span>Login with</span></a>
-              				<a class="twtLogin fl" href="#"><span>Login with</span></a>
-              				<a class="helpBtn" data-ref-panel="HelpTT" href="#"><img alt="Help" src="images/header/helpBtn.png" /></a>
+							<a class="fbLogin fl" href="javascript:void(0)" onclick="fb_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
+              				<a class="twtLogin fl" href="javascript:void(0)" onclick="twitter_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
+              				<!-- <a class="helpBtn" data-ref-panel="HelpTT" href="#"><img alt="Help" src="images/header/helpBtn.png" /></a> -->
 						</div>	
 					<?php } ?>
 						
@@ -394,7 +394,9 @@ jQuery(document).ready(function(){
 								 <jdoc:include type="component" />
 								 
 								<!-- RSVP CODE BEGIN -->
-								<?php //include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
+								<?php if(JRequest::getVar('evid') != '') :?>
+								<?php include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
+								<?php endif; ?>
 								
                          </div>
 						 
@@ -438,8 +440,6 @@ jQuery(document).ready(function(){
 		  	  	<!-- 300 x 100 Banner Ad End -->
 
   	  </div>
-
-  	  
 
 		  	   <div class="adSect tall rightCol fr cr">
 
