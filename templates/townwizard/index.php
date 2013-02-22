@@ -12,12 +12,16 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
+
 global $var;
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/inc/var.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 
 _init();
+
+define("TOWNWIZARD_TMPL_PATH", "http://".$_SERVER['HTTP_HOST']."/templates/townwizard");
+define("TOWNWIZARD_PARTNER_PATH", "http://".$_SERVER['HTTP_HOST']."/partner/".$_SESSION['partner_folder_name']);
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php')
 ?>
@@ -31,55 +35,55 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php')
 <meta name="keywords" content="<?php echo $var->keywords; ?>" />
 <meta name="description" content="<?php echo $var->metadesc; ?>" />
 <meta name="description" content="<?php echo $var->extra_meta; ?>" />
-<meta property="og:image" content="http://<?php echo $_SERVER['HTTP_HOST']?>/partner/<?php echo $_SESSION['partner_folder_name']?>/images/logo/logo.png"/>
+<meta property="og:image" content="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/logo/logo.png"/>
 
 <!-- set css and js path for new design v3 -->
 
 <meta name="viewport" content="width=device-width;initial-scale = 1.0,maximum-scale = 1.0" />
-<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/css/fonts.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/css/core.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/css/tablet.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/css/events.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo TOWNWIZARD_TMPL_PATH ?>/css/fonts.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo TOWNWIZARD_TMPL_PATH ?>/css/core.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo TOWNWIZARD_TMPL_PATH ?>/css/tablet.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo TOWNWIZARD_TMPL_PATH ?>/css/events.css" />
 
 <!-- Add css for location image pop up -->
-<link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/css/jquery.fancybox.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo TOWNWIZARD_TMPL_PATH ?>/css/jquery.fancybox.css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/js/jquery.carouFredSel-6.1.0-packed.js"></script>
-<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/js/jquery.touchSwipe.min.js"></script>
-<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/js/yetii-min.js"></script>
-<script type="text/javascript" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/js/tw.js"></script>
+<script type="text/javascript" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/jquery.carouFredSel-6.1.0-packed.js"></script>
+<script type="text/javascript" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/yetii-min.js"></script>
+<script type="text/javascript" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/tw.js"></script>
 
 <!-- Add jQuery library for location image pop up -->
 
 <script type="text/javascript">
  
-$(document).ready(function(){
+jQuery(document).ready(function(){
 //open popup
-$("#pop").click(function(){
-$("#overlay_form").fadeIn(500);
+jQuery("#pop").click(function(){
+jQuery("#overlay_form").fadeIn(500);
 positionPopup();
 });
  
 //close popup
-$("#close").click(function(){
-$("#overlay_form").fadeOut(500);
+jQuery("#close").click(function(){
+jQuery("#overlay_form").fadeOut(500);
 });
 });
  
 //position the popup at the center of the page
 function positionPopup(){
-if(!$("#overlay_form").is(':visible')){
+if(!jQuery("#overlay_form").is(':visible')){
 return;
 }
-$("#overlay_form").css({
-left: ($(window).width() - $('#overlay_form').width()) / 2,
-top: ($(window).width() - $('#overlay_form').width()) / 6,
+jQuery("#overlay_form").css({
+left: (jQuery(window).width() - jQuery('#overlay_form').width()) / 2,
+top: (jQuery(window).width() - jQuery('#overlay_form').width()) / 6,
 position:'absolute'
 });
 }
  
 //maintain the popup at center of the page when browser resized
-$(window).bind('resize',positionPopup);
+jQuery(window).bind('resize',positionPopup);
  
 </script>
 <!-- Add jQuery library for location image pop up END-->
@@ -100,7 +104,7 @@ $(window).bind('resize',positionPopup);
            var divToPrint = document.getElementById('jevents_body');
            var popupWin = window.open('', 'My Event', 'width=550,height=450');
            popupWin.document.open();
-           popupWin.document.write('<html><head><title>My Event</title><link rel="stylesheet" type="text/css" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/css/print.css" /></head><body>' + '<input class="printBtn" type="button" value="" onclick="window.print();" />' + divToPrint.innerHTML +  '</html>');
+           popupWin.document.write('<html><head><title>My Event</title><link rel="stylesheet" type="text/css" href="<?php echo TOWNWIZARD_TMPL_PATH ?>/css/print.css" /></head><body>' + '<input class="printBtn" type="button" value="" onclick="window.print();" />' + divToPrint.innerHTML +  '</html>');
             popupWin.document.close();
                 }
 </script>
@@ -110,7 +114,7 @@ $(window).bind('resize',positionPopup);
 <!-- End css and js path for new design v3 -->
 
 <!-- use favicon icon for v2 -->
-<link rel="shortcut icon" href="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/partner/<?php echo $_SESSION['partner_folder_name'];?>/images/favicon.ico" />
+<link rel="shortcut icon" href="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/favicon.ico" />
 
 <!--  CODE for SAFARI BROWSER DETECTION BEGIN -->
 	<script>
@@ -154,7 +158,7 @@ $(window).bind('resize',positionPopup);
 	}
   	
 	function tw_logout() {
-		$.ajax({
+		jQuery.ajax({
 			url: "townwizard-db-api/logout.php",
 			type: "get",
 			complete: function() {
@@ -166,9 +170,9 @@ $(window).bind('resize',positionPopup);
 </script>
 
 <script> 
-$(document).ready(function(){
-  $("#flip").click(function(){
-    $("#panel").slideToggle("slow");
+jQuery(document).ready(function(){
+  jQuery("#flip").click(function(){
+    jQuery("#panel").slideToggle("slow");
   });
 });
 </script>
@@ -190,9 +194,9 @@ $(document).ready(function(){
   
  			  
  <!-- Top Bar Start -->
-  <div id="TopBar" style="background:url('<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/whitezig_zag.png') repeat-x scroll left bottom <?php echo $var->Header_color; ?>;height: 50px;">
+  <div id="TopBar" style="background:url('<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/whitezig_zag.png') repeat-x scroll left bottom <?php echo $var->Header_color; ?>;height: 50px;">
   	<div class="sWidth">
-  	  <div class="fl powered"><?php echo JText::_("TW_POWERED_BY") ?><img alt="townwizard" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/twBanner.png" /></div>
+  	  <div class="fl powered"><?php echo JText::_("TW_POWERED_BY") ?><img alt="townwizard" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/twBanner.png" /></div>
 		  <?php if($this->countModules('top')): ?>
           <div class="fr links">
             <jdoc:include type="modules" name="top" style="rounded" />
@@ -211,7 +215,7 @@ $(document).ready(function(){
 
 	  	<div id="Header">
 	  	  <div id="Logo" class="fl">
-	  	  	<a href="index.php" title="HOME"> <img src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/partner/<?php echo $_SESSION['partner_folder_name']?>/images/logo/logo.png" height="118" width="192" /> </a>
+	  	  	<a href="index.php" title="HOME"> <img src="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/logo/logo.png" height="118" width="192" /> </a>
 	  	  </div>
 	  	     <div class="headerAdFlex fl">
 	  	  	  <div id="Social" class="fr">
@@ -226,8 +230,9 @@ $(document).ready(function(){
 						</div>	
 					<?php }  else { ?>
 						<div>
-							<a href="javascript:void(0)" onclick="fb_login();"><img alt="Login with Facebook" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/fbLoginBtn.png" /></a>
-							<a href="javascript:void(0)" onclick="twitter_login();"><img alt="Login with Twitter" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/twtLoginBtn.png" /></a>
+							<a class="fbLogin fl" href="#"><span>Login with</span></a>
+              				<a class="twtLogin fl" href="#"><span>Login with</span></a>
+              				<a class="helpBtn" data-ref-panel="HelpTT" href="#"><img alt="Help" src="images/header/helpBtn.png" /></a>
 						</div>	
 					<?php } ?>
 						
@@ -242,7 +247,7 @@ $(document).ready(function(){
 	  	  	    	 <jdoc:include type="modules" name="banner1" style="rounded" />
          		 </div>
 				 <?php else: ?>
-					 <img alt="Default Banner" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/header/default_banner.png" />
+					 <img alt="Default Banner" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/default_banner.png" />
 				  <?php endif; ?>
 	  	  	  </div>
 	  	    </div>
@@ -299,11 +304,11 @@ $(document).ready(function(){
                   <h2>TownWizard <?php echo JText::_("TW_MOBILE") ?>!</h2>
                   <p><?php echo JText::_("TW_CLICKHERE") ?>.</p>
                   <?php if($var->iphone != ""):?>
-                    <a href="<?php echo $var->iphone?>" target="_blank"><img alt="Download for the iPhone/iPad" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/iphoneAppBtn.png" /></a>
+                    <a href="<?php echo $var->iphone?>" target="_blank"><img alt="Download for the iPhone/iPad" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/sidebar/iphoneAppBtn.png" /></a>
                   <?php endif;?>
                   
                   <?php if($var->android != ""):?>
-                  <a href="<?php echo $var->android?>" target="_blank"><img alt="Download for Android" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/androidAppBtn.png" /></a>
+                  <a href="<?php echo $var->android?>" target="_blank"><img alt="Download for Android" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/sidebar/androidAppBtn.png" /></a>
                   <?php endif;?>
                 </div>
                   <?php endif;?>
@@ -313,10 +318,10 @@ $(document).ready(function(){
                   <div id="SideSocial" class="sect">
                   <h3 class="display"><?php echo JText::_("TW_FOLLOWUS") ?></h3>
                    <?php if($var->twitter != ""):?>
-                  <a class="twitter" href="<?php echo $var->twitter ?>" target="_blank"><img alt="Follow us on Twitter" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/twtFollowBtn.png" /></a>
+                  <a class="twitter" href="<?php echo $var->twitter ?>" target="_blank"><img alt="Follow us on Twitter" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/sidebar/twtFollowBtn.png" /></a>
                   <?php endif;?>
                   <?php if($var->youtube != ""):?>
-                  <a class="youtube" href="<?php echo $var->youtube ?>" target="_blank"><img alt="Follow us on YouTube" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/sidebar/ytFollowBtn.png" /></a>
+                  <a class="youtube" href="<?php echo $var->youtube ?>" target="_blank"><img alt="Follow us on YouTube" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/sidebar/ytFollowBtn.png" /></a>
                   <?php endif;?>
                 </div>
                   <?php endif;?>
@@ -371,6 +376,13 @@ $(document).ready(function(){
 	  
       <!-- Main body start -->
             <div class="centerCol fl">
+					<?php if($this->countModules('searchres')) : ?>
+					<div>
+						<jdoc:include type="modules" name="searchres" style="rounded" />
+					    <div class="cb"></div>
+					</div>
+				    <?php endif; ?>
+					
             		<div id="Try3" class="sect">
                     	<?php if( JRequest::getVar( 'view' ) == 'frontpage' ) { ?>
 						 <div class="description">
@@ -383,7 +395,6 @@ $(document).ready(function(){
 								 
 								<!-- RSVP CODE BEGIN -->
 								<?php //include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
-								<!-- RSVP CODE END -->
 								
                          </div>
 						 
