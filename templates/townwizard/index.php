@@ -395,9 +395,7 @@ jQuery(document).ready(function(){
 								 <jdoc:include type="component" />
 								 
 								<!-- RSVP CODE BEGIN -->
-								<?php if(JRequest::getVar('evid') != '') :?>
-								<?php include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
-								<?php endif; ?>
+								
 								
                          </div>
 						 

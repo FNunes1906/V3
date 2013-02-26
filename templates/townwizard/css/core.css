@@ -1123,7 +1123,7 @@ a.saved span {
   height:156px;
 }
 .detailFeature .address {
-  margin:30px 0;
+  margin:10px 0;
 }
 .detailFeature .address div {
   margin-bottom:5px;
@@ -1631,11 +1631,12 @@ text-decoration: none;
 
 
 .cont .checkins{
-	width: 45%;
+	/* width: 45%; */
+	width: 85%;
 }
 
 .cont .checkins .pad{
-	padding-left: 10px;
+	/* padding-left: 10px;*/
 }
 
 .cont .checkins .pad .seeAll {
@@ -1800,16 +1801,8 @@ text-decoration: none;
 }
 /* Over LAY RSVP  End */
 
-.likes{
-	margin-bottom: 35px;
-}
-
 #yogi{
-	/* position: relative;
-    right: 15px;
-    top: -414px;*/
-	margin-top: -196px;
-	
+	/* margin-top: -196px; */
 }
 /*.clickrsvp{
 	position: absolute;
@@ -1819,8 +1812,8 @@ text-decoration: none;
 }
 */
 .clickrsvp1{
-	width:430px;
-	clear: both;
+	/* width:430px; */
+	/* clear: both; */
 	/*position: absolute;
 	right:0;
 	top: -95px;*/

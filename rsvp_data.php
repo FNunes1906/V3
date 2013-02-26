@@ -1,4 +1,7 @@
-<?php if($_POST && !empty($_POST))
+<?php 
+include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
+
+if($_POST && !empty($_POST))
 { tw_create_rsvp($_POST); }
 ?>
 
@@ -29,7 +32,7 @@ function rsvpSubmit(rsvpvalue){
 </script>
 
 <!--<div id="Feat" class="centerCol fl">-->
-<div id="yogi">
+<div id="yogi" style="float:right;">
 	<!--<div id="EventDetail" class="detailFeature sect">-->
 		<div class="clickrsvp">
 			<!-- Map here -->
@@ -41,7 +44,7 @@ function rsvpSubmit(rsvpvalue){
 		</div>
 		
 		<div class="clickrsvp1">
-			<div class="checkins fl" style="float:right;margin-top:50px;">
+			<div class="checkins fl">
 				<div class="pad">
 				<?php if($userCount > 0): ?>
 					<span><?php echo $userCount ?> attending:</span>
