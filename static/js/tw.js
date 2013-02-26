@@ -231,6 +231,25 @@ var passLoginGate = function() {
   });
 }
 
+function geoSuccess(position) {
+  var latlng = position.coords.latitude + ", " + position.coords.longitude;
+  alert("Thank you for checking in with Town Wizard! You are located at:\n\n" + latlng);
+}
+
+function geoError(msg) {
+  alert("We're sorry, there was an error finding your location.");
+  
+  // console.log(arguments);
+}
+
+var geoLocateMe = function() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+  } else {
+    error('not supported');
+  }
+}
+
 var alertScreenSize = function() {
   alert($(window).width() + "px, " + $('body').height() + "px");
 }

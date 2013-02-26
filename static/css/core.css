@@ -424,7 +424,7 @@ input:-ms-placeholder,
 }
 #AttendancePanel .attendeeList .attendee {
   clear:both;
-  margin-bottom:15px;
+  padding:5px 0;
   width:50%;
   margin:auto;
 }
@@ -1356,6 +1356,26 @@ a.saved span {
   text-decoration:none;
 }
 .detailFeature .evtTmb .rsvpBtn img {
+  width:auto;
+  height:auto;
+}
+.detailFeature .checkinBtn {
+  background:url('../images/header/checkinBtn.png') no-repeat left top;
+  text-align:center;
+  height:30px;
+  padding:0 12px 0 25px;
+  width:63px;
+  font-size:12px;
+  line-height:30px;
+  display:block;
+  color:#000;
+  text-decoration:none;
+  margin-left:15px;
+}
+.detailFeature .checkinBtn:hover {
+  text-decoration:underline;
+}
+.detailFeature .checkinBtn img {
   width:auto;
   height:auto;
 }
