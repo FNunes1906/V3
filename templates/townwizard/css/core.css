@@ -1910,6 +1910,19 @@ text-decoration: none;
 /* Search Results end */
 
 
+/* JEV location detail setting begin */
+#VenuePhotoGallery{
+  border-top: 3px solid #000000 !important;
+   margin-bottom: 0 !important;
+}
+
+#Cuisine{
+ overflow: hidden;
+}
+
+#VenueDetail{ width:412px !important;  margin-bottom: 0 !important;}
+/* JEV location detail setting end */
+
 /* Latest Photos Start */
 
 #phocagallery-module-ri{clear: both;overflow: hidden;padding: 20px 0;}
