@@ -6,12 +6,13 @@ $(document).ready(function() {
 
   document.addEventListener("orientationchange", updateOrientation);
 
-  //Bind Twitter/Facebook help tooltip
-  jQuery('.helpBtn').click(showTip);
-  //Bind additional modal tootltips
-  jQuery('.rsvpBtn').click(showTip);
-  jQuery('#LoginPanel .socialLinks a').click(showTip);
-  jQuery('.checkins .seeAll').click(showTip);
+  //Bind all modal buttons
+  jQuery('a[data-ref-panel]').each(function() {
+    jQuery(this).click(showTip);
+  });
+
+  //Bind GeoLocation button
+  jQuery('#GeoLocateMe .yes').click(geoLocateMe);
 
 
   /*$('.centerCol .sect').click(function() {
