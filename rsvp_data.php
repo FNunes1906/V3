@@ -39,10 +39,11 @@ function rsvpSubmit(rsvpvalue){
 				<a class="rsvpBtn bold" data-ref-panel="LoginPanel" href="#">Click here to RSVP</a>
 			<?php endif; ?>
 		</div>
-
+		
 		<div class="clickrsvp1">
-			<div class="checkins fl" style="float:right;margin-top:20px;">
+			<div class="checkins fl" style="float:right;margin-top:50px;">
 				<div class="pad">
+				<?php if($userCount > 0): ?>
 					<span><?php echo $userCount ?> attending:</span>
 					<?php
 					//Looping RSVP data object to get RSVP User image
@@ -60,10 +61,12 @@ function rsvpSubmit(rsvpvalue){
 							$i++; if($imgCnt >= 5) break;
 					}?>
 					<a class="seeAll fl" data-ref-panel="AttendancePanel" href="#">See all &raquo;</a>
+				<?php endif; ?>	
 				</div>
 			</div>
 			<div class="cb"></div>
 		</div>
+		
 </div> 
 <!--</div>-->
  <form id="rsvp_form" name="rsvp_form" method="post" action="">

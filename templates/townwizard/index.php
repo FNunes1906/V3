@@ -346,7 +346,7 @@ jQuery(document).ready(function(){
       <!-- Placeholder for Header Banner Ad in Vertical Layout End -->
 	  
        <!-- Event Rotator Start -->
- 	<?php if(JRequest::getVar('Itemid') == 97 && JRequest::getVar('task') == 'range.listevents'):?>
+ 	<?php if(JRequest::getVar('task') == 'range.listevents'):?>
   
  	<div class="fl">
 			<?php if($this->countModules('searchevent')) : ?>
@@ -376,7 +376,8 @@ jQuery(document).ready(function(){
 	  
       <!-- Main body start -->
             <div class="centerCol fl">
-					<?php if($this->countModules('searchres')) : ?>
+					<?php
+					 if($this->countModules('searchres') && JRequest::getVar('task') != 'locations.detail') : ?>
 					<div>
 						<jdoc:include type="modules" name="searchres" style="rounded" />
 					    <div class="cb"></div>

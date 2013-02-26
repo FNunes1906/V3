@@ -22,7 +22,7 @@ class modLocationCatHelper
 	$sessions = null;
 	$result   = array();
 	
-	$query_locationcat='SELECT COUNT(loc.catid) as count, cate.alias, cate.id, cate.title as category FROM  jos_jev_locations as loc, jos_categories as cate WHERE loc.loccat = cate.id AND loc.published = 1 GROUP BY category ORDER BY `cate`.`title` ASC';
+	$query_locationcat='SELECT COUNT(loc.catid) as count, cate.alias, cate.id, cate.title as category FROM  jos_jev_locations as loc, jos_categories as cate WHERE loc.loccat = cate.id AND loc.published = 1 AND cate.parent_id = 152 GROUP BY category ORDER BY `cate`.`title` ASC';
 	//$result = mysql_query($query_locationcat);
 	$db->setQuery($query_locationcat);
 	if ($db->getErrorNum()) {
