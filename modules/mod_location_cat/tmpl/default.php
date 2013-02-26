@@ -9,9 +9,9 @@ global $var;
 ?>
 <!-- Featured Events Slider -->	
 
-<div id="Cuisine" class="sect grid" style="width: 420px;">
+<div id="Cuisine" class="sect grid" style="width: 420px;overflow: hidden;">
     <div class="cont">
-		<h3 class="fl"><a href="#" class="heading display"><?php echo $_SESSION['partner_folder_name']?> Cuisine</a></h3>
+		<h3 class="fl"><a href="#" class="heading display"><?php echo $_SESSION['partner_folder_name']." ".JText::_("LOC_CUISINE");?></a></h3>
         <ul>
 			<?php
 			foreach($LocationCate as $fearow) :

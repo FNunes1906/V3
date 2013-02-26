@@ -364,6 +364,7 @@ a.saved span {
 }
 #MainContent .sect .cont {
   padding:8px 0 0 8px;
+  /* position: relative; */
 }
 .centerCol .sect {
   width:420px;
@@ -1546,7 +1547,7 @@ dt.notice {
 	width:410px !important;
 }
 
-#Feat{overflow: hidden;padding-bottom: 10px;}
+#Feat{overflow: hidden;padding-bottom: 15px;}
 
 /**
 Developer: Akash
@@ -1623,7 +1624,9 @@ text-decoration: none;
 	display: block;
 	color: #000;
 	text-decoration: underline;
-	margin-left: 15px;
+	margin-right: 38px;
+	float:right;
+	
 }
 
 
@@ -1797,24 +1800,30 @@ text-decoration: none;
 }
 /* Over LAY RSVP  End */
 
-
+.likes{
+	margin-bottom: 35px;
+}
 
 #yogi{
-	position: relative;
+	/* position: relative;
+    right: 15px;
+    top: -414px;*/
+	margin-top: -196px;
 	
 }
-.clickrsvp{
+/*.clickrsvp{
 	position: absolute;
 	width:200px;
 	right:0;
 	top: -152px;
 }
-
+*/
 .clickrsvp1{
-	position: absolute;
-	width:420px;
+	width:430px;
+	clear: both;
+	/*position: absolute;
 	right:0;
-	top: -95px;
+	top: -95px;*/
 }
 /* RSVP End */
 
@@ -1909,6 +1918,9 @@ text-decoration: none;
 	
 /* Search Results end */
 
+/* JEV location detail setting begin */
+
+/* JEV location detail setting end */
 
 /* JEV location detail setting begin */
 #VenuePhotoGallery{
@@ -1931,3 +1943,14 @@ text-decoration: none;
 	padding:0 6px 0 0 !important
 }
 /* Latest Photos Start */
+
+#VenuePhotoGallery{
+  border-top: 3px solid #000000 !important;
+   margin-bottom: 0 !important;
+}
+
+#Cuisine{
+ overflow: hidden;
+}
+
+#VenueDetail{ width:412px !important;  margin-bottom: 0 !important;}

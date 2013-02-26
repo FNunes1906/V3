@@ -10,7 +10,7 @@
 	<version>1.0.0</version>
 	<description>Townwiz Location Cat</description>
 	<files>
-		<filename module="mod_locationcat">mod_location_cat.php</filename>
+		<filename module="mod_location_cat">mod_location_cat.php</filename>
 		<filename>helper.php</filename>
 		<folder>tmpl</folder>
 	</files>
