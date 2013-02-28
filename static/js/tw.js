@@ -215,11 +215,23 @@ var showTip = function(refPanel) {
     if (refPanel == "#LoginPanel") {
       jQuery(refPanel + ' .socialLinks a').unbind('click').click(passLoginGate);
     }
+
+    //Dynamically add YouTube embed code and description to VidPanel overlay
+    if (refPanel == "#VidPanel") {
+      jQuery('.vidModalHolder').html('<iframe width="420" height="315" src="https://www.youtube.com/embed/RfrueeBmfXo?rel=0" frameborder="0" allowfullscreen></iframe><p>Video description goes here</p>');
+    }
+
   });
 }
 
 var hideTip = function(refPanel) {
   jQuery(refPanel).fadeOut('fast',function() {
+    
+    //If there is a YouTube player, remove it when modal is closed so it does not continue to play
+    if (jQuery('.vidModalHolder').length) {
+      jQuery('.vidModalHolder').html('');
+    }
+    
     jQuery('#Darkness').fadeOut();
   });
 }
