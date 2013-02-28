@@ -614,6 +614,7 @@ a.saved span {
 .centerCol .sect.horiz ul.mediaThumbs li .thumb {
   background:#ccc;
   margin-left:0;
+  text-align:center;
 }
 .centerCol .sect.horiz .rating {
   margin:5px 0;
@@ -841,7 +842,8 @@ a.saved span {
 .newLists ul li .author img {
   margin-right:5px;
 }
-#SubmitEvent p {
+#SubmitEvent p, 
+.textSect p {
   padding-top:15px;
   font-size:13px;
   line-height:18px;
