@@ -315,6 +315,7 @@ li.active span.menu_img_hover,span.menu_img_hover:hover{
 .centerCol {
   max-width:420px;
   margin-right:35px;
+  min-height:320px;
 }
 .rightCol {
   max-width:300px;
@@ -1942,3 +1943,16 @@ text-decoration: none;
 }
 
 #VenueDetail{ width:412px !important;  margin-bottom: 0 !important;}
+
+/* Restaurant Search begin*/
+
+#mod_search_searchword{
+	width: 40% !important;
+}
+
+#cat_drop{
+	height: 28px;
+    padding-top: 4px;
+    width: 37%;
+}
+/* Restaurant Search end*/

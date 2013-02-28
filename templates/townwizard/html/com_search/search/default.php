@@ -8,8 +8,9 @@
 <?php endif; ?>
 
 <?php echo $this->loadTemplate('form'); ?>
+
 <?php if(!$this->error && count($this->results) > 0) :
 	echo $this->loadTemplate('results');
-else :
-	echo $this->loadTemplate('error');
-endif; ?>
+else : ?>
+	<h3 style="clear: both;padding-top: 20px;"><?php echo JText::_("LOC_RES");?></h3>
+<?php endif; ?>

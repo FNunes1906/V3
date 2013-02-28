@@ -2,13 +2,13 @@
 <!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/module-install.dtd">
 <install type="module" version="1.5.0" method="upgrade">
 	<name>Phoca Gallery Image Module</name>
-	<creationDate>22/04/2010</creationDate>
+	<creationDate>20/11/2010</creationDate>
 	<author>Jan Pavelka (www.phoca.cz)</author>
 	<authorEmail></authorEmail>
 	<authorUrl>www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>2.7.0</version>
+	<version>2.7.5</version>
 	<!-- The description is optional and defaults to the name -->
 	<description><![CDATA[ 
        Phoca Gallery Image Module - displays image(s) from Phoca Gallery component<br />
@@ -135,6 +135,7 @@
 			<option value="5">Highslide (Image only)</option>
 			<option value="6">JAK Lightbox</option>
 			<option value="7">No Popup</option>
+			<option value="8">Slimbox</option>
 		</param>
 		
 		<param name="@spacer" type="spacer" default="Modal Box" label="Modal Box" description="" />

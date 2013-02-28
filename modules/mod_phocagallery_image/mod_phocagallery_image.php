@@ -29,7 +29,11 @@ phocagalleryimport('phocagallery.picasa.picasa');
 
 $user 				= &JFactory::getUser();
 $db 				= &JFactory::getDBO();
-$menu 				= &JSite::getMenu();
+//$menu 				= &JSite::getMenu();
+global $mainframe;
+if ($mainframe->isSite()) {
+	$menu = &JSite::getMenu();
+}
 $document			= &JFactory::getDocument();
 $library 			= &PhocaGalleryLibrary::getLibrary();
 $path 				= PhocaGalleryPath::getPath();
@@ -425,6 +429,28 @@ else if ($tmpl['detailwindow'] == 7) {
 	$buttonOther->set('optionsrating', "");
 	
 }
+
+// -------------------------------------------------------
+// SLIMBOX
+// -------------------------------------------------------
+
+else if ($tmpl['detailwindow'] == 8) {
+
+	$button->set('methodname', 'slimbox');
+	$button2->methodname 		= &$button->methodname;
+	$button2->methodname 		= &$button->methodname;
+	$button2->set('options', "lightbox-images");
+	
+	$buttonOther->set('modal', true);
+	$buttonOther->set('methodname', 'modal-button');
+	$buttonOther->set('options', "{handler: 'iframe', size: {x: ".$popup_width.", y: ".$popup_height."}, overlayOpacity: ".$modal_box_overlay_opacity."}");
+	$buttonOther->set('optionsrating', "{handler: 'iframe', size: {x: ".$popup_width.", y: ".$popup_height_rating."}, overlayOpacity: ".$modal_box_overlay_opacity."}");
+
+	$document->addScript(JURI::base(true).'/components/com_phocagallery/assets/js/slimbox/slimbox.js');
+	$document->addStyleSheet(JURI::base(true).'/components/com_phocagallery/assets/js/slimbox/slimbox.css');
+
+}
+
 $folderButton = new JObject();
 $folderButton->set('name', 'image');
 $folderButton->set('options', "");		
@@ -663,10 +689,16 @@ if ($images) {
 				$tmpl['jakdatajs'][$i] .= "small: {url: '".htmlentities(JURI::base(true).'/'.PhocaGalleryText::strTrimAll(addslashes($thumbLinkM->rel)))."'},"
 				."big: {url: '".htmlentities(JURI::base(true).'/'.PhocaGalleryText::strTrimAll(addslashes($imgLink)))."'} }";
 			}
-		
+		}
+		// Added Slimbox URL settings
+		else if ( $tmpl['detailwindow'] == 8 ) {
 			
+			$valueImages->link 		= $imgLink;
+			$valueImages->link2 	= $imgLink;
+			$valueImages->linkother	= $imgLink;
+			$valueImages->linkorig	= $imgLinkOrig;
 			
-			
+		// End Slimbox URL settings	
 		} else {
 		
 			$valueImages->link 		= $siteLink;
@@ -689,6 +721,13 @@ if ($images) {
 					
 				} else if (JFile::exists($valueImages->linkthumbnailpathabs)) {
 					list($imageOrigWidth, $imageOrigHeight) = getimagesize( $valueImages->linkthumbnailpathabs );
+					
+					if ((int)$custom_image_width > 0) {
+						$imageOrigWidth = $custom_image_width;
+					}
+					if ((int)$custom_image_height > 0) {
+						$imageOrigHeight = $custom_image_height;
+					}
 				}
 			
 				
@@ -705,9 +744,15 @@ if ($images) {
 					$output[$i] .= ' onclick="gjaksMod'.$randName.'.show('.$valueImages->linknr.'); return false;"';
 				} else if ($tmpl['detailwindow'] == 7 ) {
 					$output[$i] .= '';
+				}
+				//Begin Slimbox Method
+				else if ($tmpl['detailwindow'] == 8) {
+					$output[$i] .=' rel="lightbox-'.$randName.'" ';
+				//End Slimbox Method
 				} else {
 					$output[$i] .= ' rel="'.$button->options.'"';
 				}
+				
 				
 				
 				$output[$i] .= ' >' . "\n";
@@ -786,6 +831,11 @@ if ($images) {
 					$output[$i] .= ' onclick="gjaksMod'.$randName.'.show('.$valueImages->linknr.'); return false;"';
 				} else if ($tmpl['detailwindow'] == 7 ) {
 					$output[$i] .= '';
+				}
+				//Begin Slimbox Method
+				else if ($tmpl['detailwindow'] == 8) {
+					$output[$i] .=' rel="lightbox-'.$randName.'" ';
+				//End Slimbox Method
 				} else {
 					$output[$i] .= ' rel="'.$button->options.'"';
 				}

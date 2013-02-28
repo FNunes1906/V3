@@ -408,8 +408,8 @@ jQuery(document).ready(function(){
              </div>
   	  <!-- Main body end -->	
 	  
-	  
-	  <?php if(JRequest::getVar('evid') != '') :?>
+	  <!--Used for Sharethis module begin -->
+	  <?php if(JRequest::getVar('evid') != '' || JRequest::getVar('loc_id') != '') :?>
 	  
 			 <?php if($this->countModules('ev_right')) : ?>
 		            <div class="rightCol fr">
@@ -417,8 +417,9 @@ jQuery(document).ready(function(){
 		            </div>
 		      <?php endif; ?>
 			 
-	 <?php endif; ?>	
-	  
+	 <?php endif; ?>		
+	 <!--Used for Sharethis module end --> 
+	 
  	<?php if(JRequest::getVar('Itemid') == 97 && JRequest::getVar('task') == 'range.listevents'):?>
 				<?php if($this->countModules('slider')) : ?>
 					<div id="neg" class="adSect rightCol fr">
