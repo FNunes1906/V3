@@ -593,6 +593,10 @@ a.saved span {
   margin-top:0;
   padding:0;
 }
+.centerCol .sect.horiz ul.mediaThumbs li p {
+  display:block;
+  height:30px;
+}
 .centerCol .sect.horiz ul.mediaThumbs li.vid {
   width:120px;
   margin-right:25px;
