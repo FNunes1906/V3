@@ -1,26 +1,24 @@
 <?php 
 include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 
+# Create RSVP entry from Post array variable
 if($_POST && !empty($_POST))
-{ tw_create_rsvp($_POST); }
+{
+	tw_create_rsvp($_POST);
+}
 ?>
 
 <?php 
-	//Creating array for RSVP user in $arr_rsvpuser
+	# Creating array for RSVP user in $arr_rsvpuser
 	$arr_rsvpuser = tw_get_rsvps_by_event($_REQUEST['evid']);
 	
-	/* Need to address later */
-	//$eventDetail = getEventDetail($_REQUEST['evid']);
-	
-	//Varialbe for Looping
+	# Varialbe for Looping
 	$i = 0;
 	$imgCnt = 0;
 	
-	// function to count all RSVP user with Y
+	# function to count all RSVP user with Y
 	$userCount = rsvpUserCnt($arr_rsvpuser);
-	
-	//echo "<pre>";
-	//print_r($arr_rsvpuser);
+
 ?>
 
 <script>
@@ -43,7 +41,7 @@ function rsvpSubmit(rsvpvalue){
 			<?php endif; ?>
 		</div>
 		
-		<div class="clickrsvp1">
+<!--		<div class="clickrsvp1">
 			<div class="checkins fl">
 				<div class="pad">
 				<?php if($userCount > 0): ?>
@@ -68,7 +66,7 @@ function rsvpSubmit(rsvpvalue){
 				</div>
 			</div>
 			<div class="cb"></div>
-		</div>
+		</div>-->
 		
 </div> 
 <!--</div>-->
@@ -83,15 +81,13 @@ function rsvpSubmit(rsvpvalue){
 
 <!-- Login Overlay Start -->
 
-<div id="LoginPanel" class="takeOverlay">
-	<a class="close">x</a>
+<div id="LoginPanel" class="takeOverlay" style="border:2px solid <?php echo $var->Header_color; ?>;">
+	<a class="close" style="border:2px solid <?php echo $var->Header_color; ?>;">x</a>
 	<span>
 		You must login in order to RSVP to events on <?php echo $var->site_name;?>.
 		<div class="socialLinks cb">
 			<a class="fbLogin fl" href="javascript:void(0)" onclick="fb_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
         	<a class="twtLogin fl" href="javascript:void(0)" onclick="twitter_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
-			<!--<a class="fbLogin" data-ref-panel="RsvpPanel" href="#"><span>Login with</span></a>
-			<a class="twtLogin" data-ref-panel="RsvpPanel" href="#"><span>Login with</span></a>-->
 		</div>
 	</span>
 </div>
@@ -99,8 +95,8 @@ function rsvpSubmit(rsvpvalue){
 <!-- Login Overlay End -->
 
 <!-- RSVP Overlay Start -->
-<div id="RsvpPanel" class="takeOverlay">
-	<a class="close">x</a>
+<div id="RsvpPanel" class="takeOverlay" style="border:2px solid <?php echo $var->Header_color; ?>;">
+	<a class="close" style="border:2px solid <?php echo $var->Header_color; ?>;">x</a>
 	<span>
 		<h5 class="bold">Do you plan to attend?</h5> 
 		<p class="details">
@@ -120,8 +116,8 @@ function rsvpSubmit(rsvpvalue){
 
 <!-- Attendance Overlay Start -->
 
-<div id="AttendancePanel" class="takeOverlay">
-	<a class="close">x</a>
+<div id="AttendancePanel" class="takeOverlay" style="border:2px solid <?php echo $var->Header_color; ?>;">
+	<a class="close" style="border:2px solid <?php echo $var->Header_color; ?>;">x</a>
 	<span>
 		<h5 class="bold"><?php echo $userCount ?> are Attending</h5> 
 		<div class="attendeeList">
