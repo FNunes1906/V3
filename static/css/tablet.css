@@ -143,6 +143,16 @@ body.tablet .centerCol .sect.horiz ul li,
 body.tablet .centerCol .sect ul li .thumb img {
   width:100%;
 }
+body.tablet .centerCol .sect.horiz ul.mediaThumbs li {
+  width:32%;
+}
+body.tablet .name h2 {
+  margin-bottom:30px;
+  font-size:18px;
+}
+body.tablet .name .bc a {
+  font-size:14px !important;
+}
 body.tablet .neg {
   margin-top:0 !important;
 }
