@@ -23,8 +23,7 @@ if( !$this->pop ){
 }
 $this->_footer();
 */
-?>
-<?php 
+
 $data = $this->data[row];
 
 # Event detail variables
@@ -92,30 +91,30 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 				<!-- RSVP Images code End -->
 			<div class="cb"></div>	
 		</div>
+
+		<?php if(isset($data->_jevlocation->image) && !empty($data->_jevlocation->image)): ?>
 		
-		<!-- IMAGE CODE Begin -->
-		<div style="width: 420px; overflow: hidden;" class="photoGallerySect sect" id="VenuePhotoGallery">
- 			<h3 class="fl">
- 				<a href="/index.php?option=com_phocagallery&amp;view=categories&amp;Itemid=102" class="heading display"> Photo Gallery</a>
-			</h3>
-			<div class="bc fr">
- 				<a href="/index.php?option=com_phocagallery&amp;view=categories&amp;Itemid=102">Send us your photos</a>
+			<!-- IMAGE CODE Begin -->
+			<div style="width: 420px; overflow: hidden;" class="photoGallerySect sect" id="VenuePhotoGallery">
+	 			<h3 class="fl">
+	 				<a href="/index.php?option=com_phocagallery&amp;view=categories&amp;Itemid=102" class="heading display"> Photo Gallery</a>
+				</h3>
+				<div class="bc fr">
+	 				<a href="/index.php?option=com_phocagallery&amp;view=categories&amp;Itemid=102">Send us your photos</a>
+				</div>
+	 			<ul>
+					<li>
+						<a href="#" id="pop"><img style="max-height: 100% !important; max-width: 100% !important;" src="<?php echo $lc_image;?>"></a>
+						<div style="left: 524.5px; top: 174.833px; position: absolute; display: none;" id="overlay_form">
+							<a href="#" id="close">Close</a>
+							<img style="max-height: 100% !important; max-width: 100% !important;" src="<?php echo TOWNWIZARD_LOCATION_IMAGE_PATH_FULL.$data->_jevlocation->image; ?>">
+						</div>
+					</li>
+				</ul>
 			</div>
- 			<ul>
-				<li>
-					<a href="#" id="pop"><img style="max-height: 100% !important; max-width: 100% !important;" src="<?php echo $lc_image;?>"></a>
-					<div style="left: 524.5px; top: 174.833px; position: absolute; display: none;" id="overlay_form">
-						<a href="#" id="close">Close</a>
-						<img style="max-height: 100% !important; max-width: 100% !important;" src="<?php echo TOWNWIZARD_LOCATION_IMAGE_PATH_FULL.$data->_jevlocation->image; ?>">
-					</div>
-				</li>
-			</ul>
-		</div>
-		<!-- IMAGE CODE End -->
+			<!-- IMAGE CODE End -->
 		
-        <!--<div> <?php if(isset($lc_image) && !empty($lc_image)):
-					echo "<img src=$lc_image />";
-			 endif; ?>
-		</div>-->
+		<?php endif; ?>
+        
 	</div>	
 </div>

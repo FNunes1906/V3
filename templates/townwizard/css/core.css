@@ -1035,6 +1035,7 @@ a.saved span {
   background:#f1f1f1;
   padding:15px 19px;
   margin-bottom: 20px;
+  min-height:30px;
 }
 .module_event input.evsearch {
   height:24px;

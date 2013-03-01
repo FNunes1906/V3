@@ -7,12 +7,13 @@ a {
     float: left;
 }
 
+.fr{
+	 float: right;
+    margin-top: 18px;
+}
+
 h1{
  	font-size:13px;
-}
-#Feat{
-	font-family:arial;
-	font-size:12px;
 }
 
 .bold {
@@ -38,4 +39,33 @@ h1{
     height: 32px;
     margin-right: 10px;
     width: 32px;
+}
+
+.detailFeature .address {
+   margin: 5px 0 10px;
+}
+
+#VenueDetail,#EventDetail{
+	font-family:arial;
+	font-size:12px;
+}
+
+#VenuePhotoGallery {
+    border-top: 3px solid #000000 !important;
+    margin-bottom: 0 !important;
+	
+}
+
+.likes{
+	padding-bottom: 10px;
+}
+
+#VenuePhotoGallery ul{
+	padding:0px;
+	list-style:none;
+	clear: both;
+}
+
+.takeOverlay,#yogi{
+	display: none;
 }

@@ -101,7 +101,7 @@ jQuery(window).bind('resize',positionPopup);
 <!-- Code for Print Icon begin -->
 <script type="text/javascript">     
         function PrintDiv() {    
-           var divToPrint = document.getElementById('jevents_body');
+           var divToPrint = document.getElementById('Feat');
            var popupWin = window.open('', 'My Event', 'width=550,height=450');
            popupWin.document.open();
            popupWin.document.write('<html><head><title>My Event</title><link rel="stylesheet" type="text/css" href="<?php echo TOWNWIZARD_TMPL_PATH ?>/css/print.css" /></head><body>' + '<input class="printBtn" type="button" value="" onclick="window.print();" />' + divToPrint.innerHTML +  '</html>');
