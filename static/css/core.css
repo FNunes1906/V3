@@ -602,10 +602,11 @@ a.saved span {
   margin-right:25px;
 }
 .centerCol .sect.horiz ul.mediaThumbs li.vid img {
-  width:100%;
+  width:120px;
 }
 #MainContent .centerCol .sect.horiz ul.mediaThumbs li .thumb img {
   margin-top:0;
+  height:90px;
 }
 .centerCol .sect.horiz ul.mediaThumbs li:last-child, 
 .centerCol .sect.horiz ul.mediaThumbs li:nth-child(3n+0) {
@@ -706,7 +707,9 @@ a.saved span {
   padding:0;
 }
 .centerCol .sect ul li .thumb img {
-  width:130px;
+  width:auto;
+  height:90px;
+  margin:auto;
 }
 #MainContent .sect ul li .thumb img {
   margin-top:10px;

@@ -143,8 +143,33 @@ body.tablet .centerCol .sect.horiz ul li,
 body.tablet .centerCol .sect ul li .thumb img {
   width:100%;
 }
+body.tablet .centerCol .sect ul li .thumb img {
+  height:auto !important;
+}
 body.tablet .centerCol .sect.horiz ul.mediaThumbs li {
   width:32%;
+}
+body.tablet .centerCol #PhotoGallery.sect.horiz ul.mediaThumbs li {
+  width:130px;
+}
+body.tablet .centerCol #VideoGallery.sect.horiz ul.mediaThumbs li {
+  width:120px;
+}
+body.tablet .centerCol #PhotoGallery.sect.horiz ul.mediaThumbs li:nth-child(3n+0) {
+  margin-right:10px;
+}
+body.tablet .centerCol #VideoGallery.sect.horiz ul.mediaThumbs li:nth-child(3n+0) {
+  margin-right:25px;
+}
+body.tablet .centerCol .sect.horiz ul.mediaThumbs li .thumb img {
+  width:100%;
+  margin:auto;
+}
+body.tablet .centerCol .sect.horiz .photoAlbum.listing ul.mediaThumbs li .thumb img {
+  width:auto;
+}
+body.tablet #SubmitPhotos {
+  width:100%;
 }
 body.tablet .name h2 {
   margin-bottom:30px;
