@@ -35,9 +35,9 @@ function rsvpSubmit(rsvpvalue){
 		<div class="clickrsvp">
 			<!-- Map here -->
 			<?php if($_SESSION['tw_user_name']): ?>
-				<a class="rsvpBtn bold" data-ref-panel="RsvpPanel" href="#">Click here to RSVP</a>
+				<a class="rsvpBtn bold" data-ref-panel="RsvpPanel" href="#"><?php echo JText::_("TW_CLICK_RSVP") ?></a>
 			<?php else : ?>	
-				<a class="rsvpBtn bold" data-ref-panel="LoginPanel" href="#">Click here to RSVP</a>
+				<a class="rsvpBtn bold" data-ref-panel="LoginPanel" href="#"><?php echo JText::_("TW_CLICK_RSVP") ?></a>
 			<?php endif; ?>
 		</div>
 		
@@ -84,7 +84,7 @@ function rsvpSubmit(rsvpvalue){
 <div id="LoginPanel" class="takeOverlay" style="border:2px solid <?php echo $var->Header_color; ?>;">
 	<a class="close" style="border:2px solid <?php echo $var->Header_color; ?>;">x</a>
 	<span>
-		You must login in order to RSVP to events on <?php echo $var->site_name;?>.
+		<?php echo JText::_("TW_MUST_LOGIN").' '.$var->site_name;?>.
 		<div class="socialLinks cb">
 			<a class="fbLogin fl" href="javascript:void(0)" onclick="fb_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
         	<a class="twtLogin fl" href="javascript:void(0)" onclick="twitter_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
@@ -98,17 +98,17 @@ function rsvpSubmit(rsvpvalue){
 <div id="RsvpPanel" class="takeOverlay" style="border:2px solid <?php echo $var->Header_color; ?>;">
 	<a class="close" style="border:2px solid <?php echo $var->Header_color; ?>;">x</a>
 	<span>
-		<h5 class="bold">Do you plan to attend?</h5> 
-		<p class="details">
-			<?php echo $_REQUEST['title']?> : at<br />
-			Alys Beach Ampitheater<br />
-			West Philadelphia, PA<br />
-			at 8PM Today?
-		</p>
+		<h5 class="bold"><?php echo JText::_("TW_PLAN_ATTEND")?>?</h5> 
+		<p class="details" style="padding:0;">
+	        <?php echo $_REQUEST['title']; ?> at<br>
+	        <?php echo $lc_title;?><br>
+	        <?php echo $lc_city.' '.$lc_state;?><br>on
+			<?php echo $ev_start_date.' '.$ev_time; ?>?
+      </p>
 		<div class="socialLinks rsvp cb">
-			<a class="yes" href="#" onclick="rsvpSubmit('Y');">Attending</a>
-			<a class="maybe" href="#" onclick="rsvpSubmit('M');">Maybe</a>
-			<a class="no" href="#" onclick="rsvpSubmit('N');">Not Attending</a>
+			<a class="yes" href="#" onclick="rsvpSubmit('Y');"><?php echo JText::_("TW_ATTENDING") ?></a>
+			<a class="maybe" href="#" onclick="rsvpSubmit('M');"><?php echo JText::_("TW_MAYBE") ?></a>
+			<a class="no" href="#" onclick="rsvpSubmit('N');"><?php echo JText::_("TW_NOT_ATTENDING") ?></a>
 		</div>
 	</span>
 </div>
@@ -119,7 +119,7 @@ function rsvpSubmit(rsvpvalue){
 <div id="AttendancePanel" class="takeOverlay" style="border:2px solid <?php echo $var->Header_color; ?>;">
 	<a class="close" style="border:2px solid <?php echo $var->Header_color; ?>;">x</a>
 	<span>
-		<h5 class="bold"><?php echo $userCount ?> are Attending</h5> 
+		<h5 class="bold"><?php echo $userCount ?> <?php echo JText::_("TW_ATTENDING") ?></h5> 
 		<div class="attendeeList">
 			<?php
 				$i=0;
@@ -136,7 +136,7 @@ function rsvpSubmit(rsvpvalue){
 	</span>
 </div>
 
-<!-- Attendance Overlay Etart -->
+<!-- Attendance Overlay start -->
 
 <?php 
 
@@ -158,21 +158,4 @@ $i = 0;
 	return $userCount;
 }
 
-/* RSVP Event detail
- * Parameter : Event ID
- * Return : Event detail array
- * Return Type : Array
- * Developer : Yogi
- */
- 
-/*function getEventDetail($eventId){
-
- 	// Count total numebr of user attending this event
-	foreach($arr_rsvpuser as $value){
-		if($arr_rsvpuser[$i]->value == 'Y'){ $userCount += 1; }
-		$i++;
-	}
-	return $userCount;
-}
-*/
 ?>
