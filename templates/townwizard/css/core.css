@@ -1957,3 +1957,28 @@ text-decoration: none;
     width: 37%;
 }
 /* Restaurant Search end*/
+
+/*VIDEO PAGE CSS*/
+#phocagallery{padding-top: 10px;overflow: hidden;clear: both;}
+.phocagallery-box-file-first{height: 90px !important;width:120px !important; background:none !important;}
+.phocagallery-box-file{width: 120px !important; height:145px !important; margin:8px;background:none !important;border: none !important; padding:0px;}
+.phocagallery-box-file:hover{background:none !important;border: none !important;}
+.phocagallery-box-file-third img{width:120px;height:90px;text-align: left !important;}
+.phocaname{font-size: 12px !important;text-align: left !important;padding: 5px 0 !important; border-bottom: 1px solid #D6D6D6;height: 26px;}
+/*VIDEO PAGE CSS END*/
+
+/* photo page start */
+.cat_section{
+ 
+}
+
+.category{
+  color: #000000;
+    font-family: allerbold;
+    font-size: 14px;
+}
+
+.window-container{
+ z-index: 1000 !important;
+}
+/* photo page end */

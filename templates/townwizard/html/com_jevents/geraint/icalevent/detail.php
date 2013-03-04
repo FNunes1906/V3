@@ -97,10 +97,10 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 			<!-- IMAGE CODE Begin -->
 			<div style="width: 420px; overflow: hidden;" class="photoGallerySect sect" id="VenuePhotoGallery">
 	 			<h3 class="fl">
-	 				<a href="/index.php?option=com_phocagallery&amp;view=categories&amp;Itemid=102" class="heading display"> Photo Gallery</a>
+	 				<a href="/index.php?option=com_phocagallery&amp;view=categories&amp;Itemid=102" class="heading display"><?php echo JText::_("JEV_PHOTO_GALLERY") ?></a>
 				</h3>
 				<div class="bc fr">
-	 				<a href="/index.php?option=com_phocagallery&amp;view=categories&amp;Itemid=102">Send us your photos</a>
+	 				<a href="/index.php?option=com_phocagallery&amp;view=categories&amp;Itemid=102"><?php echo JText::_("LOC_SEND_PHOTO") ?></a>
 				</div>
 	 			<ul>
 					<li>
