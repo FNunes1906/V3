@@ -84,7 +84,7 @@ function rsvpSubmit(rsvpvalue){
 <div id="LoginPanel" class="takeOverlay" style="border:2px solid <?php echo $var->Header_color; ?>;">
 	<a class="close" style="border:2px solid <?php echo $var->Header_color; ?>;">x</a>
 	<span>
-		You must login in order to RSVP to events on <?php echo $var->site_name;?>.
+		<?php echo JText::_("TW_MUST_LOGIN").' '.$var->site_name;?>.
 		<div class="socialLinks cb">
 			<a class="fbLogin fl" href="javascript:void(0)" onclick="fb_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
         	<a class="twtLogin fl" href="javascript:void(0)" onclick="twitter_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
@@ -98,8 +98,13 @@ function rsvpSubmit(rsvpvalue){
 <div id="RsvpPanel" class="takeOverlay" style="border:2px solid <?php echo $var->Header_color; ?>;">
 	<a class="close" style="border:2px solid <?php echo $var->Header_color; ?>;">x</a>
 	<span>
-		<h5 class="bold"><?php echo JText::_("TW_PLAN_ATTEND").' '. $_REQUEST['title'] ?> ?</h5> 
-		<!--<p class="details"><br /></p>-->
+		<h5 class="bold"><?php echo JText::_("TW_PLAN_ATTEND")?>?</h5> 
+		<p class="details" style="padding:0;">
+	        <?php echo $_REQUEST['title']; ?> at<br>
+	        <?php echo $lc_title;?><br>
+	        <?php echo $lc_city.' '.$lc_state;?><br>on
+			<?php echo $ev_start_date.' '.$ev_time; ?>?
+      </p>
 		<div class="socialLinks rsvp cb">
 			<a class="yes" href="#" onclick="rsvpSubmit('Y');"><?php echo JText::_("TW_ATTENDING") ?></a>
 			<a class="maybe" href="#" onclick="rsvpSubmit('M');"><?php echo JText::_("TW_MAYBE") ?></a>

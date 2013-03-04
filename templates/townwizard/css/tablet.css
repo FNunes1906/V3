@@ -202,3 +202,7 @@ body.tablet .sharingSmall {
 body.tablet .sharingSmall span {
   margin:7px 3%;
 }
+
+body.tablet #neg {
+    margin-top: 0px;
+}
