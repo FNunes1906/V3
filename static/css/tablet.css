@@ -27,7 +27,7 @@ body.tablet .rightCol.spread {
   max-width:none;
   margin-bottom:0;
 }
-body.tablet .ad.sect {
+body.tablet .ad.sect.full {
   width:100%;
   clear:both;
 }

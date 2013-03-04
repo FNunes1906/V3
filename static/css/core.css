@@ -469,6 +469,7 @@ input:-ms-placeholder,
 }
 .ad.sect {
   border:0 none !important;
+  width:300px;
 }
 #Feat h1 {
   font-size:18px;
@@ -616,6 +617,7 @@ a.saved span {
   background:#ccc;
   margin-left:0;
   text-align:center;
+  overflow:hidden;
 }
 .centerCol .sect.horiz .rating {
   margin:5px 0;
@@ -740,6 +742,20 @@ a.saved span {
 #MainContent .sect ul li .liked p {
   font-size:11px;
   padding-top:5px;
+}
+#MainContent .sect .upload a {
+  background:url('../images/header/uploadBtn.png') no-repeat left top;
+  display:block;
+  height:15px;
+  padding-left:20px;
+  font-size:12px;
+  line-height:16px;
+  color:#000;
+  margin-top:20px;
+  padding-bottom:15px;
+}
+#MainContent .sect .upload a:hover {
+  text-decoration:underline;
 }
 #LowerBannerAd {
   display:none;
