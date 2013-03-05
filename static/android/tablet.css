@@ -1,0 +1,332 @@
+body.tablet .rightCol.fr {
+  float:left;
+  clear:none;
+  margin-top:0;
+  margin-bottom:0;
+}
+body.tablet #BlogCol.rightCol.fr {
+  float:right;
+}
+body.tablet .rightCol.fr .ad {
+  margin-bottom:30px;
+}
+body.tablet .rightCol.fr.sr {
+  float:right;
+}
+body.tablet .rightCol.fr.adSect {
+  float:right;
+}
+body.tablet .rightCol.fr.adSect.dual {
+  clear:left;
+}
+body.tablet .rightCol.fr.adSect.tall {
+  float:left;
+  clear:none;
+}
+body.tablet .rightCol.spread {
+  max-width:none;
+  margin-bottom:0;
+}
+body.tablet .ad.sect.full {
+  width:100%;
+  clear:both;
+}
+body.tablet .ad.sect img {
+  margin:auto;
+}
+body.tablet .sect.grid ul li {
+  margin-right:1%;
+}
+body.tablet #Social {
+  /*margin-top:30px;*/
+  margin-top:0;
+  margin-right:20px;
+  position:relative;
+  z-index:900;
+}
+body.tablet #Social a {
+  margin-left:20px;
+}
+body.tablet #Social #LoggedIn {
+  width:196px;
+}
+body.tablet #Header .headerAdFlex {
+  margin-top:17px;
+  float:none;
+  margin-left:190px;
+  width:auto;
+}
+body.tablet #Header #UpperBannerAd {
+  margin-right:0;
+}
+body.tablet #Local {
+  width:auto;
+  margin:0;
+  float:none;
+  position:relative;
+  top:8px;
+  font-size:12px;
+}
+body.tablet #Weather {
+  float:none;
+}
+body.tablet #Weather .range {
+  display:block;
+}
+body.tablet #GuideInfo {
+  position: absolute;
+  right: 0;
+  top: 84px;
+}
+body.tablet #GuideInfo #Local {
+  margin-left:0;
+}
+body.tablet #MainNav ul li.active ul li {
+  min-height:37px;
+}
+body.tablet #MainNav ul li.active ul li a {
+  line-height:39px;
+}
+body.tablet #LowerBannerAd {
+  display:block;
+  margin-bottom:30px;
+}
+body.tablet #LowerBannerAd.min img {
+  width:310px;
+}
+body.tablet #EvtRot {
+  max-width:755px;
+}
+body.tablet .gallery {
+  margin-bottom:0;
+}
+body.tablet .gallery ul {
+  width:280px;
+  height:171px;
+}
+body.tablet .gallery .event .rsvpCont {
+  position:relative;
+}
+body.tablet .gallery .event .rsvp .faces {
+  width:205px;
+}
+body.tablet .gallery .event .rsvp .faces img {
+  margin-left:7px;
+}
+body.tablet #EvtRot .galleryNav {
+  clear:left;
+  margin-bottom:30px;
+  max-width:none !important;
+}
+body.tablet .galleryNav a.saved {
+  background:none;
+  padding:8px 12px;
+}
+body.tablet .rotator {
+  margin-left:30px;
+}
+body.tablet #EvtRot {
+  margin-left:30px;
+}
+body.tablet .rotator .centerCol {
+  max-width:none;
+  margin-right:0;
+}
+body.tablet #EvtRot .centerCol {
+  max-width:none;
+  margin-right:0;
+}
+body.tablet .centerCol .sect ul li {
+  width:32%;
+}
+body.tablet .centerCol .sect.horiz ul li, 
+body.tablet .centerCol .sect ul li .thumb img {
+  width:100%;
+}
+body.tablet .centerCol .sect ul li .thumb img {
+  height:auto !important;
+}
+body.tablet .centerCol .sect.horiz ul.mediaThumbs li {
+  width:32%;
+}
+body.tablet .centerCol #PhotoGallery.sect.horiz ul.mediaThumbs li {
+  width:130px;
+}
+body.tablet .centerCol #VideoGallery.sect.horiz ul.mediaThumbs li {
+  width:120px;
+}
+body.tablet .centerCol #PhotoGallery.sect.horiz ul.mediaThumbs li:nth-child(3n+0) {
+  margin-right:10px;
+}
+body.tablet .centerCol #VideoGallery.sect.horiz ul.mediaThumbs li:nth-child(3n+0) {
+  margin-right:25px;
+}
+body.tablet .centerCol .sect.horiz ul.mediaThumbs li .thumb img {
+  width:100%;
+  margin:auto;
+}
+body.tablet .centerCol .sect.horiz .photoAlbum.listing ul.mediaThumbs li .thumb img {
+  width:auto;
+}
+body.tablet #SubmitPhotos {
+  width:100%;
+}
+body.tablet .name h2 {
+  margin-bottom:30px;
+  font-size:18px;
+}
+body.tablet .name .bc a {
+  font-size:14px !important;
+}
+body.tablet .neg {
+  margin-top:0 !important;
+}
+body.tablet #FindForm input.search {
+  width:48%;
+}
+body.tablet #FindForm .type {
+  width:27%;
+}
+body.tablet #FindForm .sub, 
+body.tablet #FindForm .sub a {
+  font-size:14px;
+}
+body.tablet #FindForm .sub a {
+  padding:0 15px;
+}
+body.tablet #FindForm .sub span {
+  display:block;
+  padding-bottom:15px;
+}
+body.tablet #SubmitForm #DatePicker input {
+  width:79%;
+}
+body.tablet .detailFeature a {
+  margin:25px 0;
+}
+body.tablet #ShareTool .lower span.hideSm {
+  display:none;
+}
+body.tablet .detailFeature .map img {
+  width:300px;
+  height:auto;
+  padding:0 0 15px 15px;
+}
+body.tablet .detailFeature .evtTmb img {
+  width:300px;
+  height:auto;
+  padding:0 0 15px 15px;
+}
+body.tablet .detailFeature .evtTmb .rsvpBtn {
+  margin-left:12px;
+  font-size:14px;
+}
+body.tablet .detailFeature .people .likes {
+  width:45%;
+}
+body.tablet .detailFeature .people .checkins, 
+body.tablet .detailFeature .people .rsvps {
+  width:55%;
+}
+body.tablet .detailFeature .people .checkins .pad, 
+body.tablet .detailFeature .people .rsvps .pad {
+  padding-left:2px;
+}
+body.tablet .rotator {
+  margin-bottom:30px;
+}
+body.tablet .rotator .gallery {
+  margin-bottom:0;
+}
+body.tablet #Blog .sect .description h1 span {
+  float:none;
+  line-height: 14px;
+  margin-bottom: 5px;
+}
+body.tablet #Blog .sect .description ul li h3 {
+  font-size:18px;
+}
+body.tablet #Blog .sect .description ul li a, 
+body.tablet #Blog .sect .description ul li p {
+  font-size:16px;
+  line-height:22px;
+}
+body.tablet #Blog .sect .featureImg img {
+  width:100%;
+}
+body.tablet .sharingSmall {
+  padding:14px 0;
+  width:100%;
+}
+body.tablet .sharingSmall span {
+  margin:7px 3%;
+}
+body.tablet .ratingWidget .stars.vote a { 
+  margin:0 40px 0 0 !important;
+}
+body.tablet .ratingWidget .stars.vote {
+  width:280px;
+}
+body.tablet #SearchResults li .thumb img {
+  width:300px;
+}
+body.tablet #SearchResults .ratingWidget {
+  position:static;
+}
+body.tablet #SearchResults .ratingWidget .stars a {
+  margin:2px 36px 1px 0 !important;
+}
+body.tablet #SearchResults h2 {
+  font-size:20px;
+}
+body.tablet #SearchResults h3, 
+body.tablet #SearchResults a {
+  font-size:18px;
+  line-height:28px;
+  margin-bottom:25px;
+  word-wrap:break-word;
+}
+body.tablet #SearchResults .bc {
+  float:none;
+  font-size:14px;
+}
+body.tablet #SearchResults .venueName {
+  float:none;
+}
+body.tablet .takeOverlay {
+  width:80%;
+  margin-left:0;
+  top:10%;
+  left:10%;
+}
+body.tablet .takeOverlay .socialLinks {
+  margin:20px auto;
+  width:145px;
+}
+body.tablet .detailFeature .people .checkins .seeAll {
+  font-size:14px;
+  line-height:32px;
+  text-decoration:underline;
+  margin:0 0 0 15px;
+}
+body.tablet .detailFeature .people .checkins .seeAll:hover {
+  text-decoration:none;
+}
+body.tablet #AttendancePanel .attendeeList .attendee {
+  width:70%;
+  line-height:22px;
+  margin-bottom:15px;
+}
+body.tablet #AttendancePanel .attendeeList .attendee img {
+  margin-right:15px;
+}
+
+
+
+body.min .rightCol {
+  float:none !important;
+}
+body.min #Footer ul li {
+  float:none;
+  width:100%;
+}
