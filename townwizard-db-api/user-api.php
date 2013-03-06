@@ -229,6 +229,35 @@ function tw_get_rsvps_by_event($event_id, $event_date = NULL) {
 }
 
 /***
+    Get rsvp for an event for the user in sessionr
+
+    Takes event id and optionally event date as parameters.
+    If event date is available it's recommended to pass it for 
+    townwizard db to update/create event with the date.
+
+    Return:
+     - RSVP object on  HTTP status 200
+     - NULL in other cases
+***/
+function tw_get_user_rsvp_for_event($event_id, $event_date = NULL) {
+    $site_id = $_SESSION['c_db_id'];
+    $user_id = $_SESSION['tw_user']->id;
+    
+    $id = $site_id . "/" . $event_id . "/" . $user_id;
+    if(!empty($event_date)) {
+        $id = $id.'?d='.$event_date;
+    }
+
+    list($status, $response_msg) = _tw_get_json(TOWNWIZARD_DB_RSVPS_URL, $id);
+    if($status == 200) {
+        $rsvp = json_decode($response_msg);
+        return $rsvp;
+    }
+    
+    return NULL;
+}
+
+/***
     Get a user from the service by id (which can be numeric id or email).    
 
     Return:    
