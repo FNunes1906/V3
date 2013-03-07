@@ -1968,8 +1968,28 @@ text-decoration: none;
 /*VIDEO PAGE CSS END*/
 
 /* photo page start */
-.cat_section{
+.cat_section {
+    border-bottom: 1px solid #D6D6D6;
+    overflow: hidden;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
  
+#pop img{
+   height: 90px;
+     text-align: left !important;
+     width: 120px;
+ float: left;
+  margin-right: 25px !important;
+}
+.cat_section a.img2{
+ margin-right:0px !important;
+}
+.see{
+  color: #00467F;
+    font-size: 10px;
+    text-transform: uppercase;
+ float: right;
 }
 
 .category{

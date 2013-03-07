@@ -18,6 +18,8 @@ defined('_JEXEC') or die('Restricted access');
 // Include the syndicate functions only once
 require_once (dirname(__FILE__).DS.'helper.php');
 
-$LocationCate = modLocationCatHelper::getLocationCat();
+$catid	= $params->get( 'page', '' );
+
+$LocationCate = modLocationCatHelper::getLocationCat($catid);
 
 require(JModuleHelper::getLayoutPath('mod_location_cat'));

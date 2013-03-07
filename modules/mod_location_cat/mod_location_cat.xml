@@ -14,4 +14,10 @@
 		<filename>helper.php</filename>
 		<folder>tmpl</folder>
 	</files>
+	<params>
+			<param name="page" type="list" default="0" label="Select Page" description="PARAMPAGE">
+			<option value="152">Restaurants</option>
+			<option value="151">Places</option>
+		</param>
+	</params>
 </install>

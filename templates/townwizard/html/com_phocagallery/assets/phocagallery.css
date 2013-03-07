@@ -657,7 +657,8 @@ div.current dd {
 	/*border:1px solid #d2d2d2;*/
 }
 
-/* V3 video page css */
+
+
 .highslide-header .highslide-move {display: none;}
 #phocagallery .pgcenter{background:#000000;}
 #phocagallery form .pgcenter{background:#fff;}
@@ -665,8 +666,5 @@ div.current dd {
 .highslide-close a{color:#000 !important;font-size:0px; padding:9px}
 .highslide-container div{}
 .highslide-header ul li{padding-bottom: 9px;line-height: 7px;}
-.highslide-html {
- background-color: #000 !important; 
-}
 
 
