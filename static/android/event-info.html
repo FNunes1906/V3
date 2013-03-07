@@ -159,6 +159,11 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 	<body screen_capture_injected="true">
 	<!--Google Adsense -->
 	<div id="main" role="main" ontouchstart="touchStart(event,'list');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
+	<div class="social">
+		<a class="fr" href="#"><img alt="Sign in with Twitter" src="images/twt-icon.png" /></a>
+		<a class="fr" href="#"><img alt="Sign in with Facebook" src="images/fb-icon.png" /></a>
+		<a class="fr">Sign in: </a>
+	</div>
 	<ul id="placesList" class="mainList"><li>
 				<h1>Rudy Applewhite</h1>
 		<p><strong>Date:</strong>Mon, Mar 4</p>
@@ -183,6 +188,25 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 						<style type="text/css">
 
 					.fl { float:left; }
+					.fr { float:right; }
+					.social {
+						border:1px dotted #666;
+						-webkit-border-radius: 10px;
+						border-radius: 10px;
+						padding-left:10px;
+						position:fixed;
+						top:0;
+						right:0;
+						z-index:2000;
+						line-height:24px;
+						margin:5px;
+					}
+					.social a {
+						padding:5px 2px;
+						margin-right:15px;
+						display:block;
+						color:#333;
+					}
 						#RSVP {
 							margin:5px 0 15px 0;
 							padding:10px;
