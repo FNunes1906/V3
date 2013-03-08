@@ -19,7 +19,7 @@ a:hover.piro_prev{background:url(prev_h.png) center left no-repeat;}
 
 
 
-.pirobox_content {position:fixed; top:20%; left: 25%; padding:0; width:718px !important; height: 520px !important; margin:0 !important; display:block; z-index:99998;font-family:Trebuchet MS,Arial;}
+.pirobox_content {position:fixed; top:6%; left: 25%; padding:0; width:718px !important; height: 520px !important; margin:0 !important; display:block; z-index:99998;font-family:Trebuchet MS,Arial;}
 .pirobox_content table,tbody,tr,th,td{margin:0;padding:0;border:none;}
 .pirobox_content img{ margin:0; padding:0; border:none;display: inline !important;}
 
