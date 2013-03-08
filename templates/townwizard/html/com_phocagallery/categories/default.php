@@ -1,54 +1,23 @@
-<!-- Temporory poupup code begin -->
-<script>
-$(document).ready(function(){
- $("a.imagepop").click(function(){
-  var PCBox = $(this).attr('href');
-  $(PCBox).addClass("showc");
-  $(PCBox).fadeIn(300);
-        
- }); 
-    $('a.close').click(function() { 
-    $(".cat_section div").removeClass("showc"); 
-      
-   });
+<link rel="stylesheet" type="text/css" href="http://<?php echo $_SERVER['HTTP_HOST']?>/templates/townwizard/css/pirobox/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="http://<?php echo $_SERVER['HTTP_HOST']?>/templates/townwizard/css/jquery-ui.css" media="screen" />
+<script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST']?>/templates/townwizard/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST']?>/templates/townwizard/js/pirobox.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$().piroBox({
+    my_speed: 400, //animation speed
+    bg_alpha: 0.8, //background opacity
+    slideShow : true, // true == slideshow on, false == slideshow off
+    slideSpeed : 4, //slideshow duration in seconds(3 to 6 Recommended)
+    close_all : '.piro_close,.piro_overlay'// add class .piro_overlay(with comma)if you want overlay click close piroBox
+	});
 });
 </script>
 
-<style>
-.showc{display: block !important;top:60% !important;}
-.close {
-    background: url("templates/townwizard/images/fancybox_sprite.png") no-repeat scroll 0 0 transparent !important;
-    height: 24px;
-    padding: 5px;
-    position: absolute;
-    right: -19px;
-    text-indent: -9999px;
-    top: -25px;
-    width: 24px;
-}
-
-#overlay_form00,#overlay_form10,#overlay_form20,#overlay_form01,#overlay_form11,#overlay_form21,#overlay_form02,#overlay_form12,#overlay_form22{
-position: absolute;
-border: 5px solid gray;
-padding: 10px;
-background: black;
-width: auto;
-height: auto;
-
-}
-#pop{
-   display: block;
-    float: left;
-    height: 90px;
-    margin-right: 25px;
-    padding: 0;
-    width: 120px;
-}
-</style>
-<!-- Temporory poupup code end -->
-
 <?php
 defined('_JEXEC') or die('Restricted access'); 
+
+
 // Pagetitle
 if ( $this->params->def( 'show_page_title', 1 ) ) {
 	echo '<div class="componentheading'.$this->params->get( 'pageclass_sfx' ).'">'. $this->params->get('page_title').'</div>';
@@ -134,27 +103,19 @@ if ($this->tmpl['displayimagecategories'] == 1) {
 			
 		} else {
 		
-		/*  Start changed code for showing 3 latest photos in category */
-		$db =& JFactory::getDBO();
-		$catphoto="SELECT * FROM `jos_phocagallery` WHERE catid=".$this->categories[$i]->id." ORDER BY id DESC";
-		$db->setQuery($catphoto);
-		$rows=$db->query();
-			if (mysql_num_rows($rows) > 0){ 
-			$k = 0;
-				while ($row = mysql_fetch_array($rows)){
-					//echo JHTML::_( 'image.site', $this->categories[$i]->linkthumbnailpath, '', '', '', str_replace('&raquo;', '-',$this->categories[$i]->title), 'style="border:0"' );
-					 $p = "/partner/".$_SESSION['partner_folder_name']."/images/phocagallery/thumbs/phoca_thumb_s_".$row[filename];
-					echo '<a id="pop" class="img'.$k.' imagepop" href="#overlay_form'.$k.$i.'">';
-					echo '<img src='.$p.'>';
-					echo '</a>';
-					echo '<div id="overlay_form'.$k.$i.'" style="display:none"><a href="#" class="close" >Close</a><img src="/partner/masterdefaultv3/images/phocagallery/thumbs/phoca_thumb_l_'.$row[filename].'"></div>';
-					++$k;
-					if($k >= 3){ break; }
+				/*  Start changed code for showing 3 latest photos using pop-up in category */
+				$db = & JFactory::getDBO();
+				$catphoto = "SELECT * FROM `jos_phocagallery` WHERE catid=".$this->categories[$i]->id." ORDER BY id DESC";
+				$db->setQuery($catphoto);
+				global $rows;
+				$rows = $db->query();
+				if (mysql_num_rows($rows) > 0){ 
+					showcatImages();
 						
-				}
-			}
+					}
+			 	/* End changed code for showing 3 latest photos using pop-up in category */
 		 }
-		 /* End changed code for showing 3 latest photos in category */
+		
 		
 		echo '</div>';
 		//echo '</tr>';
@@ -568,3 +529,34 @@ if (count($this->categories)) {
 	echo '</div>';
 }
 echo '</form><div>&nbsp;</div></div>';
+
+
+function showcatImages(){
+				global $rows;
+			    $k = 1;
+				$j = mysql_num_rows($rows);
+				while ($row = mysql_fetch_array($rows)){
+					
+					$s = "/partner/".$_SESSION['partner_folder_name']."/images/phocagallery/thumbs/phoca_thumb_s_".$row[filename];
+					$l = "/partner/".$_SESSION['partner_folder_name']."/images/phocagallery/thumbs/phoca_thumb_l_".$row[filename];
+					if($k == 1 && $k == $j){
+						echo '<a class="pirobox_gall last" href="'.$l.'" title="'.$row[filename].'">';
+					}elseif($k == 1){
+						echo '<a class="pirobox_gall first" href="'.$l.'" title="'.$row[filename].'">';
+					}elseif(($k == $j && $k <= 3)){
+						echo '<a class="pirobox_gall last" href="'.$l.'" title="'.$row[filename].'">';
+					}elseif(($k == $j && $k > 3) ){
+						echo '<a style="display:none;" class="pirobox_gall last" href="'.$l.'" title="'.$row[filename].'">';
+					}elseif(($k == $j || $k > 3) ){
+						echo '<a style="display:none;" class="pirobox_gall" href="'.$l.'" title="'.$row[filename].'">';
+					}else{
+						echo '<a class="pirobox_gall" href="'.$l.'" title="'.$row[filename].'">';
+					}
+					
+					echo '<img class="img'.$k.'" src='.$s.'>';
+					echo '</a>';
+					$k++;
+											
+				}
+		
+}
