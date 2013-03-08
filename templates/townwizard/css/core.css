@@ -1975,15 +1975,15 @@ text-decoration: none;
     padding-top: 10px;
 }
  
-#pop img{
+.cat_section img{
    height: 90px;
      text-align: left !important;
      width: 120px;
  float: left;
-  margin-right: 25px !important;
+ 
 }
-.cat_section a.img2{
- margin-right:0px !important;
+.cat_section a .img2{
+ margin:0px 25px !important;
 }
 .see{
   color: #00467F;
