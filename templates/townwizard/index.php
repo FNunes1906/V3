@@ -367,14 +367,22 @@ jQuery(document).ready(function(){
        	<?php endif; ?>     
      <!-- Event Rotator End -->
      
-	 <?php if(JRequest::getVar('task') == 'range.listevents') :?>
-		 <?php if($this->countModules('right')) : ?>
-	            <div class="rightCol fr">
-	             	<jdoc:include type="modules" name="right" style="rounded" />
-	            </div>
-	      <?php endif; ?>
-	  <?php endif; ?>
-	  
+	 <!-- event_submit and photo upload start-->
+	  <?php if(JRequest::getVar('task') == 'range.listevents') : ?>
+	   <?php if($this->countModules('right')) : ?>
+	             <div class="rightCol fr">
+	               <jdoc:include type="modules" name="right" style="rounded" />
+	             </div>
+	       <?php endif; ?>
+	   <?php else: ?>
+	   <?php if($this->countModules('right')) : ?>
+	             <div class="rightCol fr">
+	               <jdoc:include type="modules" name="right" style="rounded" />
+	             </div>
+	       <?php endif; ?>
+	   <?php endif; ?>
+   <!-- event_submit and photo upload End-->
+   	  
       <!-- Main body start -->
             <div class="centerCol fl">
 					<?php
