@@ -1419,6 +1419,28 @@ a.saved span {
 .detailFeature .evtTmb .rsvpBtn:hover {
   text-decoration:none;
 }
+.detailFeature .evtTmb .rsvpBtn.attending {
+  background:url('../images/header/yesBtn.png') no-repeat left top;
+  text-decoration:none;
+}
+.detailFeature .evtTmb .rsvpBtn.notAttending {
+  background:url('../images/header/noBtn.png') no-repeat left top;
+  text-decoration:none;
+}
+.detailFeature .evtTmb .rsvpBtn.maybeAttending {
+  background:url('../images/header/maybeBtn.png') no-repeat left top;
+  text-decoration:none;
+}
+.detailFeature .evtTmb .rsvpBtn span {
+  display:block;
+  font-size:11px;
+  line-height:12px;
+  text-decoration:underline;
+}
+.detailFeature .evtTmb .rsvpBtn span:hover, 
+.detailFeature .evtTmb .rsvpBtn:hover span {
+  text-decoration:none;
+}
 .detailFeature .evtTmb .rsvpBtn img {
   width:auto;
   height:auto;
