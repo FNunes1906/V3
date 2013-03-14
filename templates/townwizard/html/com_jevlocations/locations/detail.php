@@ -97,7 +97,12 @@ function resetLatLngTxtFields(lat, lng){
 		$folder = "jevents/jevlocations";
 		$thimg = '<img src="'.$mediapath.'/'.$folder.'/thumbnails/thumb_'.$this->location->image.'" />' ;
 		$img = '<img src="'.$mediapath.'/'.$folder.'/'.$this->location->image.'" />' ;
-		echo "<div id='VenuePhotoGallery' class='photoGallerySect sect' style='width: 412px;overflow: hidden;'><h3 class='fl'><a class='heading display' href='/index.php?option=com_phocagallery&view=categories&Itemid=102'>".JText::_('PHOTO_GALLERY')."</a></h3><div class='bc fr'><a href='/index.php?option=com_phocagallery&view=categories&Itemid=102'>Send us your photos</a></div><ul><li><a id='pop' href='#'>".$thimg."</a><div id='overlay_form' style='display: none;'><a id='close' href='#'>Close</a>".$img."</div></li></ul></div>";
+		$imgbig = $mediapath.'/'.$folder.'/'.$this->location->image ;
+		echo "<div id='VenuePhotoGallery' class='photoGallerySect sect' style='width: 412px;overflow: hidden;'><h3 class='fl'><a class='heading display' href='/index.php?option=com_phocagallery&view=categories&Itemid=102'>".JText::_('PHOTO_GALLERY')."</a></h3><div class='bc fr'><a href='/index.php?option=com_phocagallery&view=categories&Itemid=102'>Send us your photos</a></div><ul><li>
+  
+  <a title='Open image in new window' class='pirobox_gall' href='$imgbig'>".$thimg."</a>
+  
+  </li></ul></div>";
 
 	}
 

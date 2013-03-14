@@ -74,8 +74,13 @@
 										  <?php echo $row['state'].", ".$row['city'];?><br/>
 										  <?php echo "PA ".$row['postcode'] ?>
 										</h3>
-										<h2><a class="bold" href="<?php echo "http://".$row['url'] ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
-										<h2 class="bold"><?php echo $row['phone'] ?></h2>
+										<?php if($row['url']!=''){?>
+											<h2><a class="bold" href="<?php echo "http://".$row['url'] ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
+										<?php }?>
+										<?php if($row['phone']!=''){?>
+											<h2 class="bold"><?php echo $row['phone'] ?></h2>
+										<?php }?>
+										
 						</div>
 				
 					 </li>
@@ -192,7 +197,10 @@
 										<?php if($this->escape($url)!=''){?>
 										<h2><a class="bold" href="<?php echo "http://".$this->escape($url) ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
 										<?php }?>
+										<?php if($this->escape($phone)!=''){?>
 										<h2 class="bold"><?php echo $this->escape($phone);?></h2>
+										<?php }?>
+										
 										
 			</div>
 		</li>

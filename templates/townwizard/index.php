@@ -53,40 +53,24 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php')
 <script type="text/javascript" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/yetii-min.js"></script>
 <script type="text/javascript" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/tw.js"></script>
 
-<!-- Add jQuery library for location image pop up -->
+<!-- Add jQuery library for location and Event detail image pop up -->
 
+<link rel="stylesheet" type="text/css" href="http://<?php echo $_SERVER['HTTP_HOST']?>/templates/townwizard/css/pirobox/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="http://<?php echo $_SERVER['HTTP_HOST']?>/templates/townwizard/css/jquery-ui.css" media="screen" />
+<script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST']?>/templates/townwizard/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST']?>/templates/townwizard/js/pirobox.min.js"></script>
 <script type="text/javascript">
- 
-jQuery(document).ready(function(){
-//open popup
-jQuery("#pop").click(function(){
-jQuery("#overlay_form").fadeIn(500);
-positionPopup();
+$(document).ready(function() {
+ $().piroBox({
+    my_speed: 400, //animation speed
+    bg_alpha: 0.8, //background opacity
+    slideShow : true, // true == slideshow on, false == slideshow off
+    slideSpeed : 4, //slideshow duration in seconds(3 to 6 Recommended)
+    close_all : '.piro_close,.piro_overlay'// add class .piro_overlay(with comma)if you want overlay click close piroBox
+ });
 });
- 
-//close popup
-jQuery("#close").click(function(){
-jQuery("#overlay_form").fadeOut(500);
-});
-});
- 
-//position the popup at the center of the page
-function positionPopup(){
-if(!jQuery("#overlay_form").is(':visible')){
-return;
-}
-jQuery("#overlay_form").css({
-left: (jQuery(window).width() - jQuery('#overlay_form').width()) / 2,
-top: (jQuery(window).width() - jQuery('#overlay_form').width()) / 6,
-position:'absolute'
-});
-}
- 
-//maintain the popup at center of the page when browser resized
-jQuery(window).bind('resize',positionPopup);
- 
 </script>
-<!-- Add jQuery library for location image pop up END-->
+<!-- Add jQuery library for location and Event detail  image pop up END-->
 
 <!-- Share This -->
 <script type="text/javascript">var switchTo5x=true;</script>
@@ -179,7 +163,15 @@ jQuery(document).ready(function(){
 </script>
 
 <!--  Town wizard Google Analytic code -->
+
+<?php
+$app = JFactory::getApplication();
+$this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
+?>
 <?php include("ga.php"); ?>
+
+
+
 
 </head>
 
@@ -234,6 +226,7 @@ jQuery(document).ready(function(){
 							<a class="fbLogin fl" href="javascript:void(0)" onclick="fb_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
               				<a class="twtLogin fl" href="javascript:void(0)" onclick="twitter_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
               				<!-- <a class="helpBtn" data-ref-panel="HelpTT" href="#"><img alt="Help" src="images/header/helpBtn.png" /></a> -->
+							<a class="helpBtn" data-ref-panel="HelpTT" href="#"><img alt="Help" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/helpBtn.png" /></a>
 						</div>	
 					<?php } ?>
 						
@@ -515,6 +508,21 @@ jQuery(document).ready(function(){
   </div>
 
   <!-- Footer End -->
+
+<!-- Tooltip Overlay Start -->
+	<div id="Darkness"></div>
+
+	<div id="HelpTT" class="takeOverlay">
+		<a class="close">x</a>
+		<span>
+	  		<?php echo JText::_("TW_TOOLTIP") ?><br /><br /><?php echo JText::_("TW_RSVP") ?>
+	  		<div class="socialLinks cb">
+	   			<a class="fbLogin fl" href="javascript:void(0)" onclick="fb_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
+	   			<a class="twtLogin fl" href="javascript:void(0)" onclick="twitter_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
+	  		</div>
+		</span>
+	</div>
+<!-- Tooltip Overlay End -->
 
 </body>
 </html>

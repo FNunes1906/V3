@@ -104,11 +104,7 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 				</div>
 	 			<ul>
 					<li>
-						<a href="#" id="pop"><img style="max-height: 100% !important; max-width: 100% !important;" src="<?php echo $lc_image;?>"></a>
-						<div style="left: 524.5px; top: 174.833px; position: absolute; display: none;" id="overlay_form">
-							<a href="#" id="close">Close</a>
-							<img style="max-height: 100% !important; max-width: 100% !important;" src="<?php echo TOWNWIZARD_LOCATION_IMAGE_PATH_FULL.$data->_jevlocation->image; ?>">
-						</div>
+						<a title="Open image in new window" href="<?php echo TOWNWIZARD_LOCATION_IMAGE_PATH_FULL.$data->_jevlocation->image; ?>" class='pirobox_gall' id="notitle" ><img style="max-height: 100% !important; max-width: 100% !important;" src="<?php echo $lc_image;?>"></a>
 					</li>
 				</ul>
 			</div>
