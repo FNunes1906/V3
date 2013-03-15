@@ -206,8 +206,9 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 						bottom:5px;
 					}
 					.fbEventImg {
-						width:100%;
-						margin:15px 0;
+						/*width:100%;*/
+						margin:15px auto;
+						display:block;
 					}
 					.when {
 						margin:10px 0;
@@ -262,6 +263,7 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 						  line-height:16px;
 						  text-align:center;
 						  cursor:pointer;
+						  text-decoration:none;
 						}
 						#VidPanel.takeOverlay, 
 						#VidPanel.takeOverlay .close {
@@ -450,6 +452,7 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 						        	}
 						        echo '</h3>';
 						        echo '<div id="' . $e->id . 'Panel" class="takeOverlay">';
+						        	echo '<a href="javascript:void(0);" class="close">x</a>';
 						        	echo '<div class="pad">';
 						        		echo '<h1>' . $e->name . "</h1>"; 
 							        	echo '<h2>' . $e->location . "</h2>";
