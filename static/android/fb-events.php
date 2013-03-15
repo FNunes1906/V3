@@ -436,58 +436,60 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 					    
 					    $fbEvents = tw_global_events($_POST['search_text']);
 
-					    foreach($fbEvents as $e) {
-					        echo '<li id="' . $e->id . '">';
-					        echo '<div class="moreInfo"><a data-ref-panel="' . $e->id . 'Panel" class="button small">more info</a></div>';
-					        echo "<h1>" . $e->name . "</h1>"; 
-					        echo "<h2>" . $e->location . "</h2>";
-					        echo '<h3>';
-					        	echo $e->startTime;
-					        	if (isset($e->endTime)) {
-					        		echo " - ";
-					        		echo $e->endTime;
-					        	}
-					        echo '</h3>';
-					        echo '<div id="' . $e->id . 'Panel" class="takeOverlay">';
-					        	echo '<div class="pad">';
-					        		echo '<h1>' . $e->name . "</h1>"; 
-						        	echo '<h2>' . $e->location . "</h2>";
-					        		echo '<img class="fbEventImg" alt="" src="' . $e->picture . '" />'; 
-					        		echo '<div>';
-						        		echo '<h3>';
-						        			if (isset($e->street)) {
-						        				echo '<div>' . $e->street . '</div>';
-						        			}
-						        			echo '<div>';
-						        			if (isset($e->city)) {
-						        				echo $e->city . ', ';
-						        			}
-						        			if (isset($e->state)) {
-						        				echo $e->state . ' ';
-						        			}
-						        			if (isset($e->zip)) {
-						        				echo $e->zip;
-						        			}
-						        			echo '<div class="when">' . $e->startTime;
-								        	if (isset($e->endTime)) {
-								        		echo " - ";
-								        		echo $e->endTime;
-								        	}
-						        			echo '</div></div>';
-						        		echo '</h3>';
+					    if(!empty($fbEvents)) {
+						    foreach($fbEvents as $e) {
+						        echo '<li id="' . $e->id . '">';
+						        echo '<div class="moreInfo"><a href="javascript:void(0);" data-ref-panel="' . $e->id . 'Panel" class="button small">more info</a></div>';
+						        echo "<h1>" . $e->name . "</h1>"; 
+						        echo "<h2>" . $e->location . "</h2>";
+						        echo '<h3>';
+						        	echo $e->startTime;
+						        	if (isset($e->endTime)) {
+						        		echo " - ";
+						        		echo $e->endTime;
+						        	}
+						        echo '</h3>';
+						        echo '<div id="' . $e->id . 'Panel" class="takeOverlay">';
+						        	echo '<div class="pad">';
+						        		echo '<h1>' . $e->name . "</h1>"; 
+							        	echo '<h2>' . $e->location . "</h2>";
+						        		echo '<img class="fbEventImg" alt="" src="' . $e->picture . '" />'; 
+						        		echo '<div>';
+							        		echo '<h3>';
+							        			if (isset($e->street)) {
+							        				echo '<div>' . $e->street . '</div>';
+							        			}
+							        			echo '<div>';
+							        			if (isset($e->city)) {
+							        				echo $e->city . ', ';
+							        			}
+							        			if (isset($e->state)) {
+							        				echo $e->state . ' ';
+							        			}
+							        			if (isset($e->zip)) {
+							        				echo $e->zip;
+							        			}
+							        			echo '<div class="when">' . $e->startTime;
+									        	if (isset($e->endTime)) {
+									        		echo " - ";
+									        		echo $e->endTime;
+									        	}
+							        			echo '</div></div>';
+							        		echo '</h3>';
+							        	echo '</div>';
+						        		echo '<p>' . $e->description . '</p>';
+						        		if (isset($e->latitude) && isset($e->longitude)) {
+													echo '<div><a class="button small" href="javascript:linkClicked(\'APP30A:SHOWMAP:' . $e->latitude . ':' . $e->longitude . '\')">Map</a></div>';
+												}
 						        	echo '</div>';
-					        		echo '<p>' . $e->description . '</p>';
-					        		if (isset($e->latitude) && isset($e->longitude)) {
-												echo '<div><a class="button small" href="javascript:linkClicked(\'APP30A:SHOWMAP:' . $e->latitude . ':' . $e->longitude . '\')">Map</a></div>';
-											}
-					        	echo '</div>';
-					        echo '</div>';
-					        echo '</li>';
+						        echo '</div>';
+						        echo '</li>';
 
 
 
-					        //var_dump($e);
-					    }
+						        //var_dump($e);
+						    }
+						}
 
 
 					} 
