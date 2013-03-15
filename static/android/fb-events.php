@@ -213,6 +213,9 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 					.when {
 						margin:10px 0;
 					}
+					.mainList li {
+						overflow:visible !important;
+					}
 						
 
 						#Darkness {
@@ -235,7 +238,7 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 						  border:solid 2px #ff8a00;
 						  width:94%;
 						  height:auto;
-						  position:fixed;
+						  position:absolute;
 						  top:20px;
 						  left:10px;
 						  z-index:4001;
@@ -376,6 +379,11 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 					  jQuery('a[data-ref-panel]').each(function() {
 					    jQuery(this).click(showTip);
 					  });
+
+					  jQuery('.moreInfo a').click(function() {
+					  	location = "#" + jQuery(this).parent().parent().attr('id');
+					  })
+
 					});
 
 
