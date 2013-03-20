@@ -433,18 +433,18 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 
 				
 
-  				<?php if(empty($_POST)) { ?>
+  				<?php if(empty($_GET['zip'])) { ?>
 
 					    Search events<br/><br/>
 					    
-					    <form id="events_form" method="post" action="fb-events.php"> 
-					        <input type="text" name="search_text" /><br/>
-					        <input type="submit" name="Submit" />
+					    <form id="events_form" method="get" action="fb-events.php"> 
+					        <input type="text" name="zip" /><br/>
+					        <input type="submit" />
 					    </form>
 
 					<?php } else {
 					    
-					    $fbEvents = tw_global_events($_POST['search_text']);
+					    $fbEvents = tw_global_events($_GET['zip']);
 
 					    if(!empty($fbEvents)) {
 						    foreach($fbEvents as $e) {
