@@ -3,6 +3,7 @@
 include_once('user-api.php');
 
 define("TOWNWIZARD_DB_GLOBAL_EVENTS_URL", "http://www.townwizardconnect.com/g/events");
+define("TOWNWIZARD_DB_GLOBAL_LOCATIONS_URL", "http://www.townwizardconnect.com/g/locations");
 
 /***
   Takes a search string or zip and returns an array of events.
@@ -24,6 +25,21 @@ function tw_global_events($searchStringOrZip) {
     return NULL;
 }
 
+/***
+  Takes a zip code and returns an array of locations around it
+***/
+function tw_global_locations($zip) {
+    
+    $params = '?zip='.$zip;
+
+    list($status, $response_msg) = _tw_get_json(TOWNWIZARD_DB_GLOBAL_LOCATIONS_URL, $params);
+    if($status == 200) {
+        $locations = json_decode($response_msg);
+        return $locations;
+    }
+
+    return NULL;
+}
 
 //////////////// private functions
 function _is_zip($str) {
