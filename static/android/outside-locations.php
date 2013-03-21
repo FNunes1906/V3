@@ -170,7 +170,7 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 		<a class="fr" href="#"><img alt="Sign in with Facebook" src="images/fb-icon.png" /></a>
 		<a class="fr">Sign in: </a>
 	</div>
-	<ul id="eventList" class="mainList"><li>
+	<ul id="locationList" class="mainList"><li>
 
 
 
@@ -201,9 +201,7 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 						color:#333;
 					}
 					ul li .moreInfo {
-						position:absolute;
-						right:5px;
-						bottom:5px;
+						float:left;
 					}
 					.fbEventImg {
 						/*width:100%;*/
@@ -212,9 +210,6 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 					}
 					.when {
 						margin:10px 0;
-					}
-					.mainList li {
-						overflow:visible !important;
 					}
 						
 
@@ -380,10 +375,6 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 					    jQuery(this).click(showTip);
 					  });
 
-					  jQuery('.moreInfo a').click(function() {
-					  	location = "#" + jQuery(this).parent().parent().attr('id');
-					  })
-
 					});
 
 
@@ -435,65 +426,48 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 
   				<?php if(empty($_GET['zip'])) { ?>
 
-					    Search events<br/><br/>
+					    Search locations<br/><br/>
 					    
-					    <form id="events_form" method="get" action="fb-events.php"> 
+					    <form id="locations_form" method="get" action="outside-locations.php"> 
 					        <input type="text" name="zip" /><br/>
 					        <input type="submit" />
 					    </form>
 
 					<?php } else {
 					    
-					    $fbEvents = tw_global_events($_GET['zip']);
+					    $fbLocations = tw_global_locations($_GET['zip']);
 
-					    if(!empty($fbEvents)) {
-						    foreach($fbEvents as $e) {
+					    if(!empty($fbLocations)) {
+						    foreach($fbLocations as $e) {
 						        echo '<li id="' . $e->id . '">';
-						        echo '<div class="moreInfo"><a href="javascript:void(0);" data-ref-panel="' . $e->id . 'Panel" class="button small">more info</a></div>';
-						        echo "<h1>" . $e->name . "</h1>"; 
-						        echo "<h2>" . $e->location . "</h2>";
-						        echo '<h3>';
-						        	echo $e->startTime;
-						        	if (isset($e->endTime)) {
-						        		echo " - ";
-						        		echo $e->endTime;
-						        	}
-						        echo '</h3>';
-						        echo '<div id="' . $e->id . 'Panel" class="takeOverlay">';
-						        	echo '<a href="javascript:void(0);" class="close">x</a>';
-						        	echo '<div class="pad">';
-						        		echo '<h1>' . $e->name . "</h1>"; 
-							        	echo '<h2>' . $e->location . "</h2>";
-						        		echo '<img class="fbEventImg" alt="" src="' . $e->picture . '" />'; 
-						        		echo '<div>';
-							        		echo '<h3>';
-							        			if (isset($e->street)) {
-							        				echo '<div>' . $e->street . '</div>';
-							        			}
-							        			echo '<div>';
-							        			if (isset($e->city)) {
-							        				echo $e->city . ', ';
-							        			}
-							        			if (isset($e->state)) {
-							        				echo $e->state . ' ';
-							        			}
-							        			if (isset($e->zip)) {
-							        				echo $e->zip;
-							        			}
-							        			echo '<div class="when">' . $e->startTime;
-									        	if (isset($e->endTime)) {
-									        		echo " - ";
-									        		echo $e->endTime;
-									        	}
-							        			echo '</div></div>';
-							        		echo '</h3>';
-							        	echo '</div>';
-						        		echo '<p>' . $e->description . '</p>';
-						        		if (isset($e->latitude) && isset($e->longitude)) {
-													echo '<div><a class="button small" href="javascript:linkClicked(\'APP30A:SHOWMAP:' . $e->latitude . ':' . $e->longitude . '\')">Map</a></div>';
-												}
-						        	echo '</div>';
-						        echo '</div>';
+						        echo '<h3 class="fr">';
+				        			if (isset($e->street)) {
+				        				echo '<div>' . $e->street . '</div>';
+				        			}
+				        			echo '<div>';
+					        			if (isset($e->city)) {
+					        				echo $e->city . ', ';
+					        			}
+					        			if (isset($e->state)) {
+					        				echo $e->state . ' ';
+					        			}
+					        			if (isset($e->zip)) {
+					        				echo $e->zip;
+					        			}
+				        			echo '</div>';
+				        			echo "<div>" . $e->phone . "</div>"; 
+				        		echo '</h3>';
+						        echo "<h1>" . $e->name . "</h1>";
+						        echo '<h2>';
+						        	echo $e->category;
+						        echo '</h2>';
+						        echo '<ul class="btnList">';
+							        echo '<li><a href="javascript:void(0);tel:' . preg_replace('/(\W*)/', '', $e->phone) . '" class="button small">call</a></li>';
+							        if (isset($e->latitude) && isset($e->longitude)) {
+												echo '<li><a class="button small" href="javascript:linkClicked(\'APP30A:FBCHECKIN:' . $e->latitude . ':' . $e->longitude . '\')">check in</a></li>';
+												echo '<li><a class="button small" href="javascript:linkClicked(\'APP30A:SHOWMAP:' . $e->latitude . ':' . $e->longitude . '\')">map</a></li>';
+											}
+										echo '</ul>';
 						        echo '</li>';
 
 
