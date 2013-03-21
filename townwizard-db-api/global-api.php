@@ -2,8 +2,8 @@
 
 include_once('user-api.php');
 
-define("TOWNWIZARD_DB_GLOBAL_EVENTS_URL", "http://www.townwizardconnect.com/g/events");
-define("TOWNWIZARD_DB_GLOBAL_LOCATIONS_URL", "http://www.townwizardconnect.com/g/locations");
+define("TOWNWIZARD_DB_GLOBAL_EVENTS_URL", "http://www.townwizardconnectinternal.com/g/events");
+define("TOWNWIZARD_DB_GLOBAL_LOCATIONS_URL", "http://www.townwizardconnectinternal.com/g/locations");
 
 /***
   Takes a search string or zip and returns an array of events.

@@ -1,11 +1,12 @@
 <?php
 
-define("TOWNWIZARD_DB_USERS_URL", "http://www.townwizardconnect.com/users");
-define("TOWNWIZARD_DB_USER_LOGIN_URL", "http://www.townwizardconnect.com/users/login");
+define("TOWNWIZARD_DB_USERS_URL", "http://www.townwizardconnectinternal.com/users");
+define("TOWNWIZARD_DB_USER_LOGIN_URL", "http://www.townwizardconnectinternal.com/users/login");
+define("TOWNWIZARD_DB_RATINGS_URL", "http://www.townwizardconnectinternal.com/ratings");
+define("TOWNWIZARD_DB_RSVPS_URL", "http://www.townwizardconnectinternal.com/rsvps");
+
 define("TOWNWIZARD_DB_FB_LOGIN_URL", "http://www.townwizardconnect.com/login/fb");
 define("TOWNWIZARD_DB_TWITTER_LOGIN_URL", "http://www.townwizardconnect.com/login/twitter");
-define("TOWNWIZARD_DB_RATINGS_URL", "http://www.townwizardconnect.com/ratings");
-define("TOWNWIZARD_DB_RSVPS_URL", "http://www.townwizardconnect.com/rsvps");
 
 /***
     Takes a user registration POST form data, encodes it in JSON and
