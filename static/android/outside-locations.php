@@ -188,6 +188,7 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 						top:7px;
 						left:10px;
 					}
+					h3.fr { text-align:right; }
 					.social {
 						border:1px dotted #666;
 						-webkit-border-radius: 10px;
