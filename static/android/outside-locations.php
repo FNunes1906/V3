@@ -170,6 +170,7 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 		<a class="fr" href="#"><img alt="Sign in with Facebook" src="images/fb-icon.png" /></a>
 		<a class="fr">Sign in: </a>
 	</div>
+	<a class="logo" href="#"><img alt="Town Wizard" src="images/twLogoColor.png" /></a>
 	<ul id="locationList" class="mainList"><li>
 
 
@@ -182,6 +183,11 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 					.fl { float:left; }
 					.fr { float:right; }
 					.cb { clear:both; }
+					a.logo {
+						position:absolute;
+						top:7px;
+						left:10px;
+					}
 					.social {
 						border:1px dotted #666;
 						-webkit-border-radius: 10px;
@@ -210,6 +216,16 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 					}
 					.when {
 						margin:10px 0;
+					}
+					.mainList {
+						padding-top:40px !important;
+					}
+					.mainList .catSearch {
+						height:40px;
+						font-size:16px;
+						line-height:40px;
+						padding:0 10px;
+						width:80%;
 					}
 						
 
@@ -437,8 +453,14 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 					    
 					    $fbLocations = tw_global_locations($_GET['zip']);
 
-					    if(!empty($fbLocations)) {
-						    foreach($fbLocations as $e) {
+					    if(!empty($fbLocations)) { ?>
+
+					    	<li>
+					    		<!-- Did not use form tag, assuming we will use jQuery to filter results on textfield update -->
+					    		<input class="catSearch" type="text" name="category" placeholder="Start typing a category to filter results" />
+					    	</li>
+						    
+						    <?php foreach($fbLocations as $e) {
 						        echo '<li id="' . $e->id . '">';
 						        echo '<h3 class="fr">';
 				        			if (isset($e->street)) {
@@ -471,9 +493,8 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 						        echo '</li>';
 
 
-
 						        //var_dump($e);
-						    }
+						    } 
 						}
 
 
