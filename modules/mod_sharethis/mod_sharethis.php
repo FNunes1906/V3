@@ -18,7 +18,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
                   <span class='st_email_large' displayText='Email'><?php echo JText::_("TW_SHAREEMAIL") ?></span>
                 </div>
 <div class="lower cl">
-                  <a href="index.php?option=com_rsform&formId=15&Itemid=99999" class='error_large'><span class="errorBtn btn fl"></span><span class="bold error"><?php echo JText::_("TW_EV_ERROR") ?></span> <span class="hideSm error"><?php echo JText::_("TW_EV_CON") ?></a>
+                  <a href="index.php?option=com_rsform&formId=3" class='error_large'><span class="errorBtn btn fl"></span><span class="bold error"><?php echo JText::_("TW_EV_ERROR") ?></span> <span class="hideSm error"><?php echo JText::_("TW_EV_CON") ?></a>
 <div class="cl"></div>  
 <a href="#" onclick="PrintDiv();"><span class='print_large'><span class="printBtn btn fl"></span><?php echo JText::_("TW_PRINT") ?></span></a>              
                 </div>
