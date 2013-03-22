@@ -537,9 +537,18 @@ function showcatImages(){
 				$j = mysql_num_rows($rows);
 				while ($row = mysql_fetch_array($rows)){
 					
+				$imgFileArray = explode('/',$row[filename]);
+					
+					
+				if(count($imgFileArray) > 1)
+				{
+					$s = "/partner/".$_SESSION['partner_folder_name']."/images/phocagallery/".$imgFileArray[0]."/thumbs/phoca_thumb_s_".$imgFileArray[1];
+					$l = "/partner/".$_SESSION['partner_folder_name']."/images/phocagallery/".$imgFileArray[0]."/thumbs/phoca_thumb_l_".$imgFileArray[1];
+				}else{
 					$s = "/partner/".$_SESSION['partner_folder_name']."/images/phocagallery/thumbs/phoca_thumb_s_".$row[filename];
 					$l = "/partner/".$_SESSION['partner_folder_name']."/images/phocagallery/thumbs/phoca_thumb_l_".$row[filename];
-					if($k == 1 && $k == $j){
+				}					
+				if($k == 1 && $k == $j){
 						echo '<a class="pirobox_gall last" href="'.$l.'" title="'.$row[filename].'">';
 					}elseif($k == 1){
 						echo '<a class="pirobox_gall first" href="'.$l.'" title="'.$row[filename].'">';
