@@ -1456,16 +1456,16 @@ font-family: 'AllerBold',Arial,sans-serif;
 /* advertise with us start*/
 
 #phocagallery-module-ri center div{
-	padding-bottom:10px !important;
+ padding-bottom:10px !important;
 }
 
 .contentpane .contentdescription{
-	display:none;
+ display:none;
 }
 
 #system-message ul{
-	margin-top: 10px !important;
-	margin-bottom: 10px !important;
+ margin-top: 10px !important;
+ margin-bottom: 10px !important;
 }
 
 #system-message li{ float: none; width: auto;}
@@ -1481,8 +1481,13 @@ font-family: 'AllerBold',Arial,sans-serif;
   height:30px;
  /* margin-bottom:30px;*/
   line-height:33px;
-  min-width: 124px;
+  min-width: 152px;
 }
+
+#txtcal15_0{
+ width: 51% !important;
+}
+
 #userForm input[type=text] {float: right;
   height:30px;
   line-height:30px;
@@ -1523,20 +1528,20 @@ dt.notice {
 }
 
 .formError{
-	padding-left:9px;
+ padding-left:9px;
 }
 
-#captchaTxt48,#captchaTxt37,#captchaTxt3{
-	width: 58% !important;text-align: left !important;
+.rsform-captcha-box{
+ width: 58% !important;text-align: left !important;
 }
 
 #txtcal0 {
-	 margin-left: 5px;
+  margin-left: 5px;
     width: 50% !important;
 }
 
 .yui-calcontainer{
-	margin-top: 32px;
+ margin-top: 32px;
 }
 
 .btnCal {
@@ -1545,21 +1550,21 @@ dt.notice {
     float: right;
     height: 30px;
     width: 34px;
-	}
-	
+ }
+ 
 #Submit,.rsform-submit-button{
-	background: none repeat scroll 0 0 #000000;
+ background: none repeat scroll 0 0 #000000;
     border: 1px solid #000000;
     border-radius: 5px 5px 5px 5px;
     color: #FFFFFF;
     font-weight: bold;
     padding: 5px 8px;
-	margin-top: 10px;
-	margin-left: 38px;
+ margin-top: 10px;
+ margin-left: 10px;
 }
 
 .veri{
-	line-height: 77px !important;
+ line-height: 77px !important;
 }
 
 /* advertise with us end*/
@@ -1568,7 +1573,7 @@ dt.notice {
 	width:410px !important;
 }
 
-#Feat{overflow: hidden;padding-bottom: 15px;}
+#Feat{padding-bottom: 15px;}
 
 /**
 Developer: Akash
