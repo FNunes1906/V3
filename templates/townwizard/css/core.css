@@ -1535,9 +1535,10 @@ dt.notice {
  width: 58% !important;text-align: left !important;
 }
 
-#txtcal0 {
+.rsform-calendar-box {
   margin-left: 5px;
-    width: 50% !important;
+  width: 50% !important;
+	
 }
 
 .yui-calcontainer{
