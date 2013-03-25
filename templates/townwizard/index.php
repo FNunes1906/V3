@@ -189,7 +189,7 @@ $this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
  <!-- Top Bar Start -->
   <div id="TopBar" style="background:url('<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/whitezig_zag.png') repeat-x scroll left bottom <?php echo $var->Header_color; ?>;height: 50px;">
   	<div class="sWidth">
-  	  <div class="fl powered"><?php echo JText::_("TW_POWERED_BY") ?><img alt="townwizard" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/twBanner.png" /></div>
+  	  <div class="fl powered"><?php echo JText::_("TW_POWERED_BY") ?><a href="http://www.townwizard.com/" target="_blank"><img alt="townwizard" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/twBanner.png" /></a></div>
 		  <?php if($this->countModules('top')): ?>
           <div class="fr links">
             <jdoc:include type="modules" name="top" style="rounded" />
@@ -208,7 +208,7 @@ $this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
 
 	  	<div id="Header">
 	  	  <div id="Logo" class="fl">
-	  	  	<a href="index.php" title="HOME"> <img src="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/logo/logo.png" height="118" width="192" /> </a>
+	  	  	<a href="<?php echo $this->baseurl ?>" title="HOME"> <img src="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/logo/logo.png" height="118" width="192" /> </a>
 	  	  </div>
 	  	     <div class="headerAdFlex fl">
 	  	  	  <div id="Social" class="fr">
@@ -295,8 +295,7 @@ $this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
                
                 <?php if($var->android != "" || $var->iphone != ""):?>
                 <div id="SideMobile" class="sect">
-                  <h2>TownWizard <?php echo JText::_("TW_MOBILE") ?>!</h2>
-                  <p><?php echo JText::_("TW_CLICKHERE") ?>.</p>
+                  <h2><?php echo JText::_("TW_MOBILE") ?>!</h2>
                   <?php if($var->iphone != ""):?>
                     <a href="<?php echo $var->iphone?>" target="_blank"><img alt="Download for the iPhone/iPad" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/sidebar/iphoneAppBtn.png" /></a>
                   <?php endif;?>
@@ -481,8 +480,7 @@ $this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
         <li class="site">
           <div class="pad">
          		<h3 class="display"><?php echo $var->site_name." is a TownWizard Site" ?></h3>
-                <span><?php echo JText::_("TW_OTHER_TW") ?></span>
-           		<jdoc:include type="modules" name="footer2" style="rounded" />
+                <jdoc:include type="modules" name="footer2" style="rounded" />
                 <a class="all" href="http://www.townwizard.com/locations/" target="_blank"><?php echo JText::_("TW_SEE_ALL_PARTNER") ?> &gt;</a>
            </div>
          </li>
@@ -502,7 +500,7 @@ $this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
                    <jdoc:include type="modules" name="footer" style="rounded" />
             </div>
             <?php endif; ?>
-        	<div class="twlogo bold">| &copy;&nbsp;<?PHP $time = time () ; $year= date("Y",$time); echo $year . "&nbsp;" . $var->site_name; ?> TownWizard</div>
+        	<div class="twlogo bold">| &copy;&nbsp;<?PHP $time = time () ; $year= date("Y",$time); echo $year . "&nbsp;" . $var->site_name; ?></div>
         </div>
   	</div>
   </div>

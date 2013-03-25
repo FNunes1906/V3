@@ -160,7 +160,7 @@ input:-ms-placeholder,
   border-top:0;
 }
 #LeftCol .sect h2 {
-  font-size:22px;
+  font-size:21px;
   line-height:26px;
   margin-bottom:10px;
 }
@@ -1383,10 +1383,10 @@ h1.send {
     margin-right: 5px;
 }
 
-#LeftCol .ad.space .module{
+#LeftCol .ad.space .module .banneritem{
   margin-bottom:10px;
 }
-#WidgetArea .ad.space .module{
+#WidgetArea .ad.space .module .banneritem{
   margin-bottom:30px;
 }
 
@@ -1680,7 +1680,8 @@ Last Updated Date:29-01-2013
   width:500px;
   height:auto;
   position:fixed;
-  top:40%;
+  /* top:40%; */
+  top:23%;
   left:50%;
   margin-left:-250px;
   z-index:4001;
@@ -2090,3 +2091,29 @@ h1.upload {
  z-index: 1000 !important;
 }
 /* photo page end */
+
+
+#Footer ul li.site .contentpaneopen {
+  font-size:11px;
+}
+
+#userForm #Subject{
+ border: 1px solid #CCCCCC;
+    float: right;
+    font-size: 14px;
+    height: 30px;
+    line-height: 124px;
+    margin-bottom: 30px;
+    padding-top: 3px;
+    width: 60%;
+}
+
+#Try3 .contentheading{
+      color: #0B121F;
+    font-family: 'AllerDisplayRegular',Arial,sans-serif;
+    font-size: 15px;
+    line-height: 20px;
+    padding-bottom: 12px;
+    text-transform: uppercase;
+    vertical-align: top;
+}

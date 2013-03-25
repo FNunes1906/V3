@@ -32,6 +32,9 @@ $ev_start_date	= $data->start_date;
 $ev_time		= $data->start_time.' - '.$data->stop_time;
 $ev_desc		= $data->_description;
 
+# Assign Current date to variable
+$currentDate =  date("l, F d, Y");
+
 # Location detail variables
 $lc_title 		= $data->_jevlocation->title;
 $lc_street 		= $data->_jevlocation->street;
@@ -46,7 +49,14 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 
 <div id="Feat">
     <div class="detailFeature sect" id="EventDetail">
-        <div class="bc bold fr"><?php echo $ev_start_date.' '.$ev_time; ?></div>
+        <div class="bc bold fr" style="text-align: right;">
+			<?php 
+			if($currentDate == $ev_start_date){
+				echo 'Today'.' '.$ev_time;
+			}else{
+				echo $ev_start_date.' '.$ev_time;
+			}?>
+		</div>
         <h1 class="display"><?php echo $ev_title; ?></h1>
         <div class="rating"></div>
         <div class="evtTmb fr"></div>
