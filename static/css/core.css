@@ -281,7 +281,8 @@ input:-ms-placeholder,
 #NavBest { background-image:url('../images/nav/best.png'); }
 #NavBlog { background-image:url('../images/nav/blog.png'); }
 #NavDir { background-image:url('../images/nav/dir.png'); }
-#NavEnt, #NavVideos { background-image:url('../images/nav/ent.png'); }
+#NavPhotos { background-image:url('../images/nav/photos.png'); }
+#NavVideos { background-image:url('../images/nav/videos.png'); }
 #NavEvents { background-image:url('../images/nav/events.png'); }
 #NavOffers { background-image:url('../images/nav/offers.png'); }
 #NavPeople { background-image:url('../images/nav/people.png'); }
