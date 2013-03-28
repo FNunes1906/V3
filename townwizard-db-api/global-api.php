@@ -4,46 +4,68 @@ include_once('user-api.php');
 
 define("TOWNWIZARD_DB_GLOBAL_EVENTS_URL", "http://www.townwizardconnectinternal.com/g/events");
 define("TOWNWIZARD_DB_GLOBAL_LOCATIONS_URL", "http://www.townwizardconnectinternal.com/g/locations");
+define("TOWNWIZARD_DB_GLOBAL_LOCATION_CATEGORIES_URL", "http://www.townwizardconnectinternal.com/g/lcategories");
 
 /***
-  Takes a search string or zip and returns an array of events.
+  Get events
 ***/
-function tw_global_events($searchStringOrZip) {
-
-    if(_is_zip($searchStringOrZip)) {
-        $params = '?zip='.$searchStringOrZip;
-    } else {
-        $params = '?s='.urlencode($searchStringOrZip);
-    }
-
-    list($status, $response_msg) = _tw_get_json(TOWNWIZARD_DB_GLOBAL_EVENTS_URL, $params);
-    if($status == 200) {
-        $events = json_decode($response_msg);
-        return $events;
-    }
-
-    return NULL;
+function tw_global_events($queryString) {
+    return _get_global_objects(TOWNWIZARD_DB_GLOBAL_EVENTS_URL, $queryString);
 }
 
 /***
-  Takes a zip code and returns an array of locations around it
+  Get locations
 ***/
-function tw_global_locations($zip) {
-    
-    $params = '?zip='.$zip;
+function tw_global_locations($queryString) {
+    return _get_global_objects(TOWNWIZARD_DB_GLOBAL_LOCATIONS_URL, $queryString);
+}
 
-    list($status, $response_msg) = _tw_get_json(TOWNWIZARD_DB_GLOBAL_LOCATIONS_URL, $params);
-    if($status == 200) {
-        $locations = json_decode($response_msg);
-        return $locations;
+/***
+  Get location categories
+***/
+function tw_global_location_categories($queryString) {
+    return _get_global_objects(TOWNWIZARD_DB_GLOBAL_LOCATION_CATEGORIES_URL, $queryString);
+}
+
+/***
+  Compose a query string for global locations, location categories, or event retrieval.
+  Use this query string to call methods above.
+***/
+function tw_global_query_string($zip, $location, $mainCategory, $categories) {
+    $qs = "?";
+    
+    if(!empty($zip)) $qs = $qs."zip=".$zip;
+    else if(!empty($location)) $qs = $qs."l=".$location;
+    else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+        if(!empty($ip)) {
+            $qs = $qs."ip=".$ip;              
+        }
+    }
+    
+    if(!empty($mainCategory)) {
+        if($qs != "?") $qs = $qs."&";
+        $qs = $qs."cat=".$mainCategory;
     }
 
-    return NULL;
+    if(!empty($categories)) {
+        if($qs != "?") $qs = $qs."&";
+        $qs = $qs."s=".$categories;
+    }
+
+    if($qs != "?") return $qs;
+    return "";
 }
 
 //////////////// private functions
-function _is_zip($str) {
-    return preg_match ('/^[0-9]{5}$/', $str);
+function _get_global_objects($url, $queryString) {
+    list($status, $response_msg) = _tw_get_json($url, $queryString);
+    if($status == 200) {
+        $objects = json_decode($response_msg);
+        return $objects;
+    }
+    return NULL;
 }
+
 
 ?>
