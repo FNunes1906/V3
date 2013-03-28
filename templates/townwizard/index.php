@@ -427,9 +427,11 @@ $this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
 				<?php else: ?>
 					<div class="adSect rightCol fr">	
 				<?php endif; ?>
-	<?php else: ?>
-				<div class="adSect rightCol fr">	
-	<?php endif; ?>		
+	<?php elseif(JRequest::getVar('view') == 'wrapper'): ?>
+   				<div class="adSect rightCol fr wrapper">
+ 	<?php else: ?>
+     			<div class="adSect rightCol fr"> 
+ 	<?php endif; ?>
 
 		  	  	<!-- 300 x 100 Banner Ad Start -->
 				<?php if($this->countModules('banner3')) : ?>

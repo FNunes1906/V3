@@ -20,9 +20,9 @@ function isValidEmail($name){
 	$regexp = "/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/";
 
 	if(preg_match($regexp, $name)) {
-	    echo "Email address is valid.";
+	    return TRUE;
 	}else{
-		echo "Email address is <u>not</u> valid.";
+		return FALSE;
 	}
 }
 
@@ -30,7 +30,7 @@ function isValidEmail($name){
 # Function to not allowed other Script tag 
 function isNoScript($text)
 {
-    $allowed = array(".", "-", "_", " "); // you can add here more value, you want to allow.
+    $allowed = array(".", "-", "_", " ","@"); // you can add here more value, you want to allow.
     if(ctype_alnum(str_replace($allowed, '', $text ))) {
         return TRUE;
     } else {
@@ -46,8 +46,12 @@ function isNoScript($text)
 ##
 function isNoScriptDescription($text)
 {
-    $allowed = array(".", "-", "_", " ",'"',"'",'[','(',']',')'); // you can add here more value, you want to allow.
-    if(ctype_alnum(str_replace($allowed, '', $text ))) {
+    $allowed = array(".", "-", "_","",'"',"'",'[','(',']',')'); // you can add here more value, you want to allow.
+    if($text == "")
+	{
+		 return TRUE;
+	}
+	elseif(ctype_alnum(str_replace($allowed, '', $text ))) {
         return TRUE;
     } else {
         return FALSE;

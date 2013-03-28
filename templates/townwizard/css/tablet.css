@@ -206,3 +206,32 @@ body.tablet .sharingSmall span {
 body.tablet #neg {
     margin-top: 0px;
 }
+
+body.tablet .takeOverlay {
+    left: 10%;
+    margin-left: 0;
+    top: 10%;
+    width: 80%;
+}
+
+body.tablet .takeOverlay .socialLinks {
+  margin:20px auto;
+  width:145px;
+}
+body.tablet .detailFeature .people .checkins .seeAll {
+  font-size:14px;
+  line-height:32px;
+  text-decoration:underline;
+  margin:0 0 0 15px;
+}
+body.tablet .detailFeature .people .checkins .seeAll:hover {
+  text-decoration:none;
+}
+body.tablet #AttendancePanel .attendeeList .attendee {
+  width:70%;
+  line-height:22px;
+  margin-bottom:15px;
+}
+body.tablet #AttendancePanel .attendeeList .attendee img {
+  margin-right:15px;
+}

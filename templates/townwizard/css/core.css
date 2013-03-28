@@ -79,15 +79,24 @@ h1, h2, h3, h4, p, span, div { font-weight:normal; font-family:'AllerLightRegula
   position:relative;
   top:-7px;
 }
-#GuideInfo .search input {
-  background:#f8f8f8 url('../images/header/searchBtn.png') no-repeat 250px center;
-  width:240px;
-  padding-right:25px;
-  padding-left:5px;
-  height:23px;
-  line-height:27px;
-  font-size:12px;
+#GuideInfo .search #search_fv {
+ background: none repeat scroll 0 0 #F8F8F8;
+    font-size: 12px;
+    height: 23px;
+    line-height: 27px;
+    padding-left: 5px;
+    padding-right: 25px;
+    width: 240px;
 }
+
+#GuideInfo .submit{ 
+ background: url("../images/header/searchBtn.png") no-repeat scroll 50% 50% transparent;
+    border: 0 none;
+    cursor: pointer;
+    height: 24px;
+    margin-left: -24px;
+    width: 24px;}
+	
 #GuideInfo .search .searchBtn {
   background:0 none;
   position:absolute;
@@ -1580,7 +1589,6 @@ dt.notice {
 Developer: Akash
 Last Updated Date:29-01-2013
 **/
-#GuideInfo .submit{display:none;}
 #WidgetArea .submit{
 	background: url("../images/header/searchBtnLg.png") no-repeat scroll left top transparent;
     border: 0 none;
@@ -1681,7 +1689,7 @@ Last Updated Date:29-01-2013
   height:auto;
   position:fixed;
   /* top:40%; */
-  top:23%;
+  top:226px;
   left:50%;
   margin-left:-250px;
   z-index:4001;
@@ -2116,4 +2124,16 @@ h1.upload {
     padding-bottom: 12px;
     text-transform: uppercase;
     vertical-align: top;
+}
+
+.wrapper .module{
+ position: relative;
+  z-index: -100;
+}
+#sbox-window{
+ margin-left: -465px !important;
+}
+
+#sbox-overlay {
+   background:none !important;
 }

@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="/templates/townwizard/css/core.css" />
+<link rel="stylesheet" type="text/css" href="/templates/townwizard/css/fonts.css" />
 <link href="/templates/rt_quantive_j15/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 <link rel="stylesheet" href="/administrator/templates/khepri/css/icon.css" type="text/css" />
 <link rel="stylesheet" href="/administrator/components/com_jevents/assets/css/eventsadmin.css" type="text/css" />
@@ -19,6 +21,7 @@
 define( '_JEXEC', 1 );
 define('JPATH_BASE', dirname(__FILE__) );
 define( 'DS', DIRECTORY_SEPARATOR );
+include(JPATH_BASE .DS.'formValidation.php');
 require_once ( JPATH_BASE .DS.'includes'.DS.'defines.php' );
 require_once ( JPATH_BASE .DS.'includes'.DS.'framework.php');
 require_once ( JPATH_BASE .DS.'libraries'.DS.'joomla'.DS.'utilities'.DS.'utility.php');
@@ -31,12 +34,10 @@ require_once("configuration.php");
 
 
 //#DD# 
-//session_start();  // Start the session where the code will be stored.
+session_start();  // Start the session where the code will be stored.
 include(JPATH_BASE .DS.'securimage/securimage.php');
 $img = new Securimage();
 $validCode = $img->check($_POST['code']);
-//echo "<pre>";
-//print_r($_SESSION);
 
 // move global var here for v2
 global $var;
@@ -60,7 +61,7 @@ $db=mysql_select_db(DB_NAME) or die(mysql_error());
 $ics_query=mysql_query("select * from jos_jevents_icsfile where isdefault='1' and state='1'");
 $ics_res=mysql_fetch_array($ics_query);
 $ics=$ics_res['ics_id'];
-
+global $msg;
 $msg="";
 if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
 	
@@ -233,32 +234,34 @@ if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
 function checkPostParameter($postValue,$validCode){
 //function checkPostParameter($postValue){
 global $msg;
-
-	if(empty($postValue['title']) || $postValue['title'] == ""){
-		$msg="Event Name can not be blank !<br/>";
+	
+	if(!isNoScript($postValue['title'])){
+		$msg="Valid Event Name Required!<br/>";
 		return false;
 	}
 	if(empty($postValue['catid']) || $postValue['catid']=="0"){
 		$msg="Please Select the Category!<br/>";
 		return false;
 	}
-	if(empty($postValue['custom_anonusername']) || $postValue['custom_anonusername'] == ""){
-		$msg="User Name can not be blank !<br/>";
+	if(!isNoScriptDescription($postValue['jevcontent'])){
+		$msg="Enter Valid Description !<br/>";
 		return false;
 	}
-	if(empty($postValue['custom_anonemail']) || $postValue['custom_anonemail'] == ""){
-		$msg="Email Address can not be blank !<br/>";
+	
+	if(!isNoScript($postValue['custom_anonusername'])){
+		$msg="Valid User Name Required !<br/>";
 		return false;
 	}
-	if(!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $postValue['custom_anonemail'])){ 
+	
+	if(!isValidEmail($postValue['custom_anonemail'])){ 
 		$msg="Invalid Email Address!<br/>";
 		return false;
 		}
+		
 	if(!$validCode){
 		$msg="Invalid varification code.";
-		return true; // if you want start captcha then return false
+		return false; // if you want start captcha then return false
 	}
-
 	
 	return true;
 }
@@ -385,7 +388,7 @@ function form_validation() {
 	if (!stuchkemail){
 		alert("Invalid E-mail Address! Please re-enter.");
 		document.adminForm.custom_anonemail.focus();
-		return (false);
+		return false;
 	}
 	
 	if (document.adminForm.code.value=="")
@@ -399,9 +402,9 @@ function form_validation() {
 <?php
 // Print Message after event form submission starts.
 if($msg!='') {?>
-<table cellpadding="0" cellspacing="0" width="100%" style="border: 2px solid rgb(255, 0, 0); height:40px;margin-bottom">
+<table cellpadding="0" cellspacing="0" width="44%" style="border: 2px solid rgb(255, 0, 0); height:40px;margin-bottom">
 	<tr>
-		<td style="padding:8px">
+		<td style="padding:8px; font-size: 12px;">
 			<font color="#FF0000"><b><?php echo $msg; ?></b></font>
 		</td>
 	</tr>
@@ -424,7 +427,7 @@ if($msg!='') {?>
 	</tr>
 	<tr>
 		<td valign="top" align="left"><?php echo JText::_('JEV_EVCAT'); ?></td>
-			<?php $cat_query=mysql_query("select * from jos_categories where section='com_jevents' and published='1'");?> 
+		<?php $cat_query=mysql_query("select * from jos_categories where section='com_jevents' and published='1'");?> 
 		<td style="width:200px" >
 			<select name="catid" id="catid">
 				<option value="0" ><?php echo JText::_('JEV_CHOOSE'); ?></option>
@@ -553,7 +556,7 @@ if($msg!='') {?>
 	<tr>
 		
 		<td colspan="3">
-			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea id="jevcontent" name="jevcontent" cols="70" rows="10" style="width:100%;height:230px;" class="mceEditor"><?php $postValues['jevcontent']?></textarea>
+			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea id="jevcontent" name="jevcontent" cols="70" rows="10" style="width:99%;height:230px;"></textarea>
 			</div>       	
 		</td>
 	</tr>
@@ -563,14 +566,15 @@ if($msg!='') {?>
 			<input type="hidden" name="location" id="locn" value=""/>
 			<input type="text" name="evlocation_notused" disabled="disabled" id="evlocation" value=" -- " style="float:left;margin-top: 2px;width: 128px;"/>
 			<div class="button2-left">
-				<div class="blank"><a href="javascript:selectLocation('' ,'/indexiphone.php?option=com_jevlocations&amp;task=locations.select&amp;tmpl=component','750','500')" title="Select Location"  ><?php echo JText::_('JEV_SELECT'); ?></a>
+				<div class="blank">
+				<a href="javascript:selectLocation('' ,'/index.php?option=com_jevlocations&amp;task=locations.select&amp;tmpl=component','750','500')" title="Select Location"  ><?php echo JText::_('JEV_SELECT'); ?></a>
 				</div>
 			</div>
 			<div class="button2-left">
 				<div class="blank"><a href="javascript:removeLocation();" title="Remove Location"  ><?php echo JText::_('JEV_REMOVE'); ?></a>
 				</div>
 			</div>
-			<div style="font-size:10px; vertical-align:top;float:left;"><?php echo JText::_('JEV_LOCDES'); ?></div>
+			<div style="font-size:10px; vertical-align:top;float:left;width: 218px;"><?php echo JText::_('JEV_LOCDES'); ?></div>
 	         </td>
 	</tr>
 	<tr class="jevplugin_anonusername">
@@ -584,18 +588,18 @@ if($msg!='') {?>
 	
 	<!--#DD#-->
 	<tr class="jevplugin_anonemail">	
-	<td>&nbsp;</td>
-	<td>
-		<div style="font-size: 11px; vertical-align: top; float: left;"><?php echo JText::_('JEV_CAP'); ?></div><br>
+		<td>&nbsp;</td>
+		<td>
+			<div style="font-size: 11px; vertical-align: top; float: left;"><?php echo JText::_('JEV_CAP'); ?></div><br>
 			<img id="siimage" align="left" style="width:150px;" style="padding-right: 5px; border: 0" src="securimage/securimage_show.php?sid=<?php echo md5(time()) ?>" />
 			<a tabindex="-1" style="border-style: none" href="#" title="Refresh Image" onClick="document.getElementById('siimage').src = 'securimage/securimage_show.php?sid=' + Math.random(); return false"><img src="securimage/images/refresh.gif" alt="Reload Image" border="0" onClick="this.blur()" align="bottom" /></a>
 		</td>
 	</tr>
 	<tr class="jevplugin_anonemail">	
-	<td><?php echo JText::_('JEV_VERI_CODE'); ?></td>
-	<td>
-		<input type="text" value="" id="code" name="code" size="25">
-		<br><br>
+		<td><?php echo JText::_('JEV_VERI_CODE'); ?></td>
+		<td>
+			<input type="text" value="" id="code" name="code" size="25">
+			<br><br>
 		</td>
 	</tr>
 	<!--#DD#-->
@@ -607,7 +611,7 @@ if($msg!='') {?>
 
 <table align="left" style="" width="30%" cellpadding="0" cellspacing="0">
 <tbody><tr>
-		<td id="toolbar-save" valign="top"style="padding-right:3px">
+		<td id="toolbar-save" valign="top"style="padding-right:3px;width: 70px;">
 			<a style="cursor:pointer;height:21px;"><input src="images/save-btn.gif" type="submit" name="action" value="<?php echo JText::_('JEV_SEND'); ?>" class="button"/></a>
 		</td>
 		<td id="toolbar-save" valign="top"style="padding-right:3px">
@@ -622,3 +626,18 @@ if($msg!='') {?>
 
 </div>
 <!--Jevent Form Ends-->
+
+<!-- Tooltip Overlay Start -->
+	<div id="Darkness"></div>
+
+	<div id="HelpTT" class="takeOverlay">
+		<a class="close">x</a>
+		<span>
+	  		<?php echo JText::_("TW_TOOLTIP") ?><br /><br /><?php echo JText::_("TW_RSVP") ?>
+	  		<div class="socialLinks cb">
+	   			<a class="fbLogin fl" href="javascript:void(0)" onclick="fb_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
+	   			<a class="twtLogin fl" href="javascript:void(0)" onclick="twitter_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
+	  		</div>
+		</span>
+	</div>
+<!-- Tooltip Overlay End -->

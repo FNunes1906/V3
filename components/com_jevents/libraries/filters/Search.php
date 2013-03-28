@@ -52,7 +52,7 @@ class jevSearchFilter extends jevFilter
 				
 		$filterList=array();
 		$filterList["title"]="<label class='evsearch_label' for='".$this->filterType."_fv'>".$this->filterLabel."</label>";
-		$filterList["html"] = "<input type='text' name='".$this->filterType."_fv' id='".$this->filterType."_fv'  class='evsearch'  value='".$this->filter_value."' />";
+		$filterList["html"] = '<input type="text" name="'.$this->filterType.'_fv" id="'.$this->filterType.'_fv"  class="evsearch"  value="Search Events"  onblur="if(this.value==\'\'){this.value=\'Search Events\';}" onfocus="if(this.value==\'Search Events\') this.value=\'\';" />';
 
 		$script = "JeventsFilters.filters.push({id:'".$this->filterType."_fv',value:''});";
 		$document = JFactory::getDocument();
