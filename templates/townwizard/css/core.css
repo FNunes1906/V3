@@ -387,6 +387,7 @@ a.saved span {
 #Feat .sect {
   border:0 none;
   padding:0;
+  margin: 0;
 }
 #MainContent .sect .heading {
   background:url('../images/grayArrowLg.png') no-repeat right top;
@@ -1247,7 +1248,7 @@ a.saved span {
 
 #Footer {
   background:#000;
-  height:300px;
+  height:212px;
   width:100%;
   margin-top:75px;
   color:#fff;
@@ -1448,12 +1449,6 @@ font-family: 'AllerBold',Arial,sans-serif;
 	float: left;
 }
 
-#neg{
-	margin-top:-406px;
-}
-
-
-
 .addthis_32x32_style .dummy .at300bs, .addthis_32x32_style .at300bs, .addthis_32x32_style .at15t{
 	width: 38px !important;
 }
@@ -1583,7 +1578,7 @@ dt.notice {
 	width:410px !important;
 }
 
-#Feat{padding-bottom: 15px;}
+#Feat{/*padding-bottom: 15px;*/}
 
 /**
 Developer: Akash
@@ -1898,9 +1893,9 @@ Last Updated Date:29-01-2013
     font-size: 14px;
     height: 24px;
     line-height: 24px;
-    margin-right: 12px;
-    padding: 0 5px;
-    width: 84%;
+    margin-right: 6%;
+    padding: 0 1%;
+    width: 94%;
 }
 
 .your{
@@ -1953,10 +1948,10 @@ Last Updated Date:29-01-2013
 	width: 40% !important;
 }
 
-#cat_drop{
-	height: 28px;
+#cat_drop {
+    height: 28px;
     padding-top: 4px;
-    width: 37%;
+    width: 40%;
 }
 /* Restaurant Search end*/
 
@@ -2136,4 +2131,12 @@ h1.upload {
 
 #sbox-overlay {
    background:none !important;
+}
+
+#Find .module_event .fl{
+	width: 45%;
+}
+
+.caroufredsel_wrapper{
+	margin-top: 0px !important;
 }

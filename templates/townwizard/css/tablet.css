@@ -235,3 +235,32 @@ body.tablet #AttendancePanel .attendeeList .attendee {
 body.tablet #AttendancePanel .attendeeList .attendee img {
   margin-right:15px;
 }
+
+body.tablet .adSect {
+	width: 67.5%;
+}
+
+body.tablet .rightCol{
+	float: left;
+}
+
+body.tablet .rightCol{
+	max-width:67.5%;
+}
+
+body.tablet .rightCol.fr .ad {
+    float: right;
+	width: 52%;
+}
+
+body.tablet #Feat #Find {
+    margin-left: 30px;
+}
+
+body.tablet .centerCol #Try3 {
+    margin-left: 30px;
+}
+
+body.tablet .centerCol .belowCol{
+    margin-left: 30px;
+}

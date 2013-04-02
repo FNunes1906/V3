@@ -126,23 +126,16 @@ if($CatId>0){
 
 $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 
-if(stripos($ua,'android') == true) { ?>
-
-  
-
-  <?php } 
-
-  else {
-
-  ?>
-
-  <div class="iphoneads" style=" vertical-align:top">
-
-    <?php m_show_banner('iphone-photos-screen'); ?>
-
-  </div>
-
-  <?php } ?>
+if(stripos($ua,'android') == false) { ?>
+	<div class="iphoneads" style=" vertical-align:top">
+		<?php m_show_banner('android-photos-screen'); ?>
+	</div>
+	<?php } 
+	else {?>
+	<div class="iphoneads" style=" vertical-align:top">
+		<?php m_show_banner('iphone-photos-screen'); ?>
+	</div>
+<?php } ?>
 
   
 
