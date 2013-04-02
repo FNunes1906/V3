@@ -23,7 +23,8 @@ _init();
 define("TOWNWIZARD_TMPL_PATH", "http://".$_SERVER['HTTP_HOST']."/templates/townwizard");
 define("TOWNWIZARD_PARTNER_PATH", "http://".$_SERVER['HTTP_HOST']."/partner/".$_SESSION['partner_folder_name']);
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php')
+include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
+//echo $var->keywords;
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" >
@@ -338,51 +339,48 @@ $this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
 
       <!-- Placeholder for Header Banner Ad in Vertical Layout End -->
 	  
-       <!-- Event Rotator Start -->
- 	<?php if(JRequest::getVar('task') == 'range.listevents'):?>
-  
- 	<div class="fl">
-			<?php if($this->countModules('searchevent')) : ?>
-	            <div>
-	                  <jdoc:include type="modules" name="searchevent" style="rounded" />
-	                   <div class="cb"></div>
-	             </div>
-          	<?php endif; ?>
-       		
-			<?php if($this->countModules('slider')) : ?>
-	            <div>
-	                  <jdoc:include type="modules" name="slider" style="rounded" />
-	                   <div class="cb"></div>
-	             </div>
-          	<?php endif; ?>
-    </div>
-       	<?php endif; ?>     
-     <!-- Event Rotator End -->
-     
-	 <!-- event_submit and photo upload start-->
-	  <?php if(JRequest::getVar('task') == 'range.listevents') : ?>
-	   <?php if($this->countModules('right')) : ?>
-	             <div class="rightCol fr">
-	               <jdoc:include type="modules" name="right" style="rounded" />
-	             </div>
-	       <?php endif; ?>
-	   <?php else: ?>
-	   <?php if($this->countModules('right')) : ?>
-	             <div class="rightCol fr">
-	               <jdoc:include type="modules" name="right" style="rounded" />
-	             </div>
-	       <?php endif; ?>
-	   <?php endif; ?>
-   <!-- event_submit and photo upload End-->
-   	  
+   
+	    	  
       <!-- Main body start -->
-            <div class="centerCol fl">
+       <div class="centerCol fl">
+					<!-- Event Rotator Start -->
+				 	<?php if(JRequest::getVar('task') == 'range.listevents'):?>
+				  
+				 	<div class="fl">
+							<?php if($this->countModules('searchevent')) : ?>
+					            <div id="Feat">
+									<div id="Find" class="sect">
+					                  <jdoc:include type="modules" name="searchevent" style="rounded" />
+					                   <div class="cb"></div>
+					             	</div>
+								</div>
+				          	<?php endif; ?>
+				       		
+							<?php if($this->countModules('slider')) : ?>
+					            <div>
+					                  <jdoc:include type="modules" name="slider" style="rounded" />
+					                   <div class="cb"></div>
+					             </div>
+				          	<?php endif; ?>
+				    </div>
+				       	<?php endif; ?>     
+				     <!-- Event Rotator End -->
+					
 					<?php
 					 if($this->countModules('searchres') && JRequest::getVar('task') != 'locations.detail') : ?>
-					<div>
-						<jdoc:include type="modules" name="searchres" style="rounded" />
-					    <div class="cb"></div>
-					</div>
+						<div id="Feat">
+							<div id="Find" class="sect">
+								<jdoc:include type="modules" name="searchres" style="rounded" />
+								<div class="cb"></div>
+							</div>
+						</div>
+						
+						<?php if($this->countModules('loc_slider')) : ?>
+							<div>
+								<jdoc:include type="modules" name="loc_slider" style="rounded" />
+								<div class="cb"></div>
+							</div>
+						<?php endif; ?>
 				    <?php endif; ?>
 					
             		<div id="Try3" class="sect">
@@ -428,11 +426,27 @@ $this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
 					<div class="adSect rightCol fr">	
 				<?php endif; ?>
 	<?php elseif(JRequest::getVar('view') == 'wrapper'): ?>
-   				<div class="adSect rightCol fr wrapper">
- 	<?php else: ?>
-     			<div class="adSect rightCol fr"> 
- 	<?php endif; ?>
-
+				<div class="adSect rightCol fr wrapper">
+	<?php else: ?>
+					<div class="adSect rightCol fr">	
+	<?php endif; ?>		
+				
+				<!-- event_submit and photo upload start-->
+				  <?php if(JRequest::getVar('task') == 'range.listevents') : ?>
+				   <?php if($this->countModules('right')) : ?>
+				             <div class="rightCol">
+				               <jdoc:include type="modules" name="right" style="rounded" />
+				             </div>
+				       <?php endif; ?>
+				   <?php else: ?>
+				   <?php if($this->countModules('right')) : ?>
+				             <div class="rightCol">
+				               <jdoc:include type="modules" name="right" style="rounded" />
+				             </div>
+				       <?php endif; ?>
+				   <?php endif; ?>
+			   <!-- event_submit and photo upload End-->
+				
 		  	  	<!-- 300 x 100 Banner Ad Start -->
 				<?php if($this->countModules('banner3')) : ?>
 		  	  	<div class="ad space">

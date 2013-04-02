@@ -422,7 +422,7 @@ if($msg!='') {?>
 	<table width="65%" cellpadding="5" cellspacing="2" border="0"  class="adminform" id="jevadminform">
 	<tr>
 		<td align="left"><?php echo JText::_('JEV_EVNAME'); ?>:</td>
-		<td align="right"><input class="inputbox" type="text" name="title" size="41" maxlength="255" value="<?php $postValues['title']?>" /></td>
+		<td align="left"><input class="inputbox" type="text" name="title" size="41" maxlength="255" value="<?php $postValues['title']?>" /></td>
 		<td colspan="2"><input type="hidden" name="priority" value="0" /></td>
 	</tr>
 	<tr>
@@ -574,7 +574,7 @@ if($msg!='') {?>
 				<div class="blank"><a href="javascript:removeLocation();" title="Remove Location"  ><?php echo JText::_('JEV_REMOVE'); ?></a>
 				</div>
 			</div>
-			<div style="font-size:10px; vertical-align:top;float:left;width: 218px;"><?php echo JText::_('JEV_LOCDES'); ?></div>
+			<div style="font-size:10px; vertical-align:top;width: 218px;"><?php echo JText::_('JEV_LOCDES'); ?></div>
 	         </td>
 	</tr>
 	<tr class="jevplugin_anonusername">

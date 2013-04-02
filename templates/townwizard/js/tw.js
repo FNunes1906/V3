@@ -85,7 +85,7 @@ var resizeContent = function() {
 
       if (!navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
         //Expand center column content to full width
-        jQuery('#WidgetArea .centerCol .sect, #WidgetArea .rightCol.spread').not('#WidgetArea #Blog.centerCol .sect').css('width',jQuery('#MainContent').width() - 215);
+        jQuery('#WidgetArea .centerCol .sect, #WidgetArea .rightCol.spread').not('#WidgetArea #Blog.centerCol .sect').css('width',jQuery('#MainContent').width() - 285);
         jQuery('#WidgetArea #Blog.centerCol .sect').css('width',jQuery('#MainContent').width() - 555);
       }
 
