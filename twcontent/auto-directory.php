@@ -382,7 +382,10 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 						}
 					</style>
 
+					<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+
 					<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+					<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
 					<script>
 
@@ -453,14 +456,18 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 
 					    ?>
 
+					    <script type="text/javascript">
+					    	jQuery(document).ready(function() {
+					    		//Populate autocomplete textbox with Directory Categories
+					    		var categories = <?php echo json_encode($directoryCategories) ?>;
+					  			jQuery('.catSearch').autocomplete({ source: categories });
+					    	});
+					    </script>
+
 					    <form id="locations_form" method="get" action="auto-directory.php"> 
 					        <input type="hidden" value="<?php echo $_GET['zip'] ?>" name="zip" />
 					        <input type="hidden" value="<?php echo $_GET['cat'] ?>" name="cat" />
-					        <select name="s">
-					        	<?php foreach($directoryCategories as $c) {
-					        		echo '<option value="' . $c . '">' . $c . '</option>';
-					        	} ?>
-					        </select><br/>
+					        <div class="ui-widget"><input id="Tags" class="catSearch" type="text" name="s" placeholder="Start typing a category to filter results" /></div>
 					        <input type="submit" />
 					    </form>
 
@@ -468,11 +475,27 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 					    
 					    $directoryLocations = tw_global_locations(tw_global_query_string($_GET['zip'], '', $_GET['cat'], $_GET['s']));
 
-					    if(!empty($directoryLocations)) { ?>
+					    if(!empty($directoryLocations)) { 
+
+					    	$directoryCategories = tw_global_location_categories(tw_global_query_string($_GET['zip'], '', $_GET['cat'], ''));
+
+					    ?>
+
+						    <script type="text/javascript">
+						    	jQuery(document).ready(function() {
+						    		//Populate autocomplete textbox with Directory Categories
+						    		var categories = <?php echo json_encode($directoryCategories) ?>;
+						  			jQuery('.catSearch').autocomplete({ source: categories });
+						    	});
+						    </script>
 
 					    	<li>
-					    		<!-- Did not use form tag, assuming we will use jQuery to filter results on textfield update -->
-					    		<input class="catSearch" type="text" name="category" placeholder="Start typing a category to filter results" />
+					    		<form id="locations_form" method="get" action="auto-directory.php"> 
+						        <input type="hidden" value="<?php echo $_GET['zip'] ?>" name="zip" />
+						        <input type="hidden" value="<?php echo $_GET['cat'] ?>" name="cat" />
+						    		<div class="ui-widget"><input class="catSearch" type="text" name="s" placeholder="Start typing a category to filter results" /></div>
+					    			<input type="submit" />
+					    		</form>
 					    	</li>
 						    
 						    <?php foreach($directoryLocations as $e) {
