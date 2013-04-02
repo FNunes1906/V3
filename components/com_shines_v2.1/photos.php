@@ -126,7 +126,7 @@ if($CatId>0){
 
 $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 
-if(stripos($ua,'android') == false) { ?>
+if(stripos($ua,'android') == true) { ?>
 	<div class="iphoneads" style=" vertical-align:top">
 		<?php m_show_banner('android-photos-screen'); ?>
 	</div>

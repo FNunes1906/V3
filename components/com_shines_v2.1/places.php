@@ -206,7 +206,7 @@ function divopen(str) {
 <body>
 <?php
 $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-if(stripos($ua,'android') == false) { ?>
+if(stripos($ua,'android') == true) { ?>
 	<div class="iphoneads" style="vertical-align:bottom;">
 		<?php m_show_banner('android-places-screen'); ?>
 	</div>
