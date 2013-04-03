@@ -442,115 +442,84 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
   				</script>
 
 
-				
+				<?php
+					$lat = isset($_GET['lat']) ? $_GET['lat'] : NULL;
+					$lon = isset($_GET['lon']) ? $_GET['lon'] : NULL;
+					
+					$zip = isset($_GET['zip']) ? $_GET['zip'] : NULL;
+					$cat = isset($_GET['cat']) ? $_GET['cat'] : NULL;
+					$s   = isset($_GET['s']) ? $_GET['s'] : NULL;
+					$l   = isset($lat) && isset($lon) ? $lat.",".$lon : (isset($_GET['l']) ? $_GET['l'] : NULL);
+				?>
 
-  				<?php if(empty($_GET['s']) || (empty($_GET['zip']) || empty($_GET['cat']))) { ?>
+				<?php
+		    		$qString = tw_global_query_string($zip, $l, $cat, NULL);
+		    		$directoryCategories = tw_global_location_categories($qString);
 
-					    Search locations<br/><br/>
+				    if(isset($s)) {			    	
+			    		$qString = tw_global_query_string($zip, $l, $cat, $s);
+			    		$directoryLocations = tw_global_locations($qString);
+			    	}
+				?>
 
-					    <?php
-					    	
-					    	$directoryCategories = tw_global_location_categories(tw_global_query_string($_GET['zip'], '', $_GET['cat'], ''));
-					    	
-					    	if(!empty($directoryCategories)) { 
+				<?php if(!empty($directoryCategories))  { ?>
+				    <script type="text/javascript">
+				    	jQuery(document).ready(function() {
+			    		//Populate autocomplete textbox with Directory Categories
+				    		var categories = <?php echo json_encode($directoryCategories) ?>;
+				  			jQuery('.catSearch').autocomplete({ source: categories });
+				    	});
+				    </script>
 
-					    ?>
+				    <form id="locations_form" method="get" action="auto-directory.php"> 
+				        <input type="hidden" value="<?php echo $zip ?>" name="zip" />
+				        <input type="hidden" value="<?php echo $l ?>" name="l" />
+				        <input type="hidden" value="<?php echo $cat ?>" name="cat" />
+				        <div class="ui-widget"><input id="Tags" class="catSearch" type="text" name="s" placeholder="Start typing a category to filter results" /></div>
+				        <input type="submit" />
+				    </form>
+				<?php } ?>
 
-					    <script type="text/javascript">
-					    	jQuery(document).ready(function() {
-					    		//Populate autocomplete textbox with Directory Categories
-					    		var categories = <?php echo json_encode($directoryCategories) ?>;
-					  			jQuery('.catSearch').autocomplete({ source: categories });
-					    	});
-					    </script>
-
-					    <form id="locations_form" method="get" action="auto-directory.php"> 
-					        <input type="hidden" value="<?php echo $_GET['zip'] ?>" name="zip" />
-					        <input type="hidden" value="<?php echo $_GET['cat'] ?>" name="cat" />
-					        <div class="ui-widget"><input id="Tags" class="catSearch" type="text" name="s" placeholder="Start typing a category to filter results" /></div>
-					        <input type="submit" />
-					    </form>
-
-					<?php } } else {
-					    
-					    $directoryLocations = tw_global_locations(tw_global_query_string($_GET['zip'], '', $_GET['cat'], $_GET['s']));
-
-					    if(!empty($directoryLocations)) { 
-
-					    	$directoryCategories = tw_global_location_categories(tw_global_query_string($_GET['zip'], '', $_GET['cat'], ''));
-
-					    ?>
-
-						    <script type="text/javascript">
-						    	jQuery(document).ready(function() {
-						    		//Populate autocomplete textbox with Directory Categories
-						    		var categories = <?php echo json_encode($directoryCategories) ?>;
-						  			jQuery('.catSearch').autocomplete({ source: categories });
-						    	});
-						    </script>
-
-					    	<li>
-					    		<form id="locations_form" method="get" action="auto-directory.php"> 
-						        <input type="hidden" value="<?php echo $_GET['zip'] ?>" name="zip" />
-						        <input type="hidden" value="<?php echo $_GET['cat'] ?>" name="cat" />
-						    		<div class="ui-widget"><input class="catSearch" type="text" name="s" placeholder="Start typing a category to filter results" /></div>
-					    			<input type="submit" />
-					    		</form>
-					    	</li>
-						    
-						    <?php foreach($directoryLocations as $e) {
-						        echo '<li id="' . $e->id . '">';
-						        echo '<h3 class="fr">';
-				        			if (isset($e->street)) {
-				        				echo '<div>' . $e->street . '</div>';
-				        			}
-				        			echo '<div>';
-					        			if (isset($e->city)) {
-					        				echo $e->city . ', ';
-					        			}
-					        			if (isset($e->state)) {
-					        				echo $e->state . ' ';
-					        			}
-					        			if (isset($e->zip)) {
-					        				echo $e->zip;
-					        			}
-				        			echo '</div>';
-				        			echo "<div>" . $e->phone . "</div>"; 
-				        		echo '</h3>';
-						        echo "<h1>" . $e->name . "</h1>";
-						        echo '<h2>';
-						        	echo $e->category;
-						        echo '</h2>';
-						        echo '<ul class="btnList">';
-							        echo '<li><a href="javascript:void(0);tel:' . preg_replace('/(\W*)/', '', $e->phone) . '" class="button small">call</a></li>';
-							        if (isset($e->latitude) && isset($e->longitude)) {
-												echo '<li><a class="button small" href="javascript:linkClicked(\'APP30A:FBCHECKIN:' . $e->latitude . ':' . $e->longitude . '\')">check in</a></li>';
-												echo '<li><a class="button small" href="javascript:linkClicked(\'APP30A:SHOWMAP:' . $e->latitude . ':' . $e->longitude . '\')">map</a></li>';
-											}
-										echo '</ul>';
-						        echo '</li>';
-
-
-						        //var_dump($e);
-						    } 
-						}
-
-						else { ?>
-
-							<p>Sorry, there were no results for your search.</p>
-
-						<?php }
-
+			    <?php 
+			    	if(!empty($directoryLocations)) { 
+				    	foreach($directoryLocations as $e) {
+				        	echo '<li id="' . $e->id . '">';
+				        	echo '<h3 class="fr">';
+		        			if (isset($e->street)) {
+		        				echo '<div>' . $e->street . '</div>';
+		        			}
+		        			echo '<div>';
+			        		if (isset($e->city)) {
+			        			echo $e->city . ', ';
+			        		}
+			        		if (isset($e->state)) {
+			        			echo $e->state . ' ';
+			        		}
+			        		if (isset($e->zip)) {
+			        			echo $e->zip;
+			        		}
+		        			echo '</div>';
+		        			if (isset($e->phone)) {
+		        				echo "<div>" . $e->phone . "</div>"; 
+		        			}
+		        			echo '</h3>';
+				        	echo "<h1>" . $e->name . "</h1>";
+				        	echo '<h2>';
+				        	echo $e->category;
+				        	echo '</h2>';
+				        	echo '<ul class="btnList">';
+					        echo '<li><a href="javascript:void(0);tel:' . preg_replace('/(\W*)/', '', $e->phone) . '" class="button small">call</a></li>';
+					        if (isset($e->latitude) && isset($e->longitude)) {
+										echo '<li><a class="button small" href="javascript:linkClicked(\'APP30A:FBCHECKIN:' . $e->latitude . ':' . $e->longitude . '\')">check in</a></li>';
+										echo '<li><a class="button small" href="javascript:linkClicked(\'APP30A:SHOWMAP:' . $e->latitude . ':' . $e->longitude . '\')">map</a></li>';
+									}
+								echo '</ul>';
+					        echo '</li>';
+					    }
+					} else if(isset($s)) { 
+						echo '<p>Sorry, there were no results for your search.</p>';
 					} 
-
-					?>
-
-
-
-
-					<!-- Added by Doug Facebook Results End -->
-
-
+				?>
 
 				</ul>
 
