@@ -261,6 +261,10 @@ body.tablet .centerCol #Try3 {
     margin-left: 30px;
 }
 
-body.tablet .centerCol .belowCol{
+body.tablet .centerCol #Cuisine{
+    margin-left: 30px;
+}
+
+body.tablet .rightCol #ShareThis{
     margin-left: 30px;
 }

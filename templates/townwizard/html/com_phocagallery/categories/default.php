@@ -105,7 +105,7 @@ if ($this->tmpl['displayimagecategories'] == 1) {
 		
 				/*  Start changed code for showing 3 latest photos using pop-up in category */
 				$db = & JFactory::getDBO();
-				$catphoto = "SELECT * FROM `jos_phocagallery` WHERE catid=".$this->categories[$i]->id." AND published = 1 ORDER BY id DESC";
+				$catphoto = "SELECT * FROM `jos_phocagallery` WHERE catid=".$this->categories[$i]->id." AND published = 1 ORDER BY id DESC LIMIT 3";
 				$db->setQuery($catphoto);
 				global $rows;
 				$rows = $db->query();
