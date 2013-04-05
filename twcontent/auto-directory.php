@@ -439,8 +439,18 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 					}
 
 
+					var submitCategory = function() {
+						jQuery.ajax({
+							type: "GET",
+							url: 'locations.php',
+							data: $('#locations_form').serialize(),
+							success: function(data) {
+								$('#location_listing').html(data);
+							}
+						});
+						return false;
+					}
   				</script>
-
 
 				<?php
 					$lat = isset($_GET['lat']) ? $_GET['lat'] : NULL;
@@ -466,60 +476,24 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 				    <script type="text/javascript">
 				    	jQuery(document).ready(function() {
 			    		//Populate autocomplete textbox with Directory Categories
-				    		var categories = <?php echo json_encode($directoryCategories) ?>;
-				  			jQuery('.catSearch').autocomplete({ source: categories });
+				    		var categories = <?php echo json_encode($directoryCategories) ?>;			    		
+				  			jQuery('.catSearch').autocomplete({
+				  				source: categories,
+				  				select : submitCategory
+				  			});
 				    	});
 				    </script>
 
-				    <form id="locations_form" method="get" action="auto-directory.php"> 
+				    <form id="locations_form"> 
 				        <input type="hidden" value="<?php echo $zip ?>" name="zip" />
 				        <input type="hidden" value="<?php echo $l ?>" name="l" />
 				        <input type="hidden" value="<?php echo $cat ?>" name="cat" />
 				        <div class="ui-widget"><input id="Tags" class="catSearch" type="text" name="s" placeholder="Start typing a category to filter results" /></div>
-				        <input type="submit" />
+				        <input type="button" value="Submit" onclick="submitCategory();"/>
 				    </form>
 				<?php } ?>
 
-			    <?php 
-			    	if(!empty($directoryLocations)) { 
-				    	foreach($directoryLocations as $e) {
-				        	echo '<li id="' . $e->id . '">';
-				        	echo '<h3 class="fr">';
-		        			if (isset($e->street)) {
-		        				echo '<div>' . $e->street . '</div>';
-		        			}
-		        			echo '<div>';
-			        		if (isset($e->city)) {
-			        			echo $e->city . ', ';
-			        		}
-			        		if (isset($e->state)) {
-			        			echo $e->state . ' ';
-			        		}
-			        		if (isset($e->zip)) {
-			        			echo $e->zip;
-			        		}
-		        			echo '</div>';
-		        			if (isset($e->phone)) {
-		        				echo "<div>" . $e->phone . "</div>"; 
-		        			}
-		        			echo '</h3>';
-				        	echo "<h1>" . $e->name . "</h1>";
-				        	echo '<h2>';
-				        	echo $e->category;
-				        	echo '</h2>';
-				        	echo '<ul class="btnList">';
-					        echo '<li><a href="javascript:void(0);tel:' . preg_replace('/(\W*)/', '', $e->phone) . '" class="button small">call</a></li>';
-					        if (isset($e->latitude) && isset($e->longitude)) {
-										echo '<li><a class="button small" href="javascript:linkClicked(\'APP30A:FBCHECKIN:' . $e->latitude . ':' . $e->longitude . '\')">check in</a></li>';
-										echo '<li><a class="button small" href="javascript:linkClicked(\'APP30A:SHOWMAP:' . $e->latitude . ':' . $e->longitude . '\')">map</a></li>';
-									}
-								echo '</ul>';
-					        echo '</li>';
-					    }
-					} else if(isset($s)) { 
-						echo '<p>Sorry, there were no results for your search.</p>';
-					} 
-				?>
+				<div id="location_listing"></div>
 
 				</ul>
 
