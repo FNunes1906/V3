@@ -54,6 +54,8 @@ h1, h2, h3, h4, p, span, div { font-weight:normal; font-family:'AllerLightRegula
 }
 #Logo img {
   display:block;
+  max-height: 120px;
+  max-width: 190px;
 }
 #Social {
   margin-top:17px;
@@ -2139,4 +2141,18 @@ h1.upload {
 
 .caroufredsel_wrapper{
 	margin-top: 0px !important;
+}
+
+#VenueDetail img{
+	max-width: 80%;
+    padding-top: 5px;
+}
+
+.pgcenter .sectiontablefooter{
+	display: block !important;	
+	 margin: 10px !important;
+}
+
+.ev_td_right {
+    border-bottom: 1px solid #000000;
 }

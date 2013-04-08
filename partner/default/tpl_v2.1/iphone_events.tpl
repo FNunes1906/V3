@@ -27,7 +27,8 @@
 
 			//Creating Image array from Event description
 			##Image FEtched for slide show##
-				$imageurl= strstr($featureevdetail['description'],'http');
+				$fetchimg = strstr($featureevdetail['description'],'src=');
+				$imageurl = strstr($fetchimg,'http');
 				$singleimagearray = explode('"',$imageurl);
 				if($singleimagearray[0] == ""){
 					$singleimagearray[0] = "/components/com_shines_v2.1/images/nofe_image.png"; }

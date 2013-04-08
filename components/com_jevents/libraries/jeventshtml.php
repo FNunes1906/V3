@@ -11,6 +11,22 @@
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
+#Timezone Block Begin April 2013
+global $var;
+include_once($_SERVER['DOCUMENT_ROOT'].'/inc/var.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
+_init();
+
+$timeZoneArray 	= explode(':',$var->timezone);
+global $totalHours;
+global $totalMinutes;
+global $totalSeconds;
+
+#Setting up Timezone time varible
+$totalHours	= date("H") + $timeZoneArray[0];$totalMinutes = date("i") + $timeZoneArray[1];$totalSeconds = date("s") + $timeZoneArray[2];
+
+#Timezone Block End April 2013
+
 // TODO replace with JDate 
 
 class JEventsHTML{
@@ -508,6 +524,9 @@ class JEventsHTML{
 	*            // Us style : 07/2003
 	********************************************/
 	function getDateFormat( $year, $month, $day, $type ){
+	global $totalHours;
+	global $totalMinutes;
+	global $totalSeconds;
 		// Transform to translation strings
 		if( empty( $year )){
 			$year = 0;
@@ -526,7 +545,11 @@ class JEventsHTML{
 			$cfg = & JEVConfig::getInstance();
 			$format_type	= $cfg->get('com_dateformat');
 		}
-		$datestp		= ( mktime( 0, 0, 0, $month, $day, $year ));
+		
+		//$datestp		= ( mktime( 0, 0, 0, $month, $day, $year ));
+		
+		#Timezone varialbe assign in mktime function - April 2013
+		$datestp = ( mktime( $totalHours, $totalMinutes, $totalSeconds, $month, $day, $year ));
 
 		// if date format is from langauge file then do this first
 		if( $format_type == 3 ){
