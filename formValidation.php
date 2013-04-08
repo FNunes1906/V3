@@ -58,6 +58,21 @@ function isNoScriptDescription($text)
     }
 }
 
+##Function only for Photo Upload validation
+function isNoScriptWithNull($text)
+{
+    $allowed = array(".", "-", "_", " ","@"); // you can add here more value, you want to allow.
+	if($text == "")
+	{
+		 return TRUE;
+	}
+    if(ctype_alnum(str_replace($allowed, '', $text ))) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
 
 ###
 #Function to check for Image type and size
