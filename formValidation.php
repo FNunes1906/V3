@@ -46,7 +46,7 @@ function isNoScript($text)
 ##
 function isNoScriptDescription($text)
 {
-    $allowed = array(".", "-", "_","",'"',"'",'[','(',']',')','$',':','%','!','/','?','*','&','@','|'); // you can add here more value, you want to allow.
+    $allowed = array(".", "-", "_"," ",'"',"'",'[','(',']',')','$',':','%','!','/','?','*','&','@','|'); // you can add here more value, you want to allow.
     if($text == "")
 	{
 		 return TRUE;

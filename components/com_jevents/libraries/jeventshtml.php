@@ -1,4 +1,5 @@
 <?php
+
 /**
  * JEvents Component for Joomla 1.5.x
  *
@@ -11,21 +12,18 @@
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-#Timezone Block Begin April 2013
-global $var;
-include_once($_SERVER['DOCUMENT_ROOT'].'/inc/var.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
-_init();
-
-$timeZoneArray 	= explode(':',$var->timezone);
-global $totalHours;
-global $totalMinutes;
-global $totalSeconds;
+/* Timezone Block Begin April 2013 */
+$conn			= mysql_connect("localhost",$_SESSION['c_db_user'],$_SESSION['c_db_password']) or die(mysql_error());
+$db				= mysql_select_db($_SESSION['c_db_name']) or die(mysql_error());
+$rec			= mysql_query("select * from `jos_pageglobal`");
+$pageglobal 	= mysql_fetch_array($rec); 
+$timezoneValue 	= $pageglobal['time_zone'];
 
 #Setting up Timezone time varible
+$timeZoneArray 	= explode(':',$timezoneValue);
+global $totalHours; global $totalMinutes; global $totalSeconds;
 $totalHours	= date("H") + $timeZoneArray[0];$totalMinutes = date("i") + $timeZoneArray[1];$totalSeconds = date("s") + $timeZoneArray[2];
-
-#Timezone Block End April 2013
+/* Timezone Block End April 2013 */
 
 // TODO replace with JDate 
 
