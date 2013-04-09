@@ -46,12 +46,27 @@ function isNoScript($text)
 ##
 function isNoScriptDescription($text)
 {
-    $allowed = array(".", "-", "_","",'"',"'",'[','(',']',')','$',':','%','!','/','?','*','&','@','|'); // you can add here more value, you want to allow.
+    $allowed = array(".", "-", "_"," ",'"',"'",'[','(',']',')','$',':','%','!','/','?','*','&','@','|'); // you can add here more value, you want to allow.
     if($text == "")
 	{
 		 return TRUE;
 	}
 	elseif(ctype_alnum(str_replace($allowed, '', $text ))) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
+##Function only for Photo Upload validation
+function isNoScriptWithNull($text)
+{
+    $allowed = array(".", "-", "_", " ","@"); // you can add here more value, you want to allow.
+	if($text == "")
+	{
+		 return TRUE;
+	}
+    if(ctype_alnum(str_replace($allowed, '', $text ))) {
         return TRUE;
     } else {
         return FALSE;

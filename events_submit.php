@@ -498,7 +498,7 @@ if($msg!='') {?>
 									}
 								?>
 
-								<input class="inputbox" type="text" name="start_12h" id="start_12h" size="8" maxlength="8"  value="<?php $start_12h_value?>" onChange="check12hTime(this);" />
+								<input class="inputbox" type="text" name="start_12h" id="start_12h" size="8" maxlength="8"  value="<?php echo $start_12h_value?>" onChange="check12hTime(this);" />
 								<input type="radio" name="start_ampm" id="startAM" value="am" <?php $end_ampm_check['am']?> checked="checked" onClick="toggleAMPM('startAM');"  />am  <input type="radio" name="start_ampm" id="startPM" value="pm" <?php $end_ampm_check['pm']?> onClick="toggleAMPM('startPM');"  />pm		</span>
 							</div>
 						</fieldset>

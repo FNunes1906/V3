@@ -105,7 +105,7 @@ if ($this->tmpl['displayimagecategories'] == 1) {
 		
 				/*  Start changed code for showing 3 latest photos using pop-up in category */
 				$db = & JFactory::getDBO();
-				$catphoto = "SELECT * FROM `jos_phocagallery` WHERE catid=".$this->categories[$i]->id." AND published = 1 ORDER BY id DESC LIMIT 3";
+				$catphoto = "SELECT * FROM `jos_phocagallery` WHERE catid=".$this->categories[$i]->id." AND published = 1 AND approved = 1 ORDER BY id DESC LIMIT 3";
 				$db->setQuery($catphoto);
 				global $rows;
 				$rows = $db->query();
@@ -561,8 +561,8 @@ function showcatImages(){
 					}else{
 						echo '<a class="pirobox_gall" href="'.$l.'" title="'.$row[filename].'">';
 					}
-					
-					echo '<img class="img'.$k.'" src='.$s.'>';
+					echo JHTML::_( 'image.site', $s , '', '', '','','class=img'.$k );
+					//echo '<img class="img'.$k.'" src='.$s.'>';
 					echo '</a>';
 					$k++;
 											

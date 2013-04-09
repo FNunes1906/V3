@@ -13,7 +13,14 @@ ini_set("display_errors",0);
 */
 
 // no direct access
+
 defined('_JEXEC') or die('Restricted access');
+
+$conn			= mysql_connect("localhost",$_SESSION['c_db_user'],$_SESSION['c_db_password']) or die(mysql_error());
+$db				= mysql_select_db($_SESSION['c_db_name']) or die(mysql_error());
+$rec			= mysql_query("select time_zone from `jos_pageglobal`");
+$pageglobal 	= mysql_fetch_array($rec); 
+$timezone 	= $pageglobal['time_zone'];
 
 $timeZoneArray 	= explode(':',$timezone);
 $totalHours 	= date("H") + $timeZoneArray[0];

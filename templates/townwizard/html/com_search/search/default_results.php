@@ -22,7 +22,8 @@
 
 					<li>
 						<div class="thumb fr">
-								<a href="index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/stories/jevents/jevlocations/thumbnails/thumb_<?php echo $row['locimg']; ?>"></a>
+								<?php if($row['locimg']!='') {?>
+								<a href="index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/stories/jevents/jevlocations/thumbnails/thumb_<?php echo $row['locimg']; ?>"></a><?php }?>
 						</div>
 						<a class="venueName bold fl" href="index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a>
 						<div class="bc fr bold">
@@ -34,10 +35,10 @@
 										 	 		echo $row['street'].","; 
 											?><br/>
 										  <?php if($row['state']!='' || $row['city']!='')
-										  			echo $row['state'].", ".$row['city'];
+										  			echo $row['city'].",";
 										  ?><br/>
 										  <?php if($row['postcode']!='')
-										  	echo "PA ".$row['postcode'] ?>
+										  	echo $row['state'].", ".$row['postcode'] ?>
 										</h3>
 										<?php if($row['url']!=''){?>
 											<h2><a class="bold" href="<?php echo "http://".$row['url'] ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
