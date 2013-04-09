@@ -15,7 +15,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 /* Timezone Block Begin April 2013 */
 $conn			= mysql_connect("localhost",$_SESSION['c_db_user'],$_SESSION['c_db_password']) or die(mysql_error());
 $db				= mysql_select_db($_SESSION['c_db_name']) or die(mysql_error());
-$rec			= mysql_query("select * from `jos_pageglobal`");
+$rec			= mysql_query("select time_zone from `jos_pageglobal`");
 $pageglobal 	= mysql_fetch_array($rec); 
 $timezoneValue 	= $pageglobal['time_zone'];
 
