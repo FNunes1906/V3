@@ -431,11 +431,12 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
   				</script>
 
   				<?php 
+  				    $zip = isset($_GET['zip']) ? $_GET['zip'] : NULL;
 					$lat = isset($_GET['lat']) ? $_GET['lat'] : NULL;
 					$lon = isset($_GET['lon']) ? $_GET['lon'] : NULL;
 					$l   = isset($lat) && isset($lon) ? $lat.",".$lon : (isset($_GET['l']) ? $_GET['l'] : NULL);
 				    
-				    $qString = tw_global_query_string(NULL, $l, NULL, NULL);
+				    $qString = tw_global_query_string($zip, $l, NULL, NULL);
 				    $fbEvents = tw_global_events($qString);
 
 				    if(!empty($fbEvents)) {
