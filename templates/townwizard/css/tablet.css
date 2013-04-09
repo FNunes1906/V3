@@ -268,3 +268,10 @@ body.tablet .centerCol #Cuisine{
 body.tablet .rightCol #ShareThis{
     margin-left: 30px;
 }
+
+body.tablet .imgalign{
+    width: 677px;
+ height: 349px;
+ margin: auto;
+    line-height: 349px;
+}

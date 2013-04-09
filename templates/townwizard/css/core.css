@@ -774,9 +774,21 @@ a.saved span {
 }
 .gallery .event {
   position:relative;
+  background: none repeat scroll 0 0 #000000;
+  text-align: center;
 }
+
+.imgalign{
+    height: 287px;
+    width: 420px;
+    overflow: hidden;
+ line-height: 287px;
+}
+
 .gallery .event img {
-  display:block;
+  /* display:block; */
+  margin: auto;
+  vertical-align: middle;
 }
 .gallery .event .rsvpCont {
   position:absolute;
@@ -893,6 +905,7 @@ a.saved span {
   padding:15px 10px;
   height:110px;
   z-index:800;
+  text-align: left;
 }
 .rotator .gallery .infoCont h2 {
   font-size:18px;
