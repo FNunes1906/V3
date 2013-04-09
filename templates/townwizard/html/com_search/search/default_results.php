@@ -35,10 +35,10 @@
 										 	 		echo $row['street'].","; 
 											?><br/>
 										  <?php if($row['state']!='' || $row['city']!='')
-										  			echo $row['state'].", ".$row['city'];
+										  			echo $row['city'].",";
 										  ?><br/>
 										  <?php if($row['postcode']!='')
-										  	echo "PA ".$row['postcode'] ?>
+										  	echo $row['state'].", ".$row['postcode'] ?>
 										</h3>
 										<?php if($row['url']!=''){?>
 											<h2><a class="bold" href="<?php echo "http://".$row['url'] ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>

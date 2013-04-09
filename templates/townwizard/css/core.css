@@ -1250,7 +1250,7 @@ a.saved span {
 
 #Footer {
   background:#000;
-  height:212px;
+  min-height:212px;
   width:100%;
   margin-top:75px;
   color:#fff;

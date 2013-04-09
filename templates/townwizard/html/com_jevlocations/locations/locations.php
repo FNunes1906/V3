@@ -73,8 +73,8 @@
 						<div class="rating">
 										<h3><br/>
 										 <?php echo $row['street'].","; ?><br/>
-										  <?php echo $row['state'].", ".$row['city'];?><br/>
-										  <?php echo "PA ".$row['postcode'] ?>
+										  <?php echo $row['city'].",";?><br/>
+										  <?php echo $row['state'].", ".$row['postcode'] ?>
 										</h3>
 										<?php if($row['url']!=''){?>
 											<h2><a class="bold" href="<?php echo "http://".$row['url'] ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
@@ -193,8 +193,8 @@
 			<div class="rating">
 										<h3><br/>
 										 <?php echo $this->escape($street).","; ?><br/>
-										  <?php echo $this->escape($province).", ".$this->escape($city);?><br/>
-										  <?php echo "PA ". $this->escape($postcode); ?>
+										  <?php echo $this->escape($city).",";?><br/>
+										  <?php echo $this->escape($province).", ". $this->escape($postcode); ?>
 										</h3>
 										<?php if($this->escape($url)!=''){?>
 										<h2><a class="bold" href="<?php echo "http://".$this->escape($url) ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>

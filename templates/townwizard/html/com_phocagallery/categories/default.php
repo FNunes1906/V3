@@ -561,8 +561,8 @@ function showcatImages(){
 					}else{
 						echo '<a class="pirobox_gall" href="'.$l.'" title="'.$row[filename].'">';
 					}
-					
-					echo '<img class="img'.$k.'" src='.$s.'>';
+					echo JHTML::_( 'image.site', $s , '', '', '','','class=img'.$k );
+					//echo '<img class="img'.$k.'" src='.$s.'>';
 					echo '</a>';
 					$k++;
 											

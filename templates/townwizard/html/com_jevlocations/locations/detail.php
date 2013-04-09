@@ -57,7 +57,7 @@ function resetLatLngTxtFields(lat, lng){
 	<div id="map_canvas" style="width:200px; height:156px"></div>
 	</div>
 	<?php
-	if (strlen($this->location->phone)>0) echo "<div class='phone bold'>Phone:".$this->location->phone."</div>";
+	if (strlen($this->location->phone)>0) echo "<div class='phone bold'>Phone: ".$this->location->phone."</div>";
 		if (strlen($this->location->url)>0) {
 		$pattern = '[a-zA-Z0-9&?_.,=%\-\/]';
 		if (strpos($this->location->url,"http://")===false) $this->location->url = "http://".trim($this->location->url);
@@ -77,9 +77,9 @@ function resetLatLngTxtFields(lat, lng){
 	else {
 		if (strlen($this->location->street)>0) echo "<div>".$this->location->street."</div>";
 		if (strlen($this->location->city)>0) echo "<div>".$this->location->city."</div>";
-		if (strlen($this->location->state)>0) echo "<div>".$this->location->state."</div>";
-		if (strlen($this->location->postcode)>0) echo "<div>".$this->location->postcode."</div>";
-		if (strlen($this->location->country)>0) echo "<div>".$this->location->country."</div>";
+		if (strlen($this->location->state)>0) echo "<div>".$this->location->state.", ".$this->location->postcode."</div>";
+		
+		
 	}?>
 
 </div>
