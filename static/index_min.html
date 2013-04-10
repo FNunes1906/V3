@@ -178,6 +178,161 @@
 
       <!-- Placeholder for Header Banner Ad in Vertical Layout End -->
 
+
+      <!-- Event Rotator Start -->
+
+      <div id="EvtRot" class="carousel fl">
+        <div class="gallery centerCol fl">
+          <a class="prev nav"><img alt="prev" src="images/marquee/marqueeArrowLt.png" /></a>
+          <a class="next nav"><img alt="next" src="images/marquee/marqueeArrowRt.png" /></a>
+          <ul>
+            <li id="item1" class="1">
+              <div class="event">
+                <a href="#"><img alt="" src="images/mock/lists/feat.jpg" width="100%" /></a>
+                <!--div class="rsvpCont">
+                  <div class="rsvpBg"></div>
+                  <div class="rsvp">
+                    <span class="fl display">16 RSVPs:</span>
+                    <div class="faces fl">
+                      <a class="more fr" href="#">
+                        <img alt="" src="images/marquee/rsvpArrowRt.png" />
+                      </a>
+                      <img alt="" src="images/mock/faces/person1.jpg" />
+                      <img alt="" src="images/mock/faces/person2.jpg" />
+                      <img alt="" src="images/mock/faces/person3.jpg" />
+                      <img alt="" src="images/mock/faces/person4.jpg" />
+                      <img alt="" src="images/mock/faces/person5.jpg" />
+                      <img alt="" src="images/mock/faces/person6.jpg" />
+                      <img alt="" src="images/mock/faces/person7.jpg" />
+                      <img alt="" src="images/mock/faces/person8.jpg" />
+                      <img alt="" src="images/mock/faces/person9.jpg" />
+                      <img alt="" src="images/mock/faces/person10.jpg" />
+                    </div>
+                    <div class="cl"></div>
+                  </div>
+                </div-->
+              </div>
+            </li>
+            <li id="item2" class="2">
+              <div class="event">
+                <a href="#"><img alt="" src="images/mock/lists/feat2.jpg" width="100%" /></a>
+                <!--div class="rsvpCont">
+                  <div class="rsvpBg"></div>
+                  <div class="rsvp">
+                    <span class="fl display">10 RSVPs:</span>
+                    <div class="faces fl">
+                      <img alt="" src="images/mock/faces/person11.jpg" />
+                      <img alt="" src="images/mock/faces/person10.jpg" />
+                      <img alt="" src="images/mock/faces/person9.jpg" />
+                      <img alt="" src="images/mock/faces/person8.jpg" />
+                      <img alt="" src="images/mock/faces/person7.jpg" />
+                      <img alt="" src="images/mock/faces/person6.jpg" />
+                      <img alt="" src="images/mock/faces/person5.jpg" />
+                      <img alt="" src="images/mock/faces/person1.jpg" />
+                      <img alt="" src="images/mock/faces/person2.jpg" />
+                      <img alt="" src="images/mock/faces/person3.jpg" />
+                    </div>
+                    
+                    <div class="cl"></div>
+                  </div>
+                </div-->
+              </div>
+            </li>
+            <li id="item3" class="3">
+              <div class="event">
+                <a href="#"><img alt="" src="images/mock/lists/feat3.jpg" width="100%" /></a>
+                <!--div class="rsvpCont">
+                  <div class="rsvpBg"></div>
+                  <div class="rsvp">
+                    <span class="fl display">3 RSVPs:</span>
+                    <div class="faces fl">
+                      <img alt="" src="images/mock/faces/person6.jpg" />
+                      <img alt="" src="images/mock/faces/person11.jpg" />
+                      <img alt="" src="images/mock/faces/person9.jpg" />
+                    </div>
+                    
+                    <div class="cl"></div>
+                  </div>
+                </div-->
+              </div>
+            </li>
+          </ul>
+          <div class="cb"></div>
+        </div>
+        <div class="galleryNav rightCol fr">
+          <a class="full bold" href="#">Full Calendar</a>
+          <h1 class="display"><!--span class="bold">This Week's</span-->Top Events</h1>
+          <ul>
+            <li class="1 active">
+              <a class="caroufredsel" href="#item1">
+                <span class="bold">Sonic Youth: The Eternal Tour</span>
+                Alys Beach Amphitheater &bull; Today 8pm
+              </a>
+            </li>
+            <li class="2">
+              <a class="caroufredsel" href="#item2">
+                <span class="bold">Watercolor Classes with Carol Dickson</span>
+                Bayou Arts Center &bull; 3/4 1:30pm
+              </a>
+            </li>
+            <li class="3">
+              <a class="caroufredsel" href="#item3">
+                <span class="bold">Spring Melodies Weekend With Geoff McBride, Kaci Bolls, The Babies &amp; Hugh...</span>
+                First Note Music Hall &bull; 1:30 - 3pm
+              </a>
+            </li>
+          </ul>
+          <!--a class="saved bold" href="#"><span class="bold">3</span> saved events</a-->
+        </div>
+      </div>
+      <script type="text/javascript">
+        
+        $(document).ready(function() {
+
+          $("#EvtRot .gallery ul").carouFredSel({
+              responsive          : true,
+              auto                : true, 
+              items : {
+                  visible     : 1,
+                  width       : 420, 
+                  height      : 268
+              }, 
+              circular            : true, 
+              infinite            : true,
+              direction           : "left", 
+              scroll : {
+                  fx              : "crossfade", 
+                  items           : 1,
+                  duration        : 1000, 
+                  pauseOnHover    : true, 
+                  easing          : "linear", 
+                  onAfter : function( data ) {
+                    $('#EvtRot .galleryNav ul li').each(function () {
+                      if ($(this).hasClass(data.items.visible.attr('class'))) {
+                        $(this).addClass('active');
+                      }
+                      else {
+                        $(this).removeClass('active');
+                      }
+                    });
+                  }
+              }, 
+              prev : "#EvtRot .prev",
+              next : "#EvtRot .next", 
+              swipe : {
+                  onTouch         : true, 
+                  onMouse         : true
+              }
+          });
+
+        });
+        //$("#EvtRot .gallery ul").trigger("linkAnchors", [".galleryNav"]);
+
+      </script>
+
+      <!-- Event Rotator End -->
+
+
       <!-- Blog Section Start -->
 
       <div id="Blog" class="centerCol fl">
