@@ -481,7 +481,7 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 				    		var categories = <?php echo json_encode($directoryCategories) ?>;			    		
 				  			jQuery('.catSearch').autocomplete({
 				  				source: categories,
-				  				select : submitCategory
+				  				//select : submitCategory
 				  			});
 				    	});
 				    </script>
