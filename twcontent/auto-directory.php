@@ -165,11 +165,13 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 	<body screen_capture_injected="true">
 	<!--Google Adsense -->
 	<div id="main" role="main" ontouchstart="touchStart(event,'list');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
+	<!--
 	<div class="social">
 		<a class="fr" href="#"><img alt="Sign in with Twitter" src="images/twt-icon.png" /></a>
 		<a class="fr" href="#"><img alt="Sign in with Facebook" src="images/fb-icon.png" /></a>
 		<a class="fr">Sign in: </a>
 	</div>
+     -->
 	<a class="logo" href="#"><img alt="Town Wizard" src="images/twLogoColor.png" /></a>
 	<ul id="locationList" class="mainList"><li>
 
