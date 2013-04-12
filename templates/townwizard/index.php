@@ -184,7 +184,8 @@ $this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
   
  			  
  <!-- Top Bar Start -->
-  <div id="TopBar" style="background:url('<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/whitezig_zag.png') repeat-x scroll left bottom <?php echo $var->Header_color; ?>;height: 36px;">
+  <!--<div id="TopBar" style="background:url('<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/whitezig_zag.png') repeat-x scroll left bottom <?php echo $var->Header_color; ?>;height: 36px;">-->
+  <div id="TopBar" style="background:url('<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/whitezig_zag.png') repeat-x scroll left 30px <?php echo $var->Header_color; ?>;height: 36px;">
   	<div class="sWidth">
   	  <div class="fl powered"><?php echo JText::_("TW_POWERED_BY") ?><a href="http://www.townwizard.com/" target="_blank"><img alt="townwizard" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/twBanner.png" /></a></div>
 		  <?php if($this->countModules('top')): ?>
