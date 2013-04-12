@@ -34,7 +34,7 @@ h1, h2, h3, h4, p, span, div { font-weight:normal; font-family:'AllerLightRegula
   margin-left:5px;
 }
 #TopBar .links a {
-  line-height:36px;
+  line-height:32px;
   color:#fff;
 }
 #TopBar .links a:hover {
@@ -789,6 +789,7 @@ a.saved span {
   /* display:block; */
   margin: auto;
   vertical-align: middle;
+  width:100%;
 }
 .gallery .event .rsvpCont {
   position:absolute;
@@ -837,6 +838,7 @@ a.saved span {
 }
 .galleryNav {
   position:relative;
+  min-width:300px;
 }
 .galleryNav .full {
   background:url('../images/grayArrowSm.png') no-repeat right center;
@@ -1939,7 +1941,7 @@ Last Updated Date:29-01-2013
 
 /* Latest Photos Start */
 
-#phocagallery-module-ri{clear: both;overflow: hidden;padding: 20px 0;}
+#phocagallery-module-ri{clear: both;overflow: hidden;padding: 20px 0; height:90px;}
 
 #phocagallery-module-ri center div{
 	padding:0 6px 0 0 !important
@@ -2169,3 +2171,36 @@ h1.upload {
 .ev_td_right {
     border-bottom: 1px solid #000000;
 }
+
+/* Home page image slider Begin */
+.galleryNav ul li {
+    display: block;
+    height: 72px;
+}
+.galleryNav ul li a {
+    color: #000000;
+    display: block;
+    font-size: 12px;
+    padding: 8px 12px;
+}
+.galleryNav ul li a span {
+    color: #00467F;
+    display: block;
+    font-size: 13px;
+    line-height: 16px;
+    padding-bottom: 3px;
+    text-transform: uppercase;
+}
+.bold {
+    font-family: 'AllerBold',Arial,sans-serif;
+}
+#EvtRot .moduletable .gallery{
+ margin-right:35px;
+}
+/* Home page image slider End */
+
+/* Photo submission thankyou message begin*/ 
+.php_page h4{
+ color: red;
+}
+/* Photo submission thankyou message begin*/ 

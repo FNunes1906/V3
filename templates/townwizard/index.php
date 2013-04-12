@@ -30,8 +30,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" >
 <head>
 <jdoc:include type="head" />
-
-
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <meta name="keywords" content="<?php echo $var->keywords; ?>" />
 <meta name="description" content="<?php echo $var->metadesc; ?>" />
@@ -167,12 +165,10 @@ jQuery(document).ready(function(){
 
 <?php
 $app = JFactory::getApplication();
-$this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
+//$this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
+$this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
 ?>
 <?php include("ga.php"); ?>
-
-
-
 
 </head>
 
@@ -188,7 +184,7 @@ $this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
   
  			  
  <!-- Top Bar Start -->
-  <div id="TopBar" style="background:url('<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/whitezig_zag.png') repeat-x scroll left bottom <?php echo $var->Header_color; ?>;height: 50px;">
+  <div id="TopBar" style="background:url('<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/whitezig_zag.png') repeat-x scroll left bottom <?php echo $var->Header_color; ?>;height: 36px;">
   	<div class="sWidth">
   	  <div class="fl powered"><?php echo JText::_("TW_POWERED_BY") ?><a href="http://www.townwizard.com/" target="_blank"><img alt="townwizard" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/twBanner.png" /></a></div>
 		  <?php if($this->countModules('top')): ?>
@@ -336,7 +332,12 @@ $this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
 		 <!-- Placeholder for Header Banner Ad in Vertical Layout Start -->
 
      	<div id="LowerBannerAd" class="bannerAd"></div>
-
+		<?php if($this->countModules('FrontSlider')) : ?>
+            <div id="EvtRot" class="carousel fl">
+                  <jdoc:include type="modules" name="FrontSlider" style="xhtml" />
+                   <div class="cb"></div>
+             </div>
+		<?php endif; ?>
       <!-- Placeholder for Header Banner Ad in Vertical Layout End -->
 	  
    
@@ -347,33 +348,26 @@ $this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
 				 	<?php if(JRequest::getVar('task') == 'range.listevents'):?>
 				  
 				 	<div class="fl">
-							<?php if($this->countModules('searchevent')) : ?>
-					            <div id="Feat">
-									<div id="Find" class="sect">
-					                  <jdoc:include type="modules" name="searchevent" style="rounded" />
-					                   <div class="cb"></div>
-					             	</div>
-								</div>
-				          	<?php endif; ?>
-				       		
-							<?php if($this->countModules('slider')) : ?>
-					            <div>
-					                  <jdoc:include type="modules" name="slider" style="rounded" />
-					                   <div class="cb"></div>
-					             </div>
-				          	<?php endif; ?>
+						<?php if($this->countModules('slider')) : ?>
+				            <div>
+				                <jdoc:include type="modules" name="slider" style="rounded" />
+				                <div class="cb"></div>
+				             </div>
+			          	<?php endif; ?>					
+						<?php if($this->countModules('searchevent')) : ?>
+				            <div id="Feat">
+								<div id="Find" class="sect">
+				                	<jdoc:include type="modules" name="searchevent" style="rounded" />
+				                	<div class="cb"></div>
+				             	</div>
+							</div>
+			          	<?php endif; ?>
 				    </div>
 				       	<?php endif; ?>     
 				     <!-- Event Rotator End -->
 					
 					<?php
 					 if($this->countModules('searchres') && JRequest::getVar('task') != 'locations.detail') : ?>
-						<div id="Feat">
-							<div id="Find" class="sect">
-								<jdoc:include type="modules" name="searchres" style="rounded" />
-								<div class="cb"></div>
-							</div>
-						</div>
 						
 						<?php if($this->countModules('loc_slider')) : ?>
 							<div>
@@ -381,6 +375,14 @@ $this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
 								<div class="cb"></div>
 							</div>
 						<?php endif; ?>
+						
+						<div id="Feat">
+							<div id="Find" class="sect">
+								<jdoc:include type="modules" name="searchres" style="rounded" />
+								<div class="cb"></div>
+							</div>
+						</div>
+
 				    <?php endif; ?>
 					
             		<div id="Try3" class="sect">

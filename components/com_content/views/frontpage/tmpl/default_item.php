@@ -149,11 +149,11 @@ endif; ?>
 <?php endif; ?>
 
 <?php echo $this->item->event->afterDisplayContent; ?>
-<div class="sharingSmall">
+<!--<div class="sharingSmall">
               <span class='st_facebook_large'></span>
               <span class='st_twitter_large'></span>
               <span class='st_linkedin_large'></span>
               <span class='st_pinterest_large'></span>
               <span class='st_email_large'></span>
-            </div>
+            </div>-->
 <span class="article_separator">&nbsp;</span>
