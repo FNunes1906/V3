@@ -69,7 +69,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
         <div class="cb"></div>
 	</div>
 	<div class="galleryNav rightCol fr">
-        <!--<a class="full bold" href="#">Full Calendar</a>-->
+        <a class="full bold" href="#">Full Calendar</a>
           <h1 class="display"><!--span class="bold">This Week's</span-->Top Events</h1>
           <ul>
 		  <?php 
@@ -78,7 +78,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 		  ?>
             <li class="<?php echo $i ;?> active">
               <a class="caroufredsel" href="#item2">
-                <span class="bold"><?php echo $homeslider1[$i]['summary'];?></span>
+                <span class="bold">
+				<?php 
+				if(strlen($homeslider1[$i]['summary'])>="72"){
+					$strProcess = substr($homeslider1[$i]['summary'], 0 , 72);
+					$strInput = explode(' ',$strProcess);
+					$str = array_slice($strInput, 1, -1);
+					echo implode(' ',$str).'...'; 
+				}else{
+					echo $homeslider1[$i]['summary'];
+				}
+				?>
+				</span>	
                 <?php echo $homeslider1[$i]['title'];?> &bull; <?php echo $homeslider1[$i]['Date'];?> &bull; <?php echo $homeslider1[$i]['time'];?>
               </a>
             </li>
