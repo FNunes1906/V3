@@ -134,7 +134,7 @@ var resizeContent = function() {
 
     //If event rotator exists set to full site width
     if ($('#EvtRot').length) {
-      $('#EvtRot .gallery, #EvtRot .gallery ul, #EvtRot .gallery ul li').css('width',420).css('height',158);
+      $('#EvtRot .gallery, #EvtRot .gallery ul, #EvtRot .gallery ul li').css('width',420).css('height',268);
       $('#EvtRot .gallery .event .rsvp .faces').css('width','345px');
       $('#EvtRot .galleryNav').css('width','auto');
     }
