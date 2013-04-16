@@ -925,7 +925,7 @@ a.saved span {
 .gallery .nav {
   background:#00bae8;
   position:absolute;
-  top:30%;
+  top:18%;
   height:20%;
   width:10%;
   display:block;
@@ -1048,7 +1048,7 @@ a.saved span {
 }
 .galleryNav ul li:hover, 
 .galleryNav ul li.active {
-  background:#d5d5d5;
+  background:#c2c2c2;
 }
 .galleryNav ul li a {
   display:block;

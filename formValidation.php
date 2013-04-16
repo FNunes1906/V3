@@ -30,7 +30,7 @@ function isValidEmail($name){
 # Function to not allowed other Script tag 
 function isNoScript($text)
 {
-    $allowed = array(".", "-", "_", " ","@"); // you can add here more value, you want to allow.
+    $allowed = array('.','=','-','+', '_',' ','"',"'",'[','(',']',')','$',':','%','!','/','?','*','&','@','|'); // you can add here more value, you want to allow.
     if(ctype_alnum(str_replace($allowed, '', $text ))) {
         return TRUE;
     } else {
@@ -46,7 +46,7 @@ function isNoScript($text)
 ##
 function isNoScriptDescription($text)
 {
-    $allowed = array(".", "-", "_"," ",'"',"'",'[','(',']',')','$',':','%','!','/','?','*','&','@','|'); // you can add here more value, you want to allow.
+    $allowed = array('.','=','-','+', '_',' ','"',"'",'[','(',']',')','$',':','%','!','/','?','*','&','@','|'); // you can add here more value, you want to allow.
     if($text == "")
 	{
 		 return TRUE;
@@ -61,7 +61,7 @@ function isNoScriptDescription($text)
 ##Function only for Photo Upload validation
 function isNoScriptWithNull($text)
 {
-    $allowed = array(".", "-", "_", " ","@"); // you can add here more value, you want to allow.
+    $allowed = array('.','=','-','+', '_',' ','"',"'",'[','(',']',')','$',':','%','!','/','?','*','&','@','|'); // you can add here more value, you want to allow.
 	if($text == "")
 	{
 		 return TRUE;

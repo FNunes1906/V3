@@ -259,7 +259,7 @@ global $msg;
 		}
 		
 	if(!$validCode){
-		$msg="Invalid varification code.";
+		$msg="Invalid verification code.";
 		return false; // if you want start captcha then return false
 	}
 	
@@ -422,7 +422,7 @@ if($msg!='') {?>
 	<table width="65%" cellpadding="5" cellspacing="2" border="0"  class="adminform" id="jevadminform">
 	<tr>
 		<td align="left"><?php echo JText::_('JEV_EVNAME'); ?>:</td>
-		<td align="left"><input class="inputbox" type="text" name="title" size="41" maxlength="255" value="<?php $postValues['title']?>" /></td>
+		<td align="left"><input class="inputbox" type="text" name="title" size="41" maxlength="255" value="<?php echo $postValues['title']?>" /></td>
 		<td colspan="2"><input type="hidden" name="priority" value="0" /></td>
 	</tr>
 	<tr>
@@ -499,7 +499,7 @@ if($msg!='') {?>
 								?>
 
 								<input class="inputbox" type="text" name="start_12h" id="start_12h" size="8" maxlength="8"  value="<?php echo $start_12h_value?>" onChange="check12hTime(this);" />
-								<input type="radio" name="start_ampm" id="startAM" value="am" <?php $end_ampm_check['am']?> checked="checked" onClick="toggleAMPM('startAM');"  />am  <input type="radio" name="start_ampm" id="startPM" value="pm" <?php $end_ampm_check['pm']?> onClick="toggleAMPM('startPM');"  />pm		</span>
+								<input type="radio" name="start_ampm" id="startAM" value="am" <?php echo $end_ampm_check['am']?> checked="checked" onClick="toggleAMPM('startAM');"  />am  <input type="radio" name="start_ampm" id="startPM" value="pm" <?php echo $end_ampm_check['pm']?> onClick="toggleAMPM('startPM');"  />pm		</span>
 							</div>
 						</fieldset>
 					</div>
@@ -535,8 +535,8 @@ if($msg!='') {?>
 
 							?>
 							<input class="inputbox" type="text" name="end_12h" id="end_12h" size="8" maxlength="8"  value="<?php echo $end_12h_value;?>" onChange="check12hTime(this);" />
-							<input type="radio" name="end_ampm" id="endAM" value="am" <?php $end_ampm_check['am']?>  onclick="toggleAMPM('endAM');"  />am 
-							<input type="radio" name="end_ampm" id="endPM" value="pm" <?php $end_ampm_check['pm']?> onClick="toggleAMPM('endPM');" />pm	
+							<input type="radio" name="end_ampm" id="endAM" value="am" <?php echo $end_ampm_check['am']?>  onclick="toggleAMPM('endAM');"  />am 
+							<input type="radio" name="end_ampm" id="endPM" value="pm" <?php echo $end_ampm_check['pm']?> onClick="toggleAMPM('endPM');" />pm	
 							</span>
 							
 						</div><br/>
@@ -579,11 +579,11 @@ if($msg!='') {?>
 	</tr>
 	<tr class="jevplugin_anonusername">
 		<td valign="top"  width="130" align="left"><?php echo JText::_('JEV_YOURNAME'); ?></td>
-		<td colspan="3"><input size="41" type="text" name="custom_anonusername" id="custom_anonusername" value="<?php $postValues['custom_anonusername']?>" /></td>
+		<td colspan="3"><input size="41" type="text" name="custom_anonusername" id="custom_anonusername" value="<?php echo $postValues['custom_anonusername']?>" /></td>
 	</tr>
 	<tr class="jevplugin_anonemail">
 		<td valign="top"  width="130" align="left"><?php echo JText::_('JEV_YOUREMAIL'); ?></td>
-		<td colspan="3"><input size="41" type="text" name="custom_anonemail" id="custom_anonemail" value="<?php $postValues['custom_anonemail']?>" /></td>
+		<td colspan="3"><input size="41" type="text" name="custom_anonemail" id="custom_anonemail" value="<?php echo $postValues['custom_anonemail']?>" /></td>
 	</tr>
 	
 	<!--#DD#-->

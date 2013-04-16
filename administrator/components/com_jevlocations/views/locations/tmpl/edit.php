@@ -348,12 +348,13 @@ function submitbutton(pressbutton) {
 		</tr>
 		<tr>
 			<td width="100" align="right" class="key">
-				<label for="street">
+				<label for="street" title="Use URL without http://">
 					<?php echo JText::_( 'URL' ); ?>:
 				</label>
 			</td>
 			<td>
-				<input class="text_area" type="text" name="url" id="url" size="60" maxlength="250" value="<?php echo $this->location->url;?>" />
+				<input class="text_area" type="text" name="url" id="url" size="60" maxlength="250" style="vertical-align: top;"  value="<?php echo $this->location->url;?>" />
+				<img src="/images/M_images/con_info.png" height="18" title="Use URL without http://, Example: www.abc.com">
 			</td>
 		</tr>
 
