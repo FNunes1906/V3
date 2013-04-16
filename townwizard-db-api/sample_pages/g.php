@@ -10,6 +10,7 @@ include_once('../global-api.php');
 
 <?php 
 
+/*
 var_dump(all_categories_by_zip());
 echo ("<br/><br/>");
 
@@ -28,7 +29,10 @@ echo ("<br/><br/>");
 
 var_dump(events_by_location());
 echo ("<br/><br/>");
+*/
 
+echo zip_by_location();
+echo ("<br/><br/>");
 
 function all_categories_by_zip() {
     $qs = tw_global_query_string("10308", NULL, NULL, NULL);
@@ -64,6 +68,11 @@ function events_by_location() {
     $qs = tw_global_query_string(NULL, "37.422006,-122.084095", NULL, NULL);
     echo $qs."<br/><br/>";
     return tw_global_events($qs);    
+}
+
+function zip_by_location() {
+    $qs = tw_global_query_string(NULL, "37.422006,-122.084095", NULL, NULL);    
+    return tw_global_zip_code($qs);
 }
 
 ?>

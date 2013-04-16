@@ -5,6 +5,7 @@ include_once('user-api.php');
 define("TOWNWIZARD_DB_GLOBAL_EVENTS_URL", "http://www.townwizardconnectinternal.com/g/events");
 define("TOWNWIZARD_DB_GLOBAL_LOCATIONS_URL", "http://www.townwizardconnectinternal.com/g/locations");
 define("TOWNWIZARD_DB_GLOBAL_LOCATION_CATEGORIES_URL", "http://www.townwizardconnectinternal.com/g/lcategories");
+define("TOWNWIZARD_DB_GLOBAL_ZIP_CODE_URL", "http://www.townwizardconnectinternal.com/g/zip");
 
 /***
   Get events
@@ -28,6 +29,13 @@ function tw_global_location_categories($queryString) {
 }
 
 /***
+  Get zip code
+***/
+function tw_global_zip_code($queryString) {
+    return _get_global_objects(TOWNWIZARD_DB_GLOBAL_ZIP_CODE_URL, $queryString);
+}
+
+/***
   Compose a query string for global locations, location categories, or event retrieval.
   Use this query string to call methods above.
 ***/
@@ -39,7 +47,7 @@ function tw_global_query_string($zip, $location, $mainCategory, $categories) {
     else {
         $ip = $_SERVER['REMOTE_ADDR'];
         if(!empty($ip)) {
-            $qs = $qs."ip=".$ip;              
+            $qs = $qs."ip=".$ip;          
         }
     }
     
@@ -66,6 +74,5 @@ function _get_global_objects($url, $queryString) {
     }
     return NULL;
 }
-
 
 ?>
