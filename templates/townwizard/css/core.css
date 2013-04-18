@@ -92,7 +92,7 @@ h1, h2, h3, h4, p, span, div { font-weight:normal; font-family:'AllerLightRegula
 }
 
 #GuideInfo .submit{ 
- background: url("../images/header/searchBtn.png") no-repeat scroll 50% 50% transparent;
+ background: url("../images/header/searchBtn.png") no-repeat scroll 25% 65% transparent;
     border: 0 none;
     cursor: pointer;
     height: 24px;
@@ -133,6 +133,7 @@ input:-ms-placeholder,
 #Weather {
   position:relative;
   /*top:-14px;*/
+  margin-top: -5px;
  
 }
 
@@ -1144,7 +1145,7 @@ a.saved span {
 }
 .detailFeature .desc {
   padding:10px 0 0;
-  width:210px;
+  /* width:210px; */
   font-size:11px;
 }
 .detailFeature .evtTmb img {
@@ -1941,7 +1942,11 @@ Last Updated Date:29-01-2013
 
 /* Latest Photos Start */
 
-#phocagallery-module-ri{clear: both;overflow: hidden;padding: 20px 0; height:90px;}
+#phocagallery-module-ri{clear: both;overflow: hidden;padding: 20px 0;}
+
+.rightCol .phocagallery-box-file {
+	height: 90px !important;
+}
 
 #phocagallery-module-ri center div{
 	padding:0 6px 0 0 !important
@@ -2158,11 +2163,6 @@ h1.upload {
 	margin-top: 0px !important;
 }
 
-#VenueDetail img{
-	max-width: 80%;
-    padding-top: 5px;
-}
-
 .pgcenter .sectiontablefooter{
 	display: block !important;	
 	 margin: 10px !important;
@@ -2204,3 +2204,26 @@ h1.upload {
  color: red;
 }
 /* Photo submission thankyou message begin*/ 
+
+/* event info page */
+p.desc img {
+	float: right;
+	padding-left: 12px;
+	max-width:200px !important;
+	}
+	
+p.ven_desc img {
+	padding: 5px;
+	max-width:200px !important;
+	}
+	
+#VenuePhotoGallery a{
+	float: right !important;
+}
+/* event info page */
+
+/* Location MAP css */
+#map_canvas img{
+max-width: inherit;
+}
+/* Location MAP css */

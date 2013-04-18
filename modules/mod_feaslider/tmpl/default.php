@@ -22,7 +22,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			while($fearow = mysql_fetch_array($FeaturedSlider)){
 
 			##Image FEtched for slide show##
-				$imageurl= strstr($fearow['description'],'http');
+			    $imagesrc= strstr($fearow['description'],'src=');
+				$imageurl= strstr($imagesrc,'http');
 				$singleimagearray = explode('"',$imageurl);
 				if($singleimagearray[0] == ""){
 				$singleimagearray[0] = "/partner/".$_SESSION['partner_folder_name']."/images/stories/nofe_image.png"; }
@@ -47,10 +48,20 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 				<!--This code is for slider part-->
 		    	<li id="item<?php echo $imagecount;?>" class="<?php echo $imagecount;?>">
 					<div class="event">
-					<a href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=<?php echo $_REQUEST[Itemid];?>&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><div class="imgalign"><img src="<?php echo $singleimagearray[0];?>" /></div></a>
-					<!-- <a href="/index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=97&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img style="height: 268px;width: 420px;" src="<?php echo $singleimagearray[0];?>" /></a> -->
+					<a href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=<?php echo $_REQUEST[Itemid];?>&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img src="<?php echo $singleimagearray[0];?>" /></a>
 		    		<div class="infoCont">
-		    			<h2 class="bold"><?php echo $fearow['summary']?></h2>
+		    			<h2 class="bold">
+						<?php 
+						if(strlen($fearow['summary'])>="90"){
+							$strProcess1 = substr($fearow['summary'], 0 , 90);
+							$strInput1 = explode(' ',$strProcess1);
+							$str1 = array_slice($strInput1, 1, -1);
+							echo implode(' ',$str1).' ...'; 
+						}else{
+							echo $fearow['summary'];
+						}
+						?>
+						</h2>
 		    			<p><?php echo $fearow['title'];?> &bull; <?php echo $fearow['Date'];?> &bull; <?php echo $displayTime;?> </p>
 						<div class="cl"></div>
 		    		</div>

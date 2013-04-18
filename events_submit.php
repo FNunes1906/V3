@@ -540,7 +540,7 @@ if($msg!='') {?>
 							</span>
 							
 						</div><br/>
-						<span style="margin-left:10px">
+						<span>
 								<span><br/><input type="checkbox" id='noendtime' name='noendtime'  onclick="noendtimetog();" <?php if($postValues['noendtime']==1) {echo 'checked'; }?> value="1" />
 										<span><?php echo JText::_('JEV_NOENDTIME'); ?></span>
 								</span>
@@ -556,7 +556,7 @@ if($msg!='') {?>
 	<tr>
 		
 		<td colspan="3">
-			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea id="jevcontent" name="jevcontent" cols="70" rows="10" style="width:99%;height:230px;"></textarea>
+			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea name="jevcontent" cols="70" rows="10" style="width:99%;height:230px;"></textarea>
 			</div>       	
 		</td>
 	</tr>
@@ -611,7 +611,7 @@ if($msg!='') {?>
 
 <table align="left" style="" width="30%" cellpadding="0" cellspacing="0">
 <tbody><tr>
-		<td id="toolbar-save" valign="top"style="padding-right:3px;width: 70px;">
+		<td id="toolbar-save" valign="top"style="padding-right:3px;width: 70px;padding-left: 10px;">
 			<a style="cursor:pointer;height:21px;"><input src="images/save-btn.gif" type="submit" name="action" value="<?php echo JText::_('JEV_SEND'); ?>" class="button"/></a>
 		</td>
 		<td id="toolbar-save" valign="top"style="padding-right:3px">

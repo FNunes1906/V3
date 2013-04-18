@@ -69,3 +69,16 @@ h1{
 .takeOverlay,#yogi{
 	display: none;
 }
+
+/* event info page */
+p.desc img {
+	float: right;
+	padding-left: 12px;
+	max-width:200px !important;
+	}
+	
+p.ven_desc img {
+	padding: 5px;
+	max-width:200px !important;
+	}
+/* event info page */

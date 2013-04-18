@@ -275,3 +275,25 @@ body.tablet .imgalign{
  margin: auto;
     line-height: 349px;
 }
+
+body.tablet #EventDetail {
+    width: 465px !important;
+}
+
+body.tablet #VenueDetail {
+    width: 465px !important;
+}
+  
+body.tablet #VenuePhotoGallery a {
+    margin:10px 0 0;
+}
+
+body.tablet #VenuePhotoGallery li{
+	width: 25%;
+}
+
+body.tablet #ShareTool span {
+    font-size: 8px;
+}
+
+/* event info page */
