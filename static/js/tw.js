@@ -142,7 +142,7 @@ var resizeContent = function() {
     //Else if event page rotator exists adjust width
     else if ($('.rotator').length) {
       $('.rotator .gallery ul, .rotator .gallery ul li').css('width',420);
-      $('.rotator .gallery ul, .rotator .gallery ul li, .rotator .centerCol.gallery').css('height',388);
+      $('.rotator .gallery ul, .rotator .gallery ul li, .rotator .centerCol.gallery').css('height',288);
       $('.rotator .gallery ul').parent().css('width',420);
     }
 
