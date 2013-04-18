@@ -84,7 +84,7 @@ function resetLatLngTxtFields(lat, lng){
 
 </div>
 	<?php
-	echo $this->location->description;
+	echo "<p class='ven_desc'>".$this->location->description."</p>";
 	echo "<br/><br/><div class='likes fl'><span>Liked by:</span><div class='fb-like' data-send='false' data-layout='standard' data-width='45%' data-show-faces='true'></div></div>";
 	if ($this->location->image!=""){
 		// Get the media component configuration settings

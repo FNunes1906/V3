@@ -38,9 +38,20 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 				<!--This code is for slider part-->
 		    	<li id="item<?php echo $imagecount;?>" class="<?php echo $imagecount;?>">
 					<div class="event">
-					<a href="/index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $fearow['loc_id'];?>&se=1&title=<?php echo $fearow['alias'];?>&Itemid=<?php echo $_REQUEST[Itemid];?>"><div class="imgalign"><img src="<?php echo $singleimagearray;?>" /></div></a>
+					<a href="/index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $fearow['loc_id'];?>&se=1&title=<?php echo $fearow['alias'];?>&Itemid=<?php echo $_REQUEST[Itemid];?>"><img src="<?php echo $singleimagearray;?>" /></a>
 		    		<div class="infoCont">
-		    			<h2 class="bold"><?php echo $fearow['title']?></h2>
+		    			<h2 class="bold">
+						<?php
+						if(strlen($fearow['title'])>="90"){
+							$strProcess1 = substr($fearow['title'], 0 , 90);
+							$strInput1 = explode(' ',$strProcess1);
+							$str1 = array_slice($strInput1, 1, -1);
+							echo implode(' ',$str1).' ...'; 
+						}else{
+							echo $fearow['title'];
+						}						
+						?>
+						</h2>
 		    			<p><?php echo substr($fearow['description'], 0, 75);?></p>
 						<div class="cl"></div>
 		    		</div>

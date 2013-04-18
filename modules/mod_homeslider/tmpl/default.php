@@ -53,7 +53,34 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 				<!--This code is for slider part-->
 		    	<li id="item<?php echo $imagecount;?>" class="<?php echo $imagecount;?>">
 					<div class="event">
-					<a href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=<?php echo $_REQUEST[Itemid];?>&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><div class="imgalign"><img src="<?php echo $singleimagearray[0];?>" /></div></a>
+					<a href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=<?php echo $_REQUEST[Itemid];?>&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img width="50% !important;" src="<?php echo $singleimagearray[0];?>" /></a>
+					<div class="infoCont">
+	                  <h2 class="bold">
+					  	<?php 
+						if(strlen($fearow['summary'])>="90"){
+							$strProcess1 = substr($fearow['summary'], 0 , 90);
+							$strInput1 = explode(' ',$strProcess1);
+							$str1 = array_slice($strInput1, 1, -1);
+							echo implode(' ',$str1).' ...'; 
+						}else{
+							echo $fearow['summary'];
+						}
+						?>
+					  </h2>
+	                  <p>
+					  	<?php 
+						if(strlen($fearow['description'])>="140"){
+							$strProcess12 = substr($fearow['description'], 0 , 140);
+							$strInput1 = explode(' ',$strProcess12);
+							$str12 = array_slice($strInput1, 1, -1);
+							echo implode(' ',$str12).' ...'; 
+						}else{
+							echo $fearow['description'];
+						}
+						?>					  
+					  </p>
+	                  <div class="cl"></div>
+	                </div>
 					</div>
 		    	</li>
 			<?php
@@ -100,7 +127,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 	
 	
       <script type="text/javascript">
+        
         $(document).ready(function() {
+
           $("#EvtRot .gallery ul").carouFredSel({
               responsive          : true,
               auto                : true, 
@@ -136,8 +165,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
                   onMouse         : true
               }
           });
+
         });
         //$("#EvtRot .gallery ul").trigger("linkAnchors", [".galleryNav"]);
+
       </script>
 <!-- Featured Events Slider End-->
 <?php } ?>
