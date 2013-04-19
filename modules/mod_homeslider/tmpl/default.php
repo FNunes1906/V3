@@ -19,8 +19,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			$tempeventid;
 			$homeslider1;
 			$k=0;
+			
 			while($fearow = mysql_fetch_array($HomeSlider)){
-
+$finalDescription="";
 			##Image FEtched for slide show##
 			    $imagesrc= strstr($fearow['description'],'src=');
 				$imageurl= strstr($imagesrc,'http');
@@ -53,14 +54,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 				<!--This code is for slider part-->
 		    	<li id="item<?php echo $imagecount;?>" class="<?php echo $imagecount;?>">
 					<div class="event">
-					<a href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=<?php echo $_REQUEST[Itemid];?>&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img src="<?php echo $singleimagearray[0];?>" /></a>
+					<a href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=<?php echo $_REQUEST[Itemid];?>&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img width="50% !important;" src="<?php echo $singleimagearray[0];?>" /></a>
 					<div class="infoCont">
 	                  <h2 class="bold">
 					  	<?php 
 						if(strlen($fearow['summary'])>="90"){
 							$strProcess1 = substr($fearow['summary'], 0 , 90);
 							$strInput1 = explode(' ',$strProcess1);
-							$str1 = array_slice($strInput1, 1, -1);
+							$str1 = array_slice($strInput1, 0, -1);
 							echo implode(' ',$str1).' ...'; 
 						}else{
 							echo $fearow['summary'];
@@ -69,14 +70,33 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 					  </h2>
 	                  <p>
 					  	<?php 
-						if(strlen($fearow['description'])>="140"){
-							$strProcess12 = substr($fearow['description'], 0 , 140);
-							$strInput1 = explode(' ',$strProcess12);
-							$str12 = array_slice($strInput1, 1, -1);
-							echo implode(' ',$str12).' ...'; 
-						}else{
-							echo $fearow['description'];
-						}
+						//var_dump($fearow['description']);
+						   $strArray = explode('<img',$fearow['description']);
+						  // var_dump($strArray);
+						  // echo "<br><br><br><br>";
+						   if(isset($strArray) && $strArray != ''){
+						    for($i = 0; $i <= count($strArray); ++$i){
+						     
+						     $strFound = strpos($strArray[$i],'/>');
+						     
+						     if(isset($strFound) && $strFound != ''){
+						      $s = explode('/>',$strArray[$i]);
+						      $strConcat = $s[1];
+						     }else{
+						      $strConcat = $strArray[$i]; 
+						     }
+						     $finalDescription .= $strConcat;
+						    }
+						   //echo $finalDescription; 
+						   if(strlen($finalDescription)>="140"){
+								$strProcess12 = substr($finalDescription, 0 , 140);
+								$strInput1 = explode(' ',$strProcess12);
+								$str12 = array_slice($strInput1, 0, -1);
+								echo implode(' ',$str12).' ...';
+							}else{
+								echo $fearow['description'];
+							}
+						   }
 						?>					  
 					  </p>
 	                  <div class="cl"></div>
@@ -110,7 +130,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 				if(strlen($homeslider1[$i]['summary'])>="72"){
 					$strProcess = substr($homeslider1[$i]['summary'], 0 , 72);
 					$strInput = explode(' ',$strProcess);
-					$str = array_slice($strInput, 1, -1);
+					$str = array_slice($strInput, 0, -1);
 					echo implode(' ',$str).'...'; 
 				}else{
 					echo $homeslider1[$i]['summary'];
