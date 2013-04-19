@@ -327,7 +327,7 @@ li.active span.menu_img_hover,span.menu_img_hover:hover{
 .centerCol {
   max-width:420px;
   margin-right:35px;
-  min-height:380px;
+  min-height:268px;
 }
 .rightCol {
   max-width:300px;
@@ -791,6 +791,7 @@ a.saved span {
   margin: auto;
   vertical-align: middle;
   width:100%;
+  height:150px;
 }
 .gallery .event .rsvpCont {
   position:absolute;

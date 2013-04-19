@@ -334,7 +334,7 @@ $this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
 
      	<div id="LowerBannerAd" class="bannerAd"></div>
 		<?php if($this->countModules('FrontSlider')) : ?>
-            <div id="EvtRot" class="carousel fl">
+            <div id="EvtRot" class="rotator carousel fl">
                   <jdoc:include type="modules" name="FrontSlider" style="xhtml" />
                    <div class="cb"></div>
              </div>
