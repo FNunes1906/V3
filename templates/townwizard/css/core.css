@@ -869,6 +869,7 @@ a.saved span {
 .galleryNav ul {
   background:#e9e9e9;
   list-style:none;
+  /* min-height:214px; */
 }
 .galleryNav ul li {
   display:block;

@@ -6,7 +6,8 @@ global $var;
 include_once($_SERVER['DOCUMENT_ROOT'].'/inc/var.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 ?>
-<!-- Featured Events Slider -->	
+
+<!-- Featured Events Slider -->
 
     <div class="gallery fl">
             <a class="prev nav" style="background:<?php echo $var->Header_color; ?>"><img alt="prev" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/marquee/marqueeArrowLt.png" /></a>
@@ -21,8 +22,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			$k=0;
 			
 			while($fearow = mysql_fetch_array($HomeSlider)){
-$finalDescription="";
-			##Image FEtched for slide show##
+			$finalDescription="";
+			##Image Fetched for slide show##
 			    $imagesrc= strstr($fearow['description'],'src=');
 				$imageurl= strstr($imagesrc,'http');
 				$singleimagearray = explode('"',$imageurl);
@@ -31,14 +32,14 @@ $finalDescription="";
 			##end##
 			$displayTime = '';
 			
-			if($fearow[timestart]=='12:00 AM' && $fearow[timeend]=='11:59PM')
-            {    $displayTime.='All Day Event';
+			if($fearow[timestart]=='12:00 AM' && $fearow[timeend]=='11:59PM'){   
+				$displayTime.='All Day Event';
 			}
 			else{
-			$displayTime.= $fearow[timestart];
-			if ($fearow[timeend] != '11:59PM'){
-				$displayTime.="-".$fearow[timeend];
-			}
+				$displayTime.= $fearow[timestart];
+				if ($fearow[timeend] != '11:59PM'){
+					$displayTime.="-".$fearow[timeend];
+				}
 			}
 			
 			$homeslider1[$k]['summary'] = $fearow['summary'];
@@ -54,7 +55,7 @@ $finalDescription="";
 				<!--This code is for slider part-->
 		    	<li id="item<?php echo $imagecount;?>" class="<?php echo $imagecount;?>">
 					<div class="event">
-					<a href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=<?php echo $_REQUEST[Itemid];?>&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img width="50% !important;" src="<?php echo $singleimagearray[0];?>" /></a>
+					<a style="color:#ffffff;" href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img width="50% !important;" src="<?php echo $singleimagearray[0];?>" />
 					<div class="infoCont">
 	                  <h2 class="bold">
 					  	<?php 
@@ -70,36 +71,34 @@ $finalDescription="";
 					  </h2>
 	                  <p>
 					  	<?php 
-						//var_dump($fearow['description']);
 						   $strArray = explode('<img',$fearow['description']);
-						  // var_dump($strArray);
-						  // echo "<br><br><br><br>";
 						   if(isset($strArray) && $strArray != ''){
 						    for($i = 0; $i <= count($strArray); ++$i){
 						     
-						     $strFound = strpos($strArray[$i],'/>');
+						     $strFound = strpos($strArray[$i],'" />');
 						     
 						     if(isset($strFound) && $strFound != ''){
-						      $s = explode('/>',$strArray[$i]);
+						      $s = explode('" />',$strArray[$i]);
 						      $strConcat = $s[1];
 						     }else{
 						      $strConcat = $strArray[$i]; 
 						     }
 						     $finalDescription .= $strConcat;
+							 $finalDescription=str_replace("<br />","",$finalDescription);
 						    }
-						   //echo $finalDescription; 
 						   if(strlen($finalDescription)>="140"){
 								$strProcess12 = substr($finalDescription, 0 , 140);
 								$strInput1 = explode(' ',$strProcess12);
 								$str12 = array_slice($strInput1, 0, -1);
 								echo implode(' ',$str12).' ...';
 							}else{
-								echo $fearow['description'];
+								echo $finalDescription;
 							}
 						   }
 						?>					  
 					  </p>
 	                  <div class="cl"></div>
+					  </a>
 	                </div>
 					</div>
 		    	</li>
@@ -107,7 +106,6 @@ $finalDescription="";
 			++$imagecount;/*3 featured event counter */
 			$tempeventid[] = $fearow['ev_id'];
 			}}
-			//++$datacount;
 			++$f;
 			++$k;
 			}
@@ -116,15 +114,19 @@ $finalDescription="";
         <div class="cb"></div>
 	</div>
 	<div class="galleryNav rightCol fr">
-        <a class="full bold" href="#">Full Calendar</a>
+        <a class="full bold" href="/index.php?option=com_jevents&view=range&task=range.listevents&Itemid=97">Full Calendar</a>
           <h1 class="display"><!--span class="bold">This Week's</span-->Top Events</h1>
           <ul>
 		  <?php 
 		  $i = 0;
-		  for($i=0;$i<3;$i++){
+		  for($i=0;$i<$imagecount;$i++){
 		  ?>
-            <li class="<?php echo $i ;?> active">
-              <a class="caroufredsel" href="#item2">
+            <?php if($i==0){?>
+				<li class="<?php echo $i ;?> active">
+			<?php }else{?>
+				<li class="<?php echo $i ;?>">
+			<?php }?>
+              <a class="caroufredsel" href="#item<?php echo $i ;?>">
                 <span class="bold">
 				<?php 
 				if(strlen($homeslider1[$i]['summary'])>="72"){
