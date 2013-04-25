@@ -15,9 +15,9 @@
 		<folder>tmpl</folder>
 	</files>
 	<params>
-		<param name="modlatest_inccss" type="radio" default="1" label="Include Events Latest CSS" description="Tells the module if the module Events Latest CSS should be included or not.">
-			<option value="0">No</option>
-			<option value="1">Yes</option>
+			<param name="page" type="list" default="0" label="Select Page" description="PARAMPAGE">
+			<option value="152">Restaurants</option>
+			<option value="151">Places</option>
 		</param>
 	</params>
 </install>

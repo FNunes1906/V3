@@ -15,10 +15,11 @@ ini_set("display_errors",0);
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-
 // Include the syndicate functions only once
 require_once (dirname(__FILE__).DS.'helper.php');
 
-$LocationSlider = modLocationHelper::getLocationSlider();
+$catid	= $params->get( 'page', '' );
+
+$LocationSlider = modLocationHelper::getLocationSlider($catid);
 
 require(JModuleHelper::getLayoutPath('mod_location_slider'));

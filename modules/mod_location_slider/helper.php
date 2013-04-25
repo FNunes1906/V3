@@ -19,11 +19,18 @@ defined('_JEXEC') or die('Restricted access');
 class modLocationHelper
 {
 
-	function getLocationSlider()
-	{
-	$query_location="SELECT loc.description,loc.alias,loc.loc_id,loc.title,loc.image, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 AND loc.loc_id = cf.target_id AND cf.value = 1 ORDER BY `cate`.`title` ASC";
+	function getLocationSlider($cate_id){
+	$db		  =& JFactory::getDBO();
+	$sessions = null;
+	$LocationSlider   = array();
+	
+	$query_location="SELECT loc.description,loc.alias,loc.loc_id,loc.title,loc.image, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND cate.parent_id = ".$cate_id." AND loc.published = 1 AND loc.loc_id = cf.target_id AND cf.value = 1 ORDER BY `cate`.`title` ASC";
 	//echo $query_featuredeve;
-	$LocationSlider = mysql_query($query_location);
+	$db->setQuery($query_location);
+	if ($db->getErrorNum()) {
+		JError::raiseWarning( 500, $db->stderr() );
+	}
+	$LocationSlider = $db->loadObjectList();
 	return $LocationSlider;
 	}
 }

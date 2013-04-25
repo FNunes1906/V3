@@ -1,11 +1,11 @@
 <?php
-
-if (mysql_num_rows($LocationSlider) != 0){
+//echo $catid;
+//if (mysql_num_rows($LocationSlider) != 0){
 
 defined('_JEXEC') or die('Restricted access');
 global $var;
-include_once($_SERVER['DOCUMENT_ROOT'].'/inc/var.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
+//include_once($_SERVER['DOCUMENT_ROOT'].'/inc/var.php');
+//include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 ?>
 <!-- Featured Events Slider -->	
 
@@ -20,17 +20,17 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			$imagecount = 0;
 			$tempeventid;
 
-			while($fearow = mysql_fetch_array($LocationSlider)){
+			foreach($LocationSlider as $fearow) :
 
 			##Image FEtched for slide show##
-				if($fearow['image'] == ""){
+				if($fearow->image == ""){
 				$singleimagearray = "/partner/".$_SESSION['partner_folder_name']."/images/stories/nofe_loc.png"; }
 				else{
-				$imageurl = "http://".$_SERVER['HTTP_HOST']."/partner/".$_SESSION['partner_folder_name']."/images/stories/jevents/jevlocations/".$fearow['image'];
+				$imageurl = "http://".$_SERVER['HTTP_HOST']."/partner/".$_SESSION['partner_folder_name']."/images/stories/jevents/jevlocations/".$fearow->image;
 				$singleimagearray = $imageurl;
 				}
 			##end##
-			if(in_array($fearow['loc_id'], $tempeventid)){
+			if(in_array($fearow->loc_id, $tempeventid)){
 			}else{
 			if($imagecount<5){
 			
@@ -38,32 +38,32 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 				<!--This code is for slider part-->
 		    	<li id="item<?php echo $imagecount;?>" class="<?php echo $imagecount;?>">
 					<div class="event">
-					<a href="/index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $fearow['loc_id'];?>&se=1&title=<?php echo $fearow['alias'];?>&Itemid=<?php echo $_REQUEST[Itemid];?>"><img src="<?php echo $singleimagearray;?>" /></a>
+					<a href="/index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $fearow->loc_id;?>&se=1&title=<?php echo $fearow->alias;?>&Itemid=<?php echo $_REQUEST[Itemid];?>"><img style="height:150px;" src="<?php echo $singleimagearray;?>" /></a>
 		    		<div class="infoCont">
 		    			<h2 class="bold">
 						<?php
-						if(strlen($fearow['title'])>="90"){
-							$strProcess1 = substr($fearow['title'], 0 , 90);
+						if(strlen($fearow->title)>="90"){
+							$strProcess1 = substr($fearow->title, 0 , 90);
 							$strInput1 = explode(' ',$strProcess1);
 							$str1 = array_slice($strInput1, 1, -1);
 							echo implode(' ',$str1).' ...'; 
 						}else{
-							echo $fearow['title'];
+							echo $fearow->title;
 						}						
 						?>
 						</h2>
-		    			<p><?php echo substr($fearow['description'], 0, 75);?></p>
+		    			<p><?php echo substr($fearow->description, 0, 75);?></p>
 						<div class="cl"></div>
 		    		</div>
 					</div>
 		    	</li>
 			<?php
 			++$imagecount;/*5 featured event counter */
-			$tempeventid[] = $fearow['loc_id'];
-			}}
-
-			++$f;
+			$tempeventid[] = $fearow->loc_id;
 			}
+			}
+			++$f;
+			endforeach;
 			?>
 			</ul>
 		<div class="pag"></div>
@@ -107,4 +107,4 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
         </script>
 
 <!-- Featured Events Slider End-->
-<?php } ?>
+<?php// } ?>
