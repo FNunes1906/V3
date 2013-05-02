@@ -1351,10 +1351,12 @@ text-align:center;
 }
 
 .footer_tag{
-	margin: auto;
+	 clear: both;
+    margin: auto;
     overflow: hidden;
-    width: 450px;
-	clear: both;
+    padding-bottom: 20px;
+    padding-left: 60px;
+    width: 375px;
 }
 
 #Footer .legal a {
@@ -2163,6 +2165,7 @@ h1.upload {
 
 .caroufredsel_wrapper{
 	margin-top: 0px !important;
+	max-height: 268px;
 }
 
 .pgcenter .sectiontablefooter{

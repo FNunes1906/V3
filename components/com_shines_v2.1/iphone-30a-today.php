@@ -104,7 +104,7 @@ $uri = JURI::getInstance();
 $todaydate = date("Y-m-j",strtotime("+1 day"));
 $today = date("Y-m-d G:i:s");
 $root = $uri->toString( array('scheme', 'host', 'port') );
-$sql = "select jc.* from `jos_content` jc, `jos_categories` jcs where jcs.title = 'Today' and jcs.id = jc.catid and jc.state=1 and (jc.publish_down>'".$today."' or jc.publish_down='0000-00-00 00:00:00') and (jc.publish_up <= '".$todaydate."' or jc.publish_up='0000-00-00 00:00:00') order by jc.ordering";
+$sql = "select jc.*,jcf.ordering from `jos_content` jc, `jos_categories` jcs ,`jos_content_frontpage` jcf where jcs.title = 'Today' and jcs.id = jc.catid and jc.id = jcf.content_id and jc.state=1 and (jc.publish_down>'".$today."' or jc.publish_down='0000-00-00 00:00:00') and (jc.publish_up <= '".$todaydate."' or jc.publish_up='0000-00-00 00:00:00') order by jcf.ordering";
   $param = db_fetch($sql, true, true);
   //fprint($sql);
   //fprint($param);

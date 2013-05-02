@@ -296,4 +296,7 @@ body.tablet #ShareTool span {
     font-size: 8px;
 }
 
+body.tablet .caroufredsel_wrapper {
+    max-height: 290px;
+}
 /* event info page */

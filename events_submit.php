@@ -1,22 +1,3 @@
-<link rel="stylesheet" type="text/css" href="/templates/townwizard/css/core.css" />
-<link rel="stylesheet" type="text/css" href="/templates/townwizard/css/fonts.css" />
-<link href="/templates/rt_quantive_j15/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-<link rel="stylesheet" href="/administrator/templates/khepri/css/icon.css" type="text/css" />
-<link rel="stylesheet" href="/administrator/components/com_jevents/assets/css/eventsadmin.css" type="text/css" />
-<link rel="stylesheet" href="/media/system/css/modal.css" type="text/css" />
-<link rel="stylesheet" href="/components/com_jevents/assets/css/dashboard.css" type="text/css" />
-<link rel="stylesheet" href="/plugins/system/rokbox/themes/light/rokbox-style.css" type="text/css" />
-<link rel="stylesheet" href="/components/com_gantry/css/joomla.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/joomla.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/style8.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/light-body.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/demo-styles.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/template.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/template-firefox.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/typography.css" type="text/css" />
-<link rel="stylesheet" href="/templates/rt_quantive_j15/css/fusionmenu.css" type="text/css" />
-<link rel="stylesheet" href="/modules/mod_rokajaxsearch/css/rokajaxsearch.css" type="text/css" />
-<link rel="stylesheet" href="/modules/mod_rokajaxsearch/themes/blue/rokajaxsearch-theme.css" type="text/css" />
 <?php
 define( '_JEXEC', 1 );
 define('JPATH_BASE', dirname(__FILE__) );
@@ -64,7 +45,8 @@ $ics=$ics_res['ics_id'];
 global $msg;
 $msg="";
 if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
-	
+	//echo "<pre>";
+	//print_r($_POST);
 	$postRecheck = checkPostParameter($_POST,$validCode);
 	//$postRecheck = checkPostParameter($_POST);
 	
@@ -102,7 +84,7 @@ if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
 		$cat_id=$_POST['catid'];
 		
 		$ics_id=$_POST['ics_id'];
-		$jevcontent=$_POST['jevcontent'];
+		$jevcontent=addslashes($_POST['jevcontent']);
 		$location=$_POST['location'];
 		$custom_anonusername=$_POST['custom_anonusername'];
 		$custom_anonemail=$_POST['custom_anonemail'];
@@ -235,7 +217,7 @@ function checkPostParameter($postValue,$validCode){
 //function checkPostParameter($postValue){
 global $msg;
 	
-	if(!isNoScript($postValue['title'])){
+	if(!isvalidchar($postValue['title'])){
 		$msg="Valid Event Name Required!<br/>";
 		return false;
 	}
@@ -243,12 +225,12 @@ global $msg;
 		$msg="Please Select the Category!<br/>";
 		return false;
 	}
-	if(!isNoScriptDescription($postValue['jevcontent'])){
+	if(!isvalidchar($postValue['jevcontent'])){
 		$msg="Enter Valid Description !<br/>";
 		return false;
 	}
 	
-	if(!isNoScript($postValue['custom_anonusername'])){
+	if(!isvalidchar($postValue['custom_anonusername'])){
 		$msg="Valid User Name Required !<br/>";
 		return false;
 	}
@@ -267,6 +249,26 @@ global $msg;
 }
 
 ?>
+<link rel="stylesheet" type="text/css" href="/templates/townwizard/css/core.css" />
+<link rel="stylesheet" type="text/css" href="/templates/townwizard/css/fonts.css" />
+<link href="/templates/rt_quantive_j15/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<link rel="stylesheet" href="/administrator/templates/khepri/css/icon.css" type="text/css" />
+<link rel="stylesheet" href="/administrator/components/com_jevents/assets/css/eventsadmin.css" type="text/css" />
+<link rel="stylesheet" href="/media/system/css/modal.css" type="text/css" />
+<link rel="stylesheet" href="/components/com_jevents/assets/css/dashboard.css" type="text/css" />
+<link rel="stylesheet" href="/plugins/system/rokbox/themes/light/rokbox-style.css" type="text/css" />
+<link rel="stylesheet" href="/components/com_gantry/css/joomla.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/joomla.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/style8.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/light-body.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/demo-styles.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/template.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/template-firefox.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/typography.css" type="text/css" />
+<link rel="stylesheet" href="/templates/rt_quantive_j15/css/fusionmenu.css" type="text/css" />
+<link rel="stylesheet" href="/modules/mod_rokajaxsearch/css/rokajaxsearch.css" type="text/css" />
+<link rel="stylesheet" href="/modules/mod_rokajaxsearch/themes/blue/rokajaxsearch-theme.css" type="text/css" />
+
 <script type="text/javascript" src="/includes/js/joomla.javascript.js"></script>
 <script type="text/javascript" src="/media/system/js/mootools.js"></script>
 <script type="text/javascript" src="/administrator/components/com_jevents/assets/js/editical.js?v=1.5.4"></script>
@@ -556,7 +558,7 @@ if($msg!='') {?>
 	<tr>
 		
 		<td colspan="3">
-			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea name="jevcontent" cols="70" rows="10" style="width:99%;height:230px;"></textarea>
+			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea name="jevcontent" class="mceEditor" cols="70" rows="10" style="width:99%;height:230px;"></textarea>
 			</div>       	
 		</td>
 	</tr>

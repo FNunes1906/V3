@@ -41,7 +41,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 					$displayTime.="-".$fearow[timeend];
 				}
 			}
-			
+			$homeslider1[$k]['eve_id'] = $fearow['ev_id'];
 			$homeslider1[$k]['summary'] = $fearow['summary'];
 			$homeslider1[$k]['Date'] = $fearow['Date'];
 			$homeslider1[$k]['title'] = $fearow['title'];
@@ -55,7 +55,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 				<!--This code is for slider part-->
 		    	<li id="item<?php echo $imagecount;?>" class="<?php echo $imagecount;?>">
 					<div class="event">
-					<a style="color:#ffffff;" href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img width="50% !important;" src="<?php echo $singleimagearray[0];?>" />
+					<a href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=<?php echo $_REQUEST[Itemid];?>&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img width="50% !important;" src="<?php echo $singleimagearray[0];?>" /></a>
 					<div class="infoCont">
 	                  <h2 class="bold">
 					  	<?php 
@@ -98,7 +98,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 						?>					  
 					  </p>
 	                  <div class="cl"></div>
-					  </a>
 	                </div>
 					</div>
 		    	</li>
@@ -119,14 +118,17 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
           <ul>
 		  <?php 
 		  $i = 0;
-		  for($i=0;$i<$imagecount;$i++){
+		  $tempeventid2;
+		  $d=0;
+		  while($i<count($homeslider1)){
+		  if(!in_array($homeslider1[$i]['eve_id'],$tempeventid2)){
 		  ?>
             <?php if($i==0){?>
-				<li class="<?php echo $i ;?> active">
+				<li class="<?php echo $d ;?> active">
 			<?php }else{?>
-				<li class="<?php echo $i ;?>">
+				<li class="<?php echo $d ;?>">
 			<?php }?>
-              <a class="caroufredsel" href="#item<?php echo $i ;?>">
+              <a class="caroufredsel" href="#item<?php echo $d ;?>">
                 <span class="bold">
 				<?php 
 				if(strlen($homeslider1[$i]['summary'])>="72"){
@@ -142,11 +144,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
                 <?php echo $homeslider1[$i]['title'];?> &bull; <?php echo $homeslider1[$i]['Date'];?> &bull; <?php echo $homeslider1[$i]['time'];?>
               </a>
             </li>
-			<?php } ?>
+			<?php 
+			$tempeventid2[] = $homeslider1[$i]['eve_id'];
+			++$d;
+			} 
+			$i++;
+			}
+			?>
           </ul>
           <!--a class="saved bold" href="#"><span class="bold">3</span> saved events</a-->
         </div>
 	
+
 	
       <script type="text/javascript">
         

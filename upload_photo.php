@@ -39,19 +39,19 @@ _init();
 	
 	function datavalidation(){
 	global $msg;
-		if(!isNoScriptWithNull($_POST['name'])){
+		if(!isvalidchar($_POST['name'])){
 			$msg="Please Enter Valid Name!<br/>";
 			return false;
 		}
-		if(!isNoScriptWithNull($_POST['location'])){
+		if(!isvalidchar($_POST['location'])){
 			$msg="Please Enter Valid Location!<br/>";
 			return false;
 		}
-		if(!isNoScriptWithNull($_POST['caption'])){
+		if(!isvalidchar($_POST['caption'])){
 			$msg="Please Enter Valid Photo Caption!<br/>";
 			return false;
 		}		
-		if(!isNoScriptDescription($_POST['description'])){
+		if(!isvalidchar($_POST['description'])){
 			$msg="Please Enter Valid Description!<br/>";
 			return false;
 		}

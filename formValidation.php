@@ -5,7 +5,10 @@
 
 
 <?php
-//echo isNoScriptDescription($_POST['desc']);
+/* echo "<pre>";
+print_r($_POST);
+echo var_dump($_POST['desc']);
+echo isNoScriptDescription($_POST['desc']);*/
 
 /* This file is contain all FORM validation function */
 
@@ -51,10 +54,10 @@ function isNoScriptDescription($text)
 	{
 		 return TRUE;
 	}
-	elseif(ctype_alnum(str_replace($allowed, '', $text ))) {
-        return TRUE;
+	elseif(ctype_alnum(str_replace($allowed,'', $text ))) {
+    	return TRUE;
     } else {
-        return FALSE;
+		return FALSE;
     }
 }
 
@@ -66,7 +69,7 @@ function isNoScriptWithNull($text)
 	{
 		 return TRUE;
 	}
-    if(ctype_alnum(str_replace($allowed, '', $text ))) {
+    elseif(ctype_alnum(str_replace($allowed, '', $text ))) {
         return TRUE;
     } else {
         return FALSE;
@@ -98,6 +101,21 @@ function isValidFile($fileArray)
 		return TRUE;
 	}else{
 		return FALSE;
+	}
+}
+
+
+function isvalidchar($text)
+{
+	$s1= explode("<html",$text);
+	$s2= explode("<script",$text);
+	$s3= explode("<?php",$text);
+	
+	if((isset($s1) && count($s1) > 1) OR (isset($s2) && count($s2) > 1) OR (isset($s3) && count($s3) > 1) )
+	{
+		return FALSE;
+	}else{
+		return TRUE;
 	}
 }
 
