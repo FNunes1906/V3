@@ -422,6 +422,15 @@ input:-ms-placeholder,
 .takeOverlay a.maybe {
   background:url('../images/header/maybeBtn.png') no-repeat left top;
 }
+.takeOverlay .error {
+  color:#f00;
+  font-weight:bold;
+  width:75%;
+  margin-left:25%;
+  font-size:14px;
+  text-align:left;
+  margin-top:20px;
+}
 #AttendancePanel .attendeeList {
   
   text-align:left;

@@ -247,6 +247,9 @@
                   <input class="fr" type="text" value="03801" />
 
                   <!-- Insert Captcha and send/cancel buttons here -->
+                  <div class="cb"></div>
+
+                  <a href="#" class="cb" data-ref-panel="FormErrorPanel">Submit Form click here</a>
 
                 </form>
               </div>
@@ -391,6 +394,27 @@
   </div>
 
   <!-- Footer End -->
+
+  <!-- New code for error modal starts here -->
+
+  <div id="Darkness"></div>
+
+  <!-- Form Error Overlay Start -->
+
+  <div id="FormErrorPanel" class="takeOverlay">
+    <a class="close">x</a>
+    <span>
+      Please correct the following form errors:
+      <ul class="error cb">
+        <li>Date is not valid</li>
+        <li>Event name is missing</li>
+      </ul>
+    </span>
+  </div>
+
+  <!-- Form Error Overlay End -->
+
+  <!-- New code for error modal endss here -->
 
 </body>
 </html>

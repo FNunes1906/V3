@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb" dir="ltr">
+<head>
+  <base href="http://www.navigatingnewark.com/">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="generator" content="Joomla! 1.5 - Open Source Content Management" />
+  <title>Navigatingnewark</title>
+  <link href="/templates/rhuk_milkyway/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link rel="stylesheet" href="/components/com_rsform/front.css" type="text/css" />
+  <link rel="stylesheet" href="/plugins/system/rokbox/themes/light/rokbox-style.css" type="text/css" />
+  <script type="text/javascript" src="/components/com_rsform/controller/functions.js"></script>
+  <script type="text/javascript" src="/media/system/js/mootools.js"></script>
+  <script type="text/javascript" src="/plugins/system/rokbox/rokbox.js"></script>
+  <script type="text/javascript" src="/plugins/system/rokbox/themes/light/rokbox-config.js"></script>
+  <script type="text/javascript" src="/plugins/content/avreloaded/silverlight.js"></script>
+  <script type="text/javascript" src="/plugins/content/avreloaded/wmvplayer.js"></script>
+  <script type="text/javascript" src="/plugins/content/avreloaded/swfobject.js"></script>
+  <script type="text/javascript" src="/plugins/content/avreloaded/avreloaded.js"></script>
+  <script type="text/javascript">
+var rokboxPath = '/plugins/system/rokbox/';
+  </script>
+
+  <link rel="stylesheet" href="/templates/rhuk_milkyway/css/template.css" type="text/css" />
+
+</head>
+<body class="contentpane">
+  
+  <form method="post" id="userForm" enctype="multipart/form-data" action="http://navigatingnewark.com/index.php?option=com_rsform&formId=1&tmpl=component"><div class="componentheading">Contact Us</div>
+
+<table border="0">
+  <tr>
+    <td></td>
+    <td>We love feedback! Please send us any questions, comments or suggestions, and we'll respond to your email as soon as possible. Thank you for visiting...<br>
+
+<div class="formClr"></div><span id="component6" class="formNoError"></span></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Your Name:</td>
+    <td><input type="text" value="" size="20"  name="form[name]" id="name" /><div class="formClr"></div><span id="component1" class="formNoError">Invalid Input</span></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Your Email:</td>
+    <td><input type="text" value="" size="20"  name="form[youremail]" id="youremail" /><div class="formClr"></div><span id="component2" class="formNoError">Invalid Input</span></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Please enter these verification letters:</td>
+    <td><img src="/index.php?option=com_rsform&amp;task=captcha&amp;componentId=3&amp;tmpl=component" id="captcha3" alt="Please enter these verification letters:"/><br/><input type="text" name="form[spam]" value="" id="captchaTxt3" style="text-align:center;width:75px;" /><input style="display: none !important; position: absolute !important; left: -4000px !important; top: -4000px !important;" name="User" type="text" value="" /><div class="formClr"></div><span id="component3" class="formNoError">Invalid Input</span></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td style="vertical-align:middle">Comments:</td>
+    <td><textarea cols="30" rows="5" name="form[comments]" id="comments" ></textarea><div class="formClr"></div><span id="component4" class="formNoError">Invalid Input</span></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><input type="submit" value="Send Comments" name="form[submit]" id="submit"  /><br /><br /><div><a class="submitLnk" onClick="showErrorPanel();" style="cursor:pointer;">Submit form (needs to be a link in order to trigger error modal on click. Otherwise, you can keep the submit button and call the error modal by calling showErrorPanel() on page load after the iframe refreshes with errors)</a></div><div class="formClr"></div><span id="component5" class="formNoError"></span></td>
+    <td></td>
+  </tr>
+</table>
+<input type="hidden" name="form[formId]" value="1"/></form>
+
+  <!-- New code for error modal starts here -->
+
+  <script type="text/javascript">
+
+    var showErrorPanel = function() {
+      document.getElementById('Darkness').style.display = "block";
+      document.getElementById('FormErrorPanel').style.display = "block";
+    }
+
+    var hideErrorPanel = function() {
+      document.getElementById('Darkness').style.display = "none";
+      document.getElementById('FormErrorPanel').style.display = "none";
+    }
+
+  </script>
+
+  <style type="text/css">
+    .cb { clear:both; }
+    #Darkness {
+      background: rgba(0,0,0,.5);
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 4000;
+      top: 0;
+      left: 0;
+      display:none;
+    }
+    .takeOverlay {
+      background: #e6e6e6;
+      -webkit-box-shadow: 0 0 15px rgba(0,0,0,.31);
+      -moz-box-shadow: 0 0 15px rgba(0,0,0,.31);
+      box-shadow: 0 0 15px rgba(0,0,0,.31);
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+      border: solid 2px #000;
+      width: 500px;
+      height: auto;
+      position: fixed;
+      top: 5%;
+      left: 50%;
+      margin-left: -250px;
+      z-index: 4001;
+      padding-bottom: 20px;
+      display:none;
+    }
+    .takeOverlay span {
+      padding: 10px;
+      font-size: 18px;
+      line-height: 28px;
+      display: block;
+      text-align: center;
+    }
+    .takeOverlay .error {
+      color: #f00;
+      font-weight: bold;
+      width: 75%;
+      margin-left: 25%;
+      font-size: 14px;
+      text-align: left;
+      margin-top: 20px;
+    }
+    .takeOverlay a.close {
+      font-size:12px;
+      cursor:pointer;
+    }
+  </style>
+
+  <div id="Darkness"></div>
+
+  <!-- Form Error Overlay Start -->
+
+  <div id="FormErrorPanel" class="takeOverlay">
+    <span>
+      Please correct the following form errors:
+      <ul class="error cb">
+        <li>Date is not valid</li>
+        <li>Event name is missing</li>
+      </ul>
+      <a class="close" onCLick="hideErrorPanel();">[ close ]</a>
+    </span>
+  </div>
+
+  <!-- Form Error Overlay End -->
+
+  <!-- New code for error modal ends here -->
+
+</body>
+</html>
