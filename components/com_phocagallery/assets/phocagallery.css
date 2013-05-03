@@ -664,7 +664,7 @@ div.current dd {
 .highslide-close{ background:url("js/highslide/graphics/close.png") no-repeat scroll 100% 0 transparent;}
 .highslide-close a{color:#000 !important;font-size:0px; padding:9px}
 .highslide-container div{}
-.highslide-header ul li{padding-bottom: 9px;line-height: 7px;}
+.highslide-header ul li{padding-bottom: 10px;line-height: 12px;}
 .highslide-html {
  background-color: #000 !important; 
 }

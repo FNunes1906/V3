@@ -558,8 +558,13 @@ if($msg!='') {?>
 	<tr>
 		
 		<td colspan="3">
+			<?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') == True)) {?>
+			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea name="jevcontent" cols="70" rows="10" style="width:99%;height:230px;"></textarea>
+			</div>  
+			<?php }else{?>
 			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea name="jevcontent" class="mceEditor" cols="70" rows="10" style="width:99%;height:230px;"></textarea>
-			</div>       	
+			</div>
+			<?php }?> 	
 		</td>
 	</tr>
 	<tr id="jeveditlocation">

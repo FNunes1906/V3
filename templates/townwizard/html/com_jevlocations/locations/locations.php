@@ -76,8 +76,11 @@
 										  <?php echo $row['city'].",";?><br/>
 										  <?php echo $row['state'].", ".$row['postcode'] ?>
 										</h3>
-										<?php if($row['url']!=''){?>
-											<h2><a class="bold" href="<?php echo "http://".$row['url'] ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
+										<?php if($row['url']!=''){
+											if(strpos($row['url'],"http://")===false)
+											$row['url'] = "http://".trim($row['url']);
+											?>
+											<h2><a class="bold" href="<?php echo $row['url'] ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
 										<?php }?>
 										<?php if($row['phone']!=''){?>
 											<h2 class="bold"><?php echo $row['phone'] ?></h2>
@@ -196,8 +199,11 @@
 										  <?php echo $this->escape($city).",";?><br/>
 										  <?php echo $this->escape($province).", ". $this->escape($postcode); ?>
 										</h3>
-										<?php if($this->escape($url)!=''){?>
-										<h2><a class="bold" href="<?php echo "http://".$this->escape($url) ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
+										<?php if($this->escape($url)!=''){
+											if(strpos($url,"http://")===false)
+											$url = "http://".trim($url);
+											?>
+										<h2><a class="bold" href="<?php echo $this->escape($url) ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
 										<?php }?>
 										<?php if($this->escape($phone)!=''){?>
 										<h2 class="bold"><?php echo $this->escape($phone);?></h2>

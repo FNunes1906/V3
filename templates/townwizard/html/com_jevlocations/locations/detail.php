@@ -60,11 +60,13 @@ function resetLatLngTxtFields(lat, lng){
 	if (strlen($this->location->phone)>0) echo "<div class='phone bold'>Phone: ".$this->location->phone."</div>";
 		if (strlen($this->location->url)>0) {
 		$pattern = '[a-zA-Z0-9&?_.,=%\-\/]';
-		if (strpos($this->location->url,"http://")===false) $this->location->url = "http://".trim($this->location->url);
-		$this->location->url = preg_replace('#(http://)('.$pattern.'*)#i', '<a href="\\1\\2" target="_blank">\\1\\2</a>', $this->location->url);
-		echo $this->location->url;
-	}
-	?>
+		if (strpos($this->location->url,"http://")===false) 
+		$this->location->url = "http://".trim($this->location->url);
+		//$this->location->url = preg_replace('#(http://)('.$pattern.'*)#i', '<a href="\\1\\2" target="_blank">\\1\\2</a>', $this->location->url);
+		//echo $this->location->url;
+		} ?>
+		<h2><a style="font-size: 15px;" class="bold" href='<?php echo $this->location->url; ?>' target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
+	
 	
 	<div class="address">
 	<?php

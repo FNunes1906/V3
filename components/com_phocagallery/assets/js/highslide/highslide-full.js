@@ -143,7 +143,8 @@ skin : {
 				'<span>{hs.lang.moveText}</span></a>'+
 			'</li>'+
 			'<li class="highslide-close">'+
-				'<a href="#" title="{hs.lang.closeTitle}" onclick="return hs.close(this)">'+
+				/*'<a href="#" title="{hs.lang.closeTitle}" onclick="return hs.close(this)">'+*/
+				'<a href="#" title="{hs.lang.closeTitle}" onclick="window.location.reload(); hs.close(this);">'+
 				'<span>{hs.lang.closeText}</span></a>'+
 			'</li>'+
 		'</ul></div>'+
