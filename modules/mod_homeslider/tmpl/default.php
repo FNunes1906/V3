@@ -122,6 +122,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 		  $d=0;
 		  while($i<count($homeslider1)){
 		  if(!in_array($homeslider1[$i]['eve_id'],$tempeventid2)){
+		  if($d<3){
 		  ?>
             <?php if($i==0){?>
 				<li class="<?php echo $d ;?> active">
@@ -147,7 +148,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			<?php 
 			$tempeventid2[] = $homeslider1[$i]['eve_id'];
 			++$d;
-			} 
+			} }
 			$i++;
 			}
 			?>
