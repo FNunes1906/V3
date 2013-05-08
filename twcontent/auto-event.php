@@ -483,7 +483,9 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 							echo '</div></div>';
 							echo '</h3>';
 							echo '</div>';
-						    echo '<p>' . $e->description . '</p>';
+							if(isset($e->description)) {
+						    	echo '<p>' . $e->description . '</p>';
+						    }
 						    if (isset($e->latitude) && isset($e->longitude)) {
 								echo '<div><a class="button small" href="javascript:linkClicked(\'APP30A:SHOWMAP:' . $e->latitude . ':' . $e->longitude . '\')">Map</a></div>';
 							}
