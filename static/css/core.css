@@ -1096,6 +1096,12 @@ a.saved span {
   font-size:18px;
   margin-bottom:7px;
 }
+#EvtRot.rotator .gallery .infoCont h2 {
+  font-size:16px;
+}
+#EvtRot.rotator .gallery .infoCont {
+  padding:12px 10px;
+}
 .rotator .gallery .infoCont p {
   font-size:12px;
 }
@@ -1106,6 +1112,9 @@ a.saved span {
   margin-left:-45px;
   text-align:center;
   z-index:900;
+}
+#EvtRot.rotator .gallery .pag {
+  bottom:15px;
 }
 .rotator .gallery .pag a {
   background:#666;

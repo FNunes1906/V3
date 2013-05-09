@@ -186,7 +186,7 @@
           <a class="prev nav"><img alt="prev" src="images/marquee/marqueeArrowLt.png" /></a>
           <a class="next nav"><img alt="next" src="images/marquee/marqueeArrowRt.png" /></a>
           <ul>
-            <li id="item2" class="1">
+            <li id="item1" class="1">
               <div class="event">
                 <a href="event-info.html"><img alt="" src="images/mock/lists/feat.jpg" width="100%" /></a>
                 <div class="infoCont">
@@ -196,7 +196,7 @@
                 </div>
               </div>
             </li>
-            <li id="item3" class="2">
+            <li id="item2" class="2">
               <div class="event">
                 <a href="event-info.html"><img alt="" src="images/mock/lists/feat2.jpg" width="100%" /></a>
                 <div class="infoCont">
@@ -206,17 +206,20 @@
                 </div>
               </div>
             </li>
-            <li id="item1" class="3">
+            <li id="item3" class="3">
               <div class="event">
                 <a href="event-info.html"><img alt="" src="images/mock/lists/feat3.jpg" width="100%" /></a>
                 <div class="infoCont">
-                  <h2 class="bold">Spring Melodies Weekend With Geoff McBride, Kaci Bolls, The Babies &amp; Hugh...</h2>
+                  <h2 class="bold">Spring Melodies Weekend With Geoff McBride...</h2>
                   <p>Morbi eu risus at orci tincidunt lobortis eu egestas odio. Morbi sem ligula, semper ut scelerisque eu, pulvinar id eros.</p>
                   <div class="cl"></div>
                 </div>
               </div>
             </li>
           </ul>
+          <div class="pag">
+
+          </div>
           <div class="cb"></div>
         </div>
         <div class="galleryNav rightCol fr">
@@ -279,6 +282,9 @@
               }, 
               prev : "#EvtRot .prev",
               next : "#EvtRot .next", 
+              pagination : {
+                  container       : "#EvtRot .pag"
+              }, 
               swipe : {
                   onTouch         : true, 
                   onMouse         : true
