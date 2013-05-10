@@ -346,7 +346,7 @@ $this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
       <!-- Main body start -->
        <div class="centerCol fl">
 					<!-- Event Rotator Start -->
-				 	<?php if(JRequest::getVar('task') == 'week.listevents'):?>
+				 	<?php if(JRequest::getVar('task') == 'range.listevents'):?>
 				  
 				 	<div class="fl">
 						<?php if($this->countModules('slider')) : ?>
@@ -422,7 +422,7 @@ $this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
 	 <?php endif; ?>		
 	 <!--Used for Sharethis module end --> 
 	 
- 	<?php if(JRequest::getVar('Itemid') == 97 && JRequest::getVar('task') == 'week.listevents'):?>
+ 	<?php if(JRequest::getVar('Itemid') == 97 && JRequest::getVar('task') == 'range.listevents'):?>
 				<?php if($this->countModules('slider')) : ?>
 					<div id="neg" class="adSect rightCol fr">
 				<?php else: ?>
@@ -435,7 +435,7 @@ $this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
 	<?php endif; ?>		
 				
 				<!-- event_submit and photo upload start-->
-				  <?php if(JRequest::getVar('task') == 'week.listevents') : ?>
+				  <?php if(JRequest::getVar('task') == 'range.listevents') : ?>
 				   <?php if($this->countModules('right')) : ?>
 				             <div class="rightCol">
 				               <jdoc:include type="modules" name="right" style="rounded" />
