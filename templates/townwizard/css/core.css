@@ -2175,6 +2175,7 @@ h1.upload {
 
 .ev_td_right {
     border-bottom: 1px solid #000000;
+	font-size:12px;
 }
 
 /* Home page image slider Begin */
@@ -2232,3 +2233,9 @@ p.ven_desc img {
 max-width: inherit;
 }
 /* Location MAP css */
+
+/* Weekly event listing Category Select box */
+#jevents_body #category_fv{
+	width:92px;
+}
+/* Weekly event listing Category Select box */

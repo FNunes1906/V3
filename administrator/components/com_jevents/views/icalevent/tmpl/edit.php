@@ -139,6 +139,9 @@ function submitbutton(pressbutton) {
 	else if (form.catid && form.catid.value==0 && form.catid.options && form.catid.options.length){
 		alert ( '<?php echo JText::_('JEV SELECT CATEGORY',true) ; ?>' );
 	}
+	else if (form.location.value == "") {
+		alert ( "<?php echo html_entity_decode( JText::_('JEV_E_WARNLOC') ); ?>" );
+	}
 	else if (form.ics_id.value == "0"){
 		alert( "<?php echo html_entity_decode( 'MISSING ICAL SELECTION' ); ?>" );
 	}

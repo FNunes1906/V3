@@ -38,7 +38,7 @@ global $var;
 				<!--This code is for slider part-->
 		    	<li id="item<?php echo $imagecount;?>" class="<?php echo $imagecount;?>">
 					<div class="event">
-					<a href="/index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $fearow->loc_id;?>&se=1&title=<?php echo $fearow->alias;?>&Itemid=<?php echo $_REQUEST[Itemid];?>"><img style="height:150px;" src="<?php echo $singleimagearray;?>" /></a>
+					<a href="/index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $fearow->loc_id;?>&se=1&title=<?php echo $fearow->alias;?>&Itemid=<?php echo $_REQUEST[Itemid];?>"><img src="<?php echo $singleimagearray;?>" /></a>
 		    		<div class="infoCont">
 		    			<h2 class="bold">
 						<?php

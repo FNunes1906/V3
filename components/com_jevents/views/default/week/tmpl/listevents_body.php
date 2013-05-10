@@ -27,9 +27,9 @@ echo "<ul class='ev_ul'>\n";
 
 for( $d = 0; $d < 7; $d++ ){
 
-	$day_link = '<a class="ev_link_weekday" href="' . $data['days'][$d]['link'] . '" title="' . JText::_('JEV_CLICK_TOSWITCH_DAY') . '">'
+	$day_link = '<div class="date fl">'
 
-	. JEventsHTML::getDateFormat( $data['days'][$d]['week_year'], $data['days'][$d]['week_month'], $data['days'][$d]['week_day'], 5 ).'</a>'."\n";
+	. JEventsHTML::getDateFormat( $data['days'][$d]['week_year'], $data['days'][$d]['week_month'], $data['days'][$d]['week_day'], 5 ).'</div>'."\n";
 
 	if( $data['days'][$d]['today'])	$bg = 'class="ev_td_today"';
 	else $bg = 'class="ev_td_left"';
@@ -40,10 +40,10 @@ for( $d = 0; $d < 7; $d++ ){
 	$num_events		= count($data['days'][$d]['rows']);
 	if ($num_events>0) {
 		
-
+echo "<div class='ev_td_right'>";
 		for( $r = 0; $r < $num_events; $r++ ){
 			$row = $data['days'][$d]['rows'][$r];
-
+			
 			/*$listyle = 'style="border-color:'.$row->bgcolor().';"';*/
 			echo "<li class='ev_td_li' $listyle><div class='date fl'>$day_link </div><div class='details'>\n";
 			if (!$this->loadedFromTemplate('icalevent.list_row', $row, 5)){
@@ -54,6 +54,7 @@ for( $d = 0; $d < 7; $d++ ){
 			echo "</div></li>\n";
 		}
 		//echo "</ul>\n";
+		echo "</div>";
 	}
 	//echo '</td></tr>' . "\n";
 } // end for days

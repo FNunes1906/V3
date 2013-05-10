@@ -3,7 +3,6 @@
 		<div class="flexslider">
 		    <ul class="slides">
 			<?php
-			
 			$f=0;
 			$imagecount = 0;
 			$tempeventid;
@@ -31,7 +30,8 @@
 				$imageurl = strstr($fetchimg,'http');
 				$singleimagearray = explode('"',$imageurl);
 				if($singleimagearray[0] == ""){
-					$singleimagearray[0] = "/components/com_shines_v2.1/images/nofe_image.png"; }
+					/* $singleimagearray[0] = "/components/com_shines_v2.1/images/nofe_image.png"; } */
+					$singleimagearray[0] = "/partner/".$_SESSION['partner_folder_name']."/images/stories/nofe_image.png"; }
 			##end##
 
 			if ((int) ($featureevdetail['location'])){

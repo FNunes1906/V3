@@ -63,7 +63,7 @@ _init();
 		
 
 		$filename = $_FILES['image']['name'];
-		$ext = substr($filename,(strpos($filename,'.') + 1));
+		$ext = substr($filename,(strripos($filename,'.') + 1));
 		
 		if(empty($filename) || $filename == ""){
 			$msg="Choose image for upload!";

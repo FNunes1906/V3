@@ -297,6 +297,10 @@ body.tablet #ShareTool span {
 }
 
 body.tablet .caroufredsel_wrapper {
-    max-height: 290px;
+    max-height: 340px;
+}
+
+body.tablet .gallery .event img {
+  height:200px;
 }
 /* event info page */
