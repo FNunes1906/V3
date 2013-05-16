@@ -27,7 +27,12 @@ if( $num_events > 0 ){
 
 	for( $r = 0; $r < $num_events; $r++ ){
 		$row = $data['rows'][$r];
-
+		
+		/*Code by Yogi for catgory list event begin */
+		$_stDate = $row->yup()."-".$row->mup()."-".$row->dup();
+		$_edDate = $row->ydn()."-".$row->mdn()."-".$row->ddn();
+		/*Code by Yogi for catgory list event End */
+		
 		$event_day_month_year 	= $row->dup() . $row->mup() . $row->yup();
 
 		if(( $event_day_month_year <> $chdate ) && $chdate <> '' ){
@@ -35,7 +40,15 @@ if( $num_events > 0 ){
 		}
 
 		if( $event_day_month_year <> $chdate ){
-			$date =JEventsHTML::getDateFormat( $row->yup(), $row->mup(), $row->dup(), 5 );
+		
+			/* Code by Yogi for to check if event start and end date is diffrent then show today date Begin */
+			if($_stDate == $_edDate){
+				$date =JEventsHTML::getDateFormat( $row->yup(), $row->mup(), $row->dup(), 5 );
+			}else{
+				$date =JEventsHTML::getDateFormat( date("Y"), date("m"), date("d"), 5 );
+			}
+			/* Code by Yogi for to check if evetn start and end date is diffrent then show today date End */
+			
 			//echo '<tr><td class="ev_td_left">'.$date.'</td>' . "\n";
 			//echo '<td align="left" valign="top" class="ev_td_right"><ul class="ev_ul">' . "\n";
 			echo '<ul class="ev_ul">' . "\n";
