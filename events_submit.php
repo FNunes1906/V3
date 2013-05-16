@@ -15,7 +15,7 @@ require_once("configuration.php");
 
 
 //#DD# 
-session_start();  // Start the session where the code will be stored.
+//session_start();  // Start the session where the code will be stored.
 include(JPATH_BASE .DS.'securimage/securimage.php');
 $img = new Securimage();
 $validCode = $img->check($_POST['code']);
@@ -216,7 +216,6 @@ if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
 function checkPostParameter($postValue,$validCode){
 //function checkPostParameter($postValue){
 global $msg;
-	
 	if(!isvalidchar($postValue['title'])){
 		$msg="Valid Event Name Required!<br/>";
 		return false;
@@ -401,16 +400,103 @@ function form_validation() {
 	}
 }
 </script>
+
 <?php
 // Print Message after event form submission starts.
 if($msg!='') {?>
-<table cellpadding="0" cellspacing="0" width="44%" style="border: 2px solid rgb(255, 0, 0); height:40px;margin-bottom">
-	<tr>
-		<td style="padding:8px; font-size: 12px;">
-			<font color="#FF0000"><b><?php echo $msg; ?></b></font>
-		</td>
-	</tr>
-</table>
+<style type="text/css">
+/* popup_box DIV-Styles*/
+#popup_box { 
+	display: block; /* Hide the DIV */
+	position:fixed;  
+	position:absolute; /* hack for internet explorer 6 */  
+	height:auto;  
+	width:381px;  
+	background:#E6E6E6;  
+	left: 10px;
+	 top: 35%;
+	z-index:100; /* Layering ( on-top of others), if you have lots of layers: I just maximized, you can change it yourself */
+	margin-left: 0px;  
+	
+	/* additional features, can be omitted */
+	border:2px solid #00BAE8;  	
+	border-radius: 10px 10px 10px 10px;
+	padding:15px;  
+	font-size:15px;  
+	-moz-box-shadow: 0 0 5px #00BAE8;
+	-webkit-box-shadow: 0 0 5px #00BAE8;
+	box-shadow: 0 0 5px #00BAE8;
+	
+}
+
+
+a{  
+cursor: pointer;  
+text-decoration:none;  
+} 
+
+/* This is for the positioning of the Close Link */
+#popupBoxClose {
+	background: none repeat scroll 0 0 #E6E6E6;
+    border: 2px solid #00BAE8;
+    border-radius: 50px 50px 50px 50px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.31);
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    height: 18px;
+    line-height: 15px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -12px;
+	color:#6fa5e2;  
+	font-weight:500; 
+   
+}
+</style>
+<script src="http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	
+	$(document).ready( function() {
+	
+		// When site loaded, load the Popupbox First
+		
+		$('#popupBoxClose').click( function() {			
+			unloadPopupBox();
+		});
+		
+		$('#container').click( function() {
+			unloadPopupBox();
+		});
+
+		function unloadPopupBox() {	// TO Unload the Popupbox
+			$('#popup_box').fadeOut("slow");
+			$("#container").css({ // this is just for style		
+				"opacity": "1"  
+			}); 
+		}	
+		
+		function loadPopupBox() {	// To Load the Popupbox
+			$('#popup_box').fadeIn("slow");
+			$('#popup_box').css({
+				"top":$(window).height()/3
+			});
+			$("#container").css({ // this is just for style
+				"opacity": "0.3"  
+			}); 		
+		}
+		/**********************************************************/
+		
+	});
+</script>
+
+<div id="popup_box">
+			<a id="popupBoxClose" class="close">x</a>	
+			<b><?php echo $msg ;?></b>
+</div>
+	
 <?php } ?>
 
 <!--Jevent Form Starts-->
@@ -562,7 +648,7 @@ if($msg!='') {?>
 			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea name="jevcontent" cols="70" rows="10" style="width:99%;height:230px;"></textarea>
 			</div>  
 			<?php }else{?>
-			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea name="jevcontent" class="mceEditor" cols="70" rows="10" style="width:99%;height:230px;"></textarea>
+			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea name="jevcontent" cols="70" rows="10" style="width:99%;height:230px;"></textarea>
 			</div>
 			<?php }?> 	
 		</td>
@@ -571,7 +657,7 @@ if($msg!='') {?>
 		<td width="130" align="left" style="vertical-align:top;"><?php echo JText::_('JEV_LOC'); ?></td>
 		<td colspan="3">
 			<input type="hidden" name="location" id="locn" value=""/>
-			<input type="text" name="evlocation_notused" disabled="disabled" id="evlocation" value=" -- " style="float:left;margin-top: 2px;width: 128px;"/>
+			<input type="text" name="evlocation_notused" disabled="disabled" id="evlocation" value="--" style="float:left;margin-top: 2px;width: 128px;"/>
 			<div class="button2-left">
 				<div class="blank">
 				<a href="javascript:selectLocation('' ,'/index.php?option=com_jevlocations&amp;task=locations.select&amp;tmpl=component','750','500')" title="Select Location"  ><?php echo JText::_('JEV_SELECT'); ?></a>
@@ -633,18 +719,3 @@ if($msg!='') {?>
 
 </div>
 <!--Jevent Form Ends-->
-
-<!-- Tooltip Overlay Start -->
-	<div id="Darkness"></div>
-
-	<div id="HelpTT" class="takeOverlay">
-		<a class="close">x</a>
-		<span>
-	  		<?php echo JText::_("TW_TOOLTIP") ?><br /><br /><?php echo JText::_("TW_RSVP") ?>
-	  		<div class="socialLinks cb">
-	   			<a class="fbLogin fl" href="javascript:void(0)" onclick="fb_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
-	   			<a class="twtLogin fl" href="javascript:void(0)" onclick="twitter_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
-	  		</div>
-		</span>
-	</div>
-<!-- Tooltip Overlay End -->
