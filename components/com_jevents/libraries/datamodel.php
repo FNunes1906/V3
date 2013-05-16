@@ -498,7 +498,9 @@ class JEventsDataModel {
 		$data = array();
 		$indate = mktime( 0, 0, 0, $month, $day, $year) ;
 		$startday 	= $cfg->get('com_starday', 0);
-		$numday		= (( date( 'w', $indate) - $startday + 7) %7 );
+		/* Line 501 is commented by Yogi to start weekly listing from today and assign 0 to $numday varialbe */
+		//$numday		= (( date( 'w', $indate) - $startday + 7) %7 );
+		$numday = 0;
 
 		$week_start = mktime( 0, 0, 0, $month, ( $day - $numday ), $year );
 		$week_end = mktime( 0, 0, 0, $month, ( $day - $numday )+6, $year ); // + 6 for inclusinve week

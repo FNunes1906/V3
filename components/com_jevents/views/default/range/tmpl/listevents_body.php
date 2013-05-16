@@ -20,7 +20,17 @@ echo "<h3 class='fl heading display'>".JText::_('JEV_VIEWBYWEEK')."</h3>";
 
     	for( $r = 0; $r < $num_events; $r++ ){
     		$row = $data['rows'][$r];
-
+			
+			/*Code by Yogi for catgory list event begin */
+			$_stDate = $row->yup()."-".$row->mup()."-".$row->dup();
+			$_edDate = $row->ydn()."-".$row->mdn()."-".$row->ddn();
+			
+			if($_stDate != $_edDate){
+				continue;
+			}
+			
+			/*Code by Yogi for catgory list event End */
+		
     		$event_day_month_year 	= $row->dup() . $row->mup() . $row->yup();
     		// Ensure we reflect multiday setting
     		if (!$row->eventOnDate(mktime(0,0,0,$row->mup(),$row->dup(),$row->yup()))) continue;
