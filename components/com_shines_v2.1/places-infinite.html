@@ -1,0 +1,341 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>
+masterdefaultv3 | Event</title>
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="index,follow" name="robots" />
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+<link rel="shortcut icon" href="images/l/apple-touch-icon.png">
+<link href="pics/startup.png" rel="apple-touch-startup-image" />
+<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
+<meta content="destin, vacactions in destin florida, destin, florida, real estate, sandestin resort, beaches, destin fl, maps of florida, hotels, hotels in florida, destin fishing, destin hotels, best florida beaches, florida beach house rentals, destin vacation rentals for destin, destin real estate, best beaches in florida, condo rentals in destin, vacaction rentals, fort walton beach, destin fishing, fl hotels, destin restaurants, florida beach hotels, hotels in destin, beaches in florida, destin, destin fl" name="keywords" />
+<meta content="Destin Florida's FREE iPhone application and website guide to local events, live music, restaurants and attractions" name="description" />
+<link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
+<link href="../../mobiscroll/css/mobiscroll-1.5.1.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="/components/com_shines_v2.1/javascript/mobileswipe.js"></script>
+<script type="text/javascript">
+var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){var a=document.getElementsByTagName("a");for(var i=0;i<a.length;i++){if(a[i].className.match("noeffect")){}else{a[i].onclick=function(){window.location=this.getAttribute("href");return false}}}}function hideURLbar(){window.scrollTo(0,0.9)}iWebkit.init=function(){fullscreen();hideURLbar()};iWebkit.init()}}
+</script>
+<script type="text/javascript">
+    function linkClicked(link) { document.location = link; }
+</script>
+<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<script src="../../mobiscroll/js/mobiscroll-1.5.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+            function submitForm() {
+                    document.events.submit(); //#DD#
+}
+    $(document).ready(function () {
+            // Date with external button
+            $('#date1').scroller({ showOnFocus: false });
+            $('#show').click(function() { $('#date1').scroller('show'); return false; });
+            // Time
+            $('#date2').scroller({ preset: 'time' });
+            // Datetime
+             $('#date3').scroller({ preset: 'date' });
+            $('#custom').scroller({ showOnFocus: false });
+            $('#custom').click(function() { $(this).scroller('show'); });
+            $('#disable').click(function() {
+                $('#date1').scroller('disable');
+                return false;
+            });
+            $('#enable').click(function() {
+                $('#date1').scroller('enable');
+                return false;
+            });
+            $('#get').click(function() {
+                alert($('#date1').scroller('getDate'));
+                return false;
+            });
+            $('#set').click(function() {
+                $('#date1').scroller('setDate', new Date(), true);
+                return false;
+            });
+            $('#theme, #mode').change(function() {
+                var t = $('#theme').val();
+                var m = $('#mode').val();
+                $('#date1').scroller('destroy').scroller({ showOnFocus: false, theme: t, mode: m });
+                $('#date2').scroller('destroy').scroller({ preset: 'time', theme: t, mode: m });
+               $('#date3').scroller('destroy').scroller({ preset: 'date', theme: t, mode: m });
+                $('#custom').scroller('destroy').scroller({ showOnFocus: false, theme: t, mode: m });
+            });
+        });
+</script>
+    <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31932515-1']);
+  _gaq.push(['_setDomainName', 'auto']);
+  _gaq.push(['_trackPageview']);
+
+  
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- Infinite Scolling Code added by Doug Schaffer -->
+
+<script type="text/javascript">
+$(window).scroll(function() {
+   if($(window).scrollTop() + $(window).height() == $(document).height()) {
+       alert("User is at the bottom of the page. Now make an ajax call to add more results instead of linking to a second page.");
+   }
+});
+</script>
+
+</head>
+<body>
+  <div class="iphoneads" style="vertical-align:bottom;">
+    <a href="/adsclick.php?option=com_banners&task=click&bid=29" target="_blank"><img src="/partner/masterdefaultv3/images/banners/reach_locals_320x50.png" alt="TownWiz iPhone Ad" title="TownWiz iPhone Ad" width="320px" height="50px" /></a>  </div>
+  <div id="featuredEvents">
+  <div class="flexslider-container">
+    <div class="flexslider">
+        <ul class="slides">
+      
+      </ul>
+    </div>
+  </div>
+</div> <!-- featured events -->
+<div class="section">
+
+  <form name='events' id='events' action='events.php' method='post'>
+    <input type="text" value="" class="mobiscroll ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-d scroller" id="date1" name="eventdate" style="width:0px;height:0px;border:0px;background:#333333;position: absolute;top: -100px;">
+    <button data-theme="a" id="show" class="ui-btn-hidden button" aria-disabled="false" style="width:100%;">Check Events By Day</button>
+  </form>
+  
+</div>
+<div id="main" role="main">
+
+<h1>Monday, 27 May</h1>
+
+<ul id="eventList" class="mainList" ontouchstart="touchStart(event,'eventList');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
+
+      
+    
+  <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+    <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+    <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+    <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+    <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+    <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+    <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+    <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+    <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+    <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+    <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+    <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+    <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+    <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+    <li>
+    <h1>Party at night</h1>
+        <h2>Brewerie</h2>
+    <h3>
+      8:00 AM-10:00PM &bull;
+      Music     <ul class="btnList"><li><a class="button small" href="tel:8144542200">call</a</li>
+        
+            <li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:42.12091064:-80.08227539')">check in</a></li>
+              <li><a class="button small" href="events_details.php?eid=3111&d=27&m=05&Y=2013&lat=&lon=">more info</a></li></ul>
+    </h3> 
+        <!--5711&nbsp;Miles</td> Away -->
+    </li>
+
+      </ul>
+</div>
+
+<!-- <div id="footer">&copy; 2013 masterdefaultv3, Inc. <!-- | <a href="mailto:velda.duke@me.com?subject=App Feedback">Contact Us</a> </div>  -->
+
+<div style='display:none;'></div>
+
+<!-- scripts for sliders -->
+  <script type="text/javascript" src="/components/com_shines_v2.1/javascript/sliders.js"></script>
+  <script type="text/javascript">
+    $(window).load(function() {
+      $('.flexslider').flexslider({
+        animation: "slide",
+        directionNav: false,
+        controlsContainer: ".flexslider-container"
+      });
+    });
+  </script>
+  <script src="js/helper.js"></script><!--
+<div id="footer">&copy; 2013 masterdefaultv3, Inc. | <a href="mailto:velda.duke@me.com?subject=Feedback">Contact Us</a> &nbsp;&nbsp;&nbsp; <a href="http://www.facebook.com/Scenic30A"><img src="images/icon_facebook_16x16.gif" alt="facebook_icon" width="16" height="16" /></a> &nbsp;&nbsp;&nbsp; </div>
+<div style='display:none;'></div>
+-->
+</body>
+</html>

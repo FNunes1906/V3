@@ -112,6 +112,14 @@ if($CatId>0){
 
 <?php include("../../ga.php"); ?>
 
+
+<!-- New styles add by Doug Schaffer to be moved to CSS file -->
+
+<style type="text/css">
+  #placesList img { display: block;margin:20px auto;width:50%; }
+</style>
+
+
 </head>
 
 
