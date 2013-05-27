@@ -119,7 +119,8 @@ $sql = "select jc.*,jcf.ordering from `jos_content` jc, `jos_categories` jcs ,`j
 
       $v['introtext'] = ''.$v['introtext'].'</li>';
 
-    $data .= str_replace("images/", "images/", $v['introtext']);
+    $t1='<div class="contentheading">'.$v['title'].'</div>' ;
+    $data .=$t1.str_replace("images/", "images/", $v['introtext']);
 		$c++;
   } }
 header('Content-type: text/html;charset=utf-8', true);

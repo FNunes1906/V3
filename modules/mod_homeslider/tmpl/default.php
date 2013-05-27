@@ -110,6 +110,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			}
 			?>
 			</ul>
+		<div class="pag"></div>
         <div class="cb"></div>
 	</div>
 	<div class="galleryNav rightCol fr">
@@ -191,7 +192,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
                   }
               }, 
               prev : "#EvtRot .prev",
-              next : "#EvtRot .next", 
+              next : "#EvtRot .next",
+			  pagination : {
+                  container       : "#EvtRot .pag"
+              }, 
               swipe : {
                   onTouch         : true, 
                   onMouse         : true

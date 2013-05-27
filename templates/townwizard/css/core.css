@@ -921,12 +921,17 @@ a.saved span {
 }
 .rotator .gallery .pag {
   position:absolute;
-  bottom:17px; 
+  bottom:9px; 
   left:50%;
   margin-left:-45px;
   text-align:center;
   z-index:900;
 }
+
+ .contentpaneopen img.caption{
+  position: inherit;
+ }
+
 .rotator .gallery .pag a {
   background:#666;
   display:block;
