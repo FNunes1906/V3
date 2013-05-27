@@ -27,6 +27,18 @@ echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Videos':'Videos';?>
 <meta content="destin, vacactions in destin florida, destin, florida, real estate, sandestin resort, beaches, destin fl, maps of florida, hotels, hotels in florida, destin fishing, destin hotels, best florida beaches, florida beach house rentals, destin vacation rentals for destin, destin real estate, best beaches in florida, condo rentals in destin, vacaction rentals, fort walton beach, destin fishing, fl hotels, destin restaurants, florida beach hotels, hotels in destin, beaches in florida, destin, destin fl" name="keywords" />
 <meta content="Destin Florida's FREE iPhone application and website guide to local events, live music, restaurants and attractions" name="description" />
 <?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
+
+
+
+<!-- New styles add by Doug Schaffer to be moved to CSS file -->
+
+<style type="text/css">
+  #placesList li { position:relative;padding:10px !important; }
+  #placesList li strong a img { display:block;position:absolute;top:50%;margin-top:-22px;right:0;padding:0 !important; }
+</style>
+
+
+
 </head>
 
 <body>
@@ -55,11 +67,12 @@ if(stripos($ua,'android') == true) { ?>
 		  $arr=explode('/v/',$row['videocode']);
 		  $arr1=explode('?',$arr[1]);
 		  $arr2=explode('&',$arr1[0]);
+      $yturl=$arr2[0];
 		  $arr2[0]='http://www.youtube.com/watch?v='.$arr2[0];
 	  ?>
       <li class="textbox"  style="padding-bottom:20px;">
-     <a href="<?=$arr2[0]?>"><img src="/partner/<?=$_SESSION['partner_folder_name']?>/images/phocagallery/<?=$row['filename']?>" border="0" align="left" style="padding-right:10px;width:100px; height:100px;" /></a><font color="#999999"><strong><a href="<?=$arr2[0]?>"><img src="images/next-videos.gif" align="right" style="padding-top:20px;"  border="0"/></a>
-     <a href="<?=$arr2[0]?>"><?=$row['title']?></a>
+     <a href="<?=$arr2[0]?>"><img src="http://img.youtube.com/vi/<?php echo $yturl; ?>/0.jpg" border="0" align="left" style="padding-right:10px;width:100px; height:100px;" /></a><font color="#999999"><strong><a href="<?=$arr2[0]?>"><img src="images/next-videos.gif" align="right" style="padding-top:20px;"  border="0"/></a>
+     <a style="line-height:100px;" href="<?=$arr2[0]?>"><?=$row['title']?></a>
      </strong></font> </li>
 			<?php
       }

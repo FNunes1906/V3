@@ -76,6 +76,14 @@ echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Galerías':'Galleries';
 <meta content="destin, vacactions in destin florida, destin, florida, real estate, sandestin resort, beaches, destin fl, maps of florida, hotels, hotels in florida, destin fishing, destin hotels, best florida beaches, florida beach house rentals, destin vacation rentals for destin, destin real estate, best beaches in florida, condo rentals in destin, vacaction rentals, fort walton beach, destin fishing, fl hotels, destin restaurants, florida beach hotels, hotels in destin, beaches in florida, destin, destin fl" name="keywords" />
 <meta content="Destin Florida's FREE iPhone application and website guide to local events, live music, restaurants and attractions" name="description" />
 <?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
+
+
+<!-- New styles add by Doug Schaffer to be moved to CSS file -->
+
+<style type="text/css">
+  #placesList img { width:100px;height:83px; }
+</style>
+
 </head>
 
 <body>
