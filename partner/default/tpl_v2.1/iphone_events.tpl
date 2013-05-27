@@ -70,6 +70,22 @@
 	</form>
 	
 </div>
+
+<?php
+$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+if(stripos($ua,'android') == true) { ?>
+  <div class="iphoneads" style="vertical-align:bottom;">
+	<?php m_show_banner('android-events-screen'); ?>
+  </div>
+  <?php } 
+  else {
+  ?>
+  <div class="iphoneads" style="vertical-align:bottom;">
+    <?php m_show_banner('iphone-events-screen'); ?>
+  </div>
+  <?php } ?>
+
+
 <div id="main" role="main">
 
 <h1><?=$todaestring?></h1>

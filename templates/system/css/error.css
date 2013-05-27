@@ -12,8 +12,8 @@
 /* Start Common Styles */
 * {
 	font-family: helvetica, arial, sans-serif;
-	font-size: 11px;
-	color: #5F6565;
+	font-size: 13px;
+	color: #000000;
 }
 
 html {
@@ -56,11 +56,11 @@ table, td, th, div, pre, blockquote, ul, ol, dl, address,.componentheading,.cont
 	width: 600px;
 	margin: 0px;
 	padding: 0px;
-	background: #E44249;
+	background: #000000;
 	color: #FFFFFF;
 	font-weight: bold;
-	font-size: 12px;
-	line-height: 22px;
+	font-size: 13px;
+	line-height: 25px;
 	text-align: center;
 	border-bottom: 1px solid #000000;
 }
@@ -68,6 +68,7 @@ table, td, th, div, pre, blockquote, ul, ol, dl, address,.componentheading,.cont
 	margin: 0px;
 	padding: 10px;
 	text-align: left;
+	height:140px;
 }
 #techinfo {
 	margin: 10px;

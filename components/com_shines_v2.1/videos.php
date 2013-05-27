@@ -31,45 +31,58 @@ echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Videos':'Videos';?>
 
 <body>
 
- <?php
+<?php
+/*COADING FOR BANNER ADS*/
 $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 if(stripos($ua,'android') == true) { ?>
-  <div class="iphoneads" style="vertical-align:bottom;">
- 	 <?php m_show_banner('android-videos-screen'); ?>
-  </div>
-  <?php } 
-  else {
-  ?>
-  <div class="iphoneads" style="vertical-align:bottom;">
-    <?php m_show_banner('iphone-videos-screen'); ?>
-  </div>
-  <?php } ?>
+
+  	<div class="iphoneads" style="vertical-align:bottom;">
+ 	 	<?php m_show_banner('android-videos-screen'); ?>
+  	</div>
+	
+  	<?php } else { ?>
+	
+  	<div class="iphoneads" style="vertical-align:bottom;">
+    	<?php m_show_banner('iphone-videos-screen'); ?>
+  	</div>
+	
+  	<?php } ?>
+	
 <div id="main" role="main">  
 <div id="zigzag" style="vertical-align:bottom;"> </div>
 <div id="content">
 	<ul class="mainList" id="placesList">
 		
-      <?php 
-	  while($row=mysql_fetch_array($rec))
-	  {
-		  $arr=explode('/v/',$row['videocode']);
-		  $arr1=explode('?',$arr[1]);
-		  $arr2=explode('&',$arr1[0]);
-		  $arr2[0]='http://www.youtube.com/watch?v='.$arr2[0];
-	  ?>
-      <li class="textbox"  style="padding-bottom:20px;">
-     <a href="<?=$arr2[0]?>"><img src="/partner/<?=$_SESSION['partner_folder_name']?>/images/phocagallery/<?=$row['filename']?>" border="0" align="left" style="padding-right:10px;width:100px; height:100px;" /></a><font color="#999999"><strong><a href="<?=$arr2[0]?>"><img src="images/next-videos.gif" align="right" style="padding-top:20px;"  border="0"/></a>
-     <a href="<?=$arr2[0]?>"><?=$row['title']?></a>
-     </strong></font> </li>
-			<?php
-      }
-      ?>
+      	<?php 
+		/*FETCHING CONTENT AND DISPLAY FROM LOOP*/
+	  	while($row=mysql_fetch_array($rec)){
+		
+		  	$arr=explode('/v/',$row['videocode']);
+		  	$arr1=explode('?',$arr[1]);
+		  	$arr2=explode('&',$arr1[0]);
+		  	$code_image = $arr2[0];
+		  	$arr2[0]='http://www.youtube.com/watch?v='.$arr2[0];
+	  	?>
+		
+      	<li class="textbox"  style="padding-bottom:20px;">
+     		<a href="<?php echo $arr2[0];?>"><img src="http://img.youtube.com/vi/<?php echo $code_image;?>/0.jpg" border="0" align="left" style="padding-right:10px;width:100px; height:100px;" />
+			</a>
+			<font color="#999999"><strong>
+				<a href="<?php echo $arr2[0];?>">
+					<img src="images/next-videos.gif" align="right" style="padding-top:20px;"  border="0"/>
+				</a>
+     			<a href="<?php echo $arr2[0];?>"><?php echo $row['title'];?></a>
+     		</strong></font> 
+		</li>
+		
+		<?php
+      		}
+	  		$code_image="";
+      	?>
 		
 	</ul>
 </div>
-
 </div>
 <div style='display:none;'><?php echo $pageglobal['googgle_map_api_keys']; ?></div>
 </body>
-
 </html>
