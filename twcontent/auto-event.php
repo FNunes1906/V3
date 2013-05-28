@@ -446,7 +446,9 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 						    echo '<li id="' . $e->id . '">';
 						    echo '<div class="moreInfo"><a href="javascript:void(0);" data-ref-panel="' . $e->id . 'Panel" class="button small">more info</a></div>';
 						    echo "<h1>" . $e->name . "</h1>"; 
-						    echo "<h2>" . $e->location . "</h2>";
+						    if(isset($e->location)) {
+						    	echo "<h2>" . $e->location . "</h2>";
+						    }
 						    echo '<h3>';
 						  	echo $e->startTime;
 						    if (isset($e->endTime)) {
@@ -458,7 +460,9 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 						    echo '<a href="javascript:void(0);" class="close">x</a>';
 						    echo '<div class="pad">';
 						    echo '<h1>' . $e->name . "</h1>"; 
-							echo '<h2>' . $e->location . "</h2>";
+						    if(isset($e->location)) {
+								echo '<h2>' . $e->location . "</h2>";
+							}
 						    echo '<img class="fbEventImg" alt="" src="' . $e->picture . '" />'; 
 						    echo '<div>';
 							echo '<h3>';

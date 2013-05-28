@@ -39,7 +39,7 @@ function tw_global_zip_code($queryString) {
   Compose a query string for global locations, location categories, or event retrieval.
   Use this query string to call methods above.
 ***/
-function tw_global_query_string($zip, $location, $mainCategory, $categories) {
+function tw_global_query_string($zip, $location, $mainCategory, $categories, $page = 1) {
     $qs = "?";
     
     if(!empty($zip)) $qs = $qs."zip=".$zip;
@@ -59,6 +59,11 @@ function tw_global_query_string($zip, $location, $mainCategory, $categories) {
     if(!empty($categories)) {
         if($qs != "?") $qs = $qs."&";
         $qs = $qs."s=".$categories;
+    }
+
+    if(!empty($page)) {
+        if($qs != "?") $qs = $qs."&";
+        $qs = $qs."page=".$page;
     }
 
     if($qs != "?") return $qs;

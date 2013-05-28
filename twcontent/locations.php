@@ -2,13 +2,19 @@
 
 include_once('../townwizard-db-api/global-api.php');
 
-$zip = isset($_GET['zip']) ? $_GET['zip'] : NULL;
-$cat = isset($_GET['cat']) ? $_GET['cat'] : NULL;
-$s   = isset($_GET['s']) ? $_GET['s'] : NULL;
-$l   = isset($_GET['l']) ? $_GET['l'] : NULL;
+$zip  = isset($_GET['zip']) ? $_GET['zip'] : NULL;
+$cat  = isset($_GET['cat']) ? $_GET['cat'] : NULL;
+$s    = isset($_GET['s']) ? $_GET['s'] : NULL;
+$l    = isset($_GET['l']) ? $_GET['l'] : NULL;
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-$qString = tw_global_query_string($zip, $l, $cat, $s);
-$directoryLocations = tw_global_locations($qString);
+$qString = tw_global_query_string($zip, $l, $cat, $s, $page);
+$pageOfLocations = tw_global_locations($qString);
+if(!empty($pageOfLocations)) {
+    $directoryLocations = $pageOfLocations->objects;
+    $currentPage        = $pageOfLocations->page;
+    $hasMore            = $pageOfLocations->more;
+}
 
 if(!empty($directoryLocations)) { 
     foreach($directoryLocations as $e) {
@@ -35,6 +41,11 @@ if(!empty($directoryLocations)) {
         echo '</ul>';
         echo '</li>';
     }
+
+    if($hasMore) {
+        echo '<li onclick="submitCategory(' . ($currentPage+1) . ');"><h1 style="text-align:center">More</div></h1></li>';
+    }
+
 } else if(isset($s)) { 
     echo '<p>Sorry, there were no results for your search.</p>';
 }

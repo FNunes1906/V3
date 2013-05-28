@@ -441,13 +441,15 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 					}
 
 
-					var submitCategory = function() {
+					var submitCategory = function(pageNum) {
+						jQuery('#locations_form_page_num').val(pageNum);
 						jQuery.ajax({
 							type: "GET",
 							url: 'locations.php',
-							data: $('#locations_form').serialize(),
+							data: jQuery('#locations_form').serialize(),
 							success: function(data) {
-								$('#location_listing').html(data);
+								jQuery('#location_listing').html(data);
+								jQuery(window).scrollTop(0);
 							}
 						});
 						return false;
@@ -455,23 +457,24 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
   				</script>
 
 				<?php
-					$lat = isset($_GET['lat']) ? $_GET['lat'] : NULL;
-					$lon = isset($_GET['lon']) ? $_GET['lon'] : NULL;
+					$lat  = isset($_GET['lat']) ? $_GET['lat'] : NULL;
+					$lon  = isset($_GET['lon']) ? $_GET['lon'] : NULL;
 					
-					$zip = isset($_GET['zip']) ? $_GET['zip'] : NULL;
-					$cat = isset($_GET['cat']) ? $_GET['cat'] : NULL;
-					$s   = isset($_GET['s']) ? $_GET['s'] : NULL;
-					$l   = isset($lat) && isset($lon) ? $lat.",".$lon : (isset($_GET['l']) ? $_GET['l'] : NULL);
+					$zip  = isset($_GET['zip']) ? $_GET['zip'] : NULL;
+					$cat  = isset($_GET['cat']) ? $_GET['cat'] : NULL;
+					$s    = isset($_GET['s']) ? $_GET['s'] : NULL;
+					$l    = isset($lat) && isset($lon) ? $lat.",".$lon : (isset($_GET['l']) ? $_GET['l'] : NULL);					
 				?>
 
 				<?php
 		    		$qString = tw_global_query_string($zip, $l, $cat, NULL);
 		    		$directoryCategories = tw_global_location_categories($qString);
-
+		    		/*
 				    if(isset($s)) {			    	
 			    		$qString = tw_global_query_string($zip, $l, $cat, $s);
 			    		$directoryLocations = tw_global_locations($qString);
 			    	}
+			    	*/
 				?>
 
 				<?php if(!empty($directoryCategories))  { ?>
@@ -490,8 +493,9 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 				        <input type="hidden" value="<?php echo $zip ?>" name="zip" />
 				        <input type="hidden" value="<?php echo $l ?>" name="l" />
 				        <input type="hidden" value="<?php echo $cat ?>" name="cat" />
+				        <input id="locations_form_page_num" type="hidden" value="" name="page" />
 				        <div class="ui-widget"><input id="Tags" class="catSearch" type="text" name="s" placeholder="Start typing a category to filter results" /></div>
-				        <input type="button" value="Submit" onclick="submitCategory();"/>
+				        <input type="button" value="Submit" onclick="submitCategory(1);"/>
 				    </form>
 				<?php } ?>
 
