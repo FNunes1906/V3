@@ -1,7 +1,9 @@
+
 <?php
 define( '_JEXEC', 1 );
 define('JPATH_BASE', dirname(__FILE__) );
 define( 'DS', DIRECTORY_SEPARATOR );
+
 include(JPATH_BASE .DS.'formValidation.php');
 require_once ( JPATH_BASE .DS.'includes'.DS.'defines.php' );
 require_once ( JPATH_BASE .DS.'includes'.DS.'framework.php');
@@ -13,13 +15,6 @@ require_once ( JPATH_BASE .DS.'components'.DS.'com_jevents'.DS.'libraries'.DS.'c
 require_once ( JPATH_BASE .DS.'administrator'.DS.'components'.DS.'com_jevents'.DS.'libraries'.DS.'categoryClass.php');
 require_once("configuration.php");
 
-
-//#DD# 
-//session_start();  // Start the session where the code will be stored.
-include(JPATH_BASE .DS.'securimage/securimage.php');
-$img = new Securimage();
-$validCode = $img->check($_POST['code']);
-
 // move global var here for v2
 global $var;
 include_once(JPATH_BASE .DS.'/inc/var.php');
@@ -27,9 +22,11 @@ include_once(JPATH_BASE .DS.'/inc/base.php');
 _init();
 // end v2 code
 
-$mainframe =& JFactory::getApplication('site');
+/*$mainframe =& JFactory::getApplication('site');
 $mainframe->initialise();
-$session =& JFactory::getSession();
+$session =& JFactory::getSession();*/
+
+
 
 $jconfig = new JConfig();
 define(DB_HOST, $jconfig->host);
@@ -47,7 +44,7 @@ $msg="";
 if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
 	//echo "<pre>";
 	//print_r($_POST);
-	$postRecheck = checkPostParameter($_POST,$validCode);
+	$postRecheck = checkPostParameter($_POST);
 	//$postRecheck = checkPostParameter($_POST);
 	
 	if($postRecheck){
@@ -151,7 +148,7 @@ if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
 		
 			if(!empty($last_id) && (!empty($last_id1))) {
 				//require_once($var->tpl_path."events_submit_mail.tpl");
-				$msg='Thank you for submitting your event. Our team will review and promote your information as soon as possible! Please complete this form again to submit other events.';
+				$msg='Thank you for submitting your event.<br /> Our team will review and promote your information as soon as possible! Please complete this form again to submit other events.';
 				$subject= 'New Event Submission ';
 				$adminuser = $cat->getAdminUser();
 				$adminEmail	= $adminuser->email;
@@ -213,7 +210,7 @@ if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
 #Version       : 1.0
 */
 //echo $validCode."hello";
-function checkPostParameter($postValue,$validCode){
+function checkPostParameter($postValue){
 //function checkPostParameter($postValue){
 global $msg;
 	if(!isvalidchar($postValue['title'])){
@@ -238,12 +235,7 @@ global $msg;
 		$msg="Invalid Email Address!<br/>";
 		return false;
 		}
-		
-	if(!$validCode){
-		$msg="Invalid verification code.";
-		return false; // if you want start captcha then return false
-	}
-	
+
 	return true;
 }
 
@@ -293,7 +285,7 @@ global $msg;
 <script type="text/javascript" src="/plugins/system/pc_includes/ajax_1.3.js"></script>
 <link href="/indexiphone.php?option=com_jevents&amp;task=modlatest.rss&amp;format=feed&amp;type=rss&amp;Itemid=111&amp;modid=0"  rel="alternate"  type="application/rss+xml" title="JEvents - RSS 2.0 Feed" />
 <link href="/indexiphone.php?option=com_jevents&amp;task=modlatest.rss&amp;format=feed&amp;type=atom&amp;Itemid=111&amp;modid=0"  rel="alternate"  type="application/rss+xml" title="JEvents - Atom Feed" />
-<script type="text/javascript" src="/common/js/event_submit.js"></script>
+<script type="text/javascript" src="common/js/event_submit.js"></script>
 
 <script type="text/javascript" language="javascript">
 function gotoindex(str){
@@ -392,12 +384,7 @@ function form_validation() {
 		return false;
 	}
 	
-	if (document.adminForm.code.value=="")
-	{
-		alert ("Please Enter Captcha !");
-		document.adminForm.title.focus();
-		return false;
-	}
+	
 }
 </script>
 
@@ -413,10 +400,11 @@ if($msg!='') {?>
 	height:auto;  
 	width:381px;  
 	background:#E6E6E6;  
-	left: 10px;
-	 top: 35%;
-	z-index:100; /* Layering ( on-top of others), if you have lots of layers: I just maximized, you can change it yourself */
-	margin-left: 0px;  
+	left: 31%;
+	 top: 48%;
+	z-index:1000; /* Layering ( on-top of others), if you have lots of layers: I just maximized, you can change it yourself */
+	margin-left: 0px;
+	line-height:25px; 
 	
 	/* additional features, can be omitted */
 	border:2px solid #00BAE8;  	
@@ -454,38 +442,45 @@ text-decoration:none;
 	font-weight:500; 
    
 }
+#mask {
+   background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
+   display: block;
+   height: 100%;
+   left: 0;
+   opacity: 0.8;
+   top: 0;
+   width: 100%;
+   z-index: 999;
+}
+#Darkness {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
+    display: block;
+	}
 </style>
-<script src="http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 	
 	$(document).ready( function() {
 	
 		// When site loaded, load the Popupbox First
+		loadPopupBox();
 		
 		$('#popupBoxClose').click( function() {			
 			unloadPopupBox();
+			$('#mask').remove();
 		});
 		
-		$('#container').click( function() {
-			unloadPopupBox();
-		});
-
 		function unloadPopupBox() {	// TO Unload the Popupbox
 			$('#popup_box').fadeOut("slow");
-			$("#container").css({ // this is just for style		
-				"opacity": "1"  
-			}); 
+			
 		}	
 		
 		function loadPopupBox() {	// To Load the Popupbox
+			$('body').append('<div id="mask"></div>');
+			$('#Darkness').css('display','none');
 			$('#popup_box').fadeIn("slow");
-			$('#popup_box').css({
-				"top":$(window).height()/3
-			});
-			$("#container").css({ // this is just for style
-				"opacity": "0.3"  
-			}); 		
+				
 		}
 		/**********************************************************/
 		
@@ -498,6 +493,7 @@ text-decoration:none;
 </div>
 	
 <?php } ?>
+
 
 <!--Jevent Form Starts-->
 <div style="padding:5px 0px"></div>
@@ -527,7 +523,7 @@ text-decoration:none;
 				}
 				?>
 				
-				<option value="<?php echo $row['id']?>" <?php $selectedVal?> ><?php echo $row['name']?></option>
+				<option value="<?php echo $row['id']?>" <?php echo $selectedVal?> ><?php echo $row['name']?></option>
 				<?php } ?>
 			</select>
 		</td>
@@ -683,18 +679,14 @@ text-decoration:none;
 	<tr class="jevplugin_anonemail">	
 		<td>&nbsp;</td>
 		<td>
-			<div style="font-size: 11px; vertical-align: top; float: left;"><?php echo JText::_('JEV_CAP'); ?></div><br>
-			<img id="siimage" align="left" style="width:150px;" style="padding-right: 5px; border: 0" src="securimage/securimage_show.php?sid=<?php echo md5(time()) ?>" />
-			<a tabindex="-1" style="border-style: none" href="#" title="Refresh Image" onClick="document.getElementById('siimage').src = 'securimage/securimage_show.php?sid=' + Math.random(); return false"><img src="securimage/images/refresh.gif" alt="Reload Image" border="0" onClick="this.blur()" align="bottom" /></a>
+			<?php
+global $mainframe;
+//set the argument below to true if you need to show vertically( 3 cells one below the other)
+$mainframe->triggerEvent('onShowOSOLCaptcha', array(false));
+?> 
 		</td>
 	</tr>
-	<tr class="jevplugin_anonemail">	
-		<td><?php echo JText::_('JEV_VERI_CODE'); ?></td>
-		<td>
-			<input type="text" value="" id="code" name="code" size="25">
-			<br><br>
-		</td>
-	</tr>
+	
 	<!--#DD#-->
 	
 	

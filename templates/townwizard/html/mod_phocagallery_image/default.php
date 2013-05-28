@@ -10,7 +10,7 @@ if ($phocagallery_module_width !='') {
 
 ?>
 <div class="cont">
-<h3 class="fl"><a class="heading display" href="/index.php?option=com_phocagallery&view=categories&Itemid=102">Latest Photos</a></h3>
+<h3 class="fl"><a class="heading display" href="/index.php?option=com_phocagallery&view=categories&Itemid=102"><?php echo JText::_('TW_LATEST_PHOTO'); ?></a></h3>
 <div id ="phocagallery-module-ri" style="text-align: center;<?php echo $pgWidth;?>">
 
 

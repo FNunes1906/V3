@@ -2157,11 +2157,11 @@ h1.upload {
   z-index: -100;
 }
 #sbox-window{
- margin-left: -465px !important;
+ /* margin-left: -465px !important; */
 }
 
 #sbox-overlay {
-   background:none !important;
+   /* background:none !important; */
 }
 
 #Find .module_event .fl{
@@ -2244,3 +2244,20 @@ max-width: inherit;
 	width:92px;
 }
 /* Weekly event listing Category Select box */
+
+
+/* for captcha */
+
+.osolCaptchaBlock table td {
+    text-align: left !important;
+}
+
+.osolCaptchaBlock img {
+	height: 48px;
+}
+
+#system-message dd.error ul {
+    background-color: #FFFFFF !important;
+    border: 2px solid #CC0000;
+    color: #CC0000;
+}
