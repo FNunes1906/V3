@@ -1,3 +1,4 @@
+body.tablet .rightCol div.fl { width:100%; }
 body.tablet .rightCol.fr {
   float:left;
   clear:none;
@@ -321,12 +322,114 @@ body.tablet #AttendancePanel .attendeeList .attendee img {
   margin-right:15px;
 }
 
+@media all and (max-width: 753px) {
 
-
-body.min .rightCol {
-  float:none !important;
+#TopBar .links {
+  display:none;
 }
-body.min #Footer ul li {
+
+#GuideInfo .search {
+  display:none;
+}
+
+#LeftCol {
+  display:none;
+}
+
+.centerCol {
+  width:100%;
+  margin:0;
+  max-width:100%;
+}
+
+.rotator {
+  max-width:100%;
+  margin-left:0 !important;
+}
+
+.gallery .nav {
+  display:none !important;
+}
+
+.rightCol {
+  
+}
+
+#Footer {
+  height:auto;
+  padding-bottom:30px;
+}
+
+#Footer ul li {
   float:none;
   width:100%;
+}
+
+}
+
+@media all and (max-width: 478px) {
+
+  #Header {
+    height:auto;
+    text-align:center;
+    padding-bottom:10px;
+  }
+
+  #Header .headerAdFlex {
+    margin:0 !important;
+    text-align:center;
+  }
+
+  #UpperBannerAd {
+    margin-left:0 !important;
+  }
+
+  #Social {
+    display:none;
+  }
+
+  #Logo {
+    float:none;
+  }
+
+  #Logo img {
+    margin:auto;
+  }
+
+  #MainContent .bannerAd img {
+    width:100%;
+  }
+
+  .rotator .gallery .infoCont h2 {
+    font-size:14px;
+  }
+
+  .rotator .gallery .infoCont {
+    height:80px;
+  }
+
+  #FindForm {
+    padding:15px 5px;
+  }
+
+  #FindForm input.search {
+    width:32% !important;
+  }
+
+  #FindForm .type {
+    width: 20% !important;
+  }
+
+  #FindForm .sub {
+    display:none;
+  }
+
+  .rightCol .sect {
+    width:100%;
+  }
+
+  .adSect .ad {
+    margin:0 auto 30px !important;
+  }
+
 }

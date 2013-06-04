@@ -64,10 +64,18 @@ var resizeContent = function() {
 
     //Else if event page rotator exists adjust width
     else if ($('.rotator').length) {
-      killTimer2 = setTimeout(function() {
-        $('.rotator .centerCol.gallery, .rotator .gallery ul, .rotator .gallery ul li').css('width',$('#MainContent').width() - 285).css('height',$('.rotator .gallery ul li .event').height());
-        $('.rotator .gallery ul').parent().css('width',$('#MainContent').width() - 285).css('height',$('.rotator .gallery ul li .event').height());
-      }, 100);
+      if($(window).width() < 733) {
+        killTimer2 = setTimeout(function() {
+          $('.rotator .centerCol.gallery, .rotator .gallery ul, .rotator .gallery ul li').css('width',$('#MainContent').width()).css('height',$('.rotator .gallery ul li .event').height());
+          $('.rotator .gallery ul').parent().css('width',$('#MainContent').width()).css('height',$('.rotator .gallery ul li .event').height());
+        }, 100);
+      }
+      else {
+        killTimer2 = setTimeout(function() {
+          $('.rotator .centerCol.gallery, .rotator .gallery ul, .rotator .gallery ul li').css('width',$('#MainContent').width() - 285).css('height',$('.rotator .gallery ul li .event').height());
+          $('.rotator .gallery ul').parent().css('width',$('#MainContent').width() - 285).css('height',$('.rotator .gallery ul li .event').height());
+        }, 100);
+      }
     }
 
     //Re-align center and right column content
@@ -85,24 +93,33 @@ var resizeContent = function() {
       }, 100);
 
       if (!navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
-        //Expand center column content to full width
-        $('#WidgetArea .centerCol .sect, #WidgetArea .rightCol.spread').not('#WidgetArea #Blog.centerCol .sect').css('width',$('#MainContent').width() - 215);
-        $('#WidgetArea #Blog.centerCol .sect').css('width',$('#MainContent').width() - 555);
+        if($(window).width() < 733) {
+          //Expand center column content to full width
+          $('#WidgetArea .centerCol .sect, #WidgetArea .rightCol.spread').not('#WidgetArea #Blog.centerCol .sect').css('width',$('#MainContent').width());
+          $('#WidgetArea #Blog.centerCol .sect').css('width',$('#MainContent').width());
+        }
+        else {
+          $('#WidgetArea .centerCol .sect, #WidgetArea .rightCol.spread').not('#WidgetArea #Blog.centerCol .sect').css('width',$('#MainContent').width() - 215);
+          $('#WidgetArea #Blog.centerCol .sect').css('width',$('#MainContent').width() - 555);
+        }
       }
 
     }
 
     //Shrink right column content for screen sizes below 845px
-    if ($(window).width() < 845 ) {
+    if ($(window).width() < 768 ) {
       //$('body').addClass('min');
-      $('.rightCol .sect').not('.rightCol.spread .ad.sect, #BlogCol.rightCol .sect').css('width',$('#MainContent').width() - 529);
-      $('#ShareTool .side').css('font-size',0);
-      $('body.tablet .sect.list ul li a, body.tablet #PlacesInfo ul li a').not('body.tablet .sect.horiz.list ul li a').css('line-height','15px');
-      //$('#LowerBannerAd').addClass('min');
+      if ($(window).width() > 767) {
+        $('.rightCol .sect').not('.rightCol.spread .ad.sect, #BlogCol.rightCol .sect').css('width',$('#MainContent').width() - 529);
+        $('#ShareTool .side').css('font-size',0);
+        $('body.tablet .sect.list ul li a, body.tablet #PlacesInfo ul li a').not('body.tablet .sect.horiz.list ul li a').css('line-height','15px');
+        //$('#LowerBannerAd').addClass('min');
+      }
     }
     else {
       //$('body').removeClass('min');
-      $('.rightCol .sect').not('.rightCol .ad.sect').css('width',300);
+      //Below line modified for responsive design - actual app does not have side by side widgets so we need to be full width, not 300px
+      $('.rightCol .sect').not('.rightCol .ad.sect').css('width','100%');
       $('#ShareTool .side').css('font-size','12px');
       $('body.tablet .sect.list ul li a, body.tablet #PlacesInfo ul li a').not('body.tablet .sect.horiz.list ul li a').css('line-height','25px');
       //$('#LowerBannerAd').removeClass('min');
@@ -179,8 +196,8 @@ var updateOrientation = function() {
 
   if ($(window).width() < 980) {
     //Expand center column content to full width
-    $('#WidgetArea .centerCol .sect, #WidgetArea .rightCol.spread').not('#WidgetArea #Blog.centerCol .sect').css('width',$('#MainContent').width() - 215);
-    $('#WidgetArea #Blog.centerCol .sect').css('width',$('#MainContent').width() - 555);
+    $('#WidgetArea .centerCol .sect, #WidgetArea .rightCol.spread').not('#WidgetArea #Blog.centerCol .sect').css('width',$('#MainContent').width());
+    $('#WidgetArea #Blog.centerCol .sect').css('width',$('#MainContent').width());
   }
 
 }

@@ -98,76 +98,30 @@
               <!-- Navigation Sub Menu End -->
 
             </li>
-   	  	    <li><a id="NavOffers" href="#">Offers</a></li>
   	  	    <li><a id="NavRest" href="restaurants.html">Restaurants</a></li>
-  	  	    <li><a id="NavBars" href="#">Bars</a></li>
+  	  	    <li><a id="NavBars" href="#">Places</a></li>
   	  	    <li><a id="NavPhotos" href="photos.html">Photos</a></li>
             <li><a id="NavVideos" href="videos.html">Videos</a></li>
-  	  	    <li><a id="NavPeople" href="#">People</a></li>
-  	  	    <li><a id="NavBlog" href="#">Blog</a></li>
-  	  	    <li><a id="NavBest" href="#">Best in Town</a></li>
-  	  	    <li><a id="NavDir" href="#">Directory</a></li>
   	  	   </ul>
   	    </nav>
-  	    <div id="SideLinks">
-  	      <h4 class="display">My Stuff</h3>
-  	      <a href="#">Favorite Places</a>
-  	      <a href="#">Your Saved Offers</a>
-  	      <a href="#">Your Events Calendar</a>
-  	      <a href="#">Your Lists</a>
-  	      <h4 class="display">Quick Links</h3>
-  	      <a href="#">Ratings &amp; Reviews</a>
-  	      <a href="#">Check-ins &amp;  Hotspots</a>
-  	      <a href="#">About [Brand Name]</a>
-  	    </div>
   	    <div id="SideMobile" class="sect">
-  	      <h2>TownWizard Mobile!</h2>
-  	      <p>Lorem ipsum dolor sit amet adipiscing elit donec.</p>
+  	      <h2>Download Our Apps!</h2>
   	      <a href="#" target="_blank"><img alt="Download for the iPhone/iPad" src="images/sidebar/iphoneAppBtn.png" /></a>
   	      <a href="#" target="_blank"><img alt="Download for Android" src="images/sidebar/androidAppBtn.png" /></a>
-  	    </div>
-  	    <div id="SideSocial" class="sect">
-  	      <h3 class="display">Follow Us</h3>
-  	      <a class="twitter" href="#" target="_blank"><img alt="Follow us on Twitter" src="images/sidebar/twtFollowBtn.png" /></a>
-  	      <a class="youtube" href="#" target="_blank"><img alt="Follow us on YouTube" src="images/sidebar/ytFollowBtn.png" /></a>
   	    </div>
   	    <div id="SideAds" class="sect">
   	      <div class="ad space">
   	      	<img alt="" src="images/mock/ads/180x150_1.jpg" />
   	      </div>
-  	      <div class="ad">
+  	      <div class="ad space">
   	      	<img alt="" src="images/mock/ads/180x150_2.jpg" />
   	      </div>
-  	      <div class="sect">
-  	      	<h3 class="display">Hotspots</h3>
-  	      	<p>Hot Spot rankings are decided by your annual votes.</p>
-  	      	<h4 class="display">Sushi</h4>
-  	      	<a href="#">Sushimaster</a>
-  	      	<a href="#">Yo! Sushi</a>
-  	      	<a href="#">Sushi Sushi Sushi</a>
-  	      	<a href="#">Ultimate Sushi</a>
-  	      	<h4 class="display">Outdoor Dining</h4>
-  	      	<a href="#">The Patio</a>
-  	      	<a href="#">Gerry's</a>
-  	      	<a href="#">The Red Chimney</a>
-  	      	<a href="#">Le Gavorche</a>
-  	      	<h4 class="display">Family Trip</h4>
-  	      	<a href="#">The Zoo</a>
-  	      	<a href="#">The Aquarium</a>
-  	      	<a href="#">Barney's Fun Shack</a>
-  	      	<a href="#">Milton Fun Park</a>
-  	      </div>
-  	      <div class="sect">
-  	      	<div class="ad space">
-  	      	  <img alt="" src="images/mock/ads/180x150_2.jpg" />
-  	      	</div>
-  	      	<div class="ad space">
-  	      	  <img alt="" src="images/mock/ads/180x150_1.jpg" />
-  	      	</div>
-  	      	<div class="ad">
-  	      	  <img alt="" src="images/mock/ads/180x150_2.jpg" />
-  	      	</div>
-  	      </div>
+	      	<div class="ad space">
+	      	  <img alt="" src="images/mock/ads/180x150_2.jpg" />
+	      	</div>
+	      	<div class="ad space">
+	      	  <img alt="" src="images/mock/ads/180x150_1.jpg" />
+	      	</div>
   	    </div>
   	  </div>
 
@@ -175,86 +129,13 @@
 
   	  <div id="WidgetArea">
 
-    	  <!-- Event Finder Start -->
-
-    	  <div id="Feat" class="centerCol fl">
-    	  	<div id="Find" class="sect">
-            <h1 class="display">Events in SL Merida</h1>
-            <div id="FindForm">
-              <div>
-                <input type="text" class="search fl" placeholder="Event Search" />
-                
-                <!-- Includes for Mobiscroll Select and Darepicker -->
-                <link href="css/mobiscroll-2.4.custom.min.css" rel="stylesheet" type="text/css" />
-                <script src="js/mobiscroll-2.4.custom.min.js" type="text/javascript"></script>
-
-                <script type="text/javascript">
-                  $(document).ready(function() {
-                    var themeSkinSel = getTheme();
-
-                    $('#EventType').mobiscroll().select({
-                        theme: themeSkinSel, 
-                        display: 'modal', 
-                        animate: 'pop', 
-                        mode: 'scroller', 
-                        inputClass: 'type fl'
-                    });
-                  });
-                </script>
-                <select id="EventType" name="Event Type" class="type fl">
-                  <option>Type</option>
-                  <option>Live Music</option>
-                  <option>Festival</option>
-                  <option>Market</option>
-                </select>
-
-                <style type="text/css">
-                  .ios .dwo { background:#000; }
-                </style>
-
-                <script type="text/javascript">
-                  $(document).ready(function() {
-                    var themeSkinDate = getTheme();
-                    var now = new Date();
-
-                    $('#DatePicker input').mobiscroll().date({
-                        minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()), 
-                        theme: themeSkinDate, 
-                        display: 'modal', 
-                        animate: 'pop', 
-                        mode: 'scroller'
-                    });
-                    $('#DatePicker a').click(function(){
-                        $('#DatePicker input').mobiscroll('show'); 
-                        return false;
-                    });
-                  });
-                </script>
-
-                <div id="DatePicker" class="fl">
-                  <a>Select a date...</a>
-                  <input id="SelDate" type="text" />
-                </div>
-                <input type="submit" class="submit fr" align="left" value="" onclick="alert($('#DatePicker input').mobiscroll('getDate'))" />
-              </div>
-              <div class="sub cl">
-                <span class="bold">Popular:</span> 
-                <a href="#">Family weekend</a> | 
-                <a href="#">Gigs</a> | 
-                <a href="#">Beastie Boys</a> | 
-                <a href="#">Football</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-    	  <!-- Event Finder End -->
-
         <!-- Placeholder for Header Banner Ad in Vertical Layout Start -->
 
         <div id="LowerBannerAd" class="bannerAd"></div>
 
         <!-- Placeholder for Header Banner Ad in Vertical Layout End -->
+
+        <div class="centerCol fl">
 
         <!-- Event Page Rotator Start -->
 
@@ -338,64 +219,82 @@
 
         <!-- Event Page Rotator End -->
 
-        <div id="CalendarSection">
 
-          <!-- In Your Calendar Section Start -->
+        <!-- Event Finder Start -->
 
-          <div class="rightCol fr">
-            <div id="YourCalendar" class="neg sect list">
-              <div class="cont">
-                <div class="bc fr">
-                  <a href="#">Edit</a>
+        <div id="Feat" class="centerCol fl">
+          <div id="Find" class="sect">
+            <div id="FindForm">
+              <div>
+                <input type="text" class="search fl" placeholder="Event Search" />
+                
+                <!-- Includes for Mobiscroll Select and Darepicker -->
+                <link href="css/mobiscroll-2.4.custom.min.css" rel="stylesheet" type="text/css" />
+                <script src="js/mobiscroll-2.4.custom.min.js" type="text/javascript"></script>
+
+                <script type="text/javascript">
+                  $(document).ready(function() {
+                    var themeSkinSel = getTheme();
+
+                    $('#EventType').mobiscroll().select({
+                        theme: themeSkinSel, 
+                        display: 'modal', 
+                        animate: 'pop', 
+                        mode: 'scroller', 
+                        inputClass: 'type fl'
+                    });
+                  });
+                </script>
+                <select id="EventType" name="Event Type" class="type fl">
+                  <option>Type</option>
+                  <option>Live Music</option>
+                  <option>Festival</option>
+                  <option>Market</option>
+                </select>
+
+                <style type="text/css">
+                  .ios .dwo { background:#000; }
+                </style>
+
+                <script type="text/javascript">
+                  $(document).ready(function() {
+                    var themeSkinDate = getTheme();
+                    var now = new Date();
+
+                    $('#DatePicker input').mobiscroll().date({
+                        minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()), 
+                        theme: themeSkinDate, 
+                        display: 'modal', 
+                        animate: 'pop', 
+                        mode: 'scroller'
+                    });
+                    $('#DatePicker a').click(function(){
+                        $('#DatePicker input').mobiscroll('show'); 
+                        return false;
+                    });
+                  });
+                </script>
+
+                <div id="DatePicker" class="fl">
+                  <a>Select a date...</a>
+                  <input id="SelDate" type="text" />
                 </div>
-                <h3 class="fl"><a class="heading display" href="#">In Your Calendar</a></h3>
-                <ul>
-                  <li>
-                    <h3><a class="bold" href="#">Concet: Cats!</a></h3>
-                    <p>Music Hall &bull; Today 1:30 - 3pm &bull; 10 RSVPs</p>
-                  </li>
-                  <li>
-                    <h3><a class="bold" href="#">Event name</a></h3>
-                    <p>Music Hall &bull; Today 1:30 - 3pm &bull; 10 RSVPs</p>
-                  </li>
-                  <li class="upcoming">
-                    <div class="bold fl">Upcoming</div>
-                    <div class="dates">
-                      <a href="#">6/6 Gallery Opening</a>
-                      <a href="#">7/6 Dance Show at the Anetharium</a>
-                      <a href="#">8/8 Arlo Guthrie Benefit Concert</a>
-                    </div>
-                  </li>
-                </ul>
+                <input type="submit" class="submit fr" align="left" value="" onclick="alert($('#DatePicker input').mobiscroll('getDate'))" />
+              </div>
+              <div class="cl"></div>
+              <div class="sub cl">
+                <span class="bold">Popular:</span> 
+                <a href="#">Family weekend</a> | 
+                <a href="#">Gigs</a> | 
+                <a href="#">Beastie Boys</a> | 
+                <a href="#">Football</a>
               </div>
             </div>
           </div>
-
-          <!-- In Your Calendar Section End -->
-
-          <!-- Upcoming Section Start -->
-
-          <div class="rightCol fr sr">
-            <div id="Upcoming" class="neg sect list">
-              <div class="cont">
-                <h3 class="fl"><a class="heading display" href="#">Upcoming at your Favorite Places</a></h3>
-                <ul>
-                  <li>
-                    <h3><a class="bold" href="#">Concet: Cats!</a></h3>
-                    <p>Music Hall &bull; Today 1:30 - 3pm &bull; 10 RSVPs</p>
-                  </li>
-                  <li>
-                    <h3><a class="bold" href="#">Gallery Opening</a></h3>
-                    <p>Music Hall &bull; Today 1:30 - 3pm &bull; 10 RSVPs</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Upcoming Section End -->
-
         </div>
+
+        <!-- Event Finder End -->
+
 
         <!-- This Week Section Start -->
 
@@ -416,7 +315,6 @@
                 <li>
                   <div class="date fl">6/6</div>
                   <div class="details">
-                    <div class="fr thumb"></div>
                     <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
                     <p>2pm &bull; Bayou Arts Center &bull; 10 RSVPs</p>
                   </div>
@@ -439,14 +337,6 @@
                   <div class="date fl">6/6</div>
                   <div class="details">
                     <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
-                    <p>2pm &bull; Bayou Arts Center &bull; 10 RSVPs <span class="faces"><img alt="" src="images/mock/faces/person1.jpg" /></span></p>
-                  </div>
-                </li>
-                <li>
-                  <div class="date fl">6/6</div>
-                  <div class="details">
-                    <div class="fr thumb"></div>
-                    <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
                     <p>2pm &bull; Bayou Arts Center &bull; 10 RSVPs</p>
                   </div>
                 </li>
@@ -461,7 +351,14 @@
                   <div class="date fl">6/6</div>
                   <div class="details">
                     <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
-                    <p>2pm &bull; Bayou Arts Center &bull; 10 RSVPs <span class="faces"><img alt="" src="images/mock/faces/person1.jpg" /><img alt="" src="images/mock/faces/person2.jpg" /></span></p>
+                    <p>2pm &bull; Bayou Arts Center &bull; 10 RSVPs</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date fl">6/6</div>
+                  <div class="details">
+                    <h3><a class="bold" href="#">Watercolor Tips &amp; Techniques with Carol Dickson</a></h3>
+                    <p>2pm &bull; Bayou Arts Center &bull; 10 RSVPs</p>
                   </div>
                 </li>
                 <li>
@@ -485,15 +382,11 @@
 
         <!-- This Week Section End -->
 
+        </div>
+
+        <div class="rightCol fr">
+
         <div id="EventsInfo" class="neg rightCol fr spread">
-
-          <!-- 300 x 100 Banner Ad Start -->
-
-          <div class="ad sect full cl">
-            <img alt="" src="images/mock/ads/300x100.jpg" />
-          </div>
-
-          <!-- 300 x 100 Banner Ad End -->
           
           <!-- Submit My Event Section Start -->
 
@@ -508,174 +401,8 @@
 
           <!-- Submit My Event Section End -->
 
-          <!-- Who's Going Where Section Start -->
-
-          <div class="fr">
-            <div id="WhosGoing" class="sect list">
-              <div class="cont">
-                <h3 class="fl"><a class="heading display" href="#">Who's Going Where?</a></h3>
-                <ul>
-                  <li>
-                    <div class="face fl"><img alt="" src="images/mock/faces/person1.jpg" /></div>
-                    <a href="#">John is going to the Ballet 6/7</a>
-                  </li>
-                  <li>
-                    <div class="face fl"><img alt="" src="images/mock/faces/person2.jpg" /></div>
-                    <a href="#">Susie is going to Cats! 7/6</a>
-                  </li>
-                  <li>
-                    <div class="face fl"><img alt="" src="images/mock/faces/person3.jpg" /></div>
-                    <a href="#">Joan is going to Watercolor Class 7/7</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Who's Going Where Section End -->
-
         </div>
-
-        <!-- Event Offers & Discounts Section Start -->
-
-        <div class="centerCol fl">
-          <div id="EventsOffersDiscounts" class="sect">
-            <div class="cont">
-              <div class="bc fr">
-                <span class="bold">Offer Type:</span>
-                <select>
-                  <option value="All">All</option>
-                  <option value="Offers">Offers</option>
-                  <option value="Discounts">Discounts</option>
-                </select>
-              </div>
-              <h3 class="fl"><a class="heading display" href="#">Events with Offers &amp; Discounts</a></h3>
-              <ul>
-                <li>
-                  <div class="thumb"><img alt="Cheap Abba Tickets!" src="images/mock/lists/tacos.jpg" /></div>
-                  <a class="bold" href="#">Cheap Abba Tickets!</a>
-                  <p>Lorem ispum dolor sit amet adipiscing elit donec.</p>
-                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (10)</div>
-                  <div class="liked">
-                    <p>Liked by:</p>
-                    <img alt="" src="images/mock/faces/person1.jpg" />
-                    <img alt="" src="images/mock/faces/person2.jpg" />
-                    <img alt="" src="images/mock/faces/person3.jpg" />
-                  </div>
-                </li>
-                <li>
-                  <div class="thumb"><img alt="10% Off Ballet" src="images/mock/lists/wings.jpg" /></div>
-                  <a class="bold" href="#">10% Off Ballet</a>
-                  <p>Lorem ispum dolor sit amet adipiscing elit nunc.</p>
-                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (17)</div>
-                  <div class="liked">
-                    <p>Liked by:</p>
-                    <img alt="" src="images/mock/faces/person4.jpg" />
-                    <img alt="" src="images/mock/faces/person5.jpg" />
-                    <img alt="" src="images/mock/faces/person6.jpg" />
-                  </div>
-                </li>
-                <li>
-                  <div class="currentOffers">
-                    <h4 class="bold">50 Current Offers</h4>
-                    <a class="bold" href="#">Shopping</a>
-                    <a class="bold" href="#">Restaurants</a>
-                    <a class="bold" href="#">Drinking</a>
-                    <a class="bold" href="#">Tickets</a>
-                    <a class="bold" href="#">Services</a>
-                    <a class="bold" href="#">HVAC</a>
-                    <a class="saved bold" href="#"><span class="bold">3</span> saved offers</a>
-                  </div>
-                </li>
-              </ul>
-              <div class="cb"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Event Offers & Discounts Section End -->
-
-        <!-- Editor's Event Highlights Section Start -->
-
-        <div class="centerCol fl">
-          <div id="EditorsEvents" class="sect horiz">
-            <div class="cont">
-              <div class="bc fr">
-                <a href="#">Archive</a>
-              </div>
-              <h3 class="fl"><a class="heading display" href="#">Editor's Event Highlights</a></h3>
-              <ul>
-                <li>
-                  <div class="thumb fr"><img alt="Ballet Comes to SL Merida" src="images/mock/lists/karaoke.jpg" /></div>
-                  <a class="bold" href="#">Ballet Comes to SL Merida</a>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt porta justo a euismod. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur mus.  tincidunt porta justo a euismod.</p>
-                </li>
-                <li>
-                  <div class="thumb fr"><img alt="Too Few Musicals This Year!" src="images/mock/lists/editor_mex.jpg" /></div>
-                  <a class="bold" href="#">Too Few Musicals This Year!</a>
-                  <p>Vestibulum et libero ante, eu condimentum enim. Pellentesque tempus eleifend risus nec fermentum. Integer ut aliquam odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat, dui ac euismod.</p>
-                </li>
-              </ul>
-              <div class="cb"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Editor's Event Highlights Section End -->
-
-        <!-- Best for Families Section Start -->
-
-        <div class="centerCol fl">
-          <div id="BestForFamilies" class="sect">
-            <div class="cont">
-              <div class="bc fr">
-                <a href="#">show 3 more</a>
-              </div>
-              <h3 class="fl"><a class="heading display" href="#">Best for... families</a></h3>
-              <ul>
-                <li>
-                  <div class="thumb"><img alt="Magic Mice" src="images/mock/lists/mex.jpg" /></div>
-                  <a class="bold" href="#">Magic Mice</a>
-                  <p>Lorem ispum dolor sit amet adipiscing elit donec.</p>
-                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (10)</div>
-                  <div class="liked">
-                    <p>Liked by:</p>
-                    <img alt="" src="images/mock/faces/person1.jpg" />
-                    <img alt="" src="images/mock/faces/person2.jpg" />
-                    <img alt="" src="images/mock/faces/person3.jpg" />
-                  </div>
-                </li>
-                <li>
-                  <div class="thumb"><img alt="Happy Scrappy Pups" src="images/mock/lists/rum.jpg" /></div>
-                  <a class="bold" href="#">Happy Scrappy Pups</a>
-                  <p>Lorem ispum dolor sit amet adipiscing elit nunc.</p>
-                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (17)</div>
-                  <div class="liked">
-                    <p>Liked by:</p>
-                    <img alt="" src="images/mock/faces/person4.jpg" />
-                    <img alt="" src="images/mock/faces/person5.jpg" />
-                    <img alt="" src="images/mock/faces/person6.jpg" />
-                  </div>
-                </li>
-                <li>
-                  <div class="thumb"><img alt="Childrens Parade" src="images/mock/lists/karaoke.jpg" /></div>
-                  <a class="bold" href="#">Children's Parade</a>
-                  <p>Lorem ispum dolor sit amet adipiscing elit et nunc aliquam.</p>
-                  <div class="rating"><img alt="" src="images/stars/sampleRating.png" /> (17)</div>
-                  <div class="liked">
-                    <p>Liked by:</p>
-                    <img alt="" src="images/mock/faces/person7.jpg" />
-                    <img alt="" src="images/mock/faces/person8.jpg" />
-                    <img alt="" src="images/mock/faces/person9.jpg" />
-                  </div>
-                </li>
-              </ul>
-              <div class="cb"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Best for Families Section End -->
+        
 
         <div id="LowerAds" class="neg adSect dual rightCol fr">
 
@@ -695,17 +422,23 @@
 
           <!-- 300 x 250_4 Banner Ad End -->
 
-        </div>
+          <!-- 300 x 250_3 Banner Ad Start -->
 
-        <div id="LowerTallAd" class="neg adSect tall rightCol fr cr">
-
-          <!-- 300 x 600 Banner Ad Start -->
-
-          <div class="ad">
-            <img alt="" src="images/mock/ads/300x600.jpg" />
+          <div class="ad space">
+            <img alt="" src="images/mock/ads/300x250_1.jpg" />
           </div>
 
-          <!-- 300 x 600 Banner Ad End -->
+          <!-- 300 x 250_3 Banner Ad End -->
+
+          <!-- 300 x 250_4 Banner Ad Start -->
+
+          <div class="ad space">
+            <img alt="" src="images/mock/ads/300x250_3.jpg" />
+          </div>
+
+          <!-- 300 x 250_4 Banner Ad End -->
+
+        </div>
 
         </div>
 

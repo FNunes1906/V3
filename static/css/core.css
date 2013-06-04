@@ -1,7 +1,7 @@
 /* Resets and global Styles */
 
 * { margin:0; padding:0; }
-.sWidth { max-width:970px; min-width:758px; padding:0 5px; margin:auto; }
+.sWidth { max-width:970px; /*min-width:758px;*/ padding:0 5px; margin:auto; }
 .fl { float:left; }
 .fr { float:right; }
 .cl { clear:left; }
@@ -111,7 +111,7 @@ h1, h2, h3, h4, p, span, div { font-weight:normal; font-family:'AllerLightRegula
   padding-right:25px;
   padding-left:5px;
   height:23px;
-  line-height:27px;
+  line-height:1;
   font-size:12px;
 }
 #GuideInfo .search .searchBtn {
