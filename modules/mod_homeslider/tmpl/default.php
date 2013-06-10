@@ -114,7 +114,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
         <div class="cb"></div>
 	</div>
 	<div class="galleryNav rightCol fr">
-        <a class="full bold" href="/index.php?option=com_jevents&view=range&task=range.listevents&Itemid=97">Full Calendar</a>
+        <a class="full bold" href="/index.php?option=com_jevents&view=range&task=range.listevents&Itemid=97"><?php echo JText::_("TW_FULL_CALENDAR"); ?></a>
           <h1 class="display"><?php echo JText::_("TW_TOP_EVENT"); ?></h1>
           <ul>
 		  <?php 

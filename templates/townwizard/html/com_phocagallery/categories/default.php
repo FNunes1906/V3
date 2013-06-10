@@ -94,7 +94,9 @@ if ($this->tmpl['displayimagecategories'] == 1) {
 		//echo '<tr>';		
 		echo '<div style="text-align:left; width:100%"><a href="'.$this->categories[$i]->link.'" class="category'.$this->params->get( 'pageclass_sfx' ).'">'.$this->categories[$i]->title.'</a>';
 		//if ($this->categories[$i]->numlinks > 0) {echo '<span class="small">('.$this->categories[$i]->numlinks.')</span>';}
-		echo '<a href="'.$this->categories[$i]->link.'" class="see">see more</a>';
+		echo '<a href="'.$this->categories[$i]->link.'" class="see">';
+		echo JText::_("SEE_MORE");
+		echo '</a>';
 		echo '<br/><br/>';
 		if (isset($this->categories[$i]->extpic) && $this->categories[$i]->extpic) {
 		

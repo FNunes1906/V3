@@ -19,8 +19,9 @@ function redirecturl(val)
 			$rows=$db->query();
 			?>
 			<select id="cat_drop" name="searchcat" onChange="redirecturl(this.value);" >
-				<option value="0">Select a Category	</option>
-				<option value="0">All</option>
+				<option value="0"><?php echo JText::_("SELECT_CAT"); ?></option>
+				<option value="0"><?php echo JText::_("SELECT_All"); ?></option>
+				
 				<?php while($rowsub=mysql_fetch_array($rows))
 				{
 				?>
