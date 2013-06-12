@@ -25,11 +25,20 @@ $this->_footer();
 */
 
 $data = $this->data[row];
-
 # Event detail variables
 $ev_title		= $data->_title;
 $ev_start_date	= $data->start_date;
-$ev_time		= $data->start_time.' - '.$data->stop_time;
+if($data->start_time=='12:00AM' && $data->stop_time=='11:59PM')
+{
+	$ev_time ='All Day Event';
+}
+else
+{
+	if($data->_noendtime=='0')
+		$ev_time		= $data->start_time.' - '.$data->stop_time;
+	else
+		$ev_time		= $data->start_time;
+}
 $ev_desc		= $data->_description;
 
 # Assign Current date to variable
@@ -52,9 +61,9 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
         <div class="bc bold fr" style="text-align: right;">
 			<?php 
 			if($currentDate == $ev_start_date){
-				echo 'Today'.' '.$ev_time;
+				echo 'Today'.'<br/>'.$ev_time;
 			}else{
-				echo $ev_start_date.' '.$ev_time;
+				echo $ev_start_date.'<br/>'.$ev_time;
 			}?>
 		</div>
         <h1 class="display"><?php echo $ev_title; ?></h1>
@@ -63,7 +72,7 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
         <div style="text-transform: capitalize;" class="bold"><?php echo $lc_title; ?></div>
         <p class="desc"><?php echo $ev_desc; ?></p>
         <div class="address">
-			<?php include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
+			<?php //include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
 			<div><?php echo $lc_title;?></div>
 			<div><?php echo $lc_street;?></div>
 			<div><?php echo $lc_city.' '.$lc_state.', '.$lc_postcode;?></div>
