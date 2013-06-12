@@ -33,7 +33,7 @@ if(!empty($directoryLocations)) {
         echo $e->category;
         echo '</h2>';
         echo '<ul class="btnList">';
-        echo '<li><a href="javascript:void(0);tel:' . preg_replace('/(\W*)/', '', $e->phone) . '" class="button small">call</a></li>';
+        echo '<li><a href="tel:' . preg_replace('/(\W*)/', '', $e->phone) . '" class="button small">call</a></li>';
         if (isset($e->latitude) && isset($e->longitude)) {
             echo '<li><a class="button small" href="javascript:linkClicked(\'APP30A:FBCHECKIN:' . $e->latitude . ':' . $e->longitude . '\')">check in</a></li>';
             echo '<li><a class="button small" href="javascript:linkClicked(\'APP30A:SHOWMAP:' . $e->latitude . ':' . $e->longitude . '\')">map</a></li>';
