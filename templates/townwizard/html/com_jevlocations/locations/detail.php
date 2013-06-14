@@ -100,7 +100,7 @@ function resetLatLngTxtFields(lat, lng){
 		$thimg = '<img src="'.$mediapath.'/'.$folder.'/thumbnails/thumb_'.$this->location->image.'" />' ;
 		$img = '<img src="'.$mediapath.'/'.$folder.'/'.$this->location->image.'" />' ;
 		$imgbig = $mediapath.'/'.$folder.'/'.$this->location->image ;
-		echo "<div id='VenuePhotoGallery' class='photoGallerySect sect' style='width: 412px;overflow: hidden;'><h3 class='fl'><a class='heading display' href='/index.php?option=com_phocagallery&view=categories&Itemid=102'>".JText::_('TW_PHOTO_GALLERY')."</a></h3><div class='bc fr'><a href='/index.php?option=com_phocagallery&view=categories&Itemid=102'>Send us your photos</a></div><ul><li>
+		echo "<div id='VenuePhotoGallery' class='photoGallerySect sect' style='width: 412px;overflow: hidden;'><h3 class='fl'><a class='heading display' href='/index.php?option=com_phocagallery&view=categories&Itemid=102'>".JText::_('TW_PHOTO_GALLERY')."</a></h3><div class='bc fr'><a href='/index.php?option=com_phocagallery&view=categories&Itemid=102'>".JText::_('LOC_SEND_PHOTO')."</a></div><ul><li>
   
   <a title='Open image in new window' class='pirobox_gall' href='$imgbig'>".$thimg."</a>
   

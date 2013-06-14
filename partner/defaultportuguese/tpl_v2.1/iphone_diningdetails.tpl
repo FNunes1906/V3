@@ -15,12 +15,12 @@
 			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 			if(stripos($ua,'android') == true) { 
 			?>
-			<strong>Direcci&#243;n:</strong>&nbsp;&nbsp<a href="map.php?lat=<?php echo $lat2;?>&long=<?php echo $lon2;?>">;<?php echo $row['street'];?></a>
+			<strong>Endere&#231;o:</strong>&nbsp;&nbsp<a href="map.php?lat=<?php echo $lat2;?>&long=<?php echo $lon2;?>">;<?php echo $row['street'];?></a>
 			<br />
 			<?php } 
 			else {
 			?>
-			<strong>Direcci&#243;n:</strong>&nbsp;&nbsp<a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')"><?php echo $row['street'];?></a>
+			<strong>Endere&#231;o:</strong>&nbsp;&nbsp<a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')"><?php echo $row['street'];?></a>
 			<?php } ?>
 		</p>
 	

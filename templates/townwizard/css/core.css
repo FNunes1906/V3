@@ -1596,7 +1596,8 @@ dt.notice {
 }
 
 .veri{
- line-height: 77px !important;
+ line-height: 20px !important;
+ padding-top: 23px;
 }
 
 /* advertise with us end*/

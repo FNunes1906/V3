@@ -9,14 +9,14 @@ $option = JEV_COM_COMPONENT;
 $Itemid = JEVHelper::getItemid();
 
 ?>
-<div class="bc fr" ><span class="bold">Event Type:</span><?php $this->viewNavCatText( $this->catids, JEV_COM_COMPONENT, 'cat.listevents', $this->Itemid );?></div>
+<div class="bc fr" ><span class="bold"><?php echo JText::_("TW_EVENT_TYPE") ?>:</span><?php $this->viewNavCatText( $this->catids, JEV_COM_COMPONENT, 'cat.listevents', $this->Itemid );?></div>
 <?php 
 if ( JRequest::getVar('task') === 'week.listevents' AND JRequest::getVar('view') === 'week' ){
-	echo "<h3 class='fl heading display'>THIS WEEK</h3>";
+	echo "<h3 class='fl heading display'>". JText::_('TW_THIS_WEEK'). "</h3>";
 }
 else
 {
-	echo "<h3 class='fl heading display'>List Of Events</h3>";
+	echo "<h3 class='fl heading display'>". JText::_('TW_LIST_OF_EVENTS'). "</h3>";
 }
 ?>
 <?php
