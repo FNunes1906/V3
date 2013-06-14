@@ -335,17 +335,7 @@ function tw_logout() {
     Get the external user image url (Faceook, Twitter, etc)
 ***/
 function tw_get_user_image_url($user) {
-    if($user->loginType == 'FACEBOOK') {
-         return 'http://graph.facebook.com/'.$user->externalId.'/picture';         
-    } else if($user -> loginType == 'TWITTER') {
-        $user_url = 'http://api.twitter.com/1/users/show.json?user_id='.$user->externalId;
-        list($status, $response_msg) = _tw_get_json($user_url);
-        if($status == 200) {
-            $user = json_decode($response_msg);
-            return $user->profile_image_url;
-        }
-    }
-    return NULL;
+    return $user->imageUrl;
 }
 
 // Private functions
