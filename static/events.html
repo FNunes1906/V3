@@ -3,7 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>SL Merida | Events</title>
-<meta name="viewport" content="width=device-width;initial-scale = 1.0,maximum-scale = 1.0" />
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta name="viewport" content="width=device-width,initial-scale = 1.0,minimum-scale = 1.0,maximum-scale = 1.0,user-scalable = no" />
 <link rel="stylesheet" type="text/css" href="css/fonts.css" />
 <link rel="stylesheet" type="text/css" href="css/core.css" />
 <link rel="stylesheet" type="text/css" href="css/events.css" />
@@ -13,6 +14,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.carouFredSel-6.1.0-packed.js"></script>
 <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="js/jquery.touchwipe.min.js"></script>
 <script type="text/javascript" src="js/yetii-min.js"></script>
 <script type="text/javascript" src="js/tw.js"></script>
 </head>
@@ -22,12 +24,14 @@
 
   <div id="TopBar">
   	<div class="sWidth">
+      <a id="MenuBtn" class="fl button"><span>Menu</span></a>
   	  <div class="fl powered">Powered by<img alt="townwizard" src="images/header/twBanner.png" /></div>
   	  <div class="fr links">
   	  	<a href="#">Other Townwizard Places</a> | <a href="#">About Townwizard</a>
   	  </div>
   	</div>
   </div>
+  <div id="TopBarGhost"></div>
 
   <!-- Top Bar End -->
 
@@ -38,39 +42,41 @@
   	<!-- Header Start -->
 
   	<div id="Header">
-  	  <div id="Logo" class="fl">
+  	  <div id="Logo" class="logo fl">
   	  	<a href="#"><img alt="" src="images/mock/partnerLogo.jpg" /></a>
   	  </div>
-  	    <div class="headerAdFlex fl">
-  	  	  <div id="Social" class="fr">
-            <div>
-              <a class="fbLogin fl" href="#"><span>Login with</span></a>
-              <a class="twtLogin fl" href="#"><span>Login with</span></a>
-              <a href="#"><img alt="Help" src="images/header/helpBtn.png" /></a>
-            </div>
+	    <div class="headerAdFlex fl">
+	  	  <div id="Social" class="fr">
+          <div>
+            <a class="fbLogin fl" href="#"><span>Login with</span></a>
+            <a class="twtLogin fl" href="#"><span>Login with</span></a>
+            <a href="#"><img alt="Help" src="images/header/helpBtn.png" /></a>
           </div>
-          <div id="UpperBannerAd" class="bannerAd">
-  	  	  	<div class="bannerCont">
-  	  	      <!-- TOP BANNER AD -->
-  	  	      <img src="images/mock/ads/bannerAd.jpg" />
-  	  	  	</div>
-  	  	  </div>
-  	    </div>
-  	    
-  	    <div id="GuideInfo" class="cr">
-  	      <div class="localCont">
-            <div id="Local" class="fl">
-  	      	  <div id="Weather" class="fr bold">Current Temp: 80&deg;  <img alt="Partly Cloudy" src="images/weather/partlyCloudy.png" /> <span class="range bold">High: 88&deg; / Low: 50&deg;</span></div>
-              Serving Merida, Ciudad Caucel, &amp; Surrounding Areas
-            </div>
+        </div>
+        <div id="UpperBannerAd" class="bannerAd">
+	  	  	<div class="bannerCont">
+	  	      <!-- TOP BANNER AD -->
+	  	      <img src="images/mock/ads/bannerAd.jpg" />
+	  	  	</div>
+	  	  </div>
+	    </div>
+	    
+	    <div id="GuideInfo" class="cr">
+	      <div class="localCont">
+          <div id="Local" class="fl">
+	      	  <div id="Weather" class="fr bold">Current Temp: 80&deg;  <img alt="Partly Cloudy" src="images/weather/partlyCloudy.png" /> <span class="range bold">High: 88&deg; / Low: 50&deg;</span></div>
+            Serving Merida, Ciudad Caucel, &amp; Surrounding Areas
           </div>
-          <div class="search fr">
-  	  	    <form action="search-results-events.html">
-  	  	  	  <input type="text" placeholder="Search SocialLife Merida Events..." />
-  	  	  	  <input type="submit" value="" class="searchBtn" />
-  	  	    </form>
-  	  	  </div>
-  	    </div>
+          <div class="cl"></div>
+        </div>
+        <div class="search fr">
+	  	    <form action="search-results-events.html">
+	  	  	  <input type="text" placeholder="Search SocialLife Merida Events..." />
+	  	  	  <input type="submit" value="" class="searchBtn" />
+	  	    </form>
+	  	  </div>
+        <div class="cr"></div>
+	    </div>
   	</div>
 
   	<!-- Header End -->
@@ -80,6 +86,13 @@
   	  <!-- Left Column Start -->
 
   	  <div id="LeftCol" class="fl">
+        <div class="swipe"></div>
+        <div id="MobileHeader">
+          <div class="logo">
+            <img alt="" src="images/mock/mobile-logo.png" />
+            <p class="bold">Powered by TownWizard</p>
+          </div>
+        </div>
   	  	<nav id="MainNav" class="display">
   	  	  <ul>
   	  	    <li><a id="NavHome" href="index.html">Home</a></li>
@@ -275,7 +288,7 @@
                   });
                 </script>
 
-                <div id="DatePicker" class="fl">
+                <div id="DatePicker" class="fr">
                   <a>Select a date...</a>
                   <input id="SelDate" type="text" />
                 </div>
@@ -294,6 +307,12 @@
         </div>
 
         <!-- Event Finder End -->
+
+        <!-- Placeholder for Header Banner Ad in Mobile Layout Start -->
+
+        <div id="MobileBannerAd" class="bannerAd cb"></div>
+
+        <!-- Placeholder for Header Banner Ad in Mobile Layout End -->
 
 
         <!-- This Week Section Start -->
@@ -441,6 +460,8 @@
         </div>
 
         </div>
+
+        <div class="cb"></div>
 
       </div>
 

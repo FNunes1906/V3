@@ -26,6 +26,19 @@ h1, h2, h3, h4, p, span, div { font-weight:normal; font-family:'AllerLightRegula
   font-size:10px;
   color:#fff;
   overflow:hidden;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:2000;
+}
+#TopBarGhost {
+  background:#fff;
+  position:static;
+  height:36px;
+  width:100%;
+}
+#TopBar .button {
+  display:none;
 }
 #TopBar .powered img {
   position:relative;
@@ -51,7 +64,7 @@ h1, h2, h3, h4, p, span, div { font-weight:normal; font-family:'AllerLightRegula
 #Header .bannerAd {
   margin:10px 15px;
 }
-#Logo img {
+.logo img {
   display:block;
 }
 #Social {
@@ -100,6 +113,9 @@ h1, h2, h3, h4, p, span, div { font-weight:normal; font-family:'AllerLightRegula
 }
 #Social #LoggedIn .logOut:hover {
   text-decoration:none;
+}
+#GuideInfo .localCont {
+  float:left;
 }
 #GuideInfo .search {
   position:relative;
@@ -153,6 +169,12 @@ input:-ms-placeholder,
 
 /* Left column styles */
 
+#MobileHeader {
+  display:none;
+}
+.swipe {
+  display:none;
+}
 #LeftCol h4 {
   margin-top:23px;
   font-size:12px;
@@ -448,9 +470,6 @@ input:-ms-placeholder,
   height:50px;
   margin-bottom:15px;
   margin-right:30px;
-}
-#MainContent {
-  padding-top:20px;
 }
 #WidgetArea {
   /* Comment out to allow ads to wrap below left column */
@@ -767,7 +786,8 @@ a.saved span {
 #MainContent .sect .upload a:hover {
   text-decoration:underline;
 }
-#LowerBannerAd {
+#LowerBannerAd, 
+#MobileBannerAd {
   display:none;
   text-align:center;
 }
@@ -1694,6 +1714,16 @@ a.saved span {
 }
 
 /* ------------------------------------------------------------------- */
+
+
+
+@media all and (min-width: 733px) {
+
+  #MainContent {
+    padding-top:20px;
+  }
+
+}
 
 
 /* Negative Margins */

@@ -14,6 +14,9 @@ $(document).ready(function() {
   //Bind GeoLocation button
   jQuery('#GeoLocateMe .yes').click(geoLocateMe);
 
+  //Bind Menu Button for Mobile Site
+  jQuery('#MenuBtn').click(toggleMenu);
+
 
   /*$('.centerCol .sect').click(function() {
     alert("sect: " + $(this).offset().top + " " + $(this).css('margin-top') + "\nleft col bottom: " + ($('#LeftCol').offset().top + $('#LeftCol').height()));
@@ -21,7 +24,45 @@ $(document).ready(function() {
     alert($(this).attr('class'));
   });*/
 
+  $(document).on('click','#LeftCol .swipe',function() {
+    toggleMenu();
+  });
+
+  $('#LeftCol .swipe').touchwipe({
+     wipeLeft: function() { toggleMenu(); },
+     wipeRight: function() { },
+     min_move_x: 20,
+     min_move_y: 20,
+     preventDefaultEvents: true
+  });
+
 });
+
+var toggleMenu = function() {
+  if(jQuery('#TopBar').offset().left > 0) {
+    jQuery('#LeftCol').css('z-index',999);
+    jQuery('#TopBar, #WidgetArea').animate({ left: 0 }, 200, function() { 
+      jQuery('#WidgetArea').css('position','relative').css('top','-4px');
+      window.scrollTo(0,currentTop);
+    });
+    jQuery('#TopBar').animate({ left: 0 }, 200, function() { 
+      jQuery('#Footer').show();
+    });
+  }
+  else {
+    jQuery('#Footer').hide();
+    jQuery('#LeftCol .swipe').show().css('height',$('#LeftCol').height());
+    jQuery('#TopBar').animate({ left: '85%' }, 200, function() { });
+    jQuery('#TopBar, #WidgetArea').css('position','fixed').animate({ left: '85%' }, 200, function() { 
+      jQuery('#LeftCol').css('z-index',2001);
+    });
+    currentTop = window.pageYOffset;
+    //alert(currentTop + ' ' + (window.pageYOffset + 32));
+    jQuery('#WidgetArea').css('top', 32 - currentTop + 'px');
+    window.scrollTo(0,0);
+    //jQuery('#LeftCol').css('top',window.pageYOffset + 'px');
+  }
+}
 
 function fb_login() {
   window.open("/townwizard-db-api/fb-login.php", "_blank", "height=200,width=400,status=no,toolbar=no,menubar=no");
@@ -41,8 +82,8 @@ var resizeContent = function() {
     $('body').addClass('tablet');
 
     //Set Top Bar and Footer backgrounds to full screen width
-    $('#TopBar').css('width',$('#Content').width() + 10);
-    $('#Footer').css('width',$('#Content').width() + 10);
+    //$('#TopBar').css('width',$('#Content').width() + 10);
+    //$('#Footer').css('width',$('#Content').width() + 10);
 
     //Move guide text next to logo after upper banner ad is moved to lower ad space 
     if (!$('#UpperBannerAd').hasClass('tabletLayout')) {
@@ -106,15 +147,21 @@ var resizeContent = function() {
 
     }
 
-    //Shrink right column content for screen sizes below 845px
-    if ($(window).width() < 768 ) {
+    //Shrink content for screen sizes below 768px
+    if ($(window).width() < 733 ) {
       //$('body').addClass('min');
-      if ($(window).width() > 767) {
-        $('.rightCol .sect').not('.rightCol.spread .ad.sect, #BlogCol.rightCol .sect').css('width',$('#MainContent').width() - 529);
-        $('#ShareTool .side').css('font-size',0);
-        $('body.tablet .sect.list ul li a, body.tablet #PlacesInfo ul li a').not('body.tablet .sect.horiz.list ul li a').css('line-height','15px');
+      $('.rightCol .sect').not('.rightCol.spread .ad.sect, #BlogCol.rightCol .sect').css('width',$('#MainContent').width());
+      //$('#ShareTool .side').css('font-size',0);
+      $('body.tablet .sect.list ul li a, body.tablet #PlacesInfo ul li a').not('body.tablet .sect.horiz.list ul li a').css('line-height','15px');
+
         //$('#LowerBannerAd').addClass('min');
-      }
+        //Move upper banner ad to mobile ad space 
+        if (!$('#LowerBannerAd').hasClass('mobileLayout')) {
+          $('#MobileBannerAd').append($('#LowerBannerAd').html());
+          $('#LowerBannerAd').addClass('mobileLayout').html('').hide();
+        }
+
+
     }
     else {
       //$('body').removeClass('min');
@@ -122,7 +169,15 @@ var resizeContent = function() {
       $('.rightCol .sect').not('.rightCol .ad.sect').css('width','100%');
       $('#ShareTool .side').css('font-size','12px');
       $('body.tablet .sect.list ul li a, body.tablet #PlacesInfo ul li a').not('body.tablet .sect.horiz.list ul li a').css('line-height','25px');
+    
       //$('#LowerBannerAd').removeClass('min');
+        //Moves upper banner ad back to lower spot
+        if ($('#LowerBannerAd').hasClass('mobileLayout')) {
+          $('#LowerBannerAd').removeClass('mobileLayout').html('').show();
+          $('#LowerBannerAd').append($('#MobileBannerAd').html());
+          $('#MobileBannerAd').html('');
+        }
+
     }
   }
 
@@ -138,8 +193,8 @@ var resizeContent = function() {
   	$('body').removeClass('tablet');
 
     //Sets Top Bar and Footer backgrounds to full site width
-  	$('#TopBar').css('width','100%');
-    $('#Footer').css('width','100%');
+  	//$('#TopBar').css('width','100%');
+    //$('#Footer').css('width','100%');
   	
     //Moves upper banner ad back to header spot and places guide text below
     if ($('#UpperBannerAd').hasClass('tabletLayout')) {
