@@ -498,7 +498,7 @@ $this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
          <?php if($this->countModules('footer2')) : ?>
         <li class="site">
           <div class="pad">
-         		<h3 class="display"><?php echo $var->site_name." is a TownWizard Site" ?></h3>
+         		<h3 class="display"><?php echo $var->site_name.' '.JText::_("TW_TWSITE") ?></h3>
                 <jdoc:include type="modules" name="footer2" style="rounded" />
                 <a class="all" href="http://www.townwizard.com/locations/" target="_blank"><?php echo JText::_("TW_SEE_ALL_PARTNER") ?> &gt;</a>
            </div>
