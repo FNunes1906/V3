@@ -31,7 +31,7 @@
 			<form action="" method="post" name="location_form" id="searchForm">
 				<fieldset>
 					<input type="search" name="searchvalue" value="" size="15"/>
-					<input type="submit" name="search_rcd" value="Search"/>
+					<input type="submit" name="search_rcd" value="Zoeken"/>
 				</fieldset>
 			</form>
 		</div>
