@@ -362,6 +362,11 @@ body.tablet #AttendancePanel .attendeeList .attendee img {
   width:100%;
 }
 
+#Feat .sect {
+  border-left:0 none;
+  padding:0;
+}
+
 
 
   #TopBar {
@@ -584,14 +589,15 @@ body.tablet #AttendancePanel .attendeeList .attendee img {
     margin:0 auto 30px !important;
   }
 
-  #LowerAds {
+  #LowerAds, #LowerTallAd {
     float:none;
     margin:auto;
     clear:both;
   }
 
-  .detailFeature {
+  .detailFeature.sect {
     margin-top:12px;
+    border-top:0 none !important;
   }
 
   .detailFeature h1 {
@@ -628,6 +634,45 @@ body.tablet #AttendancePanel .attendeeList .attendee img {
     float:none;
     width:100% !important;
     margin-bottom:30px;
+  }
+
+  .centerCol .sect.horiz ul li .thumb {
+    margin-left:0;
+    margin-right:8px;
+  }
+
+  .centerCol .sect.horiz ul li .thumb img {
+    width:100% !important;
+  }
+
+  #SearchResults .venueName {
+    float:left !important;
+  }
+
+  #SearchResults .bc {
+    float:right !important;
+  }
+
+  .detailFeature .ratingWidget {
+    padding-left:10px;
+  }
+
+  .detailFeature .ratingWidget .cust {
+    margin-bottom:20px;
+  }
+
+  .detailFeature .map {
+    float:none !important;
+  }
+
+  .detailFeature .map img {
+    display:block;
+    width:94% !important;
+    padding:0 3% !important;
+  }
+
+  .detailFeature .checkinBtn {
+    margin-left:10px !important;
   }
 
 }
