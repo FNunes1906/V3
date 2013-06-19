@@ -82,8 +82,12 @@
 											?>
 											<h2><a class="bold" href="<?php echo $row['url'] ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
 										<?php }?>
-										<?php if($row['phone']!=''){?>
-											<h2 class="bold"><?php echo $row['phone'] ?></h2>
+										<?php if($row['phone']!=''){
+										$phrase = $this->escape($phone);
+										$remove = array("(","-",")");
+										$newphrase1 = str_replace($remove, "", $phrase);
+										?>
+											<h2 class="bold"><a href="tel:<?php echo $newphrase1;?>"><?php echo $row['phone'] ?></a></h2>
 										<?php }?>
 										
 						</div>
@@ -205,8 +209,13 @@
 											?>
 										<h2><a class="bold" href="<?php echo $this->escape($url) ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
 										<?php }?>
-										<?php if($this->escape($phone)!=''){?>
-										<h2 class="bold"><?php echo $this->escape($phone);?></h2>
+										<?php if($this->escape($phone)!=''){
+										$phrase = $this->escape($phone);
+										$remove = array("(","-",")");
+										$newphrase = str_replace($remove, "", $phrase);
+										//echo $newphrase;
+										?>
+										<h2 class="bold"><a href="tel:<?php echo $newphrase;?>"><?php echo $this->escape($phone);?></a></h2>
 										<?php }?>
 										
 										

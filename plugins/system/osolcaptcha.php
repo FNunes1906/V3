@@ -507,7 +507,7 @@ class plgSystemOSOLCaptcha extends JPlugin
 				JError::raiseWarning("666",JTEXT::_('OSOLCAPTCHA_ERROR_MESSAGE'));
 				//JFactory::getApplication()
 				//$mainframe->redirect(JURI::base());
-				$mainframe->redirect("index.php?option=com_php&Itemid=105");
+				$mainframe->redirect("submit-your-event");
 			}
 			else
 			{
