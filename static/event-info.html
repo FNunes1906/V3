@@ -156,73 +156,83 @@
 
   	  <div id="WidgetArea">
 
+        <!-- Placeholder for Header Banner Ad in Vertical Layout Start -->
+
+        <div id="LowerBannerAd" class="bannerAd"></div>
+
+        <!-- Placeholder for Header Banner Ad in Vertical Layout End -->
+
+        <div class="centerCol fl">
+
     	  <!-- Event Detail Section Start -->
 
     	  <div id="Feat" class="centerCol fl">
     	  	<div id="EventDetail" class="detailFeature sect">
-            <div class="bc bold fr">
-              Today, 8PM
-            </div>
-            <h1 class="display">Sonic Youth: The Eternal Tour</h1>
-            <div class="rating"></div>
-            <div class="evtTmb fr">
-              <!-- Map here -->
-              <img alt="" src="images/mock/lists/feat.jpg" />
-
-              <a class="rsvpBtn bold" data-ref-panel="LoginPanel" href="#">Click here to RSVP</a>
-
-              <script>
-                //The following Javascript code is purely to mock demonstrate feedback about user RSVP status. This functionality will need to be wired into the php to update the class name and html() of the rsvpBtn anchor tag
-                
-                jQuery(document).ready(function() {
-                  jQuery('#RsvpPanel .rsvp a').click(updateRsvpStatus);
-                });
-
-
-                var updateRsvpStatus = function() {
-                  var status = jQuery(this).attr('class');
-                  switch(status) {
-                    case "yes":
-                      jQuery('.rsvpBtn').removeClass().addClass('rsvpBtn bold attending').html('You are attending <span>(click here to change)</span>');
-                      break;
-                    case "no":
-                      jQuery('.rsvpBtn').removeClass().addClass('rsvpBtn bold notAttending').html('You are not attending <span>(click here to change)</span>');
-                      break;
-                    case "maybe":
-                      jQuery('.rsvpBtn').removeClass().addClass('rsvpBtn bold maybeAttending').html('You might attend <span>(click here to change)</span>');
-                      break;
-                  }
-                }
-
-              </script>
-            </div>
-            <div class="detailCont">
-              <div class="bold">Alys Beach Ampitheater</div>
-              <p class="desc">Vestibulum et libero ante, eu condimentum enim. Pellentesque tempus eleifend risus nec fermentum. Integer ut aliquam odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat, dui ac euismod.</p>
-              <div class="address">
-                <div>Alys Beach Ampitheater</div>
-                <div>444 South St</div>
-                <div>West Philadelphia, PA</div>
-                <div>03801</div>
+            <div class="pad">
+              <div class="bc bold fr">
+                Today, 8PM
               </div>
-              <div class="people cb">
-                <div class="likes fl">
-                  <span>Liked by:</span>
-                  <div class="fb-like" data-send="false" data-width="225" data-show-faces="true"></div>
+              <h1 class="display">Sonic Youth: The Eternal Tour</h1>
+              <div class="rating"></div>
+              <div class="evtTmb fr">
+                <!-- Map here -->
+                <img alt="" src="images/mock/lists/feat.jpg" />
+
+                <a class="rsvpBtn bold" data-ref-panel="LoginPanel" href="#">Click here to RSVP</a>
+
+                <script>
+                  //The following Javascript code is purely to mock demonstrate feedback about user RSVP status. This functionality will need to be wired into the php to update the class name and html() of the rsvpBtn anchor tag
+                  
+                  jQuery(document).ready(function() {
+                    jQuery('#RsvpPanel .rsvp a').click(updateRsvpStatus);
+                  });
+
+
+                  var updateRsvpStatus = function() {
+                    var status = jQuery(this).attr('class');
+                    switch(status) {
+                      case "yes":
+                        jQuery('.rsvpBtn').removeClass().addClass('rsvpBtn bold attending').html('You are attending <span>(click here to change)</span>');
+                        break;
+                      case "no":
+                        jQuery('.rsvpBtn').removeClass().addClass('rsvpBtn bold notAttending').html('You are not attending <span>(click here to change)</span>');
+                        break;
+                      case "maybe":
+                        jQuery('.rsvpBtn').removeClass().addClass('rsvpBtn bold maybeAttending').html('You might attend <span>(click here to change)</span>');
+                        break;
+                    }
+                  }
+
+                </script>
+              </div>
+              <div class="detailCont">
+                <div class="bold">Alys Beach Ampitheater</div>
+                <p class="desc">Vestibulum et libero ante, eu condimentum enim. Pellentesque tempus eleifend risus nec fermentum. Integer ut aliquam odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat, dui ac euismod.</p>
+                <div class="address">
+                  <div>Alys Beach Ampitheater</div>
+                  <div>444 South St</div>
+                  <div>West Philadelphia, PA</div>
+                  <div>03801</div>
                 </div>
-                <div class="checkins fl">
-                  <div class="pad">
-                    <span>50 attending:</span>
-                    <img class="fl" alt="" src="images/mock/faces/person1.jpg" />
-                    <img class="fl" alt="" src="images/mock/faces/person2.jpg" />
-                    <img class="fl" alt="" src="images/mock/faces/person3.jpg" />
-                    <img class="fl" alt="" src="images/mock/faces/person4.jpg" />
-                    <img class="fl" alt="" src="images/mock/faces/person5.jpg" />
-                    <a class="seeAll fl" data-ref-panel="AttendancePanel" href="#">See all &raquo;</a>
-                    <div class="cb"></div>
+                <div class="people cb">
+                  <div class="likes fl">
+                    <span>Liked by:</span>
+                    <div class="fb-like" data-send="false" data-width="225" data-show-faces="true"></div>
                   </div>
+                  <div class="checkins fl">
+                    <div class="pad">
+                      <span>50 attending:</span>
+                      <img class="fl" alt="" src="images/mock/faces/person1.jpg" />
+                      <img class="fl" alt="" src="images/mock/faces/person2.jpg" />
+                      <img class="fl" alt="" src="images/mock/faces/person3.jpg" />
+                      <img class="fl" alt="" src="images/mock/faces/person4.jpg" />
+                      <img class="fl" alt="" src="images/mock/faces/person5.jpg" />
+                      <a class="seeAll fl" data-ref-panel="AttendancePanel" href="#">See all &raquo;</a>
+                      <div class="cb"></div>
+                    </div>
+                  </div>
+                  <div class="cb"></div>
                 </div>
-                <div class="cb"></div>
               </div>
             </div>
           </div>
@@ -230,11 +240,7 @@
 
     	  <!-- Event Detail Section End -->
 
-        <!-- Placeholder for Header Banner Ad in Vertical Layout Start -->
 
-        <div id="LowerBannerAd" class="bannerAd"></div>
-
-        <!-- Placeholder for Header Banner Ad in Vertical Layout End -->
 
         <!-- Placeholder for Header Banner Ad in Mobile Layout Start -->
 
@@ -242,40 +248,7 @@
 
         <!-- Placeholder for Header Banner Ad in Mobile Layout End -->
 
-        <!-- Share This Section Start -->
-
-        <div class="rightCol fr">
-          <div id="ShareThis" class="neg sect">
-            <div class="cont">
-              <h3 class="fl"><a class="heading display" href="#">Share This</a></h3>
-              <div id="ShareTool" class="cl">
-                <div class="side fl">
-                  <span class='st_twitter_large' displayText='Tweet This'>Tweet This</span>
-                  <div class="cl"></div>
-                  <span class='st_facebook_large' displayText='Facebook'>Facebook</span>
-                  <div class="cl"></div>
-                  <span class='st_tumblr_large' displayText='Tumblr'>Tumblr</span>
-                </div>
-                <div class="side fl">
-                  <span class='st_googleplus_large' displayText='Google Plus'>Google+</span>
-                  <div class="cl"></div> 
-                  <span class='cal_large' displayText='Add to Cal'><span class="calBtn btn fl"></span>Add to Cal (.ics)</span>
-                  <div class="cl"></div>               
-                  <span class='st_email_large' displayText='Email'>Email Info</span>
-                </div>
-                <div class="lower cl">
-                  <a href="submit-event-error.html" class='error_large'><span class="errorBtn btn fl"></span><span class="bold error">Is Our Info Wrong?</span> <span class="hideSm error">Contact us to correct it</a>
-                  <div class="cl"></div>
-                  <a href="#"><span class='favorites_large'><span class="favBtn btn fl"></span>Add to My Favorites</span></a>
-                  <div class="cl"></div>
-                  <a href="#"><span class='print_large'><span class="printBtn btn fl"></span>Print this Page</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Share This Section End -->
+        
 
 
         <!-- This Week Section Start -->
@@ -364,7 +337,44 @@
 
         <!-- This Week Section End -->
 
+        </div>
+
         <div class="rightCol fr">
+
+          <!-- Share This Section Start -->
+
+        <div class="rightCol fr">
+          <div id="ShareThis" class="neg sect">
+            <div class="cont">
+              <h3 class="fl"><a class="heading display" href="#">Share This</a></h3>
+              <div id="ShareTool" class="cl">
+                <div class="side fl">
+                  <span class='st_twitter_large' displayText='Tweet This'>Tweet This</span>
+                  <div class="cl"></div>
+                  <span class='st_facebook_large' displayText='Facebook'>Facebook</span>
+                  <div class="cl"></div>
+                  <span class='st_tumblr_large' displayText='Tumblr'>Tumblr</span>
+                </div>
+                <div class="side fl">
+                  <span class='st_googleplus_large' displayText='Google Plus'>Google+</span>
+                  <div class="cl"></div> 
+                  <span class='cal_large' displayText='Add to Cal'><span class="calBtn btn fl"></span>Add to Cal (.ics)</span>
+                  <div class="cl"></div>               
+                  <span class='st_email_large' displayText='Email'>Email Info</span>
+                </div>
+                <div class="lower cl">
+                  <a href="submit-event-error.html" class='error_large'><span class="errorBtn btn fl"></span><span class="bold error">Is Our Info Wrong?</span> <span class="hideSm error">Contact us to correct it</a>
+                  <div class="cl"></div>
+                  <a href="#"><span class='favorites_large'><span class="favBtn btn fl"></span>Add to My Favorites</span></a>
+                  <div class="cl"></div>
+                  <a href="#"><span class='print_large'><span class="printBtn btn fl"></span>Print this Page</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Share This Section End -->
 
         <div id="EventsInfo" class="neg rightCol fr spread">
           

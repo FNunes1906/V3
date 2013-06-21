@@ -322,8 +322,20 @@ body.tablet #AttendancePanel .attendeeList .attendee img {
   margin-right:15px;
 }
 
+@media all and (max-width: 980px) {
+  .rightCol {
+    max-width:none;
+    width:100%;
+  }
+}
 
 @media all and (max-width: 733px) {
+
+  #WidgetArea { margin-left:0; }
+
+  .detailFeature .pad {
+    padding:0;
+  }
 
 #TopBar .links {
   display:none;
@@ -348,9 +360,7 @@ body.tablet #AttendancePanel .attendeeList .attendee img {
   display:none !important;
 }
 
-.rightCol {
-  
-}
+
 
 #Footer {
   height:auto;
@@ -673,6 +683,12 @@ body.tablet #AttendancePanel .attendeeList .attendee img {
 
   .detailFeature .checkinBtn {
     margin-left:10px !important;
+  }
+
+  .ad img { margin:auto; }
+
+  .centerCol .sect.horiz ul li .thumb {
+    float:none;
   }
 
 }

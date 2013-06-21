@@ -159,211 +159,213 @@
 
   	  <div id="WidgetArea">
 
+        <!-- Placeholder for Header Banner Ad in Vertical Layout Start -->
+
+        <div id="LowerBannerAd" class="bannerAd"></div>
+
+        <!-- Placeholder for Header Banner Ad in Vertical Layout End -->
+
         <div class="centerCol fl">
 
     	  <!-- Venue Detail Section Start -->
 
     	  <div id="Feat" class="centerCol fl">
     	  	<div id="VenueDetail" class="detailFeature sect">
-            <div class="bc bold fr">
-              American, Italian $
-            </div>
-            <h1 class="display">The Pizza Palace</h1>
+            <div class="pad">
+              <div class="bc bold fr">
+                American, Italian $
+              </div>
+              <h1 class="display">The Pizza Palace</h1>
 
-            <!-- Start New Rating Widget -->
+              <!-- Start New Rating Widget -->
 
-            <style type="text/css">
+              <style type="text/css">
 
-              .ratingWidget .stars {
-                height:14px;
-                position:relative;
-                width:120px;
-              }
-              .ratingWidget .avgRating {
-                line-height:18px;
-              }
-              .ratingWidget .stars a {
-                background:url('images/stars/starsList.png') center bottom;
-                display:block;
-                float:left;
-                width:14px;
-                height:13px;
-                margin:2px 4px 1px 0 !important;
-              }
-              .ratingWidget .vote.stars a {
-                cursor:pointer;
-              }
-              .ratingWidget .stars a.filled {
-                background-position:left -13px;
-              }
-              .ratingWidget .vote.stars a.filled {
-                background-position:left top;
-              }
+                .ratingWidget .stars {
+                  height:14px;
+                  position:relative;
+                  width:120px;
+                }
+                .ratingWidget .avgRating {
+                  line-height:18px;
+                }
+                .ratingWidget .stars a {
+                  background:url('images/stars/starsList.png') center bottom;
+                  display:block;
+                  float:left;
+                  width:14px;
+                  height:13px;
+                  margin:2px 4px 1px 0 !important;
+                }
+                .ratingWidget .vote.stars a {
+                  cursor:pointer;
+                }
+                .ratingWidget .stars a.filled {
+                  background-position:left -13px;
+                }
+                .ratingWidget .vote.stars a.filled {
+                  background-position:left top;
+                }
 
-            </style>
+              </style>
 
-            <script type="text/javascript">
+              <script type="text/javascript">
 
-              $(document).ready(function() {
+                $(document).ready(function() {
 
-                //Init Rating
-                initRating();
+                  //Init Rating
+                  initRating();
 
-                //Bind Rating Units
-                $('.ratingWidget .vote.stars a').mouseenter(hoverVote);
-                $('.ratingWidget .vote.stars').mouseleave(showRating);
-                $('.ratingWidget .vote.stars a').click(castVote);
+                  //Bind Rating Units
+                  $('.ratingWidget .vote.stars a').mouseenter(hoverVote);
+                  $('.ratingWidget .vote.stars').mouseleave(showRating);
+                  $('.ratingWidget .vote.stars a').click(castVote);
 
-              });
+                });
 
-              var rating = 0;
-              var $star;
+                var rating = 0;
+                var $star;
 
-              var initRating = function() {
-                $('.ratingWidget .avgRating.stars').each(function() {
+                var initRating = function() {
+                  $('.ratingWidget .avgRating.stars').each(function() {
+                    $star = $(this);
+                    resetIndex();
+                    var currRating = $(this).attr('data-content-rating');
+                    $(this).find('a').each(function() {
+                      if ($(this).attr('index') <= currRating) {
+                        $(this).addClass('filled');
+                      }
+                      else {
+                        $(this).removeClass('filled');
+                      }
+                    });
+                  });
+                }
+
+                var resetIndex = function() {
+                  var starCount = 0;
+                  $star.parent().find('a').each(function() {
+                    starCount++;
+                    $(this).attr('index', starCount);
+                  });
+                }
+
+                var showRating = function() {
                   $star = $(this);
-                  resetIndex();
+                  resetIndex(); 
                   var currRating = $(this).attr('data-content-rating');
-                  $(this).find('a').each(function() {
-                    if ($(this).attr('index') <= currRating) {
+                  $(this).parent().find('a').each(function() {
+                    if($(this).attr('index') <= currRating) {
                       $(this).addClass('filled');
                     }
                     else {
                       $(this).removeClass('filled');
                     }
                   });
-                });
-              }
+                }
 
-              var resetIndex = function() {
-                var starCount = 0;
-                $star.parent().find('a').each(function() {
-                  starCount++;
-                  $(this).attr('index', starCount);
-                });
-              }
+                var hoverVote = function(ref) {
+                  $star = $(this);
+                  resetIndex();
+                  var vote = $(this).attr('index');
+                  $(this).parent().find('a').each(function() {
+                    if($(this).attr('index') <= vote) {
+                      $(this).addClass('filled');
+                    }
+                    else {
+                      $(this).removeClass('filled');
+                    }
+                  });
+                }
 
-              var showRating = function() {
-                $star = $(this);
-                resetIndex(); 
-                var currRating = $(this).attr('data-content-rating');
-                $(this).parent().find('a').each(function() {
-                  if($(this).attr('index') <= currRating) {
-                    $(this).addClass('filled');
-                  }
-                  else {
-                    $(this).removeClass('filled');
-                  }
-                });
-              }
+                var castVote = function() {
+                  var voteCount = 0;
+                  $(this).addClass('voted');
+                  $(this).parent().find('a').each(function() {
+                    voteCount++;
+                    if($(this).hasClass('voted')) {
+                      rating = voteCount;
+                      var content = $(this).parent().parent().parent().attr('data-content-id');
+                      $(this).parent().attr('data-content-rating',rating);
+                      $(this).removeClass('voted');
 
-              var hoverVote = function(ref) {
-                $star = $(this);
-                resetIndex();
-                var vote = $(this).attr('index');
-                $(this).parent().find('a').each(function() {
-                  if($(this).attr('index') <= vote) {
-                    $(this).addClass('filled');
-                  }
-                  else {
-                    $(this).removeClass('filled');
-                  }
-                });
-              }
+                      alert(rating + " " + content);
+                    }
+                  });
+                }
 
-              var castVote = function() {
-                var voteCount = 0;
-                $(this).addClass('voted');
-                $(this).parent().find('a').each(function() {
-                  voteCount++;
-                  if($(this).hasClass('voted')) {
-                    rating = voteCount;
-                    var content = $(this).parent().parent().parent().attr('data-content-id');
-                    $(this).parent().attr('data-content-rating',rating);
-                    $(this).removeClass('voted');
-
-                    alert(rating + " " + content);
-                  }
-                });
-              }
-
-            </script>
+              </script>
 
 
-            <div class="ratingWidget" data-content-id="12345">
-              <div class="cust fl">
-                <span>Customer rating:</span>
-                <div class="avgRating stars" data-content-rating="3">
-                  <a class="1"></a>
-                  <a class="2"></a>
-                  <a class="3"></a>
-                  <a class="4"></a>
-                  <a class="5"></a>
-                  (10)
+              <div class="ratingWidget" data-content-id="12345">
+                <div class="cust fl">
+                  <span>Customer rating:</span>
+                  <div class="avgRating stars" data-content-rating="3">
+                    <a class="1"></a>
+                    <a class="2"></a>
+                    <a class="3"></a>
+                    <a class="4"></a>
+                    <a class="5"></a>
+                    (10)
+                  </div>
                 </div>
-              </div>
-              <div class="yours fl">
-                <span>Your rating:</span>
-                <div class="vote stars" data-content-rating="0">
-                  <a class="1"></a>
-                  <a class="2"></a>
-                  <a class="3"></a>
-                  <a class="4"></a>
-                  <a class="5"></a>
-                </div>
-              </div>
-              <div class="cb"></div>
-            </div>
-
-            <!-- End New Rating Widget -->
-
-            <div class="map fr">
-              <!-- Map here -->
-              <img alt="" src="images/mock/smallMap.jpg" />
-
-              <a class="checkinBtn bold" data-ref-panel="LoginPanel" href="#">Check In</a>
-            </div>
-            <div class="detailCont">
-              <div class="phone bold">Phone: 603-123-3456</div>
-              <a href="#">www.pizzapalace.com</a>
-              <a href="#">info@the pizzapalace.com</a>
-              <div class="address">
-                <div>Unit 15,</div>
-                <div>444 South St</div>
-                <div>West Philadelphia, PA</div>
-                <div>03801</div>
-              </div>
-            
-              <div class="people cb">
-                <div class="likes fl">
-                  <span>Liked by:</span>
-                  <div class="fb-like" data-href="http://www.apple.com" data-send="false" data-width="50%" data-show-faces="true"></div>
-                </div>
-                <div class="checkins fl">
-                  <div class="pad">
-                    <span>50 Checkins today:</span>
-                    <img class="fl" alt="" src="images/mock/faces/person1.jpg" />
-                    <img class="fl" alt="" src="images/mock/faces/person2.jpg" />
-                    <img class="fl" alt="" src="images/mock/faces/person3.jpg" />
-                    <img class="fl" alt="" src="images/mock/faces/person4.jpg" />
-                    <img class="fl" alt="" src="images/mock/faces/person5.jpg" />
-                    <a class="seeAll fl" data-ref-panel="AttendancePanel" href="#">See all &raquo;</a>
-                    <div class="cb"></div>
+                <div class="yours fl">
+                  <span>Your rating:</span>
+                  <div class="vote stars" data-content-rating="0">
+                    <a class="1"></a>
+                    <a class="2"></a>
+                    <a class="3"></a>
+                    <a class="4"></a>
+                    <a class="5"></a>
                   </div>
                 </div>
                 <div class="cb"></div>
+              </div>
+
+              <!-- End New Rating Widget -->
+
+              <div class="map fr">
+                <!-- Map here -->
+                <img alt="" src="images/mock/smallMap.jpg" />
+
+                <a class="checkinBtn bold" data-ref-panel="LoginPanel" href="#">Check In</a>
+              </div>
+              <div class="detailCont">
+                <div class="phone bold">Phone: 603-123-3456</div>
+                <a href="#">www.pizzapalace.com</a>
+                <a href="#">info@the pizzapalace.com</a>
+                <div class="address">
+                  <div>Unit 15,</div>
+                  <div>444 South St</div>
+                  <div>West Philadelphia, PA</div>
+                  <div>03801</div>
+                </div>
+              
+                <div class="people cb">
+                  <div class="likes fl">
+                    <span>Liked by:</span>
+                    <div class="fb-like" data-href="http://www.apple.com" data-send="false" data-width="50%" data-show-faces="true"></div>
+                  </div>
+                  <div class="checkins fl">
+                    <div class="pad">
+                      <span>50 Checkins today:</span>
+                      <img class="fl" alt="" src="images/mock/faces/person1.jpg" />
+                      <img class="fl" alt="" src="images/mock/faces/person2.jpg" />
+                      <img class="fl" alt="" src="images/mock/faces/person3.jpg" />
+                      <img class="fl" alt="" src="images/mock/faces/person4.jpg" />
+                      <img class="fl" alt="" src="images/mock/faces/person5.jpg" />
+                      <a class="seeAll fl" data-ref-panel="AttendancePanel" href="#">See all &raquo;</a>
+                      <div class="cb"></div>
+                    </div>
+                  </div>
+                  <div class="cb"></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
     	  <!-- Venue Detail Section End -->
-
-        <!-- Placeholder for Header Banner Ad in Vertical Layout Start -->
-
-        <div id="LowerBannerAd" class="bannerAd"></div>
-
-        <!-- Placeholder for Header Banner Ad in Vertical Layout End -->
 
 
         <!-- Placeholder for Header Banner Ad in Mobile Layout Start -->
@@ -375,7 +377,7 @@
 
         <!-- Share This Section Start -->
 
-        <div class="rightCol fr">
+        <div class="leftCol fl">
           <div id="ShareThis" class="neg sect">
             <div class="cont">
               <h3 class="fl"><a class="heading display" href="#">Share This</a></h3>

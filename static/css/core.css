@@ -473,7 +473,7 @@ input:-ms-placeholder,
 }
 #WidgetArea {
   /* Comment out to allow ads to wrap below left column */
-  /* margin-left:215px; */
+  margin-left:215px;
 }
 #LeftCol {
   width:180px;
@@ -1401,6 +1401,9 @@ a.saved span {
 
 .detailFeature {
   margin-bottom:50px;
+}
+.detailFeature .pad {
+  padding:10px 0 0 10px;
 }
 .detailFeature a {
   display:block;

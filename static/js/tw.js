@@ -48,6 +48,7 @@ var toggleMenu = function() {
     jQuery('#TopBar').animate({ left: 0 }, 200, function() { 
       jQuery('#Footer').show();
     });
+    jQuery('#LeftCol .swipe').hide();
   }
   else {
     jQuery('#Footer').hide();
@@ -127,8 +128,8 @@ var resizeContent = function() {
         $('#WidgetArea .centerCol .sect').not('#WidgetArea #Blog.centerCol .sect').each(function() {
           $(this).parent().removeClass('cb belowCol');
           if ($(this).offset().top > ($('#LeftCol').offset().top + $('#LeftCol').height() + parseFloat($(this).css('margin-top')))) {
-            $(this).css('width',$('#Content').width());
-            $(this).parent().addClass('cb belowCol').css('width',$('#Content').width());
+            //$(this).css('width',$('#Content').width());
+            //$(this).parent().addClass('cb belowCol').css('width',$('#Content').width());
           }
         });
       }, 100);
