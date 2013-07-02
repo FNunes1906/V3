@@ -4,6 +4,7 @@ define( '_JEXEC', 1 );
 define('JPATH_BASE', dirname(__FILE__) );
 define( 'DS', DIRECTORY_SEPARATOR );
 
+
 include(JPATH_BASE .DS.'formValidation.php');
 require_once ( JPATH_BASE .DS.'includes'.DS.'defines.php' );
 require_once ( JPATH_BASE .DS.'includes'.DS.'framework.php');
@@ -239,11 +240,15 @@ global $msg;
 	return true;
 }
 
+
 ?>
+
 <link rel="stylesheet" type="text/css" href="/templates/townwizard/css/core.css" />
 <link rel="stylesheet" type="text/css" href="/templates/townwizard/css/fonts.css" />
 <link href="/templates/rt_quantive_j15/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
 <link rel="stylesheet" href="/administrator/templates/khepri/css/icon.css" type="text/css" />
+ 
 <link rel="stylesheet" href="/administrator/components/com_jevents/assets/css/eventsadmin.css" type="text/css" />
 <link rel="stylesheet" href="/media/system/css/modal.css" type="text/css" />
 <link rel="stylesheet" href="/components/com_jevents/assets/css/dashboard.css" type="text/css" />
@@ -261,6 +266,7 @@ global $msg;
 <link rel="stylesheet" href="/modules/mod_rokajaxsearch/themes/blue/rokajaxsearch-theme.css" type="text/css" />
 
 <script type="text/javascript" src="/includes/js/joomla.javascript.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="/media/system/js/mootools.js"></script>
 <script type="text/javascript" src="/administrator/components/com_jevents/assets/js/editical.js?v=1.5.4"></script>
 <script type="text/javascript" src="/administrator/components/com_jevpeople/assets/js/people.js"></script>
@@ -285,6 +291,7 @@ global $msg;
 <script type="text/javascript" src="/plugins/system/pc_includes/ajax_1.3.js"></script>
 <link href="/indexiphone.php?option=com_jevents&amp;task=modlatest.rss&amp;format=feed&amp;type=rss&amp;Itemid=111&amp;modid=0"  rel="alternate"  type="application/rss+xml" title="JEvents - RSS 2.0 Feed" />
 <link href="/indexiphone.php?option=com_jevents&amp;task=modlatest.rss&amp;format=feed&amp;type=atom&amp;Itemid=111&amp;modid=0"  rel="alternate"  type="application/rss+xml" title="JEvents - Atom Feed" />
+
 <script type="text/javascript" src="common/js/event_submit.js"></script>
 
 <script type="text/javascript" language="javascript">
@@ -402,7 +409,7 @@ if($msg!='') {?>
 	background:#E6E6E6;  
 	left: 31%;
 	 top: 48%;
-	z-index:1000; /* Layering ( on-top of others), if you have lots of layers: I just maximized, you can change it yourself */
+	z-index:2000; /* Layering ( on-top of others), if you have lots of layers: I just maximized, you can change it yourself */
 	margin-left: 0px;
 	line-height:25px; 
 	
@@ -442,56 +449,35 @@ text-decoration:none;
 	font-weight:500; 
    
 }
-#mask {
-   background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
-   display: block;
-   height: 100%;
-   left: 0;
-   opacity: 0.8;
-   top: 0;
-   width: 100%;
-   z-index: 999;
-}
-#Darkness {
+.black {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
     display: block;
-	}
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
 </style>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+
 
 <script type="text/javascript">
-	
-	$(document).ready( function() {
-	
-		// When site loaded, load the Popupbox First
-		loadPopupBox();
-		
-		$('#popupBoxClose').click( function() {			
-			unloadPopupBox();
-			$('#mask').remove();
-		});
-		
-		function unloadPopupBox() {	// TO Unload the Popupbox
-			$('#popup_box').fadeOut("slow");
+	jQuery(document).ready( function() {
 			
-		}	
-		
-		function loadPopupBox() {	// To Load the Popupbox
-			$('body').append('<div id="mask"></div>');
-			$('#Darkness').css('display','none');
-			$('#popup_box').fadeIn("slow");
-				
-		}
-		/**********************************************************/
-		
-	});
+		jQuery('#popupBoxClose').click( function() {		
+			jQuery('.black').css('display','none');
+			jQuery('#popup_box').css('display','none');
+		});
+		});
 </script>
 
-<div id="popup_box">
+<div id="popup_box" >
 			<a id="popupBoxClose" class="close">x</a>	
 			<b><?php echo $msg ;?></b>
+			
 </div>
-	
+<div class="black" ></div>	
 <?php } ?>
 
 

@@ -92,7 +92,7 @@ $allCatIds[] = 151;
 
 $path= $_SERVER['PHP_SELF'] . "?option=com_jevlocations&task=locations.listlocations&tmpl=component&needdistance=1&sortdistance=1&lat=".$lat1."&lon=".$lon1."&bIPhone=". $_REQUEST[bIPhone]."&iphoneapp=1&search=". $_REQUEST[search]."&limit=0&jlpriority_fv=0&filter_loccat=".$filter_loccat."&filter_order=".$filter_order."&filter_order_Dir=".$filter_order_Dir;
 
-if ($_REQUEST['search']!='' || $_REQUEST['Buscar']!='' || $_REQUEST['Traži']!='' || $_REQUEST['Pesquisar']!='' || $_REQUEST['']!='Zoeken')
+if ($_REQUEST['search']!='' || $_REQUEST['Buscar']!='' || $_REQUEST['Traži']!='' || $_REQUEST['Pesquisar']!='' || $_REQUEST['Zoeken']!='')
 	$subquery="  and title like '%".$_REQUEST['search']."%' or description like '%".$_REQUEST['search']."%'";
 
 $query1 = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180)) + cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations $customfields3_table WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ".$subquery;

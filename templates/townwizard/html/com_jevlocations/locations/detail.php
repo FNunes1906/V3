@@ -58,10 +58,10 @@ function resetLatLngTxtFields(lat, lng){
 	</div>
 	<?php
 	if (strlen($this->location->phone)>0) {
-		$phrase = $this->escape($phone);
-		$remove = array("(","-",")");
+		$phrase = $this->location->phone;
+		$remove = array("(","-",")"," ");
 		$newphrase = str_replace($remove, "", $phrase);
-		echo "<div class='phone bold'>".JText::_("TW_PHONE").":".$this->location->phone."</div>";
+		 echo "<div class='phone bold'>".JText::_("TW_PHONE").":<a href=tel:".$newphrase.">".$this->location->phone."</a></div>";
 	}
 		if (strlen($this->location->url)>0) {
 		$pattern = '[a-zA-Z0-9&?_.,=%\-\/]';

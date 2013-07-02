@@ -84,7 +84,7 @@
 										<?php }?>
 										<?php if($row['phone']!=''){
 										$phrase = $this->escape($phone);
-										$remove = array("(","-",")");
+										$remove = array("(","-",")"," ");
 										$newphrase1 = str_replace($remove, "", $phrase);
 										?>
 											<h2 class="bold"><a href="tel:<?php echo $newphrase1;?>"><?php echo $row['phone'] ?></a></h2>

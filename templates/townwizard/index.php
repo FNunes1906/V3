@@ -392,7 +392,27 @@ $this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
 						<?php } else { ?>
 						<div class="cont">	
 						<?php } ?>
-	                             <jdoc:include type="message" />
+	                             <?php if ($this->getBuffer('message')) : ?> 
+							
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+								
+							<script type="text/javascript">
+	
+	jQuery(document).ready( function() {
+			
+		jQuery('#popupBoxClose').click( function() {		
+			jQuery('.black').css('display','none');
+			jQuery('#systmsg').css('display','none');
+		});
+		});
+</script>
+							<div id="systmsg" >
+  		<a id="popupBoxClose" class="close">x</a>
+  <jdoc:include type="message" />
+ 	
+</div>  
+	<div class="black" ></div>
+<?php endif; ?> 
 	                            
 								 <jdoc:include type="component" />
 								 

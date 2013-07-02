@@ -1,6 +1,13 @@
 <?php // no direct access
 defined('_JEXEC') or die('Restricted access'); 
 global $Itemid;
+If($Itemid=='100')
+{
+	$page = '152';
+}
+else{
+	$page = '151';
+}
 ?>
 <script type="text/javascript">
 function redirecturl(val)
@@ -14,13 +21,13 @@ function redirecturl(val)
 		<?php
 		    $output = '<input name="searchword" id="mod_search_searchword" maxlength="'.$maxlength.'" alt="'.$button_text.'" class="fl locsearch inputbox'.$moduleclass_sfx.'" type="text" size="'.$width.'" value="'.$text.'"  onblur="if(this.value==\'\') this.value=\''.$text.'\';" onfocus="if(this.value==\''.$text.'\') this.value=\'\';" />';
 			$db =& JFactory::getDBO();
-			$recsubsql="select * from jos_categories where section='com_jevlocations2' and published=1 ORDER BY title ASC";
+			$recsubsql="select * from jos_categories where parent_id=".$page." AND section='com_jevlocations2' and published=1 ORDER BY title ASC";
 			$db->setQuery($recsubsql);
 			$rows=$db->query();
 			?>
 			<select id="cat_drop" name="searchcat" onChange="redirecturl(this.value);" >
-				<option value="0"><?php echo JText::_("SELECT_CAT"); ?></option>
-				<option value="0"><?php echo JText::_("SELECT_All"); ?></option>
+				<option value="<?php echo $page ?>"><?php echo JText::_("SELECT_CAT"); ?></option>
+				<option value="<?php echo $page ?>"><?php echo JText::_("SELECT_All"); ?></option>
 				
 				<?php while($rowsub=mysql_fetch_array($rows))
 				{

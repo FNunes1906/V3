@@ -52,7 +52,34 @@ global $var;
 						}						
 						?>
 						</h2>
-		    			<p><?php echo substr($fearow->description, 0, 75);?></p>
+		    			 <p>
+					  	<?php 
+						   $strArray = explode('<img',$fearow->description);
+						   if(isset($strArray) && $strArray != ''){
+						    for($i = 0; $i <= count($strArray); ++$i){
+						     
+						     $strFound = strpos($strArray[$i],'" />');
+						     
+						     if(isset($strFound) && $strFound != ''){
+						      $s = explode('" />',$strArray[$i]);
+						      $strConcat = $s[1];
+						     }else{
+						      $strConcat = $strArray[$i]; 
+						     }
+						     $finalDescription .= $strConcat;
+							 $finalDescription=str_replace("<br />","",$finalDescription);
+						    }
+						   if(strlen($finalDescription)>="140"){
+								$strProcess12 = substr($finalDescription, 0 , 140);
+								$strInput1 = explode(' ',$strProcess12);
+								$str12 = array_slice($strInput1, 0, -1);
+								echo implode(' ',$str12).' ...';
+							}else{
+								echo $finalDescription;
+							}
+						   }
+						?>					  
+					  </p>
 						<div class="cl"></div>
 		    		</div>
 					</div>
