@@ -3,7 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>SL Merida | Videos</title>
-<meta name="viewport" content="width=device-width;initial-scale = 1.0,maximum-scale = 1.0" />
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta name="viewport" content="width=device-width,initial-scale = 1.0,minimum-scale = 1.0,maximum-scale = 1.0,user-scalable = no" />
 <link rel="stylesheet" type="text/css" href="css/fonts.css" />
 <link rel="stylesheet" type="text/css" href="css/core.css" />
 
@@ -12,6 +13,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.carouFredSel-6.1.0-packed.js"></script>
 <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="js/jquery.touchwipe.min.js"></script>
 <script type="text/javascript" src="js/yetii-min.js"></script>
 <script type="text/javascript" src="js/tw.js"></script>
 
@@ -31,18 +33,33 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
 
+
+  <!-- Yogi :
+  
+  There are 2 sections of code (PT 1 & PT 2) containing the main menu that should only be added to the page when in a web browser and not the app mode. Perhaps you can set a variable in the PHP which decides whether these blocks of code get written to the page.
+  
+  -->
+
+
+  <!-- START MENU CODE PT 1 -->
+
   <!-- Top Bar Start -->
 
   <div id="TopBar">
-  	<div class="sWidth">
-  	  <div class="fl powered">Powered by<img alt="townwizard" src="images/header/twBanner.png" /></div>
-  	  <div class="fr links">
-  	  	<a href="#">Other Townwizard Places</a> | <a href="#">About Townwizard</a>
-  	  </div>
-  	</div>
+    <div class="sWidth">
+      <a id="MenuBtn" class="fl button"><span>Menu</span></a>
+      <div class="fl powered">Powered by<img alt="townwizard" src="images/header/twBanner.png" /></div>
+      <div class="fr links">
+        <a href="#">Other Townwizard Places</a> | <a href="#">About Townwizard</a>
+      </div>
+    </div>
   </div>
+  <div id="TopBarGhost"></div>
 
   <!-- Top Bar End -->
+
+  <!-- END MENU CODE PT 1 -->
+
 
   <!-- Content Start -->
 
@@ -89,90 +106,59 @@
   	<!-- Header End -->
 
   	<div id="MainContent">
+
+
+      <!-- START MENU CODE PT 2 -->
   	  
   	  <!-- Left Column Start -->
 
   	  <div id="LeftCol" class="fl">
+        <div class="swipe"></div>
+        <div id="MobileHeader">
+          <div class="logo">
+            <img alt="" src="images/mock/mobile-logo.png" />
+            <p>powered by townwizard</p>
+          </div>
+        </div>
   	  	<nav id="MainNav" class="display">
   	  	  <ul>
   	  	    <li><a id="NavHome" href="index.html">Home</a></li>
             <li><a id="NavEvents" href="events.html">Events</a></li>
-            <li><a id="NavOffers" href="#">Offers</a></li>
             <li><a id="NavRest" href="restaurants.html">Restaurants</a></li>
-            <li><a id="NavBars" href="#">Bars</a></li>
+            <li><a id="NavBars" href="#">Places</a></li>
             <li><a id="NavPhotos" href="photos.html">Photos</a></li>
             <li class="active"><a id="NavVideos" href="videos.html">Videos</a></li>
-            <li><a id="NavPeople" href="#">People</a></li>
-            <li><a id="NavBlog" href="#">Blog</a></li>
-            <li><a id="NavBest" href="#">Best in Town</a></li>
-            <li><a id="NavDir" href="#">Directory</a></li>
   	  	   </ul>
   	    </nav>
-  	    <div id="SideLinks">
-  	      <h4 class="display">My Stuff</h3>
-  	      <a href="#">Favorite Places</a>
-  	      <a href="#">Your Saved Offers</a>
-  	      <a href="#">Your Events Calendar</a>
-  	      <a href="#">Your Lists</a>
-  	      <h4 class="display">Quick Links</h3>
-  	      <a href="#">Ratings &amp; Reviews</a>
-  	      <a href="#">Check-ins &amp;  Hotspots</a>
-  	      <a href="#">About [Brand Name]</a>
-  	    </div>
   	    <div id="SideMobile" class="sect">
-  	      <h2>TownWizard Mobile!</h2>
-  	      <p>Lorem ipsum dolor sit amet adipiscing elit donec.</p>
-  	      <a href="#" target="_blank"><img alt="Download for the iPhone/iPad" src="images/sidebar/iphoneAppBtn.png" /></a>
-  	      <a href="#" target="_blank"><img alt="Download for Android" src="images/sidebar/androidAppBtn.png" /></a>
-  	    </div>
-  	    <div id="SideSocial" class="sect">
-  	      <h3 class="display">Follow Us</h3>
-  	      <a class="twitter" href="#" target="_blank"><img alt="Follow us on Twitter" src="images/sidebar/twtFollowBtn.png" /></a>
-  	      <a class="youtube" href="#" target="_blank"><img alt="Follow us on YouTube" src="images/sidebar/ytFollowBtn.png" /></a>
-  	    </div>
-  	    <div id="SideAds" class="sect">
-  	      <div class="ad space">
-  	      	<img alt="" src="images/mock/ads/180x150_1.jpg" />
-  	      </div>
-  	      <div class="ad">
-  	      	<img alt="" src="images/mock/ads/180x150_2.jpg" />
-  	      </div>
-  	      <div class="sect">
-  	      	<h3 class="display">Hotspots</h3>
-  	      	<p>Hot Spot rankings are decided by your annual votes.</p>
-  	      	<h4 class="display">Sushi</h4>
-  	      	<a href="#">Sushimaster</a>
-  	      	<a href="#">Yo! Sushi</a>
-  	      	<a href="#">Sushi Sushi Sushi</a>
-  	      	<a href="#">Ultimate Sushi</a>
-  	      	<h4 class="display">Outdoor Dining</h4>
-  	      	<a href="#">The Patio</a>
-  	      	<a href="#">Gerry's</a>
-  	      	<a href="#">The Red Chimney</a>
-  	      	<a href="#">Le Gavorche</a>
-  	      	<h4 class="display">Family Trip</h4>
-  	      	<a href="#">The Zoo</a>
-  	      	<a href="#">The Aquarium</a>
-  	      	<a href="#">Barney's Fun Shack</a>
-  	      	<a href="#">Milton Fun Park</a>
-  	      </div>
-  	      <div class="sect">
-  	      	<div class="ad space">
-  	      	  <img alt="" src="images/mock/ads/180x150_2.jpg" />
-  	      	</div>
-  	      	<div class="ad space">
-  	      	  <img alt="" src="images/mock/ads/180x150_1.jpg" />
-  	      	</div>
-  	      	<div class="ad">
-  	      	  <img alt="" src="images/mock/ads/180x150_2.jpg" />
-  	      	</div>
-  	      </div>
-  	    </div>
+          <h2>Download Our Apps!</h2>
+          <a href="#" target="_blank"><img alt="Download for the iPhone/iPad" src="images/sidebar/iphoneAppBtn.png" /></a>
+          <a href="#" target="_blank"><img alt="Download for Android" src="images/sidebar/androidAppBtn.png" /></a>
+        </div>
+        <div id="SideAds" class="sect">
+          <div class="ad space">
+            <img alt="" src="images/mock/ads/180x150_1.jpg" />
+          </div>
+          <div class="ad space">
+            <img alt="" src="images/mock/ads/180x150_2.jpg" />
+          </div>
+          <div class="ad space">
+            <img alt="" src="images/mock/ads/180x150_2.jpg" />
+          </div>
+          <div class="ad space">
+            <img alt="" src="images/mock/ads/180x150_1.jpg" />
+          </div>
+        </div>
   	  </div>
 
   	  <!-- Left Column End -->
 
+      <!-- END MENU CODE PT 2 -->
+      
+
   	  <div id="WidgetArea">
+
+        <div class="centerCol fl">
 
         <!-- Placeholder for Header Banner Ad in Vertical Layout Start -->
 
@@ -227,15 +213,16 @@
 
         <!-- Video Gallery End -->
 
-        <!-- 300 x 100 Banner Ad Start -->
+        <!-- Placeholder for Header Banner Ad in Mobile Layout Start -->
 
-        <div class="rightCol adSect fr">
-          <div class="ad sect cl">
-            <img alt="" src="images/mock/ads/300x100.jpg" />
-          </div>
+        <div id="MobileBannerAd" class="bannerAd cb"></div>
+
+        <!-- Placeholder for Header Banner Ad in Mobile Layout End -->
+
         </div>
 
-        <!-- 300 x 100 Banner Ad End -->
+        <div class="rightCol fr">
+
 
         <!-- New Lists Section Start -->
 
@@ -311,6 +298,11 @@
       </div>
 
   	  <div class="cb"></div>
+
+      </div>
+
+      <div class="cb"></div>
+
   	</div>
   </div>
 

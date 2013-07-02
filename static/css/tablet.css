@@ -32,6 +32,9 @@ body.tablet .ad.sect.full {
   width:100%;
   clear:both;
 }
+body.tablet .ad.sect {
+  width:100%;
+}
 body.tablet .ad.sect img {
   margin:auto;
 }
@@ -87,6 +90,9 @@ body.tablet #MainNav ul li.active ul li {
 }
 body.tablet #MainNav ul li.active ul li a {
   line-height:39px;
+}
+body.tablet .centerCol {
+  max-width:100%;
 }
 body.tablet #LowerBannerAd {
   display:block;
@@ -148,7 +154,7 @@ body.tablet .centerCol .sect ul li .thumb img {
   height:auto !important;
 }
 body.tablet .centerCol .sect.horiz ul.mediaThumbs li {
-  width:32%;
+  width:31%;
 }
 body.tablet .centerCol #PhotoGallery.sect.horiz ul.mediaThumbs li {
   width:130px;
@@ -327,6 +333,13 @@ body.tablet #AttendancePanel .attendeeList .attendee img {
     max-width:none;
     width:100%;
   }
+
+  body.tablet .centerCol {
+    width:100%;
+  }
+
+  #Events .galleryNav { display:none; }
+
 }
 
 @media all and (max-width: 733px) {
@@ -522,13 +535,14 @@ body.tablet #AttendancePanel .attendeeList .attendee img {
   #MobileHeader {
     background:#fff;
     display:block;
-    text-align:center;
+    text-align:left;
   }
 
   #MobileHeader p {
     font-size:12px;
-    color:#333;
-    padding:10px 0;
+    color:#999;
+    padding:4px 10px;
+    font-weight:normal;
   }
 
   #MobileHeader .logo img {
@@ -540,7 +554,7 @@ body.tablet #AttendancePanel .attendeeList .attendee img {
   }
 
   .centerCol .sect.horiz ul li:last-child {
-    border-bottom:0 none;
+    /*border-bottom:0 none;*/
   }
 
   .rightCol {
@@ -605,7 +619,8 @@ body.tablet #AttendancePanel .attendeeList .attendee img {
     clear:both;
   }
 
-  .detailFeature.sect {
+  .detailFeature.sect, 
+  .media.sect {
     margin-top:12px;
     border-top:0 none !important;
   }
@@ -653,6 +668,11 @@ body.tablet #AttendancePanel .attendeeList .attendee img {
 
   .centerCol .sect.horiz ul li .thumb img {
     width:100% !important;
+    display:none !important;
+  }
+
+  .centerCol .sect.horiz ul.mediaThumbs li .thumb img {
+    display:block !important;
   }
 
   #SearchResults .venueName {
@@ -689,6 +709,55 @@ body.tablet #AttendancePanel .attendeeList .attendee img {
 
   .centerCol .sect.horiz ul li .thumb {
     float:none;
+  }
+
+  .centerCol .sect.horiz ul li .thumb img {
+    width:auto !important;
+  }
+
+  body.tablet #EvtRot {
+    max-width:none;
+    width:100%;
+  }
+
+  body.tablet #EvtRot .galleryNav {
+    margin-bottom:0;
+  }
+
+  .centerCol .sect.horiz .phone {
+    background:url('../images/phone.png') no-repeat left 2px;
+    display:block;
+    height:25px;
+    padding-left:23px;
+  }
+
+  .centerCol .sect.horiz .phone2 {
+    background:url('../images/phone2.png') no-repeat left -2px;
+    display:block;
+    height:25px;
+    padding-left:30px;
+    margin-top:3px;
+  }
+
+}
+
+@media all and (max-width: 430px) {
+
+  body.tablet .centerCol .media.sect.horiz ul.mediaThumbs li {
+    width:100% !important;
+  }
+
+  body.tablet .centerCol .sect ul li .thumb img {
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  .centerCol .sect.horiz ul.mediaThumbs li {
+    display:none;
+  }
+
+  .centerCol .sect.horiz ul.mediaThumbs li:first-child {
+    display:block;
   }
 
 }

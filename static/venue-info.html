@@ -34,6 +34,16 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
 
+
+  <!-- Yogi :
+  
+  There are 2 sections of code (PT 1 & PT 2) containing the main menu that should only be added to the page when in a web browser and not the app mode. Perhaps you can set a variable in the PHP which decides whether these blocks of code get written to the page.
+  
+  -->
+
+
+  <!-- START MENU CODE PT 1 -->
+
   <!-- Top Bar Start -->
 
   <div id="TopBar">
@@ -48,6 +58,9 @@
   <div id="TopBarGhost"></div>
 
   <!-- Top Bar End -->
+
+  <!-- END MENU CODE PT 1 -->
+
 
   <!-- Content Start -->
 
@@ -94,6 +107,9 @@
   	<!-- Header End -->
 
   	<div id="MainContent">
+
+
+      <!-- START MENU CODE PT 2 -->
   	  
   	  <!-- Left Column Start -->
 
@@ -102,14 +118,13 @@
         <div id="MobileHeader">
           <div class="logo">
             <img alt="" src="images/mock/mobile-logo.png" />
-            <p class="bold">Powered by TownWizard</p>
+            <p>powered by townwizard</p>
           </div>
         </div>
         <nav id="MainNav" class="display">
   	  	  <ul>
   	  	    <li><a id="NavHome" href="index.html">Home</a></li>
   	  	    <li><a id="NavEvents" href="events.html">Events</a></li>
-   	  	    <li><a id="NavOffers" href="#">Offers</a></li>
   	  	    <li class="active">
               <a id="NavRest" href="restaurants.html">Restaurants</a>
 
@@ -125,13 +140,9 @@
               <!-- Navigation Sub Menu End -->
 
             </li>
-  	  	    <li><a id="NavBars" href="#">Bars</a></li>
+            <li><a id="NavBars" href="#">Places</a></li>
   	  	    <li><a id="NavPhotos" href="photos.html">Photos</a></li>
             <li><a id="NavVideos" href="videos.html">Videos</a></li>
-  	  	    <li><a id="NavPeople" href="#">People</a></li>
-  	  	    <li><a id="NavBlog" href="#">Blog</a></li>
-  	  	    <li><a id="NavBest" href="#">Best in Town</a></li>
-  	  	    <li><a id="NavDir" href="#">Directory</a></li>
   	  	   </ul>
   	    </nav>
   	    <div id="SideMobile" class="sect">
@@ -156,6 +167,9 @@
   	  </div>
 
   	  <!-- Left Column End -->
+
+      <!-- END MENU CODE PT 2 -->
+
 
   	  <div id="WidgetArea">
 
@@ -513,7 +527,7 @@
                       West Philadelphia, PA 03801
                     </h3>
                     <h2><a class="bold" href="http://www.pizzapalace.com" target="_blank">Visit Website</a></h2>
-                    <h2 class="bold">603-123-3456</h2>
+                    <h2 class="bold phone">603-123-3456</h2>
                   </div>
                   <div class="cb"></div>
                 </li>
@@ -543,7 +557,7 @@
                       Los Angeles, CA 90245
                     </h3>
                     <h2><a class="bold" href="http://www.superbar2000.com" target="_blank">Visit Website</a></h2>
-                    <h2 class="bold">603-123-3456</h2>
+                    <h2 class="bold phone">603-123-3456</h2>
                   </div>
                   <div class="cb"></div>
                 </li>
@@ -574,7 +588,7 @@
                       Stamford, CT 06906
                     </h3>
                     <h2><a class="bold" href="http://www.shiki.com" target="_blank">Visit Website</a></h2>
-                    <h2 class="bold">203-123-3456</h2>
+                    <h2 class="bold phone">203-123-3456</h2>
                   </div>
                   <div class="cb"></div>
                 </li>
@@ -604,7 +618,7 @@
                       Bangor, ME 06926
                     </h3>
                     <h2><a class="bold" href="http://www.longjohnsilvers.com" target="_blank">Visit Website</a></h2>
-                    <h2 class="bold">743-623-3426</h2>
+                    <h2 class="bold phone2">743-623-3426</h2>
                   </div>
                   <div class="cb"></div>
                 </li>
@@ -634,7 +648,7 @@
                       Stamford, CT 06903
                     </h3>
                     <h2><a class="bold" href="http://www.shiki.com" target="_blank">Visit Website</a></h2>
-                    <h2 class="bold">203-123-3456</h2>
+                    <h2 class="bold phone2">203-123-3456</h2>
                   </div>
                   <div class="cb"></div>
                 </li>
@@ -665,7 +679,7 @@
                       Norwalk, CT 06916
                     </h3>
                     <h2><a class="bold" href="http://www.losportales.com" target="_blank">Visit Website</a></h2>
-                    <h2 class="bold">203-123-3456</h2>
+                    <h2 class="bold phone2">203-123-3456</h2>
                   </div>
                   <div class="cb"></div>
                 </li>
