@@ -47,7 +47,8 @@ class JElementFilelist extends JElement
 		if($node->attributes('directory') == '/components/com_php/files/'){
 			$path		= JPATH_ROOT.DS.$node->attributes('directory');
 		}else{
-			$path		= JPATH_ROOT.DS."partner/".$_SESSION['partner_folder_name'].DS.$node->attributes('directory');
+			//$path		= JPATH_ROOT.DS."partner/".$_SESSION['partner_folder_name'].DS.$node->attributes('directory');
+			$path		= JPATH_ROOT.DS.$node->attributes('directory');
 		}
 		$filter		= $node->attributes('filter');
 		$exclude	= $node->attributes('exclude');
