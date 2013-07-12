@@ -27,19 +27,54 @@ $this->_footer();
 $data = $this->data[row];
 # Event detail variables
 $ev_title		= $data->_title;
-$ev_start_date	= $data->start_date;
-if($data->start_time=='12:00AM' && $data->stop_time=='11:59PM')
+
+/* code added by rinkal for date format in all language */
+
+$lang =& JFactory::getLanguage();
+$lan = $lang->getName();
+
+if($lan == "Español")
 {
-	$ev_time ='All Day Event';
+	setlocale(LC_TIME,"spanish");
+	$ev_start_date = ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date)));
+	
+}
+else if($lan == "Croatian(HR)"){
+	
+	setlocale(LC_TIME,"croatian");
+	$ev_start_date = ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date)));
+	
+}
+else if($lan == "Nederlands - nl-NL"){
+	
+	setlocale(LC_TIME,"Nederlands");
+	$ev_start_date = ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date)));
+	
+}
+else if($lan == "Português (Brasil)"){
+	
+	setlocale(LC_TIME,"Português");
+	$ev_start_date = ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date)));
+	
+}
+else{
+	$ev_start_date	= $data->start_date;
+}
+
+if($data->_alldayevent == 1)
+{
+	$ev_time = 'All Day Event';
 }
 else
 {
-	if($data->_noendtime=='0')
-		$ev_time		= $data->start_time.' - '.$data->stop_time;
+	if($data->_noendtime == '0')
+		$ev_time = $data->start_time.' - '.$data->stop_time;
 	else
-		$ev_time		= $data->start_time;
+		$ev_time = $data->start_time;
 }
-$ev_desc		= $data->_description;
+
+/* code ended by rinkal for date format in all language */
+$ev_desc = $data->_description;
 
 # Assign Current date to variable
 $currentDate =  date("l, F d, Y");

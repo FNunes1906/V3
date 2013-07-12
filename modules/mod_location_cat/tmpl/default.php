@@ -4,7 +4,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 global $var;
-
+global $Itemid;
 
 ?>
 <!-- Featured Events Slider -->	
@@ -25,7 +25,7 @@ global $var;
 			//while($fearow = mysql_fetch_array($LocationCate)){
 			?> 
 		    	<li>
-					<a href=<?php echo "/index.php?option=com_jevlocations&task=locations.locations&searchcat=".$fearow->id;?>><?php echo $fearow->category;?></a>(<?php echo $fearow->count;?>)
+					<a href=<?php echo "/index.php?option=com_jevlocations&task=locations.locations&Itemid=".$Itemid."&searchcat=".$fearow->id;?>><?php echo $fearow->category;?></a>(<?php echo $fearow->count;?>)
 		    	</li>
 			<?php
 			//}

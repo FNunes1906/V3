@@ -1635,9 +1635,15 @@ Last Updated Date:29-01-2013
     line-height: 24px;
     margin-right: 12px;
     padding: 0 0 0 5px;
-    width: 100%;
+    width: 75%;
 	font-size: 13px !important;
 }
+
+.about{
+	float: left;
+	margin-right: 10px;
+}
+
 .module_event form {
 	overflow:hidden;
 }

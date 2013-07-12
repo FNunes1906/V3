@@ -119,6 +119,10 @@ $link_to=$path;
 $query_featured = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180)) + cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations, jos_jev_customfields3 WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ";
 $query_featured .= " AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ";
 $query_featured .= " ORDER BY dist ASC";
+
+$query_location="SELECT loc.description,loc.alias,loc.loc_id,loc.title,loc.image, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND cate.parent_id = 151 AND loc.published = 1 AND loc.loc_id = cf.target_id AND cf.value = 1 ORDER BY `cate`.`title` ASC";
+$featured_loc=mysql_query($query_location);
+
 header( 'Content-Type:text/html;charset=utf-8');
 ?>
 
@@ -204,19 +208,7 @@ function divopen(str) {
 <?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
 </head>
 <body>
-<?php
-$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-if(stripos($ua,'android') == true) { ?>
-	<div class="iphoneads" style="vertical-align:bottom;">
-		<?php m_show_banner('android-places-screen'); ?>
-	</div>
-	<?php } 
-else {
-	?>
-	<div class="iphoneads" style="vertical-align:bottom;">
-	<?php m_show_banner('iphone-places-screen'); ?>
-	</div>
-	<?php } ?>
+
 <?php
 /* Code added for iphone_restaurants.tpl */
 require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_places.tpl");
