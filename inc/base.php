@@ -72,6 +72,9 @@ function load_config() {
   $var->keywords = isset($pagemeta['keywords'])?$pagemeta['keywords']:'';
   $var->extra_meta = isset($pagemeta['extra_meta'])?$pagemeta['extra_meta']:'';
   $var->timezone = $pageglobal['time_zone'];
+  
+  /*  Varialbel added for Date format - Akash 16/7/2013 */
+  $var->timeformat = $pageglobal['time_format'];
 }
 
 function _gen_country() {

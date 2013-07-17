@@ -1639,9 +1639,13 @@ Last Updated Date:29-01-2013
 	font-size: 13px !important;
 }
 
-.about{
+.about img{
 	float: left;
 	margin-right: 10px;
+}
+
+.description{
+  background: none repeat scroll 0 0 #E9E9E9;
 }
 
 .module_event form {

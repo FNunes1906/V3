@@ -1,87 +1,99 @@
+<!-- CODE ADDED BY AKASH FOR SLIDER -->
 <div id="featuredEvents">
- <div class="flexslider-container">
-  <div class="flexslider">
-      <ul class="slides">
-   <?php
-   $f=0;
-   $imagecount = 0;
-   $templocid;
+	<div class="flexslider-container">
+		<div class="flexslider">
+		    <ul class="slides">
+			<?php
+			$f=0;
+			$imagecount = 0;
+			$templocid;
 
-   while($fealoc=mysql_fetch_array($featured_loc)){
+			while($fealoc=mysql_fetch_array($featured_loc)){
 
-   ##Image FEtched for slide show##
-    if($fealoc['image'] == ""){
-    $singleimagearray = "/partner/".$_SESSION['partner_folder_name']."/images/stories/nofe_loc.png"; }
-    else{
-    $imageurl = "http://".$_SERVER['HTTP_HOST']."/partner/".$_SESSION['partner_folder_name']."/images/stories/jevents/jevlocations/".$fealoc['image'];
-    $singleimagearray = $imageurl;
-    }
-   ##end##
-   if(in_array($fealoc['loc_id'], $templocid)){
-   }else{
-   if($imagecount<5){
-   
-   ?> 
-       <li>
-     <img  src="<?php echo $singleimagearray;?>" />
-        <div class="flex-caption">
-         <h1><?php echo $fealoc['title'] ;?></h1>
-         <h2><?php echo $fealoc['category'] ;?></h2>
-         <h3 style="font-size: 12px;text-transform:none;">
-       <?php
-       $strArray = explode('<img',$fealoc['description']);
-          if(isset($strArray) && $strArray != ''){
-           for($i = 0; $i <= count($strArray); ++$i){
-            
-            $strFound = strpos($strArray[$i],'" />');
-            
-            if(isset($strFound) && $strFound != ''){
-             $s = explode('" />',$strArray[$i]);
-             $strConcat = $s[1];
-            }else{
-             $strConcat = $strArray[$i]; 
-            }
-            $finalDescription .= $strConcat;
-         $finalDescription=str_replace("<br />","",$finalDescription);
-           }
-          if(strlen($finalDescription)>="110"){
-         $strProcess12 = substr($finalDescription, 0 , 110);
-         $strInput1 = explode(' ',$strProcess12);
-         $str12 = array_slice($strInput1, 0, -1);
-         echo implode(' ',$str12).'...';
-        }else{
-         echo $finalDescription;
-        }
-          }
-       ?>
-      </h3>
-        </div> <!-- caption -->
-       </li>
-   <?php
-   ++$imagecount;/*5 featured event counter */
-   $templocid[] = $fealoc['loc_id'];
-   }
-   }
-   ++$f;
-   }
-   ?>
+			/*Image FEtched for slide show*/
+				if($fealoc['image'] == ""){
+				$singleimagearray = "/partner/".$_SESSION['partner_folder_name']."/images/stories/nofe_loc.png"; }
+				else{
+				$imageurl = "http://".$_SERVER['HTTP_HOST']."/partner/".$_SESSION['partner_folder_name']."/images/stories/jevents/jevlocations/".$fealoc['image'];
+				$singleimagearray = $imageurl;
+				}
+			/*end*/
+			if(in_array($fealoc['loc_id'], $templocid)){
+			}else{
+			if($imagecount<5){
+			
+			?> 
+			<!-- creating loop for slider -->
+		    	<li>
+					<img  src="<?php echo $singleimagearray;?>" />
+		    		<div class="flex-caption">
+		    			<h1><?php echo $fealoc['title'] ;?></h1>
+		    			<h2><?php echo $fealoc['category'] ;?></h2>
+		    			<h3 style="font-size: 12px;text-transform:none;">
+							<?php
+							/*Replace images from description */
+							$strArray = explode('<img',$fealoc['description']);
+							   if(isset($strArray) && $strArray != ''){
+							    for($i = 0; $i <= count($strArray); ++$i){
+							     
+							     $strFound = strpos($strArray[$i],'" />');
+							     
+							     if(isset($strFound) && $strFound != ''){
+							      $s = explode('" />',$strArray[$i]);
+							      $strConcat = $s[1];
+							     }else{
+							      $strConcat = $strArray[$i]; 
+							     }
+							     $finalDescription .= $strConcat;
+								 $finalDescription=str_replace("<br />","",$finalDescription);
+							    }
+								/* lenth of the description count 110 char */
+							   if(strlen($finalDescription)>="110"){
+									$strProcess12 = substr($finalDescription, 0 , 110);
+									$strInput1 = explode(' ',$strProcess12);
+									$str12 = array_slice($strInput1, 0, -1);
+									echo implode(' ',$str12).'...';
+								}else{
+									echo $finalDescription;
+								}
+							   }
+							?>
+						</h3>
+		    		</div> <!-- caption -->
+		    	</li>
+				<!-- End of the loop for slider -->
+			<?php
+			$finalDescription = "";
+			++$imagecount;/*5 featured event counter */
+			$templocid[] = $fealoc['loc_id'];
+			}
+			}
+			++$f;
+			}
+			?>
 
-   </ul>
-  </div>
- </div>
+			</ul>
+		</div>
+	</div>
 </div>  <!-- featured events -->
+
 <?php
-	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-	if(stripos($ua,'android') == true) { ?>
-		<div class="iphoneads" style="vertical-align:bottom;">
-		<?php echo m_show_banner('android-restaurants-screen'); ?>
-		</div>
-	<?php }	else { ?>
-		<div class="iphoneads" style="vertical-align:bottom;">
-		<?php m_show_banner('iphone-restaurants-screen'); ?>
-		</div>
+/*Device testing for banner*/
+$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+if(stripos($ua,'android') == true) { ?>
+	<div class="iphoneads" style="vertical-align:bottom;">
+		<?php m_show_banner('android-places-screen'); ?>
+	</div>
+	<?php } 
+else {
+	?>
+	<div class="iphoneads" style="vertical-align:bottom;">
+	<?php m_show_banner('iphone-places-screen'); ?>
+	</div>
 	<?php } ?>
 	
+<!-- CODE END AKASH FOR SLIDER -->	
+
 <div id="main" role="main">
 	<div id="searchBar">
 		<form id="placeCatForm">
@@ -103,7 +115,7 @@
 						
 						if (mysql_num_rows($reccount)){
 							if(($_REQUEST['filter_loccat']!='alp') || ($_REQUEST['filter_loccat']!='0')){?>
-								<option value="<?php echo $rowsub['id'];?>" <?php if ($_REQUEST['filter_loccat']==$rowsub['id']) {?> selected <?php }?>><?php echo $rowsub['title'];?></option>
+								<option value="<?=$rowsub['id'];?>" <?php if ($_REQUEST['filter_loccat']==$rowsub['id']) {?> selected <?php }?>><?=$rowsub['title'];?></option>
 							<?php }
 						}
 					}?>
@@ -142,9 +154,9 @@
 			while($row=mysql_fetch_assoc($rec)){
 				$distance = distance($lat1, $lon1, $row[geolat],  $row[geolon], $dunit);?>
 				<li>
-					<h1><?php echo utf8_encode($row['title'])?></h1>
+					<h1><?=utf8_encode($row['title'])?></h1>
 					<p><?php echo stripJunk(showBrief(strip_tags(utf8_encode($row['description'])),30)); ?></p>
-					<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?php echo $dunit?> Away</p>
+					<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?=$dunit?> Away</p>
 						<ul class="btnList">
 							<?php if ($_REQUEST['bIPhone']=='0'){?>
 										<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row[phone]); ?>">call</a></li>
@@ -153,7 +165,7 @@
 							<?php } ?>
 				
 							<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row[geolat]; ?>:<?php echo $row[geolon]; ?>')">check in</a></li>
-							<li><a class="button small" href="diningdetails.php?did=<?php echo $row['loc_id']?>&lat=<?php echo $lat1?>&lon=<?php echo $lon1?>">more info</a></li>
+							<li><a class="button small" href="diningdetails.php?did=<?=$row['loc_id']?>&lat=<?=$lat1?>&lon=<?=$lon1?>">more info</a></li>
 							<li><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $row[geolon]; ?>:<?php echo $row[geolat]; ?>')"></a></li>
 						</ul>
 				</li><?php
@@ -181,9 +193,9 @@
 				$lon2  = $data[geolon];
 				$dist = distance($lat1, $lon1, $lat2, $lon2, $dunit);?>
 				<li>
-					<h1><?php echo utf8_encode($data['title'])?></h1>
+					<h1><?=utf8_encode($data['title'])?></h1>
 					<p><?php echo stripJunk(showBrief(strip_tags(utf8_encode($data['description'])),30)); ?></p>
-					<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?php echo $dunit?> Away</p>
+					<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?=$dunit?> Away</p>
 					<ul class="btnList">
 						<?php if ($_REQUEST['bIPhone'] == '0'){?>
 									<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data[phone]); ?>">call</a></li>
@@ -192,7 +204,7 @@
 						<?php } ?>
 						
 						<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $data[geolat]; ?>:<?php echo $data[geolon]; ?>')">check in</a></li>
-						<li><a class="button small" href="diningdetails.php?did=<?php echo $data['loc_id']?>&lat=<?php echo $lat1?>&lon=<?php echo $lon1?>">more info</a></li>
+						<li><a class="button small" href="diningdetails.php?did=<?=$data['loc_id']?>&lat=<?=$lat1?>&lon=<?=$lon1?>">more info</a></li>
 						<li><a  href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $data['geolon']; ?>:<?php echo $data['geolat']; ?>')"></a></li>
 					</ul>
 			<?php } 

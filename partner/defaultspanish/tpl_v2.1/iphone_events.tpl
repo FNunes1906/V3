@@ -50,8 +50,8 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 						<img src="<?php echo $singleimagearray[0] ?>" />
 					</div>
 		    		<div class="flex-caption">
-		    			<h1><?php echo $featureevdetail['summary']?></h1>
-		    			<h2><?php echo $rowfealocdetail['title']?></h2>
+		    			<h1><?php echo $fearow['summary']?></h1>
+		    			<h2><?php echo $fearow['title']?></h2>
 		    			<h3><?php echo $displayTime ?></h3>
 		    		</div> <!-- caption -->
 		    	</li>
@@ -71,7 +71,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 
 	<form name='events' id='events' action='events.php' method='post'>
 		<input type="text" value="" class="mobiscroll ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-d scroller" id="date1" name="eventdate" style="width:0px;height:0px;border:0px;background:#333333;position: absolute;top: -100px;">
-		<button data-theme="a" id="show" class="ui-btn-hidden button" aria-disabled="false" style="width:100%;">Ver Eventos por día</button>
+		<button data-theme="a" id="show" class="ui-btn-hidden button" aria-disabled="false" style="width:100%;">Ver Eventos por d&#237;a</button>
 	</form>
 	
 </div>
@@ -127,7 +127,7 @@ if(stripos($ua,'android') == true) { ?>
 			#DD#
 			$displayTime = '';
 			if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59PM')
-            {    $displayTime.='Todo el día';}
+            {    $displayTime.='Todo el d&#237;a';}
 			else{
 				$displayTime.= ltrim($row[timestart], "0");
 				

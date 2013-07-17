@@ -47,6 +47,9 @@ else
 $todaestring=date('D, M j', mktime(0, 0, 0, $tomonth, $today, $toyear));
 $query="select *,DATE_FORMAT(`startrepeat`,'%h:%i %p') as timestart, DATE_FORMAT(`endrepeat`,'%h:%i%p') as timeend from jos_jevents_repetition where rp_id=$eid";
 $rec=mysql_query($query) or die(mysql_error());
+mysql_set_charset("UTF8");
+
+header( 'Content-Type:text/html;charset=utf-8');
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -57,7 +60,7 @@ $rec=mysql_query($query) or die(mysql_error());
 <meta property="og:title" content="<?php echo $site_name.' | Event';?>"/>
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <meta content="index,follow" name="robots" />
-<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="pics/homescreen.gif" rel="apple-touch-icon" />
 <meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
 <!--<link href="css/style.css" rel="stylesheet" media="screen" type="text/css" />-->
@@ -69,10 +72,21 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 			function linkClicked(link) { document.location = link; } 
 </script>
 
-<title>
-<?php echo $site_name.' | ';
-echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Detalle de evento':'Event Detail';?>
-</title>
+	<title>
+	<?php echo $site_name.' | ';
+	echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Detalle de evento':'Event Detail';?>
+		<?php echo $site_name.' | ';
+		if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
+			echo 'Detalle de evento';
+		}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
+			echo 'Event Detail';
+		}elseif($_SESSION['tpl_folder_name'] == 'defaultcroation'){
+			echo 'Događaj Detalj';
+		}elseif($_SESSION['tpl_folder_name'] == 'default'){
+			echo 'Event Detail';
+		}
+		?>		
+	</title>
 <script type="text/javascript">
 	// TOUCH-EVENTS SINGLE-FINGER SWIPE-SENSING JAVASCRIPT
 	// this script can be used with one or more page elements to perform actions based on them being swiped with a single finger

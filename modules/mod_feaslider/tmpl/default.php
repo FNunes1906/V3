@@ -62,7 +62,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 						}
 						?>
 						</h2>
-		    			<p><?php echo $fearow['title'];?> &bull; <?php echo $fearow['Date'];?> &bull; <?php echo $displayTime;?> </p>
+		    			<p><?php echo $fearow['title'];?> &bull; 
+						<?php echo $fearow['Date'];?> &bull; 
+						<?php
+					        if($var->timeformat == "12"){
+					        echo $displayTime;
+					       }else{
+					        echo date("H:i", strtotime($fearow['timestart']))." - ".date("H:i", strtotime($fearow['timeend']));
+					       }
+      					?>
+						</p>
 						<div class="cl"></div>
 		    		</div>
 					</div>

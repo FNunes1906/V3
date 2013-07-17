@@ -2,14 +2,15 @@
 	<ul id="placesList" class="mainList" ontouchstart="touchStart(event,'list');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 <li>
 	<?php 
-	while($row=mysql_fetch_array($rec))
-	
-	{
+	while($row=mysql_fetch_array($rec)){
+
 	$lat2=$row['geolat'];
 	$lon2=$row['geolon'];
+	
 	?>
 	
 		<h1><?php echo $row['title'];?></h1>
+		
 		<p>
 			<?php
 			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
@@ -29,7 +30,7 @@
 		<strong>Telefon:</strong>&nbsp;&nbsp;<a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$row[phone])?>"><?php echo $row[phone];?></a>
 		</p>
 		
-		<p><strong>Udaljenost:</strong>&nbsp;&nbsp;<?=round(distance($lat1, $lon1, $lat2, $lon2,$dunit),'1')?><?php echo $dunit;?></p>
+		<p><strong>Udaljenost:</strong>&nbsp;&nbsp;<?php echo round(distance($lat1, $lon1, $lat2, $lon2,$dunit),'1');?><?php echo $dunit;?></p>
 		
 		<?php if ($row['url']!=''){ ?>
 		<p>
@@ -43,7 +44,7 @@
 		<?php if ($row['description']!=''){ ?>
 		<p>
 			<strong>Omschrijving:</strong>
-			 <?php echo stripJunk(utf8_encode($row['description'])); ?>
+			 <?php echo $row['description']; ?>
 		</p>
 
 		<?php } ?>

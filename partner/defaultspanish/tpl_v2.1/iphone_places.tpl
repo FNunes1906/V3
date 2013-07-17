@@ -1,3 +1,99 @@
+<!-- CODE ADDED BY AKASH FOR SLIDER -->
+<div id="featuredEvents">
+	<div class="flexslider-container">
+		<div class="flexslider">
+		    <ul class="slides">
+			<?php
+			$f=0;
+			$imagecount = 0;
+			$templocid;
+
+			while($fealoc=mysql_fetch_array($featured_loc)){
+
+			/*Image FEtched for slide show*/
+				if($fealoc['image'] == ""){
+				$singleimagearray = "/partner/".$_SESSION['partner_folder_name']."/images/stories/nofe_loc.png"; }
+				else{
+				$imageurl = "http://".$_SERVER['HTTP_HOST']."/partner/".$_SESSION['partner_folder_name']."/images/stories/jevents/jevlocations/".$fealoc['image'];
+				$singleimagearray = $imageurl;
+				}
+			/*end*/
+			if(in_array($fealoc['loc_id'], $templocid)){
+			}else{
+			if($imagecount<5){
+			
+			?> 
+			<!-- creating loop for slider -->
+		    	<li>
+					<img  src="<?php echo $singleimagearray;?>" />
+		    		<div class="flex-caption">
+		    			<h1><?php echo $fealoc['title'] ;?></h1>
+		    			<h2><?php echo $fealoc['category'] ;?></h2>
+		    			<h3 style="font-size: 12px;text-transform:none;">
+							<?php
+							/*Replace images from description */
+							$strArray = explode('<img',$fealoc['description']);
+							   if(isset($strArray) && $strArray != ''){
+							    for($i = 0; $i <= count($strArray); ++$i){
+							     
+							     $strFound = strpos($strArray[$i],'" />');
+							     
+							     if(isset($strFound) && $strFound != ''){
+							      $s = explode('" />',$strArray[$i]);
+							      $strConcat = $s[1];
+							     }else{
+							      $strConcat = $strArray[$i]; 
+							     }
+							     $finalDescription .= $strConcat;
+								 $finalDescription=str_replace("<br />","",$finalDescription);
+							    }
+								/* lenth of the description count 110 char */
+							   if(strlen($finalDescription)>="110"){
+									$strProcess12 = substr($finalDescription, 0 , 110);
+									$strInput1 = explode(' ',$strProcess12);
+									$str12 = array_slice($strInput1, 0, -1);
+									echo implode(' ',$str12).'...';
+								}else{
+									echo $finalDescription;
+								}
+							   }
+							?>
+						</h3>
+		    		</div> <!-- caption -->
+		    	</li>
+				<!-- End of the loop for slider -->
+			<?php
+			$finalDescription = "";
+			++$imagecount;/*5 featured event counter */
+			$templocid[] = $fealoc['loc_id'];
+			}
+			}
+			++$f;
+			}
+			?>
+
+			</ul>
+		</div>
+	</div>
+</div>  <!-- featured events -->
+
+<?php
+/*Device testing for banner*/
+$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+if(stripos($ua,'android') == true) { ?>
+	<div class="iphoneads" style="vertical-align:bottom;">
+		<?php m_show_banner('android-places-screen'); ?>
+	</div>
+	<?php } 
+else {
+	?>
+	<div class="iphoneads" style="vertical-align:bottom;">
+	<?php m_show_banner('iphone-places-screen'); ?>
+	</div>
+	<?php } ?>
+	
+<!-- CODE END AKASH FOR SLIDER -->	
+
 <div id="main" role="main">
 <div id="searchBar">
 <form id="placeCatForm">
@@ -67,8 +163,8 @@ Alfab&#233;tico
 				$distance = distance($lat1, $lon1, $row[geolat],  $row[geolon], $dunit);
 				?>
 				<li>
-				<h1><?=utf8_encode($row['title'])?></h1>
-				<p><?php echo stripJunk(showBrief(strip_tags(utf8_encode($row['description'])),30)); ?></p>
+				<h1><?php echo $row['title'];?></h1>
+				<p><?php echo showBrief($row['description'],30) ?></p>
 				<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?=$dunit?> Lejos</p>
 				<ul class="btnList">
 				<?php if ($_REQUEST['bIPhone']=='0'){?>
@@ -114,8 +210,8 @@ Alfab&#233;tico
 				$dist = distance($lat1, $lon1, $lat2, $lon2, $dunit);
 				?>
 				<li>
-				<h1><?=utf8_encode($data['title'])?></h1>
-				<p><?php echo stripJunk(showBrief(strip_tags(utf8_encode($data['description'])),30)); ?></p>
+				<h1><?php echo $data['title'];?></h1>
+				<p><?php echo showBrief($data['description'],30) ?></p>
 				<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?=$dunit?> Away</p>
 				<ul class="btnList">
 				<?php if ($_REQUEST['bIPhone']=='0'){?>

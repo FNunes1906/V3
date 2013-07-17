@@ -4,6 +4,9 @@ include("iadbanner.php");
 
 $query="select * from jos_phocagallery where catid=2 order by id desc";
 $rec=mysql_query($query) or die(mysql_error());
+mysql_set_charset("UTF8");
+
+header( 'Content-Type:text/html;charset=utf-8');
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -13,9 +16,11 @@ $rec=mysql_query($query) or die(mysql_error());
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <meta content="index,follow" name="robots" />
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<link href="pics/homescreen.gif" rel="apple-touch-icon" />
 <meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
+<link href="pics/homescreen.gif" rel="apple-touch-icon" />
+<link href="pics/startup.png" rel="apple-touch-startup-image" />
 <link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
+<link rel="shortcut icon" href="images/l/apple-touch-icon.png">
 <script src="/components/com_shines/javascript/functions.js" type="text/javascript"></script>
 
 <title>
@@ -33,56 +38,66 @@ echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Videos':'Videos';?>
 <!-- New styles add by Doug Schaffer to be moved to CSS file -->
 
 <style type="text/css">
-  #placesList li { position:relative;padding:10px !important; }
-  #placesList li strong a img { display:block;position:absolute;top:50%;margin-top:-22px;right:0;padding:0 !important; }
+  	#placesList li { position:relative;padding:10px !important; }
+  	#placesList li strong a img { display:block;position:absolute;top:50%;margin-top:-22px;right:0;padding:0 !important; }
 </style>
 
-
-
 </head>
-
 <body>
 
- <?php
-$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-if(stripos($ua,'android') == true) { ?>
-  <div class="iphoneads" style="vertical-align:bottom;">
- 	 <?php m_show_banner('android-videos-screen'); ?>
-  </div>
-  <?php } 
-  else {
-  ?>
-  <div class="iphoneads" style="vertical-align:bottom;">
-    <?php m_show_banner('iphone-videos-screen'); ?>
-  </div>
-  <?php } ?>
-<div id="main" role="main">  
-<div id="zigzag" style="vertical-align:bottom;"> </div>
-<div id="content">
-	<ul class="mainList" id="placesList">
-		
-      <?php 
-	  while($row=mysql_fetch_array($rec))
-	  {
-		  $arr=explode('/v/',$row['videocode']);
-		  $arr1=explode('?',$arr[1]);
-		  $arr2=explode('&',$arr1[0]);
-      $yturl=$arr2[0];
-		  $arr2[0]='http://www.youtube.com/watch?v='.$arr2[0];
-	  ?>
-      <li class="textbox"  style="padding-bottom:20px;">
-     <a href="<?=$arr2[0]?>"><img src="http://img.youtube.com/vi/<?php echo $yturl; ?>/0.jpg" border="0" align="left" style="padding-right:10px;width:100px; height:100px;" /></a><font color="#999999"><strong><a href="<?=$arr2[0]?>"><img src="images/next-videos.gif" align="right" style="padding-top:20px;"  border="0"/></a>
-     <a style="line-height:100px;" href="<?=$arr2[0]?>"><?=$row['title']?></a>
-     </strong></font> </li>
+<!--code for ad banner-->
+	<?php
+		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+		if(stripos($ua,'android') == true) { 
+	?>
+	<div class="iphoneads" style="vertical-align:bottom;">
+	<?php 
+		m_show_banner('android-videos-screen'); 
+	?>
+		</div>
+	<?php
+		 } else {
+	?>
+	<div class="iphoneads" style="vertical-align:bottom;">
+	<?php 
+		m_show_banner('iphone-videos-screen'); 
+	?>
+	</div>
+	<?php } ?>
+	
+	<div id="main" role="main">  
+		<div id="zigzag" style="vertical-align:bottom;"> </div>
+		<div id="content">
+			<ul class="mainList" id="placesList">
+
+			<?php 
+			while($row=mysql_fetch_array($rec)){
+				$arr=explode('/v/',$row['videocode']);
+				$arr1=explode('?',$arr[1]);
+				$arr2=explode('&',$arr1[0]);
+				$yturl=$arr2[0];
+				$arr2[0]='http://www.youtube.com/watch?v='.$arr2[0];
+				
+			?>
+			
+			<li class="textbox"  style="padding-bottom:20px;">
+				<a href="<?php echo $arr2[0]; ?>">
+					<img src="http://img.youtube.com/vi/<?php echo $yturl; ?>/0.jpg" border="0" align="left" style="padding-right:10px;width:100px; height:100px;" />
+				</a>
+				<font color="#999999"><strong>
+					<a href="<?php echo $arr2[0]; ?>">
+						<img src="images/next-videos.gif" align="right" style="padding-top:20px;"  border="0"/>
+					</a>
+					<a style="line-height:100px;" href="<?php echo $arr2[0]; ?>"><?php echo utf8_encode($row['title']) ; ?></a>
+				</strong></font> 
+			</li>
 			<?php
-      }
-      ?>
-		
-	</ul>
-</div>
+			}
 
-</div>
-<div style='display:none;'><?php echo $pageglobal['googgle_map_api_keys']; ?></div>
+			?>
+			</ul>
+		</div>
+	</div>
+	<div style='display:none;'><?php echo $pageglobal['googgle_map_api_keys']; ?></div>
 </body>
-
 </html>

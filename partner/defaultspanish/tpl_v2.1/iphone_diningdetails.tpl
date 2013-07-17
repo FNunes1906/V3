@@ -43,7 +43,7 @@
 		<?php if ($row['description']!=''){ ?>
 		<p>
 			<strong>Descripci&#243;n:</strong>
-			 <?php echo stripJunk(utf8_encode($row['description'])); ?>
+			 <?php echo stripJunk($row['description']); ?>
 		</p>
 
 		<?php } ?>

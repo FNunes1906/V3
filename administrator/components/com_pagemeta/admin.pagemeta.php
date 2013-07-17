@@ -286,6 +286,24 @@ function globalseting(){
       <?php } ?>
    </td>
   </tr>
+  <!-- CODE FOR TIME FORMAT -->
+   <tr>
+    <td width="20%" class="key"><label>Time Format:</label></td>
+    <td width="80%">
+      <?php
+      if ($row['time_format'] == '12') { ?>
+      <input name="tformat" type="radio" value="12" checked />12 hrs&nbsp;<input name="tformat" type="radio" value="24" />24 hrs
+      <?php } ?> 
+      <?php
+      if ($row['time_format'] == '24') { ?>
+      <input name="tformat" type="radio" value="12"/>12 hrs&nbsp;<input name="tformat" type="radio" value="24" checked />24 hrs
+      <?php } ?>
+      <?php if ($row['time_format'] == '') { ?>
+      <input name="tformat" type="radio" value="12"/>12 hrs&nbsp;<input name="tformat" type="radio" value="24" checked />24 hrs
+      <?php } ?>
+   </td>
+  </tr>
+  
 </table>
 </form>
 <?php
@@ -312,7 +330,7 @@ function save(){
 	}
 	elseif(isset($_POST['global'])){
 		
-		$query = "UPDATE #__pageglobal SET site_name ='".$_POST['site_name']."', email ='".$_POST['email']."', googgle_map_api_keys ='".addslashes($_POST['googgle_map_api_keys'])."', location_code ='".$_POST['location_code']."', beach ='".$_POST['beach']."', photo_mini_slider_cat ='".$_POST['photo_mini_slider_cat']."', photo_upload_cat ='".$_POST['photo_upload_cat']."', facebook ='".$_POST['facebook']."', iphone ='".$_POST['iphone']."', android ='".$_POST['android']."', Header_color='".$_POST['Header_color']."', distance_unit ='".$_POST['dunit']."', weather_unit ='".$_POST['wunit']."', twitter ='".$_POST['twitter']."',date_format ='".$_POST['dformat']."', youtube ='".$_POST['youtube']."',time_zone ='".$_POST['timezone']."' WHERE id='1'";
+		$query = "UPDATE #__pageglobal SET site_name ='".$_POST['site_name']."', email ='".$_POST['email']."', googgle_map_api_keys ='".addslashes($_POST['googgle_map_api_keys'])."', location_code ='".$_POST['location_code']."', beach ='".$_POST['beach']."', photo_mini_slider_cat ='".$_POST['photo_mini_slider_cat']."', photo_upload_cat ='".$_POST['photo_upload_cat']."', facebook ='".$_POST['facebook']."', iphone ='".$_POST['iphone']."', android ='".$_POST['android']."', Header_color='".$_POST['Header_color']."', distance_unit ='".$_POST['dunit']."', weather_unit ='".$_POST['wunit']."', twitter ='".$_POST['twitter']."',date_format ='".$_POST['dformat']."',time_format ='".$_POST['tformat']."', youtube ='".$_POST['youtube']."',time_zone ='".$_POST['timezone']."' WHERE id='1'";
 		
 		$db->setQuery( $query );
 		

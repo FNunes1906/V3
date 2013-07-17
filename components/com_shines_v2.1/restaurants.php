@@ -21,6 +21,7 @@ $jconfig = new JConfig();
 $link = @mysql_pconnect($jconfig->host,  $jconfig->user, $jconfig->password);
 mysql_select_db($jconfig->db);
 $rec01 = mysql_query("select * from `jos_pageglobal`");
+mysql_set_charset("UTF8");
 $pageglobal=mysql_fetch_array($rec01);
 
 function showBrief($str, $length) {
@@ -37,16 +38,16 @@ function stripJunk($string) {
 
 function distance($lat1, $lon1, $lat2, $lon2, $unit) { 
 	$theta = $lon1 - $lon2; 
-	$dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)); 
-	$dist = acos($dist); 
+	$dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+        $dist = acos($dist); 
 	$dist = rad2deg($dist); 
 	$miles = $dist * 60 * 1.1515;
 	$unit = strtoupper($unit);
-	if ($unit == "KMS") {
+	if($unit == "KMS") {
 		return ($miles * 1.609344); 
-		} else if ($unit == "N") {
+		}else if($unit == "N"){
 		return ($miles * 0.8684);
-		} else {
+		}else{
 		return $miles;
 	}
 }
@@ -62,7 +63,9 @@ else
 $lon1=0;
 
 if ($_REQUEST['filter_loccat']!='0')
-	$filter_loccat=$_REQUEST['filter_loccat'];
+	
+$filter_loccat=$_REQUEST['filter_loccat'];
+
 if($filter_loccat == 'Featured')
 	$customfields3_table = ", `jos_jev_customfields3` ";
 else
@@ -73,15 +76,15 @@ else
 $ii=0;
 if(isset($_REQUEST['filter_order']) && $_REQUEST['filter_order']!="")
 	$filter_order = $_REQUEST['filter_order'];
-else	
-$filter_order = "";
+else    
+$filter_order = "";	
 if(isset($_REQUEST['filter_order_Dir']) && $_REQUEST['filter_order_Dir']!="")
 	$filter_order_Dir = $_REQUEST['filter_order_Dir'];
-else	
+else    
 $filter_order_Dir = "ASC";
 
 #@#
-$RES=mysql_query("select id from jos_categories where parent_id=152 AND section='com_jevlocations2' and published=1 order by `ordering`");
+$RES=mysql_query("select id from jos_categories where parent_id=152 AND section='com_jevlocations2' and published=1 order by `ordering`");mysql_set_charset("UTF8");
 while($idsrow=mysql_fetch_assoc($RES)){
 	$allCatIds[] = $idsrow['id'];
 }
@@ -106,6 +109,7 @@ if(($filter_order != "") || ($_REQUEST['filter_loccat']=='alp'))
 else
 $query1 .= " ORDER BY dist ASC";
 $rec1=mysql_query($query1) or die(mysql_error());
+mysql_set_charset("UTF8");
 $total_data=mysql_num_rows($rec1);
 $total_rows=$total_data;
 $page_limit=50;
@@ -118,12 +122,16 @@ $query_featured = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi
 $query_featured .= " AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ";
 $query_featured .= " ORDER BY dist ASC";
 
+/* CODE ADDED BY AKASH FOR SLIDER */
+
 $query_location="SELECT loc.description,loc.alias,loc.loc_id,loc.title,loc.image, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND cate.parent_id = 152 AND loc.published = 1 AND loc.loc_id = cf.target_id AND cf.value = 1 ORDER BY `cate`.`title` ASC";
+
 $featured_loc=mysql_query($query_location);
+mysql_set_charset("UTF8");
+
+/*CODE END AKASH FOR SLIDER*/
 
 header( 'Content-Type:text/html;charset=utf-8');
-
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -136,18 +144,27 @@ header( 'Content-Type:text/html;charset=utf-8');
 <meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <meta content="index,follow" name="robots" />
-<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="<?php echo $var->metadesc; ?>" />
 <meta name="description" content="<?php echo $var->extra_meta; ?>" />
 
 <title>
 <?php echo $site_name.' | ';
-echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Restaurantes':'Restaurants';?>
+if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
+	echo 'Restaurantes';
+}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
+	echo 'Restaurants';
+}elseif($_SESSION['tpl_folder_name'] == 'defaultcroation'){
+	echo 'Restorani';
+}elseif($_SESSION['tpl_folder_name'] == 'default'){
+	echo 'Restaurants';
+}
+?>
 </title>
 
 <link href="pics/homescreen.gif" rel="apple-touch-icon" />
 <link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
-<link rel="shortcut icon" href="images/l/apple-touch-icon.png">
+ <link rel="shortcut icon" href="images/l/apple-touch-icon.png">
 <link href="pics/startup.png" rel="apple-touch-startup-image" />
 <script type="text/javascript">
 var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){var a=document.getElementsByTagName("a");for(var i=0;i<a.length;i++){if(a[i].className.match("noeffect")){}else{a[i].onclick=function(){window.location=this.getAttribute("href");return false}}}}function hideURLbar(){window.scrollTo(0,0.9)}iWebkit.init=function(){fullscreen();hideURLbar()};iWebkit.init()}}
@@ -161,17 +178,16 @@ ddsmoothmenu.init({
 	//customtheme: ["#1c5a80", "#18374a"],
 	contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
 	})
-	
 ddsmoothmenu.init({
 	mainmenuid: "smoothmenu2", //Menu DIV id
 	orientation: 'v', //Horizontal or vertical menu: Set to "h" or "v"
-	classname: 'ddsmoothmenu-v', //class added to menu's outer DI
+	classname: 'ddsmoothmenu-v', //class added to menu's outer DIV
 	//customtheme: ["#804000", "#482400"],
 	contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
 	})
-	
-function redirecturl(val)
+	function redirecturl(val)
 {
+	
 	url="<?php echo $_SERVER['PHP_SELF']; ?>?option=com_jevlocations&task=locations.listlocations&tmpl=component&needdistance=1&sortdistance=1&lat=<?php echo $_REQUEST['lat']?>&lon=<?php echo $_REQUEST['lon']?>&bIPhone=<?php echo $_REQUEST['bIPhone']?>&iphoneapp=1&search=<?php echo $_REQUEST['search']?>&limit=0&jlpriority_fv=0&filter_loccat="+val + "&filter_order=<?php echo $filter_order?>&filter_order_Dir=<?php echo $filter_order_Dir?>";
 	window.location=url;
 }
@@ -183,7 +199,6 @@ function divopen(str) {
 		document.getElementById(str).style.display="none";
 	}
 }
-
 </script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="javascript/libs/jquery-1.7.1.min.js"><\/script>')</script>
@@ -210,9 +225,10 @@ function divopen(str) {
 <?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
 </head>
 <body>
+
 <?php
 /* Code added for iphone_restaurants.tpl */
-require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_restaurants.tpl");
+require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_places.tpl");
 ?>
 </body>
 </html>

@@ -371,6 +371,7 @@ td { vertical-align: top; }
 		ul.mainList{
 			margin: 0 0 10px 0; list-style: none;padding: 0px;
 			background: url(../images/l/twBg.png) repeat-y scroll 100% 100%;
+			text-align: center;
 		}
 		#main ul.mainList h1{
 			background: none;text-transform: none;font-weight: bold; font-size: 1.3em;

@@ -1,5 +1,5 @@
 <?php 
-setlocale(LC_TIME,"spanish");
+setlocale(LC_TIME,"croatian");
 $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
 ?>
 <div id="main" role="main" ontouchstart="touchStart(event,'list');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
@@ -9,23 +9,26 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		{
 		//#DD#
 		$ev=mysql_query("select *  from jos_jevents_vevent where ev_id=".$row['eventid']) or die(mysql_error());
+		mysql_set_charset("UTF8");
 		$evDetails=mysql_fetch_array($ev);
 		$evrawdata = unserialize($evDetails['rawdata']);
 		//#DD#	
 		//$queryvevdetail="select *  from jos_jevents_vevdetail where evdet_id=".$row['eventid'];
 		$queryvevdetail="select *  from jos_jevents_vevdetail where evdet_id=".$row['eventdetail_id'];
 		$recvevdetail=mysql_query($queryvevdetail) or die(mysql_error());
+		mysql_set_charset("UTF8");
 		$rowvevdetail=mysql_fetch_array($recvevdetail);
 		if ((int) ($rowvevdetail['location']))
 		{
 		$querylocdetail="select *  from jos_jev_locations where loc_id=".$rowvevdetail['location'];
 		$reclocdetail=mysql_query($querylocdetail) or die(mysql_error());
+		mysql_set_charset("UTF8");
 		$rowlocdetail=mysql_fetch_array($reclocdetail);
 		$lat2=$rowlocdetail['geolat'];
 		$lon2=$rowlocdetail['geolon'];
 		}
 		?>
-		<H1><?php echo$rowvevdetail['summary'];?></h1>
+		<H1><?php echo $rowvevdetail['summary'];?></h1>
 
 		<p><strong>Datum:</strong><?php echo $todaestring;?></p>
 		<p><strong>Vrijeme:</strong>
@@ -67,7 +70,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		<p><strong>Adresa:</strong><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" ><?php echo $rowlocdetail['street'];?></a></p>
 			<?php } ?>
 		<p><strong>Telefon:</strong><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo $rowlocdetail['phone'];?></a></p>
-		<p><strong>Udaljenost:</strong><?=round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1')?>&nbsp;<?php echo $dunit?></p>
+		<p><strong>Udaljenost:</strong><?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1');?>&nbsp;<?php echo $dunit?></p>
 		<?php if(trim($rowlocdetail['url']) != '') { ?>
 		<p><strong>Internet stranica:</strong><a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" target="_blank"><?php echo str_replace('http://','',$rowlocdetail['url']); ?></a></p>
 			<?php } ?>
@@ -138,9 +141,9 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 <!-- #DD# -->
 <!--
 <div id="footer">
-&copy; <?=date('Y');?> <?=$site_name?>, Inc.
+&copy; <?php echo date('Y');?> <?php echo $site_name;?>, Inc.
 <!-- |
-<a href="mailto:<?=$email?>?subject=App Feedback">
+<a href="mailto:<?php echo $email;?>?subject=App Feedback">
 Contact Us
 </a>
 </div>

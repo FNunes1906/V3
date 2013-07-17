@@ -52,6 +52,7 @@ global $var;
 						}						
 						?>
 						</h2>
+		    			<!-- <p><?php echo substr($fearow->description, 0, 75);?></p> -->
 		    			 <p>
 					  	<?php 
 						   $strArray = explode('<img',$fearow->description);
@@ -85,6 +86,7 @@ global $var;
 					</div>
 		    	</li>
 			<?php
+			$finalDescription = "";
 			++$imagecount;/*5 featured event counter */
 			$tempeventid[] = $fearow->loc_id;
 			}

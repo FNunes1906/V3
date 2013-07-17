@@ -21,6 +21,7 @@ $jconfig = new JConfig();
 $link = @mysql_pconnect($jconfig->host,  $jconfig->user, $jconfig->password);
 mysql_select_db($jconfig->db);
 $rec01 = mysql_query("select * from `jos_pageglobal`");
+mysql_set_charset("UTF8");
 $pageglobal=mysql_fetch_array($rec01);
 
 function showBrief($str, $length) {
@@ -83,7 +84,7 @@ else
 $filter_order_Dir = "ASC";
 
 #@#
-$RES=mysql_query("select id from jos_categories where parent_id=151 AND section='com_jevlocations2' and published=1 order by `ordering`");
+$RES=mysql_query("select id from jos_categories where parent_id=151 AND section='com_jevlocations2' and published=1 order by `ordering`");mysql_set_charset("UTF8");
 while($idsrow=mysql_fetch_assoc($RES)){
 	$allCatIds[] = $idsrow['id'];
 }
@@ -108,6 +109,7 @@ if(($filter_order != "") || ($_REQUEST['filter_loccat']=='alp'))
 else
 $query1 .= " ORDER BY dist ASC";
 $rec1=mysql_query($query1) or die(mysql_error());
+mysql_set_charset("UTF8");
 $total_data=mysql_num_rows($rec1);
 $total_rows=$total_data;
 $page_limit=50;
@@ -120,8 +122,14 @@ $query_featured = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi
 $query_featured .= " AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ";
 $query_featured .= " ORDER BY dist ASC";
 
+/* CODE ADDED BY AKASH FOR SLIDER */
+
 $query_location="SELECT loc.description,loc.alias,loc.loc_id,loc.title,loc.image, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND cate.parent_id = 151 AND loc.published = 1 AND loc.loc_id = cf.target_id AND cf.value = 1 ORDER BY `cate`.`title` ASC";
+
 $featured_loc=mysql_query($query_location);
+mysql_set_charset("UTF8");
+
+/*CODE END AKASH FOR SLIDER*/
 
 header( 'Content-Type:text/html;charset=utf-8');
 ?>
@@ -136,13 +144,23 @@ header( 'Content-Type:text/html;charset=utf-8');
 <meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <meta content="index,follow" name="robots" />
-<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="<?php echo $var->metadesc; ?>" />
 <meta name="description" content="<?php echo $var->extra_meta; ?>" />
 
 <title>
 <?php echo $site_name.' | ';
-echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Lugares':'Places';?>
+if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
+	echo 'Lugares';
+}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
+	echo 'Plaatsen';
+}elseif($_SESSION['tpl_folder_name'] == 'defaultcroation'){
+	echo 'Mjesta';
+}elseif($_SESSION['tpl_folder_name'] == 'default'){
+	echo 'Places';
+}
+?>
+
 </title>
 
 <link href="pics/homescreen.gif" rel="apple-touch-icon" />

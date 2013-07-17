@@ -46,6 +46,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			$homeslider1[$k]['Date'] = $fearow['Date'];
 			$homeslider1[$k]['title'] = $fearow['title'];
 			$homeslider1[$k]['time'] = $displayTime;
+			$homeslider1[$k]['timestart'] = $fearow[timestart];
+   			$homeslider1[$k]['timeend'] = $fearow[timeend];
 
 			if(in_array($fearow['ev_id'], $tempeventid)){
 			}else{
@@ -143,7 +145,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 				}
 				?>
 				</span>	
-                <?php echo $homeslider1[$i]['title'];?> &bull; <?php echo $homeslider1[$i]['Date'];?> &bull; <?php echo $homeslider1[$i]['time'];?>
+                <?php echo $homeslider1[$i]['title'];?> &bull; 
+				<?php echo $homeslider1[$i]['Date'];?> &bull; 
+				<?php
+					/*condition for hour format*/ 
+				    if($var->timeformat == "12"){
+				     echo $homeslider1[$i]['time'];
+				    }else{
+				     echo date("H:i", strtotime($homeslider1[$i]['timestart']))." - ".date("H:i", strtotime($homeslider1[$i]['timeend']));
+				    }
+				?>
               </a>
             </li>
 			<?php 
@@ -153,6 +164,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			$i++;
 			}
 			?>
+			
           </ul>
           <!--a class="saved bold" href="#"><span class="bold">3</span> saved events</a-->
         </div>

@@ -1,5 +1,5 @@
 <?php 
-setlocale(LC_TIME,"croation");
+setlocale(LC_TIME,"croatian");
 $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
 ?>
 <div id="featuredEvents">
@@ -50,8 +50,8 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 						<img src="<?php echo $singleimagearray[0];?>" />
 					</div>
 		    		<div class="flex-caption">
-		    			<h1><?php echo $featureevdetail['summary'];?></h1>
-		    			<h2><?php echo $rowfealocdetail['title'];?></h2>
+		    			<h1><?php echo $fearow['summary'];?></h1>
+		    			<h2><?php echo $fearow['title'];?></h2>
 		    			<h3><?php echo $displayTime;?></h3>
 		    		</div> <!-- caption -->
 		    	</li>
@@ -102,22 +102,26 @@ if(stripos($ua,'android') == true) { ?>
 			while($row=mysql_fetch_array($rec)){
 			//#DD#
 			$ev=mysql_query("select *  from jos_jevents_vevent where ev_id=".$row['eventid']) or die(mysql_error());
+			mysql_set_charset("UTF8");
 			$evDetails=mysql_fetch_array($ev);
 			$evrawdata = unserialize($evDetails['rawdata']);
 			
 			/*Edited By Akash*/
 			/*To fetch category name of the event*/
 			$event_category=mysql_query("select title  from jos_categories where id=".$evDetails['catid']) or die(mysql_error());
+			mysql_set_charset("UTF8");
 			$ev_cat=mysql_fetch_object($event_category);
 			$categoryname[] = $ev_cat->title;
 			//#DD#	
 			//$queryvevdetail="select *  from jos_jevents_vevdetail where evdet_id=".$row['eventid'];
 			$queryvevdetail="select *  from jos_jevents_vevdetail where evdet_id=".$row['eventdetail_id'];
+			//mysql_set_charset("UTF8");
 			$recvevdetail=mysql_query($queryvevdetail) or die(mysql_error());
 			$rowvevdetail=mysql_fetch_array($recvevdetail);
 
 			if ((int) ($rowvevdetail['location'])){
 				$querylocdetail="select *  from jos_jev_locations where loc_id=".$rowvevdetail['location'];
+				mysql_set_charset("UTF8");
 				$reclocdetail=mysql_query($querylocdetail) or die(mysql_error());
 				$rowlocdetail=mysql_fetch_array($reclocdetail);
 				$lat2=$rowlocdetail[geolat];
@@ -127,7 +131,7 @@ if(stripos($ua,'android') == true) { ?>
 			#DD#
 			$displayTime = '';
 			if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59PM')
-            {    $displayTime.='Todo el día';}
+            {    $displayTime.='Cijeli dan';}
 			else{
 				$displayTime.= ltrim($row[timestart], "0");
 				
@@ -155,9 +159,9 @@ if(stripos($ua,'android') == true) { ?>
  			<?php } else { ?>
 			<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">Prijavite se</a></li>
 				<?php } ?>
-			<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $today;?>&m=<?php echo $tomonth;?>&Y=<?php echo $toyear;?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">Više</a></li></ul>
+			<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $today;?>&m=<?php echo $tomonth;?>&Y=<?php echo $toyear;?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">Vi&#353;e</a></li></ul>
 		</h3> 
-				<!--<?=round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1')?>&nbsp;<?=$dunit?></td> Away -->
+				<!--<?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1');?>&nbsp;<?php echo $dunit;?></td> Away -->
     </li>
 
       <?php
@@ -168,7 +172,7 @@ if(stripos($ua,'android') == true) { ?>
 </ul>
 </div>
 
-<!-- <div id="footer">&copy; <?=date('Y');?> <?=$site_name?>, Inc. <!-- | <a href="mailto:<?=$email?>?subject=App Feedback">Contact Us</a> </div>  -->
+<!-- <div id="footer">&copy; <?php echo date('Y');?> <?php echo $site_name;?>, Inc. <!-- | <a href="mailto:<?php echo $email;?>?subject=App Feedback">Contact Us</a> </div>  -->
 
 <div style='display:none;'><?php echo $pageglobal['googgle_map_api_keys']; ?></div>
 

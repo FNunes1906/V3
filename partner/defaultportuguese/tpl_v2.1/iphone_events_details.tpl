@@ -1,5 +1,5 @@
 <?php 
-setlocale(LC_TIME,"spanish");
+setlocale(LC_TIME,"portuguese");
 $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
 ?>
 <div id="main" role="main" ontouchstart="touchStart(event,'list');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
@@ -9,16 +9,19 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		{
 		//#DD#
 		$ev=mysql_query("select *  from jos_jevents_vevent where ev_id=".$row['eventid']) or die(mysql_error());
+		mysql_set_charset("UTF8");
 		$evDetails=mysql_fetch_array($ev);
 		$evrawdata = unserialize($evDetails['rawdata']);
 		//#DD#	
 		//$queryvevdetail="select *  from jos_jevents_vevdetail where evdet_id=".$row['eventid'];
 		$queryvevdetail="select *  from jos_jevents_vevdetail where evdet_id=".$row['eventdetail_id'];
+		mysql_set_charset("UTF8");
 		$recvevdetail=mysql_query($queryvevdetail) or die(mysql_error());
 		$rowvevdetail=mysql_fetch_array($recvevdetail);
 		if ((int) ($rowvevdetail['location']))
 		{
 		$querylocdetail="select *  from jos_jev_locations where loc_id=".$rowvevdetail['location'];
+		mysql_set_charset("UTF8");
 		$reclocdetail=mysql_query($querylocdetail) or die(mysql_error());
 		$rowlocdetail=mysql_fetch_array($reclocdetail);
 		$lat2=$rowlocdetail['geolat'];
