@@ -319,7 +319,8 @@ break;
 			*/
 			//$image = '<img src="'.JURI::base(true).'/images/stories/'.$iParams->get('menu_image').'" '.$imgalign.' alt="'.$item->alias.'" />';
 			
-			$image = '<span class="menu_img_hover" style="background:url(/partner/'.$_SESSION['partner_folder_name'].'/images/stories/nav/'.$iParams->get('menu_image').') no-repeat scroll 5% 0% transparent;display: block;"></span>';
+			//$image = '<span class="menu_img_hover" style="background:url(/partner/'.$_SESSION['partner_folder_name'].'/images/stories/nav/'.$iParams->get('menu_image').') no-repeat scroll 5% 0% transparent;display: block;"></span>';
+			$image = '<span class="menu_img_hover" style="background:url(/images/stories/nav/'.$iParams->get('menu_image').') no-repeat scroll 5% 0% transparent;display: block;"></span>';
 			
 			/* code ended by Rinkal */
 if($tmp->ionly){

@@ -97,7 +97,7 @@ else {
 <div id="main" role="main">
 	<div id="searchBar">
 		<form id="placeCatForm">
-			<?php	$recsubsql="select * from jos_categories where (parent_id=151 OR id=151) AND section='com_jevlocations2' and published=1 ORDER BY title ASC";
+			<?php	$recsubsql="select * from jos_categories where (parent_id=152 OR id=152) AND section='com_jevlocations2' and published=1 ORDER BY title ASC";
 			$recsub=mysql_query($recsubsql) or die(mysql_error());
 			mysql_set_charset("UTF8");
 			?>

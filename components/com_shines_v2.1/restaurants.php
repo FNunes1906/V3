@@ -228,7 +228,7 @@ function divopen(str) {
 
 <?php
 /* Code added for iphone_restaurants.tpl */
-require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_places.tpl");
+require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_restaurants.tpl");
 ?>
 </body>
 </html>
