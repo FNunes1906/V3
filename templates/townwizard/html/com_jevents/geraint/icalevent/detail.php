@@ -25,8 +25,14 @@ $this->_footer();
 */
 
 $data = $this->data[row];
+$ev_start_date = ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date)));
+
+//Created date to manage repeat date
+$date=date_create($_GET['day'].'-'.$_GET['month'].'-'.$_GET['year']);
+$data->start_date = date_format($date,"l,F d,Y");
+
 # Event detail variables
-$ev_title		= $data->_title;
+$ev_title	= $data->_title;
 
 /* code added by rinkal for date format in all language */
 
@@ -107,7 +113,7 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
         <div style="text-transform: capitalize;" class="bold"><?php echo $lc_title; ?></div>
         <p class="desc"><?php echo $ev_desc; ?></p>
         <div class="address">
-			<?php include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
+			<?php // include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
 			<div><?php echo $lc_title;?></div>
 			<div><?php echo $lc_street;?></div>
 			<div><?php echo $lc_city.' '.$lc_state.', '.$lc_postcode;?></div>

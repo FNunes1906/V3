@@ -624,9 +624,14 @@ class JEventsHTML{
 
 			case '5':
 				if( $format_type == 0 ){
+					$_SESSION['ev_listing_date'] = JEV_CommonFunctions::jev_strftime("%d/%m",$datestp);
+					$_SESSION['ev_format_type'] = 0;
+					
 					return JEV_CommonFunctions::jev_strftime("%d/%m",$datestp);
 					// Fr style : 23/07
 				}elseif( $format_type == 1 ){
+					$_SESSION['ev_listing_date'] = JEV_CommonFunctions::jev_strftime("%m/%d",$datestp);
+					$_SESSION['ev_format_type'] = 1;
 					return JEV_CommonFunctions::jev_strftime("%m/%d",$datestp);
 					// Us style : 07/23
 				}else{

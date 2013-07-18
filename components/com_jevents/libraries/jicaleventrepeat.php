@@ -176,6 +176,19 @@ class jIcalEventRepeat extends jIcalEventDB{
 	}
 
 	function viewDetailLink($year,$month,$day,$sef=true, $Itemid=0){
+		// Event listing repeat date issue by yogi start
+		$date_format_type = $_SESSION['ev_format_type'];
+		$evdate = explode('/',$_SESSION['ev_listing_date']);
+		
+		if($date_format_type == 1){
+			$month	= $evdate[0];
+			$day	= $evdate[1];
+		}else{
+			$month	= $evdate[1];
+			$day	= $evdate[0];
+		}
+		// Event listing repeat date issue by yogi end
+		
 		$Itemid	= $Itemid>0?$Itemid:JEVHelper::getItemid();
 		// uid = event series unique id i.e. the actual event
 		$title = JFilterOutput::stringURLSafe($this->title());
