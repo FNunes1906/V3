@@ -70,7 +70,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		<p><strong>Adres:</strong><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" ><?php echo $rowlocdetail['street'];?></a></p>
 			<?php } ?>
 		<p><strong>Telefoonnummer:</strong><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo $rowlocdetail['phone'];?></a></p>
-		<p><strong>Afstand:</strong><?=round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1')?>&nbsp;<?php echo $dunit?></p>
+		<p><strong>Afstand:</strong><?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1');?>&nbsp;<?php echo $dunit?></p>
 		<?php if(trim($rowlocdetail['url']) != '') { ?>
 		<p><strong>Website:</strong><a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" target="_blank"><?php echo str_replace('http://','',$rowlocdetail['url']); ?></a></p>
 			<?php } ?>
@@ -141,9 +141,9 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 <!-- #DD# -->
 <!--
 <div id="footer">
-&copy; <?=date('Y');?> <?=$site_name?>, Inc.
+&copy; <?php echo date('Y');?> <?php echo $site_name;?>, Inc.
 <!-- |
-<a href="mailto:<?=$email?>?subject=App Feedback">
+<a href="mailto:<?php echo $email;?>?subject=App Feedback">
 Contact Us
 </a>
 </div>

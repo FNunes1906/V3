@@ -37,7 +37,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		/* Coded By Rinkal */
 		$displayTime = '';
 			if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59PM')
-            {    echo 'All Day Event';}
+            {    echo 'Evento de dia inteiro';}
 			else{
 				$displayTime.= ltrim($row[timestart], "0");
 				if($rowvevdetail['noendtime']==0){
@@ -49,7 +49,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		
 		
 		/* if($evrawdata['allDayEvent']=='on'){
-				echo 'All Day Event';
+				echo 'Evento de dia inteiro';
 			}else{
 					$displayTime.= ltrim($row[timestart], "0");
 					if($evrawdata['NOENDTIME']!=1){
@@ -70,7 +70,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		<p><strong>Endere&#231;o:</strong><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" ><?php echo $rowlocdetail['street'];?></a></p>
 			<?php } ?>
 		<p><strong>Telefone:</strong><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo $rowlocdetail['phone'];?></a></p>
-		<p><strong>Distancia:</strong><?=round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1')?>&nbsp;<?php echo $dunit?></p>
+		<p><strong>Distancia:</strong><?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1');?>&nbsp;<?php echo $dunit?></p>
 		<?php if(trim($rowlocdetail['url']) != '') { ?>
 		<p><strong>Website:</strong><a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" target="_blank"><?php echo str_replace('http://','',$rowlocdetail['url']); ?></a></p>
 			<?php } ?>

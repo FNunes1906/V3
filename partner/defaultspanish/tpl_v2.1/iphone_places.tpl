@@ -122,8 +122,8 @@ Alfab&#233;tico
 		if(($_REQUEST['filter_loccat']!='alp') || ($_REQUEST['filter_loccat']!='0'))
 		{
 			?>
-			<option value="<?=$rowsub['id'];?>" <?php if ($_REQUEST['filter_loccat']==$rowsub['id']) {?> selected <?php }?>>
-			<?=$rowsub['title'];?>
+			<option value="<?php echo $rowsub['id'];?>" <?php if ($_REQUEST['filter_loccat']==$rowsub['id']) {?> selected <?php }?>>
+			<?php echo $rowsub['title'];?>
 			</option>
 			<?php
 		}}}
@@ -164,8 +164,8 @@ Alfab&#233;tico
 				?>
 				<li>
 				<h1><?php echo $row['title'];?></h1>
-				<p><?php echo showBrief($row['description'],30) ?></p>
-				<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?=$dunit?> Lejos</p>
+				<p><?php echo showBrief($row['description'],30) ;?></p>
+				<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?php echo $dunit;?> Lejos</p>
 				<ul class="btnList">
 				<?php if ($_REQUEST['bIPhone']=='0'){?>
 					<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row[phone]); ?>">llamar</a></li>
@@ -178,7 +178,7 @@ Alfab&#233;tico
 					<?php } else { ?>
 					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row[geolat]; ?>:<?php echo $row[geolon]; ?>')">facturar</a></li>
 					<?php } ?>
-				<li><a class="button small" href="diningdetails.php?did=<?=$row['loc_id']?>&lat=<?=$lat1?>&lon=<?=$lon1?>">m&#225;s info</a></li>
+				<li><a class="button small" href="diningdetails.php?did=<?php echo $row['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">m&#225;s info</a></li>
 				<li><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $row[geolon]; ?>:<?php echo $row[geolat]; ?>')"></a></li>
 				</ul>
 				</li>
@@ -211,8 +211,8 @@ Alfab&#233;tico
 				?>
 				<li>
 				<h1><?php echo $data['title'];?></h1>
-				<p><?php echo showBrief($data['description'],30) ?></p>
-				<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?=$dunit?> Away</p>
+				<p><?php echo showBrief($data['description'],30); ?></p>
+				<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?php echo $dunit;?> Away</p>
 				<ul class="btnList">
 				<?php if ($_REQUEST['bIPhone']=='0'){?>
 				   <li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data[phone]); ?>">call</a></li>
@@ -225,7 +225,7 @@ Alfab&#233;tico
 					<?php } else { ?>
 					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $data[geolat]; ?>:<?php echo $data[geolon]; ?>')">check in</a></li>
 					<?php } ?>
-					<li><a class="button small" href="diningdetails.php?did=<?=$data['loc_id']?>&lat=<?=$lat1?>&lon=<?=$lon1?>">more info</a></li>
+					<li><a class="button small" href="diningdetails.php?did=<?php echo $data['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">more info</a></li>
 					<li><a  href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $data['geolon']; ?>:<?php echo $data['geolat']; ?>')"></a></li>
 				</ul>
 				<?php } ?>

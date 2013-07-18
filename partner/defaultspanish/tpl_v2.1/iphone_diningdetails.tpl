@@ -15,21 +15,21 @@
 			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 			if(stripos($ua,'android') == true) { 
 			?>
-			<strong>Direcci&#243;n:</strong>&nbsp;&nbsp<a href="map.php?lat=<?=$lat2?>&long=<?=$lon2?>">;<?=$row['street']?></a>
+			<strong>Direcci&#243;n:</strong>&nbsp;&nbsp<a href="map.php?lat=<?php echo $lat2;?>&long=<?php echo $lon2;?>">;<?php echo $row['street'];?></a>
 			<br />
 			<?php } 
 			else {
 			?>
-			<strong>Direcci&#243;n:</strong>&nbsp;&nbsp<a href="javascript:linkClicked('APP30A:SHOWMAP:<?=$lat2?>:<?=$lon2?>')"><?=$row['street']?></a>
+			<strong>Direcci&#243;n:</strong>&nbsp;&nbsp<a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')"><?php echo $row['street'];?></a>
 			<?php } ?>
 		</p>
 	
 		
 		<p>
-		<strong>Tel&#233;fono:</strong>&nbsp;&nbsp;<a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$row[phone])?>"><?=$row[phone]?></a>
+		<strong>Tel&#233;fono:</strong>&nbsp;&nbsp;<a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$row[phone])?>"><?php echo $row[phone]?></a>
 		</p>
 		
-		<p><strong>Distancia:</strong>&nbsp;&nbsp;<?=round(distance($lat1, $lon1, $lat2, $lon2,$dunit),'1')?><?=$dunit?></p>
+		<p><strong>Distancia:</strong>&nbsp;&nbsp;<?php echo round(distance($lat1, $lon1, $lat2, $lon2,$dunit),'1');?>&nbsp;<?php echo $dunit;?></p>
 		
 		<?php if ($row['url']!=''){ ?>
 		<p>

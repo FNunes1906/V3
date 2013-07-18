@@ -37,7 +37,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		/* Coded By Rinkal */
 		$displayTime = '';
 			if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59PM')
-            {    echo 'All Day Event';}
+            {    echo 'Cijeli dan';}
 			else{
 				$displayTime.= ltrim($row[timestart], "0");
 				if($rowvevdetail['noendtime']==0){

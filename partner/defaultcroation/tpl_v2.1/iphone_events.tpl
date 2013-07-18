@@ -26,7 +26,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 			$displayTime = '';
 			
 			if($fearow[timestart]=='12:00 AM' && $fearow[timeend]=='11:59PM'){   
-				$displayTime.='All Day Event';
+				$displayTime.='Cijeli dan';
 			}
 			else{
 				$displayTime.= $fearow[timestart];
@@ -157,7 +157,7 @@ if(stripos($ua,'android') == true) { ?>
 	 			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 				if(stripos($ua,'android') == true) { ?>
  			<?php } else { ?>
-			<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">Prijavite se</a></li>
+			<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">Prijavi se</a></li>
 				<?php } ?>
 			<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $today;?>&m=<?php echo $tomonth;?>&Y=<?php echo $toyear;?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">Vi&#353;e</a></li></ul>
 		</h3> 

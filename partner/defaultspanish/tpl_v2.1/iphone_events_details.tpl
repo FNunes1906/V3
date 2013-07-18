@@ -25,16 +25,16 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		$lon2=$rowlocdetail['geolon'];
 		}
 		?>
-		<H1><?=$rowvevdetail['summary']?></h1>
+		<H1><?php echo $rowvevdetail['summary'];?></h1>
 
-		<p><strong>Fecha:</strong><?=$todaestring?></p>
+		<p><strong>Fecha:</strong><?php echo $todaestring;?></p>
 		<p><strong>Hora:</strong>
 		<?php
 		//#DD#
 		/* Coded By Rinkal */
 		$displayTime = '';
 			if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59PM')
-            {    echo 'All Day Event';}
+            {    echo 'Todo el día';}
 			else{
 				$displayTime.= ltrim($row[timestart], "0");
 				if($rowvevdetail['noendtime']==0){
@@ -46,7 +46,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		
 		
 		/* if($evrawdata['allDayEvent']=='on'){
-				echo 'All Day Event';
+				echo 'Todo el día';
 			}else{
 					$displayTime.= ltrim($row[timestart], "0");
 					if($evrawdata['NOENDTIME']!=1){
@@ -58,20 +58,20 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		?>
 
 		</p>
-		<p><strong>Ubicaci&#243;n:</strong><?=$rowlocdetail['title']?></p>
+		<p><strong>Ubicaci&#243;n:</strong><?php echo $rowlocdetail['title'];?></p>
 		<?php
 		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 		if(stripos($ua,'android') == true) { ?>
-		<p><strong>Direcci&#243;n:</strong><a href="map.php?lat=<?=$lat2?>&long=<?=$lon2?>"><?=$rowlocdetail['street']?></a></p>
+		<p><strong>Direcci&#243;n:</strong><a href="map.php?lat=<?php echo $lat2;?>&long=<?php echo $lon2;?>"><?php echo $rowlocdetail['street'];?></a></p>
 			<?php } else { ?>
-		<p><strong>Direcci&#243;n:</strong><a href="javascript:linkClicked('APP30A:SHOWMAP:<?=$lat2?>:<?=$lon2?>')" ><?=$rowlocdetail['street']?></a></p>
+		<p><strong>Direcci&#243;n:</strong><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" ><?php echo $rowlocdetail['street'];?></a></p>
 			<?php } ?>
-		<p><strong>Tel&#233;fono:</strong><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?=$rowlocdetail['phone']?></a></p>
-		<p><strong>Distancia:</strong><?=round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1')?>&nbsp;<?=$dunit?></p>
+		<p><strong>Tel&#233;fono:</strong><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone']);?>"><?php echo $rowlocdetail['phone'];?></a></p>
+		<p><strong>Distancia:</strong><?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1');?>&nbsp;<?php echo $dunit;?></p>
 		<?php if(trim($rowlocdetail['url']) != '') { ?>
 		<p><strong>Sitio Web:</strong><a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" target="_blank"><?php echo str_replace('http://','',$rowlocdetail['url']); ?></a></p>
 			<?php } ?>
-	<p><strong>Descripci&#243;n:</strong><?=$rowvevdetail['description']?></p>
+	<p><strong>Descripci&#243;n:</strong><?php echo $rowvevdetail['description'];?></p>
 		<?php
 		//#DD#
 		$mailContent.= "
@@ -138,9 +138,9 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 <!-- #DD# -->
 <!--
 <div id="footer">
-&copy; <?=date('Y');?> <?=$site_name?>, Inc.
+&copy; <?php echo date('Y');?> <?php echo $site_name;?>, Inc.
 <!-- |
-<a href="mailto:<?=$email?>?subject=App Feedback">
+<a href="mailto:<?php echo $email?>?subject=App Feedback">
 Contact Us
 </a>
 </div>

@@ -29,7 +29,7 @@
 		<strong>Telefone:</strong>&nbsp;&nbsp;<a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$row[phone])?>"><?php echo $row[phone];?></a>
 		</p>
 		
-		<p><strong>Distancia:</strong>&nbsp;&nbsp;<?=round(distance($lat1, $lon1, $lat2, $lon2,$dunit),'1')?><?php echo $dunit;?></p>
+		<p><strong>Distancia:</strong>&nbsp;&nbsp;<?php echo round(distance($lat1, $lon1, $lat2, $lon2,$dunit),'1');?>&nbsp;<?php echo $dunit;?></p>
 		
 		<?php if ($row['url']!=''){ ?>
 		<p>

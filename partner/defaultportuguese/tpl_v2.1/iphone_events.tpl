@@ -26,7 +26,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 			$displayTime = '';
 			
 			if($fearow[timestart]=='12:00 AM' && $fearow[timeend]=='11:59PM'){   
-				$displayTime.='All Day Event';
+				$displayTime.='Evento de dia inteiro';
 			}
 			else{
 				$displayTime.= $fearow[timestart];

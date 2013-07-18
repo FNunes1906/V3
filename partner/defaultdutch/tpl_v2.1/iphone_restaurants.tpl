@@ -162,7 +162,7 @@ else {
 				<li>
 				<h1><?php echo $row['title'];?></h1>
 				<p><?php echo showBrief($row['description'],30); ?></p>
-				<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?php echo $dunit;?> Lejos</p>
+				<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?php echo $dunit;?> weg</p>
 				<ul class="btnList">
 				<?php if ($_REQUEST['bIPhone']=='0'){?>
 					<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row[phone]); ?>">Bel</a></li>
@@ -173,7 +173,7 @@ else {
 				$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 				if(stripos($ua,'android') == true) { ?>
 					<?php } else { ?>
-					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row[geolat]; ?>:<?php echo $row[geolon]; ?>')">Check In</a></li>
+					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row[geolat]; ?>:<?php echo $row[geolon]; ?>')">Inchecken</a></li>
 					<?php } ?>
 				<li><a class="button small" href="diningdetails.php?did=<?php echo $row['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">Meer informatie</a></li>
 				<li><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $row[geolon]; ?>:<?php echo $row[geolat]; ?>')"></a></li>
@@ -209,7 +209,7 @@ else {
 				<li>
 				<h1><?php echo $data['title'];?></h1>
 				<p><?php echo showBrief($data['description'],30); ?></p>
-				<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?php echo $dunit;?> Away</p>
+				<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?php echo $dunit;?> weg</p>
 				<ul class="btnList">
 				<?php if ($_REQUEST['bIPhone']=='0'){?>
 				   <li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data[phone]); ?>">Bel</a></li>
@@ -220,7 +220,7 @@ else {
 				$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 				if(stripos($ua,'android') == true) { ?>
 					<?php } else { ?>
-					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $data[geolat]; ?>:<?php echo $data[geolon]; ?>')">check in</a></li>
+					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $data[geolat]; ?>:<?php echo $data[geolon]; ?>')">Inchecken</a></li>
 					<?php } ?>
 					<li><a class="button small" href="diningdetails.php?did=<?php echo $data['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">Meer informatie</a></li>
 					<li><a  href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $data['geolon']; ?>:<?php echo $data['geolat']; ?>')"></a></li>

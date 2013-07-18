@@ -162,7 +162,7 @@ else {
 				<li>
 				<h1><?php echo $row['title'];?></h1>
 				<p><?php echo showBrief($row['description'],30); ?></p>
-				<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?php echo $dunit;?> Lejos</p>
+				<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?php echo $dunit;?> longe</p>
 				<ul class="btnList">
 				<?php if ($_REQUEST['bIPhone']=='0'){?>
 					<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row[phone]); ?>">Ligue</a></li>
@@ -209,7 +209,8 @@ else {
 				<li>
 				<h1><?php echo $data['title'];?></h1>
 				<p><?php echo showBrief($data['description'],30); ?></p>
-				<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?php echo $dunit;?> Away</p>
+				<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?php echo $dunit;?> longe
+				</p>
 				<ul class="btnList">
 				<?php if ($_REQUEST['bIPhone']=='0'){?>
 				   <li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data[phone]); ?>">Ligue</a></li>

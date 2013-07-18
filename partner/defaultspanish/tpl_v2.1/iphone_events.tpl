@@ -26,7 +26,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 			$displayTime = '';
 			
 			if($fearow[timestart]=='12:00 AM' && $fearow[timeend]=='11:59PM'){   
-				$displayTime.='All Day Event';
+				$displayTime.='Todo el día';
 			}
 			else{
 				$displayTime.= $fearow[timestart];
@@ -93,7 +93,7 @@ if(stripos($ua,'android') == true) { ?>
 
 <div id="main" role="main">
 
-<h1><?=$todaestring?></h1>
+<h1><?php echo $todaestring;?></h1>
 
 <ul id="eventList" class="mainList" ontouchstart="touchStart(event,'eventList');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 
@@ -142,10 +142,10 @@ if(stripos($ua,'android') == true) { ?>
 
 	  
 	<li>
-		<h1><?=$rowvevdetail['summary']?></h1>
-      	<h2><?=$rowlocdetail['title']?></h2>
+		<h1><?php echo $rowvevdetail['summary'];?></h1>
+      	<h2><?php echo $rowlocdetail['title'];?></h2>
 		<h3>
-			<?=$displayTime?> &bull;
+			<?php echo $displayTime;?> &bull;
 			<?php echo $categoryname[$n]; ?>
 			<ul class="btnList"><li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>">llamar</a</li>
 				
@@ -155,9 +155,9 @@ if(stripos($ua,'android') == true) { ?>
  			<?php } else { ?>
 			<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">facturar</a></li>
 				<?php } ?>
-			<li><a class="button small" href="events_details.php?eid=<?=$row['rp_id']?>&d=<?=$today?>&m=<?=$tomonth?>&Y=<?=$toyear?>&lat=<?=$lat1?>&lon=<?=$lon1?>">m&#225;s info</a></li></ul>
+			<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id']?>&d=<?php echo $today;?>&m=<?php echo $tomonth;?>&Y=<?php echo $toyear;?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">m&#225;s info</a></li></ul>
 		</h3> 
-				<!--<?=round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1')?>&nbsp;<?=$dunit?></td> Away -->
+				<!--<?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1')?>&nbsp;<?php echo $dunit;?></td> Away -->
     </li>
 
       <?php
@@ -168,7 +168,7 @@ if(stripos($ua,'android') == true) { ?>
 </ul>
 </div>
 
-<!-- <div id="footer">&copy; <?=date('Y');?> <?=$site_name?>, Inc. <!-- | <a href="mailto:<?=$email?>?subject=App Feedback">Contact Us</a> </div>  -->
+<!-- <div id="footer">&copy; <?php echo date('Y');?> <?php echo $site_name;?>, Inc. <!-- | <a href="mailto:<?php echo $email?>?subject=App Feedback">Contact Us</a> </div>  -->
 
 <div style='display:none;'><?php echo $pageglobal['googgle_map_api_keys']; ?></div>
 
