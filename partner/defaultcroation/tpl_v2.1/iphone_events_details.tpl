@@ -30,7 +30,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		?>
 		<H1><?php echo $rowvevdetail['summary'];?></h1>
 
-		<p><strong>Datum:</strong><?php echo $todaestring;?></p>
+		<p><strong>Datum:</strong><?php echo UTF8_encode($todaestring);?></p>
 		<p><strong>Vrijeme:</strong>
 		<?php
 		//#DD#

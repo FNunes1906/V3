@@ -93,7 +93,7 @@ if(stripos($ua,'android') == true) { ?>
 
 <div id="main" role="main">
 
-<h1><?php echo $todaestring;?></h1>
+<h1><?php echo UTF8_encode($todaestring);?></h1>
 
 <ul id="eventList" class="mainList" ontouchstart="touchStart(event,'eventList');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 

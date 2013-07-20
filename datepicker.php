@@ -64,7 +64,7 @@ function redirecturl(val)
 
 .dw-in{
 	   left:36% !important;
-    top: 10% !important;
+    top: 290px !important;
 }
 
 </style>

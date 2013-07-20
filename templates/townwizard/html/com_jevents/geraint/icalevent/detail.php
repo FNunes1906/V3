@@ -27,7 +27,7 @@ $this->_footer();
 $data = $this->data[row];
 $ev_start_date = ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date)));
 
-//Created date to manage repeat date
+//Created date to manage repeat date - Yogi
 $date=date_create($_GET['day'].'-'.$_GET['month'].'-'.$_GET['year']);
 $data->start_date = date_format($date,"l,F d,Y");
 
@@ -39,29 +39,24 @@ $ev_title	= $data->_title;
 $lang =& JFactory::getLanguage();
 $lan = $lang->getName();
 
-if($lan == "Español")
-{
+if($lan=="Español"){
 	setlocale(LC_TIME,"spanish");
-	$ev_start_date = ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date)));
-	
+	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
 }
-else if($lan == "Croatian(HR)"){
+else if($lan=="Croatian(HR)"){
 	
-	setlocale(LC_TIME,"croatian");
-	$ev_start_date = ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date)));
-	
+	setlocale(LC_TIME,"Croatian");
+	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
 }
-else if($lan == "Nederlands - nl-NL"){
+else if($lan=="Nederlands - nl-NL"){
 	
-	setlocale(LC_TIME,"Nederlands");
-	$ev_start_date = ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date)));
-	
+	setlocale(LC_TIME,"Dutch");
+	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
 }
-else if($lan == "Português (Brasil)"){
+else if($lan=="Português (Brasil)"){
 	
-	setlocale(LC_TIME,"Português");
-	$ev_start_date = ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date)));
-	
+	setlocale(LC_TIME,"Portuguese");
+	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
 }
 else{
 	$ev_start_date	= $data->start_date;
@@ -69,7 +64,7 @@ else{
 
 if($data->_alldayevent == 1)
 {
-	$ev_time = 'All Day Event';
+	$ev_time =JText::_('ALL_DAY');
 }
 else
 {
