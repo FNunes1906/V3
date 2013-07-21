@@ -108,7 +108,7 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
         <div style="text-transform: capitalize;" class="bold"><?php echo $lc_title; ?></div>
         <p class="desc"><?php echo $ev_desc; ?></p>
         <div class="address">
-			<?php // include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
+			<?php include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
 			<div><?php echo $lc_title;?></div>
 			<div><?php echo $lc_street;?></div>
 			<div><?php echo $lc_city.' '.$lc_state.', '.$lc_postcode;?></div>
