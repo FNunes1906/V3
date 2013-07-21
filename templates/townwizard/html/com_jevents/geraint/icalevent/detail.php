@@ -29,7 +29,7 @@ $ev_start_date = ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date)))
 
 //Created date to manage repeat date - Yogi
 $date=date_create($_GET['day'].'-'.$_GET['month'].'-'.$_GET['year']);
-$data->start_date = date_format($date,"l,F d,Y");
+$data->start_date = date_format($date,"l, F d, Y");
 
 # Event detail variables
 $ev_title	= $data->_title;

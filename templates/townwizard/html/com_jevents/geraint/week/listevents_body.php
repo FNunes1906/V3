@@ -52,7 +52,7 @@ if (mysql_num_rows($rows)!= 0){
 				
 				$m = DATE('m',strtotime($ser_date));
 				$d  = DATE('d',strtotime($ser_date)) ;
-				$y  = DATE('y',strtotime($ser_date)) ;
+				$y  = DATE('Y',strtotime($ser_date)) ;
 				if($f == "%m/%d"){
 					echo "<li class='ev_td_li'><div class='date fl'>".$m."/".$d."</div>";
 				}
