@@ -368,22 +368,22 @@ $this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
 				     <!-- Event Rotator End -->
 					
 					<?php
-					 if($this->countModules('searchres') && JRequest::getVar('task') != 'locations.detail') : ?>
+					 if(JRequest::getVar('task') != 'locations.detail') : ?>
 						
 						<?php if($this->countModules('loc_slider')) : ?>
-							<div>
-								<jdoc:include type="modules" name="loc_slider" style="rounded" />
-								<div class="cb"></div>
-							</div>
+								<div>
+									<jdoc:include type="modules" name="loc_slider" style="rounded" />
+									<div class="cb"></div>
+								</div>
 						<?php endif; ?>
-						
-						<div id="Feat">
-							<div id="Find" class="sect">
-								<jdoc:include type="modules" name="searchres" style="rounded" />
-								<div class="cb"></div>
-							</div>
-						</div>
-
+						<?php if($this->countModules('searchres')) : ?>
+								<div id="Feat">
+									<div id="Find" class="sect">
+										<jdoc:include type="modules" name="searchres" style="rounded" />
+										<div class="cb"></div>
+									</div>
+								</div>
+						<?php endif; ?>
 				    <?php endif; ?>
 					
             		<div id="Try3" class="sect">

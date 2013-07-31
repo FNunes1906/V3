@@ -1,6 +1,6 @@
 <?php
 //echo $catid;
-//if (mysql_num_rows($LocationSlider) != 0){
+if (count($LocationSlider) != 0){
 
 defined('_JEXEC') or die('Restricted access');
 global $var;
@@ -136,4 +136,4 @@ global $var;
         </script>
 
 <!-- Featured Events Slider End-->
-<?php// } ?>
+<?php } ?>

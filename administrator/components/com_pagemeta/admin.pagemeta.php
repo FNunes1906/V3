@@ -241,15 +241,15 @@ function globalseting(){
     <td width="20%" class="key"><label>distance unit:</label></td>
     <td width="80%">
       <?php
-      if ($row['distance_unit'] == 'Kms') { ?>
-      <input name="dunit" type="radio" value="Kms" checked />Kms&nbsp;<input name="dunit" type="radio" value="Miles" />Miles
+      if ($row['distance_unit'] == 'KM') { ?>
+      <input name="dunit" type="radio" value="KM" checked />KM&nbsp;<input name="dunit" type="radio" value="Miles" />Miles
       <?php } ?> 
       <?php
       if ($row['distance_unit'] == 'Miles') { ?>
-      <input name="dunit" type="radio" value="Kms"/>Kms&nbsp;<input name="dunit" type="radio" value="Miles" checked />Miles
+      <input name="dunit" type="radio" value="KM"/>KM&nbsp;<input name="dunit" type="radio" value="Miles" checked />Miles
       <?php } ?>
       <?php if ($row['distance_unit'] == '') { ?>
-      <input name="dunit" type="radio" value="Kms"/>Kms&nbsp;<input name="dunit" type="radio" value="Miles" checked />Miles
+      <input name="dunit" type="radio" value="KM"/>KM&nbsp;<input name="dunit" type="radio" value="Miles" checked />Miles
       <?php } ?>
     </td>
   </tr>

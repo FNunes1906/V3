@@ -27,7 +27,7 @@
 			else{
 				$displayTime.= $fearow[timestart];
 				if ($fearow[timeend] != '11:59PM'){
-					$displayTime.="-".$fearow[timeend];
+					$displayTime.=" - ".$fearow[timeend];
 				}
 			}
 			$homeslider1[$k]['eve_id'] = $fearow['ev_id'];
@@ -35,18 +35,31 @@
 			$homeslider1[$k]['Date'] = $fearow['Date'];
 			$homeslider1[$k]['title'] = $fearow['title'];
 			$homeslider1[$k]['time'] = $displayTime;
-
+			/* below Varialbe for 24 vs 12 hours time format for HOME SLIDER yogi */
+			$homeslider1[$k]['timestart'] = $fearow['timestart'];
+   			$homeslider1[$k]['timeend'] = $fearow['timeend'];
+			
 			if(in_array($fearow['ev_id'], $tempeventid)){
 			}else{
 			if($imagecount<5){
 			
 			?> 
 		    	<li>
-					<img  src="<?php echo $singleimagearray[0];?>" />
+					<img src="<?php echo $singleimagearray[0];?>" />
 		    		<div class="flex-caption">
 		    			<h1><?php echo $fearow['summary'];?></h1>
 		    			<h2><?php echo $fearow['title'];?></h2>
-		    			<h3><?php echo $displayTime;?></h3>
+		    			<h3>
+							<!--below Varialbe for 24 vs 12 hours time format for HOME SLIDER yogi-->
+							<?php
+							
+								if($time_format == "12"){
+									echo $displayTime;
+								}else{
+									echo date("H:i", strtotime($homeslider1[$k]['timestart']))." - ".date("H:i", strtotime($homeslider1[$k]['timeend']));
+								}
+							?>
+						</h3>
 		    		</div> <!-- caption -->
 		    	</li>
 			<?php
@@ -125,9 +138,8 @@ if(stripos($ua,'android') == true) { ?>
             {    $displayTime.='All Day Event';}
 			else{
 				$displayTime.= ltrim($row[timestart], "0");
-				
-				if($rowvevdetail['noendtime']==0){
-					$displayTime.='-'.ltrim($row[timeend], "0");
+				if($rowvevdetail['noendtime'] == 0){
+					$displayTime.=' - '.ltrim($row[timeend], "0");
 				}
 			}
 
@@ -140,15 +152,22 @@ if(stripos($ua,'android') == true) { ?>
 		<h1><?php echo $rowvevdetail['summary'];?></h1>
       	<h2><?php echo $rowlocdetail['title'];?></h2>
 		<h3>
-			<?php echo $displayTime;?> &bull;
+		<!--Code for 24 vs 12 hour time format for LISTING Yogi -->
+		<?php
+			if($time_format == "12"){
+				echo $displayTime.' &bull; ';
+			}else{
+				echo date("H:i", strtotime($row[timestart]))." - ".date("H:i", strtotime($row[timeend]));
+			}
+		?>
+			
 			<?php echo $categoryname[$n]; ?>
 			<ul class="btnList"><li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>">call</a</li>
 				
 			<?php
 	 			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-				if(stripos($ua,'android') == true) { ?>
- 			<?php } else { ?>
-			<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">check in</a></li>
+				if(stripos($ua,'android') != true) { ?>
+					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">check in</a></li>
 				<?php } ?>
 			<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $today;?>&m=<?php echo $tomonth;?>&Y=<?php echo $toyear;?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">more info</a></li></ul>
 		</h3> 

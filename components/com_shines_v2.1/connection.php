@@ -17,7 +17,7 @@ $conn=mysql_connect(DB_HOST,DB_USER,DB_PASSWORD) or die(mysql_error());
 $db=mysql_select_db(DB_NAME) or die(mysql_error());
 
 $rec = mysql_query("select * from `jos_pageglobal`");
-$pageglobal=mysql_fetch_array($rec);
+$pageglobal = mysql_fetch_array($rec);
 
 $gmapkeys=explode('googlemapskey=',$pagejevent['params']);
 $gmapkeys1=explode("\n",$gmapkeys[1]);
@@ -28,5 +28,6 @@ $googgle_map_api_keys = $gmapkeys1[0];
 $location_code = $pageglobal['location_code'];
 $dunit= $pageglobal['distance_unit'];
 $timezone = $pageglobal['time_zone'];
+$time_format = $pageglobal['time_format'];
 $var->googgle_analytics = $pageglobal['googgle_map_api_keys'];
 ?>

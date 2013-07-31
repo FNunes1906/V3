@@ -1,6 +1,7 @@
 <?php 
 setlocale(LC_TIME,"croatian");
-$todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
+//$todaestring = ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
+$todaestring = $today.'/'.$tomonth;
 ?>
 <div id="main" role="main" ontouchstart="touchStart(event,'list');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 	<ul id="placesList" class="mainList"><li>
@@ -30,7 +31,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		?>
 		<H1><?php echo $rowvevdetail['summary'];?></h1>
 
-		<p><strong>Datum:</strong><?php echo UTF8_encode($todaestring);?></p>
+		<p><strong>Datum:</strong> <?php echo UTF8_encode($todaestring);?></p>
 		<p><strong>Vrijeme:</strong>
 		<?php
 		//#DD#
@@ -43,7 +44,13 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 				if($rowvevdetail['noendtime']==0){
 					$displayTime.='-'.ltrim($row[timeend], "0");
 				}
-				echo $displayTime;
+				//echo $displayTime;
+				/* 12 vs 24 hour time format by yogi */
+				if($time_format == "12"){
+					echo $displayTime;
+				}else{
+					echo date("H:i", strtotime($row[timestart]))." - ".date("H:i", strtotime($row[timeend]));
+				}
 			}
 	   /* End By Rinkal */
 		
@@ -61,20 +68,20 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		?>
 
 		</p>
-		<p><strong>Lokacija:</strong><?php echo $rowlocdetail['title'];?></p>
+		<p><strong>Lokacija:</strong> <?php echo $rowlocdetail['title'];?></p>
 		<?php
 		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 		if(stripos($ua,'android') == true) { ?>
-		<p><strong>Adresa:</strong><a href="map.php?lat=<?php echo $lat2;?>&long=<?php echo $lon2;?>"><?php echo $rowlocdetail['street'];?></a></p>
+		<p><strong>Adresa:</strong> <a href="map.php?lat=<?php echo $lat2;?>&long=<?php echo $lon2;?>"><?php echo $rowlocdetail['street'];?></a></p>
 			<?php } else { ?>
-		<p><strong>Adresa:</strong><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" ><?php echo $rowlocdetail['street'];?></a></p>
+		<p><strong>Adresa:</strong> <a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" ><?php echo $rowlocdetail['street'];?></a></p>
 			<?php } ?>
-		<p><strong>Telefon:</strong><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo $rowlocdetail['phone'];?></a></p>
-		<p><strong>Udaljenost:</strong><?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1');?>&nbsp;<?php echo $dunit?></p>
+		<p><strong>Telefon:</strong> <a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo $rowlocdetail['phone'];?></a></p>
+		<p><strong>Udaljenost:</strong> <?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1');?>&nbsp;<?php echo $dunit?></p>
 		<?php if(trim($rowlocdetail['url']) != '') { ?>
-		<p><strong>Internet stranica:</strong><a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" target="_blank"><?php echo str_replace('http://','',$rowlocdetail['url']); ?></a></p>
+		<p><strong>Internet stranica:</strong> <a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" target="_blank"><?php echo str_replace('http://','',$rowlocdetail['url']); ?></a></p>
 			<?php } ?>
-	<p><strong>Opis:</strong><?php echo $rowvevdetail['description']?></p>
+	<p><strong>Opis:</strong> <?php echo $rowvevdetail['description']?></p>
 		<?php
 		//#DD#
 		$mailContent.= "

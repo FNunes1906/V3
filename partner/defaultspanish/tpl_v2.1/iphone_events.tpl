@@ -1,6 +1,6 @@
 <?php 
 setlocale(LC_TIME,"spanish");
-$todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
+$todaestring = ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
 ?>
 <div id="featuredEvents">
 	<div class="flexslider-container">
@@ -31,7 +31,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 			else{
 				$displayTime.= $fearow[timestart];
 				if ($fearow[timeend] != '11:59PM'){
-					$displayTime.="-".$fearow[timeend];
+					$displayTime.=" - ".$fearow[timeend];
 				}
 			}
 			$homeslider1[$k]['eve_id'] = $fearow['ev_id'];
@@ -39,6 +39,9 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 			$homeslider1[$k]['Date'] = $fearow['Date'];
 			$homeslider1[$k]['title'] = $fearow['title'];
 			$homeslider1[$k]['time'] = $displayTime;
+			/* below Varialbe for 24 vs 12 hours time format for HOME SLIDER yogi */
+			$homeslider1[$k]['timestart'] = $fearow['timestart'];
+   			$homeslider1[$k]['timeend'] = $fearow['timeend'];
 
 			if(in_array($fearow['ev_id'], $tempeventid)){
 			}else{
@@ -52,7 +55,15 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		    		<div class="flex-caption">
 		    			<h1><?php echo $fearow['summary']?></h1>
 		    			<h2><?php echo $fearow['title']?></h2>
-		    			<h3><?php echo $displayTime ?></h3>
+		    			<h3><!--below Varialbe for 24 vs 12 hours time format for HOME SLIDER yogi-->
+							<?php
+							
+								if($time_format == "12"){
+									echo $displayTime;
+								}else{
+									echo date("H:i", strtotime($homeslider1[$k]['timestart']))." - ".date("H:i", strtotime($homeslider1[$k]['timeend']));
+								}
+							?></h3>
 		    		</div> <!-- caption -->
 		    	</li>
 			<?php
@@ -93,7 +104,7 @@ if(stripos($ua,'android') == true) { ?>
 
 <div id="main" role="main">
 
-<h1><?php echo $todaestring;?></h1>
+<h1><?php echo utf8_encode($todaestring);?></h1>
 
 <ul id="eventList" class="mainList" ontouchstart="touchStart(event,'eventList');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 
@@ -132,7 +143,7 @@ if(stripos($ua,'android') == true) { ?>
 				$displayTime.= ltrim($row[timestart], "0");
 				
 				if($rowvevdetail['noendtime']==0){
-					$displayTime.='-'.ltrim($row[timeend], "0");
+					$displayTime.=' - '.ltrim($row[timeend], "0");
 				}
 			}
 
@@ -145,7 +156,14 @@ if(stripos($ua,'android') == true) { ?>
 		<h1><?php echo $rowvevdetail['summary'];?></h1>
       	<h2><?php echo $rowlocdetail['title'];?></h2>
 		<h3>
-			<?php echo $displayTime;?> &bull;
+			<!--Code for 24 vs 12 hour time format for LISTING Yogi -->
+			<?php
+				if($time_format == "12"){
+					echo $displayTime.' &bull; ';
+				}else{
+					echo date("H:i", strtotime($row[timestart]))." - ".date("H:i", strtotime($row[timeend]));
+				}
+			?>
 			<?php echo $categoryname[$n]; ?>
 			<ul class="btnList"><li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>">llamar</a</li>
 				

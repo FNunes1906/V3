@@ -12,19 +12,8 @@
 		<h1><?php echo $row['title'];?></h1>
 		
 		<p>
-			<?php
-			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-			if(stripos($ua,'android') == true) { 
-			?>
-			<strong>Adresa:</strong>&nbsp;&nbsp<a href="map.php?lat=<?php echo $lat2;?>&long=<?php echo $lon2;?>">;<?php echo $row['street'];?></a>
-			<br />
-			<?php } 
-			else {
-			?>
-			<strong>Adresa:</strong>&nbsp;&nbsp<a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')"><?php echo $row['street'];?></a>
-			<?php } ?>
+			<strong>Adresa:</strong>&nbsp;<a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')"><?php echo $row['street'];?></a>
 		</p>
-	
 		
 		<p>
 		<strong>Telefon:</strong>&nbsp;&nbsp;<a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$row[phone])?>"><?php echo $row[phone];?></a>

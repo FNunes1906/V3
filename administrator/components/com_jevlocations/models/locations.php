@@ -89,7 +89,8 @@ class LocationsModelLocations extends JModel
 		if (empty($this->_publicdata))
 		{
 			$query = $this->_buildPublicQuery();
-			$this->_publicdata = $this->_getList($query, $this->getState('limitstart'), $this->getState('limit'));
+			//$this->_publicdata = $this->_getList($query, $this->getState('limitstart'), $this->getState('limit'));
+			$this->_publicdata = $this->_getList($query, $this->getState('limitstart'),0);
 			$db = & JFactory::getDBO();
 			echo $db->getErrorMsg();
 		}

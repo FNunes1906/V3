@@ -40,7 +40,13 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 				if($rowvevdetail['noendtime']==0){
 					$displayTime.='-'.ltrim($row[timeend], "0");
 				}
-				echo $displayTime;
+				//echo $displayTime;
+				/* 12 vs 24 hour time format by yogi */
+				if($time_format == "12"){
+					echo $displayTime;
+				}else{
+					echo date("H:i", strtotime($row[timestart]))." - ".date("H:i", strtotime($row[timeend]));
+				}
 			}
 	   /* End By Rinkal */
 		

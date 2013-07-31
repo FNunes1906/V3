@@ -23,7 +23,7 @@
 		?>
 		<H1><?php echo $rowvevdetail['summary'];?></h1>
 
-		<p><strong>Date:</strong><?php echo $todaestring;?></p>
+		<p><strong>Date:</strong> <?php echo $todaestring;?></p>
 		<p><strong>Time:</strong>
 		<?php
 		//#DD#
@@ -34,9 +34,15 @@
 			else{
 				$displayTime.= ltrim($row[timestart], "0");
 				if($rowvevdetail['noendtime']==0){
-					$displayTime.='-'.ltrim($row[timeend], "0");
+					$displayTime.=' - '.ltrim($row[timeend], "0");
 				}
-				echo $displayTime;
+				//echo $displayTime;
+				/* 12 vs 24 hour time format by yogi */
+				if($time_format == "12"){
+					echo $displayTime;
+				}else{
+					echo date("H:i", strtotime($row[timestart]))." - ".date("H:i", strtotime($row[timeend]));
+				}
 			}
 	   /* End By Rinkal */
 		
@@ -54,14 +60,14 @@
 		?>
 
 		</p>
-		<p><strong>Location:</strong><?php echo $rowlocdetail['title'];?></p>
-		<p><strong>Address:</strong><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" ><?php echo $rowlocdetail['street'];?></a></p>
-		<p><strong>Phone:</strong><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo $rowlocdetail['phone'];?></a></p>
-		<p><strong>Distance:</strong><?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1')?>&nbsp;<?php echo $dunit;?></p>
+		<p><strong>Location:</strong> <?php echo $rowlocdetail['title'];?></p>
+		<p><strong>Address:</strong> <a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" ><?php echo $rowlocdetail['street'];?></a></p>
+		<p><strong>Phone:</strong> <a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo $rowlocdetail['phone'];?></a></p>
+		<p><strong>Distance:</strong> <?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1')?>&nbsp;<?php echo $dunit;?></p>
 		<?php if(trim($rowlocdetail['url']) != '') { ?>
-		<p><strong>Website:</strong><a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" target="_blank"><?php echo str_replace('http://','',$rowlocdetail['url']); ?></a></p>
+		<p><strong>Website:</strong> <a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" target="_blank"><?php echo str_replace('http://','',$rowlocdetail['url']); ?></a></p>
 			<?php } ?>
-	<p><strong>Description:</strong><?php echo $rowvevdetail['description'];?></p>
+	<p><strong>Description:</strong> <?php echo $rowvevdetail['description'];?></p>
 		<?php
 		//#DD#
 		$mailContent.= "

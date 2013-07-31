@@ -82,13 +82,13 @@
 $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 if(stripos($ua,'android') == true) { ?>
 	<div class="iphoneads" style="vertical-align:bottom;">
-		<?php m_show_banner('android-places-screen'); ?>
+		<?php m_show_banner('android-restaurants-screen'); ?>
 	</div>
 	<?php } 
 else {
 	?>
 	<div class="iphoneads" style="vertical-align:bottom;">
-	<?php m_show_banner('iphone-places-screen'); ?>
+	<?php m_show_banner('iphone-restaurants-screen'); ?>
 	</div>
 	<?php } ?>
 	
