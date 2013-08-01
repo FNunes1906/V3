@@ -168,7 +168,7 @@ ddsmoothmenu.init({
 	function redirecturl(val)
 {
 	
-	url="<?php echo $_SERVER['PHP_SELF']; ?>?category_id=<?php echo $category_id?>&option=com_jevlocations&task=locations.listlocations&tmpl=component&needdistance=1&sortdistance=1&lat=<?=$_REQUEST['lat']?>&lon=<?php echo $_REQUEST['lon']?>&bIPhone=<?php echo $_REQUEST['bIPhone']?>&iphoneapp=1&search=<?php echo $_REQUEST['search']?>&limit=0&jlpriority_fv=0&filter_loccat="+val + "&filter_order=<?php echo $filter_order?>&filter_order_Dir=<?php echo $filter_order_Dir?>";
+	url="<?php echo $_SERVER['PHP_SELF']; ?>?category_id=<?php echo $category_id?>&option=com_jevlocations&task=locations.listlocations&tmpl=component&needdistance=1&sortdistance=1&lat=<?php echo $_REQUEST['lat'];?>&lon=<?php echo $_REQUEST['lon']?>&bIPhone=<?php echo $_REQUEST['bIPhone']?>&iphoneapp=1&search=<?php echo $_REQUEST['search']?>&limit=0&jlpriority_fv=0&filter_loccat="+val + "&filter_order=<?php echo $filter_order?>&filter_order_Dir=<?php echo $filter_order_Dir?>";
 	window.location=url;
 }
 
@@ -206,15 +206,7 @@ function divopen(str) {
 </head>
 <body>
 <?php
-$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-if(stripos($ua,'android') == true) { ?>
-	<div class="iphoneads" style="vertical-align:bottom;"></div>
-	<?php } 
-else {
-	?>
-	<div class="iphoneads" style="vertical-align:bottom;">
-	<?php 
-	/* 
+/* 
 Code Begin 
 Result  : display banner for category
 Request : Fetching Title from category id
@@ -222,19 +214,26 @@ Developer:Rinkal
 Last update Date:02-01-2013
 */
 	
-	$res=mysql_query("select title from jos_categories where id=".$category_id."");
-	while($bann_cat_name=mysql_fetch_array($res))
+$res=mysql_query("select title from jos_categories where id=".$category_id."");
+while($bann_cat_name=mysql_fetch_array($res))
 	{
 	$banner_cat_name=$bann_cat_name['title'];
-	$banner_cat_name=explode(" -", $banner_cat_name);
-	//echo 'iphone-'.$banner_cat_name[0].'-screen';
-	m_show_banner('iphone-'.$banner_cat_name[0].'-screen');
+	//$banner_cat_name=explode(" -", $banner_cat_name);
 	}
-	/*Code End */
-	 
+
+$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+if(stripos($ua,'android') == True) { ?>
+	<div class="iphoneads" style="vertical-align:bottom;">
+		<?php m_show_banner('android-'.$banner_cat_name.'-screen'); ?>
+	</div>
+	<?php } 
+else {
 	?>
+	<div class="iphoneads" style="vertical-align:bottom;">
+		<?php m_show_banner('iphone-'.$banner_cat_name.'-screen');?>
 	</div>
 	<?php } ?>
+<!--Code End -->
 <?php
 /* Code added for iphone_restaurants.tpl */
 require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_generic_locations.tpl");

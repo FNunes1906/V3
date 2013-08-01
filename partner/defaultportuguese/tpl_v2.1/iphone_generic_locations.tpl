@@ -17,13 +17,13 @@ $recsub=mysql_query($recsubsql) or die(mysql_error());
 ?>
 <select name="d" onChange="redirecturl(this.value)" >
 <option value="0">
-Seleccione una categor&#237;a
+Escolha uma Categoria
 </option>
 <option value="0">
-Todos
+Tudo
 </option>
 <option value="alp" <?php if ($_REQUEST['filter_loccat']=='alp') {?> selected <?php }?>>
-Alfab&#233;tico
+Alfabético
 </option>
 <?php	while($rowsub=mysql_fetch_array($recsub))
 {
@@ -82,20 +82,20 @@ Alfab&#233;tico
 				<li>
 				<h1><?php echo utf8_encode($row['title'])?></h1>
 				<p><?php echo stripJunk(showBrief(strip_tags(utf8_encode($row['description'])),30)); ?></p>
-				<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?php echo $dunit?> Lejos</p>
+				<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?php echo $dunit?> longe</p>
 				<ul class="btnList">
 				<?php if ($_REQUEST['bIPhone']=='0'){?>
-					<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row[phone]); ?>">llamar</a></li>
+					<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row[phone]); ?>">Ligue</a></li>
 					<?php } else { ?>
-					<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row[phone]); ?>">llamar</a></li>
+					<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row[phone]); ?>">Ligue</a></li>
 					<?php } ?>
 				<?php
 				$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 				if(stripos($ua,'android') == true) { ?>
 					<?php } else { ?>
-					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row[geolat]; ?>:<?php echo $row[geolon]; ?>')">facturar</a></li>
+					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row[geolat]; ?>:<?php echo $row[geolon]; ?>')">check in</a></li>
 					<?php } ?>
-				<li><a class="button small" href="diningdetails.php?did=<?php echo $row['loc_id']?>&lat=<?php echo $lat1?>&lon=<?php echo $lon1?>">m&#225;s info</a></li>
+				<li><a class="button small" href="diningdetails.php?did=<?php echo $row['loc_id']?>&lat=<?php echo $lat1?>&lon=<?php echo $lon1?>">Mais Informações</a></li>
 				<li><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $row[geolon]; ?>:<?php echo $row[geolat]; ?>')"></a></li>
 				</ul>
 				</li>
@@ -129,20 +129,20 @@ Alfab&#233;tico
 				<li>
 				<h1><?php echo utf8_encode($data['title'])?></h1>
 				<p><?php echo stripJunk(showBrief(strip_tags(utf8_encode($data['description'])),30)); ?></p>
-				<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?php echo $dunit?> Lejos</p>
+				<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?php echo $dunit?> longe</p>
 				<ul class="btnList">
 				<?php if ($_REQUEST['bIPhone']=='0'){?>
-				   <li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data[phone]); ?>">llamar</a></li>
+				   <li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data[phone]); ?>">Ligue</a></li>
 					<?php } else { ?>
-				   <li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data[phone]); ?>">llamar</a></li>
+				   <li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data[phone]); ?>">Ligue</a></li>
 					<?php } ?>
 				<?php
 				$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 				if(stripos($ua,'android') == true) { ?>
 					<?php } else { ?>
-					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $data[geolat]; ?>:<?php echo $data[geolon]; ?>')">facturar</a></li>
+					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $data[geolat]; ?>:<?php echo $data[geolon]; ?>')">check in</a></li>
 					<?php } ?>
-					<li><a class="button small" href="diningdetails.php?did=<?php echo $data['loc_id']?>&lat=<?php echo $lat1?>&lon=<?php echo $lon1?>">m&#225;s info</a></li>
+					<li><a class="button small" href="diningdetails.php?did=<?php echo $data['loc_id']?>&lat=<?php echo $lat1?>&lon=<?php echo $lon1?>">Mais Informações</a></li>
 					<li><a  href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $data['geolon']; ?>:<?php echo $data['geolat']; ?>')"></a></li>
 				</ul>
 				<?php } ?>
