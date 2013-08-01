@@ -3,8 +3,9 @@ include("connection.php");
 include("iadbanner.php");
 
 $query="select * from jos_phocagallery where catid=2 order by id desc";
-$rec=mysql_query($query) or die(mysql_error());
 mysql_set_charset("UTF8");
+$rec=mysql_query($query) or die(mysql_error());
+
 
 header( 'Content-Type:text/html;charset=utf-8');
 
@@ -88,7 +89,7 @@ echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Videos':'Videos';?>
 					<a href="<?php echo $arr2[0]; ?>">
 						<img src="images/next-videos.gif" align="right" style="padding-top:20px;"  border="0"/>
 					</a>
-					<a style="line-height:100px;" href="<?php echo $arr2[0]; ?>"><?php echo utf8_encode($row['title']) ; ?></a>
+					<a style="line-height:100px;" href="<?php echo $arr2[0]; ?>"><?php echo $row['title'] ; ?></a>
 				</strong></font> 
 			</li>
 			<?php

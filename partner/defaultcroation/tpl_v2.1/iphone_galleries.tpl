@@ -3,26 +3,18 @@
 <div id="content">
 
 	<ul class="mainList" id="placesList">
-
-		
-
     <?php 
-
 	  foreach($param as $v) 
-
 	  {
-
 	  	if(isset($v['avatar']) && trim($v['avatar']) != '') 
-
 	  	{
-
 	  	?>
 
       <li class="textbox"  style="padding-bottom:0px;">
 
      <table><tr><td>
 
- <a href="galleries.php?id=<?=$v['id']?>">   
+ <a href="galleries.php?id=<?php echo $v['id']?>">   
 
  <img class="photo_container" src="<?php echo $v['avatar']; ?>" alt="<?php echo $v['title']; ?>" title="<?php echo $v['title']; ?>" />
 
@@ -36,33 +28,19 @@
 
      <strong>
 
-     <a href="photos.php?id=<?=$v['id']?>"><?=$v['title']?></a>
+     <a href="photos.php?id=<?php echo $v['id']?>"><?php echo $v['title']?></a>
 
      </strong></font> 
 
      </td></tr></table>
-
-
-
      </li>
-
-		
-
 		<?php
 
 			}
-
     }
 
     ?>
-
-		
-
 	</ul>
-
-	
-
-	
 
 </div>
 
@@ -72,7 +50,6 @@
 
 
 
-	<!--&copy; <?=date('Y');?> <?=$site_name?>  | <a href="mailto:<?=$email?>?subject=App Feedback">Contact Us</a>--></div>
+	<!--&copy; <?php echo date('Y');?> <?php echo $site_name?>  | <a href="mailto:<?php echo $email?>?subject=App Feedback">Contact Us</a>--></div>
 
 <div style='display:none;'><?php echo $pageglobal['googgle_map_api_keys']; ?></div>
-

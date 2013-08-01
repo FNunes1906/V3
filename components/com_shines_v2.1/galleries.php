@@ -15,7 +15,8 @@ $rec=mysql_query($query) or die(mysql_error());
 
   //$param = db_fetch("select * from `jos_phocagallery_categories` where id != 2 and `published` = 1 and `approved` = 1 order by ordering asc", true, true);
   
-  $query = "select * from jos_phocagallery_categories where id<>2 and published=1 and approved=1 order by ordering";
+ 	$query = "select * from jos_phocagallery_categories where id<>2 and published=1 and approved=1 order by ordering";
+	mysql_set_charset("UTF8");
 	$rec=mysql_query($query) or die(mysql_error());
 	
 	$param = array();
@@ -61,7 +62,7 @@ $rec=mysql_query($query) or die(mysql_error());
 <head>
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <meta content="index,follow" name="robots" />
-<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <link href="pics/homescreen.gif" rel="apple-touch-icon" />
 <meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
 <link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
