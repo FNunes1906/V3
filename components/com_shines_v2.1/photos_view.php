@@ -57,6 +57,7 @@ if($CatId>0){
 		 
 
 		 $rec=$mydb->execute_query($recno);
+		 mysql_set_charset("UTF8");
 
 		 $current_page=$mydb->current_page();
 
@@ -80,7 +81,7 @@ if($CatId>0){
 
 <meta content="index,follow" name="robots" />
 
-<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 
 <link href="pics/homescreen.gif" rel="apple-touch-icon" />
 
