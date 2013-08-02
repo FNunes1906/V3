@@ -794,6 +794,11 @@ class JEventsDBModel {
 
 	// Allow the passing of filters directly into this function for use in 3rd party extensions etc.
 	function listIcalEventsByRange( $startdate, $enddate, $limitstart, $limit, $showrepeats = true,     $order = "rpt.startrepeat asc, rpt.endrepeat ASC, det.summary ASC", $filters = false, $extrafields="", $extratables="", $count=false) {
+				/* Saturday and sunday date session varialbe by Yogi */
+				$_SESSION['saturday_date']	= $startdate;
+				$_SESSION['sunday_date']	= $enddate;
+
+		
 		list($year, $month, $day) = explode('-', $startdate);
 		list($thisyear, $thismonth, $thisday) = JEVHelper::getYMD();
 

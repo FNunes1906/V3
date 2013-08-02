@@ -1,4 +1,5 @@
-<?php 
+<?php
+//session_start(); 
 defined('_JEXEC') or die('Restricted access');
 
 
@@ -9,11 +10,15 @@ echo "<h3 class='fl heading display'>".JText::_('JEV_VIEWBYWEEK')."</h3>";
 
 /*echo "<div id='cal_title'>". JText::_('JEV_EVENTSFOR') ."</div>\n";	*/
 ?>
-<div class="bc fr" ><span class="bold"><?php echo JText::_('JEV_VIEWBYCAT');?>:</span><?php $this->viewNavCatText( $this->catids, JEV_COM_COMPONENT, 'cat.listevents', $this->Itemid );?></div>
+<div class="bc fr" >
+	<span class="bold"><?php echo JText::_('JEV_VIEWBYCAT');?>:</span>
+	<?php $this->viewNavCatText( $this->catids, JEV_COM_COMPONENT, 'cat.listevents', $this->Itemid );?>
+</div>
 <table align="center" width="100%" cellspacing="0" cellpadding="5" class="ev_table">
     
     <?php
-    $num_events = count($data['rows']);
+
+	$num_events = count($data['rows']);
     $chdate ="";
     if( $num_events > 0 ){
     	echo "<tr>\n";
@@ -26,7 +31,7 @@ echo "<h3 class='fl heading display'>".JText::_('JEV_VIEWBYWEEK')."</h3>";
 			$_edDate = $row->ydn()."-".$row->mdn()."-".$row->ddn();
 			
 			if($_stDate != $_edDate){
-				continue;
+				//continue;
 			}
 			
 			/*Code by Yogi for catgory list event End */
@@ -41,13 +46,24 @@ echo "<h3 class='fl heading display'>".JText::_('JEV_VIEWBYWEEK')."</h3>";
 
     		if( $event_day_month_year <> $chdate ){
     			$date =JEventsHTML::getDateFormat( $row->yup(), $row->mup(), $row->dup(), 5 );
+    			//echo $row->yup(), $row->mup(), $row->dup();
+    			
+				$strday = explode('-',$_SESSION['saturday_date']);
+				$sndday = explode('-',$_SESSION['sunday_date']);
+				$date_saturday	=	JEventsHTML::getDateFormat($strday[0],$strday[1],$strday[2], 5 );
+    			$date_sunday	=	JEventsHTML::getDateFormat($sndday[0],$sndday[1],$sndday[2], 5 );
     			echo '<tr>' . "\n";
     			echo '<td align="left" valign="top" class="ev_td_right"><ul class="ev_ul1">' . "\n";
     		}
 
     		$listyle = 'style="border-color:'.$row->bgcolor().';"';
-    		echo "<li class='ev_td_li' $listyle><div class='date fl'>".$date."</div><div class='details'>\n";
-    		if (!$this->loadedFromTemplate('icalevent.list_row', $row, 0)){
+			if($_stDate < $_SESSION['saturday_date']){
+    			echo "<li class='ev_td_li' $listyle><div class='date fl'>".$date_saturday.'<br>&nbsp;&nbsp;&nbsp;&nbsp;&<br>'.$date_sunday."</div><div class='details'>\n";
+    		}else{
+				echo "<li class='ev_td_li' $listyle><div class='date fl'>".$date."</div><div class='details'>\n";
+    		
+			}
+			if (!$this->loadedFromTemplate('icalevent.list_row', $row, 0)){
     			$this->viewEventRowNew ( $row,'view_detail',JEV_COM_COMPONENT, $Itemid);
     		}
     		echo "</li>\n";
