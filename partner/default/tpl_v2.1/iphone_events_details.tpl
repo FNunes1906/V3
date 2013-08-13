@@ -26,37 +26,42 @@
 		<p><strong>Date:</strong> <?php echo $todaestring;?></p>
 		<p><strong>Time:</strong>
 		<?php
-		//#DD#
-		/* Coded By Rinkal */
-		$displayTime = '';
-			if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59PM')
-            {    echo 'All Day Event';}
-			else{
-				$displayTime.= ltrim($row[timestart], "0");
-				if($rowvevdetail['noendtime']==0){
-					$displayTime.=' - '.ltrim($row[timeend], "0");
-				}
-				//echo $displayTime;
-				/* 12 vs 24 hour time format by yogi */
-				if($time_format == "12"){
-					echo $displayTime;
-				}else{
-					echo date("H:i", strtotime($row[timestart]))." - ".date("H:i", strtotime($row[timeend]));
-				}
-			}
-	   /* End By Rinkal */
+		/* Coded By Akash */
 		
-		
-		/* if($evrawdata['allDayEvent']=='on'){
-				echo 'All Day Event';
-			}else{
-					$displayTime.= ltrim($row[timestart], "0");
-					if($evrawdata['NOENDTIME']!=1){
-					$displayTime.='-'.ltrim($row[timeend], "0");
+			$displayTime = '';
+			
+			if($time_format == "12"){
+			
+				if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59 PM'){   
+					$displayTime.='All Day Event';
+				}		
+				else{
+					$displayTime.= $row[timestart];
+					if ($row[timeend] != '11:59 PM' ){
+						$displayTime.="-".$row[timeend];
 					}
-		echo $displayTime;
-		} */
-		//#DD#
+				}
+			
+			}else{
+			
+				$stime = date("H:i", strtotime($row['timestart']));
+				$etime = date("H:i", strtotime($row['timeend']));
+				
+				if($stime=='00:00' && $etime=='23:59'){   
+					$displayTime.='All Day Event';
+				}		
+				else{
+					$displayTime.= $stime;
+					if ($etime!='23:59' ){
+						$displayTime.="-".$etime;
+					}
+				}
+				
+			}
+			
+			echo $displayTime;
+			
+	   /* End By Akash */	
 		?>
 
 		</p>

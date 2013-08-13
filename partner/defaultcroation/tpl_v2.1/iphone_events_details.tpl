@@ -34,48 +34,48 @@ $todaestring = $today.'/'.$tomonth;
 		<p><strong>Datum:</strong> <?php echo UTF8_encode($todaestring);?></p>
 		<p><strong>Vrijeme:</strong>
 		<?php
-		//#DD#
-		/* Coded By Rinkal */
-		$displayTime = '';
-			if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59PM')
-            {    echo 'Cijeli dan';}
-			else{
-				$displayTime.= ltrim($row[timestart], "0");
-				if($rowvevdetail['noendtime']==0){
-					$displayTime.='-'.ltrim($row[timeend], "0");
-				}
-				//echo $displayTime;
-				/* 12 vs 24 hour time format by yogi */
-				if($time_format == "12"){
-					echo $displayTime;
-				}else{
-					echo date("H:i", strtotime($row[timestart]))." - ".date("H:i", strtotime($row[timeend]));
-				}
-			}
-	   /* End By Rinkal */
+		/* Coded By Akash */
 		
-		
-		/* if($evrawdata['allDayEvent']=='on'){
-				echo 'All Day Event';
-			}else{
-					$displayTime.= ltrim($row[timestart], "0");
-					if($evrawdata['NOENDTIME']!=1){
-					$displayTime.='-'.ltrim($row[timeend], "0");
+			$displayTime = '';
+			
+			if($time_format == "12"){
+			
+				if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59 PM'){   
+					$displayTime.='Cijeli dan';
+				}		
+				else{
+					$displayTime.= $row[timestart];
+					if ($row[timeend] != '11:59 PM' ){
+						$displayTime.="-".$row[timeend];
 					}
-		echo $displayTime;
-		} */
-		//#DD#
+				}
+			
+			}else{
+			
+				$stime = date("H:i", strtotime($row['timestart']));
+				$etime = date("H:i", strtotime($row['timeend']));
+				
+				if($stime=='00:00' && $etime=='23:59'){   
+					$displayTime.='Cijeli dan';
+				}		
+				else{
+					$displayTime.= $stime;
+					if ($etime!='23:59' ){
+						$displayTime.="-".$etime;
+					}
+				}
+				
+			}
+			
+			echo $displayTime;
+			
+	   /* End By Akash */
 		?>
 
 		</p>
 		<p><strong>Lokacija:</strong> <?php echo $rowlocdetail['title'];?></p>
 		<?php
-		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-		if(stripos($ua,'android') == true) { ?>
-		<p><strong>Adresa:</strong> <a href="map.php?lat=<?php echo $lat2;?>&long=<?php echo $lon2;?>"><?php echo $rowlocdetail['street'];?></a></p>
-			<?php } else { ?>
 		<p><strong>Adresa:</strong> <a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" ><?php echo $rowlocdetail['street'];?></a></p>
-			<?php } ?>
 		<p><strong>Telefon:</strong> <a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo $rowlocdetail['phone'];?></a></p>
 		<p><strong>Udaljenost:</strong> <?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1');?>&nbsp;<?php echo $dunit?></p>
 		<?php if(trim($rowlocdetail['url']) != '') { ?>

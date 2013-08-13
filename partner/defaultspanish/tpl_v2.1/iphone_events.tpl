@@ -23,25 +23,50 @@ $todaestring = ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $
 				if($singleimagearray[0] == ""){
 				$singleimagearray[0] = "/partner/".$_SESSION['partner_folder_name']."/images/stories/nofe_image.png"; }
 			##end##
+			
+		/* Coded By Akash */			
+			
 			$displayTime = '';
 			
-			if($fearow[timestart]=='12:00 AM' && $fearow[timeend]=='11:59PM'){   
-				$displayTime.='Todo el día';
-			}
-			else{
-				$displayTime.= $fearow[timestart];
-				if ($fearow[timeend] != '11:59PM'){
-					$displayTime.=" - ".$fearow[timeend];
+			if($time_format == "12"){
+			
+				if($fearow[timestart]=='12:00 AM' && $fearow[timeend]=='11:59 PM'){   
+					$displayTime.='Todo el día';
+				}		
+				else{
+					$displayTime.= $fearow[timestart];
+					if ($fearow[timeend] != '11:59 PM' ){
+						$displayTime.="-".$fearow[timeend];
+					}
 				}
+			
+			}else{
+			
+				$stime = date("H:i", strtotime($fearow['timestart']));
+				$etime = date("H:i", strtotime($fearow['timeend']));
+				
+				if($stime=='00:00' && $etime=='23:59'){   
+					$displayTime.='Todo el día';
+				}		
+				else{
+					$displayTime.= $stime;
+					if ($etime!='23:59' ){
+						$displayTime.="-".$etime;
+					}
+				}
+				
 			}
-			$homeslider1[$k]['eve_id'] = $fearow['ev_id'];
+
+		/* End By Akash */	
+					
+		/*	$homeslider1[$k]['eve_id'] = $fearow['ev_id'];
 			$homeslider1[$k]['summary'] = $fearow['summary'];
 			$homeslider1[$k]['Date'] = $fearow['Date'];
 			$homeslider1[$k]['title'] = $fearow['title'];
-			$homeslider1[$k]['time'] = $displayTime;
+			$homeslider1[$k]['time'] = $displayTime;*/
 			/* below Varialbe for 24 vs 12 hours time format for HOME SLIDER yogi */
-			$homeslider1[$k]['timestart'] = $fearow['timestart'];
-   			$homeslider1[$k]['timeend'] = $fearow['timeend'];
+		/*	$homeslider1[$k]['timestart'] = $fearow['timestart'];
+   			$homeslider1[$k]['timeend'] = $fearow['timeend'];*/
 
 			if(in_array($fearow['ev_id'], $tempeventid)){
 			}else{
@@ -49,9 +74,7 @@ $todaestring = ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $
 			
 			?> 
 		    	<li>
-					<div style="overflow:hidden;clear:both;">
-						<img src="<?php echo $singleimagearray[0] ?>" />
-					</div>
+				<a href="/components/com_shines_v2.1/events_details.php?eid=<?php echo $fearow['rp_id'];?>&y=<?php echo $fearow['Eyear'];?>&m=<?php echo $fearow['Emonth'];?>&d=<?php echo $fearow['EDate'];?>"><img src="<?php echo $singleimagearray[0];?>" /></a>
 		    		<div class="flex-caption">
 		    			<h1><?php echo $fearow['summary']?></h1>
 		    			<h2><?php echo $fearow['title']?></h2>
@@ -67,6 +90,7 @@ $todaestring = ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $
 		    		</div> <!-- caption -->
 		    	</li>
 			<?php
+			$displayTime = "";			
 			++$imagecount;/*5 featured event counter */
 			$tempeventid[] = $fearow['ev_id'];
 			}}
@@ -134,21 +158,39 @@ if(stripos($ua,'android') == true) { ?>
 				$lat2=$rowlocdetail[geolat];
 				$lon2=$rowlocdetail[geolon];
 			}
+		/* Coded By Akash */			
 
-			#DD#
-			$displayTime = '';
-			if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59PM')
-            {    $displayTime.='Todo el d&#237;a';}
-			else{
-				$displayTime.= ltrim($row[timestart], "0");
-				
-				if($rowvevdetail['noendtime']==0){
-					$displayTime.=' - '.ltrim($row[timeend], "0");
+			$displayTime2 = '';
+			if($time_format == "12"){
+			
+				if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59 PM'){   
+					$displayTime2.='Todo el día';
+				}		
+				else{
+					$displayTime2.= $row[timestart];
+					if ($row[timeend] != '11:59 PM' ){
+						$displayTime2.="-".$row[timeend];
+					}
 				}
+			
+			}else{
+			
+				$stime = date("H:i", strtotime($row['timestart']));
+				$etime = date("H:i", strtotime($row['timeend']));
+				
+				if($stime=='00:00' && $etime=='23:59'){   
+					$displayTime2.='Todo el día';
+				}		
+				else{
+					$displayTime2.= $stime;
+					if ($etime!='23:59' ){
+						$displayTime2.="-".$etime;
+					}
+				}
+				
 			}
 
-			#DD#
-
+		/* End By Akash */	
 	  ?>
 
 	  
@@ -158,11 +200,7 @@ if(stripos($ua,'android') == true) { ?>
 		<h3>
 			<!--Code for 24 vs 12 hour time format for LISTING Yogi -->
 			<?php
-				if($time_format == "12"){
-					echo $displayTime.' &bull; ';
-				}else{
-					echo date("H:i", strtotime($row[timestart]))." - ".date("H:i", strtotime($row[timeend]));
-				}
+					echo $displayTime2.' &bull; ';
 			?>
 			<?php echo $categoryname[$n]; ?>
 			<ul class="btnList"><li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>">llamar</a</li>
@@ -179,9 +217,10 @@ if(stripos($ua,'android') == true) { ?>
     </li>
 
       <?php
-	  $rowlocdetail['title']="";
-	  ++$n;
-	  }  
+		$displayTime2 = "";
+		$rowlocdetail['title']="";
+		++$n;
+		}  
 	  ?>
 </ul>
 </div>

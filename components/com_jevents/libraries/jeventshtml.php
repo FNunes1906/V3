@@ -12,19 +12,6 @@
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-/* Timezone Block Begin April 2013 */
-$conn			= mysql_connect("localhost",$_SESSION['c_db_user'],$_SESSION['c_db_password']) or die(mysql_error());
-$db				= mysql_select_db($_SESSION['c_db_name']) or die(mysql_error());
-$rec			= mysql_query("select time_zone from `jos_pageglobal`");
-$pageglobal 	= mysql_fetch_array($rec); 
-$timezoneValue 	= $pageglobal['time_zone'];
-
-#Setting up Timezone time varible
-$timeZoneArray 	= explode(':',$timezoneValue);
-global $totalHours; global $totalMinutes; global $totalSeconds;
-$totalHours	= date("H") + $timeZoneArray[0];$totalMinutes = date("i") + $timeZoneArray[1];$totalSeconds = date("s") + $timeZoneArray[2];
-/* Timezone Block End April 2013 */
-
 // TODO replace with JDate 
 
 class JEventsHTML{
@@ -522,9 +509,7 @@ class JEventsHTML{
 	*            // Us style : 07/2003
 	********************************************/
 	function getDateFormat( $year, $month, $day, $type ){
-	global $totalHours;
-	global $totalMinutes;
-	global $totalSeconds;
+	
 		// Transform to translation strings
 		if( empty( $year )){
 			$year = 0;
@@ -544,10 +529,10 @@ class JEventsHTML{
 			$format_type	= $cfg->get('com_dateformat');
 		}
 		
-		//$datestp		= ( mktime( 0, 0, 0, $month, $day, $year ));
+		$datestp		= ( mktime( 0, 0, 0, $month, $day, $year ));
 		
 		#Timezone varialbe assign in mktime function - April 2013
-		$datestp = ( mktime( $totalHours, $totalMinutes, $totalSeconds, $month, $day, $year ));
+		//$datestp = ( mktime( $totalHours, $totalMinutes, $totalSeconds, $month, $day, $year ));
 
 		// if date format is from langauge file then do this first
 		if( $format_type == 3 ){

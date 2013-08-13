@@ -4,6 +4,22 @@ ini_set('display_errors',1);
 include("../connection.php");
 include("../iadbanner.php");
 
+/* Assigning Timezone Session varialble to $timezoneValue vriable */
+$timezoneValue 	= $_SESSION['tw_timezone'];
+
+//Setting up Timezone time (hour, minut and second) varible
+$timeZoneArray 	= explode(':',$timezoneValue);
+$totalHours		= date("H") + $timeZoneArray[0];
+$totalMinutes	= date("i") + $timeZoneArray[1];
+$totalSeconds	= date("s") + $timeZoneArray[2];
+
+//Using mktime function setting up final date in timestamp based on timezone specified in $totalHours & $totalMinutes
+$today		= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+$tomonth	= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
+$toyear		= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
+/* Timezone Block End August 2013 */
+
+
 /* Code for iPhone Banner Begin */
 $banner_code =  m_show_banner('iphone-events-screen');
 /* Code for iPhone Banner End */
@@ -19,11 +35,10 @@ $dto		= isset($_GET['to']) ? $_GET['to']:0;
 $offset		= isset($_GET['offset']) ? $_GET['offset']:0;
 $limit		= isset($_GET['limit']) ? $_GET['limit']:0;
 $featured	= isset($_GET['featured']) ? $_GET['featured']:0;
-$fda		= explode('-',$dfrom);
-$tda		= explode('-',$dto);
-$today_date = date('Y-m-d');
-$td_array 	= explode('-',$today_date);
-
+$startDate		= explode('-',$dfrom);
+$endDate		= explode('-',$dto);
+/*$today_date = date('Y-m-d');
+$td_array 	= explode('-',$today_date);*/
 
 // Session varialbe set for Latitute to calculate distance
 $_SESSION['lat_device1'] = '';
@@ -46,18 +61,19 @@ API Request	: /event/?category_id=1
 
 if(isset($catId) && $catId != ''){
 	
-	$today = date('d'); $tomonth = date('m'); $toyear = date('Y');
+	//$today = date('d'); $tomonth = date('m'); $toyear = date('Y');
 	$select_query	= "SELECT ev.ev_id,rpt.rp_id,rpt.startrepeat,rpt.endrepeat,ev.catid,cat.title,evd.description,evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND rpt.eventdetail_id = evd.evdet_id AND rpt.eventdetail_id = cf.evdet_id";
 	
 	/* When Start Date & End Date provided */
 	if((isset($dfrom) && $dfrom != 0) && (isset($dto) && $dto != 0)){
-		$select_query .= " AND rpt.endrepeat >= '".$fda[0]."-".$fda[1]."-".$fda[2]." 00:00:00' AND rpt.startrepeat <='".$tda[0]."-".$tda[1]."-".$tda[2]." 23:59:59'";
+		$select_query .= " AND rpt.endrepeat >= '".$startDate[0]."-".$startDate[1]."-".$startDate[2]." 00:00:00' AND rpt.startrepeat <='".$endDate[0]."-".$endDate[1]."-".$endDate[2]." 23:59:59'";
 	/* When Start Date provided */
 	}elseif((isset($dfrom) && $dfrom != 0)){
-		$select_query .= " AND rpt.endrepeat >= '".$fda[0]."-".$fda[1]."-".$fda[2]." 00:00:00'";
+		$select_query .= " AND rpt.endrepeat >= '".$startDate[0]."-".$startDate[1]."-".$startDate[2]." 00:00:00'";
 	/* When End Date provided */
 	}elseif((isset($dto) && $dto != 0)){
-		$select_query .= " AND rpt.startrepeat <='".$tda[0]."-".$tda[1]."-".$tda[2]." 23:59:59' AND rpt.endrepeat >= '".$td_array[0]."-".$td_array[1]."-".$td_array[2]." 00:00:00'";
+		//$select_query .= " AND rpt.startrepeat <='".$endDate[0]."-".$endDate[1]."-".$endDate[2]." 23:59:59' AND rpt.endrepeat >= '".$td_array[0]."-".$td_array[1]."-".$td_array[2]." 00:00:00'";
+		$select_query .= " AND rpt.startrepeat <='".$endDate[0]."-".$endDate[1]."-".$endDate[2]." 23:59:59' AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00'";
 	}else{
 	/* No date is provided */
 		$select_query .= " AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00'";
@@ -271,18 +287,19 @@ API Request	: /event/
 
 
 //featured = 1	
-	$today = date('d'); $tomonth = date('m'); $toyear = date('Y');
+	//$today = date('d'); $tomonth = date('m'); $toyear = date('Y');
 	$select_query	= "SELECT rpt.rp_id,rpt.startrepeat,rpt.endrepeat,ev.ev_id,ev.catid,cat.title,evd.description,evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND rpt.eventdetail_id = evd.evdet_id AND rpt.eventdetail_id = cf.evdet_id";
 
 	/* When Start Date & End Date provided */
 	if((isset($dfrom) && $dfrom != 0) && (isset($dto) && $dto != 0)){
-		$select_query .= " AND rpt.endrepeat >= '".$fda[0]."-".$fda[1]."-".$fda[2]." 00:00:00' AND rpt.startrepeat <='".$tda[0]."-".$tda[1]."-".$tda[2]." 23:59:59'";
+		$select_query .= " AND rpt.endrepeat >= '".$startDate[0]."-".$startDate[1]."-".$startDate[2]." 00:00:00' AND rpt.startrepeat <='".$endDate[0]."-".$endDate[1]."-".$endDate[2]." 23:59:59'";
 	/* When Start Date provided */
 	}elseif((isset($dfrom) && $dfrom != 0)){
-		$select_query .= " AND rpt.endrepeat >= '".$fda[0]."-".$fda[1]."-".$fda[2]." 00:00:00'";
+		$select_query .= " AND rpt.endrepeat >= '".$startDate[0]."-".$startDate[1]."-".$startDate[2]." 00:00:00'";
 	/* When End Date provided */
 	}elseif((isset($dto) && $dto != 0)){
-		$select_query .= " AND rpt.startrepeat <='".$tda[0]."-".$tda[1]."-".$tda[2]." 23:59:59' AND rpt.endrepeat >= '".$td_array[0]."-".$td_array[1]."-".$td_array[2]." 00:00:00'";
+		//$select_query .= " AND rpt.startrepeat <='".$endDate[0]."-".$endDate[1]."-".$endDate[2]." 23:59:59' AND rpt.endrepeat >= '".$td_array[0]."-".$td_array[1]."-".$td_array[2]." 00:00:00'";
+		$select_query .= " AND rpt.startrepeat <='".$endDate[0]."-".$endDate[1]."-".$endDate[2]." 23:59:59' AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00'";
 	}else{
 	/* No date is provided */
 		$select_query .= " AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00'";
@@ -436,7 +453,7 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 	$dist = rad2deg($dist); 
 	$miles = $dist * 60 * 1.1515;
 	$unit = strtoupper($unit);
-	if($unit == "KMS") {
+	if($unit == "KM") {
 		return ($miles * 1.609344); 
 	}else if($unit == "N"){
 		return ($miles * 0.8684);

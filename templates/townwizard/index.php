@@ -346,7 +346,9 @@ $this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
       <!-- Main body start -->
        <div class="centerCol fl">
 					<!-- Event Rotator Start -->
-				 	<?php if(JRequest::getVar('task') == 'week.listevents'):?>
+				 	<?php //if(JRequest::getVar('task') == 'week.listevents'):?>
+					
+					<?php if(JRequest::getVar('task') != 'icalrepeat.detail'):?>
 				  
 				 	<div class="fl">
 						<?php if($this->countModules('slider')) : ?>

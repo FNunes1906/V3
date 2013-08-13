@@ -99,6 +99,14 @@ class JConfig {
 			$_SESSION['partner_folder_name'] 	= $row['partner_folder_name'];
 			$this->sitename 					= ucfirst($_SESSION['partner_folder_name']);
 			
+			/* Below code is to fetch Partner timezone from Page Meta */
+			$conn						= mysql_pconnect("localhost",$_SESSION['c_db_user'],$_SESSION['c_db_password']) or die(mysql_error());
+			$db							= mysql_select_db($_SESSION['c_db_name']) or die(mysql_error());
+			$rec						= mysql_query("select time_zone from `jos_pageglobal`");
+			$pageglobal 				= mysql_fetch_array($rec); 
+			$_SESSION['tw_timezone'] 	= $pageglobal['time_zone'];
+
+			mysql_close($conn);
 			mysql_close($link);
 		}else{
 			header("location:thanks.php");

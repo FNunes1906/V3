@@ -1,10 +1,27 @@
 <?php 
-//echo "<pre>";
-//print_r($_POST);
 defined('_JEXEC') or die('Restricted access');
 
-$cfg	 = & JEVConfig::getInstance();
+/* Timezone Block Begin August 2013 */
+$timezoneValue 	= $_SESSION['tw_timezone'];
 
+//Setting up Timezone time (hour, minut and second) varible
+$timeZoneArray 	= explode(':',$timezoneValue);
+$totalHours	= date("H") + $timeZoneArray[0];
+$totalMinutes = date("i") + $timeZoneArray[1];
+$totalSeconds = date("s") + $timeZoneArray[2];
+
+// Using mktime function setting up final date in timestamp based on timezone specified in $totalHours & $totalMinutes
+$timeZoneDate = mktime($totalHours, $totalMinutes, $totalSeconds, $this->month, $this->day, $this->year);
+
+// Create array from modified time timzondate varialbe
+$weekStartDate = explode('/',strftime("%m/%d/%Y",$timeZoneDate));
+
+// Assign final week start date to date,year,month data set.
+list($this->month, $this->day, $this->year) = $weekStartDate;
+
+/* Timezone Block End August 2013 */
+
+$cfg	 = & JEVConfig::getInstance();
 $data = $this->datamodel->getWeekData($this->year, $this->month, $this->day);
 
 $option = JEV_COM_COMPONENT;

@@ -1,11 +1,11 @@
 <?php
-
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
 
 session_start();
 include("connection.php");
 include("iadbanner.php");
 
+// Function for distance calculation
 function distance($lat1, $lon1, $lat2, $lon2, $unit) { 
   $theta = $lon1 - $lon2; 
   $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)); 
@@ -14,82 +14,95 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
   $miles = $dist * 60 * 1.1515;
   $unit = strtoupper($unit);
 
-  if ($unit == "KMS") {
-    return ($miles * 1.609344); 
-  } else if ($unit == "N") {
-      return ($miles * 0.8684);
-    } else {
-        return $miles;
-      }
+	if ($unit == "KM") {
+		return ($miles * 1.609344); 
+	} else if ($unit == "N") {
+		return ($miles * 0.8684);
+	} else {
+		return $miles;
+	}
 }
 
-if (isset($_REQUEST['lat']) && $_REQUEST['lat'] != "" )
-{$_SESSION['lat_device1']=$_REQUEST['lat'];
-$lat1=$_SESSION['lat_device1'];
+// Assigning latitude value
+if (isset($_REQUEST['lat']) && $_REQUEST['lat'] != "" ){
+	$_SESSION['lat_device1'] = $_REQUEST['lat'];
+	$lat1 = $_SESSION['lat_device1'];
 }
 
-if (isset($_REQUEST['lon']) && $_REQUEST['lon'] != "" )
-{$_SESSION['lon_device1']=$_REQUEST['lon'];
-$lon1=$_SESSION['lon_device1'];
+// Assigning longitude value
+if (isset($_REQUEST['lon']) && $_REQUEST['lon'] != "" ){
+	$_SESSION['lon_device1']=$_REQUEST['lon'];
+	$lon1=$_SESSION['lon_device1'];
 }
 
-$timeZoneArray 	= explode(':',$timezone);
-$totalHours 	= date("H") + $timeZoneArray[0];
-$totalMinutes = date("i") + $timeZoneArray[1];
-$totalSeconds = date("s") + $timeZoneArray[2];
+// timezone value assigning to current Servertime Setting up Timezone time hour, minut and second varible
+$timeZoneArray	= explode(':',$timezone);
+$totalHours		= date("H") + $timeZoneArray[0];
+$totalMinutes	= date("i") + $timeZoneArray[1];
+$totalSeconds	= date("s") + $timeZoneArray[2];
 
-if ($_REQUEST['d']=="")
-$today=date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+if ($_REQUEST['d'] == "")
+	$today = date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
 else
-$today=$_REQUEST['d'];
-if ($_REQUEST['m']=="")
-$tomonth=date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
+	$today = $_REQUEST['d'];
+
+if ($_REQUEST['m'] == "")
+	$tomonth = date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
 else
-$tomonth=$_REQUEST['m'];
-if ($_REQUEST['Y']=="")
-$toyear=date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
+	$tomonth = $_REQUEST['m'];
+
+if ($_REQUEST['Y'] == "")
+	$toyear = date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
 else
-$toyear=$_REQUEST['Y'];
+	$toyear = $_REQUEST['Y'];
 
 //#DD#
 $_REQUEST['eventdate'] = trim($_REQUEST['eventdate']);
 
+// If date is select from datepicker then assign below date variable
 if(!empty($_REQUEST['eventdate'])){
-    $today = date('d',strtotime($_REQUEST['eventdate']));
-    $tomonth = date('m',strtotime($_REQUEST['eventdate']));
-    $toyear = date('Y',strtotime($_REQUEST['eventdate']));
+	$today		= date('d',strtotime($_REQUEST['eventdate']));
+	$tomonth	= date('m',strtotime($_REQUEST['eventdate']));
+	$toyear	= date('Y',strtotime($_REQUEST['eventdate']));
 }
 //#DD#
+$todaestring	=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
 
-$todaestring=date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
-
+//Query to fetch ID of all categories created in Jevents from category table
 $query_cat="SELECT c.id FROM jos_categories AS c LEFT JOIN jos_categories AS p ON p.id=c.parent_id LEFT JOIN jos_categories AS gp ON gp.id=p.parent_id LEFT JOIN jos_categories AS ggp ON ggp.id=gp.parent_id WHERE c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents'";
+$rec_cat = mysql_query($query_cat);
 
-$rec_cat=mysql_query($query_cat);
 mysql_set_charset("UTF8");
-while($row_cat=mysql_fetch_array($rec_cat))
-$array_cat[]=$row_cat['id'];
-$byday= strtoupper(substr(date('D',mktime(0, 0, 0, $tomonth, $today, $toyear)),0,2));
-$arrstrcat=implode(',',array_merge(array(-1), $array_cat));
+
+while($row_cat = mysql_fetch_array($rec_cat)){
+	$array_cat[] = $row_cat['id'];
+}
+
+//var_dump($array_cat);	
+
+$byday = strtoupper(substr(date('D',mktime(0, 0, 0, $tomonth, $today, $toyear)),0,2));
+$arrstrcat = implode(',',array_merge(array(-1), $array_cat));
 
 $query_filter="SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00' AND rpt.startrepeat <= '".$toyear."-".$tomonth."-".$today." 23:59:59' AND ev.state=1 AND rpt.endrepeat>='".date('Y',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('m',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('d', mktime($totalHours, $totalMinutes, $totalSeconds))." 00:00:00' AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$toyear." and MONTH(rpt.startrepeat )=".$tomonth." and DAYOFMONTH(rpt.startrepeat )=".$today.") or freq<>'WEEKLY')GROUP BY rpt.rp_id";
 
-$rec_filter=mysql_query($query_filter);
+$rec_filter = mysql_query($query_filter);
 mysql_set_charset("UTF8");
-while($row_filter=mysql_fetch_array($rec_filter)){
-    $arr_rr_id[]=$row_filter['rp_id'];
+
+while($row_filter = mysql_fetch_array($rec_filter)){
+	$arr_rr_id[] = $row_filter['rp_id'];
 }
-if (count($arr_rr_id))
+
+if (count($arr_rr_id)){
 	$strchk=implode(',',$arr_rr_id);
-else
+}else{
 	$strchk=0;
+}	
 	$query="select *,DATE_FORMAT(`startrepeat`,'%h:%i %p') as timestart, DATE_FORMAT(`endrepeat`,'%h:%i %p') as timeend from jos_jevents_repetition where rp_id in ($strchk) ORDER BY  DATE_FORMAT(`startrepeat`,'%H%i') ASC ";
 	$rec=mysql_query($query) or die(mysql_error());
 	mysql_set_charset("UTF8");
 	/*Feature Event Query By Akash*/
 
 /*Last Day of the Month*/
-
 $LD = Date('d', strtotime("+30 days"));
 $LM = Date('m', strtotime("+30 days"));
 $LY = Date('y', strtotime("+30 days"));
@@ -183,9 +196,7 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 <body>
 <?php
     /* Code added for iphone_places.tpl */
-	
 	require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_events.tpl");
-    
 ?>
 <!--
 <div id="footer">&copy; <?php echo date('Y');?> <?php echo $site_name?>, Inc. | <a href="mailto:<?php echo $email?>?subject=Feedback">Contact Us</a> &nbsp;&nbsp;&nbsp; <a href="<?php echo $pageglobal['facebook']?>"><img src="images/icon_facebook_16x16.gif" alt="facebook_icon" width="16" height="16" /></a> &nbsp;&nbsp;&nbsp; </div>

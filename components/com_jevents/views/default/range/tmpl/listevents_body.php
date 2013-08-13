@@ -50,19 +50,22 @@ echo "<h3 class='fl heading display'>".JText::_('JEV_VIEWBYWEEK')."</h3>";
     			
 				$strday = explode('-',$_SESSION['saturday_date']);
 				$sndday = explode('-',$_SESSION['sunday_date']);
-				$date_saturday	=	JEventsHTML::getDateFormat($strday[0],$strday[1],$strday[2], 5 );
     			$date_sunday	=	JEventsHTML::getDateFormat($sndday[0],$sndday[1],$sndday[2], 5 );
-    			echo '<tr>' . "\n";
+				$date_saturday	=	JEventsHTML::getDateFormat($strday[0],$strday[1],$strday[2], 5 );
+				echo '<tr>' . "\n";
     			echo '<td align="left" valign="top" class="ev_td_right"><ul class="ev_ul1">' . "\n";
     		}
 
     		$listyle = 'style="border-color:'.$row->bgcolor().';"';
 			if($_stDate < $_SESSION['saturday_date']){
-    			echo "<li class='ev_td_li' $listyle><div class='date fl'>".$date_saturday.'<br>&nbsp;&nbsp;&nbsp;&nbsp;&<br>'.$date_sunday."</div><div class='details'>\n";
+    			echo "<li class='ev_td_li' $listyle><div class='date fl'>".$date_saturday.'<br>&nbsp;&nbsp;&nbsp;&nbsp;-<br>'.$date_sunday."</div><div class='details'>\n";
     		}else{
+				/* getDateFormat is chaging session variable so setting it back to the start result row */
+				$reset_date =  JEventsHTML::getDateFormat( $row->yup(), $row->mup(), $row->dup(), 5 ); 	
 				echo "<li class='ev_td_li' $listyle><div class='date fl'>".$date."</div><div class='details'>\n";
     		
 			}
+
 			if (!$this->loadedFromTemplate('icalevent.list_row', $row, 0)){
     			$this->viewEventRowNew ( $row,'view_detail',JEV_COM_COMPONENT, $Itemid);
     		}

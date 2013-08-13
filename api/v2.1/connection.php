@@ -32,4 +32,7 @@ $location_code			=	$pageglobal['location_code'];
 $dunit		=	$pageglobal['distance_unit'];
 
 $var->googgle_analytics	=	$pageglobal['googgle_map_api_keys'];
+
+/* Yogi: TimeZone page global data is kept in session in configuration.php all other global variable should go in the session as well in configuration.php */
+
 ?>

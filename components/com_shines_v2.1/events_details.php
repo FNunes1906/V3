@@ -12,7 +12,8 @@ $dist = acos($dist);
 $dist = rad2deg($dist); 
 $miles = $dist * 60 * 1.1515;
 $unit = strtoupper($unit);
-	if($unit == "KMS") {
+
+	if($unit == "KM") {
 		return ($miles * 1.609344); 
 	}else if($unit == "N"){
 		return ($miles * 0.8684);

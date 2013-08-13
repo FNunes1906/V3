@@ -30,48 +30,48 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		<p><strong>Fecha:</strong><?php echo $todaestring;?></p>
 		<p><strong>Hora:</strong>
 		<?php
-		//#DD#
-		/* Coded By Rinkal */
-		$displayTime = '';
-			if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59PM')
-            {    echo 'Todo el día';}
-			else{
-				$displayTime.= ltrim($row[timestart], "0");
-				if($rowvevdetail['noendtime']==0){
-					$displayTime.='-'.ltrim($row[timeend], "0");
-				}
-				//echo $displayTime;
-				/* 12 vs 24 hour time format by yogi */
-				if($time_format == "12"){
-					echo $displayTime;
-				}else{
-					echo date("H:i", strtotime($row[timestart]))." - ".date("H:i", strtotime($row[timeend]));
-				}
-			}
-	   /* End By Rinkal */
+
+		/* Coded By Akash */
 		
-		
-		/* if($evrawdata['allDayEvent']=='on'){
-				echo 'Todo el día';
-			}else{
-					$displayTime.= ltrim($row[timestart], "0");
-					if($evrawdata['NOENDTIME']!=1){
-					$displayTime.='-'.ltrim($row[timeend], "0");
+			$displayTime = '';
+			
+			if($time_format == "12"){
+			
+				if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59 PM'){   
+					$displayTime.='Todo el día';
+				}		
+				else{
+					$displayTime.= $row[timestart];
+					if ($row[timeend] != '11:59 PM' ){
+						$displayTime.="-".$row[timeend];
 					}
-		echo $displayTime;
-		} */
-		//#DD#
+				}
+			
+			}else{
+			
+				$stime = date("H:i", strtotime($row['timestart']));
+				$etime = date("H:i", strtotime($row['timeend']));
+				
+				if($stime=='00:00' && $etime=='23:59'){   
+					$displayTime.='Todo el día';
+				}		
+				else{
+					$displayTime.= $stime;
+					if ($etime!='23:59' ){
+						$displayTime.="-".$etime;
+					}
+				}
+				
+			}
+			
+			echo $displayTime;
+			
+	   /* End By Akash */	
 		?>
 
 		</p>
 		<p><strong>Ubicaci&#243;n:</strong><?php echo $rowlocdetail['title'];?></p>
-		<?php
-		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-		if(stripos($ua,'android') == true) { ?>
-		<p><strong>Direcci&#243;n:</strong><a href="map.php?lat=<?php echo $lat2;?>&long=<?php echo $lon2;?>"><?php echo $rowlocdetail['street'];?></a></p>
-			<?php } else { ?>
 		<p><strong>Direcci&#243;n:</strong><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" ><?php echo $rowlocdetail['street'];?></a></p>
-			<?php } ?>
 		<p><strong>Tel&#233;fono:</strong><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone']);?>"><?php echo $rowlocdetail['phone'];?></a></p>
 		<p><strong>Distancia:</strong><?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1');?>&nbsp;<?php echo $dunit;?></p>
 		<?php if(trim($rowlocdetail['url']) != '') { ?>
