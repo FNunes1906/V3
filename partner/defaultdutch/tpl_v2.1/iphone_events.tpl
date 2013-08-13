@@ -79,14 +79,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		    			<h1><?php echo $fearow['summary'];?></h1>
 		    			<h2><?php echo $fearow['title'];?></h2>
 		    			<h3><!--below Varialbe for 24 vs 12 hours time format for HOME SLIDER yogi-->
-							<?php
-							
-								if($time_format == "12"){
-									echo $displayTime;
-								}else{
-									echo date("H:i", strtotime($homeslider1[$k]['timestart']))." - ".date("H:i", strtotime($homeslider1[$k]['timeend']));
-								}
-							?></h3>
+							<?php echo $displayTime; ?></h3>
 		    		</div> <!-- caption -->
 		    	</li>
 			<?php

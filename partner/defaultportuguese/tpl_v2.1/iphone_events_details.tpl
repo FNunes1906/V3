@@ -73,7 +73,6 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 
 		</p>
 		<p><strong>Localiza&#231;&#227;o:</strong><?php echo $rowlocdetail['title'];?></p>
-		<?php
 		<p><strong>Endere&#231;o:</strong><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" ><?php echo $rowlocdetail['street'];?></a></p>
 		<p><strong>Telefone:</strong><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo $rowlocdetail['phone'];?></a></p>
 		<p><strong>Distancia:</strong><?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1');?>&nbsp;<?php echo $dunit?></p>

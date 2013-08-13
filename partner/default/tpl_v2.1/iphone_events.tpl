@@ -76,9 +76,7 @@
 		    			<h2><?php echo $fearow['title'];?></h2>
 		    			<h3>
 							<!--below Varialbe for 24 vs 12 hours time format for HOME SLIDER yogi-->
-							<?php
-									echo $displayTime;
-							?>
+							<?php echo $displayTime; ?>
 						</h3>
 		    		</div> <!-- caption -->
 		    	</li>
