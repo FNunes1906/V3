@@ -503,7 +503,7 @@ class plgSystemOSOLCaptcha extends JPlugin
 			{
 				//JError::raiseWarning("666","You have entered the wrong CAPTCHA sequence. Please try again.  <a href=\"javascript:history.go(-1);\">Go to Previous page</a>");
 				
-				
+				$_SESSION=$_REQUEST;
 				JError::raiseWarning("666",JTEXT::_('OSOLCAPTCHA_ERROR_MESSAGE'));
 				//JFactory::getApplication()
 				//$mainframe->redirect(JURI::base());

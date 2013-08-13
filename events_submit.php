@@ -4,6 +4,8 @@ define( '_JEXEC', 1 );
 define('JPATH_BASE', dirname(__FILE__) );
 define( 'DS', DIRECTORY_SEPARATOR );
 
+//echo "<pre>";
+//print_r($_SESSION);
 
 include(JPATH_BASE .DS.'formValidation.php');
 require_once ( JPATH_BASE .DS.'includes'.DS.'defines.php' );
@@ -25,7 +27,7 @@ _init();
 
 /*$mainframe =& JFactory::getApplication('site');
 $mainframe->initialise();
-$session =& JFactory::getSession();*/
+$session = JFactory::getSession();*/
 
 
 
@@ -42,9 +44,12 @@ $ics_res=mysql_fetch_array($ics_query);
 $ics=$ics_res['ics_id'];
 global $msg;
 $msg="";
+
+
 if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
 	//echo "<pre>";
 	//print_r($_POST);
+	
 	$postRecheck = checkPostParameter($_POST);
 	//$postRecheck = checkPostParameter($_POST);
 	
@@ -192,13 +197,40 @@ if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
 				
 				// Acknowledgement Email to the Event Creator. 
 				mail($custom_anonemail,$subject,$ack_message,$headers);
+				
+				$_SESSION['title']="";
+				$_SESSION['catid']="";
+				$_SESSION['ics_id']="";
+				$_SESSION['view12Hour']="";
+				$_SESSION['publish_up']="";
+				$_SESSION['start_12h']="";
+				$_SESSION['publish_down']="";
+				$_SESSION['end_12h']="";
+				$_SESSION['jevcontent']="";
+				$_SESSION['location']="";
+				$_SESSION['custom_anonusername']="";
+				$_SESSION['custom_anonemail']="";
+				$_SESSION['custom_field4']="";
 			}
 	}else{
-		$postValues = $_POST;
-		//echo "<pre>";
-		//print_r($_POST);
-		//exit;
+				$_SESSION['title']=$_POST['title'];
+				$_SESSION['catid']=$_POST['catid'];
+				$_SESSION['ics_id']=$_POST['ics_id'];
+				$_SESSION['view12Hour']=$_POST['view12Hour'];
+				$_SESSION['publish_up']=$_POST['publish_up'];
+				$_SESSION['start_12h']=$_POST['start_12h'];
+				$_SESSION['publish_down']=$_POST['publish_down'];
+				$_SESSION['end_12h']=$_POST['end_12h'];
+				$_SESSION['jevcontent']=$_POST['jevcontent'];
+				$_SESSION['location']=$_POST['location'];
+				$_SESSION['custom_anonusername']=$_POST['custom_anonusername'];
+				$_SESSION['custom_anonemail']=$_POST['custom_anonemail'];
+				$_SESSION['custom_field4']="";
 	}
+	
+	
+	
+	
 }
 
 
@@ -212,7 +244,7 @@ if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
 */
 //echo $validCode."hello";
 function checkPostParameter($postValue){
-//function checkPostParameter($postValue){
+
 global $msg;
 	if(!isvalidchar($postValue['title'])){
 		$msg="Valid Event Name Required!<br/>";
@@ -492,7 +524,7 @@ text-decoration:none;
 	<table width="65%" cellpadding="5" cellspacing="2" border="0"  class="adminform" id="jevadminform">
 	<tr>
 		<td align="left"><?php echo JText::_('JEV_EVNAME'); ?>:</td>
-		<td align="left"><input class="inputbox" type="text" name="title" size="41" maxlength="255" value="<?php echo $postValues['title']?>" /></td>
+		<td align="left"><input class="inputbox" type="text" name="title" size="41" maxlength="255" value="<?php echo $_SESSION['title']?>" /></td>
 		<td colspan="2"><input type="hidden" name="priority" value="0" /></td>
 	</tr>
 	<tr>
@@ -502,7 +534,7 @@ text-decoration:none;
 			<select name="catid" id="catid">
 				<option value="0" ><?php echo JText::_('JEV_CHOOSE'); ?></option>
 				<?php while($row=mysql_fetch_array($cat_query)) { 
-				if($postValues['catid']==$row['id']){
+				if($_SESSION['catid']==$row['id']){
 					$selectedVal = 'selected';
 				}else{
 					$selectedVal = '';
@@ -525,7 +557,7 @@ text-decoration:none;
 					<legend><?php echo JText::_('JEV_EVSED'); ?></legend>
 					<span>
 						<span ><?php echo JText::_('JEV_UNTIME'); ?></span>
-						<span><input type="checkbox" id='allDayEvent' name='allDayEvent' <?php if($postValues['allDayEvent']=='on') {echo 'checked'; }?>  onclick="alldayeventtog()" />
+						<span><input type="checkbox" id='allDayEvent' name='allDayEvent' <?php if($_SESSION['allDayEvent']=='on') {echo 'checked'; }?>  onclick="alldayeventtog()" />
 						</span>
 					</span>
 					<span style="margin:20px" class='checkbox12h'>
@@ -536,10 +568,10 @@ text-decoration:none;
 							<legend><?php echo JText::_('JEV_STDATE'); ?></legend>
 							<div style="float:left">
 								<?php 
-									if(empty($postValues['publish_up'])){ 
+									if(empty($_SESSION['publish_up'])){ 
 										$publish_up_value = date("Y-m-d");
 									}else{ 
-										$publish_up_value = $postValues['publish_up']; 
+										$publish_up_value = $_SESSION['publish_up']; 
 									} 
 								?>
 								<input type="text" name="publish_up" id="publish_up" value="<?php echo $publish_up_value;?>" maxlength="10" onChange="var elem = $('publish_up');checkDates(elem);" size="10"  />         
@@ -548,18 +580,18 @@ text-decoration:none;
 								<span id="start_12h_area" style="display:inline">
 								
 								<?php 
-									if(empty($postValues['start_12h'])){ 
+									if(empty($_SESSION['start_12h'])){ 
 										$start_12h_value = '08:00';
 									}else{ 
-										$start_12h_value = $postValues['start_12h']; 
+										$start_12h_value = $_SESSION['start_12h']; 
 									} 
 
-									if($postValues['start_ampm']=='pm'){ 
+									if($_SESSION['start_ampm']=='pm'){ 
 										$start_ampm_check = 'checked="checked"';
 									} 
 
 									$end_ampm_check = array();
-									if($postValues['start_ampm']=='pm'){ 
+									if($_SESSION['start_ampm']=='pm'){ 
 										$end_ampm_check['pm'] = 'checked="checked"';
 										$end_ampm_check['am'] = '';
 									}else{
@@ -577,10 +609,10 @@ text-decoration:none;
 						<fieldset><legend><?php echo JText::_('JEV_ENDDATE'); ?></legend>
 						<div style="float:left">
 						<?php 
-							if(empty($postValues['publish_down'])){ 
+							if(empty($_SESSION['publish_down'])){ 
 								$publish_down_value = date("Y-m-d");
 							}else{ 
-								$publish_down_value = $postValues['publish_down']; 
+								$publish_down_value = $_SESSION['publish_down']; 
 							} 
 						?>
 					<input type="text" name="publish_down" id="publish_down" value="<?php echo $publish_down_value;?>" maxlength="10" onChange="var elem = $('publish_up');checkDates(elem);" size="10"  />         
@@ -588,14 +620,14 @@ text-decoration:none;
 						<div style="float:left;margin-left:11px!important"><?php echo JText::_('JEV_ENDTIME'); ?>&nbsp;
 							<span id="end_12h_area" style="display:inline">
 							<?php 
-								if(empty($postValues['end_12h'])){ 
+								if(empty($_SESSION['end_12h'])){ 
 									$end_12h_value = '05:00';
 								}else{ 
-									$end_12h_value = $postValues['end_12h']; 
+									$end_12h_value = $_SESSION['end_12h']; 
 								} 
 
 								$end_ampm_check = array();
-								if($postValues['end_ampm']=='am'){ 
+								if($_SESSION['end_ampm']=='am'){ 
 									$end_ampm_check['am'] = 'checked="checked"';
 									$end_ampm_check['pm'] = '';
 								}else{
@@ -611,7 +643,7 @@ text-decoration:none;
 							
 						</div><br/>
 						<span>
-								<span><br/><input type="checkbox" id='noendtime' name='noendtime'  onclick="noendtimetog();" <?php if($postValues['noendtime']==1) {echo 'checked'; }?> value="1" />
+								<span><br/><input type="checkbox" id='noendtime' name='noendtime'  onclick="noendtimetog();" <?php if($_SESSION['noendtime']==1) {echo 'checked'; }?> value="1" />
 										<span><?php echo JText::_('JEV_NOENDTIME'); ?></span>
 								</span>
 							</span>
@@ -626,13 +658,10 @@ text-decoration:none;
 	<tr>
 		
 		<td colspan="3">
-			<?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') == True)) {?>
-			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea name="jevcontent" cols="70" rows="10" style="width:99%;height:230px;"></textarea>
-			</div>  
-			<?php }else{?>
-			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea name="jevcontent" cols="70" rows="10" style="width:99%;height:230px;"></textarea>
+			
+			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea name="jevcontent" cols="70" rows="10" style="width:99%;height:230px;" ><?php echo $_SESSION['jevcontent'];?></textarea>
 			</div>
-			<?php }?> 	
+			
 		</td>
 	</tr>
 	<tr id="jeveditlocation">
@@ -654,11 +683,11 @@ text-decoration:none;
 	</tr>
 	<tr class="jevplugin_anonusername">
 		<td valign="top"  width="130" align="left"><?php echo JText::_('JEV_YOURNAME'); ?></td>
-		<td colspan="3"><input size="41" type="text" name="custom_anonusername" id="custom_anonusername" value="<?php echo $postValues['custom_anonusername']?>" /></td>
+		<td colspan="3"><input size="41" type="text" name="custom_anonusername" id="custom_anonusername" value="<?php echo $_SESSION['custom_anonusername']?>" /></td>
 	</tr>
 	<tr class="jevplugin_anonemail">
 		<td valign="top"  width="130" align="left"><?php echo JText::_('JEV_YOUREMAIL'); ?></td>
-		<td colspan="3"><input size="41" type="text" name="custom_anonemail" id="custom_anonemail" value="<?php echo $postValues['custom_anonemail']?>" /></td>
+		<td colspan="3"><input size="41" type="text" name="custom_anonemail" id="custom_anonemail" value="<?php echo $_SESSION['custom_anonemail']?>" /></td>
 	</tr>
 	
 	<!--#DD#-->
