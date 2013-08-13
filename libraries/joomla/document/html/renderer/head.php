@@ -76,16 +76,16 @@ class JDocumentRendererHead extends JDocumentRenderer
 			foreach ($tag as $name => $content)
 			{
 				if ($type == 'http-equiv') {
-					$strHtml .= $tab.'<meta http-equiv="'.$name.'" content="'.$content.'"'.$tagEnd.$lnEnd;
+/*					$strHtml .= $tab.'<meta http-equiv="'.$name.'" content="'.$content.'"'.$tagEnd.$lnEnd;*/
 				} elseif ($type == 'standard') {
-					$strHtml .= $tab.'<meta name="'.$name.'" content="'.str_replace('"',"'",$content).'"'.$tagEnd.$lnEnd;
+/*					$strHtml .= $tab.'<meta name="'.$name.'" content="'.str_replace('"',"'",$content).'"'.$tagEnd.$lnEnd;*/
 				}
 			}
 		}
 
-		$strHtml .= $tab.'<meta name="description" content="'.$document->getDescription().'" />'.$lnEnd;
+/*		$strHtml .= $tab.'<meta name="description" content="'.$document->getDescription().'" />'.$lnEnd;
 		$strHtml .= $tab.'<meta name="generator" content="'.$document->getGenerator().'" />'.$lnEnd;
-
+*/
 		$strHtml .= $tab.'<title>'.htmlspecialchars($document->getTitle()).'</title>'.$lnEnd;
 
 		// Generate link declarations
