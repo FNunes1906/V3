@@ -96,7 +96,7 @@ while($idsrow=mysql_fetch_assoc($RES)){
 $allCatIds[] = $category_id;
 #@#
 
-$path= $_SERVER['PHP_SELF'] . "?option=com_jevlocations&task=locations.listlocations&tmpl=component&needdistance=1&sortdistance=1&lat=".$lat1."&lon=".$lon1."&bIPhone=". $_REQUEST[bIPhone]."&iphoneapp=1&search=". $_REQUEST[search]."&limit=0&jlpriority_fv=0&filter_loccat=".$filter_loccat."&filter_order=".$filter_order."&filter_order_Dir=".$filter_order_Dir;
+$path= $_SERVER['PHP_SELF'] . "?category_id=".$category_id."&option=com_jevlocations&task=locations.listlocations&tmpl=component&needdistance=1&sortdistance=1&lat=".$lat1."&lon=".$lon1."&bIPhone=". $_REQUEST[bIPhone]."&iphoneapp=1&search=". $_REQUEST[search]."&limit=0&jlpriority_fv=0&filter_loccat=".$filter_loccat."&filter_order=".$filter_order."&filter_order_Dir=".$filter_order_Dir;
 
 if ($_REQUEST['search']!='' || $_REQUEST['Buscar']!='')
 	$subquery="  and title like '%".$_REQUEST['search']."%' or description like '%".$_REQUEST['search']."%'";

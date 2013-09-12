@@ -67,7 +67,8 @@ global $var;
 						     }else{
 						      $strConcat = $strArray[$i]; 
 						     }
-						     $finalDescription .= $strConcat;
+						     /*$finalDescription .= $strConcat;*/
+							 $finalDescription .= strip_tags($strConcat);
 							 $finalDescription=str_replace("<br />","",$finalDescription);
 						    }
 						   if(strlen($finalDescription)>="140"){

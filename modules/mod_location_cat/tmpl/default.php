@@ -14,9 +14,12 @@ global $Itemid;
 		<h3 class="fl"><a href="#" class="heading display">
 		<?php
 		if ($catid == 152){
-		echo $_SESSION['partner_folder_name']." ".JText::_("LOC_CUISINE");}
+			//echo $_SESSION['partner_folder_name']." ".JText::_("LOC_CUISINE");}
+			echo $var->site_name." ".JText::_("LOC_CUISINE");}
+			
 		elseif($catid == 151){
-		echo $_SESSION['partner_folder_name']." ".JText::_("LOC_PLACES");}
+			//echo $_SESSION['partner_folder_name']." ".JText::_("LOC_PLACES");}
+			echo $var->site_name." ".JText::_("LOC_PLACES");}
 		?>
 		</a></h3>
         <ul>

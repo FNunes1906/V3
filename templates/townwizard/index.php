@@ -19,7 +19,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/var.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 
 _init();
-
 define("TOWNWIZARD_TMPL_PATH", "http://".$_SERVER['HTTP_HOST']."/templates/townwizard");
 define("TOWNWIZARD_PARTNER_PATH", "http://".$_SERVER['HTTP_HOST']."/partner/".$_SESSION['partner_folder_name']);
 
@@ -186,14 +185,14 @@ $this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
  <!-- Top Bar Start -->
   <!--<div id="TopBar" style="background:url('<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/whitezig_zag.png') repeat-x scroll left bottom <?php echo $var->Header_color; ?>;height: 36px;">-->
   <div id="TopBar" style="background:url('<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/whitezig_zag.png') repeat-x scroll left 30px <?php echo $var->Header_color; ?>;height: 36px;">
-  	<div class="sWidth">
+  	<!--<div class="sWidth">
   	  <div class="fl powered"><?php echo JText::_("TW_POWERED_BY") ?><a href="http://www.townwizard.com/" target="_blank"><img alt="townwizard" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/twBanner.png" /></a></div>
 		  <?php if($this->countModules('top')): ?>
           <div class="fr links">
             <jdoc:include type="modules" name="top" style="rounded" />
           </div>
           <?php endif; ?>
-  	</div>
+  	</div>-->
   </div>
 
   <!-- Top Bar End -->
@@ -224,7 +223,7 @@ $this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
 							<a class="fbLogin fl" href="javascript:void(0)" onclick="fb_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
               				<a class="twtLogin fl" href="javascript:void(0)" onclick="twitter_login();"><span><?php echo JText::_("TW_LOGIN_WITH") ?></span></a>
               				<!-- <a class="helpBtn" data-ref-panel="HelpTT" href="#"><img alt="Help" src="images/header/helpBtn.png" /></a> -->
-							<a class="helpBtn" data-ref-panel="HelpTT" href="#"><img alt="Help" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/helpBtn.png" /></a>
+							<a class="helpBtn" data-ref-panel="HelpTT" style="cursor:pointer"><img alt="Help" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/helpBtn.png" /></a>
 						</div>	
 					<?php } ?>
 						
@@ -517,21 +516,22 @@ $this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
          </li>
          <?php endif; ?>
          
-         <?php if($this->countModules('footer2')) : ?>
-        <li class="site">
-          <div class="pad">
-         		<h3 class="display"><?php echo $var->site_name.' '.JText::_("TW_TWSITE") ?></h3>
-                <jdoc:include type="modules" name="footer2" style="rounded" />
-                <a class="all" href="http://www.townwizard.com/locations/" target="_blank"><?php echo JText::_("TW_SEE_ALL_PARTNER") ?> &gt;</a>
-           </div>
-         </li>
+         <?php if($this->countModules('footer3')) : ?>
+			<li class="site">
+				<div class="pad">
+					<h3 class="display"> Connect with <?php echo $var->site_name ?></h3>
+					<jdoc:include type="modules" name="footer3" style="rounded" />
+				</div>
+			</li>
          <?php endif; ?>
-          <?php if($this->countModules('footer3')) : ?>
+          <?php if($this->countModules('footer2')) : ?>
             <li class="community">
-              <div class="pad">
-                    <h3 class="display"><?php echo JText::_("TW_COMMUNITY") ?></h3>
-                    <jdoc:include type="modules" name="footer3" style="rounded" />
-              </div>
+				<div class="pad">
+					<h3 class="display"><?php echo $var->site_name; ?> is <?php echo JText::_("TW_POWERED_BY") ?><a style="float: right; margin-top: -4px; margin-right: 10px;" href="http://www.townwizard.com/" target="_blank"><img alt="townwizard" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/twBanner.png" /></a></h3>
+					<!-- <jdoc:include type="modules" name="footer2" style="rounded" />-->
+					<a style="margin-top: 24px;" class="all" href="http://www.townwizard.com" target="_blank"><?php echo JText::_("TW_COMMUNITY") ?></a>
+					<a class="all" href="http://www.townwizard.com" target="_blank"><?php echo JText::_("TW_WANT") ?></a>
+				</div>
             </li>
          <?php endif; ?>
       </ul>

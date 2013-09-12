@@ -25,7 +25,7 @@
 			?> 
 			<!-- creating loop for slider -->
 		    	<li>
-				<a href="/components/com_shines_v2.1/diningdetails.php?did=<?php echo $fealoc['loc_id'];?>"><img  src="<?php echo $singleimagearray;?>" /></a> 
+				<a href="/components/com_shines_v2.1/diningdetails.php?did=<?php echo $fealoc['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><img  src="<?php echo $singleimagearray;?>" /></a> 
 		    		<div class="flex-caption">
 		    			<h1><?php echo $fealoc['title'] ;?></h1>
 		    			<h2><?php echo $fealoc['category'] ;?></h2>
@@ -82,13 +82,13 @@
 $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 if(stripos($ua,'android') == true) { ?>
 	<div class="iphoneads" style="vertical-align:bottom;">
-		<?php m_show_banner('android-restaurants-screen'); ?>
+		<?php m_show_banner('android-places-screen'); ?>
 	</div>
 	<?php } 
 else {
 	?>
 	<div class="iphoneads" style="vertical-align:bottom;">
-	<?php m_show_banner('iphone-restaurants-screen'); ?>
+	<?php m_show_banner('iphone-places-screen'); ?>
 	</div>
 	<?php } ?>
 	
@@ -97,36 +97,35 @@ else {
 <div id="main" role="main">
 	<div id="searchBar">
 		<form id="placeCatForm">
-			<?php	$recsubsql="select * from jos_categories where (parent_id=152 OR id=152) AND section='com_jevlocations2' and published=1 ORDER BY title ASC";
-			$recsub=mysql_query($recsubsql) or die(mysql_error());
-			mysql_set_charset("UTF8");
-			?>
-			<select name="d" onChange="redirecturl(this.value)" >
-				<option value="0">Izaberite kategoriju</option>
-				<option value="0">sve</option>
-				<option value="alp" <?php if ($_REQUEST['filter_loccat']=='alp') {?> selected <?php }?>>Abecedno</option>
-				<?php	while($rowsub=mysql_fetch_array($recsub)){
-				
-					$querycount = "SELECT * FROM jos_jev_locations WHERE published=1 and loccat=".$rowsub['id'];
-					if($filter_order != "")
-						$querycount .= " ORDER BY title ASC ";
-					else
-					$querycount .= " ORDER BY ordering ASC";
-					$reccount=mysql_query($querycount) or die(mysql_error());
-					mysql_set_charset("UTF8");
-					if (mysql_num_rows($reccount))
+		<?php	$recsubsql="select * from jos_categories where (parent_id=151 OR id=151) AND section='com_jevlocations2' and published=1 ORDER BY title ASC";
+		$recsub=mysql_query($recsubsql) or die(mysql_error());
+		mysql_set_charset("UTF8");
+		?>
+		<select name="d" onChange="redirecturl(this.value)" >
+			<option value="0">Izaberite kategoriju</option>
+			<option value="0">sve</option>
+			<option value="alp" <?php if ($_REQUEST['filter_loccat']=='alp') {?> selected <?php }?>>Abecedno</option>
+			<?php	while($rowsub=mysql_fetch_array($recsub)){
+				$querycount = "SELECT * FROM jos_jev_locations WHERE published=1 and loccat=".$rowsub['id'];
+				if($filter_order != "")
+					$querycount .= " ORDER BY title ASC ";
+				else
+				$querycount .= " ORDER BY ordering ASC";
+				$reccount=mysql_query($querycount) or die(mysql_error());
+				mysql_set_charset("UTF8");
+				if (mysql_num_rows($reccount))
+				{
+					if(($_REQUEST['filter_loccat']!='alp') || ($_REQUEST['filter_loccat']!='0'))
 					{
-						if(($_REQUEST['filter_loccat']!='alp') || ($_REQUEST['filter_loccat']!='0'))
-						{
-							?>
-							<option value="<?php echo $rowsub['id'];?>" <?php if ($_REQUEST['filter_loccat']==$rowsub['id']) {?> selected <?php }?>>
-							<?php echo $rowsub['title'];?>
-							</option>
-							<?php
+						?>
+						<option value="<?php echo $rowsub['id'];?>" <?php if ($_REQUEST['filter_loccat']==$rowsub['id']) {?> selected <?php }?>>
+						<?php echo $rowsub['title'];?>
+						</option>
+						<?php
 						}
 					}
 				}?>
-			</select>
+		</select>
 		</form>
 		
 		<div onclick="divopen('q1')">
@@ -163,8 +162,8 @@ else {
 				?>
 				<li>
 				<h1><?php echo $row['title'];?></h1>
-				<p><?php echo showBrief($row['description'],30); ?></p>
-				<p class="distance">Udaljenost : <?php echo round($distance,1); ?>&nbsp;<?php echo $dunit;?> </p>
+				<p><?php echo showBrief($row['description'],30) ?></p>
+				<p class="distance">Udaljenost : <?php echo round($distance,1); ?>&nbsp;<?php echo $dunit;?></p>
 				<ul class="btnList">
 				<?php if ($_REQUEST['bIPhone']=='0'){?>
 					<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row[phone]); ?>">Nazovi</a></li>

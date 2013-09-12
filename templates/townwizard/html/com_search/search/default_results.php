@@ -23,9 +23,9 @@
 					<li>
 						<div class="thumb fr">
 								<?php if($row['locimg']!='') {?>
-								<a href="index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/stories/jevents/jevlocations/thumbnails/thumb_<?php echo $row['locimg']; ?>"></a><?php }?>
+								<a href="restaurants/detail/<?php echo $row['loc_id'] ?>/<?php echo $row['title'] ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/stories/jevents/jevlocations/thumbnails/thumb_<?php echo $row['locimg']; ?>"></a><?php }?>
 						</div>
-						<a class="venueName bold fl" href="index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a>
+						<a class="venueName bold fl" href="restaurants/detail/<?php echo $row['loc_id'] ?>/<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a>
 						<div class="bc fr bold">
 										<?php echo $row['cat']; ?>
 						</div>

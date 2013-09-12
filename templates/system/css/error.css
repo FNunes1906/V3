@@ -39,30 +39,33 @@ table, td, th, div, pre, blockquote, ul, ol, dl, address,.componentheading,.cont
 }
 
 #outline {
-	width: 814px;
+	/*width: 814px;*/
+	width: auto;
 	margin: 0px;
 	padding: 0px;
-	padding-top: 60px;
-	padding-bottom: 60px;
+	/*padding-top: 60px;*/
+	/*padding-bottom: 60px;*/
 	background: #FFFFFF;
 }
 #errorboxoutline {
-	width: 600px;
+	/*width: 600px;*/
+	width: auto;
 	margin: 0px;
 	padding: 0px;
-	border: 1px solid #000000;
+	/*border: 1px solid #000000;*/
 }
 #errorboxheader {
-	width: 600px;
+	/*width: 600px;*/
+	width: auto;
 	margin: 0px;
 	padding: 0px;
-	background: #000000;
-	color: #FFFFFF;
+/*	background: #000000;*/
+	color: #9D0000;
 	font-weight: bold;
 	font-size: 13px;
 	line-height: 25px;
 	text-align: center;
-	border-bottom: 1px solid #000000;
+	/*border-bottom: 1px solid #000000;*/
 }
 #errorboxbody {
 	margin: 0px;

@@ -12,6 +12,10 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
+if (($this->error->code) == '404') {
+	header('Location: /index.php?option=com_content&view=article&id=400');
+	exit;
+}
 
 if (!isset($this->error)) {
 	$this->error = JError::raiseWarning( 403, JText::_('ALERTNOTAUTH') );
@@ -21,7 +25,7 @@ if (!isset($this->error)) {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
 <head>
-	<title><?php echo $this->error->code ?> - Requsted page not found</title>
+	<title><?php echo $this->error->code ?> - <?php echo $this->title; ?></title>
 	<link rel="stylesheet" href="<?php echo $this->baseurl; ?>/templates/system/css/error.css" type="text/css" />
 	<?php if($this->direction == 'rtl') : ?>
 	<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/error_rtl.css" type="text/css" />
@@ -29,21 +33,33 @@ if (!isset($this->error)) {
 </head>
 <body>
 	<div align="center">
-	
 		<div id="outline">
 		<div id="errorboxoutline">
-			<div id="errorboxheader">SORRY, THE PAGE YOU REQUESTED WAS NOT FOUND</div>
+			<div id="errorboxheader"><?php echo $this->error->code ?> - <?php echo $this->error->message ?></div>
 			<div id="errorboxbody">
-			<p><strong><?php echo JText::_('Please try one of the following Steps:'); ?></strong></p>
-			
+			<p><strong><?php echo JText::_('You may not be able to visit this page because of:'); ?></strong></p>
+				<ol>
+					<li><?php echo JText::_('An out-of-date bookmark/favourite'); ?></li>
+					<li><?php echo JText::_('A search engine that has an out-of-date listing for this site'); ?></li>
+					<li><?php echo JText::_('A mis-typed address'); ?></li>
+					<li><?php echo JText::_('You have no access to this page'); ?></li>
+					<li><?php echo JText::_('The requested resource was not found'); ?></li>
+					<li><?php echo JText::_('An error has occurred while processing your request.'); ?></li>
+				</ol>
+			<p><strong><?php echo JText::_('Please try one of the following pages:'); ?></strong></p>
 			<p>
 				<ul>
-					<li><strong>Please check the URL for proper spelling.</strong></li>
-					<p></p>
-					<li><strong>If you're having trouble locating a destination on the site, try visiting the <a style="color:#9d0000"  href="<?php echo $this->baseurl; ?>/index.php">Home Page</a></strong></li>
+					<li><a href="<?php echo $this->baseurl; ?>/index.php" title="<?php echo JText::_('Go to the home page'); ?>"><?php echo JText::_('Home Page'); ?></a></li>
 				</ul>
 			</p>
-			
+			<p><?php echo JText::_('If difficulties persist, please contact the system administrator of this site.'); ?></p>
+			<div id="techinfo">
+			<p><?php echo $this->error->message; ?></p>
+			<p>
+				<?php if($this->debug) :
+					echo $this->renderBacktrace();
+				endif; ?>
+			</p>
 			</div>
 			</div>
 		</div>

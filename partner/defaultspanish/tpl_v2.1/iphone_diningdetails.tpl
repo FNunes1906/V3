@@ -44,7 +44,7 @@
 			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 			if(stripos($ua,'iphone') == true) { 
 			?>
-			<li><a href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row[geolat]; ?>:<?php echo $row[geolon]; ?>')" class="button small">facturar</a></li>
+			<li><a href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row[geolat]; ?>:<?php echo $row[geolon]; ?>')" class="button small">Registrar visita</a></li>
 			<?php } ?>
 		</ul>
 		<?php  } ?>

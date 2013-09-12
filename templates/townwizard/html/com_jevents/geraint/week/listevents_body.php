@@ -40,65 +40,81 @@ else
 ?>
 <!-- Code Start by Rinkal -->
 
-<?php if($_REQUEST['searchdate']!='')
-{
+<?php if($_REQUEST['searchdate']!=''){
+
 	$ser_date=date("Y-m-d",strtotime($_REQUEST['searchdate']));
 	/* Fetching Date Format from Page Global */
 	$db1 =& JFactory::getDBO();
-  	$pageglobal = "select date_format from `jos_pageglobal`";
-  	$db1->setQuery($pageglobal);
-  	$df=$db1->query();
- 	while($d = mysql_fetch_array($df)){
- 		$f=$d['date_format'];
-	}
+	$pageglobal = "select date_format,time_format from `jos_pageglobal`";
+	$db1->setQuery($pageglobal);
+	$df=$db1->query();
+	$d=mysql_fetch_row($df);
+	$df=$d[0];
+	$tf=$d[1];
+   
+ /* Fetching events from events table */
+ 
+ 	$db =& JFactory::getDBO();
+  	$query_datelist1="SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%l:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%l:%i%p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.noendtime,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND rpt.endrepeat >= '".$ser_date." 00:00:00' AND rpt.startrepeat <='".$ser_date." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";
 	
-	/* Fetching events from events table */
-	
-	$db =& JFactory::getDBO();
- 	$query_datelist1="SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%l:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%l:%i%p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.noendtime,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND rpt.endrepeat >= '".$ser_date." 00:00:00' AND rpt.startrepeat <='".$ser_date." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";
+ 	$db->setQuery($query_datelist1);
+ 	$rows=$db->query();
+ 
+ if (mysql_num_rows($rows)!= 0){
+	echo "<ul class='ev_ul'>\n";
+	echo "<div class='ev_td_right'>";
 
- $db->setQuery($query_datelist1);
- $rows=$db->query();
-if (mysql_num_rows($rows)!= 0){
-		echo "<ul class='ev_ul'>\n";
-		echo "<div class='ev_td_right'>";
-		
-		while($row = mysql_fetch_array($rows)){
-		
+	while($row = mysql_fetch_array($rows)){
+  
 		if($ser_date<= $row[endrepeat]){
-				
-				$m = DATE('m',strtotime($ser_date));
-				$d  = DATE('d',strtotime($ser_date)) ;
-				$y  = DATE('Y',strtotime($ser_date)) ;
-				if($f == "%m/%d"){
-					echo "<li class='ev_td_li'><div class='date fl'>".$m."/".$d."</div>";
-				}
-				else{
-					echo "<li class='ev_td_li'><div class='date fl'>".$d."/".$m."</div>";
-				}
-		}
+			$m = DATE('m',strtotime($ser_date));
+			$d  = DATE('d',strtotime($ser_date)) ;
+			$y  = DATE('Y',strtotime($ser_date)) ;
+			if($df == "%m/%d"){
+				echo "<li class='ev_td_li'><div class='date fl'>".$m."/".$d."</div>";
+			}
+			else{
+				echo "<li class='ev_td_li'><div class='date fl'>".$d."/".$m."</div>";
+			}
+		}																						
 		echo "<div class='details'>\n<a class='ev_link_row' style='font-weight:bold;' href='/index.php?option=com_jevents&task=icalrepeat.detail&evid=".$row[rp_id]."&Itemid=".$_REQUEST[Itemid]."&year=".$y."&month=".$m."&day=".$d."'>".$row['summary']."</a>";
-		
-		if($row['timestart']=='12:00 AM' && $row['timeend']=='11:59PM'){
-			$displayTime=JText::_('ALL_DAY');
-			echo '<br/>'.$row['category'].' • '.$displayTime.' • '.$row['title'];
-		}
-		else if($row['noendtime']==1){
-			echo "<br/>".$row['category'].' • '.$row['timestart'].' • '.$row['title'];
+
+		if($tf == "12"){
+			if($row['timestart']=='12:00 AM' && $row['timeend']=='11:59PM'){
+				$displayTime=JText::_('ALL_DAY');
+				echo '<br/>'.$row['category'].' • '.$displayTime.' • '.$row['title'];
+			}
+			else if($row['noendtime']==1){
+				echo "<br/>".$row['category'].' • '.$row['timestart'].' • '.$row['title'];
+			}
+			else{
+				echo "<br/>".$row['category'].' • '.$row['timestart'].'-'.$row['timeend'].' • '.$row['title'];
+			}
 		}
 		else{
-			echo "<br/>".$row['category'].' • '.$row['timestart'].'-'.$row['timeend'].' • '.$row['title'];
+			$stime = date("H:i", strtotime($row['timestart']));
+			$etime = date("H:i", strtotime($row['timeend']));
+
+			if($stime=='00:00' && $etime=='23:59'){
+				$displayTime=JText::_('ALL_DAY');
+				echo '<br/>'.$row['category'].' • '.$displayTime.' • '.$row['title'];
+			}
+			else if($row['noendtime']==1){
+				echo "<br/>".$row['category'].' • '.$stime.' • '.$row['title'];
+			}
+			else{
+				echo "<br/>".$row['category'].' • '.$stime.'-'.$etime.' • '.$row['title'];
+			}
 		}
-		
 		echo "</div></li>";
-		}
-		echo "</div>";
-		echo "</ul>";
-	 }
+  }																																													
+	echo "</div>";
+	echo "</ul>";
+}
 	else{
-		echo "<div style='clear: both;padding-top: 20px;font-weight: bold;'>".JText::_('NO_EVENTS')." ".$ser_date." .</div>";
-	}
-	
+  	echo "<div style='clear: both;padding-top: 20px;font-weight: bold;'>".JText::_('NO_EVENTS')." ".$ser_date." .</div>";
+ 	}
+ 
 } 
 /* Code End by Rinkal */
 else{

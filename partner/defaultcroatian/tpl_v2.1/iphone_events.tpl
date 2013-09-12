@@ -1,6 +1,7 @@
 <?php 
 setlocale(LC_TIME,"croatian");
-$todaestring = ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
+/*$todaestring = ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));*/
+$todaestring = iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));
 ?>
 <div id="featuredEvents">
 	<div class="flexslider-container">
@@ -121,7 +122,7 @@ if(stripos($ua,'android') == true) { ?>
 
 <div id="main" role="main">
 
-<h1><?php echo UTF8_encode($todaestring);?></h1>
+<h1><?php echo $todaestring;?></h1>
 
 <ul id="eventList" class="mainList" ontouchstart="touchStart(event,'eventList');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 
@@ -240,3 +241,4 @@ if(stripos($ua,'android') == true) { ?>
 		});
 	</script>
 	<script src="js/helper.js"></script>
+	<script src="../../mobiscroll/js/mobiscroll_croatian.js" type="text/javascript"></script>

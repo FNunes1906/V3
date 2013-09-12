@@ -25,7 +25,7 @@
 			?> 
 			<!-- creating loop for slider -->
 		    	<li>
-				<a href="/components/com_shines_v2.1/diningdetails.php?did=<?php echo $fealoc['loc_id'];?>"><img  src="<?php echo $singleimagearray;?>" /></a> 
+				<a href="/components/com_shines_v2.1/diningdetails.php?did=<?php echo $fealoc['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><img  src="<?php echo $singleimagearray;?>" /></a> 
 		    		<div class="flex-caption">
 		    			<h1><?php echo $fealoc['title'] ;?></h1>
 		    			<h2><?php echo $fealoc['category'] ;?></h2>

@@ -198,12 +198,7 @@ if(stripos($ua,'android') == true) { ?>
 			<?php echo $categoryname[$n]; ?>
 			<ul class="btnList"><li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>">llamar</a</li>
 				
-			<?php
-	 			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-				if(stripos($ua,'android') == true) { ?>
- 			<?php } else { ?>
-			<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">facturar</a></li>
-				<?php } ?>
+			<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">Registrar visita</a></li>
 			<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id']?>&d=<?php echo $today;?>&m=<?php echo $tomonth;?>&Y=<?php echo $toyear;?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">m&#225;s info</a></li></ul>
 		</h3> 
 				<!--<?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1')?>&nbsp;<?php echo $dunit;?></td> Away -->
@@ -234,3 +229,4 @@ if(stripos($ua,'android') == true) { ?>
 		});
 	</script>
 	<script src="js/helper.js"></script>
+	<script src="../../mobiscroll/js/mobiscroll_spanish.js" type="text/javascript"></script>

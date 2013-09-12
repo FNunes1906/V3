@@ -81,7 +81,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 						     
 						     if(isset($strFound) && $strFound != ''){
 						      $s = explode('" />',$strArray[$i]);
-						      $strConcat = $s[1];
+							  $strConcat = strip_tags($s[1]);
+						      /*$strConcat = $s[1];*/
 						     }else{
 						      $strConcat = $strArray[$i]; 
 						     }
@@ -117,7 +118,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 	</div>
 	<div class="galleryNav rightCol fr">
         <!--<a class="full bold" href="/index.php?option=com_jevents&view=range&task=range.listevents&Itemid=97"><?php echo JText::_("TW_FULL_CALENDAR"); ?></a>-->
-        <a class="full bold" href="/index.php?option=com_jevents&view=week&task=week.listevents&Itemid=97"><?php echo JText::_("TW_FULL_CALENDAR"); ?></a>
+        <!--<a class="full bold" href="/index.php?option=com_jevents&view=week&task=week.listevents&Itemid=97"><?php echo JText::_("TW_FULL_CALENDAR"); ?></a>-->
           <h1 class="display"><?php echo JText::_("TW_TOP_EVENT"); ?></h1>
           <ul>
 		  <?php 

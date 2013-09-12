@@ -237,3 +237,4 @@ if(stripos($ua,'android') == true) { ?>
 		});
 	</script>
 	<script src="js/helper.js"></script>
+	<script src="../../mobiscroll/js/mobiscroll_portuguese.js" type="text/javascript"></script> 

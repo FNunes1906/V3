@@ -393,7 +393,7 @@ a.saved span {
   margin: 0;
 }
 #MainContent .sect .heading {
-  background:url('../images/grayArrowLg.png') no-repeat right top;
+  /* background:url('../images/grayArrowLg.png') no-repeat right top; */
   padding-right:15px;
   text-transform:uppercase;
   display:block;
@@ -1447,7 +1447,7 @@ font-family: 'AllerDisplayRegular',Arial,sans-serif;
     text-transform: uppercase;
 	 padding-bottom: 12px;}
 	
-.blog img{ max-width:392px; display:block;}
+.blog img{ max-width:392px; display:block;margin: auto;}
 
 .article_separator{
 	display: none;
@@ -2347,4 +2347,7 @@ max-width: inherit;
 .tool-text {
     font-size: 100%;
     margin: 0;
+}
+.description .contentpaneopen{
+ width: 100%;
 }

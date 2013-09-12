@@ -150,7 +150,7 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
     function linkClicked(link) { document.location = link; }
 </script>
 <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
-<script src="../../mobiscroll/js/mobiscroll-1.5.1.js" type="text/javascript"></script>
+<!--<script src="../../mobiscroll/js/mobiscroll-1.5.1.js" type="text/javascript"></script>-->
 <script type="text/javascript">
             function submitForm() {
                     document.events.submit(); //#DD#
