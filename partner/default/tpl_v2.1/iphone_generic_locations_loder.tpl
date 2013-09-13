@@ -43,54 +43,40 @@
 		<?php # Search input box and submit button END ?>
 	</div>
 <!-- Infinite Scolling Code -->
-<script type="text/javascript">
+<!--<script type="text/javascript">
 $(window).scroll(function() {
    if($(window).scrollTop() + $(window).height() == $(document).height()) {
        alert("User is at the bottom of the page. Now make an ajax call to add more results instead of linking to a second page.");
    }
 });
-</script>
+</script>-->
 
-<!--<script type="text/javascript">
-	 $(document).ready(function() { 
-		$(window).scroll(function() {
-		   	if($(window).scrollTop() == $(document).height() - $(window).height()) {	
-				$('div#loadMoreComments').show();
-				$.ajax({
-					dataType : "html" ,
-					contentType : "application/x-www-form-urlencoded" ,
-					url: "generic_locations_loder_ajax.php?startat="+<?php echo $start_at?> ,
-					success: function(html) {
-						if(html){		
-							$("#postedComments").append(html);
-							$('div#loadMoreComments').hide();
-						}else{		
-							$('div#loadMoreComments').replaceWith("<center><h1 style='color:red'>End of countries !!!!!!!</h1></center>");
-						}
-					}
-				});
-			}
-		});
-	});
-</script>	-->
+	
 	<ul id="placesList" class="mainList">
 		<?php # If search value is NOT entered in serch box BEGIN ?>
 		<?php
 		if($_POST['search_rcd'] != "Search"){ 
-				$query = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180)) + cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations $customfields3_table WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ".$subquery;
+				$query  = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180)) + cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations $customfields3_table WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ".$subquery;
+				$query1 = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180))";
+				$query2 = "cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations $customfields3_table WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ".$subquery;
 			
 			if($filter_loccat == 'Featured'){
-				$query .= " AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ";
+				$query  .= " AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ";
+				$query2 .= " AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ";
 			}elseif($filter_loccat != 0 && $_REQUEST['filter_loccat'] != 'alp'){
-				$query .= " AND loccat = $filter_loccat ";
+				$query  .= " AND loccat = $filter_loccat ";
+				$query2 .= " AND loccat = $filter_loccat ";
 			}
 			
 			if(($filter_order != "") || ($_REQUEST['filter_loccat'] == 'alp')){
-				$query .= " ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+				$query  .= " ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+				$query2 .= " ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
 			}else{
-				$query .= " ORDER BY dist ASC LIMIT " .$start_at.','.$entries_per_page;
+				$query  .= " ORDER BY dist ASC LIMIT " .$start_at.','.$entries_per_page;
+				$query2 .= " ORDER BY dist ASC LIMIT " .$start_at.','.$entries_per_page;
 			}
-				
+			$ajaxquery1 = $query1;	
+			$ajaxquery2 = $query2;	
 			$rec = mysql_query($query) or die(mysql_error());
 			$n   = 0;
 			
@@ -159,8 +145,35 @@ $(window).scroll(function() {
 					include("connection.php");?>
 			</li>
 	</ul>
+	<!--Added for infinte scroll-->
 	<div id="loadMoreComments" style="display:none;" > <center>Dimitrios</center></div>	
-		<?php if($n =='50') {
+	
+	<script type="text/javascript">
+	 $(document).ready(function() { 
+		$(window).scroll(function() {
+		   	if($(window).scrollTop() == $(document).height() - $(window).height()) {	
+				$('div#loadMoreComments').show();
+				$.ajax({
+					dataType : "html" ,
+					contentType : "application/x-www-form-urlencoded" ,
+					url: "generic_locations_loder_ajax.php?ajaxquery1=<?php echo $ajaxquery1?>&ajaxquery2=<?php echo $ajaxquery2?>&lat1=<?php echo $lat1?>&lon1=<?php echo $lon1?>&dunit=<?php echo $dunit?>" ,
+					success: function(html) {
+						if(html){		
+							$("#placesList").append(html);
+							$('div#loadMoreComments').hide();
+						}else{		
+							$('div#loadMoreComments').replaceWith("<center><h1 style='color:red'>End of Record.</h1></center>");
+						}
+					}
+				});
+			}
+		});
+	});
+</script>
+	
+	
+		<?php if($n =='6') {
+			//echo "Totoal row:".$total_rows,"entries per page:",$entries_per_page,"current page:",$current_page,"link:",$link_to;
 			echo get_paginate_links($total_rows,$entries_per_page,$current_page,$link_to);
 			}?>
 		<div style='display:none;'>
