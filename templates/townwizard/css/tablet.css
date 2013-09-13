@@ -304,3 +304,7 @@ body.tablet .gallery .event img {
   height:200px;
 }
 /* event info page */
+
+body.tablet .footer_tw{float: left;
+    margin-bottom: 4px;
+    margin-top: -17px !important;}

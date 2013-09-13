@@ -1217,11 +1217,11 @@ a.saved span {
   width:50%;
 }
 #ShareTool span {
-  display:block;
-  line-height:32px;
-  height:32px;
-  margin-bottom:10px;
-  font-size: 10px;
+ display:block;
+ line-height:15px;
+ height:32px;
+ margin-bottom:10px;    
+ width: 33px;
 }
 #ShareTool span .stButton {
   float:left;
@@ -1292,7 +1292,7 @@ a.saved span {
   list-style:none;
 }
 #Footer ul li {
-  width:33%;
+  width:37%;
   float:left;
 }
 #Footer ul li .pad {
@@ -1332,7 +1332,7 @@ a.saved span {
 #Footer ul li.site a, 
 #Footer ul li.community a {
   display:block;
-  margin-top:7px;
+  margin-top:4px;
 }
 #Footer ul li.site .all {
   margin-top:30px;
@@ -2350,4 +2350,17 @@ max-width: inherit;
 }
 .description .contentpaneopen{
  width: 100%;
+}
+
+.footer_tw{float: left; margin-top: -4px !important;}
+
+/*CSs for share this module*/
+span.print_large{
+ line-height: 35px !important;
+ width: auto !important;
+}
+.share_font{
+     float: right;
+     text-align: left;
+     width: 105px !important;
 }

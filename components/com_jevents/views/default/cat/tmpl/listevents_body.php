@@ -7,7 +7,13 @@ $data = $this->datamodel->getCatData( $this->catids,false, $this->limit, $this->
 $Itemid = JEVHelper::getItemid();
 
 ?>
-<div class="bc fr" ><span class="bold"><?php echo JText::_('JEV_VIEWBYCAT');?>:</span><?php $this->viewNavCatText( $this->catids, JEV_COM_COMPONENT, 'cat.listevents', $this->Itemid );?></div>
+
+<!-- Event listing CATEGORY FILTER
+<div class="bc fr" >
+	<span class="bold"><?php echo JText::_('JEV_VIEWBYCAT');?>:</span><?php $this->viewNavCatText( $this->catids, JEV_COM_COMPONENT, 'cat.listevents', $this->Itemid );?>
+</div>
+-->
+
 <?php 
 if ( JRequest::getVar('task') === 'cat.listevents' ){
 	echo "<h3 class='fl heading display'>".JText::_('JEV_EVENTLIST')."</h3>";

@@ -45,13 +45,9 @@ $ics=$ics_res['ics_id'];
 global $msg;
 $msg="";
 
-
-if($_POST['action']=='Save' || $_POST['action']=='Ahorrar'){
-	//echo "<pre>";
-	//print_r($_POST);
+if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']=='Spremi' || $_POST['action']=='Bewaar' || $_POST['action']=='Salve'){	
 	
 	$postRecheck = checkPostParameter($_POST);
-	//$postRecheck = checkPostParameter($_POST);
 	
 	if($postRecheck){
 	

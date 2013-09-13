@@ -10,10 +10,12 @@ echo "<h3 class='fl heading display'>".JText::_('JEV_VIEWBYWEEK')."</h3>";
 
 /*echo "<div id='cal_title'>". JText::_('JEV_EVENTSFOR') ."</div>\n";	*/
 ?>
+<!-- Event listing CATEGORY FILTER
 <div class="bc fr" >
 	<span class="bold"><?php echo JText::_('JEV_VIEWBYCAT');?>:</span>
 	<?php $this->viewNavCatText( $this->catids, JEV_COM_COMPONENT, 'cat.listevents', $this->Itemid );?>
 </div>
+-->
 <table align="center" width="100%" cellspacing="0" cellpadding="5" class="ev_table">
     
     <?php

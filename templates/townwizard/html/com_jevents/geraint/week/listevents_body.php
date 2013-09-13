@@ -28,7 +28,9 @@ $option = JEV_COM_COMPONENT;
 $Itemid = JEVHelper::getItemid();
 
 ?>
+<!-- Event listing CATEGORY FILTER
 <div class="bc fr" ><span class="bold"><?php echo JText::_("TW_EVENT_TYPE") ?>:</span><?php $this->viewNavCatText( $this->catids, JEV_COM_COMPONENT, 'cat.listevents', $this->Itemid );?></div>
+-->
 <?php 
 if ( JRequest::getVar('task') === 'week.listevents' AND JRequest::getVar('view') === 'week' ){
 	echo "<h3 class='fl heading display'>". JText::_('TW_THIS_WEEK'). "</h3>";
