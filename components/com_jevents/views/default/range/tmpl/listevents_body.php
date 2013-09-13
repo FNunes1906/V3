@@ -5,8 +5,12 @@ defined('_JEXEC') or die('Restricted access');
 
 $cfg	 = & JEVConfig::getInstance();
 $data = $this->data;
+if(JRequest::getVar('Itemid') == 98){
+	echo "<h3 class='fl heading display'>".JText::_('JEV_VIEWBYWEEK')."</h3>";
+}else{
+	echo "<h3 class='fl heading display'>".JText::_('TW_THISMONTH')."</h3>";
+}
 
-echo "<h3 class='fl heading display'>".JText::_('JEV_VIEWBYWEEK')."</h3>";
 
 /*echo "<div id='cal_title'>". JText::_('JEV_EVENTSFOR') ."</div>\n";	*/
 ?>
