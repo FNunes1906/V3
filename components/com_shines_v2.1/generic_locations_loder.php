@@ -122,7 +122,7 @@ else
 $rec1 				= mysql_query($query1) or die(mysql_error());
 $total_data 		= mysql_num_rows($rec1);
 $total_rows 		= $total_data;
-$page_limit 		= 6;
+$page_limit 		= 20;
 $entries_per_page	= $page_limit;
 $current_page 		= (empty($_REQUEST['page']))? 1:$_REQUEST['page'];
 $start_at 			= ($current_page * $entries_per_page) - $entries_per_page;

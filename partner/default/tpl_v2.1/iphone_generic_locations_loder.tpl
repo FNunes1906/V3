@@ -197,7 +197,7 @@
 	<!--Added for infinte scroll-->
 
 	
-		<?php /*if($n =='6') {
+		<?php /*if($n =='20') {
 			//echo "Totoal row:".$total_rows,"entries per page:",$entries_per_page,"current page:",$current_page,"link:",$link_to;
 			echo get_paginate_links($total_rows,$entries_per_page,$current_page,$link_to);
 			}*/?>
