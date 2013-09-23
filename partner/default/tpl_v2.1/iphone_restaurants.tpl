@@ -156,7 +156,7 @@ else {
 				$distance = distance($lat1, $lon1, $row[geolat],  $row[geolon], $dunit);?>
 				<li>
 					<h1><?php echo $row['title'];?></h1>
-					<p><?php echo stripJunk(showBrief($row['description']),30); ?></p>
+					<p><?php echo stripJunk(showBrief($row['description'],30)); ?></p>
 					<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?php echo $dunit;?> Away</p>
 						<ul class="btnList">
 							<?php if ($_REQUEST['bIPhone']=='0'){?>

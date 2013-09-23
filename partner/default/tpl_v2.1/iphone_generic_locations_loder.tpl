@@ -42,15 +42,6 @@
 		</div>
 		<?php # Search input box and submit button END ?>
 	</div>
-<!-- Infinite Scolling Code -->
-<!--<script type="text/javascript">
-$(window).scroll(function() {
-   if($(window).scrollTop() + $(window).height() == $(document).height()) {
-       alert("User is at the bottom of the page. Now make an ajax call to add more results instead of linking to a second page.");
-   }
-});
-</script>-->
-
 	
 	<ul id="placesList" class="mainList">
 		<?php # If search value is NOT entered in serch box BEGIN ?>
@@ -70,13 +61,14 @@ $(window).scroll(function() {
 			
 			if(($filter_order != "") || ($_REQUEST['filter_loccat'] == 'alp')){
 				$query  .= " ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
-				$query2 .= " ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+				$query2 .= " ORDER BY title ASC LIMIT ";
 			}else{
 				$query  .= " ORDER BY dist ASC LIMIT " .$start_at.','.$entries_per_page;
-				$query2 .= " ORDER BY dist ASC LIMIT " .$start_at.','.$entries_per_page;
+				$query2 .= " ORDER BY dist ASC LIMIT ";
 			}
 			$ajaxquery1 = $query1;	
-			$ajaxquery2 = $query2;	
+			$ajaxquery2 = $query2;
+			
 			$rec = mysql_query($query) or die(mysql_error());
 			$n   = 0;
 			
@@ -100,8 +92,35 @@ $(window).scroll(function() {
 					</ul>
 				</li>
 				<?php ++$n;
-			}
-		}
+			}?>
+				<!--Infinite Scroller Begin	-->
+				<div id="loadMoreComments" style="display:none;" > <center>Dimitrios</center></div>	
+				<script type="text/javascript">
+					 $(document).ready(function() { 
+					 var lpage = 0;
+						$(window).scroll(function() {
+						   	if($(window).scrollTop() == $(document).height() - $(window).height()) {
+								lpage = lpage + 1;
+								$('div#loadMoreComments').show();
+								$.ajax({
+									dataType : "html" ,
+									contentType : "application/x-www-form-urlencoded" ,
+									url: "generic_locations_loder_ajax.php?ajaxquery1=<?php echo $ajaxquery1?>&ajaxquery2=<?php echo $ajaxquery2?>&lat1=<?php echo $lat1?>&lon1=<?php echo $lon1?>&dunit=<?php echo $dunit?>&entries_per_page=<?php echo $entries_per_page?>&lpage="+lpage ,
+									success: function(html) {
+										if(html){		
+											$("#placesList").append(html);
+											$('div#loadMoreComments').hide();
+										}else{		
+											$('div#loadMoreComments').replaceWith("<center><h1 style='color:red'>End of Record.</h1></center>");
+										}
+									}
+								});
+							}
+						});
+					});
+				</script>
+				<!--Infinite Scroller Ends	-->
+		<?php }
 		# END 
 		
 		# If search value is entered BEGIN - [Regular listing]
@@ -110,10 +129,13 @@ $(window).scroll(function() {
 		
 			if(($filter_loccat == 0) || ($_REQUEST['filter_loccat'] == 'alp') && ($_POST['search_rcd'] == "Search")){
 				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+				$ajaxquery1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT ";
 			}elseif($filter_loccat == 'Featured' && $_POST['search_rcd'] == "Search" ){
 				$search_query1 = "select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%'  AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+				$ajaxquery1 = "select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%'  AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT ";
 			}elseif($_POST['search_rcd'] == "Search"){
 				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and loccat=$filter_loccat and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+				$ajaxquery1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and loccat=$filter_loccat and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT ";
 			}
 				
 			$search_query = mysql_query($search_query1) or die(mysql_error());
@@ -140,42 +162,45 @@ $(window).scroll(function() {
 						<li><a  href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $data['geolon']; ?>:<?php echo $data['geolat']; ?>')"></a></li>
 					</ul>
 				<?php } ?>
+					<!--Infinite Scroller Begin	-->
+					<div id="loadMoreComments" style="display:none;" > <center>Dimitrios</center></div>	
+					<script type="text/javascript">
+						 $(document).ready(function() { 
+						 var lpage = 0;
+							$(window).scroll(function() {
+							   	if($(window).scrollTop() == $(document).height() - $(window).height()) {
+									lpage = lpage + 1;
+									$('div#loadMoreComments').show();
+									$.ajax({
+										dataType : "html" ,
+										contentType : "application/x-www-form-urlencoded" ,
+										url: "generic_locations_loder_search_ajax.php?ajaxquery1=<?php echo $ajaxquery1?>&lat1=<?php echo $lat1?>&lon1=<?php echo $lon1?>&dunit=<?php echo $dunit?>&entries_per_page=<?php echo $entries_per_page?>&lpage="+lpage ,
+										success: function(html) {
+											if(html){		
+												$("#placesList").append(html);
+												$('div#loadMoreComments').hide();
+											}else{		
+												$('div#loadMoreComments').replaceWith("<center><h1 style='color:red'>End of Record.</h1></center>");
+											}
+										}
+									});
+								}
+							});
+						});
+					</script>
+					<!--Infinite Scroller Ends	-->				
 				<?php }
 				# END
 					include("connection.php");?>
 			</li>
 	</ul>
 	<!--Added for infinte scroll-->
-	<div id="loadMoreComments" style="display:none;" > <center>Dimitrios</center></div>	
+
 	
-	<script type="text/javascript">
-	 $(document).ready(function() { 
-		$(window).scroll(function() {
-		   	if($(window).scrollTop() == $(document).height() - $(window).height()) {	
-				$('div#loadMoreComments').show();
-				$.ajax({
-					dataType : "html" ,
-					contentType : "application/x-www-form-urlencoded" ,
-					url: "generic_locations_loder_ajax.php?ajaxquery1=<?php echo $ajaxquery1?>&ajaxquery2=<?php echo $ajaxquery2?>&lat1=<?php echo $lat1?>&lon1=<?php echo $lon1?>&dunit=<?php echo $dunit?>" ,
-					success: function(html) {
-						if(html){		
-							$("#placesList").append(html);
-							$('div#loadMoreComments').hide();
-						}else{		
-							$('div#loadMoreComments').replaceWith("<center><h1 style='color:red'>End of Record.</h1></center>");
-						}
-					}
-				});
-			}
-		});
-	});
-</script>
-	
-	
-		<?php if($n =='6') {
+		<?php /*if($n =='6') {
 			//echo "Totoal row:".$total_rows,"entries per page:",$entries_per_page,"current page:",$current_page,"link:",$link_to;
 			echo get_paginate_links($total_rows,$entries_per_page,$current_page,$link_to);
-			}?>
+			}*/?>
 		<div style='display:none;'>
 		<?php echo $pageglobal['googgle_map_api_keys']; ?>
 		</div>
