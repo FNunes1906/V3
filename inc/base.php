@@ -63,6 +63,7 @@ function load_config() {
   $var->youtube = $pageglobal['youtube'];
   $var->googgle_analytics=$pageglobal['googgle_map_api_keys'];
   $var->Header_color =$pageglobal['Header_color'];
+  $var->Footer_Menu_Link=$pageglobal['Footer_Menu_Link'];
   $var->distance_unit=$pageglobal['dunit'];
   $var->weather_unit=$pageglobal['wunit'];
   $var->time_zone=$pageglobal['timezone'];

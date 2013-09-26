@@ -1,6 +1,10 @@
 <?php 
 defined('_JEXEC') or die('Restricted access');
 
+/* $current_cat Used to get current category id for event when search through datepicker */
+global $current_cat;		
+$current_cat =  $this->datamodel->catidList;
+
 /* Timezone Block Begin August 2013 */
 $timezoneValue 	= $_SESSION['tw_timezone'];
 
@@ -57,11 +61,14 @@ else
  /* Fetching events from events table */
  
  	$db =& JFactory::getDBO();
-  	$query_datelist1="SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%l:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%l:%i%p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.noendtime,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND rpt.endrepeat >= '".$ser_date." 00:00:00' AND rpt.startrepeat <='".$ser_date." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";
+	if(!isset($current_cat) || $current_cat == ''){
+  		$query_datelist1="SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%l:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%l:%i%p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.noendtime,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND rpt.endrepeat >= '".$ser_date." 00:00:00' AND rpt.startrepeat <='".$ser_date." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";
+	}else{
+		$query_datelist1="SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%l:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%l:%i%p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.noendtime,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND  (cat.id=".$current_cat." OR cat.parent_id=".$current_cat.") AND cat.published = 1 AND cat.section = 'com_jevents' AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND rpt.endrepeat >= '".$ser_date." 00:00:00' AND rpt.startrepeat <='".$ser_date." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";	
+	}
 	
  	$db->setQuery($query_datelist1);
  	$rows=$db->query();
- 
  if (mysql_num_rows($rows)!= 0){
 	echo "<ul class='ev_ul'>\n";
 	echo "<div class='ev_td_right'>";

@@ -1,3 +1,5 @@
+<?php global $Itemid;?>
+
 <link href="templates/townwizard/css/mobiscroll-2.4.custom.min.css" rel="stylesheet" type="text/css" />
 
 <script src="templates/townwizard/js/mobiscroll-2.4.custom.min.js" type="text/javascript"></script>
@@ -31,7 +33,7 @@ jQuery.noConflict();
 
 function redirecturl(val)
 {
-	url="index.php?option=com_jevents&view=week&task=week.listevents&Itemid=97&searchdate="+val;
+	url="/index.php?option=com_jevents&view=week&task=week.listevents&Itemid=<?php echo $Itemid;?>&searchdate="+val; 
 	window.location=url;
 }
 
