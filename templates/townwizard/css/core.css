@@ -1984,6 +1984,7 @@ Last Updated Date:29-01-2013
 
 #VenueDetail{ width:412px !important;  margin-bottom: 0 !important;}
 
+#VenueDetail img{ max-width:95%;}
 /* Restaurant Search begin*/
 
 #mod_search_searchword{

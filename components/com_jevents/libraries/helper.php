@@ -265,11 +265,14 @@ class JEVHelper {
 			}
 		}
 		else if (JUtility::isWinOS()){
-			return strftime("%#I:%M%p",$date);
-		}
-		else {
-			return strtolower(strftime("%I:%M%p",$date));
-		}
+	   		//return strftime("%#I:%M%p",$date);
+			# Below changes made for AM PM issue for event listing on site for all language except English
+	  		return strftime("%I:%M ", $date).(($date%86400) < 43200 ? 'AM' : 'PM');
+	  	}else {
+		   //return strtolower(strftime("%I:%M%p",$date));
+		   # Below changes made for AM PM issue for event listing on site for all language except English
+		   return strtolower(strftime("%I:%M ", $date).(($date%86400) < 43200 ? 'AM' : 'PM'));
+	    }
 	}
 
 

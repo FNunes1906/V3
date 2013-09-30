@@ -51,7 +51,7 @@ if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']==
 	
 	if($postRecheck){
 	
-		$title=$_POST['title'];
+		$title = addslashes($_POST['title']);
 		$allDayEvent=$_POST['allDayEvent'];
 		$custom_field4=$_POST['custom_field4'];
 		$publish_up=$_POST['publish_up'];

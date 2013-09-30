@@ -531,11 +531,11 @@ only screen and (min-device-pixel-ratio: 1.5) {
 		background-size: 20px 20px ;
 	}
 	#main ul.mainList li span{
-		background: url(../images/h/offerTag@2x.png) no-repeat bottom right;
+/*		background: url(../images/h/offerTag@2x.png) no-repeat bottom right;
 		-webkit-background-size: 35px 27px ;  
 		-moz-background-size: 35px 27px ;  
 		background-size: 35px 27px ;
-	}
+*/	}
 }
 
 
