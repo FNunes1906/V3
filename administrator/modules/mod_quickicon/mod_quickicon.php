@@ -38,46 +38,39 @@ if (!defined( '_JOS_QUICKICON_MODULE' ))
 	?>
 	<div id="cpanel">
 		<?php
-		$link = 'index.php?option=com_content&amp;task=add';
-		quickiconButton( $link, 'icon-48-article-add.png', JText::_( 'Add New Article' ) );
-
-		$link = 'index.php?option=com_content';
-		quickiconButton( $link, 'icon-48-article.png', JText::_( 'Article Manager' ) );
-
-		$link = 'index.php?option=com_frontpage';
-		quickiconButton( $link, 'icon-48-frontpage.png', JText::_( 'Frontpage Manager' ) );
-
-		$link = 'index.php?option=com_sections&amp;scope=content';
-		quickiconButton( $link, 'icon-48-section.png', JText::_( 'Section Manager' ) );
-
-		$link = 'index.php?option=com_categories&amp;section=com_content';
-		quickiconButton( $link, 'icon-48-category.png', JText::_( 'Category Manager' ) );
-
-		$link = 'index.php?option=com_media';
-		quickiconButton( $link, 'icon-48-media.png', JText::_( 'Media Manager' ) );
-
 		// Get the current JUser object
 		$user = &JFactory::getUser();
+		
+		$link = 'index.php?option=com_frontpage';
+		quickiconButton( $link, 'icon-48-frontpage.png', JText::_( 'FRONT PAGE FEATURE MANAGER' ) );
+		
+		$link = 'index.php?option=com_content&amp;task=add';
+		quickiconButton( $link, 'icon-48-article-add.png', JText::_( 'ADD NEW FEATURE' ) );
 
 		if ( $user->get('gid') > 23 ) {
-			$link = 'index.php?option=com_menus';
-			quickiconButton( $link, 'icon-48-menumgr.png', JText::_( 'Menu Manager' ) );
+			
+			$link = 'index.php?option=com_jevents&task=icalevent.list';
+			quickiconButton( $link, 'icon-48-jevents.png', JText::_( 'ADD EVENT' ) );
+		
+			$link = 'index.php?option=com_jevlocations&task=locations.overview';
+			quickiconButton( $link, 'icon-48-location.png', JText::_( 'ADD LOCATION' ) );
+		
+			$link = 'index.php?option=com_phocagallery&view=phocagallerys';
+			quickiconButton( $link, 'icon-48-pg-gal.png', JText::_( 'ADD IMAGE' ) );
+		
+			$link = 'index.php?option=com_media';
+			quickiconButton( $link, 'icon-48-media.png', JText::_( 'UPLOAD AD BANNER' ) );
+
+			$link = 'index.php?option=com_banners';
+			quickiconButton( $link, 'icon-48-banner.png', JText::_( 'CREATE AD BANNER' ) );
+		
+			$link = 'index.php?option=com_media';
+			quickiconButton( $link, 'icon-48-media.png', JText::_( 'MEDIA MANAGER ' ) );
+		
+			$link = 'index.php?option=com_pagemeta';
+			quickiconButton( $link, 'icon-48-config.png', JText::_( 'PAGE META' ) );
 		}
 
-		if ( $user->get('gid') > 24 ) {
-			$link = 'index.php?option=com_languages&amp;client=0';
-			quickiconButton( $link, 'icon-48-language.png', JText::_( 'Language Manager' ) );
-		}
-
-		if ( $user->get('gid') > 23 ) {
-			$link = 'index.php?option=com_users';
-			quickiconButton( $link, 'icon-48-user.png', JText::_( 'User Manager' ) );
-		}
-
-		if ( $user->get('gid') > 24 ) {
-			$link = 'index.php?option=com_config';
-			quickiconButton( $link, 'icon-48-config.png', JText::_( 'Global Configuration' ) );
-		}
 		?>
 	</div>
 	<?php
