@@ -58,7 +58,7 @@ if (!defined( '_JOS_QUICKICON_MODULE' ))
 			$link = 'index.php?option=com_phocagallery&view=phocagallerys';
 			quickiconButton( $link, 'icon-48-pg-gal.png', JText::_( 'ADD IMAGE' ) );
 		
-			$link = 'index.php?option=com_media';
+			$link = 'index.php?option=com_media&folder=banners';
 			quickiconButton( $link, 'icon-48-media.png', JText::_( 'UPLOAD AD BANNER' ) );
 
 			$link = 'index.php?option=com_banners';
