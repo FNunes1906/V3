@@ -42,33 +42,33 @@ if (!defined( '_JOS_QUICKICON_MODULE' ))
 		$user = &JFactory::getUser();
 		
 		$link = 'index.php?option=com_frontpage';
-		quickiconButton( $link, 'icon-48-frontpage.png', JText::_( 'FRONT PAGE FEATURE MANAGER' ) );
+		quickiconButton( $link, 'twIcon_home.png', JText::_( 'MANAGE HOME PAGE FEATURES' ) );
 		
 		$link = 'index.php?option=com_content&amp;task=add';
-		quickiconButton( $link, 'icon-48-article-add.png', JText::_( 'ADD NEW FEATURE' ) );
+		quickiconButton( $link, 'twIcon_feature.png', JText::_( 'ADD NEW FEATURE' ) );
 
 		if ( $user->get('gid') > 23 ) {
 			
 			$link = 'index.php?option=com_jevents&task=icalevent.list';
-			quickiconButton( $link, 'icon-48-jevents.png', JText::_( 'ADD EVENT' ) );
+			quickiconButton( $link, 'twIcon_date.png', JText::_( 'MANAGE EVENTS' ) );
 		
 			$link = 'index.php?option=com_jevlocations&task=locations.overview';
-			quickiconButton( $link, 'icon-48-location.png', JText::_( 'ADD LOCATION' ) );
+			quickiconButton( $link, 'twIcon_location.png', JText::_( 'MANAGE LOCATIONS' ) );
 		
 			$link = 'index.php?option=com_phocagallery&view=phocagallerys';
-			quickiconButton( $link, 'icon-48-pg-gal.png', JText::_( 'ADD IMAGE' ) );
+			quickiconButton( $link, 'twIcon_photos.png', JText::_( 'MANAGE IMAGES' ) );
 		
 			$link = 'index.php?option=com_media&folder=banners';
-			quickiconButton( $link, 'icon-48-media.png', JText::_( 'UPLOAD AD BANNER' ) );
+			quickiconButton( $link, 'twIcon_bannerUpload.png', JText::_( 'UPLOAD AD BANNER' ) );
 
 			$link = 'index.php?option=com_banners';
-			quickiconButton( $link, 'icon-48-banner.png', JText::_( 'CREATE AD BANNER' ) );
+			quickiconButton( $link, 'twIcon_bannerAdd.png', JText::_( 'MANAGE  BANNERS' ) );
 		
 			$link = 'index.php?option=com_media';
-			quickiconButton( $link, 'icon-48-media.png', JText::_( 'MEDIA MANAGER ' ) );
+			quickiconButton( $link, 'twIcon_media.png', JText::_( 'MEDIA MANAGER ' ) );
 		
 			$link = 'index.php?option=com_pagemeta';
-			quickiconButton( $link, 'icon-48-config.png', JText::_( 'PAGE META' ) );
+			quickiconButton( $link, 'twIcon_meta.png', JText::_( 'SETTINGS ' ) );
 		}
 
 		?>

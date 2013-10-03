@@ -528,7 +528,7 @@ $this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
 		<?php if($this->countModules('footer2')) : ?>
 			<li class="community">
 				<div class="pad">
-					<h3 class="display" style="float: left;margin-right:4px"><?php echo $var->site_name; ?> is <span style="font-size: 10px;padding-left: 2px; display: inline;"><?php echo JText::_("TW_POWERED_BY") ?></span></h3>
+					<h3 class="display" style="float: left;margin-right:4px"><?php echo $var->site_name; ?>  -<span style="font-size: 10px;padding-left: 2px; display: inline;"><?php echo JText::_("TW_POWERED_BY") ?></span></h3>
 					<a class="footer_tw" href="<?php echo $var->Footer_Menu_Link;?>" target="_blank"><img alt="townwizard" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/twBanner.png" /></a></h3>
 					<!-- <jdoc:include type="modules" name="footer2" style="rounded" />-->
 					<a style="margin-top: 24px; clear: both;" class="all" href="<?php echo $var->Footer_Menu_Link;?>" target="_blank"><?php echo JText::_("TW_COMMUNITY") ?></a>
