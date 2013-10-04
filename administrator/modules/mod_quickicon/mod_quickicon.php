@@ -56,7 +56,7 @@ if (!defined( '_JOS_QUICKICON_MODULE' ))
 			quickiconButton( $link, 'twIcon_location.png', JText::_( 'MANAGE LOCATIONS' ) );
 		
 			$link = 'index.php?option=com_phocagallery&view=phocagallerys';
-			quickiconButton( $link, 'twIcon_photos.png', JText::_( 'MANAGE IMAGES' ) );
+			quickiconButton( $link, 'twIcon_photos.png', JText::_( 'MANAGE<br>IMAGES / VIDEOS' ) );
 		
 			$link = 'index.php?option=com_media&folder=banners';
 			quickiconButton( $link, 'twIcon_bannerUpload.png', JText::_( 'UPLOAD AD BANNER' ) );
