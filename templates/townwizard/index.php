@@ -11,7 +11,12 @@
 
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
-
+# Code to prevent Mootols script in Joomla website - to resolve conflict with event datepicker
+if( JRequest::getVar( 'option' ) == 'com_jevents' ){
+	$setHeader = $this->getHeadData();
+	$setHeader['scripts'] = array(' '=>' ');
+	$this->setHeadData($setHeader);
+}
 
 global $var;
 

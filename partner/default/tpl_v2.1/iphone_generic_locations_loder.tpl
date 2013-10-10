@@ -94,7 +94,7 @@
 				<?php ++$n;
 			}?>
 				<!--Infinite Scroller Begin	-->
-				<div id="loadMoreComments" style="display:none;" > <center>Loading</center></div>	
+				<div id="loadMoreComments" style="display:none;" > <center>Loading...</center></div>	
 				<script type="text/javascript">
 					 $(document).ready(function() { 
 					 var lpage = 0;
