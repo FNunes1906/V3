@@ -168,6 +168,8 @@ function DefaultLoadedFromTemplate($view,$template_name, $event, $mask){
 			$showyeardate = $cfg->get("showyeardate",0);
 
 			$row = $event;
+			//echo "<pre>";
+			//print_r($row);
 			$times = "";
 			if (($showyeardate && $jevtask=="year") || $jevtask=="search.results" || $jevtask=="cat"  || $jevtask=="range"){
 
@@ -184,8 +186,9 @@ function DefaultLoadedFromTemplate($view,$template_name, $event, $mask){
 					if ($row->noendtime()){
 						$times = $start_time;
 					}
+					// for displaying all day label in event listing
 					else if ($row->alldayevent()){
-						$times = "";
+						$times = JText::_('ALL_DAY');
 					}
 					else if($start_time != $stop_time ){
 						$times = $start_time . ' - ' . $stop_time;
@@ -194,33 +197,44 @@ function DefaultLoadedFromTemplate($view,$template_name, $event, $mask){
 						$times = $start_time;
 					}
 
-					$times = $start_date." ". $times."<br/>";
-				} else {
+					$times = $start_date." ". $times."";
+				} else { 
 					if ($row->noendtime()){
 						$times = $start_time;
 					}
 					else if($start_time != $stop_time && !$row->alldayevent()){
+						
 						$times = $start_time . '&nbsp;-&nbsp;' . $stop_time;
 					}
-					$times =$start_date . ' - '	. $stop_date." ". $times."<br/>";
+					// for displaying all day label in event listing
+					else if ($row->alldayevent()){
+						$times = JText::_('ALL_DAY');
+					}
+					
+					$times =$start_date . ' - '	. $stop_date." ". $times."";
 				}
 			}
-			else if (($jevtask=="day" || $jevtask=="week" )  && ($row->starttime() != $row->endtime()) && !($row->alldayevent())){
+			else if (($jevtask=="day" || $jevtask=="week" )){
 				$starttime = JEVHelper::getTime($row->getUnixStartTime(),$row->hup(),$row->minup());
 				$endtime	= JEVHelper::getTime($row->getUnixEndTime(),$row->hdn(),$row->mindn());
-
 				if ($row->noendtime()){
 					if ($showyeardate && $jevtask=="year"){
 						$times = $starttime. '&nbsp;-&nbsp;' . $endtime . '&nbsp;';
 					}
+					
 					else {
 						$times = $starttime. '&nbsp;';
 					}
+				}
+				// for displaying all day label in event listing
+				else if($row->alldayevent()){
+					$times = JText::_('ALL_DAY');
 				}
 				else {
 					$times = $starttime. '&nbsp;-&nbsp;' . $endtime . '&nbsp;';
 				}
 			}
+			
 			$search[]="{{REPEATSUMMARY}}";$replace[]=$times;$blank[]="";
 		}
 	}
