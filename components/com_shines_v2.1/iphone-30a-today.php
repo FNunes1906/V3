@@ -110,7 +110,14 @@ $sql = "select jc.*,jcf.ordering from `jos_content` jc, `jos_categories` jcs ,`j
   //fprint($param);
   $data = '';
 	$c=1;
-  if($param) { foreach($param as $v) {
+  if($param)
+  {
+  	foreach($param as $v) 
+	 {
+	  $t1='<div class="contentheading">'.$v['title'].'</div>' ;
+	    $data .= '<li style="text-align:center;">'.$t1.'<p>'.$v['introtext'].'</p></li>';
+	 }
+  	 /*foreach($param as $v) {
   
   preg_match_all ("/(<img.*?>)/i" , $v['introtext'] , $matches);
 	foreach($matches[1] as $m) {
@@ -122,7 +129,7 @@ $sql = "select jc.*,jcf.ordering from `jos_content` jc, `jos_categories` jcs ,`j
     $t1='<div class="contentheading">'.$v['title'].'</div>' ;
     $data .=$t1.str_replace("images/", "images/", $v['introtext']);
 		$c++;
-  } }
+  }*/ }
 header('Content-type: text/html;charset=utf-8', true);
 include("iadbanner.php"); 
 include("connection.php");
@@ -136,7 +143,7 @@ include("connection.php");
 echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Noticias':'News';?>
 </title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />-->
  <?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
 </head>
 <body>
@@ -158,6 +165,7 @@ if(stripos($ua,'android') == true) { ?>
 	<ul id="placesList" class="mainList offer">
 		<?php
 		echo $data ;
+		
 		?>
 	</ul>
   </div>

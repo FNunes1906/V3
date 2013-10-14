@@ -96,12 +96,15 @@ $todaestring = ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $
 	</div>
 </div> <!-- featured events -->
 <div class="section">
+	<!--Code for Mobiscroll NEW date picker - Yogi START -->
+		<input style="display: none;" type="text" name="test_default" id="test_default" onChange="redirecturl(this.value);"/>
+		<label for="test_default" class="ui-btn-hidden button">Ver Eventos por d&#237;a</label>
+	<!--Code for Mobiscroll NEW date picker - Yogi END -->
 
-	<form name='events' id='events' action='events.php' method='post'>
+	<!--<form name='events' id='events' action='events.php' method='post'>
 		<input type="text" value="" class="mobiscroll ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-d scroller" id="date1" name="eventdate" style="width:0px;height:0px;border:0px;background:#333333;position: absolute;top: -100px;">
 		<button data-theme="a" id="show" class="ui-btn-hidden button" aria-disabled="false" style="width:100%;">Ver Eventos por d&#237;a</button>
-	</form>
-	
+	</form>-->
 </div>
 
 <?php
@@ -121,13 +124,14 @@ if(stripos($ua,'android') == true) { ?>
 
 <div id="main" role="main">
 
-<h1><?php echo utf8_encode($todaestring);?></h1>
+<!--<h1><?php echo utf8_encode($todaestring);?></h1>-->
 
 <ul id="eventList" class="mainList" ontouchstart="touchStart(event,'eventList');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 
 			<?php 
 			$n = 0;
 			while($row=mysql_fetch_array($rec)){
+			
 			//#DD#
 			$ev=mysql_query("select *  from jos_jevents_vevent where ev_id=".$row['eventid']) or die(mysql_error());
 			$evDetails=mysql_fetch_array($ev);
@@ -184,9 +188,20 @@ if(stripos($ua,'android') == true) { ?>
 			}
 
 		/* End By Akash */	
-	  ?>
 
-	  
+		# Code for to display Date in zigzag image START - Yogi
+		$displayDate	= explode(' ',$row['startrepeat']);
+		$dDay			= date('d',strtotime($displayDate[0]));
+		$dMonth			= date('m',strtotime($displayDate[0]));
+		$dYear			= date('Y',strtotime($displayDate[0]));
+		$displayDate	= date('l, j M', mktime(0, 0, 0, $dMonth, $dDay, $dYear));
+		if($displayCheck != $displayDate){?>
+			<h1 id="datezig">
+				<?php echo ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $dMonth, $dDay, $dYear))); ?>
+			</h1>
+			<?php $displayCheck = $displayDate;
+		 }
+		 # Code for to display Date in zigzag image END - Yogi?>
 	<li>
 		<h1><?php echo $rowvevdetail['summary'];?></h1>
       	<h2><?php echo $rowlocdetail['title'];?></h2>
@@ -229,4 +244,4 @@ if(stripos($ua,'android') == true) { ?>
 		});
 	</script>
 	<script src="js/helper.js"></script>
-	<script src="../../mobiscroll/js/mobiscroll_spanish.js" type="text/javascript"></script>
+	<!--<script src="../../mobiscroll/js/mobiscroll_spanish.js" type="text/javascript"></script>-->

@@ -175,7 +175,7 @@ table button, table input { *overflow: auto; }
  * 2. Allow styling of clickable form elements in iOS
  */
 
-button, input[type="button"], input[type="reset"], input[type="submit"], [role="button"] { cursor: pointer; -webkit-appearance: button; }
+button, input[type="button"], input[type="reset"], input[type="submit"], [role="button"] { cursor: pointer; }
 
 /*
  * Consistent box sizing and appearance
@@ -361,7 +361,15 @@ td { vertical-align: top; }
 		   padding: 5px 12px 17px;
 		   background: #fff url(../images/border2.gif) repeat-x bottom;
 		}
-		  
+		 
+		#datezig{
+		   margin: 0 0 0 0  !important;
+		   text-transform: uppercase  !important;
+		   font-weight: normal  !important;
+		   font-size: 1em  !important;
+		   padding: 5px 12px 17px  !important;
+		   background: #fff url(../images/border2.gif) repeat-x bottom !important;
+		} 
 		#main #zigzag{
 		   margin: 0 0 0 0;text-transform: uppercase; font-weight: normal; font-size: 1em;
 		   padding: 0px 0px 17px;

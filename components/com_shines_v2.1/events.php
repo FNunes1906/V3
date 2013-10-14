@@ -1,9 +1,23 @@
 <?php
+
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
 
 session_start();
 include("connection.php");
 include("iadbanner.php");
+
+
+if($_SESSION['tpl_folder_name'] == "defaultspanish"){
+	$final_lang = "es";
+}elseif($_SESSION['tpl_folder_name'] == "defaultcroatian"){
+	$final_lang = "cr";
+}elseif($_SESSION['tpl_folder_name'] == "defaultdutch"){
+		$final_lang = "de";
+}elseif($_SESSION['tpl_folder_name'] == "defaultportuguese"){
+	$final_lang = "pt-PT";
+}else{
+	$final_lang = "";
+}
 
 // Function for distance calculation
 function distance($lat1, $lon1, $lat2, $lon2, $unit) { 
@@ -41,32 +55,45 @@ $totalHours		= date("H") + $timeZoneArray[0];
 $totalMinutes	= date("i") + $timeZoneArray[1];
 $totalSeconds	= date("s") + $timeZoneArray[2];
 
-if ($_REQUEST['d'] == "")
+if ($_REQUEST['d'] == ""){
+	$featureday = date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
 	$today = date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
-else
-	$today = $_REQUEST['d'];
+	$fromDay = date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+}
 
-if ($_REQUEST['m'] == "")
+if ($_REQUEST['m'] == ""){
+	$featuremonth = date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
 	$tomonth = date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
-else
-	$tomonth = $_REQUEST['m'];
+	$fromMonth = date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
+}
 
-if ($_REQUEST['Y'] == "")
+if ($_REQUEST['Y'] == ""){
+	$featureyear = date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
 	$toyear = date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
-else
-	$toyear = $_REQUEST['Y'];
+	$fromYear = date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
+}
 
 //#DD#
 $_REQUEST['eventdate'] = trim($_REQUEST['eventdate']);
-
 // If date is select from datepicker then assign below date variable
+
+
 if(!empty($_REQUEST['eventdate'])){
-	$today		= date('d',strtotime($_REQUEST['eventdate']));
-	$tomonth	= date('m',strtotime($_REQUEST['eventdate']));
-	$toyear	= date('Y',strtotime($_REQUEST['eventdate']));
+	
+	#Creating Array for Start and end date
+	$startDate = explode('-',$_REQUEST['eventdate']);
+
+	# Creating Daterange variable
+	$fromDay	= date('d',strtotime($startDate[0]));
+	$fromMonth	= date('m',strtotime($startDate[0]));
+	$fromYear	= date('Y',strtotime($startDate[0]));
+	$today		= date('d',strtotime($startDate[1]));
+	$tomonth	= date('m',strtotime($startDate[1]));
+	$toyear		= date('Y',strtotime($startDate[1]));
 }
 //#DD#
-$todaestring	=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
+$startDateString	=	date('l, j M', mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear));
+$toDateString		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
 
 //Query to fetch ID of all categories created in Jevents from category table
 $query_cat="SELECT c.id FROM jos_categories AS c LEFT JOIN jos_categories AS p ON p.id=c.parent_id LEFT JOIN jos_categories AS gp ON gp.id=p.parent_id LEFT JOIN jos_categories AS ggp ON ggp.id=gp.parent_id WHERE c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents'";
@@ -83,7 +110,9 @@ while($row_cat = mysql_fetch_array($rec_cat)){
 $byday = strtoupper(substr(date('D',mktime(0, 0, 0, $tomonth, $today, $toyear)),0,2));
 $arrstrcat = implode(',',array_merge(array(-1), $array_cat));
 
-$query_filter="SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00' AND rpt.startrepeat <= '".$toyear."-".$tomonth."-".$today." 23:59:59' AND ev.state=1 AND rpt.endrepeat>='".date('Y',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('m',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('d', mktime($totalHours, $totalMinutes, $totalSeconds))." 00:00:00' AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$toyear." and MONTH(rpt.startrepeat )=".$tomonth." and DAYOFMONTH(rpt.startrepeat )=".$today.") or freq<>'WEEKLY')GROUP BY rpt.rp_id";
+/*$query_filter="SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00' AND rpt.startrepeat <= '".$toyear."-".$tomonth."-".$today." 23:59:59' AND ev.state=1 AND rpt.endrepeat>='".date('Y',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('m',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('d', mktime($totalHours, $totalMinutes, $totalSeconds))." 00:00:00' AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$toyear." and MONTH(rpt.startrepeat )=".$tomonth." and DAYOFMONTH(rpt.startrepeat )=".$today.") or freq<>'WEEKLY')GROUP BY rpt.rp_id";*/
+
+$query_filter="SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat <= '".$toyear."-".$tomonth."-".$today." 23:59:59' AND rpt.startrepeat >= '".$fromYear."-".$fromMonth."-".$fromDay." 00:00:00' AND ev.state=1 AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$toyear." and MONTH(rpt.startrepeat )=".$tomonth." and DAYOFMONTH(rpt.startrepeat )=".$today.") or freq<>'WEEKLY') ORDER BY rpt.startrepeat";
 
 $rec_filter = mysql_query($query_filter);
 mysql_set_charset("UTF8");
@@ -97,7 +126,7 @@ if (count($arr_rr_id)){
 }else{
 	$strchk=0;
 }	
-	$query="select *,DATE_FORMAT(`startrepeat`,'%h:%i %p') as timestart, DATE_FORMAT(`endrepeat`,'%h:%i %p') as timeend from jos_jevents_repetition where rp_id in ($strchk) ORDER BY  DATE_FORMAT(`startrepeat`,'%H%i') ASC ";
+	$query="select *,DATE_FORMAT(`startrepeat`,'%h:%i %p') as timestart, DATE_FORMAT(`endrepeat`,'%h:%i %p') as timeend from jos_jevents_repetition where rp_id in ($strchk) ORDER BY `startrepeat` ASC ";
 	$rec=mysql_query($query) or die(mysql_error());
 	mysql_set_charset("UTF8");
 	/*Feature Event Query By Akash*/
@@ -107,7 +136,7 @@ $LD = Date('d', strtotime("+30 days"));
 $LM = Date('m', strtotime("+30 days"));
 $LY = Date('y', strtotime("+30 days"));
 	
-$query_featuredeve="SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%h:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%h:%i %p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND cf.value = 1 AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00' AND rpt.startrepeat <= '".$LY."-".$LM."-".$LD." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";	
+$query_featuredeve="SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%h:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%h:%i %p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND cf.value = 1 AND rpt.endrepeat >= '".$featureyear."-".$featuremonth."-".$featureday." 00:00:00' AND rpt.startrepeat <= '".$LY."-".$LM."-".$LD." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";	
 
 $featured_filter=mysql_query($query_featuredeve);
 
@@ -140,7 +169,7 @@ if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_na
 <meta content="destin, vacactions in destin florida, destin, florida, real estate, sandestin resort, beaches, destin fl, maps of florida, hotels, hotels in florida, destin fishing, destin hotels, best florida beaches, florida beach house rentals, destin vacation rentals for destin, destin real estate, best beaches in florida, condo rentals in destin, vacaction rentals, fort walton beach, destin fishing, fl hotels, destin restaurants, florida beach hotels, hotels in destin, beaches in florida, destin, destin fl" name="keywords" />
 <meta content="Destin Florida's FREE iPhone application and website guide to local events, live music, restaurants and attractions" name="description" />
 <link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
-<link href="../../mobiscroll/css/mobiscroll-1.5.1.css" rel="stylesheet" type="text/css" />
+<!--<link href="../../mobiscroll/css/mobiscroll-1.5.1.css" rel="stylesheet" type="text/css" />-->
 
 <script type="text/javascript" src="/components/com_shines_v2.1/javascript/mobileswipe.js"></script>
 <script type="text/javascript">
@@ -149,7 +178,7 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 <script type="text/javascript">
     function linkClicked(link) { document.location = link; }
 </script>
-<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<!--<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>-->
 <!--<script src="../../mobiscroll/js/mobiscroll-1.5.1.js" type="text/javascript"></script>-->
 <script type="text/javascript">
             function submitForm() {
@@ -191,9 +220,121 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
             });
         });
 </script>
+
+<!--Code for Mobiscroll NEW date picker - Yogi START -->
+
+
+<script src="javascript/jquery-1.9.1.min.js"></script>
+<link href="css/mobiscroll.custom-2.7.2.min.css" rel="stylesheet" type="text/css" />
+<script src="javascript/mobiscroll.custom-2.7.2.min.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+ jQuery(function () {
+   var now = new Date();
+ var curr = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+ var opt = {}
+ opt.rangepicker = {preset : 'rangepicker'};
+ jQuery('select.changes').bind('change', function() {
+  var demo = "rangepicker";
+  jQuery(".demos").hide();
+  if (!($("#demo_"+demo).length))
+  demo = 'default';
+  jQuery("#demo_" + demo).show();
+  jQuery('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "modal", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
+ });
+ jQuery('#demo').trigger('change');
+ 
+ });
+ 
+</script>
+
+<script type="text/javascript">
+	     /*   $(function () {
+	            var curr = new Date().getFullYear();
+	            var opt = {
+
+	            }
+
+	    opt.date = {preset : 'date'};
+		opt.datetime = { preset : 'datetime', minDate: new Date(2012,3,10,9,22), maxDate: new Date(2014,7,30,15,44), stepMinute: 5  };
+		opt.time = {preset : 'time'};
+		opt.rangepicker = {preset : 'rangepicker'};
+		<!--Script-->
+
+	            $('select.changes').bind('change', function() {
+	                var demo = $('#demo').val();
+	                $(".demos").hide();
+	                if (!($("#demo_"+demo).length))
+	                    demo = 'default';
+
+	                $("#demo_" + demo).show();
+	                $('#test_'+demo).val('').scroller('destroy').scroller(
+						$.extend(opt[$('#demo').val()], { theme: $('#theme').val(), mode: $('#mode').val(), display: $('#display').val(), lang: $('#language').val() }));
+	            });
+	            $('#demo').trigger('change');
+			});*/
+			
+			
+			
+	function redirecturl(val){
+		url="/components/com_shines_v2.1/events.php?eventdate="+val; 
+		window.location = url;
+	}
+
+			
+	    </script>
+<!--Code for Mobiscroll NEW date picker - Yogi END -->
+
     <?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
 </head>
 <body>
+
+		<!--<div style="display: none;">
+	        <label for="theme">Theme</label>
+	        <select name="theme" id="theme" class="changes">
+	            <option value="default">Default</option>
+	            <option value="ios">iOS</option>
+				<option value="ios7" selected="selected">iOS7</option>
+	        </select>
+	    </div>
+	    <div style="display: none;">
+	        <label for="mode">Mode</label>
+	        <select name="mode" id="mode" class="changes">
+	            <option value="scroller" selected="selected">Scroller</option>
+	            <option value="clickpick">Clickpick</option>
+	            <option value="mixed">Mixed</option>
+	        </select>
+	    </div>
+	    <div style="display: none;">
+	        <label for="display">Display</label>
+	        <select name="display" id="display" class="changes">
+	            <option value="modal" selected="selected">Modal</option>
+	            <option value="inline">Inline</option>
+	            <option value="bubble">Bubble</option>
+	            <option value="top">Top</option>
+	            <option value="bottom">Bottom</option>
+	        </select>
+	    </div>-->
+	    <!--<div style="display: none;">
+	        <label for="language">Language</label>
+	        <select name="language" id="language" class="changes">
+	            <option value="" >English</option>
+	            <option value="de" >Deutsch</option>
+				<option value="es" >Español</option>
+				<option value="pt-PT">Português Europeu</option>
+				<option value="cr" selected="selected">Croatian</option>
+	        </select>
+	    </div>-->
+	    <div style="display: none">
+	        <label for="demo">Demo</label>
+	        <select name="demo" id="demo" class="changes">
+	            <option value="date" selected>Date</option>
+				<option value="datetime" >Datetime</option>
+				<option value="time" >Time</option>
+				<option value="rangepicker" selected="selected" >Range Picker</option>
+	        </select>
+	    </div>
 <?php
     /* Code added for iphone_places.tpl */
 	require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_events.tpl");

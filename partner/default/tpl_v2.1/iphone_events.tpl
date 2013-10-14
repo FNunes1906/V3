@@ -94,12 +94,19 @@
 		</div>
 	</div>
 </div> <!-- featured events -->
+
 <div class="section">
 
-	<form name='events' id='events' action='events.php' method='post'>
+<!--Code for Mobiscroll NEW date picker - Yogi START -->
+	    
+		<input style="display: none;" type="text" name="test_default" id="test_default" onChange="redirecturl(this.value);"/>
+		<label for="test_default" class="ui-btn-hidden button">Check Events By Day</label>
+<!--Code for Mobiscroll NEW date picker - Yogi END -->
+
+	<!--<form name='events' id='events' action='events.php' method='post'>
 		<input type="text" value="" class="mobiscroll ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-d scroller" id="date1" name="eventdate" style="width:0px;height:0px;border:0px;background:#333333;position: absolute;top: -100px;">
 		<button data-theme="a" id="show" class="ui-btn-hidden button" aria-disabled="false" style="width:100%;">Check Events By Day</button>
-	</form>
+	</form>-->
 	
 </div>
 
@@ -120,7 +127,8 @@ if(stripos($ua,'android') == true) { ?>
 
 <div id="main" role="main">
 
-<h1><?php echo $todaestring;?></h1>
+<!--<h1><?php echo $startDateString.' - '.$toDateString;?></h1>-->
+
 
 <ul id="eventList" class="mainList" ontouchstart="touchStart(event,'eventList');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 
@@ -183,19 +191,26 @@ if(stripos($ua,'android') == true) { ?>
 				
 			}
 		/* End By Akash */	
-	  ?>
 
-	  
-	<li>
+		# Code for to display Date in zigzag image START - Yogi
+		$displayDate	= explode(' ',$row['startrepeat']);
+		$dDay			= date('d',strtotime($displayDate[0]));
+		$dMonth			= date('m',strtotime($displayDate[0]));
+		$dYear			= date('Y',strtotime($displayDate[0]));
+		$displayDate	= date('l, j M', mktime(0, 0, 0, $dMonth, $dDay, $dYear));
+		if($displayCheck != $displayDate){?>
+			<h1 id="datezig"><?php echo $displayDate;?></h1>
+			<?php $displayCheck = $displayDate;
+		 }
+		 # Code for to display Date in zigzag image END - Yogi?>
+		 
+		<li>	
 		<h1><?php echo $rowvevdetail['summary'];?></h1>
       	<h2><?php echo $rowlocdetail['title'];?></h2>
 		<h3>
 		<!--Code for 24 vs 12 hour time format for LISTING Yogi -->
-		<?php
-				echo $displayTime2.' &bull; ';
-		?>
-			
-			<?php echo $categoryname[$n]; ?>
+		<?php echo $displayTime2.' &bull; ';?>
+		<?php echo $categoryname[$n]; ?>
 			<ul class="btnList"><li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>">call</a</li>
 				
 			<?php
@@ -203,7 +218,12 @@ if(stripos($ua,'android') == true) { ?>
 				if(stripos($ua,'android') != true) { ?>
 					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">check in</a></li>
 				<?php } ?>
-			<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $today;?>&m=<?php echo $tomonth;?>&Y=<?php echo $toyear;?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">more info</a></li></ul>
+			<?php 
+			// Code for More infor link Date
+			$dateValue = explode(' ',$row['startrepeat']);
+			$dateValue = explode('-',$dateValue[0]);
+			?>	
+			<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">more info</a></li></ul>
 		</h3> 
 				<!--<?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1')?>&nbsp;<?php echo $dunit;?></td> Away -->
     </li>
@@ -233,4 +253,4 @@ if(stripos($ua,'android') == true) { ?>
 		});
 	</script>
 	<script src="js/helper.js"></script>
-	<script src="../../mobiscroll/js/mobiscroll-1.5.1.js" type="text/javascript"></script>
+	<!--<script src="../../mobiscroll/js/mobiscroll-1.5.1.js" type="text/javascript"></script>-->
