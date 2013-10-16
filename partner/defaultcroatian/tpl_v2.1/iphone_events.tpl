@@ -203,7 +203,7 @@ if(stripos($ua,'android') == true) { ?>
 		$displayDate	= date('l, j M', mktime(0, 0, 0, $dMonth, $dDay, $dYear));
 		if($displayCheck != $displayDate){?>
 			<h1 id="datezig">
-				<?php echo ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $dMonth, $dDay, $dYear))); ?>
+				<?php echo iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $dMonth, $dDay, $dYear)))); ?>
 			</h1>
 			<?php $displayCheck = $displayDate;
 		 }

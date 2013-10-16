@@ -572,32 +572,57 @@ text-decoration:none;
 								?>
 								<input type="text" name="publish_up" id="publish_up" value="<?php echo $publish_up_value;?>" maxlength="10" onChange="var elem = $('publish_up');checkDates(elem);" size="10"  />         
 							</div>
+							
+							<?php
+								/* Fetching Date Format from Page Global */
+								$db1 =& JFactory::getDBO();
+								$pageglobal = "select time_format from `jos_pageglobal`";
+								$db1->setQuery($pageglobal);
+								$df=$db1->query();
+								$d=mysql_fetch_row($df);
+								$tf=$d[0];
+							?>
+														
 							<div style="float:left;margin-left:11px!important;"><?php echo JText::_('JEV_STTIME'); ?>&nbsp;
 								<span id="start_12h_area" style="display:inline">
 								
-								<?php 
-									if(empty($_SESSION['start_12h'])){ 
-										$start_12h_value = '08:00';
-									}else{ 
-										$start_12h_value = $_SESSION['start_12h']; 
-									} 
+										<?php 
+									if($tf == "12"){
+										if(empty($_SESSION['start_12h'])){ 
+											$start_12h_value = '08:00';
+										}else{ 
+											$start_12h_value = $_SESSION['start_12h']; 
+										} 
 
-									if($_SESSION['start_ampm']=='pm'){ 
-										$start_ampm_check = 'checked="checked"';
-									} 
+										if($_SESSION['start_ampm']=='pm'){ 
+											$start_ampm_check = 'checked="checked"';
+										} 
 
-									$end_ampm_check = array();
-									if($_SESSION['start_ampm']=='pm'){ 
-										$end_ampm_check['pm'] = 'checked="checked"';
-										$end_ampm_check['am'] = '';
-									}else{
-										$end_ampm_check['pm'] = '';
-										$end_ampm_check['am'] = 'checked="checked"';
-									}
-								?>
+										$end_ampm_check = array();
+										if($_SESSION['start_ampm']=='pm'){ 
+											$end_ampm_check['pm'] = 'checked="checked"';
+											$end_ampm_check['am'] = '';
+										}else{
+											$end_ampm_check['pm'] = '';
+											$end_ampm_check['am'] = 'checked="checked"';
+										}
+									?>
 
-								<input class="inputbox" type="text" name="start_12h" id="start_12h" size="8" maxlength="8"  value="<?php echo $start_12h_value?>" onChange="check12hTime(this);" />
-								<input type="radio" name="start_ampm" id="startAM" value="am" <?php echo $end_ampm_check['am']?> checked="checked" onClick="toggleAMPM('startAM');"  />am  <input type="radio" name="start_ampm" id="startPM" value="pm" <?php echo $end_ampm_check['pm']?> onClick="toggleAMPM('startPM');"  />pm		</span>
+									<input class="inputbox" type="text" name="start_12h" id="start_12h" size="8" maxlength="8"  value="<?php echo $start_12h_value?>" onChange="check12hTime(this);" />
+									<input type="radio" name="start_ampm" id="startAM" value="am" <?php echo $end_ampm_check['am']?> checked="checked" onClick="toggleAMPM('startAM');"  />am  
+									<input type="radio" name="start_ampm" id="startPM" value="pm" <?php echo $end_ampm_check['pm']?> onClick="toggleAMPM('startPM');"  />pm
+									
+									<?php }else{
+										if(empty($_SESSION['start_12h'])){ 
+											$start_12h_value = '08:00';
+										}else{ 
+											$start_12h_value = $_SESSION['start_12h']; 
+										} 
+									?>
+									
+									<input class="inputbox" type="text" name="start_12h" id="start_12h" size="8" maxlength="8"  value="<?php echo $start_12h_value?>" onChange="check12hTime(this);" />	
+										
+									<?php }?>		</span>
 							</div>
 						</fieldset>
 					</div>
@@ -615,26 +640,41 @@ text-decoration:none;
 						</div>
 						<div style="float:left;margin-left:11px!important"><?php echo JText::_('JEV_ENDTIME'); ?>&nbsp;
 							<span id="end_12h_area" style="display:inline">
-							<?php 
-								if(empty($_SESSION['end_12h'])){ 
-									$end_12h_value = '05:00';
-								}else{ 
-									$end_12h_value = $_SESSION['end_12h']; 
-								} 
+								<?php 
+								if($tf == "12"){
+									if(empty($_SESSION['end_12h'])){ 
+										$end_12h_value = '05:00';
+									}else{ 
+										$end_12h_value = $_SESSION['end_12h']; 
+									} 
 
-								$end_ampm_check = array();
-								if($_SESSION['end_ampm']=='am'){ 
-									$end_ampm_check['am'] = 'checked="checked"';
-									$end_ampm_check['pm'] = '';
-								}else{
-									$end_ampm_check['am'] = '';
-									$end_ampm_check['pm'] = 'checked="checked"';
-								}
+									$end_ampm_check = array();
+									if($_SESSION['start_ampm']=='pm'){ 
+										$end_ampm_check['pm'] = 'checked="checked"';
+										$end_ampm_check['am'] = '';
+									}else{
+										$end_ampm_check['pm'] = '';
+										$end_ampm_check['am'] = 'checked="checked"';
+									}
+								?>
 
-							?>
-							<input class="inputbox" type="text" name="end_12h" id="end_12h" size="8" maxlength="8"  value="<?php echo $end_12h_value;?>" onChange="check12hTime(this);" />
-							<input type="radio" name="end_ampm" id="endAM" value="am" <?php echo $end_ampm_check['am']?>  onclick="toggleAMPM('endAM');"  />am 
-							<input type="radio" name="end_ampm" id="endPM" value="pm" <?php echo $end_ampm_check['pm']?> onClick="toggleAMPM('endPM');" />pm	
+								<input class="inputbox" type="text" name="end_12h" id="end_12h" size="8" maxlength="8"  value="<?php echo $end_12h_value?>" onChange="check12hTime(this);" />
+								<input type="radio" name="end_ampm" id="endAM" value="am" <?php echo $end_ampm_check['am']?> checked="checked" onClick="toggleAMPM('endAM');"  />am  
+								<input type="radio" name="end_ampm" id="endPM" value="pm" <?php echo $end_ampm_check['pm']?> onClick="toggleAMPM('endPM');"  />pm
+								
+								<?php }else{
+									if(empty($_SESSION['end_12h'])){ 
+										$end_12h_value = '17:00';
+									}else{ 
+										$end_12h_value = $_SESSION['end_12h']; 
+									} 
+								?>
+								
+								<input class="inputbox" type="text" name="end_12h" id="end_12h" size="8" maxlength="8"  value="<?php echo $end_12h_value?>" onChange="check12hTime(this);" />	
+									
+								<?php }?>
+							
+							
 							</span>
 							
 						</div><br/>

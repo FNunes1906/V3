@@ -53,7 +53,7 @@ if($_REQUEST['searchdate']!=''){
 	$start_date=(strftime ($df,strtotime($search_date[0])));
 	$end_date=(strftime ($df,strtotime($search_date[1])));
 	
-	echo "<h3 class='fl heading display'>". JText::_('JEV_EVENTLIST')." Between ".$start_date." to ".$end_date."</h3>";
+	echo "<h3 class='fl heading display'>". JText::_('JEV_EVENTFROM') ." ".$start_date." to ".$end_date."</h3>";
 	
 }elseif ( JRequest::getVar('task') === 'week.listevents' AND JRequest::getVar('view') === 'week' ){
 	echo "<h3 class='fl heading display'>". JText::_('TW_THIS_WEEK'). "</h3>";
@@ -68,8 +68,6 @@ if($_REQUEST['searchdate']!=''){
 	$raw_search_date = explode(" - ",$_REQUEST['searchdate']);
 	$ser_start_date=date("Y-m-d",strtotime($raw_search_date[0]));
 	$ser_end_date=date("Y-m-d",strtotime($raw_search_date[1]));
-		
-
    
  /* Fetching events from events table */
  
@@ -84,16 +82,18 @@ if($_REQUEST['searchdate']!=''){
  	$rows=$db->query();
  if (mysql_num_rows($rows)!= 0){
 	echo "<ul class='ev_ul'>\n";
-	//echo "<div class='ev_td_right'>";
 
-$tempdate = "";
+	//$tempdate = "";
 
 	while($row = mysql_fetch_array($rows)){
 	
-	if ($tempdate != $row[Date]){
+	if (isset($tempdate) && $tempdate != $row[Date]){
 		echo "<div class='ev_td_right'>";
 	}
-  
+  	if ($tempdate != $row[Date]){
+		echo "</div>";
+		 $tempdate = $row[Date];
+	}
 		if($ser_start_date<= $row[endrepeat]){
 			$m = DATE('m',strtotime($row[Date]));
 			$d  = DATE('d',strtotime($row[Date])) ;
@@ -136,13 +136,10 @@ $tempdate = "";
 		}
 		echo "</div></li>";
 		
-	if ($tempdate == $row[Date]){
-		echo "</div>";
+
 		
-	}
-	$tempdate = $row[Date];
-  }																																													
-//	echo "</div>";
+		
+  }																																					
 	echo "</ul>";
 }
 	else{

@@ -143,6 +143,7 @@ include("connection.php");
 echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Noticias':'News';?>
 </title>
 
+<meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />-->
  <?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
 </head>
