@@ -1,15 +1,34 @@
 <?php
 
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
+// Set flag that this is a parent file
+define( '_JEXEC', 1 );
+define( 'DS', DIRECTORY_SEPARATOR );
+$x = realpath(dirname(__FILE__)."/../../") ;
+// SVN version
+if (!file_exists($x.DS.'includes'.DS.'defines.php')){
+	$x = realpath(dirname(__FILE__)."/../../../") ;
+
+}
+define( 'JPATH_BASE', $x );
+
+@ini_set("display_errors",0);
+
+require_once JPATH_BASE.DS.'includes'.DS.'defines.php';
+require_once JPATH_BASE.DS.'includes'.DS.'framework.php';
+ 
+global $mainframe;
+$mainframe =& JFactory::getApplication('site');
+$mainframe->initialise();
 
 include("connection.php");
 
 function about_intro() {
-  global $var;
-  $text = mysql_query("select `introtext` from `jos_content` where `title` = 'App About Us'");
-  $res=mysql_fetch_array($text);
-  $text=$res[introtext];
-  echo $text;
+	$db = JFactory::getDBO();
+	$db->setQuery("select `introtext` from `jos_content` where `title` = 'App About Us'");
+	$content = $db->query();
+	$text=mysql_fetch_row($content);
+	echo $text[0];
 }
 ?>
 	
@@ -24,7 +43,7 @@ function about_intro() {
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 	<meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=false" />
 	<meta http-equiv="cleartype" content="on">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/h/apple-touch-icon.png">
   	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/m/apple-touch-icon.png">
@@ -32,7 +51,6 @@ function about_intro() {
   	<link rel="shortcut icon" href="img/l/apple-touch-icon.png">
 	
 	<link href="pics/homescreen.gif" rel="apple-touch-icon" />
-	<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
 	<link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
 	
 	<title><?php echo utf8_encode($site_name).' | About Us';?></title>

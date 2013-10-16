@@ -106,30 +106,20 @@ $today = date("Y-m-d G:i:s");
 $root = $uri->toString( array('scheme', 'host', 'port') );
 $sql = "select jc.*,jcf.ordering from `jos_content` jc, `jos_categories` jcs ,`jos_content_frontpage` jcf where jcs.title = 'Today' and jcs.id = jc.catid and jc.id = jcf.content_id and jc.state=1 and (jc.publish_down>'".$today."' or jc.publish_down='0000-00-00 00:00:00') and (jc.publish_up <= '".$todaydate."' or jc.publish_up='0000-00-00 00:00:00') order by jcf.ordering";
   $param = db_fetch($sql, true, true);
+ 
   //fprint($sql);
   //fprint($param);
   $data = '';
-	$c=1;
-  if($param)
-  {
-  	foreach($param as $v) 
-	 {
-	  $t1='<div class="contentheading">'.$v['title'].'</div>' ;
-	    $data .= '<li style="text-align:center;">'.$t1.'<p>'.$v['introtext'].'</p></li>';
-	 }
-  	 /*foreach($param as $v) {
-  
-  preg_match_all ("/(<img.*?>)/i" , $v['introtext'] , $matches);
-	foreach($matches[1] as $m) {
-		$v['introtext']=str_replace($m, "<li style='text-align:center;'><div>$m</div>",$v['introtext']);
+  $c=0;
+  if($param) 
+ { 
+ 	foreach($param as $v) 
+	{
+		$t1='<div class="contentheading">'.$v['title'].'</div>' ;
+	  	$data .= '<li style="text-align:center;">'.$t1.'<p>'.$v['introtext'].'</p></li>';
 	}
-
-      $v['introtext'] = ''.$v['introtext'].'</li>';
-
-    $t1='<div class="contentheading">'.$v['title'].'</div>' ;
-    $data .=$t1.str_replace("images/", "images/", $v['introtext']);
-		$c++;
-  }*/ }
+	
+ }
 header('Content-type: text/html;charset=utf-8', true);
 include("iadbanner.php"); 
 include("connection.php");
@@ -142,8 +132,7 @@ include("connection.php");
 <?php echo $site_name.' | ';
 echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Noticias':'News';?>
 </title>
-
-<meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=false" />
 <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />-->
  <?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
 </head>
@@ -166,7 +155,6 @@ if(stripos($ua,'android') == true) { ?>
 	<ul id="placesList" class="mainList offer">
 		<?php
 		echo $data ;
-		
 		?>
 	</ul>
   </div>

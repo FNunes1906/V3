@@ -28,22 +28,21 @@ if($cur_language == "Español"){
 
 <script type="text/javascript">
 	jQuery(function () {
-	
-	var curr = new Date().getFullYear();
-	var opt = {}
-	opt.rangepicker = {preset : 'rangepicker'};
-	jQuery('select.changes').bind('change', function() {
-		var demo = "rangepicker";
-		jQuery(".demos").hide();
-		if (!($("#demo_"+demo).length))
-		demo = 'default';
-		jQuery("#demo_" + demo).show();
-		jQuery('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "bottom", lang: "<?php echo $final_lang;?>" }));
+		var now = new Date();
+		var curr = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+		var opt = {}
+		opt.rangepicker = {preset : 'rangepicker'};
+		jQuery('select.changes').bind('change', function() {
+			var demo = "rangepicker";
+			jQuery(".demos").hide();
+			if (!($("#demo_"+demo).length))
+			demo = 'default';
+			jQuery("#demo_" + demo).show();
+			jQuery('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "bottom", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
+		});
+ jQuery('#demo').trigger('change');
+ 
 	});
-	jQuery('#demo').trigger('change');
-	
-	});
-	
 </script>
 <script src="templates/townwizard/js/mobiscroll.custom-2.7.2.min.js" type="text/javascript"></script>
 <script type="text/javascript">

@@ -1,15 +1,36 @@
 <?php
 
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
+// Set flag that this is a parent file
+define( '_JEXEC', 1 );
+define( 'DS', DIRECTORY_SEPARATOR );
+$x = realpath(dirname(__FILE__)."/../../") ;
+// SVN version
+if (!file_exists($x.DS.'includes'.DS.'defines.php')){
+	$x = realpath(dirname(__FILE__)."/../../../") ;
+
+}
+define( 'JPATH_BASE', $x );
+
+@ini_set("display_errors",0);
+
+require_once JPATH_BASE.DS.'includes'.DS.'defines.php';
+require_once JPATH_BASE.DS.'includes'.DS.'framework.php';
+ 
+global $mainframe;
+$mainframe =& JFactory::getApplication('site');
+$mainframe->initialise();
 
 include("connection.php");
+
 function contact_intro() {
-  global $var;
-  $text = mysql_query("select `introtext` from `jos_content` where `title` = 'App Contact Us'");
-  $res=mysql_fetch_array($text);
-  $text=$res[introtext];
-  echo $text;
+	$db = JFactory::getDBO();
+	$db->setQuery("select `introtext` from `jos_content` where `title` = 'App Contact Us'");
+	$content = $db->query();
+	$text=mysql_fetch_row($content);
+	echo $text[0];
 }
+
 	?>
 	
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -20,10 +41,10 @@ function contact_intro() {
 	<meta property="og:title" content="<?php echo utf8_encode($site_name).' | Contact';?>"/>
 	<meta content="yes" name="apple-mobile-web-app-capable" />
 	<meta content="index,follow" name="robots" />
-	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=false" />
 	<meta http-equiv="cleartype" content="on">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/h/apple-touch-icon.png">
   	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/m/apple-touch-icon.png">
@@ -31,16 +52,14 @@ function contact_intro() {
   	<link rel="shortcut icon" href="img/l/apple-touch-icon.png">
 	
 	<link href="pics/homescreen.gif" rel="apple-touch-icon" />
-	<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
 	<link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
 	<title><?php echo utf8_encode($site_name).' | Contact';?></title>
 	<meta content="destin, vacactions in destin florida, destin, florida, real estate, sandestin resort, beaches, destin fl, maps of florida, hotels, hotels in florida, destin fishing, destin hotels, best florida beaches, florida beach house rentals, destin vacation rentals for destin, destin real estate, best beaches in florida, condo rentals in destin, vacaction rentals, fort walton beach, destin fishing, fl hotels, destin restaurants, florida beach hotels, hotels in destin, beaches in florida, destin, destin fl" name="keywords" />
 	<meta content="Destin Florida's FREE iPhone application and website guide to local events, live music, restaurants and attractions" name="description" />
+	
 	<?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
 	</head>
 	<body>
 				<div id="main"><ul class="mainList"><li><?php contact_intro(); ?></li></ul></div>
-				
-				<!-- AddThis Button END -->
-				</body>
+	</body>
 </html>

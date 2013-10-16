@@ -141,6 +141,7 @@ header( 'Content-Type:text/html;charset=utf-8');
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<!--<meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />-->
 <meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <meta content="index,follow" name="robots" />
