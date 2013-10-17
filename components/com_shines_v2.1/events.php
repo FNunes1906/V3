@@ -57,26 +57,27 @@ $totalSeconds	= date("s") + $timeZoneArray[2];
 
 if ($_REQUEST['d'] == ""){
 	$featureday = date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
-	$today = date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
-	$fromDay = date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+	$today 		= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+	$fromDay 	= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
 }
 
 if ($_REQUEST['m'] == ""){
-	$featuremonth = date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
-	$tomonth = date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
-	$fromMonth = date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
+	$featuremonth	= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
+	$tomonth 		= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
+	$fromMonth		= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
 }
 
 if ($_REQUEST['Y'] == ""){
-	$featureyear = date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
-	$toyear = date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
-	$fromYear = date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
+	$featureyear	= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
+	$toyear 		= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
+	$fromYear 		= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
 }
 
 //#DD#
 $_REQUEST['eventdate'] = trim($_REQUEST['eventdate']);
 // If date is select from datepicker then assign below date variable
 
+$todaestring = '';
 
 if(!empty($_REQUEST['eventdate'])){
 	
@@ -90,6 +91,8 @@ if(!empty($_REQUEST['eventdate'])){
 	$today		= date('d',strtotime($startDate[1]));
 	$tomonth	= date('m',strtotime($startDate[1]));
 	$toyear		= date('Y',strtotime($startDate[1]));
+}else{
+	$todaestring	=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
 }
 //#DD#
 $startDateString	=	date('l, j M', mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear));

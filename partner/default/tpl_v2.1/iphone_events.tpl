@@ -128,7 +128,10 @@ if(stripos($ua,'android') == true) { ?>
 <div id="main" role="main">
 
 <!--<h1><?php echo $startDateString.' - '.$toDateString;?></h1>-->
-
+<?php
+if($todaestring != null){?>
+	<h1><?php echo $todaestring;?></h1>
+<?php } ?>
 
 <ul id="eventList" class="mainList" ontouchstart="touchStart(event,'eventList');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 
@@ -198,11 +201,13 @@ if(stripos($ua,'android') == true) { ?>
 		$dMonth			= date('m',strtotime($displayDate[0]));
 		$dYear			= date('Y',strtotime($displayDate[0]));
 		$displayDate	= date('l, j M', mktime(0, 0, 0, $dMonth, $dDay, $dYear));
-		if($displayCheck != $displayDate){?>
-			<h1 id="datezig"><?php echo $displayDate;?></h1>
-			<?php $displayCheck = $displayDate;
-		 }
-		 # Code for to display Date in zigzag image END - Yogi?>
+		if($todaestring == NULL){
+			if($displayCheck != $displayDate){?>
+				<h1 id="datezig"><?php echo $displayDate;?></h1>
+				<?php $displayCheck = $displayDate;
+			 }
+		 	# Code for to display Date in zigzag image END - Yogi
+		 }?>
 		 
 		<li>	
 		<h1><?php echo $rowvevdetail['summary'];?></h1>
