@@ -90,6 +90,7 @@ if($_REQUEST['searchdate']!=''){
 	if (isset($tempdate) && $tempdate != $row[Date]){
 		echo "<div class='ev_td_right'>";
 	}
+
   	if ($tempdate != $row[Date]){
 		echo "</div>";
 		 $tempdate = $row[Date];
@@ -98,11 +99,28 @@ if($_REQUEST['searchdate']!=''){
 			$m = DATE('m',strtotime($row[Date]));
 			$d  = DATE('d',strtotime($row[Date])) ;
 			$y  = DATE('Y',strtotime($row[Date])) ;
+			$mydate = $y."-".$m."-".$d;	
+			/*DISPLAY EVENT END DATE FOR EVENT WITH SINGLE REPEATE ENTRY*/	
+			$end_m = DATE('m',strtotime($row[endrepeat]));
+			$end_d  = DATE('d',strtotime($row[endrepeat])) ;
+			$start_d  = DATE('d',strtotime($ser_start_date)) ;
+			$start_m  = DATE('m',strtotime($ser_start_date)) ;
+			$oddevent_enddate  = DATE($df,strtotime($row[endrepeat])) ;
+			
+			
 			if($df == "%m/%d"){
-				echo "<li class='ev_td_li'><div class='date fl'>".$m."/".$d."</div>";
+				if(strtotime($mydate)<strtotime($ser_start_date)){
+					echo "<li class='ev_td_li'><div class='date fl'>".$start_m."/".$start_d."<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<br/>".$end_m."/".$end_d."</div>";
+				} else {
+					echo "<li class='ev_td_li'><div class='date fl'>".$m."/".$d."</div>";
+				}
 			}
 			else{
-				echo "<li class='ev_td_li'><div class='date fl'>".$d."/".$m."</div>";
+				if(strtotime($mydate)<strtotime($ser_start_date)){
+					echo "<li class='ev_td_li'><div class='date fl'>".$start_d."/".$start_m."<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<br/>".$end_d."/".$end_m."</div>";
+				} else {
+					echo "<li class='ev_td_li'><div class='date fl'>".$d."/".$m."</div>";
+				}
 			}
 		}																						
 		echo "<div class='details'>\n<a class='ev_link_row' style='font-weight:bold;' href='/index.php?option=com_jevents&task=icalrepeat.detail&evid=".$row[rp_id]."&Itemid=".$_REQUEST[Itemid]."&year=".$y."&month=".$m."&day=".$d."'>".$row['summary']."</a>";

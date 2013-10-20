@@ -124,7 +124,15 @@ if(stripos($ua,'android') == true) { ?>
 
 <div id="main" role="main">
 
-<!--<h1><?php echo utf8_encode($todaestring);?></h1>-->
+<?php
+if($todaestring != null){
+	$todaestring =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));
+	echo "<h1>".$todaestring."</h1>";
+}elseif($seachStartFullDate == $searchEndFullDate){
+	$seachStartDate =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear))));
+	echo "<h1>".$seachStartDate."</h1>";
+}
+?>
 
 <ul id="eventList" class="mainList" ontouchstart="touchStart(event,'eventList');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 
@@ -190,18 +198,46 @@ if(stripos($ua,'android') == true) { ?>
 		/* End By Akash */	
 
 		# Code for to display Date in zigzag image START - Yogi
+		
+		// Code for repeat end date - When event start and end date are different issue.
+		$displayEndDate		= explode(' ',$row['endrepeat']);
+		$edDay				= date('d',strtotime($displayEndDate[0]));
+		$edMonth				= date('m',strtotime($displayEndDate[0]));
+		$edYear				= date('Y',strtotime($displayEndDate[0]));
+		$displayEndDate		= date('l, j M', mktime(0, 0, 0, $edMonth, $edDay, $edYear));
+		$displayFullEndDate	= $edYear.'-'.$edMonth.'-'.$edDay;
+		
+		// event start repeat code
 		$displayDate	= explode(' ',$row['startrepeat']);
 		$dDay			= date('d',strtotime($displayDate[0]));
 		$dMonth			= date('m',strtotime($displayDate[0]));
 		$dYear			= date('Y',strtotime($displayDate[0]));
 		$displayDate	= date('l, j M', mktime(0, 0, 0, $dMonth, $dDay, $dYear));
-		if($displayCheck != $displayDate){?>
-			<h1 id="datezig">
-				<?php echo iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $dMonth, $dDay, $dYear))));?>
-			</h1>
-			<?php $displayCheck = $displayDate;
-		 }
-		 # Code for to display Date in zigzag image END - Yogi?>
+		$displayFullDate= $dYear.'-'.$dMonth.'-'.$dDay;
+		
+		if($todaestring == null && $seachStartFullDate != $searchEndFullDate){
+			if($displayCheck != $displayDate){?>
+				<h1 id="datezig"> 
+				<?php 
+					if($displayFullDate <> $displayFullEndDate){
+						$seachStartDate =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear))));
+						echo $seachStartDate.' - ';
+						if($displayFullEndDate > $searchEndFullDate){
+							$searchEndDate =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));
+							echo $searchEndDate;
+						}else{
+							echo iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $edMonth, $edDay, $edYear))));
+						}	
+					}else{
+						echo iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $dMonth, $dDay, $dYear))));
+					}?>
+				</h1>
+				<?php $displayCheck = $displayDate;
+			}
+		}
+		
+		# Code for to display Date in zigzag image END - Yogi?>
+		
 	<li>
 		<h1><?php echo $rowvevdetail['summary'];?></h1>
       	<h2><?php echo $rowlocdetail['title'];?></h2>

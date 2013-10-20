@@ -2365,3 +2365,5 @@ span.print_large{
      text-align: left;
      width: 105px !important;
 }
+
+.ev_td_li .date{font-size:12px;}

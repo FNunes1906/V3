@@ -91,12 +91,16 @@ if(!empty($_REQUEST['eventdate'])){
 	$today		= date('d',strtotime($startDate[1]));
 	$tomonth	= date('m',strtotime($startDate[1]));
 	$toyear		= date('Y',strtotime($startDate[1]));
+	
+	$seachStartFullDate	=	$fromYear.'-'.$fromMonth.'-'.$fromDay;
+	$searchEndFullDate	=	$toyear.'-'.$tomonth.'-'.$today ;
+	$seachStartDate		=	date('l, j M', mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear));
+	$searchEndDate		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
 }else{
-	$todaestring	=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
+	$todaestring		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
 }
 //#DD#
-$startDateString	=	date('l, j M', mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear));
-$toDateString		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
+
 
 //Query to fetch ID of all categories created in Jevents from category table
 $query_cat="SELECT c.id FROM jos_categories AS c LEFT JOIN jos_categories AS p ON p.id=c.parent_id LEFT JOIN jos_categories AS gp ON gp.id=p.parent_id LEFT JOIN jos_categories AS ggp ON ggp.id=gp.parent_id WHERE c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents'";
@@ -108,15 +112,17 @@ while($row_cat = mysql_fetch_array($rec_cat)){
 	$array_cat[] = $row_cat['id'];
 }
 
-//var_dump($array_cat);	
-
 $byday = strtoupper(substr(date('D',mktime(0, 0, 0, $tomonth, $today, $toyear)),0,2));
 $arrstrcat = implode(',',array_merge(array(-1), $array_cat));
 
-if(!isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == ''){
+$ser_start_date=date("Y-m-d",strtotime($startDate[0]));
+$ser_end_date=date("Y-m-d",strtotime($startDate[1]));
+
+if(!isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == '' || $seachStartDate == $searchEndDate ){
 	$query_filter="SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00' AND rpt.startrepeat <= '".$toyear."-".$tomonth."-".$today." 23:59:59' AND ev.state=1 AND rpt.endrepeat>='".date('Y',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('m',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('d', mktime($totalHours, $totalMinutes, $totalSeconds))." 00:00:00' AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$toyear." and MONTH(rpt.startrepeat )=".$tomonth." and DAYOFMONTH(rpt.startrepeat )=".$today.") or freq<>'WEEKLY')GROUP BY rpt.rp_id";
 }else{
-	$query_filter="SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat <= '".$toyear."-".$tomonth."-".$today." 23:59:59' AND rpt.startrepeat >= '".$fromYear."-".$fromMonth."-".$fromDay." 00:00:00' AND ev.state=1 AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$toyear." and MONTH(rpt.startrepeat )=".$tomonth." and DAYOFMONTH(rpt.startrepeat )=".$today.") or freq<>'WEEKLY') ORDER BY rpt.startrepeat";
+	/*$query_filter="SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat <= '".$toyear."-".$tomonth."-".$today." 23:59:59' AND rpt.startrepeat >= '".$fromYear."-".$fromMonth."-".$fromDay." 00:00:00' AND ev.state=1 AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$toyear." and MONTH(rpt.startrepeat )=".$tomonth." and DAYOFMONTH(rpt.startrepeat )=".$today.") or freq<>'WEEKLY') ORDER BY rpt.startrepeat";*/
+	$query_filter="SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%l:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%l:%i%p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.noendtime,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND rpt.endrepeat >= '".$ser_start_date." 00:00:00' AND rpt.startrepeat <='".$ser_end_date." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat"	;
 }
 
 $rec_filter = mysql_query($query_filter);
@@ -290,48 +296,10 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 
 			
 	    </script>
-<!--Code for Mobiscroll NEW date picker - Yogi END -->
-
-    <?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
+	<!--Code for Mobiscroll NEW date picker - Yogi END -->
+<?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
 </head>
-<body>
-
-		<!--<div style="display: none;">
-	        <label for="theme">Theme</label>
-	        <select name="theme" id="theme" class="changes">
-	            <option value="default">Default</option>
-	            <option value="ios">iOS</option>
-				<option value="ios7" selected="selected">iOS7</option>
-	        </select>
-	    </div>
-	    <div style="display: none;">
-	        <label for="mode">Mode</label>
-	        <select name="mode" id="mode" class="changes">
-	            <option value="scroller" selected="selected">Scroller</option>
-	            <option value="clickpick">Clickpick</option>
-	            <option value="mixed">Mixed</option>
-	        </select>
-	    </div>
-	    <div style="display: none;">
-	        <label for="display">Display</label>
-	        <select name="display" id="display" class="changes">
-	            <option value="modal" selected="selected">Modal</option>
-	            <option value="inline">Inline</option>
-	            <option value="bubble">Bubble</option>
-	            <option value="top">Top</option>
-	            <option value="bottom">Bottom</option>
-	        </select>
-	    </div>-->
-	    <!--<div style="display: none;">
-	        <label for="language">Language</label>
-	        <select name="language" id="language" class="changes">
-	            <option value="" >English</option>
-	            <option value="de" >Deutsch</option>
-				<option value="es" >Español</option>
-				<option value="pt-PT">Português Europeu</option>
-				<option value="cr" selected="selected">Croatian</option>
-	        </select>
-	    </div>-->
+	<body>
 	    <div style="display: none">
 	        <label for="demo">Demo</label>
 	        <select name="demo" id="demo" class="changes">
@@ -341,13 +309,9 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 				<option value="rangepicker" selected="selected" >Range Picker</option>
 	        </select>
 	    </div>
-<?php
-    /* Code added for iphone_places.tpl */
-	require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_events.tpl");
-?>
-<!--
-<div id="footer">&copy; <?php echo date('Y');?> <?php echo $site_name?>, Inc. | <a href="mailto:<?php echo $email?>?subject=Feedback">Contact Us</a> &nbsp;&nbsp;&nbsp; <a href="<?php echo $pageglobal['facebook']?>"><img src="images/icon_facebook_16x16.gif" alt="facebook_icon" width="16" height="16" /></a> &nbsp;&nbsp;&nbsp; </div>
-<div style='display:none;'><?php echo $pageglobal['googgle_map_api_keys']; ?></div>
--->
-</body>
+		<?php
+	    /* Code added for iphone_places.tpl */
+		require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_events.tpl");
+		?>
+	</body>
 </html>
