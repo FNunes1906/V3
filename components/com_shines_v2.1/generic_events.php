@@ -119,6 +119,17 @@ $query_featuredeve="SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepea
 
 $featured_filter=mysql_query($query_featuredeve);
 
+/* code start by rinkal for page title */
+$cat_id = $_REQUEST['category_id'];
+$query_cat = "SELECT c.title FROM jos_categories as c WHERE c.id=".$cat_id." AND c.published = 1 AND c.section = 'com_jevents'";
+$cat_res = mysql_query($query_cat);
+$cat_title = mysql_fetch_array($cat_res);
+
+$pagemeta_res = mysql_query("select title from `jos_pagemeta`where uri='/$cat_title[title]'");
+$pagemeta =mysql_fetch_array($pagemeta_res);
+
+/* code end by rinkal for page title */
+
 header( 'Content-Type:text/html;charset=utf-8');
 ?>
 
@@ -127,16 +138,26 @@ header( 'Content-Type:text/html;charset=utf-8');
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>
-<?php echo $site_name.' | ';
-if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-	echo 'Eventos';
-}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-	echo 'Evenementen';
-}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-	echo 'Događanja';
-}elseif($_SESSION['tpl_folder_name'] == 'default'){
-	echo 'Events';
-}
+<?php
+	/* code start by rinkal for page title */
+	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+	if(stripos($ua,'android') == True) { 
+		$title = $site_name.' ~ '.$cat_title['title'];
+		if($pagemeta['title']!='')
+		{
+			$title.= ' ~ '.$pagemeta['title'];
+		}
+		echo $title;
+	}
+	else{
+		$title = $site_name.' : '.$cat_title['title'];
+		if($pagemeta['title']!='')
+		{
+			$title.= ' : '.$pagemeta['title'];
+		}
+		echo $title;
+	}
+	/* code end by rinkal for page title */
 ?>
 </title>
 <meta content="yes" name="apple-mobile-web-app-capable" />

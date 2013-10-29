@@ -30,6 +30,12 @@ class RangeController extends JController   {
 
 	function listevents() {
 
+		$pagetitle= $_SERVER['REQUEST_URI'];
+		$urlpart = explode("/",$pagetitle);
+		if(isset($urlpart[2]) != ""){
+			$document = &JFactory::getDocument();
+			$document->setTitle(ucfirst ($urlpart[1]).' | '.ucfirst ( $urlpart[2]));
+		}
 		list($year,$month,$day) = JEVHelper::getYMD();
 
 		// Joomla unhelpfully switched limitstart to start when sef is enabled!  includes/router.php line 390

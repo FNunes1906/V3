@@ -169,8 +169,11 @@ jQuery(document).ready(function(){
 
 <?php
 $app = JFactory::getApplication();
-//$this->setTitle( $_SESSION['partner_folder_name'] . ' | ' . $this->getTitle() );
-$this->setTitle( $var->site_name . ' | ' . $this->getTitle() );
+if(JRequest::getVar('task') == 'icalrepeat.detail'){
+	$this->setTitle( $var->site_name . ' | '. JText::_("TW_EVENT_DETAIL").' | '. $this->getTitle() . ' | ' . $var->page_title );
+}else{
+	$this->setTitle( $var->site_name . ' | ' . $this->getTitle() . ' | ' . $var->page_title );	
+}
 ?>
 <?php include("ga.php"); ?>
 

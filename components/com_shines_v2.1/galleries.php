@@ -47,12 +47,15 @@ $rec=mysql_query($query) or die(mysql_error());
 			if(trim($userfolder) == '' && trim($filename) == '')
 				$param[$k]['avatar'] = '';
 			else
-			$param[$k]['avatar'] = '/partner/'.$_SESSION['partner_folder_name'].'/images/phocagallery/'.$userfolder.'thumbs/phoca_thumb_s_'.$filename;
+				$param[$k]['avatar'] = '/partner/'.$_SESSION['partner_folder_name'].'/images/phocagallery/'.$userfolder.'thumbs/phoca_thumb_s_'.$filename;
       
 	 }
 	
 
-//*********************************************
+/* code start by rinkal for page title */
+$pagemeta_res = mysql_query("select title from `jos_pagemeta`where uri='/photos'");
+$pagemeta =mysql_fetch_array($pagemeta_res);
+/* code end by rinkal for page title */
 
 
 ?>
@@ -70,8 +73,36 @@ $rec=mysql_query($query) or die(mysql_error());
 <script src="javascript/functions.js" type="text/javascript"></script>
 
 <title>
-<?php echo $site_name.' | ';
-echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Galerías':'Galleries';?>
+<?php
+	/* code start by rinkal for page title */
+	if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
+		$t = 'fotos';
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
+		$t = "foto's";
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
+		$t = 'fotografije';
+	}elseif($_SESSION['tpl_folder_name'] == 'default'){
+		$t = 'photos';
+	}
+	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+	if(stripos($ua,'android') == True) { 
+		$title = $site_name.' ~ '.$t;
+		if($pagemeta['title']!='')
+		{
+			$title.= ' ~ '.$pagemeta['title'];
+		}
+		echo $title;
+	}
+	else{
+		$title = $site_name.' : '.$t;
+		if($pagemeta['title']!='')
+		{
+			$title .= ' : '.$pagemeta['title'];
+		}
+		echo $title;
+	}
+	/* code end by rinkal for page title */
+?>
 </title>
 
 <!--<link href="pics/startup.png" rel="apple-touch-startup-image" /> -->

@@ -123,14 +123,47 @@ $sql = "select jc.*,jcf.ordering from `jos_content` jc, `jos_categories` jcs ,`j
 header('Content-type: text/html;charset=utf-8', true);
 include("iadbanner.php"); 
 include("connection.php");
+
+/* code start by rinkal for page title */
+$pagemeta_res = mysql_query("select title from `jos_pagemeta`where uri='/index.php'");
+$pagemeta =mysql_fetch_array($pagemeta_res);
+/* code end by rinkal for page title */
 ?>
 <html>
 <head>
 <link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
 
 <title>
-<?php echo $site_name.' | ';
-echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Noticias':'News';?>
+<?php 
+	/* code start by rinkal for page title */
+	if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
+		$t = 'inicio';
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
+		$t = 'home';
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
+		$t = 'početna';
+	}elseif($_SESSION['tpl_folder_name'] == 'default'){
+		$t = 'home';
+	}
+	
+	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+	if(stripos($ua,'android') == True) { 
+		$title = $site_name.' ~ '.$t;
+		if($pagemeta['title']!='')
+		{
+			$title.= ' ~ '.$pagemeta['title'];
+		}
+		echo $title;
+	}
+	else{
+		$title = $site_name.' : '.$t;
+		if($pagemeta['title']!='')
+		{
+			$title .= ' : '.$pagemeta['title'];
+		}
+		echo $title;
+	}
+?>
 </title>
 <meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=false" />
 <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />-->

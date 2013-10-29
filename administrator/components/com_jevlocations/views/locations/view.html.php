@@ -441,7 +441,7 @@ SCRIPT;
 		}
 
 		$document =& JFactory::getDocument();
-		$document->setTitle(JText::_('Event Location'). " :: ". $location->title);
+		$document->setTitle(JText::_('Location Detail'). " | ". $location->title);
 
 		$subtitle = addslashes(str_replace(" ","+",urlencode($location->title)));
 

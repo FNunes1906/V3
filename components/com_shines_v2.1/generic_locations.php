@@ -25,8 +25,6 @@ mysql_select_db($jconfig->db);
 $rec01 = mysql_query("select * from `jos_pageglobal`");
 $pageglobal=mysql_fetch_array($rec01);
 
-
-
 function showBrief($str, $length) {
 	$str = strip_tags($str);
 	$str = explode(" ", $str);
@@ -88,7 +86,7 @@ $filter_order_Dir = "ASC";
 
 $category_id = $_REQUEST['category_id'];
 #@#
-$RES=mysql_query("select id from jos_categories where parent_id=".$category_id." AND section='com_jevlocations2' and published=1 order by `ordering`");
+$RES=mysql_query("select id,title from jos_categories where parent_id=".$category_id." AND section='com_jevlocations2' and published=1 order by `ordering`");
 
 while($idsrow=mysql_fetch_assoc($RES)){
 	$allCatIds[] = $idsrow['id'];
@@ -125,6 +123,16 @@ $link_to=$path;
 $query_featured = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180)) + cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations, jos_jev_customfields3 WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ";
 $query_featured .= " AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ";
 $query_featured .= " ORDER BY dist ASC";
+
+/* code start by rinkal for page title */
+$cat_query=mysql_query("select title from jos_categories where id=".$category_id." AND section='com_jevlocations2' and published=1 order by `ordering`");
+$cat_title = mysql_fetch_array($cat_query);
+
+$pagemeta_res = mysql_query("select title from `jos_pagemeta`where uri='/$cat_title[title]'");
+$pagemeta =mysql_fetch_array($pagemeta_res);
+
+/* code end by rinkal for page title */
+
 header( 'Content-Type:text/html;charset=utf-8');
 ?>
 
@@ -135,13 +143,36 @@ header( 'Content-Type:text/html;charset=utf-8');
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<title>
+<?php
+	/* code start by rinkal for page title */
+	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+	if(stripos($ua,'android') == True) { 
+		$title = $site_name.' ~ '.$cat_title['title'];
+		if($pagemeta['title']!='')
+		{
+			$title.= ' ~ '.$pagemeta['title'];
+		}
+		echo $title;
+	}
+	else{
+		$title = $site_name.' : '.$cat_title['title'];
+		if($pagemeta['title']!='')
+		{
+			$title.= ' : '.$pagemeta['title'];
+		}
+		echo $title;
+	}
+	/* code end by rinkal for page title */
+?>
+</title>
+
 <meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <meta content="index,follow" name="robots" />
 <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
 <meta name="description" content="<?php echo $var->metadesc; ?>" />
 <meta name="description" content="<?php echo $var->extra_meta; ?>" />
-<title><?php echo $site_name?></title>
 <link href="pics/homescreen.gif" rel="apple-touch-icon" />
 <link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
  <link rel="shortcut icon" href="images/l/apple-touch-icon.png">

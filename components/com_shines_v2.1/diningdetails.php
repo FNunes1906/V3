@@ -33,7 +33,6 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 	mysql_set_charset("UTF8");
 	$rec=mysql_query($query) or die(mysql_error());
 	
-	
 	function stripJunk($string) { 
 		$cleanedString = preg_replace("/[^A-Za-z0-9\s\.\-\/+\!;\n\t\r\(\)\'\"._\?>,~\*<}{\[\]\=\&\@\#\$\%\^` ]:/","", $string); 
 		$cleanedString = preg_replace("/\s+/"," ",$cleanedString); 
@@ -76,15 +75,32 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 	</script>
 	
 	<title>
-		<?php echo $site_name.' | ';
-		if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-			echo 'Lugares detalle';
-		}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-			echo 'Plaatsen Detail';
-		}elseif($_SESSION['tpl_folder_name'] == 'defaultcroation'){
-			echo 'Mjesta Detalj';
-		}elseif($_SESSION['tpl_folder_name'] == 'default'){
-			echo 'Places Detail';
+	<?php
+		/* code start by rinkal for page title */
+		
+		$title=mysql_query($query) or die(mysql_error());
+	
+		while($row=mysql_fetch_array($title))
+		{
+			if ($_SESSION['tpl_folder_name'] == 'defaultspanish'){
+				$t = 'detalles-de-ubicación';
+			}elseif($_SESSION['tpl_folder_name'] == 'defaultportuguese'){
+				$t = 'detalhe-localização';
+			}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
+				$t = 'locatie-detail';
+			}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
+				$t = 'lokacija-detalj';
+			}elseif($_SESSION['tpl_folder_name'] == 'default'){
+				$t = 'location-detail';
+			}
+			
+			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+			if(stripos($ua,'android') == True) { 
+				echo $site_name.' ~ '.$t.' ~ '.$row['title'];
+			}
+			else{
+				echo $site_name.' : '.$t.' : '.$row['title'];
+			}
 		}
 		?>		
 	</title>

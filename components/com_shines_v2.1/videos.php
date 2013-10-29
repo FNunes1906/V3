@@ -6,6 +6,10 @@ $query="select * from jos_phocagallery where catid=2 order by id desc";
 mysql_set_charset("UTF8");
 $rec=mysql_query($query) or die(mysql_error());
 
+/* code start by rinkal for page title */
+$pagemeta_res = mysql_query("select title from `jos_pagemeta`where uri='/videos'");
+$pagemeta =mysql_fetch_array($pagemeta_res);
+/* code end by rinkal for page title */
 
 header( 'Content-Type:text/html;charset=utf-8');
 
@@ -26,8 +30,34 @@ header( 'Content-Type:text/html;charset=utf-8');
 <script src="/components/com_shines/javascript/functions.js" type="text/javascript"></script>
 
 <title>
-<?php echo $site_name.' | ';
-echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Videos':'Videos';?>
+<?php 
+	/* code start by rinkal for page title */
+	if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese' || $_SESSION['tpl_folder_name'] == 'default'){
+		$t = 'videos';
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
+		$t = 'Filmpjesl';
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
+		$t = 'video';
+	}
+	
+	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+	if(stripos($ua,'android') == True) { 
+		$title = $site_name.' ~ '.$t;
+		if($pagemeta['title']!='')
+		{
+			$title.= ' ~ '.$pagemeta['title'];
+		}
+		echo $title;
+	}
+	else{
+		$title = $site_name.' : '.$t;
+		if($pagemeta['title']!='')
+		{
+			$title .= ' : '.$pagemeta['title'];
+		}
+		echo $title;
+	}
+?>
 </title>
 
 <!--<link href="pics/startup.png" rel="apple-touch-startup-image" /> -->

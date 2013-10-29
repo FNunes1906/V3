@@ -48,7 +48,12 @@ else
 $todaestring=date('D, M j', mktime(0, 0, 0, $tomonth, $today, $toyear));
 $query="select *,DATE_FORMAT(`startrepeat`,'%h:%i %p') as timestart, DATE_FORMAT(`endrepeat`,'%h:%i %p') as timeend from jos_jevents_repetition where rp_id=$eid";
 $rec=mysql_query($query) or die(mysql_error());
+
 mysql_set_charset("UTF8");
+
+/* code start by rinkal for page title */
+$title=mysql_query($query) or die(mysql_error());
+/* code end by rinkal for page title */
 
 header( 'Content-Type:text/html;charset=utf-8');
 ?>
@@ -75,19 +80,35 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 </script>
 
 	<title>
-	<?php echo $site_name.' | ';
-	echo ($_SESSION['tpl_folder_name'] == 'defaultspanish')?'Detalle de evento':'Event Detail';?>
-		<?php echo $site_name.' | ';
-		if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-			echo 'Detalle de evento';
-		}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-			echo 'Event Detail';
-		}elseif($_SESSION['tpl_folder_name'] == 'defaultcroation'){
-			echo 'Događaj Detalj';
-		}elseif($_SESSION['tpl_folder_name'] == 'default'){
-			echo 'Event Detail';
+	<?php
+	
+	/* code start by rinkal for page title */
+	
+	if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
+		$t = 'detalles-del-evento';
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
+		$t = 'evenementen-detail';
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
+		$t = 'događaj-detalj';
+	}elseif($_SESSION['tpl_folder_name'] == 'default'){
+		$t = 'event-detail';
+	}
+	
+	while($row=mysql_fetch_array($title))
+	{
+		$queryvevdetail="select summary from jos_jevents_vevdetail where evdet_id=".$row['eventdetail_id'];
+		$recvevdetail=mysql_query($queryvevdetail) or die(mysql_error());
+		$rowvevdetail=mysql_fetch_array($recvevdetail);
+		
+		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+		if(stripos($ua,'android') == True) { 
+			echo $site_name.' ~ '.$t.' ~ '.$rowvevdetail['summary'];
 		}
-		?>		
+		else{
+			echo $site_name.' : '.$t.' : '.$rowvevdetail['summary'];
+		}
+	}
+	?>		
 	</title>
 <script type="text/javascript">
 	// TOUCH-EVENTS SINGLE-FINGER SWIPE-SENSING JAVASCRIPT

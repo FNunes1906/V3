@@ -520,7 +520,7 @@ window.addEvent(\'domready\', function(){
 		
 		// Set page title per category
 		if ($tmpl['displaycatnametitle'] == 1) {
-			$document->setTitle($params->get( 'page_title') . ' - '. $category->title);
+			$document->setTitle($params->get( 'page_title') .' | '. $category->title);
 		} else {
 			$document->setTitle( $params->get( 'page_title' ));
 		}

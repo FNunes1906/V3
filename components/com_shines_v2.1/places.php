@@ -131,6 +131,11 @@ mysql_set_charset("UTF8");
 
 /*CODE END AKASH FOR SLIDER*/
 
+/* code start by rinkal for page title */
+$pagemeta_res = mysql_query("select title from `jos_pagemeta`where uri='/places'");
+$pagemeta =mysql_fetch_array($pagemeta_res);
+/* code end by rinkal for page title */
+
 header( 'Content-Type:text/html;charset=utf-8');
 ?>
 
@@ -150,16 +155,36 @@ header( 'Content-Type:text/html;charset=utf-8');
 <meta name="description" content="<?php echo $var->extra_meta; ?>" />
 
 <title>
-<?php echo $site_name.' | ';
-if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-	echo 'Lugares';
-}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-	echo 'Plaatsen';
-}elseif($_SESSION['tpl_folder_name'] == 'defaultcroation'){
-	echo 'Mjesta';
-}elseif($_SESSION['tpl_folder_name'] == 'default'){
-	echo 'Places';
-}
+<?php
+		/* code start by rinkal for page title */
+		if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
+			$t = 'lugares';
+		}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
+			$t = 'plaatsen';
+		}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
+			$t = 'mjesta';
+		}elseif($_SESSION['tpl_folder_name'] == 'default'){
+			$t = 'places';
+		}
+		
+		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+		if(stripos($ua,'android') == True) { 
+			$title = $site_name.' ~ '.$t;
+			if($pagemeta['title']!='')
+			{
+				$title.= ' ~ '.$pagemeta['title'];
+			}
+			echo $title;
+		}
+		else{
+			$title = $site_name.' : '.$t;
+			if($pagemeta['title']!='')
+			{
+				$title .= ' : '.$pagemeta['title'];
+			}
+			echo $title;
+		}
+		/* code end by rinkal for page title */
 ?>
 
 </title>

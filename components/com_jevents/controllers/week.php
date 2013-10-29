@@ -30,6 +30,13 @@ class WeekController extends JController   {
 
 	function listevents() {
 
+		$pagetitle= $_SERVER['REQUEST_URI'];
+		$urlpart = explode("/",$pagetitle);
+		if(isset($urlpart[2]) != ""){
+			$document = &JFactory::getDocument();
+			$document->setTitle(ucfirst ($urlpart[1]).' | '.ucfirst ( $urlpart[2]));
+		}
+
 		list($year,$month,$day) = JEVHelper::getYMD();
 		$Itemid	= JEVHelper::getItemid();
 

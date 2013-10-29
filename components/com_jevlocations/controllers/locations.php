@@ -168,6 +168,13 @@ class FrontLocationsController extends AdminLocationsController {
 
 	function locations( )
 	{
+		$pagetitle= $_SERVER['REQUEST_URI'];
+		$urlpart = explode("/",$pagetitle);
+		if(isset($urlpart[2]) != ""){
+			$document = &JFactory::getDocument();
+			$document->setTitle(ucfirst ($urlpart[1]).' | '.ucfirst ( $urlpart[2]));
+		}	
+
 		// get the view
 		$viewName = "locations";
 		$this->view = & $this->getView($viewName,"html");

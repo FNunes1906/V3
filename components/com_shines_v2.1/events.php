@@ -151,24 +151,49 @@ $query_featuredeve="SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepea
 
 $featured_filter=mysql_query($query_featuredeve);
 
+/* code start by rinkal for page title */
+$pagemeta_res = mysql_query("select title from `jos_pagemeta`where uri='/events'");
+$pagemeta =mysql_fetch_array($pagemeta_res);
+/* code end by rinkal for page title */
+
 header( 'Content-Type:text/html;charset=utf-8');
 ?>
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>
-<?php echo $site_name.' | ';
-if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-	echo 'Eventos';
-}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-	echo 'Evenementen';
-}elseif($_SESSION['tpl_folder_name'] == 'defaultcroation'){
-	echo 'Događanja';
-}elseif($_SESSION['tpl_folder_name'] == 'default'){
-	echo 'Events';
-}
+
+<?php
+	/* code start by rinkal for page title */
+
+	if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
+		$t = 'eventos';
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
+		$t = 'evenementen';
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
+		$t = 'događanja';
+	}elseif($_SESSION['tpl_folder_name'] == 'default'){
+		$t = 'events';
+	}
+	
+	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+	if(stripos($ua,'android') == True) { 
+		$title = $site_name.' ~ '.$t;
+		if($pagemeta['title']!='')
+		{
+			$title.= ' ~ '.$pagemeta['title'];
+		}
+		echo $title;
+	}
+	else{
+		$title = $site_name.' : '.$t;
+		if($pagemeta['title']!='')
+		{
+			$title.= ' : '.$pagemeta['title'];
+		}
+		echo $title;
+	}
+	/* code end by rinkal for page title */
 ?>
 </title>
 <meta content="yes" name="apple-mobile-web-app-capable" />

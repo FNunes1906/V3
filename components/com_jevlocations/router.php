@@ -46,7 +46,7 @@ function JevLocationsBuildRoute(&$query)
 		case "locations":
 		case "overview":
 		case "list":
-			$segments[]=$task;
+			/*$segments[]=$task;*/
 			break;
 		case "detail":
 			$segments[]=$task;
