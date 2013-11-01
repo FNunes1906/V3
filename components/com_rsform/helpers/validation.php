@@ -52,6 +52,21 @@ class RSFormProValidations
 		return true;
 	}
 	
+	function townwizardvalidation($param){// string from input
+		
+		// you can add here more value, which you dont want to allow.
+		$notallowed = "_,?,<,/,>,*";
+		
+		for($i=0;$i<strlen($param);$i++){
+			//this will check each character if the string with our not allowed data
+			if(strpos($notallowed,$param[$i]) !== false){
+			//If special character found then return false.	
+				return false;
+			}
+		}
+		return true;
+	}	
+	
 	function alphaaccented($value, $extra=null, $data=null) {
 		if (preg_match('#[^[:alpha:] ]#u', $value)) {
 			return false;

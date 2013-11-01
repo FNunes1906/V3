@@ -20,7 +20,7 @@ defined('_JEXEC') or die('Restricted access');
 
 // Pagetitle
 if ( $this->params->def( 'show_page_title', 1 ) ) {
-	echo '<div class="componentheading'.$this->params->get( 'pageclass_sfx' ).'">'. $this->params->get('page_title').'</div>';
+	echo '<h2 class="componentheading'.$this->params->get( 'pageclass_sfx' ).'">'. $this->params->get('page_title').'</h2>';
 }
 // Image, description
 echo '<div class="contentpane'.$this->params->get( 'pageclass_sfx' ).'">';
@@ -92,7 +92,7 @@ if ($this->tmpl['displayimagecategories'] == 1) {
 		}
 
 		//echo '<tr>';		
-		echo '<div style="text-align:left; width:100%"><a href="'.$this->categories[$i]->link.'" class="category'.$this->params->get( 'pageclass_sfx' ).'">'.$this->categories[$i]->title.'</a>';
+		echo '<div style="text-align:left; width:100%"><h3><a href="'.$this->categories[$i]->link.'" class="category'.$this->params->get( 'pageclass_sfx' ).'">'.$this->categories[$i]->title.'</a></h3>';
 		//if ($this->categories[$i]->numlinks > 0) {echo '<span class="small">('.$this->categories[$i]->numlinks.')</span>';}
 		echo '<a href="'.$this->categories[$i]->link.'" class="see">';
 		echo JText::_("TW_SEE_MORE");

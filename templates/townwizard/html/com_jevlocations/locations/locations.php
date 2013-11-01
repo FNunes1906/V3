@@ -11,10 +11,23 @@
 	$folder = "jevents/jevlocations";
 	global $Itemid;
 	
+	$menu = JFactory::getApplication()->getMenu();
+	$menuname = $menu->getActive()->name;
+	$p_id = $menu->getActive();
+	if (isset($p_id->id) && $p_id->parent){
+		 $parent = $menu->getItem($menu->getActive()->parent)->name;
+	}
+	
+	
+	/* Fetching sitename from Page Global */
+	$db =& JFactory::getDBO();
+	$pageglobal = "select site_name from `jos_pageglobal`";
+	$db->setQuery($pageglobal);
+	$sn=$db->query();
+	$site_name=mysql_fetch_row($sn);
+	
 ?>
-<div class="componentheading">
-			<?php echo JText::_("LOC_LIST");?>
-</div>
+<h2 class="componentheading"><?php echo $menuname." ". $parent." in ".$site_name[0];?></h2>
 <form action="<?php echo JRoute::_("index.php?option=com_jevlocations&task=locations.locations&Itemid=$Itemid");?>" method="post" name="adminForm">
 
 <?php if ($locparams->get("showfilters",1)) { ?>
@@ -66,7 +79,7 @@
 							<?php if($row['locimg']!='') {?>
 							<a href="index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/stories/jevents/jevlocations/thumbnails/thumb_<?php echo $row['locimg']; ?>"></a><?php } ?>
 						</div>
-						<a class="venueName bold fl" href="index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a>
+						<h3 style="margin:0px;"><a class="venueName bold fl" href="index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a></h3>
 						<div class="bc fr bold">
 										<?php echo $row['cat']; ?>
 						</div>
@@ -190,9 +203,7 @@
 			</div>
 			<?php } ?>
 			<span class="editlinktip hasTip" title="<?php echo JText::_( 'JEV view Location' );?>::<?php echo $this->escape($row->title); ?>">
-					<a class="venueName bold fl" href="<?php echo $link; ?>">
-						<?php echo $this->escape($row->title); ?>
-					</a>
+				<h3 style="margin:0px;"><a class="venueName bold fl" href="<?php echo $link; ?>"><?php echo $this->escape($row->title); ?></a></h3>
 			</span>
 			<div class="bc fr bold">
 										<?php echo $this->escape($row->category); ?>

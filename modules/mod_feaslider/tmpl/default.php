@@ -50,7 +50,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 					<div class="event">
 					<a href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=<?php echo $_REQUEST[Itemid];?>&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img src="<?php echo $singleimagearray[0];?>" /></a>
 		    		<div class="infoCont">
-		    			<h2 class="bold">
+		    			<strong class="bold">
 						<?php 
 						if(strlen($fearow['summary'])>="90"){
 							$strProcess1 = substr($fearow['summary'], 0 , 90);
@@ -61,7 +61,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 							echo $fearow['summary'];
 						}
 						?>
-						</h2>
+						</strong>
 		    			<p><?php echo $fearow['title'];?> &bull; 
 						<?php echo $fearow['Date'];?> &bull; 
 						<?php

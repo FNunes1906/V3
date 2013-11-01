@@ -30,6 +30,8 @@ $data = $this->datamodel->getWeekData($this->year, $this->month, $this->day);
 
 $option = JEV_COM_COMPONENT;
 $Itemid = JEVHelper::getItemid();
+$menu = JFactory::getApplication()->getMenu();
+$menuname = $menu->getActive()->name;
 
 ?>
 <!-- Event listing CATEGORY FILTER
@@ -39,7 +41,7 @@ $Itemid = JEVHelper::getItemid();
 
 	/* Fetching Date Format from Page Global */
 	$db1 =& JFactory::getDBO();
-	$pageglobal = "select date_format,time_format from `jos_pageglobal`";
+	$pageglobal = "select date_format,time_format,site_name from `jos_pageglobal`";
 	$db1->setQuery($pageglobal);
 	$df=$db1->query();
 	$d=mysql_fetch_row($df);
@@ -49,16 +51,15 @@ $Itemid = JEVHelper::getItemid();
 	
 if($_REQUEST['searchdate']!=''){
 	$search_date = explode(" - ",$_REQUEST['searchdate']);
-	
 	$start_date=(strftime ($df,strtotime($search_date[0])));
 	$end_date=(strftime ($df,strtotime($search_date[1])));
-	
-	echo "<h3 class='fl heading display'>". JText::_('JEV_EVENTFROM') ." ".$start_date." to ".$end_date."</h3>";
-	
+	echo "<h2 class='fl heading display'>". JText::_('JEV_EVENTFROM') ." ".$start_date." to ".$end_date."</h2>";
+}elseif ( JRequest::getVar('task') === 'week.listevents' AND JRequest::getVar('view') === 'week' AND JRequest::getVar('Itemid') == 97){
+	echo "<h2 class='fl heading display'>". JText::_('TW_THIS_WEEK')." ".JText::_('EVENTS_IN')." ".$d[2]."</h2><br/>";
 }elseif ( JRequest::getVar('task') === 'week.listevents' AND JRequest::getVar('view') === 'week' ){
-	echo "<h3 class='fl heading display'>". JText::_('TW_THIS_WEEK'). "</h3>";
+	echo "<h2 class='fl heading display'>". JText::_('TW_THIS_WEEK')." ".$menuname." ".JText::_('EVENTS_IN')." ".$d[2]."</h2>";
 }else {
-	echo "<h3 class='fl heading display'>". JText::_('TW_LIST_OF_EVENTS'). "</h3>";
+	echo "<h2 class='fl heading display'>". JText::_('TW_LIST_OF_EVENTS'). "</h2><br/>";
 }
 ?>
 <!-- Code Start by Rinkal -->

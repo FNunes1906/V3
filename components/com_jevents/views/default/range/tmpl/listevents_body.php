@@ -3,12 +3,20 @@
 defined('_JEXEC') or die('Restricted access');
 
 
+/* Fetching sitename from Page Global */
+	$db1 =& JFactory::getDBO();
+	$pageglobal = "select site_name from `jos_pageglobal`";
+	$db1->setQuery($pageglobal);
+	$df=$db1->query();
+	$d=mysql_fetch_row($df);
+
+
 $cfg	 = & JEVConfig::getInstance();
 $data = $this->data;
 if(JRequest::getVar('Itemid') == 98){
-	echo "<h3 class='fl heading display'>".JText::_('JEV_VIEWBYWEEK')."</h3>";
+	echo "<h2 class='fl heading display'>".JText::_('JEV_VIEWBYWEEK')." ".JText::_('EVENTS_IN')." ".$d[0]."</h2>";
 }else{
-	echo "<h3 class='fl heading display'>".JText::_('TW_THISMONTH')."</h3>";
+	echo "<h2 class='fl heading display'>".JText::_('TW_THISMONTH')." ".JText::_('EVENTS_IN')." ".$d[0]."</h2>";
 }
 
 

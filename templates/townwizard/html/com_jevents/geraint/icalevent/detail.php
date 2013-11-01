@@ -103,7 +103,7 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 				echo $ev_start_date.'<br/>'.$ev_time;
 			}?>
 		</div>
-        <h1 class="display"><?php echo $ev_title; ?></h1>
+        <h2 class="display"><?php echo $ev_title; ?></h2>
         <div class="rating"></div>
         <div class="evtTmb fr"></div>
         <div style="text-transform: capitalize;" class="bold"><?php echo $lc_title; ?></div>

@@ -272,7 +272,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 						echo " <a href='http://www.weather.com/weather/today/$var->location_code' target='_blank'><img  SRC='/common/images/weather/" . $data[weather][cc][icon] . ".png' height='25' border='0' style='vertical-align: middle;'></a>";
 					?>
 					</div> 
-	  	      	    <?php echo $var->beach; ?> 
+	  	      	    <?php echo '<h1>'.$var->beach.'</h1>'; ?> 
 	            </div>
 	          </div>
               

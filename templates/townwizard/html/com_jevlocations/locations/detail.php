@@ -51,7 +51,7 @@ function resetLatLngTxtFields(lat, lng){
 <div id="VenueDetail" class="detailFeature sect" style="width: 412px;">
 	<?php 
 	echo "<div class='bc bold fr'>".$this->location->category."</div>";
-	echo "<h1 class='display'>".$this->location->title. "</h1>";?>
+	echo "<h2 class='display'>".$this->location->title. "</h2>";?>
 	
 	<div class="map fr">
 	<div id="map_canvas" style="width:200px; height:156px"></div>

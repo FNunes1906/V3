@@ -40,7 +40,7 @@ global $var;
 					<div class="event">
 					<a href="/index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $fearow->loc_id;?>&se=1&title=<?php echo $fearow->alias;?>&Itemid=<?php echo $_REQUEST[Itemid];?>"><img src="<?php echo $singleimagearray;?>" /></a>
 		    		<div class="infoCont">
-		    			<h2 class="bold">
+		    			<strong class="bold">
 						<?php
 						if(strlen($fearow->title)>="90"){
 							$strProcess1 = substr($fearow->title, 0 , 90);
@@ -51,7 +51,7 @@ global $var;
 							echo $fearow->title;
 						}						
 						?>
-						</h2>
+						</strong>
 		    			<!-- <p><?php echo substr($fearow->description, 0, 75);?></p> -->
 		    			 <p>
 					  	<?php 

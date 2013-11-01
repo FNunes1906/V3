@@ -17,7 +17,7 @@ if ( $this->tmpl['displaycatnametitle'] == 1) {
 // Pagetitle
 if ($this->tmpl['showpagetitle'] != 0) {
 	if ( $heading != '') {
-	    echo '<div class="componentheading'.$this->params->get( 'pageclass_sfx' ).'">'.$heading.'</div>'. "\n";
+	    echo '<h2 class="componentheading'.$this->params->get( 'pageclass_sfx' ).'">'.$heading.'</h2>'. "\n";
 	} 
 }
 // Image, description

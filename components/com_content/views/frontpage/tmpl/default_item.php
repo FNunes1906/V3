@@ -14,9 +14,9 @@ $canEdit	= ($this->user->authorize('com_content', 'edit', 'content', 'all') || $
 	<td class="contentheading<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>" width="280px">
 		<?php if ($this->item->params->get('link_titles') && $this->item->readmore_link != '') : ?>
 		<a href="<?php echo $this->item->readmore_link; ?>" class="contentpagetitle<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>">
-			<?php echo $this->escape($this->item->title); ?></a>
+			<?php echo '<h2>'. $this->escape($this->item->title).'</h2>'; ?></a>
 		<?php else : ?>
-			<?php echo $this->escape($this->item->title); ?>
+			<?php echo '<h2>'.$this->escape($this->item->title).'</h2>'; ?>
 		<?php endif; ?>
 	</td>
 	<?php endif; ?>

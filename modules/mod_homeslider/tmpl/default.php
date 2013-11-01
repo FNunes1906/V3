@@ -59,7 +59,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 					<div class="event">
 					<a href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=97&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img src="<?php echo $singleimagearray[0];?>" /></a>
 					<div class="infoCont">
-	                  <h2 class="bold">
+	                  <strong class="bold">
 					  	<?php 
 						if(strlen($fearow['summary'])>="90"){
 							$strProcess1 = substr($fearow['summary'], 0 , 90);
@@ -70,7 +70,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 							echo $fearow['summary'];
 						}
 						?>
-					  </h2>
+					  </strong>
 	                  <p>
 					  	<?php 
 						   $strArray = explode('<img',$fearow['description']);
@@ -119,7 +119,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 	<div class="galleryNav rightCol fr">
         <!--<a class="full bold" href="/index.php?option=com_jevents&view=range&task=range.listevents&Itemid=97"><?php echo JText::_("TW_FULL_CALENDAR"); ?></a>-->
         <!--<a class="full bold" href="/index.php?option=com_jevents&view=week&task=week.listevents&Itemid=97"><?php echo JText::_("TW_FULL_CALENDAR"); ?></a>-->
-          <h1 class="display"><?php echo JText::_("TW_TOP_EVENT"); ?></h1>
+          <strong class="display"><?php echo JText::_("TW_TOP_EVENT"); ?></strong>
           <ul>
 		  <?php 
 		  $i = 0;
@@ -135,7 +135,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 				<li class="<?php echo $d ;?>">
 			<?php }?>
               <a class="caroufredsel" href="#item<?php echo $d ;?>">
-                <span class="bold">
+                <strong class="bold">
 				<?php 
 				if(strlen($homeslider1[$i]['summary'])>="72"){
 					$strProcess = substr($homeslider1[$i]['summary'], 0 , 72);
@@ -146,7 +146,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 					echo $homeslider1[$i]['summary'];
 				}
 				?>
-				</span>	
+				</strong>	
                 <?php echo $homeslider1[$i]['title'];?> &bull; 
 				<?php echo $homeslider1[$i]['Date'];?> &bull; 
 				<?php

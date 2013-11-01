@@ -2,7 +2,7 @@
 defined('_JEXEC') or die('Restricted access'); ?>
 <div id="ShareThis" class="neg sect">
 	<div class="cont">
-		<h3 class="fl"><a class="heading display" href="#"><?php echo JText::_("TW_SHARETHIS") ?></a></h3>
+		<strong class="heading display fl"><?php echo JText::_("TW_SHARETHIS") ?></strong>
 		<div id="ShareTool" class="cl">
 			<div class="side fl">
 				<div class='st_facebook_large' displayText='Facebook'><span class="share_font"><?php echo JText::_("TW_SHAREFB") ?></span></div>                

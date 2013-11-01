@@ -28,12 +28,12 @@ function DefaultLoadedFromTemplate($view,$template_name, $event, $mask){
 	$rowlink = JRoute::_($rowlink.$view->datamodel->getCatidsOutLink());
 	ob_start();
 	?>
-	<a class="ev_link_row" href="<?php echo $rowlink; ?>" style="font-weight:bold;" title="<?php echo JEventsHTML::special($event->title()) ;?>">
+	<h3 style="font-size:12px;padding-bottom:0px;"><a class="ev_link_row" href="<?php echo $rowlink; ?>" style="font-weight:bold;" title="<?php echo JEventsHTML::special($event->title()) ;?>">
 	<?php
 	$linkstart = ob_get_clean();
 
 	$search[]="{{LINKSTART}}";$replace[]=$linkstart;$blank[]="";
-	$search[]="{{LINKEND}}";$replace[]="</a>";$blank[]="";
+	$search[]="{{LINKEND}}";$replace[]="</a></h3>";$blank[]="";
 
 	$fulllink = $linkstart . $event->title() .'</a>';
 	$search[]="{{TITLE_LINK}}";$replace[]=$fulllink;$blank[]="";
