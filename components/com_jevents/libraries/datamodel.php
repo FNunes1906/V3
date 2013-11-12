@@ -151,6 +151,8 @@ class JEventsDataModel {
 		include_once(JPATH_ADMINISTRATOR."/components/".JEV_COM_COMPONENT."/libraries/colorMap.php");
 
 		$cfg = & JEVConfig::getInstance();
+		
+
 
 		if (!$veryshort){
 			//$rows = $this->queryModel->listEventsByMonthNEW( $year, $month, 'reccurtype ASC,publish_up');
@@ -289,6 +291,8 @@ class JEventsDataModel {
 			$cellDate		= mktime (0, 0, 0, $month, $d, $year);
 			$data["dates"][$dayCount]['cellDate']=$cellDate;
 			//$data["dates"][$dayCount]['events'] = array();
+			
+
 
 			if( $rowcount > 0 ){
 				foreach ($rows as $row) {
@@ -436,39 +440,107 @@ class JEventsDataModel {
 		return $data;
 	}
 
-	function getRangeData($start,$end, $limit, $limitstart )
-	{
+	function getRangeData($start2,$end2, $limit, $limitstart ){
+		
+		$month2 = DATE('m',strtotime($start2));
+		$day2  = DATE('d',strtotime($start2)) ;
+		$year2  = DATE('Y',strtotime($start2)) ;
+		
+		$emonth2 = DATE('m',strtotime($end2));
+		$eday2  = DATE('d',strtotime($end2)) ;
+		$eyear2  = DATE('Y',strtotime($end2)) ;		
+		
 		global $mainframe;
-
-		$data = array();
-
+		$Itemid = JEVHelper::getItemid();
 		$db	=& JFactory::getDBO();
 
-		$cfg = & JEVConfig::getInstance();
+		$cat = "";
+		if ($this->catidsOut != 0){
+			$cat = '&catids='.$this->catidsOut;
+		}
 
+		$cfg = & JEVConfig::getInstance();
+		
 		include_once(JPATH_ADMINISTRATOR."/components/".JEV_COM_COMPONENT."/libraries/colorMap.php");
 
-		$data ["limit"] = $limit;
+		$data2 = array();
+		$numday2 = 0;
 
-		if ($data ["limit"]>0){
+		$week_start2 = mktime( 0, 0, 0, $month2, ( $day2 - $numday2 ), $year2);
+		$week_end2 = mktime( 0, 0, 0, $emonth2, ( $eday2 - $numday2 ), $eyear2 ); 
+		
+		$rows = $this->queryModel->listEventsByWeekNEW(strftime("%Y-%m-%d",$week_start2),strftime("%Y-%m-%d",$week_end2));
+		
+		$icalrows2 = $this->queryModel->listIcalEventsByWeek($week_start2, $week_end2);
 
-			$counter = $this->queryModel->countIcalEventsByRange( $start,$end,  $cfg->get('com_showrepeats'));
+		$rows = array_merge($icalrows2,$rows);
+		$rowcount2 = count( $rows );
+		
+		//week start date
+		$data2['startdate']	= JEventsHTML::getDateFormat( strftime("%Y",$week_start2), strftime("%m",$week_start2), strftime("%d",$week_start2), 1 );
+		//week end date
+		$data2['enddate']	= JEventsHTML::getDateFormat( strftime("%Y",$week_end2), strftime("%m",$week_end2), strftime("%d",$week_end2), 1 );
 
-			$data["total"] =  $counter ;
-
-			if( $data["total"] <= $data ["limit"] ) {
-				$limitstart = 0;
+		$data2['days'] = array();
+		
+		$return = array($start2);
+	 	$startday = $start2;
+		$i=1;
+		
+		if (strtotime($start2) < strtotime($end2)){
+			while (strtotime($startday) < strtotime($end2)){
+				$startday = date('Y-m-d', strtotime($start2.'+'.$i.' days'));
+				$return[] = $startday;
+				$i++;
 			}
-			$data ["limitstart"]=$limitstart;
-		}
-		else {
-			$data["total"]=0;
-			$data ["limitstart"]=0;
 		}
 
-		$data["rows"] = $this->queryModel->listIcalEventsByRange( $start,$end, $data ["limitstart"], $data ["limit"],  $cfg->get('com_showrepeats'));
+		$counter2 = count($return);
+		$_SESSION['totaldays'] = $counter2 ;
 
-		return $data;
+		for( $d = 0; $d < $counter2; $d++ ){
+		
+			$data2['days'][$d] = array();
+			$data2['days'][$d]['rows'] = array();
+
+			$this_currentdate2 = mktime( 0, 0, 0, $month2, ( $day2 - $numday2 + $d ), $year2 );
+
+			$data2['days'][$d]['week_day'] = strftime("%d",$this_currentdate2);
+			$data2['days'][$d]['week_month'] = strftime("%m",$this_currentdate2);
+			$data2['days'][$d]['week_year'] = strftime("%Y",$this_currentdate2);
+
+			// This is really view specific - remove it later
+			$data2['days'][$d]['link']= JRoute::_( 'index.php?option='.JEV_COM_COMPONENT.'&task=day.listevents&year='.$data2['days'][$d]['week_year'].'&month='.$data2['days'][$d]['week_month'].'&day='.$data2['days'][$d]['week_day'].'&Itemid='.$Itemid . $cat);
+
+			$t_datenow2 = JEVHelper::getNow();
+			$now_adjusted2 = $t_datenow2->toUnix(true);
+			
+			if( strftime('%Y-%m-%d',$this_currentdate2) == strftime('%Y-%m-%d', $now_adjusted2))
+			{
+				$data2['days'][$d]['today']=true;
+				$data2['days']['today']=$d;
+			}
+			else
+			{
+				$data2['days'][$d]['today']=false;
+			}
+			
+
+			$num_events2		= count( $rows );
+			$countprint		= 0;
+
+			for( $r = 0; $r < $num_events2; $r++ ){
+				$row2 = $rows[$r];
+				if ($row2->checkRepeatWeek($this_currentdate2,$start2,$end2))  {
+				
+					$count2 = count($data2['days'][$d]['rows']);
+					$data2['days'][$d]['rows'][$count2] = $row2;
+				}
+			}
+
+		}
+	
+		return $data2;
 	}
 
 	/**
@@ -504,20 +576,25 @@ class JEventsDataModel {
 
 		$week_start = mktime( 0, 0, 0, $month, ( $day - $numday ), $year );
 		$week_end = mktime( 0, 0, 0, $month, ( $day - $numday )+6, $year ); // + 6 for inclusinve week
-
+		
+		// give null
 		$rows = $this->queryModel->listEventsByWeekNEW(strftime("%Y-%m-%d",$week_start),strftime("%Y-%m-%d",$week_end));
-
+		
+		//give event array 
 		$icalrows = $this->queryModel->listIcalEventsByWeek( $week_start, $week_end);
 
 		$rows = array_merge($icalrows,$rows);
 		$rowcount = count( $rows );
-
+				
+		//week start date
 		$data['startdate']	= JEventsHTML::getDateFormat( strftime("%Y",$week_start), strftime("%m",$week_start), strftime("%d",$week_start), 1 );
+		//week end date
 		$data['enddate']	= JEventsHTML::getDateFormat( strftime("%Y",$week_end), strftime("%m",$week_end), strftime("%d",$week_end), 1 );
 
 		$data['days'] = array();
 
 		for( $d = 0; $d < 7; $d++ ){
+		
 			$data['days'][$d] = array();
 			$data['days'][$d]['rows'] = array();
 
@@ -532,6 +609,7 @@ class JEventsDataModel {
 
 			$t_datenow = JEVHelper::getNow();
 			$now_adjusted = $t_datenow->toUnix(true);
+			
 			if( strftime('%Y-%m-%d',$this_currentdate) == strftime('%Y-%m-%d', $now_adjusted ))
 			{
 				$data['days'][$d]['today']=true;
@@ -541,7 +619,8 @@ class JEventsDataModel {
 			{
 				$data['days'][$d]['today']=false;
 			}
-
+			
+			//condition not true
 			if ($detailedDay && ($this_currentdate==$indate)){
 				$this->_populateHourData($data, $rows, $indate);
 			}
@@ -552,7 +631,6 @@ class JEventsDataModel {
 			for( $r = 0; $r < $num_events; $r++ ){
 				$row = $rows[$r];
 				if ($row->checkRepeatWeek($this_currentdate,$week_start,$week_end))  {
-
 					$count = count($data['days'][$d]['rows']);
 					$data['days'][$d]['rows'][$count] = $row;
 				}
@@ -562,6 +640,111 @@ class JEventsDataModel {
 		}
 
 		return $data;
+	}
+	
+	function getRangeDataCalender($start_date, $end_date) {
+		
+		$month = DATE('m',strtotime($start_date));
+		$day  = DATE('d',strtotime($start_date)) ;
+		$year  = DATE('Y',strtotime($start_date)) ;
+		
+		$emonth = DATE('m',strtotime($end_date));
+		$eday  = DATE('d',strtotime($end_date)) ;
+		$eyear  = DATE('Y',strtotime($end_date)) ;		
+		
+		global $mainframe;
+		$Itemid = JEVHelper::getItemid();
+		$db	=& JFactory::getDBO();
+
+		$cat = "";
+		if ($this->catidsOut != 0){
+			$cat = '&catids='.$this->catidsOut;
+		}
+
+		$cfg = & JEVConfig::getInstance();
+		
+		include_once(JPATH_ADMINISTRATOR."/components/".JEV_COM_COMPONENT."/libraries/colorMap.php");
+
+		$data1 = array();
+	
+		$numday1 = 0;
+
+		$week_start1 = mktime( 0, 0, 0, $month, ( $day - $numday1 ), $year );
+		$week_end1 = mktime( 0, 0, 0, $emonth, ( $eday - $numday1 ), $eyear ); 
+		
+		// give null
+		$rows = $this->queryModel->listEventsByWeekNEW(strftime("%Y-%m-%d",$week_start1),strftime("%Y-%m-%d",$week_end1));
+		
+		//give event array 
+		$icalrows = $this->queryModel->listIcalEventsByWeek( $week_start1, $week_end1);
+
+		$rows = array_merge($icalrows,$rows);
+		$rowcount = count( $rows );
+		
+		//week start date
+		$data1['startdate']	= JEventsHTML::getDateFormat( strftime("%Y",$week_start1), strftime("%m",$week_start1), strftime("%d",$week_start1), 1 );
+		//week end date
+		$data1['enddate']	= JEventsHTML::getDateFormat( strftime("%Y",$week_end1), strftime("%m",$week_end1), strftime("%d",$week_end1), 1 );
+
+		$data1['days'] = array();
+		
+		$return = array($start_date);
+	 	$start = $start_date;
+		$i=1;
+		
+		if (strtotime($start_date) < strtotime($end_date)){
+			while (strtotime($start) < strtotime($end_date)){
+				$start = date('Y-m-d', strtotime($start_date.'+'.$i.' days'));
+				$return[] = $start;
+				$i++;
+			}
+		}
+
+		$counter = count($return);
+		$_SESSION['listcaldays'] = $counter;
+
+		for( $d = 0; $d < $counter; $d++ ){
+		
+			$data1['days'][$d] = array();
+			$data1['days'][$d]['rows'] = array();
+
+			$this_currentdate1 = mktime( 0, 0, 0, $month, ( $day - $numday + $d ), $year );
+
+			$data1['days'][$d]['week_day'] = strftime("%d",$this_currentdate1);
+			$data1['days'][$d]['week_month'] = strftime("%m",$this_currentdate1);
+			$data1['days'][$d]['week_year'] = strftime("%Y",$this_currentdate1);
+
+			// This is really view specific - remove it later
+			$data1['days'][$d]['link']= JRoute::_( 'index.php?option='.JEV_COM_COMPONENT.'&task=day.listevents&year='.$data1['days'][$d]['week_year'].'&month='.$data1['days'][$d]['week_month'].'&day='.$data1['days'][$d]['week_day'].'&Itemid='.$Itemid . $cat);
+
+			$t_datenow1 = JEVHelper::getNow();
+			$now_adjusted1 = $t_datenow1->toUnix(true);
+			
+			if( strftime('%Y-%m-%d',$this_currentdate1) == strftime('%Y-%m-%d', $now_adjusted1 ))
+			{
+				$data1['days'][$d]['today']=true;
+				$data1['days']['today']=$d;
+			}
+			else
+			{
+				$data1['days'][$d]['today']=false;
+			}
+
+			$num_events1		= count( $rows );
+			$countprint		= 0;
+
+			for( $r = 0; $r < $num_events1; $r++ ){
+				$row1 = $rows[$r];
+				if ($row1->checkRepeatWeek($this_currentdate1,$start_date,$end_date))  {
+				
+					$count = count($data1['days'][$d]['rows']);
+					$data1['days'][$d]['rows'][$count] = $row1;
+				}
+			}
+		}
+		
+		return $data1;
+
 	}
 
 	function _populateHourData(&$data, $rows, $target_date){

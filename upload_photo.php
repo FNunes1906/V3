@@ -127,8 +127,8 @@ _init();
 				$headers .= 'From: NO-REPLY <admin@'.$_SERVER['SERVER_NAME'].'>' . "\r\n";
 				$headers .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
 				// Email Notification to Administrator
-				//$sendmail = mail($adminEmail,$subject,$message,$headers);
-				$sendmail = true;
+				$sendmail = mail($adminEmail,$subject,$message,$headers);
+				//$sendmail = true;
 		    }
 			
 		}else{

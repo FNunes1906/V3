@@ -4,7 +4,7 @@ ini_set('display_errors',1);
 include("../connection.php");
 
 // Display all published category from J_Events component
-$select_query = "SELECT id,name FROM jos_categories WHERE section LIKE 'com_jevents' AND PUBLISHED = 1 ORDER BY id";
+$select_query = "SELECT id,name FROM jos_categories WHERE section LIKE 'com_jevents' AND PUBLISHED = 1 ORDER BY ordering";
 $catResult = mysql_query($select_query);
 $i=0;
 

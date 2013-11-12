@@ -1,8 +1,28 @@
 <?php defined('_JEXEC') or die('Restricted access'); 
+
+/* code added by rinkal for map in all languages */
+$lang =& JFactory::getLanguage();
+$lan = $lang->getName();
+if($lan=="Español"){
+ $lan1="es";
+}
+else if($lan=="Croatian(HR)"){
+ $lan1="hr";
+}
+else if($lan=="Nederlands - nl-NL"){
+ $lan1="nl";
+}
+else if($lan=="Português (Brasil)"){
+ $lan1="pt";
+}
+else{
+ $lan1="en";
+}
+/* code ended by rinkal for map in all language */
 ?>
 <html>
 <head>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=<?php echo $lan1?>"></script>
 <script type="text/javascript">
   var geocoder;
   var map;

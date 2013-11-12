@@ -349,9 +349,10 @@ li.active span.menu_img_hover,span.menu_img_hover:hover{
 .ad.sect {
   border:0 none !important;
 }
-#Feat h1 {
-  font-size:18px;
+#Feat h2 {
+  font-size:16px;
   margin-bottom:12px;
+  line-height: 18px;
 }
 a.saved {
   padding:13px 12px;
