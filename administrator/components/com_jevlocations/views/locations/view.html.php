@@ -441,7 +441,7 @@ SCRIPT;
 		}
 
 		$document =& JFactory::getDocument();
-		$document->setTitle(JText::_('Location Detail'). " | ". $location->title);
+		$document->setTitle(JText::_('TW_LOCATION_DETAIL'). " | ". $location->title);
 
 		$subtitle = addslashes(str_replace(" ","+",urlencode($location->title)));
 

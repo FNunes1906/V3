@@ -127,8 +127,8 @@ if($todaestring != null){
 	$todaestring =  ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
 	echo "<h1>$todaestring</h1>";
 }elseif($seachStartFullDate == $searchEndFullDate){
-	$seachStartDate =  ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear)))
-	$searchEndDate 	=  ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)))
+	$seachStartDate =  ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear)));
+	$searchEndDate 	=  ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
 	echo "<h1>$seachStartDate</h1>";
 }
 ?>
