@@ -59,15 +59,15 @@ function contact_intro() {
 	<?php 
 		/* code start by rinkal for page title */
 		if ($_SESSION['tpl_folder_name'] == 'defaultspanish'){
-			$t = 'contáctenos';
+			$t = 'Contáctenos';
 		}elseif($_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-			$t = 'conosco';
+			$t = 'Conosco';
 		}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-			$t = 'contact';
+			$t = 'Contact';
 		}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-			$t = 'kontaktirajte ';
+			$t = 'Kontaktirajte ';
 		}elseif($_SESSION['tpl_folder_name'] == 'default'){
-			$t = 'contact';
+			$t = 'Contact';
 		}
 		
 		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);

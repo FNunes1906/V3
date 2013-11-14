@@ -170,9 +170,11 @@ jQuery(document).ready(function(){
 <?php
 $app = JFactory::getApplication();
 if(JRequest::getVar('task') == 'icalrepeat.detail'){
-	$this->setTitle( $var->site_name . ' | '. JText::_("TW_EVENT_DETAIL").' | '. $this->getTitle() . ' | ' . $var->page_title );
+ $this->setTitle( $var->site_name . ' | '. JText::_("TW_EVENT_DETAIL").' | '. $this->getTitle());
+}elseif(JRequest::getVar('task') == 'locations.detail'){
+ $this->setTitle( $var->site_name . ' | ' . $this->getTitle()); 
 }else{
-	$this->setTitle( $var->site_name . ' | ' . $this->getTitle() . ' | ' . $var->page_title );	
+ $this->setTitle( $var->site_name . ' | ' . $this->getTitle() . ' | ' . $var->page_title ); 
 }
 ?>
 <?php include("ga.php"); ?>

@@ -58,15 +58,15 @@ function about_intro() {
 	<?php 
 		/* code start by rinkal for page title */
 		if ($_SESSION['tpl_folder_name'] == 'defaultspanish'){
-			$t = 'acerca-de';
+			$t = 'Acerca De';
 		}elseif($_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-			$t = 'sobre';
+			$t = 'Sobre';
 		}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-			$t = 'over';
+			$t = 'Over';
 		}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-			$t = 'oko';
+			$t = 'Oko';
 		}elseif($_SESSION['tpl_folder_name'] == 'default'){
-			$t = 'about';
+			$t = 'About';
 		}
 		
 		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);

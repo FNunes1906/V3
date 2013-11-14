@@ -85,13 +85,13 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 	/* code start by rinkal for page title */
 	
 	if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-		$t = 'detalles-del-evento';
+		$t = 'Detalles Del Evento';
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-		$t = 'evenementen-detail';
+		$t = 'Evenementen Detail';
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-		$t = 'događaj-detalj';
+		$t = 'Događaj Detalj';
 	}elseif($_SESSION['tpl_folder_name'] == 'default'){
-		$t = 'event-detail';
+		$t = 'Event Detail';
 	}
 	
 	while($row=mysql_fetch_array($title))

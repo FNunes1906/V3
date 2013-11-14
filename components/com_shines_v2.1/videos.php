@@ -33,11 +33,11 @@ header( 'Content-Type:text/html;charset=utf-8');
 <?php 
 	/* code start by rinkal for page title */
 	if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese' || $_SESSION['tpl_folder_name'] == 'default'){
-		$t = 'videos';
+		$t = 'Videos';
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
 		$t = 'Filmpjesl';
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-		$t = 'video';
+		$t = 'Video';
 	}
 	
 	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);

@@ -29,12 +29,20 @@ class WeekController extends JController   {
 	}
 
 	function listevents() {
-
 		$pagetitle= $_SERVER['REQUEST_URI'];
 		$urlpart = explode("/",$pagetitle);
-		if(isset($urlpart[2]) != ""){
+
+		if (preg_match("/index.php/",$urlpart[1])) {
+			$urlpart[1] = JText::_('TW_SEARCH_EVENTS');
+			$urlpart[2] = ""; $urlpart[3] = ""; $urlpart[4] = ""; $urlpart[5] = "";
 			$document = &JFactory::getDocument();
-			$document->setTitle(ucfirst ($urlpart[1]).' | '.ucfirst ( $urlpart[2]));
+			$document->setTitle(ucfirst ($urlpart[1]));
+		}elseif (isset($urlpart[2]) != ""){
+			$document = &JFactory::getDocument();
+			$document->setTitle(ucfirst ($urlpart[1]).' | '.ucfirst ( $urlpart[2] ));
+		} else {
+			$document = &JFactory::getDocument();
+			$document->setTitle(ucfirst ($urlpart[1]));
 		}
 
 		list($year,$month,$day) = JEVHelper::getYMD();

@@ -471,7 +471,7 @@ class JEventsDataModel {
 		
 		$rows = $this->queryModel->listEventsByWeekNEW(strftime("%Y-%m-%d",$week_start2),strftime("%Y-%m-%d",$week_end2));
 		
-		$icalrows2 = $this->queryModel->listIcalEventsByWeek($week_start2, $week_end2);
+		$icalrows2 = $this->queryModel->listIcalEventsByWeek($week_start2, $week_end2);		
 
 		$rows = array_merge($icalrows2,$rows);
 		$rowcount2 = count( $rows );
@@ -525,7 +525,11 @@ class JEventsDataModel {
 				$data2['days'][$d]['today']=false;
 			}
 			
-
+			//condition not true
+			if ($detailedDay && ($this_currentdate2==$indate)){
+				$this->_populateHourData($data2, $rows, $indate);
+			}
+			
 			$num_events2		= count( $rows );
 			$countprint		= 0;
 
@@ -537,10 +541,14 @@ class JEventsDataModel {
 					$data2['days'][$d]['rows'][$count2] = $row2;
 				}
 			}
+						// sort events of this day by time
+			usort($data2['days'][$d]['rows'],array("JEventsDataModel", "_sortEventsByTime"));
 
 		}
-	
-		return $data2;
+/*	echo "Range Data";
+	echo "<pre>";
+	print_r($data2);*/
+	return $data2;
 	}
 
 	/**
@@ -639,7 +647,9 @@ class JEventsDataModel {
 			usort($data['days'][$d]['rows'],array("JEventsDataModel", "_sortEventsByTime"));
 		}
 
-		return $data;
+/*	echo "<pre>";
+	print_r($data);*/
+	return $data;
 	}
 	
 	function getRangeDataCalender($start_date, $end_date) {
@@ -729,6 +739,11 @@ class JEventsDataModel {
 			{
 				$data1['days'][$d]['today']=false;
 			}
+			
+			//condition not true
+			if ($detailedDay && ($this_currentdate1==$indate)){
+				$this->_populateHourData($data1, $rows, $indate);
+			}			
 
 			$num_events1		= count( $rows );
 			$countprint		= 0;
@@ -741,6 +756,8 @@ class JEventsDataModel {
 					$data1['days'][$d]['rows'][$count] = $row1;
 				}
 			}
+			// sort events of this day by time
+			usort($data1['days'][$d]['rows'],array("JEventsDataModel", "_sortEventsByTime"));			
 		}
 		
 		return $data1;

@@ -158,13 +158,13 @@ header( 'Content-Type:text/html;charset=utf-8');
 <?php
 		/* code start by rinkal for page title */
 		if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-			$t = 'lugares';
+			$t = 'Lugares';
 		}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-			$t = 'plaatsen';
+			$t = 'Plaatsen';
 		}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-			$t = 'mjesta';
+			$t = 'Mjesta';
 		}elseif($_SESSION['tpl_folder_name'] == 'default'){
-			$t = 'places';
+			$t = 'Places';
 		}
 		
 		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);

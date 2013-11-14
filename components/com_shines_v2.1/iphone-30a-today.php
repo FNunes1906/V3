@@ -137,13 +137,13 @@ $pagemeta =mysql_fetch_array($pagemeta_res);
 <?php 
 	/* code start by rinkal for page title */
 	if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-		$t = 'inicio';
+		$t = 'Inicio';
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-		$t = 'home';
+		$t = 'Home';
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-		$t = 'početna';
+		$t = 'Početna';
 	}elseif($_SESSION['tpl_folder_name'] == 'default'){
-		$t = 'home';
+		$t = 'Home';
 	}
 	
 	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);

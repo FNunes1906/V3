@@ -83,15 +83,15 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 		while($row=mysql_fetch_array($title))
 		{
 			if ($_SESSION['tpl_folder_name'] == 'defaultspanish'){
-				$t = 'detalles-de-ubicación';
+				$t = 'Detalles De Ubicación';
 			}elseif($_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-				$t = 'detalhe-localização';
+				$t = 'Detalhe Localização';
 			}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-				$t = 'locatie-detail';
+				$t = 'Locatie Detail';
 			}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-				$t = 'lokacija-detalj';
+				$t = 'Lokacija Detalj';
 			}elseif($_SESSION['tpl_folder_name'] == 'default'){
-				$t = 'location-detail';
+				$t = 'Location Detail';
 			}
 			
 			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);

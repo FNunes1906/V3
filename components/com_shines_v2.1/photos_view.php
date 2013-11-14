@@ -55,15 +55,15 @@ $img_title= $mydb->execute_query($recno);
 <?php
 	/* code start by rinkal for page title */
 	if ($_SESSION['tpl_folder_name'] == 'defaultspanish'){
-		$t = 'detalle-de-las-fotos';
+		$t = 'Fotos Detalle';
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-		$t = 'fotos-pormenor';
+		$t = 'Fotos Pormenor';
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-		$t = "foto's-detail";
+		$t = "Foto's Detail";
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-		$t = 'Fotografije-prikazuju';
+		$t = 'Fotografije Prikazuju';
 	}elseif($_SESSION['tpl_folder_name'] == 'default'){
-		$t = 'photos-detail';
+		$t = 'Photos Detail';
 	}
 	
 	

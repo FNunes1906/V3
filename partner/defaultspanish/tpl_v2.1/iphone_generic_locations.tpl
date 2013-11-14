@@ -93,7 +93,7 @@ Alfab&#233;tico
 				$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 				if(stripos($ua,'android') == true) { ?>
 					<?php } else { ?>
-					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row[geolat]; ?>:<?php echo $row[geolon]; ?>')">facturar</a></li>
+					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row[geolat]; ?>:<?php echo $row[geolon]; ?>')">Registrar visita</a></li>
 					<?php } ?>
 				<li><a class="button small" href="diningdetails.php?did=<?php echo $row['loc_id']?>&lat=<?php echo $lat1?>&lon=<?php echo $lon1?>">m&#225;s info</a></li>
 				<li><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $row[geolon]; ?>:<?php echo $row[geolat]; ?>')"></a></li>
@@ -140,7 +140,7 @@ Alfab&#233;tico
 				$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 				if(stripos($ua,'android') == true) { ?>
 					<?php } else { ?>
-					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $data[geolat]; ?>:<?php echo $data[geolon]; ?>')">facturar</a></li>
+					<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $data[geolat]; ?>:<?php echo $data[geolon]; ?>')">Registrar visita</a></li>
 					<?php } ?>
 					<li><a class="button small" href="diningdetails.php?did=<?php echo $data['loc_id']?>&lat=<?php echo $lat1?>&lon=<?php echo $lon1?>">m&#225;s info</a></li>
 					<li><a  href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $data['geolon']; ?>:<?php echo $data['geolat']; ?>')"></a></li>

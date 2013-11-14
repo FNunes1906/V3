@@ -57,15 +57,15 @@ function advertise_intro() {
 	<?php 
 		/* code start by rinkal for page title */
 		if ($_SESSION['tpl_folder_name'] == 'defaultspanish'){
-			$t = 'anúnciate';
+			$t = 'Anúnciate';
 		}elseif($_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-			$t = 'anuncie';
+			$t = 'Anuncie';
 		}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-			$t = 'adverteer';
+			$t = 'Adverteer';
 		}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-			$t = 'marketing';
+			$t = 'Marketing';
 		}elseif($_SESSION['tpl_folder_name'] == 'default'){
-			$t = 'about';
+			$t = 'About';
 		}
 		
 		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);

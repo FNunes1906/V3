@@ -57,15 +57,15 @@ function help_intro() {
 	<?php 
 		/* code start by rinkal for page title */
 		if ($_SESSION['tpl_folder_name'] == 'defaultspanish'){
-			$t = 'ayudar';
+			$t = 'Ayudar';
 		}elseif($_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-			$t = 'ajudar';
+			$t = 'Ajudar';
 		}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-			$t = 'helpen';
+			$t = 'Helpen';
 		}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-			$t = 'pomoći ';
+			$t = 'Pomoći ';
 		}elseif($_SESSION['tpl_folder_name'] == 'default'){
-			$t = 'help';
+			$t = 'Help';
 		}
 		
 		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);

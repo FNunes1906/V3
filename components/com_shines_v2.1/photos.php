@@ -65,13 +65,13 @@ $pagemeta =mysql_fetch_array($pagemeta_res);
 <?php
 	/* code start by rinkal for page title */
 	if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-		$t = 'fotos';
+		$t = 'Fotos';
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-		$t = "foto's";
+		$t = "Foto's";
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-		$t = 'fotografije';
+		$t = 'Fotografije';
 	}elseif($_SESSION['tpl_folder_name'] == 'default'){
-		$t = 'photos';
+		$t = 'Photos';
 	}
 	
 	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);

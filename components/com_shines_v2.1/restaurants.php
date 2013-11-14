@@ -158,13 +158,13 @@ header( 'Content-Type:text/html;charset=utf-8');
 	/* code start by rinkal for page title */
 	
 	if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-		$t = 'restaurantes';
+		$t = 'Restaurantes';
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-		$t = 'restaurants';
+		$t = 'Restaurants';
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-		$t = 'restorani';
+		$t = 'Restorani';
 	}elseif($_SESSION['tpl_folder_name'] == 'default'){
-		$t = 'restaurants';
+		$t = 'Restaurants';
 	}
 
 	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);

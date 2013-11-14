@@ -1,6 +1,5 @@
 <?php 
 setlocale(LC_TIME,"croatian");
-/*$todaestring = ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));*/
 ?>
 <div id="featuredEvents">
 	<div class="flexslider-container">
