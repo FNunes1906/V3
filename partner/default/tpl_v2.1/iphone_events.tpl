@@ -12,15 +12,15 @@
 			while($fearow=mysql_fetch_array($featured_filter)){
 			
 			$finalDescription="";
-			##Image Fetched for slide show##
+			# Image Fetched for slide show
 			    $imagesrc= strstr($fearow['description'],'src=');
 				$imageurl= strstr($imagesrc,'http');
 				$singleimagearray = explode('"',$imageurl);
 				if($singleimagearray[0] == ""){
 				$singleimagearray[0] = "/partner/".$_SESSION['partner_folder_name']."/images/stories/nofe_image.png"; }
-			##end##
+			# end
 			
-		/* Coded By Akash */			
+			# Coded By Akash
 			
 			$displayTime = '';
 			
@@ -51,9 +51,7 @@
 					}
 				}
 				
-			}
-				
-		/* End By Akash */			
+			} # End By Akash
 			
 			if(in_array($fearow['ev_id'], $tempeventid)){
 			}else{
@@ -84,31 +82,24 @@
 	</div>
 </div> <!-- featured events -->
 
-
 <div class="section">
 	<!--Code for Mobiscroll NEW date picker - Yogi START -->
 	<input style="display: none;" type="text" name="test_default" id="test_default" onChange="redirecturl(this.value);"/>
 	<label for="test_default" class="ui-btn-hidden button">Check Events By Day</label>
 	<!--Code for Mobiscroll NEW date picker - Yogi END -->
-
-	<!--<form name='events' id='events' action='events.php' method='post'>
-	<input type="text" value="" class="mobiscroll ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-d scroller" id="date1" name="eventdate" style="width:0px;height:0px;border:0px;background:#333333;position: absolute;top: -100px;">
-	<button data-theme="a" id="show" class="ui-btn-hidden button" aria-disabled="false" style="width:100%;">Check Events By Day</button>
-	</form>-->
 </div>
 
 <?php
 $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 if(stripos($ua,'android') == true) { ?>
-		<div class="iphoneads" style="vertical-align:bottom;">
-			<?php m_show_banner('android-events-screen'); ?>
-		</div>
+	<div class="iphoneads" style="vertical-align:bottom;">
+		<?php m_show_banner('android-events-screen'); ?>
+	</div>
 <?php }else{?>
-		<div class="iphoneads" style="vertical-align:bottom;">
-    		<?php m_show_banner('iphone-events-screen'); ?>
-  		</div>
+	<div class="iphoneads" style="vertical-align:bottom;">
+	<?php m_show_banner('iphone-events-screen'); ?>
+	</div>
 <?php } ?>
-
 
 <div id="main" role="main">
 <?php
@@ -122,9 +113,7 @@ if($todaestring != null){
 <ul id="eventList" class="mainList" ontouchstart="touchStart(event,'eventList');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 	<?php 
 	$n = 0;
-	$displayCheck = '';
-
-	if(!isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == '' || $seachStartDate == $searchEndDate){
+	if($seachStartDate == $searchEndDate || !isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == ''){
 		while($row = mysql_fetch_array($rec)){
 
 			# Fetch event data from "event" table
@@ -196,7 +185,7 @@ if($todaestring != null){
 						$e_end_rpt		= strstr($row['endrepeat']," ",true);
 						
 						if($e_start_rpt != $e_end_rpt){
-							$dateValue = explode('-',$ser_start_date);
+							$dateValue = explode('-',$single_day_date);
 						}else{
 							$dateValue = explode(' ',$row['startrepeat']);
 							$dateValue = explode('-',$dateValue[0]);

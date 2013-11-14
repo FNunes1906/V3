@@ -1,11 +1,13 @@
 <?php
-
-if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
+if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')){
+	ob_start("ob_gzhandler");
+}else{
+	ob_start();
+}
 
 session_start();
 include("connection.php");
 include("iadbanner.php");
-
 
 if($_SESSION['tpl_folder_name'] == "defaultspanish"){
 	$final_lang = "es";
@@ -96,8 +98,10 @@ if(!empty($_REQUEST['eventdate'])){
 	$searchEndFullDate	=	$toyear.'-'.$tomonth.'-'.$today ;
 	$seachStartDate		=	date('l, j M', mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear));
 	$searchEndDate		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
+	$single_day_date	= 	($fromYear.'-'.$fromMonth.'-'.$fromDay);
 }else{
 	$todaestring		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
+	$single_day_date	= 	($toyear.'-'.$tomonth.'-'.$today);
 }
 //#DD#
 
@@ -155,134 +159,131 @@ header('Content-Type:text/html;charset=utf-8');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>
+	<head>
+		<title>
 
-<?php
-	/* code start by rinkal for page title */
-	if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-		$t = 'eventos';
-	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-		$t = 'evenementen';
-	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-		$t = 'događanja';
-	}elseif($_SESSION['tpl_folder_name'] == 'default'){
-		$t = 'events';
-	}
-	
-	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-	if(stripos($ua,'android') == True) { 
-		$title = $site_name.' ~ '.$t;
-		if($pagemeta['title']!='')
-		{
-			$title.= ' ~ '.$pagemeta['title'];
+		<?php
+			/* code start by rinkal for page title */
+			if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
+				$t = 'Eventos';
+			}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
+				$t = 'Evenementen';
+			}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
+				$t = 'Događanja';
+			}elseif($_SESSION['tpl_folder_name'] == 'default'){
+				$t = 'Events';
+			}
+			
+			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+			if(stripos($ua,'android') == True){ 
+				$title = $site_name.' ~ '.$t;
+				if($pagemeta['title']!=''){
+					$title.= ' ~ '.$pagemeta['title'];
+				}
+				echo $title;
+			}else{
+				$title = $site_name.' : '.$t;
+				if($pagemeta['title']!=''){
+					$title.= ' : '.$pagemeta['title'];
+				}
+				echo $title;
+			}
+			/* code end by rinkal for page title */
+		?>
+		</title>
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="index,follow" name="robots" />
+		<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+		<link rel="shortcut icon" href="images/l/apple-touch-icon.png">
+		<link href="pics/startup.png" rel="apple-touch-startup-image" />
+		<!--<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />-->
+		<meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta content="destin, vacactions in destin florida, destin, florida, real estate, sandestin resort, beaches, destin fl, maps of florida, hotels, hotels in florida, destin fishing, destin hotels, best florida beaches, florida beach house rentals, destin vacation rentals for destin, destin real estate, best beaches in florida, condo rentals in destin, vacaction rentals, fort walton beach, destin fishing, fl hotels, destin restaurants, florida beach hotels, hotels in destin, beaches in florida, destin, destin fl" name="keywords" />
+		<meta content="Destin Florida's FREE iPhone application and website guide to local events, live music, restaurants and attractions" name="description" />
+		<link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
+		<!--<link href="../../mobiscroll/css/mobiscroll-1.5.1.css" rel="stylesheet" type="text/css" />-->
+
+		<script type="text/javascript" src="/components/com_shines_v2.1/javascript/mobileswipe.js"></script>
+		<script type="text/javascript">
+		var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){var a=document.getElementsByTagName("a");for(var i=0;i<a.length;i++){if(a[i].className.match("noeffect")){}else{a[i].onclick=function(){window.location=this.getAttribute("href");return false}}}}function hideURLbar(){window.scrollTo(0,0.9)}iWebkit.init=function(){fullscreen();hideURLbar()};iWebkit.init()}}
+		</script>
+		<script type="text/javascript">
+		    function linkClicked(link) { document.location = link; }
+		</script>
+		<!--<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>-->
+		<!--<script src="../../mobiscroll/js/mobiscroll-1.5.1.js" type="text/javascript"></script>-->
+		<script type="text/javascript">
+		            function submitForm() {
+		                    document.events.submit(); //#DD#
 		}
-		echo $title;
-	}
-	else{
-		$title = $site_name.' : '.$t;
-		if($pagemeta['title']!='')
-		{
-			$title.= ' : '.$pagemeta['title'];
-		}
-		echo $title;
-	}
-	/* code end by rinkal for page title */
-?>
-</title>
-<meta content="yes" name="apple-mobile-web-app-capable" />
-<meta content="index,follow" name="robots" />
-<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
-<link rel="shortcut icon" href="images/l/apple-touch-icon.png">
-<link href="pics/startup.png" rel="apple-touch-startup-image" />
-<!--<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />-->
-<meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-<meta content="destin, vacactions in destin florida, destin, florida, real estate, sandestin resort, beaches, destin fl, maps of florida, hotels, hotels in florida, destin fishing, destin hotels, best florida beaches, florida beach house rentals, destin vacation rentals for destin, destin real estate, best beaches in florida, condo rentals in destin, vacaction rentals, fort walton beach, destin fishing, fl hotels, destin restaurants, florida beach hotels, hotels in destin, beaches in florida, destin, destin fl" name="keywords" />
-<meta content="Destin Florida's FREE iPhone application and website guide to local events, live music, restaurants and attractions" name="description" />
-<link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
-<!--<link href="../../mobiscroll/css/mobiscroll-1.5.1.css" rel="stylesheet" type="text/css" />-->
+		    $(document).ready(function () {
+		            // Date with external button
+		            $('#date1').scroller({ showOnFocus: false });
+		            $('#show').click(function() { $('#date1').scroller('show'); return false; });
+		            // Time
+		            $('#date2').scroller({ preset: 'time' });
+		            // Datetime
+		             $('#date3').scroller({ preset: 'date' });
+		            $('#custom').scroller({ showOnFocus: false });
+		            $('#custom').click(function() { $(this).scroller('show'); });
+		            $('#disable').click(function() {
+		                $('#date1').scroller('disable');
+		                return false;
+		            });
+		            $('#enable').click(function() {
+		                $('#date1').scroller('enable');
+		                return false;
+		            });
+		            $('#get').click(function() {
+		                alert($('#date1').scroller('getDate'));
+		                return false;
+		            });
+		            $('#set').click(function() {
+		                $('#date1').scroller('setDate', new Date(), true);
+		                return false;
+		            });
+		            $('#theme, #mode').change(function() {
+		                var t = $('#theme').val();
+		                var m = $('#mode').val();
+		                $('#date1').scroller('destroy').scroller({ showOnFocus: false, theme: t, mode: m });
+		                $('#date2').scroller('destroy').scroller({ preset: 'time', theme: t, mode: m });
+		               $('#date3').scroller('destroy').scroller({ preset: 'date', theme: t, mode: m });
+		                $('#custom').scroller('destroy').scroller({ showOnFocus: false, theme: t, mode: m });
+		            });
+		        });
+		</script>
 
-<script type="text/javascript" src="/components/com_shines_v2.1/javascript/mobileswipe.js"></script>
-<script type="text/javascript">
-var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){var a=document.getElementsByTagName("a");for(var i=0;i<a.length;i++){if(a[i].className.match("noeffect")){}else{a[i].onclick=function(){window.location=this.getAttribute("href");return false}}}}function hideURLbar(){window.scrollTo(0,0.9)}iWebkit.init=function(){fullscreen();hideURLbar()};iWebkit.init()}}
-</script>
-<script type="text/javascript">
-    function linkClicked(link) { document.location = link; }
-</script>
-<!--<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>-->
-<!--<script src="../../mobiscroll/js/mobiscroll-1.5.1.js" type="text/javascript"></script>-->
-<script type="text/javascript">
-            function submitForm() {
-                    document.events.submit(); //#DD#
-}
-    $(document).ready(function () {
-            // Date with external button
-            $('#date1').scroller({ showOnFocus: false });
-            $('#show').click(function() { $('#date1').scroller('show'); return false; });
-            // Time
-            $('#date2').scroller({ preset: 'time' });
-            // Datetime
-             $('#date3').scroller({ preset: 'date' });
-            $('#custom').scroller({ showOnFocus: false });
-            $('#custom').click(function() { $(this).scroller('show'); });
-            $('#disable').click(function() {
-                $('#date1').scroller('disable');
-                return false;
-            });
-            $('#enable').click(function() {
-                $('#date1').scroller('enable');
-                return false;
-            });
-            $('#get').click(function() {
-                alert($('#date1').scroller('getDate'));
-                return false;
-            });
-            $('#set').click(function() {
-                $('#date1').scroller('setDate', new Date(), true);
-                return false;
-            });
-            $('#theme, #mode').change(function() {
-                var t = $('#theme').val();
-                var m = $('#mode').val();
-                $('#date1').scroller('destroy').scroller({ showOnFocus: false, theme: t, mode: m });
-                $('#date2').scroller('destroy').scroller({ preset: 'time', theme: t, mode: m });
-               $('#date3').scroller('destroy').scroller({ preset: 'date', theme: t, mode: m });
-                $('#custom').scroller('destroy').scroller({ showOnFocus: false, theme: t, mode: m });
-            });
-        });
-</script>
+		<!--Code for Mobiscroll NEW date picker - Yogi START -->
+		<script src="javascript/jquery-1.9.1.min.js"></script>
+		<link href="css/mobiscroll.custom-2.7.2.min.css" rel="stylesheet" type="text/css" />
+		<script src="javascript/mobiscroll.custom-2.7.2.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+		 jQuery(function () {
+		 var now = new Date();
+		 var curr = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+		 var opt = {}
+		 opt.rangepicker = {preset : 'rangepicker'};
+		 jQuery('select.changes').bind('change', function() {
+		  var demo = "rangepicker";
+		  jQuery(".demos").hide();
+		  if (!($("#demo_"+demo).length))
+		  demo = 'default';
+		  jQuery("#demo_" + demo).show();
+		  jQuery('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "modal", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
+		 });
+		 jQuery('#demo').trigger('change');
+		 });
+		</script>
+		<script type="text/javascript">
+			function redirecturl(val){
+				url="/components/com_shines_v2.1/events.php?eventdate="+val; 
+				window.location = url;
+			}
+		</script>
+		<!--Code for Mobiscroll NEW date picker - Yogi END -->
 
-<!--Code for Mobiscroll NEW date picker - Yogi START -->
-<script src="javascript/jquery-1.9.1.min.js"></script>
-<link href="css/mobiscroll.custom-2.7.2.min.css" rel="stylesheet" type="text/css" />
-<script src="javascript/mobiscroll.custom-2.7.2.min.js" type="text/javascript"></script>
-<script type="text/javascript">
- jQuery(function () {
- var now = new Date();
- var curr = new Date(now.getFullYear(), now.getMonth(), now.getDate())
- var opt = {}
- opt.rangepicker = {preset : 'rangepicker'};
- jQuery('select.changes').bind('change', function() {
-  var demo = "rangepicker";
-  jQuery(".demos").hide();
-  if (!($("#demo_"+demo).length))
-  demo = 'default';
-  jQuery("#demo_" + demo).show();
-  jQuery('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "modal", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
- });
- jQuery('#demo').trigger('change');
- });
-</script>
-<script type="text/javascript">
-	function redirecturl(val){
-		url="/components/com_shines_v2.1/events.php?eventdate="+val; 
-		window.location = url;
-	}
-</script>
-<!--Code for Mobiscroll NEW date picker - Yogi END -->
-
-<?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
-</head>
+		<?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
+	</head>
 	<body>
 	    <div style="display: none">
 	        <label for="demo">Demo</label>
