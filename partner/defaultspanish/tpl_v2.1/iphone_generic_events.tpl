@@ -89,7 +89,7 @@ setlocale(LC_TIME,"spanish");
 <div class="section">
 	<!--Code for Mobiscroll NEW date picker - Yogi START -->
 	<input style="display: none;" type="text" name="test_default" id="test_default" onChange="redirecturl(this.value);"/>
-	<label for="test_default" class="ui-btn-hidden button">Check Events By Day</label>
+	<label for="test_default" class="ui-btn-hidden button">Ver Eventos por d&#237;a</label>
 	<!--Code for Mobiscroll NEW date picker - Yogi END -->
 </div>
 
@@ -124,12 +124,12 @@ if(stripos($ua,'android') == True) { ?>
 <div id="main" role="main">
 <?php
 if($todaestring != null){
-	$todaestring =  ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
-	echo "<h1>$todaestring</h1>";
+	$todaestring =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));
+	echo "<h1>".$todaestring."</h1>";
 }elseif($seachStartFullDate == $searchEndFullDate){
-	$seachStartDate =  ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear)));
-	$searchEndDate 	=  ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
-	echo "<h1>$seachStartDate</h1>";
+	$seachStartDate =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear))));
+	$searchEndDate  =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));	
+	echo "<h1>".$seachStartDate."</h1>";
 }
 ?>
 
@@ -234,7 +234,7 @@ if($todaestring != null){
 			unset($categoryname);
 			$n = 0;
 			
-			$disp_date =  ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear)));
+			$disp_date =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear))));
 			echo "<h1 id='datezig'>$disp_date</h1>";
 		
 			# Event fetch query for given date	

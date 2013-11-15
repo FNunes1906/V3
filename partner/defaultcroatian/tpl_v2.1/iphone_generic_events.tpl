@@ -89,7 +89,7 @@ setlocale(LC_TIME,"croatian");
 <div class="section">
 	<!--Code for Mobiscroll NEW date picker - Yogi START -->
 	<input style="display: none;" type="text" name="test_default" id="test_default" onChange="redirecturl(this.value);"/>
-	<label for="test_default" class="ui-btn-hidden button">Check Events By Day</label>
+	<label for="test_default" class="ui-btn-hidden button">Filtriranje po datumu</label>
 	<!--Code for Mobiscroll NEW date picker - Yogi END -->
 </div>
 

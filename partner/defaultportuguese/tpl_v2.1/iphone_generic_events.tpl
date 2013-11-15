@@ -89,7 +89,7 @@ setlocale(LC_TIME,"portuguese");
 <div class="section">
 	<!--Code for Mobiscroll NEW date picker - Yogi START -->
 	<input style="display: none;" type="text" name="test_default" id="test_default" onChange="redirecturl(this.value);"/>
-	<label for="test_default" class="ui-btn-hidden button">Check Events By Day</label>
+	<label for="test_default" class="ui-btn-hidden button">Confira os Eventos di&#225;rios</label>
 	<!--Code for Mobiscroll NEW date picker - Yogi END -->
 </div>
 
