@@ -1,6 +1,6 @@
 <?php 
 setlocale(LC_TIME,"portuguese");
-$todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
+$todaestring =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));
 ?>
 <div id="main" role="main" ontouchstart="touchStart(event,'list');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 	<ul id="placesList" class="mainList"><li>
@@ -28,7 +28,7 @@ $todaestring=ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $to
 		$lon2=$rowlocdetail['geolon'];
 		}
 		?>
-		<H1><?php echo$rowvevdetail['summary'];?></h1>
+		<H1><?php echo $rowvevdetail['summary'];?></h1>
 
 		<p><strong>Data:</strong><?php echo $todaestring;?></p>
 		<p><strong>Hora:</strong>
