@@ -581,7 +581,7 @@ class plgSystemOSOLCaptcha extends JPlugin
 
 			<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">
   <tr>
-    <td width=\"120\"  >
+    <td width=\"100\"  >
 	
 
 	<a href=\"http://www.outsource-online.net/osol-captcha-for-joomla.html\" target=\"blank\" style=\"font-size:10px\" >
@@ -605,7 +605,7 @@ class plgSystemOSOLCaptcha extends JPlugin
 			//]]>
 			</script>
 			<label>
-       <a href=\"#\" onclick=\"reloadCapthcha{$GLOBALS['totalCaptchas']}(".$GLOBALS['totalCaptchas'].");return false;\" >".JText::_('REFRESH CAPTCHA')."</a>
+       <a href=\"#\" onclick=\"reloadCapthcha{$GLOBALS['totalCaptchas']}(".$GLOBALS['totalCaptchas'].");return false;\" ><img src=\"templates/townwizard/images/captcha_refresh.gif\" alt=\"captcha\"/></a>
     </label></td>
 	".($vertical?"</tr><tr>":"")."
     

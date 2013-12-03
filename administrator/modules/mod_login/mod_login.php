@@ -49,7 +49,7 @@ endif; ?>
 	<?php
 	if($error = JError::getError(true)) {
 		echo '<p id="login-error-message">';
-		echo $error->get('message');
+		//echo $error->get('message');
 		echo '<p>';
 	}
 	?>
@@ -67,6 +67,10 @@ endif; ?>
 	</div>
 	</div>
 	<div class="clr"></div>
+	<a class="forget_pass" target="_blank" href="/component/user/reset">
+			<?php echo JText::_('Forgot your Password?'); ?>
+	</a>
+	
 	<input type="submit" style="border: 0; padding: 0; margin: 0; width: 0px; height: 0px;" value="<?php echo JText::_( 'Login' ); ?>" />
 	<input type="hidden" name="option" value="com_login" />
 	<input type="hidden" name="task" value="login" />

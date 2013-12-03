@@ -68,7 +68,7 @@ class UserModelReset extends JModel
 		// Check the results
 		if (!($id = $db->loadResult()))
 		{
-			$this->setError(JText::_('COULD_NOT_FIND_USER'));
+			$this->setError(JText::_('COULD_NOT_FIND_EMAIL'));
 			return false;
 		}
 

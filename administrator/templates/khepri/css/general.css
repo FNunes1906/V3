@@ -616,3 +616,9 @@ table.pagemetatable td.key, table.pagemetatable td.paramlist_key {
 table.pagemetatable td {
     padding: 3px;
 }
+
+.forget_pass{ 
+	float: right;
+	padding-right: 35px;
+	padding-top: 10px;
+}

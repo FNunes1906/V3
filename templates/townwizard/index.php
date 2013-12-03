@@ -215,7 +215,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 
 	  	<div id="Header">
 	  	  <div id="Logo" class="fl">
-	  	  	<a href="<?php echo $this->baseurl ?>" title="HOME"> <img src="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/logo/logo.png" height="118" width="192" /> </a>
+	  	  	<a href="<?php echo $this->baseurl ?>" title="HOME"> <img src="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/logo/logo.png" height="120" width="190" /> </a>
 	  	  </div>
 	  	     <div class="headerAdFlex fl">
 	  	  	  <div id="Social" class="fr">
@@ -529,7 +529,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
          <?php if($this->countModules('footer3')) : ?>
 			<li class="site" style="width: 26%;">
 				<div class="pad">
-					<h3 class="display"> Connect with <?php echo $var->site_name ?></h3>
+					<h3 class="display"> <?php echo JText::_("TW_CONNECT_WITH").' '.$var->site_name ?></h3>
 					<jdoc:include type="modules" name="footer3" style="rounded" />
 				</div>
 			</li>

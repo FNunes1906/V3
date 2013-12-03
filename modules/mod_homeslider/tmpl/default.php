@@ -24,6 +24,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			while($fearow = mysql_fetch_array($HomeSlider)){
 			$finalDescription="";
 			##Image Fetched for slide show##
+				$fearow['description'] = strip_tags($fearow['description']);
 			    $imagesrc= strstr($fearow['description'],'src=');
 				$imageurl= strstr($imagesrc,'http');
 				$singleimagearray = explode('"',$imageurl);

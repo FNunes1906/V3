@@ -6,11 +6,11 @@
 	</div>
 <?php endif; ?>
 
-<form action="<?php echo JRoute::_( 'index.php?option=com_user&task=requestreset' ); ?>" method="post" class="josForm form-validate">
+<form style="clear: both; padding-top: 12px;" action="<?php echo JRoute::_( 'index.php?option=com_user&task=requestreset' ); ?>" method="post" class="josForm form-validate">
 	<table cellpadding="0" cellspacing="0" border="0" width="100%" class="contentpane">
 		<tr>
 			<td colspan="2" height="40">
-				<p><?php echo JText::_('RESET_PASSWORD_REQUEST_DESCRIPTION'); ?></p>
+				<p style="line-height: 20px;"><?php echo JText::_('RESET_PASSWORD_REQUEST_DESCRIPTION'); ?></p><br />
 			</td>
 		</tr>
 		<tr>
@@ -18,9 +18,11 @@
 				<label for="email" class="hasTip" title="<?php echo JText::_('RESET_PASSWORD_EMAIL_TIP_TITLE'); ?>::<?php echo JText::_('RESET_PASSWORD_EMAIL_TIP_TEXT'); ?>"><?php echo JText::_('Email Address'); ?>:</label>
 			</td>
 			<td>
-				<input id="email" name="email" type="text" class="required validate-email" />
+				<input id="email" name="email" type="text" class="required validate-email" /><br />
 			</td>
 		</tr>
+		<tr><td colspan="2">&nbsp;</td></tr>
+		
 	</table>
 
 	<button type="submit" class="validate"><?php echo JText::_('Submit'); ?></button>
