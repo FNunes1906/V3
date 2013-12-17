@@ -444,8 +444,8 @@ class UserController extends JController
 		}
 
 		$message = JText::_('PASSWORD_RESET_SUCCESS');
-		/*$this->setRedirect('administrator/index.php?option=com_login', $message);*/
-		$this->setRedirect('index.php', $message);
+		//$this->setRedirect('index.php', $message);
+		$this->setRedirect('index.php?option=com_user&view=reset', $message);
 	}
 
 	/**

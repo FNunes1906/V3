@@ -212,7 +212,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
   <div id="Content" class="sWidth">
   	
   	<!-- Header Start -->
-
+	<?php if(JRequest::getVar('view') != 'reset'): ?>
 	  	<div id="Header">
 	  	  <div id="Logo" class="fl">
 	  	  	<a href="<?php echo $this->baseurl ?>" title="HOME"> <img src="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/logo/logo.png" height="120" width="190" /> </a>
@@ -286,13 +286,13 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
              
 	  	    </div>
 	  	</div>
-
+	<?php endif; ?>
   		<!-- Header End -->
 
   	<div id="MainContent">
   	  
   	 <!-- Left Column Start -->
-
+	<?php if(JRequest::getVar('view') != 'reset'): ?>
         <div id="LeftCol" class="fl">
 		        <?php if($this->countModules('menu')) : ?>
                 <div id="MainNav" class="display">
@@ -335,7 +335,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
                 </div>
                 <?php endif; ?>
         </div>
-
+	<?php endif; ?>
   	  <!-- Left Column End -->
 
   	  <div id="WidgetArea">
@@ -513,7 +513,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
   <!-- Content End -->
 
   <!-- Footer Start -->
-
+<?php if(JRequest::getVar('view') != 'reset'): ?>
   <div id="Footer">
   	<div class="sWidth">
   	  <ul>
@@ -557,7 +557,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
         </div>
   	</div>
   </div>
-
+<?php endif; ?>
   <!-- Footer End -->
 
 <!-- Tooltip Overlay Start -->

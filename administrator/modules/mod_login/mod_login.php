@@ -1,3 +1,20 @@
+<?php if(JRequest::getVar('option') == 'com_login'){
+	$doc =& JFactory::getDocument();
+       $doc->_scripts = array();
+}
+?>
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="/templates/townwizard/js/fancyBox/lib/jquery-1.10.1.min.js"></script>
+<!-- Add fancyBox main JS and CSS files -->
+<script type="text/javascript" src="/templates/townwizard/js/fancyBox/source/jquery.fancybox.js?v=2.1.5"></script>
+<link rel="stylesheet" type="text/css" href="/templates/townwizard/js/fancyBox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+<script type="text/javascript">
+	$(document).ready(function() {
+			$('.fancybox').fancybox();
+	});
+</script>
+	
 <?php
 /**
 * @version		$Id: mod_login.php 14401 2010-01-26 14:10:00Z louis $
@@ -24,7 +41,10 @@ $languages = array();
 $languages = JLanguageHelper::createLanguageList($browserLang );
 array_unshift( $languages, JHTML::_('select.option',  '', JText::_( 'Default' ) ) );
 $langs = JHTML::_('select.genericlist',   $languages, 'lang', ' class="inputbox"', 'value', 'text', $browserLang );
+
+
 ?>
+
 <?php if(JPluginHelper::isEnabled('authentication', 'openid')) :
 		$lang->load( 'plg_authentication_openid', JPATH_ADMINISTRATOR );
 		$langScript = 	'var JLanguage = {};'.
@@ -67,7 +87,8 @@ endif; ?>
 	</div>
 	</div>
 	<div class="clr"></div>
-	<a class="forget_pass" target="_blank" href="/component/user/reset">
+	
+	<a class="fancybox fancybox.iframe forget_pass" href="/component/user/reset">
 			<?php echo JText::_('Forgot your Password?'); ?>
 	</a>
 	

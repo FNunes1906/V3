@@ -24,7 +24,15 @@ setlocale(LC_TIME,"dutch");
 				$singleimagearray[0] = "/partner/".$_SESSION['partner_folder_name']."/images/stories/nofe_image.png"; }
 			##end##
 			
-		/* Coded By Akash */			
+		/* Coded By Akash */
+		$displayDate ="";
+		if($date_format == "%m/%d"){
+			$displayDate = $fearow['Date'];
+		}else{
+			$rawdate = $fearow['EDate'];
+			$rawdate1 = $fearow['Emonth'];
+			$displayDate= $rawdate."/".$rawdate1;
+		}			
 			
 			$displayTime = '';
 			
@@ -65,7 +73,9 @@ setlocale(LC_TIME,"dutch");
 		    		<div class="flex-caption">
 		    			<h1><?php echo $fearow['summary'];?></h1>
 		    			<h2><?php echo $fearow['title'];?></h2>
-		    			<h3><!--below Varialbe for 24 vs 12 hours time format for HOME SLIDER yogi-->
+		    			<h3><?php echo $displayDate;?> &bull;
+						
+						<!--below Varialbe for 24 vs 12 hours time format for HOME SLIDER yogi-->
 							<?php echo $displayTime; ?></h3>
 		    		</div> <!-- caption -->
 		    	</li>

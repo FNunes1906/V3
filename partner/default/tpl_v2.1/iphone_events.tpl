@@ -21,6 +21,14 @@
 			# end
 			
 			# Coded By Akash
+			$displayDate ="";
+			if($date_format == "%m/%d"){
+		    	$displayDate = $fearow['Date'];
+		    }else{
+		    	$rawdate = $fearow['EDate'];
+		    	$rawdate1 = $fearow['Emonth'];
+		    	$displayDate= $rawdate."/".$rawdate1;
+		    }
 			
 			$displayTime = '';
 			
@@ -61,7 +69,7 @@
 		    		<div class="flex-caption">
 		    			<h1><?php echo $fearow['summary'];?></h1>
 		    			<h2><?php echo $fearow['title'];?></h2>
-		    			<h3>
+		    			<h3><?php echo $displayDate;?> &bull;
 							<!--below Varialbe for 24 vs 12 hours time format for HOME SLIDER yogi-->
 							<?php echo $displayTime; ?>
 						</h3>

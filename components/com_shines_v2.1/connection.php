@@ -29,5 +29,6 @@ $location_code = $pageglobal['location_code'];
 $dunit= $pageglobal['distance_unit'];
 $timezone = $pageglobal['time_zone'];
 $time_format = $pageglobal['time_format'];
+$date_format = $pageglobal['date_format'];
 $var->googgle_analytics = $pageglobal['googgle_map_api_keys'];
 ?>

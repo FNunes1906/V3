@@ -25,15 +25,20 @@ setlocale(LC_TIME,"spanish");
 			# end
 			
 			# Coded By Akash
-			
+			$displayDate ="";
+			if($date_format == "%m/%d"){
+				$displayDate = $fearow['Date'];
+			}else{
+				$rawdate = $fearow['EDate'];
+				$rawdate1 = $fearow['Emonth'];
+				$displayDate= $rawdate."/".$rawdate1;
+			}
+
 			$displayTime = '';
-			
 			if($time_format == "12"){
-			
 				if($fearow[timestart]=='12:00 AM' && $fearow[timeend]=='11:59 PM'){   
 					$displayTime.='Todo el día';
-				}		
-				else{
+				}else{
 					$displayTime.= $fearow[timestart];
 					if ($fearow[timeend] != '11:59 PM' ){
 						$displayTime.="-".$fearow[timeend];
@@ -41,14 +46,12 @@ setlocale(LC_TIME,"spanish");
 				}
 			
 			}else{
-			
 				$stime = date("H:i", strtotime($fearow['timestart']));
 				$etime = date("H:i", strtotime($fearow['timeend']));
 				
 				if($stime=='00:00' && $etime=='23:59'){   
 					$displayTime.='Todo el día';
-				}		
-				else{
+				}else{
 					$displayTime.= $stime;
 					if ($etime!='23:59' ){
 						$displayTime.="-".$etime;
@@ -65,7 +68,7 @@ setlocale(LC_TIME,"spanish");
 		    		<div class="flex-caption">
 		    			<h1><?php echo $fearow['summary'];?></h1>
 		    			<h2><?php echo $fearow['title'];?></h2>
-		    			<h3>
+		    			<h3><?php echo $displayDate;?> &bull;
 							<!--below Varialbe for 24 vs 12 hours time format for HOME SLIDER yogi-->
 							<?php echo $displayTime; ?>
 						</h3>

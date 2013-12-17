@@ -2404,3 +2404,12 @@ span.print_large{
 dd.notice.message,dd.message.message,dd.error.message{
 	 padding: 0 10px;
 }
+
+.tablet #systmsg{
+ left: 16%;
+}
+
+dd.message li{
+ font-size: 14px;
+ line-height: 22px;
+}
