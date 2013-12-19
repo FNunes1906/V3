@@ -96,11 +96,11 @@ setlocale(LC_TIME,"portuguese");
 <div class="section">
 	<!--Code for Mobiscroll NEW date picker - Yogi START -->
 	<input style="display: none;" type="text" name="test_default" id="test_default" onChange="redirecturl(this.value);"/>
-	<label for="test_default" class="ui-btn-hidden button" style="width: 40%;float: left;">Confira os Eventos di&#225;rios</label>
+	<label for="test_default" class="ui-btn-hidden button" style="width: 45%;float: left;">Eventos por Dia</label>
 	<!--Code for Mobiscroll NEW date picker - Yogi END -->
 	
 	<!--Code for Event Category drop down Yogi Start -->
-	<form id="generic_event_cat_form">
+	<form id="generic_event_cat_form" class="cls_event_cat_form">
 		<select name="category_id" onChange="redirecturlcat(this.value)" class="catdisp">
 			<?php while($row_cat = mysql_fetch_array($rec_cat_select)){?>
 				<option class="catdispopt" value="<?php echo $row_cat['id'];?>" <?php if($row_cat['id'] == $cat_id) echo "selected='selected'";?>>
