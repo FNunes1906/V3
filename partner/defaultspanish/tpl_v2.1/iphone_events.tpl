@@ -87,8 +87,21 @@
 <div class="section">
 	<!--Code for Mobiscroll NEW date picker - Yogi START -->
 		<input style="display: none;" type="text" name="test_default" id="test_default" onChange="redirecturl(this.value);"/>
-		<label for="test_default" class="ui-btn-hidden button">Ver Eventos por d&#237;a</label>
+		<label for="test_default" class="ui-btn-hidden button" style="width: 40%;float: left;">Ver Eventos por d&#237;a</label>
 	<!--Code for Mobiscroll NEW date picker - Yogi END -->
+	
+	<!--Code for Event Category drop down Yogi Start -->
+		<form id="event_cat_form">
+			<select name="category_id" onChange="redirecturlcat(this.value)" class="catdisp">
+				<option value="0" class="catdispopt">Toda la categoría</option>
+				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
+					<option class="catdispopt" value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
+						<?php echo $row_cat['name'];?>
+					</option>
+				<?php }?>
+			</select>
+		</form>
+	<!--Code for Event Category drop down Yogi End -->
 </div>
 
 <?php
