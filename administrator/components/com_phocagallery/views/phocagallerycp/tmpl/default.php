@@ -1,4 +1,8 @@
-<?php defined('_JEXEC') or die('Restricted access');?>
+<?php defined('_JEXEC') or die('Restricted access');
+$user		= & JFactory::getUser();
+$db			= & JFactory::getDBO();
+$usertype	= $user->get('usertype');
+?>
 
 <form action="index.php" method="post" name="adminForm">
 <table class="adminform">
@@ -13,27 +17,47 @@
 	echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-cat.png', JText::_( 'Categories' ) );
 	
 	$link = 'index.php?option=com_phocagallery&view=phocagalleryt';
-	echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-theme.png', JText::_( 'Themes' ) );
+	//Not displaying for TW_admin user 
+	 if ($usertype != 'TW_Admin') {
+		echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-theme.png', JText::_( 'Themes' ) );
+	}
 	
 	$link = 'index.php?option=com_phocagallery&view=phocagalleryra';
-	echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-vote.png', JText::_( 'Category Rating' ) );
+	//Not displaying for TW_admin user 
+	 if ($usertype != 'TW_Admin') {
+		echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-vote.png', JText::_( 'Category Rating' ) );
+	}
 	
 	$link = 'index.php?option=com_phocagallery&view=phocagalleryraimg';
-	echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-vote-img.png', JText::_( 'Image Rating' ) );
+	//Not displaying for TW_admin user 
+	 if ($usertype != 'TW_Admin') {
+		echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-vote-img.png', JText::_( 'Image Rating' ) );
+	}
 	
 	$link = 'index.php?option=com_phocagallery&view=phocagallerycos';
-	echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-comment.png', JText::_( 'PHOCAGALLERY_CATEGORY_COMMENTS' ) );
+	//Not displaying for TW_admin user 
+	 if ($usertype != 'TW_Admin') {
+		echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-comment.png', JText::_( 'PHOCAGALLERY_CATEGORY_COMMENTS' ) );
+	}
 	$link = 'index.php?option=com_phocagallery&view=phocagallerycoimgs';
-	echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-comment-img.png', JText::_( 'PHOCAGALLERY_IMAGE_COMMENTS' ) );
+	//Not displaying for TW_admin user 
+	 if ($usertype != 'TW_Admin') {
+		echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-comment-img.png', JText::_( 'PHOCAGALLERY_IMAGE_COMMENTS' ) );
+	}
 	
 	$link = 'index.php?option=com_phocagallery&view=phocagalleryusers';
-	echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-users.png', JText::_( 'PHOCAGALLERY_USERS' ) );
-	
+	//Not displaying for TW_admin user 
+	 if ($usertype != 'TW_Admin') {
+		echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-users.png', JText::_( 'PHOCAGALLERY_USERS' ) );
+	}
 	//$link = 'index.php?option=com_phocagallery&view=phocagalleryucs';
 	//echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-users-cat.png', JText::_( 'Users Categories' ) );
 	
 	$link = 'index.php?option=com_phocagallery&view=phocagalleryin';
-	echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-info.png', JText::_( 'Info' ) );
+	//Not displaying for TW_admin user 
+	 if ($usertype != 'TW_Admin') {
+		echo PhocaGalleryRenderAdmin::quickIconButton( $link, 'icon-48-pg-info.png', JText::_( 'Info' ) );
+	}
 	?>
 			
 			<div style="clear:both">&nbsp;</div>

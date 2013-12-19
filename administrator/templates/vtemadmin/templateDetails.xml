@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 1.5//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.5/template-install.dtd">
+<install type="template" version="1.5.0" client="administrator">
+	<name>VtemAdmin</name>
+	<creationDate>06/06/2010</creationDate>
+	<author>Nguyen Van Tuyen</author>
+	<authorEmail>tuyen0110@gmail.com</authorEmail>
+	<authorUrl>http://www.vtem.net</authorUrl>
+	<copyright></copyright>
+	<license>GNU/GPL</license>
+	<version>1.0</version>
+	<description>Administration template for Joomla! 1.5</description>
+	<files>
+		<filename>index.php</filename>
+		<filename>index.html</filename>
+		<filename>component.php</filename>
+		<filename>cpanel.php</filename>
+		<filename>login.php</filename>
+		<filename>template_thumbnail.png</filename>
+		<filename>params.ini</filename>
+		<folder>images</folder>
+		<folder>css</folder>
+		<folder>js</folder>
+		<folder>html</folder>
+	</files>
+	<positions>
+		<position>menu</position>
+		<position>submenu</position>
+		<position>toolbar</position>
+		<position>title</position>
+		<position>status</position>
+		<position>icon</position>
+		<position>cp_shell</position>
+		<position>cpanel</position>
+		<position>debug</position>
+	</positions>
+	<installfile>install.vtemadmin.php</installfile>
+	<params>
+		<param name="showSiteName" type="radio" default="0" label="Show Site Name" description="Show the site name in the template header">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="headerColor" type="list" default="blue" label="Style">
+		    <option value="blue">Blue</option>
+			<option value="green">Green</option>
+			<option value="red">Red</option>
+			<option value="orange">Orange</option>
+		</param>
+	</params>
+</install>

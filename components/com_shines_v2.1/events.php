@@ -39,6 +39,16 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 	}
 }
 
+// Display all published category from J_Events component
+if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != 0){
+	$catId		= $_REQUEST['category_id'];
+	$event_cat_query = "SELECT  id,name FROM `jos_categories` WHERE (`parent_id` =".$catId." OR `id` =".$catId.") AND PUBLISHED = 1 ORDER BY name";
+	$result_event_cat = mysql_query($event_cat_query);
+}else{
+	$event_cat_query = "SELECT id,name FROM jos_categories WHERE section LIKE 'com_jevents' AND PUBLISHED = 1 ORDER BY name";
+	$result_event_cat = mysql_query($event_cat_query);
+} 
+
 // Assigning latitude value
 if (isset($_REQUEST['lat']) && $_REQUEST['lat'] != "" ){
 	$_SESSION['lat_device1'] = $_REQUEST['lat'];
@@ -107,6 +117,14 @@ if(!empty($_REQUEST['eventdate'])){
 
 //Query to fetch ID of all categories created in Jevents from category table
 $query_cat = "SELECT c.id FROM jos_categories AS c LEFT JOIN jos_categories AS p ON p.id=c.parent_id LEFT JOIN jos_categories AS gp ON gp.id=p.parent_id LEFT JOIN jos_categories AS ggp ON ggp.id=gp.parent_id WHERE c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents'";
+
+// checking cat id is set or not 
+if(isset($catId) && $catId != ''){
+	$query_cat = "SELECT c.id FROM jos_categories AS c WHERE (c.id=".$catId." OR parent_id=".$catId.") and c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents'";
+}
+
+
+
 $rec_cat   = mysql_query($query_cat);
 
 mysql_set_charset("UTF8");
@@ -281,7 +299,55 @@ header('Content-Type:text/html;charset=utf-8');
 			}
 		</script>
 		<!--Code for Mobiscroll NEW date picker - Yogi END -->
+		
+		<!--Code for event Category drop down - Yogi START -->
+		<style>
+			.catdisp{
+			      background: linear-gradient(to bottom, #6ABC43 0%, #4B832F 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+				    border: 3px solid #DBDBDB;
+				    border-radius: 10px;
+				    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) inset;
+				    color: #FFFFFF;
+				    display: block;
+				    font-size: 1.3em;
+				    font-weight: bold;
+				    padding: 11px 10px;
+				    text-decoration: none;
+				    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+				    text-transform: uppercase;
+					letter-spacing:0.5px;
+					-webkit-appearance: none;
+    				-moz-appearance: none;
+    				text-indent: 1px;
+    				text-overflow: '';
+					text-align: center;
+					width:48%;
 
+			}
+			.catdispopt{
+			    color: #000000;
+			    display: block;
+			    font-size: 1.3em;
+			    font-weight:normal;
+			    text-align: left;
+			    text-decoration: none;
+				text-transform: none;"
+				box-shadow: none;
+				border-radius: 0px;
+				text-shadow: none;
+			}
+		</style>
+		<script type="text/javascript">
+		function redirecturlcat(val){
+			if(val == 'all')
+				url = "<?php echo $_SERVER['PHP_SELF'];?>";
+			else
+				url = "<?php echo $_SERVER['PHP_SELF']; ?>?category_id="+val;
+			window.location = url;
+		}
+		</script>
+		<!--Code for event Category drop down - Yogi END -->
+		
 		<?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
 	</head>
 	<body>
@@ -294,6 +360,7 @@ header('Content-Type:text/html;charset=utf-8');
 				<option value="rangepicker" selected="selected" >Range Picker</option>
 	        </select>
 	    </div>
+		
 		<?php
 	    /* Code added for iphone_places.tpl */
 		require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_events.tpl");

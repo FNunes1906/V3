@@ -151,6 +151,8 @@ class JAuthorization extends gacl_api
 		$this->addACL( 'com_media', 'upload', 'users', 'administrator' );
 		$this->addACL( 'com_media', 'upload', 'users', 'manager' );
 
+		
+		
 		$this->addACL( 'com_menus', 'manage', 'users', 'administrator' );
 		$this->addACL( 'com_menus', 'manage', 'users', 'super administrator' );
 
@@ -168,7 +170,7 @@ class JAuthorization extends gacl_api
 		$this->addACL( 'com_templates', 'manage', 'users', 'super administrator' );
 		//$this->addACL( 'com_templates', 'manage', 'user', 'administrator' )
 
-		$this->addACL( 'com_trash', 'manage', 'users', 'administrator' );
+		//$this->addACL( 'com_trash', 'manage', 'users', 'administrator' );
 		$this->addACL( 'com_trash', 'manage', 'users', 'super administrator' );
 
 		// email block users property
@@ -177,7 +179,7 @@ class JAuthorization extends gacl_api
 
 		$this->addACL( 'com_users', 'manage', 'users', 'administrator' );
 		$this->addACL( 'com_users', 'manage', 'users', 'super administrator' );
-
+		
 		$this->addACL( 'com_weblinks', 'manage', 'users', 'super administrator' );
 		$this->addACL( 'com_weblinks', 'manage', 'users', 'administrator' );
 		$this->addACL( 'com_weblinks', 'manage', 'users', 'manager' );
@@ -187,7 +189,8 @@ class JAuthorization extends gacl_api
 		$this->addACL( 'com_users', 'email_events', 'users', 'super administrator' );
 		$this->addACL( 'workflow', 'email_events', 'users', 'administrator', null, null );
 		$this->addACL( 'workflow', 'email_events', 'users', 'super administrator', null, null );
-
+		
+			
 		// actions
 		$this->addACL( 'com_content', 'add', 'users', 'author', 'content', 'all' );
 		$this->addACL( 'com_content', 'add', 'users', 'editor', 'content', 'all' );
@@ -204,10 +207,25 @@ class JAuthorization extends gacl_api
 		$this->addACL( 'com_content', 'add', 'users', 'administrator', 'content', 'all' );
 		$this->addACL( 'com_content', 'edit', 'users', 'administrator', 'content', 'all' );
 		$this->addACL( 'com_content', 'publish', 'users', 'administrator', 'content', 'all' );
-
+		
 		$this->addACL( 'com_content', 'add', 'users', 'super administrator', 'content', 'all' );
 		$this->addACL( 'com_content', 'edit', 'users', 'super administrator', 'content', 'all' );
 		$this->addACL( 'com_content', 'publish', 'users', 'super administrator', 'content', 'all' );
+		
+		//Rights for TW_admin
+		$this->addACL( 'com_users', 'manage', 'users', 'TW_Admin' );
+		$this->addACL( 'com_user', 'edit', 'users', 'TW_Admin', null, null, '' );
+		$this->addACL( 'com_users', 'block user', 'users', 'TW_Admin' );
+		$this->addACL( 'com_banners', 'manage', 'users', 'TW_Admin' );
+		$this->addACL( 'com_components', 'manage', 'users', 'TW_Admin' );
+		$this->addACL( 'com_frontpage', 'manage', 'users', 'TW_Admin' );
+		$this->addACL( 'com_media', 'manage', 'users', 'TW_Admin' );
+		$this->addACL( 'com_media', 'popup', 'users', 'TW_Admin' );
+		$this->addACL( 'com_media', 'upload', 'users', 'TW_Admin' );
+		$this->addACL( 'com_content', 'add', 'users', 'TW_Admin', 'content', 'all' );
+		$this->addACL( 'com_content', 'edit', 'users', 'TW_Admin', 'content', 'all' );
+		$this->addACL( 'com_content', 'publish', 'users', 'TW_Admin', 'content', 'all' );
+		
 	}
 
 	/**
@@ -279,6 +297,7 @@ class JAuthorization extends gacl_api
 		for ($i=0; $i < $this->acl_count; $i++)
 		{
 			$acl =& $this->acl[$i];
+			
 			if (strcasecmp( $aco_section_value, $acl[0] ) == 0) {
 				if (strcasecmp( $aco_value, $acl[1] ) == 0) {
 					if (strcasecmp( $aro_section_value, $acl[2] ) == 0) {

@@ -332,7 +332,7 @@ li.active span.menu_img_hover,span.menu_img_hover:hover{
 .centerCol {
   max-width:420px;
   margin-right:35px;
-  min-height:268px;
+  min-height:305px;
 }
 .rightCol {
   max-width:300px;
@@ -2413,3 +2413,44 @@ dd.message li{
  font-size: 14px;
  line-height: 22px;
 }
+
+/* CSS for Blog section start*/
+#blog-page{
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    clear: both;
+    margin-top: 20px;
+    padding: 12px 0;
+}
+
+#blog-page h3{
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.readon{
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    color: #000000;
+    display: block;
+    float: right;
+    font-weight: bold;
+    line-height: 24px;
+    padding: 0 10px;
+    margin-top: 22px
+}
+
+.readon:hover{
+    text-decoration: underline;
+}
+
+#blog-page,.contentpaneopen{
+	font-size: 13.5px;
+	line-height: 17px;
+}
+
+.sect .blog {
+        clear: both;
+}
+/* CSS for Blog section End */
+
+

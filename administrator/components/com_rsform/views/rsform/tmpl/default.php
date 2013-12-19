@@ -9,6 +9,9 @@
 defined('_JEXEC') or die('Restricted access');
 
 JHTML::_('behavior.tooltip');
+$user		= & JFactory::getUser();
+$db			= & JFactory::getDBO();
+$usertype	= $user->get('usertype');
 ?>
 <form action="index.php" method="post" name="adminForm">
     <table width="100%">
@@ -47,6 +50,10 @@ JHTML::_('behavior.tooltip');
 									</div>
 								</div>
 								<span class="clr"></span>
+								
+								<!-- Not displaying for TW_admin user -->
+								<?php if ($usertype != 'TW_Admin') { ?>
+									
 								<h3><?php echo JText::_('RSFP_CONFIGURATION'); ?></h3>
 								<div style="float: left">
 									<div class="icon hasTip" title="<?php echo JText::_('RSFP_CONFIGURATION'); ?>">
@@ -79,7 +86,7 @@ JHTML::_('behavior.tooltip');
 											<span><?php echo JText::_('RSFP_PLUGINS'); ?></span>
 										</a>
 									</div>
-								</div>
+								</div> <?php } ?>
 								</div>
 							</td>
 						</tr>

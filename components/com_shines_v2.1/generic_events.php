@@ -111,11 +111,12 @@ $query_cat = "SELECT c.id FROM jos_categories AS c LEFT JOIN jos_categories AS p
 */
 // checking cat id is set or not 
 if(isset($_REQUEST['category_id'])){
-	$cat_id = $_REQUEST['category_id'];
-	$query_cat="SELECT c.id FROM jos_categories AS c WHERE (c.id=".$cat_id." OR parent_id=".$cat_id.") and c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents'";
+	$cat_id 	= $_REQUEST['category_id'];
+	$query_cat	= "SELECT c.id,c.name FROM jos_categories AS c WHERE (c.id=".$cat_id." OR parent_id=".$cat_id.") and c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents'";
 }
 
-$rec_cat   = mysql_query($query_cat);
+$rec_cat 		= mysql_query($query_cat);
+$rec_cat_select = mysql_query($query_cat);
 mysql_set_charset("UTF8");
 
 while($row_cat = mysql_fetch_array($rec_cat)){
@@ -290,6 +291,52 @@ header('Content-Type:text/html;charset=utf-8');
 			}
 		</script>
 		<!--Code for Mobiscroll NEW date picker - Yogi END -->
+		
+		<!--Code for event Category drop down - Yogi START -->
+		<style>
+			.catdisp{
+			      background: linear-gradient(to bottom, #6ABC43 0%, #4B832F 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+				    border: 3px solid #DBDBDB;
+				    border-radius: 10px;
+				    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) inset;
+				    color: #FFFFFF;
+				    display: block;
+				    font-size: 1.3em;
+				    font-weight: bold;
+				    padding: 11px 10px;
+				    text-decoration: none;
+				    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+				    text-transform: uppercase;
+					letter-spacing:0.5px;
+					-webkit-appearance: none;
+    				-moz-appearance: none;
+    				text-indent: 1px;
+    				text-overflow: '';
+					text-align: center;
+					width:48%;
+
+			}
+			.catdispopt{
+			    color: #000000;
+			    display: block;
+			    font-size: 1.3em;
+			    font-weight:normal;
+			    text-align: left;
+			    text-decoration: none;
+				text-transform: none;"
+				box-shadow: none;
+				border-radius: 0px;
+				text-shadow: none;
+			}
+		</style>
+		<script type="text/javascript">
+		function redirecturlcat(val){
+				url = "<?php echo $_SERVER['PHP_SELF']; ?>?category_id="+val;
+				window.location = url;
+		}
+		</script>
+		<!--Code for event Category drop down - Yogi END -->
+		
 
 		<?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
 	</head>

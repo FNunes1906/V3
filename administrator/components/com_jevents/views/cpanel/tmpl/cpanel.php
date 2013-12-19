@@ -8,7 +8,8 @@
  * @license     GNU/GPLv2, see http://www.gnu.org/licenses/gpl-2.0.html
  * @link        http://www.jevents.net
  */
-defined('_JEXEC') or die('Restricted access'); ?>
+defined('_JEXEC') or die('Restricted access'); 
+?>
 <div id="jevents">
    <?php if (isset($this->warning)){
    	?>
@@ -41,21 +42,28 @@ defined('_JEXEC') or die('Restricted access'); ?>
 				$this->_quickiconButton( $link, "icon-48-category.png", JText::_('JEV_INSTAL_CATS')  ,"/administrator/templates/khepri/images/header/");
 
 				$user = JFactory::getUser();
-				if ($user->gid>=24){
-
-					$link = "index.php?option=$option&task=user.list";
-					$this->_quickiconButton( $link, "icon-48-user.png", JText::_('JEV_MANAGE_USERS') ,"/administrator/templates/khepri/images/header/");
-
-					$link = "index.php?option=$option&task=params.edit";
-					$this->_quickiconButton( $link, "icon-48-config.png", JText::_('JEV_INSTAL_CONFIG') ,"/administrator/templates/khepri/images/header/");
-				}
-					$link = "index.php?option=$option&task=defaults.list";
-					$this->_quickiconButton( $link, "icon-48-article.png", JText::_('JEV_LAYOUT_DEFAULTS') ,"/administrator/templates/khepri/images/header/");
+				$user		= & JFactory::getUser();
+				$db			= & JFactory::getDBO();
+				$usertype	= $user->get('usertype');
 				
-				$params = JComponentHelper::getParams(JEV_COM_COMPONENT);
-				if ($this->migrated && !$params->get("hideMigration",0)){
-					$link = "index.php?option=$option&task=config.convert";
-					$this->_quickiconButton( $link, "dbrestore.png", JText::_('JEV_ADMIN_CONVERT'),"","","if (!confirm('".JText::_("Are you sure?")."')) return false;");
+				//Not displaying for TW_admin user 
+	 			if ($usertype != 'TW_Admin') {
+					if ($user->gid>=24){
+
+						$link = "index.php?option=$option&task=user.list";
+						$this->_quickiconButton( $link, "icon-48-user.png", JText::_('JEV_MANAGE_USERS') ,"/administrator/templates/khepri/images/header/");
+
+						$link = "index.php?option=$option&task=params.edit";
+						$this->_quickiconButton( $link, "icon-48-config.png", JText::_('JEV_INSTAL_CONFIG') ,"/administrator/templates/khepri/images/header/");
+					}
+						$link = "index.php?option=$option&task=defaults.list";
+						$this->_quickiconButton( $link, "icon-48-article.png", JText::_('JEV_LAYOUT_DEFAULTS') ,"/administrator/templates/khepri/images/header/");
+				
+					$params = JComponentHelper::getParams(JEV_COM_COMPONENT);
+					if ($this->migrated && !$params->get("hideMigration",0)){
+						$link = "index.php?option=$option&task=config.convert";
+						$this->_quickiconButton( $link, "dbrestore.png", JText::_('JEV_ADMIN_CONVERT'),"","","if (!confirm('".JText::_("Are you sure?")."')) return false;");
+					}
 				}
 				?>
 				

@@ -28,6 +28,7 @@ class JAdminCSSMenu extends JTree
 	{
 		$this->_root = new JMenuNode('ROOT');
 		$this->_current = & $this->_root;
+		
 	}
 
 	function addSeparator()
@@ -75,6 +76,11 @@ class JAdminCSSMenu extends JTree
 		/*
 		 * Build the CSS class suffix
 		 */
+		
+		$user		= & JFactory::getUser();
+		$db			= & JFactory::getDBO();
+		$usertype	= $user->get('usertype');
+		
 		$class = '';
 		if ($this->_current->hasChildren()) {
 			$class = ' class="node"';
@@ -93,13 +99,17 @@ class JAdminCSSMenu extends JTree
 		 * Print the item
 		 */
 		echo "<li".$class.">";
-
+		
 		/*
 		 * Print a link if it exists
 		 */
-		if ($this->_current->link != null) {
+		if (($this->_current->link != null && $usertype == 'TW_Admin' && $this->_current->title == 'JEV People') || ($this->_current->link != null && $usertype == 'TW_Admin' && $this->_current->title == 'PHP Pages') || ($this->_current->link != null && $usertype == 'TW_Admin' && $this->_current->title == 'Categories') || ($this->_current->link != null && $usertype == 'TW_Admin' && ($this->_current->title == 'Themes' || $this->_current->title == 'Category Rating' || $this->_current->title == 'Image Rating' || $this->_current->title == 'Category Comments' || $this->_current->title == 'Image Comments' || $this->_current->title == 'Users' || $this->_current->title == 'Info')) || ($this->_current->link != null && $usertype == 'TW_Admin' && ($this->_current->title == 'Configuration' || $this->_current->title == 'Updates' || $this->_current->title == 'Plugins')) || ($this->_current->link != null && $usertype == 'TW_Admin' && $this->_current->title == 'Search') || ($this->_current->link != null && $usertype == 'TW_Admin' && $this->_current->title == 'Shines')) {
+			echo "<span></span>";
+		}elseif ($this->_current->link != null) {
 			echo "<a class=\"".$this->getIconClass($this->_current->class)."\" href=\"".$this->_current->link."\">".$this->_current->title."</a>";
-		} elseif ($this->_current->title != null) {
+		}elseif ($this->_current->title != null && $usertype == 'TW_Admin' && $this->_current->title == 'Menus') {
+			echo "<span></span>";
+		}elseif ($this->_current->title != null ) {
 			echo "<a>".$this->_current->title."</a>\n";
 		} else {
 			echo "<span></span>";

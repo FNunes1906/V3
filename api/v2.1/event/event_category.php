@@ -4,14 +4,27 @@ ini_set('display_errors',1);
 include("../connection.php");
 
 // Display all published category from J_Events component
-$select_query = "SELECT id,name FROM jos_categories WHERE section LIKE 'com_jevents' AND PUBLISHED = 1 ORDER BY ordering";
-$catResult = mysql_query($select_query);
-$i=0;
+if(isset($_REQUEST['category_id'])){
+	$catId		= $_REQUEST['category_id'];
+	$select_query = "SELECT  id,name FROM `jos_categories` WHERE (`parent_id` =".$catId." OR `id` =".$catId.") AND PUBLISHED = 1 ORDER BY name";
+	$catResult = mysql_query($select_query);
+	$i=0;
 
-while($row = mysql_fetch_array($catResult)){
-	$data[$i]['id']    = $row['id'];
-	$data[$i]['title'] = $row['name'];
-	++$i;
+	while($row = mysql_fetch_array($catResult)){
+		$data[$i]['id']    = $row['id'];
+		$data[$i]['title'] = $row['name'];
+		++$i;
+	} 
+}else{
+	$select_query = "SELECT id,name FROM jos_categories WHERE section LIKE 'com_jevents' AND PUBLISHED = 1 ORDER BY name";
+	$catResult = mysql_query($select_query);
+	$i=0;
+
+	while($row = mysql_fetch_array($catResult)){
+		$data[$i]['id']    = $row['id'];
+		$data[$i]['title'] = $row['name'];
+		++$i;
+	} 
 } 
 
 header('Content-type: application/json');
