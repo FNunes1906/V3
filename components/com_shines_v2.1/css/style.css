@@ -677,8 +677,8 @@ li.textbox a img{max-width:100%;}
 	text-shadow: none;
 }*/
 .cls_event_cat_form{
- 	height: 5px;
-    padding: 5px 0 0 3px;
+ 	height: 0px;
+    padding: 10px 0 10px 3px;
 }
 
 /* CSS for Event category dropdown END */
