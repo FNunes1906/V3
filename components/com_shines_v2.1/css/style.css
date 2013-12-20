@@ -649,7 +649,7 @@ li.textbox a img{max-width:100%;}
 	text-overflow: '';
 	text-align: center;
 	width:100%;*/
-    font-family:Helvetica,Arial,sans-serif;
+/*    font-family:Helvetica,Arial,sans-serif;
     -webkit-border-radius: 5px; 
     -moz-border-radius: 5px;
     color:#555555;
@@ -662,9 +662,9 @@ li.textbox a img{max-width:100%;}
     margin-top:2px;
     padding:10px;
     display: inline-block;
-    width: 30%;
+    width: 30%;*/
 }
-.catdispopt{
+/*.catdispopt{
     color: #000000;
     display: block;
     font-size: 12px;
@@ -675,11 +675,10 @@ li.textbox a img{max-width:100%;}
 	box-shadow: none;
 	border-radius: 0px;
 	text-shadow: none;
-}
+}*/
 .cls_event_cat_form{
-	display: block;
-    float: right;
-    width: 45%;
+ 	height: 5px;
+    padding: 5px 0 0 3px;
 }
 
 /* CSS for Event category dropdown END */
