@@ -60,7 +60,7 @@ class AdminCategoriesController extends JController {
 		$db	=& JFactory::getDBO();
 		$user =& JFactory::getUser();
 
-		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator"){
+		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator" && strtolower($user->usertype)!="tw_admin"){
 			$this->setRedirect( "index.php?option=$this->component&task=cpanel.cpanel", "Not Authorised - must be super admin" );
 			return;
 		}
@@ -182,7 +182,7 @@ class AdminCategoriesController extends JController {
 
 		$user =& JFactory::getUser();
 
-		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator"){
+		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator" && strtolower($user->usertype)!="tw_admin"){
 			$this->setRedirect( "index.php?option=".JEVEX_COM_COMPONENT."&task=categories", "Not Authorised - must be super admin" );
 			return;
 		}
@@ -262,7 +262,7 @@ class AdminCategoriesController extends JController {
 		$cid = JRequest::getVar(	'cid',	array(0) );
 		JArrayHelper::toInteger($cid);
 
-		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator"){
+		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator" && strtolower($user->usertype)!="tw_admin"){
 			$this->setRedirect( "index.php?option=".JEVEX_COM_COMPONENT."&task=cpanel.cpanel", "Not Authorised - must be super admin" );
 			return;
 		}
@@ -300,7 +300,7 @@ class AdminCategoriesController extends JController {
 	 */
 	function saveorder(){
 		$user =& JFactory::getUser();
-		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator"){
+		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator" && strtolower($user->usertype)!="tw_admin"){
 			$this->setRedirect( "index.php?option=".JEVEX_COM_COMPONENT."&task=cpanel.cpanel", "Not Authorised - must be super admin" );
 			return;
 		}
@@ -366,7 +366,7 @@ class AdminCategoriesController extends JController {
 	 */	
 	function delete(){
 		$user =& JFactory::getUser();
-		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator"){
+		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator" && strtolower($user->usertype)!="tw_admin"){
 			$this->setRedirect( "index.php?option=".JEVEX_COM_COMPONENT."&task=cpanel.cpanel", "Not Authorised - must be super admin" );
 			return;
 		}
@@ -406,7 +406,7 @@ class AdminCategoriesController extends JController {
 
 	function toggleCatPublish($cid,$newstate){
 		$user =& JFactory::getUser();
-		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator"){
+		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator" && strtolower($user->usertype)!="tw_admin"){
 			$this->setRedirect( "index.php?option=".JEVEX_COM_COMPONENT."&task=cpanel.cpanel", "Not Authorised - must be super admin" );
 			return;
 		}

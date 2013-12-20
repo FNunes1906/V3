@@ -98,18 +98,6 @@ setlocale(LC_TIME,"croatian");
 	<input style="display: none;" type="text" name="test_default" id="test_default" onChange="redirecturl(this.value);"/>
 	<label for="test_default" class="ui-btn-hidden button">Događanja u dan</label>
 	<!--Code for Mobiscroll NEW date picker - Yogi END -->
-	
-	<!--Code for Event Category drop down Yogi Start -->
-	<form id="generic_event_cat_form" class="cls_event_cat_form">
-		<select name="category_id" onChange="redirecturlcat(this.value)">
-			<?php while($row_cat = mysql_fetch_array($rec_cat_select)){?>
-				<option value="<?php echo $row_cat['id'];?>" <?php if($row_cat['id'] == $cat_id) echo "selected='selected'";?>>
-					<?php echo $row_cat['name'];?>
-				</option>
-			<?php }?>
-		</select>
-	</form>
-	<!--Code for Event Category drop down Yogi End -->
 </div>
 
 <?php
@@ -144,11 +132,37 @@ if(stripos($ua,'android') == True) { ?>
 <?php
 if($todaestring != null){
 	$todaestring =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));
-	echo "<h1>$todaestring</h1>";
+	echo "<h1>$todaestring";?>
+	<!--Code for Event Category drop down Yogi Start -->
+		<form id="event_cat_form" class="cls_event_cat_form">
+			<select name="category_id" onChange="redirecturlcat(this.value)">
+				<option value="0">Categories</option>
+				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
+					<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
+						<?php echo $row_cat['name'];?>
+					</option>
+				<?php }?>
+			</select>
+		</form>
+	<!--Code for Event Category drop down Yogi End -->	
+	<?php echo "</h1>";
 }elseif($seachStartFullDate == $searchEndFullDate){
 	$seachStartDate =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear))));
 	$searchEndDate  =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));	
-	echo "<h1>$seachStartDate</h1>";
+	echo "<h1>$seachStartDate";?>
+	<!--Code for Event Category drop down Yogi Start -->
+		<form id="event_cat_form" class="cls_event_cat_form">
+			<select name="category_id" onChange="redirecturlcat(this.value)">
+				<option value="0">Categories</option>
+				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
+					<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
+						<?php echo $row_cat['name'];?>
+					</option>
+				<?php }?>
+			</select>
+		</form>
+	<!--Code for Event Category drop down Yogi End -->	
+	<?php echo "</h1>";
 }
 ?>
 
@@ -254,7 +268,25 @@ if($todaestring != null){
 			$n = 0;
 			
 			$disp_date =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear))));
-			echo "<h1 id='datezig'>$disp_date</h1>";
+			/*echo "<h1 id='datezig'>$disp_date</h1>";*/
+			if($x == 1){
+				echo "<h1 id='datezig'>$disp_date";?>
+				<!--Code for Event Category drop down Yogi Start -->
+				<form id="event_cat_form" class="cls_event_cat_form">
+					<select name="category_id" onChange="redirecturlcat(this.value)">
+						<option value="0">Categories</option>
+						<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
+							<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
+								<?php echo $row_cat['name'];?>
+							</option>
+						<?php }?>
+					</select>
+				</form>
+				<!--Code for Event Category drop down Yogi End -->	
+				<?php echo "</h1>";
+			}else{
+				echo "<h1 id='datezig'>$disp_date</h1>";
+			}
 		
 			# Event fetch query for given date	
 			$ev_query_filter = "SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat >= '".$ev_toyear."-".$ev_tomonth."-".$ev_today." 00:00:00' AND rpt.startrepeat <= '".$ev_toyear."-".$ev_tomonth."-".$ev_today." 23:59:59' AND ev.state=1 AND rpt.endrepeat>='".date('Y',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('m',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('d', mktime($totalHours, $totalMinutes, $totalSeconds))." 00:00:00' AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$ev_toyear." and MONTH(rpt.startrepeat )=".$ev_tomonth." and DAYOFMONTH(rpt.startrepeat )=".$ev_today.") or freq<>'WEEKLY')GROUP BY rpt.rp_id";	

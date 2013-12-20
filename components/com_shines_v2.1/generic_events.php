@@ -300,7 +300,6 @@ header('Content-Type:text/html;charset=utf-8');
 		}
 		</script>
 		<!--Code for event Category drop down - Yogi END -->
-		
 
 		<?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
 	</head>
