@@ -358,7 +358,7 @@ td { vertical-align: top; }
 		/* Css for Banner vs date header on app event page - Akash */
 		#main h1{
 		   margin: 0 0 0 0;text-transform: uppercase; font-weight: normal; font-size: 1em;
-		   padding: 5px 12px 17px;
+		   padding: 5px 12px 24px;
 		   background: #fff url(../images/border2.gif) repeat-x bottom;
 		}
 		 
@@ -677,8 +677,7 @@ li.textbox a img{max-width:100%;}
 	text-shadow: none;
 }*/
 .cls_event_cat_form{
- 	height: 0px;
-    padding: 10px 0 10px 3px;
+ float: right;
 }
 
 /* CSS for Event category dropdown END */
