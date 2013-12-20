@@ -630,7 +630,7 @@ li.textbox a img{max-width:100%;}
 }
 /* CSS for Event category dropdown START */
 .catdisp{
-	background: linear-gradient(to bottom, #6ABC43 0%, #4B832F 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+/*	background: linear-gradient(to bottom, #6ABC43 0%, #4B832F 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
 	border: 3px solid #DBDBDB;
 	border-radius: 10px;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) inset;
@@ -648,7 +648,21 @@ li.textbox a img{max-width:100%;}
 	text-indent: 1px;
 	text-overflow: '';
 	text-align: center;
-	width:100%;
+	width:100%;*/
+    font-family:Helvetica,Arial,sans-serif;
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px;
+    color:#555555;
+    background:#FBFBFB none repeat scroll 0 0;
+    border:1px solid #E5E5E5;
+    font-size:12px;
+    line-height: 16px;
+    margin-bottom:16px;
+    margin-right:6px;
+    margin-top:2px;
+    padding:10px;
+    display: inline-block;
+    width: 30%;
 }
 .catdispopt{
     color: #000000;
