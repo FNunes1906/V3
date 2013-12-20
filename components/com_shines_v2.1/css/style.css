@@ -678,6 +678,7 @@ li.textbox a img{max-width:100%;}
 }*/
 .cls_event_cat_form{
  float: right;
+ text-transform: none;
 }
 
 /* CSS for Event category dropdown END */

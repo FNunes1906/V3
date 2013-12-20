@@ -112,17 +112,18 @@ $query_cat = "SELECT c.id FROM jos_categories AS c LEFT JOIN jos_categories AS p
 // checking cat id is set or not 
 if(isset($_REQUEST['category_id'])){
 	$cat_id 	= $_REQUEST['category_id'];
-	$query_cat	= "SELECT c.id,c.name FROM jos_categories AS c WHERE (c.id=".$cat_id." OR parent_id=".$cat_id.") and c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents'";
+	$query_cat	= "SELECT c.id,c.name FROM jos_categories AS c WHERE (c.id=".$cat_id." OR parent_id=".$cat_id.") and c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents' ORDER BY c.name";
 }
 
 $rec_cat 		= mysql_query($query_cat);
-$rec_cat_select = mysql_query($query_cat);
+$result_event_cat = mysql_query($query_cat);
 mysql_set_charset("UTF8");
 
 while($row_cat = mysql_fetch_array($rec_cat)){
 	# Creating Category array
 	$array_cat[] = $row_cat['id'];
 }
+
 
 $byday = strtoupper(substr(date('D',mktime(0, 0, 0, $tomonth, $today, $toyear)),0,2));
 $arrstrcat = implode(',',array_merge(array(-1), $array_cat));
