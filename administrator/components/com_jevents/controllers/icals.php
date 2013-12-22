@@ -211,7 +211,7 @@ class AdminIcalsController extends JController {
 			}
 		}
 		$user =& JFactory::getUser();
-		if (!($authorised || strtolower($user->usertype)=="super administrator" || strtolower($user->usertype)=="administrator" && strtolower($user->usertype)!="tw_admin")) {
+		if (!($authorised || strtolower($user->usertype)=="super administrator" || strtolower($user->usertype)=="administrator" || strtolower($user->usertype)=="tw_admin")) {
 			$this->setRedirect( "index.php?option=".JEV_COM_COMPONENT."&task=$redirect_task", "Not Authorised - must be super admin" );
 			return;
 		}
@@ -343,8 +343,10 @@ class AdminIcalsController extends JController {
 		}
 
 		$user =& JFactory::getUser();
-		if (!($authorised || strtolower($user->usertype)=="super administrator" || strtolower($user->usertype)=="administrator" && strtolower($user->usertype)!="tw_admin")){
-			$this->setRedirect( "index.php?option=".JEV_COM_COMPONENT."&task=$redirect_task", "Not Authorised - must be super admin" );
+		if (!($authorised || strtolower($user->usertype)=="super administrator" || strtolower($user->usertype)=="administrator" || strtolower($user->usertype)=="tw_admin")){
+			echo $user->usertype;
+			$this->setRedirect( "index.php?option=".JEV_COM_COMPONENT."&task=$redirect_task", "Not Authorised - must be super admin123" );
+			
 			return;
 		}
 

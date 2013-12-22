@@ -13,6 +13,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 				<div class='st_googleplus_large' displayText='Google Plus'><span  class="share_font"><?php echo JText::_("TW_SHAREGOO") ?></span></div>
 				<div class='st_email_large' displayText='Email'><span class="share_font"><?php echo JText::_("TW_SHAREEMAIL") ?></span></div>
 			</div>
+			<?php if(JRequest::getVar('evid') != '' || JRequest::getVar('loc_id') != '') : ?>
 			<div class="lower cl">
 				<a href="index.php?option=com_rsform&view=rsform&Itemid=117" class='error_large'>
 					<span class="errorBtn btn fl"></span>
@@ -27,6 +28,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 					</span>
 				</a>    
 			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>

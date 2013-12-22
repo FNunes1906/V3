@@ -1,13 +1,14 @@
+
 <?php // no direct access
 defined('_JEXEC') or die('Restricted access');
 $cparams =& JComponentHelper::getParams('com_media');
 ?>
 <?php if ($this->params->get('show_page_title', 1)) : ?>
-<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
+<h2 class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 	<?php echo $this->escape($this->params->get('page_title')); ?>
-</div>
+</h2>
 <?php endif; ?>
-<table class="blog<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" cellpadding="0" cellspacing="0">
+<table id="blog-page" class="blog<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" cellpadding="0" cellspacing="0">
 <?php if ($this->params->def('show_description', 1) || $this->params->def('show_description_image', 1)) :?>
 <tr>
 	<td valign="top">

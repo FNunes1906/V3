@@ -442,8 +442,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
   	  <!-- Main body end -->	
 	  
 	  <!--Used for Sharethis module begin -->
-	  <?php if(JRequest::getVar('evid') != '' || JRequest::getVar('loc_id') != '') :?>
-	  
+	  <?php if(JRequest::getVar('evid') != '' || JRequest::getVar('loc_id') != '' || JRequest::getVar( 'view' )=='article') :?>
 			 <?php if($this->countModules('ev_right')) : ?>
 		            <div class="rightCol fr">
 		             	<jdoc:include type="modules" name="ev_right" style="rounded" />

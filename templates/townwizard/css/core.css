@@ -1230,7 +1230,7 @@ a.saved span {
 }
 #ShareTool span {
  display:block;
- line-height:15px;
+ line-height:28px;
  height:32px;
  margin-bottom:10px;    
  width: 33px;
@@ -2426,7 +2426,6 @@ dd.message li{
 	font-size: 16px;
 	font-weight: bold;
 }
-
 .readon{
     border: 1px solid #CCCCCC;
     border-radius: 5px;
@@ -2443,14 +2442,16 @@ dd.message li{
     text-decoration: underline;
 }
 
-#blog-page,.contentpaneopen{
+#blog-page,.cont .contentpaneopen{
 	font-size: 13.5px;
 	line-height: 17px;
+}
+
+#Try3 .cont{
+	min-height: 305px;
 }
 
 .sect .blog {
         clear: both;
 }
 /* CSS for Blog section End */
-
-
