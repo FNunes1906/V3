@@ -1,5 +1,5 @@
 <!-- jquery for ajax loader -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="javascript/libs/ajax_jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="javascript/libs/jquery-1.7.1.min.js"><\/script>')</script>
 
 <?php
@@ -96,18 +96,18 @@ if(stripos($ua,'android') == true) { ?>
 				{ ?>
 					<li style="text-align:center;" id="blog_text">
 						<div class="contentheading"><?php echo $data['title'] ?></div>
+						
 						<p><?php echo $data['introtext'] ?></p><br/>
-						<a class="readmore" href="blog_details.php?id=<?php echo $data['id'] ?>">Read more</a>
-						<br/><br/>
+						<?php if($data['fulltext']!=''){ ?>
+						<a class="readmore" href="blog_details.php?id=<?php echo $data['id'] ?>"><?php echo $read_more;?></a>
+						<br/><br/><?php } ?>
 					</li>
-					
 				<?php
 				}
-			 }
-		?>
+			 }?>
 		
 		<!-- Code for Ajax Lazy loader START -->
-		 <div id="loading" style="display:none;" ><center>Content loading..</center></div>
+		<div id="loading" style="display:none;" ><center>Content loading..</center></div>
 		<script type="text/javascript">
 					 $(document).ready(function() { 
 						var start_at = <?php echo $end_at?>;

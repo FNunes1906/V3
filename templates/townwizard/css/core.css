@@ -2454,4 +2454,7 @@ dd.message li{
 .sect .blog {
         clear: both;
 }
+.contentpaneopen img{
+ max-width: 392px;
+ }
 /* CSS for Blog section End */
