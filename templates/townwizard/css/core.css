@@ -2445,6 +2445,7 @@ dd.message li{
 #blog-page,.cont .contentpaneopen{
 	font-size: 13.5px;
 	line-height: 17px;
+	
 }
 
 #Try3 .cont{
@@ -2455,6 +2456,38 @@ dd.message li{
         clear: both;
 }
 .contentpaneopen img{
- max-width: 392px;
+ 	max-width: 392px;
  }
+
+#blog-page, #blog-page .contentpaneopen{
+	width: 100%;
+}
+
+.sectiontableentry1 td,.sectiontableentry2 td{
+	padding-bottom:10px;
+	font-size: 14px;
+   	font-weight: bold;
+	vertical-align: bottom;
+}
+
+.sectiontableentry1 h3 a,.sectiontableentry2 h3 a{
+	font-size: 14px;
+   	font-weight: bold;
+}
+
 /* CSS for Blog section End */
+
+/* CSS for click here link in event submit module Start */
+.rightCol #ListEvent p a{
+	font-weight: bold;
+    	padding-left: 5px;
+}
+
+.rightCol #ListEvent p a:hover{
+	text-decoration: underline;
+}
+
+input.dashboard, select.dashboard {
+    vertical-align: top;
+}
+/* CSS for click here link in event submit module End */

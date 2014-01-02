@@ -10,6 +10,8 @@ $today = date("Y-m-d G:i:s");
 $sql = "select jc.* from `jos_content` jc, `jos_categories` jcs where jcs.title = 'Blog' and jcs.id = jc.catid and jc.state=1 and (jc.publish_down>'".$today."' or jc.publish_down='0000-00-00 00:00:00') and (jc.publish_up <= '".$todaydate."' or jc.publish_up='0000-00-00 00:00:00') order by jc.ordering LIMIT " .$start_at.",".$end_at;
 $recblogdata = mysql_query($sql);
 
+header('Content-type: text/html;charset=ISO-8859-1', true);
+
 if(mysql_num_rows($recblogdata)>0)
 {
 	while($data = mysql_fetch_array($recblogdata)){

@@ -8,7 +8,7 @@ $objBlog = new blog();
 
 $article_res = $objBlog->fetch_blog_detail_data($_REQUEST['id']);
 
-header('Content-type: text/html;charset=utf-8', true);
+header('Content-type: text/html;charset=ISO-8859-1', true);
 
 /* code start by rinkal for page title */
 $pagemeta = $objBlog->fetch_pagemeta_title();

@@ -12,7 +12,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	}
 </script>
 <form action="<?php echo $this->action; ?>" method="post" name="adminForm">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding-top: 8px">
 <?php if ($this->params->get('filter') || $this->params->get('show_pagination_limit')) : ?>
 <tr>
 	<td colspan="5">
@@ -66,15 +66,18 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <?php endif; ?>
 <?php foreach ($this->items as $item) : ?>
 <tr class="sectiontableentry<?php echo ($item->odd +1 ) . $this->escape($this->params->get('pageclass_sfx')); ?>" >
-	<td align="right">
-		<?php echo $this->pagination->getRowOffset( $item->count ); ?>
+	<td align="left" width="20">
+		<?php //echo $this->pagination->getRowOffset( $item->count ); 
+			echo "<img src='templates/townwizard/images/grayArrowLg.png' alt='grayArrowLg' class='decoded'>";
+		?>
 	</td>
 	<?php if ($this->params->get('show_title')) : ?>
 	<?php if ($item->access <= $this->user->get('aid', 0)) : ?>
-	<td>
-		<a href="<?php echo $item->link; ?>">
+	<td align="left" >
+		<h3><a href="<?php echo $item->link; ?>">
 			<?php echo $this->escape($item->title); ?></a>
 			<?php $this->item = $item; echo JHTML::_('icon.edit', $item, $this->params, $this->access) ?>
+		</h3>
 	</td>
 	<?php else : ?>
 	<td>
@@ -118,7 +121,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	</td>
 </tr>
 <tr>
-	<td colspan="5" align="right">
+	<td colspan="5" align="center">
 		<?php echo $this->pagination->getPagesCounter(); ?>
 	</td>
 </tr>

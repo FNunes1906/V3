@@ -124,3 +124,8 @@ margin-bottom:50px;
 	text-transform:uppercase;
 	padding:2px 15px 5px 0px;
 }
+
+.body_tw {
+    background: url("../images/twBg.png") repeat-y scroll 100% 100% rgba(0, 0, 0, 0);
+    height: 100%;
+}

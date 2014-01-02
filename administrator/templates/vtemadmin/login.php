@@ -46,7 +46,8 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 </script>
 </head>
 <body onload="javascript:setFocus()" class="vt_login_bg">
-	<a href="http://www.townwizard.com" target="_blank"><img style="margin: 10px auto auto; display: block;" src="templates/vtemadmin/images/logo_red.png"></a>
+<div class="body_tw">
+	<a style="margin: auto; display: block; width: 80px;" href="http://www.townwizard.com" target="_blank"><img style="margin: 10px auto auto;" src="templates/vtemadmin/images/logo_red.png"></a>
 	<div class="login">
 				
 				<h1><?php echo JText::_('Administration Login') ?></h1>
@@ -57,6 +58,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 						<a href="<?php echo JURI::root(); ?>"><?php echo JText::_('Return to site Home Page') ?></a>
 			</p>		
 	</div>
+</div>
 			<noscript>
 				<?php echo JText::_('WARNJAVASCRIPT') ?>
 			</noscript>

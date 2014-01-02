@@ -30,11 +30,12 @@ define("TOWNWIZARD_PARTNER_PATH", "http://".$_SERVER['HTTP_HOST']."/partner/".$_
 include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 //echo $var->keywords;
 ?>
-<!DOCTYPE html>
+
+<!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" >
 <head>
 <jdoc:include type="head" />
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=<?php echo $var->characterset; ?>" />
 <meta name="keywords" content="<?php echo $var->keywords; ?>" />
 <meta name="description" content="<?php echo $var->metadesc; ?>" />
 <meta name="description" content="<?php echo $var->extra_meta; ?>" />
@@ -50,7 +51,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 
 <!-- Add css for location image pop up -->
 <link rel="stylesheet" type="text/css" href="<?php echo TOWNWIZARD_TMPL_PATH ?>/css/jquery.fancybox.css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/jquery.carouFredSel-6.1.0-packed.js"></script>
 <script type="text/javascript" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/jquery.touchSwipe.min.js"></script>
 <script type="text/javascript" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/yetii-min.js"></script>
@@ -59,7 +60,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 <!-- Add jQuery library for location and Event detail image pop up -->
 
 <link rel="stylesheet" type="text/css" href="http://<?php echo $_SERVER['HTTP_HOST']?>/templates/townwizard/css/pirobox/style.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="http://<?php echo $_SERVER['HTTP_HOST']?>/templates/townwizard/css/jquery-ui.css" media="screen" />
+<!--<link rel="stylesheet" type="text/css" href="http://<?php echo $_SERVER['HTTP_HOST']?>/templates/townwizard/css/jquery-ui.css" media="screen" />-->
 <script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST']?>/templates/townwizard/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST']?>/templates/townwizard/js/pirobox.min.js"></script>
 <script type="text/javascript">
@@ -105,7 +106,7 @@ $(document).ready(function() {
 
 <!--  CODE for SAFARI BROWSER DETECTION BEGIN -->
 <?php if( JRequest::getVar( 'view' ) == 'frontpage' ) { ?>
- <script>
+<script type="text/javascript">
  // First Time Visit Processing
  // copyright 10th January 2006, Stephen Chapman
  // permission to use this Javascript on your web page is granted
@@ -134,7 +135,7 @@ $(document).ready(function() {
 <!--  CODE for SAFARI BROWSER DETECTION END -->
 
 
-<script>
+<script type="text/javascript">
 	/* Facebook login function */
 	function fb_login() {
 		window.open("/townwizard-db-api/fb-login.php", "_blank", "height=400,width=600,status=no,toolbar=no,menubar=no");
@@ -157,7 +158,7 @@ $(document).ready(function() {
 
 </script>
 
-<script> 
+<script type="text/javascript"> 
 jQuery(document).ready(function(){
   jQuery("#flip").click(function(){
     jQuery("#panel").slideToggle("slow");
@@ -183,7 +184,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 
 <body>
  <div id="fb-root"></div>
-<script>(function(d, s, id) {
+<script type="text/javascript">(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
@@ -215,13 +216,13 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 	<?php if(JRequest::getVar('view') != 'reset'): ?>
 	  	<div id="Header">
 	  	  <div id="Logo" class="fl">
-	  	  	<a href="<?php echo $this->baseurl ?>" title="HOME"> <img src="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/logo/logo.png" height="120" width="190" /> </a>
+	  	  	<a href="<?php echo $this->baseurl ?>" title="HOME"> <img alt="logo" src="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/logo/logo.png" height="120" width="190" /> </a>
 	  	  </div>
 	  	     <div class="headerAdFlex fl">
 	  	  	  <div id="Social" class="fr">
 	            <div>
 					<!-- SOCIAL LOGIN START -->
-					<?php if($_SESSION['tw_user_name']) { ?>
+					<?php if(isset($_SESSION['tw_user_name'])) { ?>
 						<div id="LoggedIn" class="fl" style="font-size:11.5px; width:270px; text-align: right;">
 							<img style="float:right;padding:0px;" src="<?php echo $_SESSION['tw_user_image_url']; ?>">
                 			<span style="padding-right:60px; display: block;">Welcome to <?php echo $var->site_name.' '.$_SESSION['tw_user_name']; ?>!</span>
@@ -270,8 +271,8 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 	            <div id="Local" class="fl">
 					<div id="Weather" class="fr">
 	  				<?php
-						echo str_replace('N/A','--',$data[weather][cc][tmp]) . "&#176; ";
-						echo " <a href='http://www.weather.com/weather/today/$var->location_code' target='_blank'><img  SRC='/common/images/weather/" . $data[weather][cc][icon] . ".png' height='25' border='0' style='vertical-align: middle;'></a>";
+						echo str_replace('N/A','--',$data['weather']['cc']['tmp']) . "&#176; ";
+						echo " <a href='http://www.weather.com/weather/today/$var->location_code' target='_blank'><img alt='weather'  src='/common/images/weather/" . $data['weather']['cc']['icon'] . ".png' /></a>";
 					?>
 					</div> 
 	  	      	    <?php echo '<h1>'.$var->beach.'</h1>'; ?> 
@@ -405,7 +406,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 						<?php } ?>
 	                             <?php if ($this->getBuffer('message')) : ?> 
 							
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script>
 								
 							<script type="text/javascript">
 	
@@ -441,7 +442,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
              </div>
   	  <!-- Main body end -->	
 	  
-	  <!--Used for Sharethis module begin -->
+	 <!--Used for Sharethis module begin -->
 	  <?php if(JRequest::getVar('evid') != '' || JRequest::getVar('loc_id') != '' || JRequest::getVar( 'view' )=='article') :?>
 			 <?php if($this->countModules('ev_right')) : ?>
 		            <div class="rightCol fr">
@@ -462,7 +463,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 				<div class="adSect rightCol fr wrapper">
 	<?php else: ?>
 					<div class="adSect rightCol fr">	
-	<?php endif; ?>		
+	<?php endif; ?>	
 				
 				<!-- event_submit and photo upload start-->
 				  <?php if(JRequest::getVar('task') == 'week.listevents') : ?>
@@ -538,7 +539,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 			<li class="community">
 				<div class="pad">
 					<h3 class="display" style="float: left;margin-right:4px"><?php echo $var->site_name; ?>  -<span style="font-size: 10px;padding-left: 2px; display: inline;"><?php echo JText::_("TW_POWERED_BY") ?></span></h3>
-					<a class="footer_tw" href="<?php echo $var->Footer_Menu_Link;?>" target="_blank"><img alt="townwizard" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/twBanner.png" /></a></h3>
+					<a class="footer_tw" href="<?php echo $var->Footer_Menu_Link;?>" target="_blank"><img alt="townwizard" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/twBanner.png" /></a>
 					<!-- <jdoc:include type="modules" name="footer2" style="rounded" />-->
 					<a style="margin-top: 24px; clear: both;" class="all" href="<?php echo $var->Footer_Menu_Link;?>" target="_blank"><?php echo JText::_("TW_COMMUNITY") ?></a>
 					<a class="all" href="<?php echo $var->Footer_Menu_Link;?>" target="_blank"><?php echo JText::_("TW_WANT") ?></a>

@@ -10,12 +10,12 @@ include("connection.php");
 include("model/blog_class.php");
 $objBlog = new blog();
 
-$start_at 			= 0;
+$start_at 		= 0;
 $entries_per_page	= 10;
 $end_at 			= $entries_per_page;
-$todaydate 			= date("Y-m-j",strtotime("+1 day"));
-$today 				= date("Y-m-d G:i:s");
-$param 				= $objBlog->fetch_blog_data($todaydate, $today,$start_at,$end_at);
+$todaydate 		= date("Y-m-j",strtotime("+1 day"));
+$today 			= date("Y-m-d G:i:s");
+$param 			= $objBlog->fetch_blog_data($todaydate, $today,$start_at,$end_at);
 $total_data 		= mysql_num_rows($param);
 
 
@@ -123,10 +123,13 @@ if(stripos($ua,'android') == true) { ?>
 										if(html){		
 											$("#placesList").append(html);
 											start_at = start_at + end_at;
+											$('div#loading').hide();
+										}else{		
+											$('div#loading').hide();
 										}
 									}
 								});
-								$('div#loading').hide();
+								
 							}
 						});
 					});
