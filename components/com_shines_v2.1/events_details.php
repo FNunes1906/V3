@@ -45,10 +45,10 @@ if ($_REQUEST['Y']=="")
 	$toyear=date('Y');
 else
 	$toyear=$_REQUEST['Y'];
+	
 $todaestring=date('D, M j', mktime(0, 0, 0, $tomonth, $today, $toyear));
 $query="select *,DATE_FORMAT(`startrepeat`,'%h:%i %p') as timestart, DATE_FORMAT(`endrepeat`,'%h:%i %p') as timeend from jos_jevents_repetition where rp_id=$eid";
 $rec=mysql_query($query) or die(mysql_error());
-
 mysql_set_charset("UTF8");
 
 /* code start by rinkal for page title */
@@ -61,6 +61,7 @@ header( 'Content-Type:text/html;charset=utf-8');
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
 <link rel="image_src" href="http://<?php echo $_SERVER['HTTP_HOST']?>/partner/<?php echo $_SESSION['partner_folder_name']?>/images/logo/logo.png" />   	
 <meta property="og:image" content="http://<?php echo $_SERVER['HTTP_HOST']?>/partner/<?php echo $_SESSION['partner_folder_name']?>/images/logo/logo.png"/>
 <meta property="og:title" content="<?php echo $site_name.' | Event';?>"/>
@@ -72,26 +73,54 @@ header( 'Content-Type:text/html;charset=utf-8');
 <meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <!--<link href="css/style.css" rel="stylesheet" media="screen" type="text/css" />-->
 <link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
-<script type="text/javascript">
+<!--<script type="text/javascript">
 var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){var a=document.getElementsByTagName("a");for(var i=0;i<a.length;i++){if(a[i].className.match("noeffect")){}else{a[i].onclick=function(){window.location=this.getAttribute("href");return false}}}}function hideURLbar(){window.scrollTo(0,0.9)}iWebkit.init=function(){fullscreen();hideURLbar()};iWebkit.init()}}
-</script>
+</script>-->
 <script language="javascript">
 			function linkClicked(link) { document.location = link; } 
 </script>
-
+<!-- AddThisEvent Settings -->
+<script src="javascript/libs/ical.js"></script>
+<?php 
+$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+if(stripos($ua,'android') == True) { ?>
+<script type="text/javascript">
+addthisevent.settings({
+	mouse	: false,
+	css		: false,
+	outlook	: {show:false, text:"Outlook"},
+	google	: {show:true,  text:"Add to Gcal"},
+	yahoo	: {show:false, text:"Yahoo"},
+	ical		: {show:false, text:"Add to iCal"},
+	hotmail	: {show:false, text:"Hotmail"}
+});
+</script>
+<?php } else { ?>
+<script type="text/javascript">
+addthisevent.settings({
+	mouse	: false,
+	css		: false,
+	outlook	: {show:false, text:"Outlook"},
+	google	: {show:false, text:"Add to Gcal"},
+	yahoo	: {show:false, text:"Yahoo"},
+	ical		: {show:true,  text:"Add to iCal"},
+	hotmail	: {show:false, text:"Hotmail"}
+});
+</script>
+<?php } ?>
 	<title>
 	<?php
 	
 	/* code start by rinkal for page title */
 	
 	if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-		$t = 'Detalles Del Evento';
+		$page_title = 'Detalles Del Evento';
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-		$t = 'Evenementen Detail';
+		$page_title = 'Evenementen Detail';
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-		$t = 'Događaj Detalj';
+		$page_title = 'Događaj Detalj';
 	}elseif($_SESSION['tpl_folder_name'] == 'default'){
-		$t = 'Event Detail';
+		$page_title = 'Event Detail';
 	}
 	
 	while($row=mysql_fetch_array($title))
@@ -102,10 +131,10 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 		
 		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 		if(stripos($ua,'android') == True) { 
-			echo $site_name.' ~ '.$t.' ~ '.$rowvevdetail['summary'];
+			echo $site_name.' ~ '.$page_title.' ~ '.$rowvevdetail['summary'];
 		}
 		else{
-			echo $site_name.' : '.$t.' : '.$rowvevdetail['summary'];
+			echo $site_name.' : '.$page_title.' : '.$rowvevdetail['summary'];
 		}
 	}
 	?>		
@@ -234,6 +263,7 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 <meta content="Destin Florida's FREE iPhone application and website guide to local events, live music, restaurants and attractions" name="description" />
 
 <?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
+
 	</head>
 	<body>
 

@@ -16,8 +16,8 @@ class JConfig {
 	var $gzip = '0';
 	var $error_reporting = '0';
 	var $xmlrpc_server = '0';
-	var $log_path = '/home/townwiz/newv1/logs';
-	var $tmp_path = '/home/townwiz/newv1/tmp';
+	var $log_path = '/twweb/v3/logs';
+	var $tmp_path = '/twweb/v3/tmp';
 	var $live_site = '';
 	var $force_ssl = '0';
 	var $offset = '-6';

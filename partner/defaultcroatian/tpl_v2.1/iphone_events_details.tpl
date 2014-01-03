@@ -3,7 +3,7 @@ setlocale(LC_TIME,"croatian");
 //$todaestring = ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear)));
 $todaestring = $today.'/'.$tomonth;
 ?>
-<div id="main" role="main" ontouchstart="touchStart(event,'list');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
+<div id="main" role="main" ontouchstart="touchStart(event,'list');"  ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 	<ul id="placesList" class="mainList"><li>
 		<?php 
 		while($row=mysql_fetch_array($rec))
@@ -29,7 +29,7 @@ $todaestring = $today.'/'.$tomonth;
 		$lon2=$rowlocdetail['geolon'];
 		}
 		?>
-		<H1><?php echo $rowvevdetail['summary'];?></h1>
+		<h1><?php echo $rowvevdetail['summary'];?></h1>
 
 		<p><strong>Datum:</strong> <?php echo UTF8_encode($todaestring);?></p>
 		<p><strong>Vrijeme:</strong>
@@ -81,6 +81,22 @@ $todaestring = $today.'/'.$tomonth;
 		<p><strong>Internet stranica:</strong> <a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" target="_blank"><?php echo str_replace('http://','',$rowlocdetail['url']); ?></a></p>
 			<?php } ?>
 	<p><strong>Opis:</strong> <?php echo $rowvevdetail['description']?></p>
+		
+		<!-- code for ical calendar start-->
+		<?php  	$cal_date=date('m-d-Y', mktime(0, 0, 0, $tomonth, $today, $toyear)); ?>		
+				<div class="addthisevent">
+					<?php if($displayTime=='All Day Event'){ ?> 
+				 	<span class="_all_day_event">true</span>
+				   	<?php } ?>
+				 	<span class="_start"><?php echo $cal_date.' '.$row[timestart] ?></span>
+		    			<span class="_end"><?php echo $cal_date.' '.$row['timeend'] ?></span> 
+				  	<span class="_summary"><?php echo $rowvevdetail['summary'] ?></span>
+				   	<span class="_description"><?php echo $rowvevdetail['description'];?></span>
+				    	<span class="_location"><?php echo $rowlocdetail['title'];?></span>
+				  	<span class="_date_format">MM/DD/YYYY</span>
+				</div>
+		<!-- code for ical calendar end-->
+		
 		<?php
 		//#DD#
 		$mailContent.= "
@@ -127,30 +143,14 @@ $todaestring = $today.'/'.$tomonth;
 
 		<div style='float:left;padding:3px 3px 3px 8px;'>
 		<a expr:share_url='data:post.url' href='http://www.facebook.com/sharer.php?u=<?php echo $eurl ?>' name='fb_share' type='box_count'>
-				<div class="facebook">
-				</div>
+				<div class="facebook">	</div>
 			</a>
-			<!--
-		<script src='http://static.ak.fbcdn.net/connect.php/js/FB.Share' type='text/javascript'>
-	</script>
-	-->
+			
+		<!--<script src='http://static.ak.fbcdn.net/connect.php/js/FB.Share' type='text/javascript'></script>-->
 		</div>
-<div style='float:left;padding:3px 3px 3px 8px;'>
-<a href="https://plus.google.com/share?url=<?php echo $egurl;?>" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-<div class="google">
+		<div style='float:left;padding:3px 3px 3px 8px;'>
+			<a href="https://plus.google.com/share?url=<?php echo $egurl;?>" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+			<div class="google"></div>
+			</a>
+		</div>
 </div>
-</a>
-</div>
-</div>
-
-
-<!-- #DD# -->
-<!--
-<div id="footer">
-&copy; <?php echo date('Y');?> <?php echo $site_name;?>, Inc.
-<!-- |
-<a href="mailto:<?php echo $email;?>?subject=App Feedback">
-Contact Us
-</a>
-</div>
--->
