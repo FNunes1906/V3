@@ -96,8 +96,20 @@ setlocale(LC_TIME,"portuguese");
 <div class="section">
 	<!--Code for Mobiscroll NEW date picker - Yogi START -->
 	<input style="display: none;" type="text" name="test_default" id="test_default" onChange="redirecturl(this.value);"/>
-	<label for="test_default" class="ui-btn-hidden button">Eventos por Dia</label>
+	<label for="test_default" class="ui-btn-hidden">Eventos por Dia</label>
 	<!--Code for Mobiscroll NEW date picker - Yogi END -->
+	
+	<!--Code for Event Category drop down Yogi Start -->
+		<form id="event_cat_form" class="cls_event_cat_form">
+			<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
+				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
+					<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
+						<?php echo $row_cat['name'];?>
+					</option>
+				<?php }?>
+			</select>
+		</form>
+	<!--Code for Event Category drop down Yogi End -->	
 </div>
 
 <?php
@@ -132,35 +144,11 @@ if(stripos($ua,'android') == True) { ?>
 <?php
 if($todaestring != null){
 	$todaestring =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));
-	echo "<h1>$todaestring";?>
-	<!--Code for Event Category drop down Yogi Start -->
-		<form id="event_cat_form" class="cls_event_cat_form">
-			<select name="category_id" onChange="redirecturlcat(this.value)">
-				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
-					<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
-						<?php echo $row_cat['name'];?>
-					</option>
-				<?php }?>
-			</select>
-		</form>
-	<!--Code for Event Category drop down Yogi End -->	
-	<?php echo "</h1>";
+	echo "<h1>$todaestring";?><?php echo "</h1>";
 }elseif($seachStartFullDate == $searchEndFullDate){
 	$seachStartDate =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear))));
 	$searchEndDate  =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));	
-	echo "<h1>$seachStartDate";?>
-	<!--Code for Event Category drop down Yogi Start -->
-		<form id="event_cat_form" class="cls_event_cat_form">
-			<select name="category_id" onChange="redirecturlcat(this.value)">
-				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
-					<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
-						<?php echo $row_cat['name'];?>
-					</option>
-				<?php }?>
-			</select>
-		</form>
-	<!--Code for Event Category drop down Yogi End -->	
-	<?php echo "</h1>";
+	echo "<h1>$seachStartDate";?><?php echo "</h1>";
 }
 ?>
 
@@ -268,19 +256,7 @@ if($todaestring != null){
 			$disp_date =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear))));
 			/*echo "<h1 id='datezig'>$disp_date</h1>";*/
 			if($x == 1){
-				echo "<h1 id='datezig'>$disp_date";?>
-				<!--Code for Event Category drop down Yogi Start -->
-				<form id="event_cat_form" class="cls_event_cat_form">
-					<select name="category_id" onChange="redirecturlcat(this.value)">
-						<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
-							<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
-								<?php echo $row_cat['name'];?>
-							</option>
-						<?php }?>
-					</select>
-				</form>
-				<!--Code for Event Category drop down Yogi End -->	
-				<?php echo "</h1>";
+				echo "<h1 id='datezig'>$disp_date";?><?php echo "</h1>";
 			}else{
 				echo "<h1 id='datezig'>$disp_date</h1>";
 			}

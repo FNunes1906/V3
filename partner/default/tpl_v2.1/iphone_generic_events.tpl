@@ -92,8 +92,20 @@
 <div class="section">
 	<!--Code for Mobiscroll NEW date picker - Yogi START -->
 	<input style="display: none;" type="text" name="test_default" id="test_default" onChange="redirecturl(this.value);"/>
-	<label for="test_default" class="ui-btn-hidden button">Events By Day</label>
+	<label for="test_default" class="ui-btn-hidden">Events By Day</label>
 	<!--Code for Mobiscroll NEW date picker - Yogi END -->
+	
+	<!--Code for Event Category drop down Yogi Start -->
+		<form id="event_cat_form" class="cls_event_cat_form">
+			<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
+				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
+					<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
+						<?php echo $row_cat['name'];?>
+					</option>
+				<?php }?>
+			</select>
+		</form>
+	<!--Code for Event Category drop down Yogi End -->	
 </div>
 
 <?php
@@ -127,33 +139,9 @@ if(stripos($ua,'android') == True) { ?>
 <div id="main" role="main">
 <?php
 if($todaestring != null){
-	echo "<h1>$todaestring";?>
-	<!--Code for Event Category drop down Yogi Start -->
-		<form id="event_cat_form" class="cls_event_cat_form">
-			<select name="category_id" onChange="redirecturlcat(this.value)">
-				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
-					<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
-						<?php echo $row_cat['name'];?>
-					</option>
-				<?php }?>
-			</select>
-		</form>
-	<!--Code for Event Category drop down Yogi End -->	
-	<?php echo "</h1>";
+	echo "<h1>$todaestring";?><?php echo "</h1>";
 }elseif($seachStartFullDate == $searchEndFullDate){
-	echo "<h1>$seachStartDate";?>
-	<!--Code for Event Category drop down Yogi Start -->
-		<form id="event_cat_form" class="cls_event_cat_form">
-			<select name="category_id" onChange="redirecturlcat(this.value)">
-				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
-					<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
-						<?php echo $row_cat['name'];?>
-					</option>
-				<?php }?>
-			</select>
-		</form>
-	<!--Code for Event Category drop down Yogi End -->	
-	<?php echo "</h1>";
+	echo "<h1>$seachStartDate";?><?php echo "</h1>";
 }
 ?>
 
@@ -261,19 +249,7 @@ if($todaestring != null){
 			$disp_date = date('l, j M', mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear));
 			/*echo "<h1 id='datezig'>$disp_date</h1>";*/
 			if($x == 1){
-				echo "<h1 id='datezig'>$disp_date";?>
-				<!--Code for Event Category drop down Yogi Start -->
-				<form id="event_cat_form" class="cls_event_cat_form">
-					<select name="category_id" onChange="redirecturlcat(this.value)">
-						<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
-							<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
-								<?php echo $row_cat['name'];?>
-							</option>
-						<?php }?>
-					</select>
-				</form>
-				<!--Code for Event Category drop down Yogi End -->	
-				<?php echo "</h1>";
+				echo "<h1 id='datezig'>$disp_date";?><?php echo "</h1>";
 			}else{
 				echo "<h1 id='datezig'>$disp_date</h1>";
 			}
