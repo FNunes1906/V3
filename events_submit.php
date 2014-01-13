@@ -150,7 +150,7 @@ if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']==
 		
 			if(!empty($last_id) && (!empty($last_id1))) {
 				//require_once($var->tpl_path."events_submit_mail.tpl");
-				$msg='Thank you for submitting your event.<br /> Our team will review and promote your information as soon as possible! Please complete this form again to submit other events.';
+				$msg=JText::_('THANKS_MSG');
 				$subject= 'New Event Submission ';
 				$adminuser = $cat->getAdminUser();
 				$adminEmail	= $adminuser->email;
@@ -243,25 +243,25 @@ function checkPostParameter($postValue){
 
 global $msg;
 	if(!isvalidchar($postValue['title'])){
-		$msg="Valid Event Name Required!<br/>";
+		$msg=JText::_('VALID_EV_NAME');
 		return false;
 	}
 	if(empty($postValue['catid']) || $postValue['catid']=="0"){
-		$msg="Please Select the Category!<br/>";
+		$msg=JText::_('VALID_EV_CAT');
 		return false;
 	}
 	if(!isvalidchar($postValue['jevcontent'])){
-		$msg="Enter Valid Description !<br/>";
+		$msg=JText::_('VALID_EV_DES');
 		return false;
 	}
 	
 	if(!isvalidchar($postValue['custom_anonusername'])){
-		$msg="Valid User Name Required !<br/>";
+		$msg=JText::_('VALID_EV_USER');
 		return false;
 	}
 	
 	if(!isValidEmail($postValue['custom_anonemail'])){ 
-		$msg="Invalid Email Address!<br/>";
+		$msg=JText::_('VALID_EMAIL');
 		return false;
 		}
 

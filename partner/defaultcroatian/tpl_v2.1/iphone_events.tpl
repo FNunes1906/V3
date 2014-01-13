@@ -101,10 +101,10 @@ setlocale(LC_TIME,"croatian");
 	<!--Code for Event Category drop down Yogi Start -->
 	<form id="event_cat_form" class="cls_event_cat_form">
 		<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
-			<option value="0">Kategorije</option>
+			<option value="0"><?php echo strtoupper("Kategorije");?></option>
 			<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
 				<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
-					<?php echo $row_cat['name'];?>
+					<?php echo strtoupper($row_cat['name']);?>
 				</option>
 			<?php }?>
 		</select>

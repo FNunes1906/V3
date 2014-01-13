@@ -104,7 +104,7 @@ setlocale(LC_TIME,"portuguese");
 			<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
 				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
 					<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
-						<?php echo $row_cat['name'];?>
+						<?php echo strtoupper($row_cat['name']);?>
 					</option>
 				<?php }?>
 			</select>

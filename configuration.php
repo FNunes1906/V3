@@ -37,8 +37,8 @@ class JConfig {
 	var $db = 'master';
 	var $dbprefix = 'jos_';
 	var $mailer = 'mail';
-	var $mailfrom = 'yogi.ghorecha@aaditsoftware.com';
-	var $fromname = 'Town Wiz';
+	var $mailfrom = 'support@townwizard.com';
+	var $fromname = 'Town Wizard Support';
 	var $sendmail = '/usr/sbin/sendmail';
 	var $smtpauth = '0';
 	var $smtpsecure = 'none';
