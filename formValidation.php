@@ -107,6 +107,7 @@ function isValidFile($fileArray)
 
 function isvalidchar($text)
 {
+	$text = strtolower($text);	
 	$s1= explode("<html",$text);
 	$s2= explode("<script",$text);
 	$s3= explode("<?php",$text);

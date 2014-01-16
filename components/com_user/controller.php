@@ -379,16 +379,18 @@ class UserController extends JController
 
 		// Get the model
 		$model = &$this->getModel('Reset');
-
+		
+		$token = $model->requestReset($email);
+		
 		// Request a reset
-		if ($model->requestReset($email) === false)
+		if ($token === false)
 		{
 			$message = JText::sprintf('PASSWORD_RESET_REQUEST_FAILED', $model->getError());
 			$this->setRedirect('index.php?option=com_user&view=reset', $message);
 			return false;
 		}
-
-		$this->setRedirect('index.php?option=com_user&view=reset&layout=confirm');
+		
+		$this->setRedirect('index.php?option=com_user&view=reset&layout=confirm&token='.$token);
 	}
 
 	/**
@@ -412,7 +414,7 @@ class UserController extends JController
 		if ($model->confirmReset($token, $username) !== true)
 		{
 			$message = JText::sprintf('PASSWORD_RESET_CONFIRMATION_FAILED', $model->getError());
-			$this->setRedirect('index.php?option=com_user&view=reset&layout=confirm', $message);
+			$this->setRedirect('index.php?option=com_user&view=reset&layout=confirm&token='.$token, $message);
 			return false;
 		}
 		$this->setRedirect('index.php?option=com_user&view=reset&layout=complete');
@@ -444,8 +446,8 @@ class UserController extends JController
 		}
 
 		$message = JText::_('PASSWORD_RESET_SUCCESS');
-		//$this->setRedirect('index.php', $message);
-		$this->setRedirect('index.php?option=com_user&view=reset', $message);
+		$this->setRedirect('/thanks-pass.php', '');
+		//$this->setRedirect('index.php?option=com_user&view=reset', $message);
 	}
 
 	/**

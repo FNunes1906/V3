@@ -390,31 +390,32 @@ function form_validation() {
 
 	if (document.adminForm.title.value=="")
 	{
-		alert ("Title can not be blank !");
+		
+		alert('<?php echo JText::_("VALID_EV_NAME") ?>');
 		document.adminForm.title.focus();
 		return false;
 	}
 	if (document.adminForm.catid.value=="0")
 	{
-		alert ("Please Select the Category!");
+		alert ('<?php echo JText::_("VALID_EV_CAT") ?>');
 		document.adminForm.catid.focus();
 		return false;
 	}
 	if (document.adminForm.custom_anonusername.value=="")
 	{
-		alert ("User Name can not be blank !");
+		alert ('<?php echo JText::_("VALID_EV_USER") ?>');
 		document.adminForm.custom_anonusername.focus();
 		return false;
 	}
 	if (document.adminForm.custom_anonemail.value=="")
 	{
-		alert ("Email Address can not be blank !");
+		alert ('<?php echo JText::_("VALID_EMAIL") ?>');
 		document.adminForm.custom_anonemail.focus();
 		return false;
 	}
 	var stuchkemail=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/.test(document.adminForm.custom_anonemail.value);
 	if (!stuchkemail){
-		alert("Invalid E-mail Address! Please re-enter.");
+		alert ('<?php echo JText::_("VALID_EMAIL") ?>');
 		document.adminForm.custom_anonemail.focus();
 		return false;
 	}
