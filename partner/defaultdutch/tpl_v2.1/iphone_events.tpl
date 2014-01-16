@@ -99,7 +99,7 @@ setlocale(LC_TIME,"dutch");
 	<!--Code for Mobiscroll NEW date picker - Yogi END -->
 	
 	<!--Code for Event Category drop down Yogi Start -->
-		<form id="event_cat_form" class="cls_event_cat_form">
+		<form id="event_cat_form" class="cls_event_cat_form" autocomplete="off">
 			<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
 				<option value="0"><?php echo strtoupper("Categorieën");?></option>
 				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
