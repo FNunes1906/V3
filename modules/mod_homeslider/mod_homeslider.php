@@ -27,26 +27,27 @@ $totalHours 	= date("H") + $timeZoneArray[0];
 $totalMinutes = date("i") + $timeZoneArray[1];
 $totalSeconds = date("s") + $timeZoneArray[2];
 
-if ($_REQUEST['d']=="")
+if(isset($_REQUEST['d']) && $_REQUEST['d']=="")
 $today=date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
 else
-$today=$_REQUEST['d'];
-if ($_REQUEST['m']=="")
+$today= isset($_REQUEST['d']);
+if(isset($_REQUEST['m']) && $_REQUEST['m']=="")
 $tomonth=date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
 else
-$tomonth=$_REQUEST['m'];
-if ($_REQUEST['Y']=="")
+$tomonth= isset($_REQUEST['m']);
+if(isset($_REQUEST['Y']) && $_REQUEST['Y']=="")
 $toyear=date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
 else
-$toyear=$_REQUEST['Y'];
+$toyear= isset($_REQUEST['Y']);
 
 //#DD#
+if(isset($_REQUEST['eventdate']))
 $_REQUEST['eventdate'] = trim($_REQUEST['eventdate']);
 
 if(!empty($_REQUEST['eventdate'])){
-    $today = date('d',strtotime($_REQUEST['eventdate']));
-    $tomonth = date('m',strtotime($_REQUEST['eventdate']));
-    $toyear = date('Y',strtotime($_REQUEST['eventdate']));
+	$today = date('d',strtotime($_REQUEST['eventdate']));
+	$tomonth = date('m',strtotime($_REQUEST['eventdate']));
+	$toyear = date('Y',strtotime($_REQUEST['eventdate']));
 }
 
 // Include the syndicate functions only once

@@ -47,7 +47,7 @@ if(JRequest::getVar('Itemid') == 98){
 				echo "<div class='ev_td_right'>";
 				for( $r = 0; $r < $num_events; $r++ ){
 					$row = $data2['days'][$d]['rows'][$r];
-					echo "<li class='ev_td_li' $listyle><div class='date fl'>$day_link </div><div class='details'>\n";
+					echo "<li class='ev_td_li' ".isset($listyle)."><div class='date fl'>$day_link </div><div class='details'>\n";
 					if (!$this->loadedFromTemplate('icalevent.list_row', $row, 5)){
 						$this->viewEventRowNew($row);
 						echo "&nbsp;::&nbsp;";
@@ -73,7 +73,7 @@ if(JRequest::getVar('Itemid') == 98){
 
 <?php
     // Create the pagination object
-    if ($data2["total"]>$data2["limit"]){
+    if (isset($data2["total"])>isset($data2["limit"])){
     	$this->paginationForm($data2["total"], $data2["limitstart"], $data2["limit"]);
     }
   ?>

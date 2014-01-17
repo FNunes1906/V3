@@ -526,7 +526,7 @@ class JEventsDataModel {
 			}
 			
 			//condition not true
-			if ($detailedDay && ($this_currentdate2==$indate)){
+			if (isset($detailedDay) && ($this_currentdate2==$indate)){
 				$this->_populateHourData($data2, $rows, $indate);
 			}
 			
@@ -629,7 +629,7 @@ class JEventsDataModel {
 			}
 			
 			//condition not true
-			if ($detailedDay && ($this_currentdate==$indate)){
+			if (isset($detailedDay) && ($this_currentdate==$indate)){
 				$this->_populateHourData($data, $rows, $indate);
 			}
 
@@ -741,7 +741,7 @@ class JEventsDataModel {
 			}
 			
 			//condition not true
-			if ($detailedDay && ($this_currentdate1==$indate)){
+			if (isset($detailedDay) && ($this_currentdate1==$indate)){
 				$this->_populateHourData($data1, $rows, $indate);
 			}			
 

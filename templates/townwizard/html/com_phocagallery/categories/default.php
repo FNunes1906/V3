@@ -539,7 +539,7 @@ function showcatImages(){
 				$j = mysql_num_rows($rows);
 				while ($row = mysql_fetch_array($rows)){
 					
-				$imgFileArray = explode('/',$row[filename]);
+				$imgFileArray = explode('/',isset($row['filename']));
 					
 					
 				if(count($imgFileArray) > 1)
@@ -547,21 +547,21 @@ function showcatImages(){
 					$s = "/partner/".$_SESSION['partner_folder_name']."/images/phocagallery/".$imgFileArray[0]."/thumbs/phoca_thumb_m_".$imgFileArray[1];
 					$l = "/partner/".$_SESSION['partner_folder_name']."/images/phocagallery/".$imgFileArray[0]."/thumbs/phoca_thumb_l_".$imgFileArray[1];
 				}else{
-					$s = "/partner/".$_SESSION['partner_folder_name']."/images/phocagallery/thumbs/phoca_thumb_m_".$row[filename];
-					$l = "/partner/".$_SESSION['partner_folder_name']."/images/phocagallery/thumbs/phoca_thumb_l_".$row[filename];
+					$s = "/partner/".$_SESSION['partner_folder_name']."/images/phocagallery/thumbs/phoca_thumb_m_".$row['filename'];
+					$l = "/partner/".$_SESSION['partner_folder_name']."/images/phocagallery/thumbs/phoca_thumb_l_".$row['filename'];
 				}					
 				if($k == 1 && $k == $j){
-						echo '<a class="pirobox_gall last" href="'.$l.'" title="'.$row[filename].'">';
+						echo '<a class="pirobox_gall last" href="'.$l.'" title="'.$row['filename'].'">';
 					}elseif($k == 1){
-						echo '<a class="pirobox_gall first" href="'.$l.'" title="'.$row[filename].'">';
+						echo '<a class="pirobox_gall first" href="'.$l.'" title="'.$row['filename'].'">';
 					}elseif(($k == $j && $k <= 3)){
-						echo '<a class="pirobox_gall last" href="'.$l.'" title="'.$row[filename].'">';
+						echo '<a class="pirobox_gall last" href="'.$l.'" title="'.$row['filename'].'">';
 					}elseif(($k == $j && $k > 3) ){
-						echo '<a style="display:none;" class="pirobox_gall last" href="'.$l.'" title="'.$row[filename].'">';
+						echo '<a style="display:none;" class="pirobox_gall last" href="'.$l.'" title="'.$row['filename'].'">';
 					}elseif(($k == $j || $k > 3) ){
-						echo '<a style="display:none;" class="pirobox_gall" href="'.$l.'" title="'.$row[filename].'">';
+						echo '<a style="display:none;" class="pirobox_gall" href="'.$l.'" title="'.$row['filename'].'">';
 					}else{
-						echo '<a class="pirobox_gall" href="'.$l.'" title="'.$row[filename].'">';
+						echo '<a class="pirobox_gall" href="'.$l.'" title="'.$row['filename'].'">';
 					}
 					echo JHTML::_( 'image.site', $s , '', '', '','','class=img'.$k );
 					//echo '<img class="img'.$k.'" src='.$s.'>';

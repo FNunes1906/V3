@@ -49,7 +49,7 @@ $menuname = $menu->getActive()->name;
 	$tf=$d[1];
 	
 	
-if($_REQUEST['searchdate']!=''){
+if(isset($_REQUEST['searchdate']) && $_REQUEST['searchdate']!=''){
 	$search_date = explode(" - ",$_REQUEST['searchdate']);
 	$start_date=(strftime ($df,strtotime($search_date[0])));
 	$end_date=(strftime ($df,strtotime($search_date[1])));
@@ -64,7 +64,7 @@ if($_REQUEST['searchdate']!=''){
 
 //CODE START BY AKASH
 
-if($_REQUEST['searchdate']!=''){
+if(isset($_REQUEST['searchdate']) && $_REQUEST['searchdate']!=''){
 	
 	$raw_search_date = explode(" - ",$_REQUEST['searchdate']);
 	$ser_start_date=date("Y-m-d",strtotime($raw_search_date[0]));
@@ -108,7 +108,7 @@ if($_REQUEST['searchdate']!=''){
 	
 }else{/* Code End by Rinkal */
 
-	if (count($data['catids'])==1 && $data['catids'][0]!=0 && strlen($data['catdesc'])>0){
+	if (isset($data['catids']) && count($data['catids'])==1 && $data['catids'][0]!=0 && strlen($data['catdesc'])>0){
 		echo "<div class='jev_catdesc'>".$data['catdesc']."</div>";
 	}
 	echo "<ul class='ev_ul'>\n";
@@ -125,11 +125,12 @@ if($_REQUEST['searchdate']!=''){
 		$num_events	= count($data['days'][$d]['rows']);
 		if ($num_events>0) {
 			
-	echo "<div class='ev_td_right'>";
+			echo "<div class='ev_td_right'>";
 			for( $r = 0; $r < $num_events; $r++ ){
 				$row = $data['days'][$d]['rows'][$r];
 				
-				echo "<li class='ev_td_li' $listyle><div class='date fl'>$day_link </div><div class='details'>\n";
+				echo "<li class='ev_td_li' ".isset($listyle)."><div class='date fl'>$day_link </div><div class='details'>\n";
+				
 				if (!$this->loadedFromTemplate('icalevent.list_row', $row, 5)){
 					$this->viewEventRowNew ( $row);
 					echo "&nbsp;::&nbsp;";

@@ -19,12 +19,19 @@ function jugaRightsCheck( $details ) {
 	global $mosConfig_absolute_path, $mosConfig_live_site, $mainframe, $database;
 	
 	$my = $details["user"];
+	if(isset($details["title"] ))
 	$title 		= strval ( htmlspecialchars ( $details["title"] ) );
+	if(isset($details["option"] ))
 	$option 	= strval ( htmlspecialchars ( $details["option"] ) );
+	if(isset($details["section"] ))
 	$section	= strval ( htmlspecialchars ( $details["section"] ) );
+	if(isset($details["view"] ))
 	$view		= strval ( htmlspecialchars ( $details["view"] ) );
+	if(isset($details["task"] ))
 	$task 		= strval ( htmlspecialchars ( $details["task"] ) );
+	if(isset($details["id"] ))
 	$id			= intval ( $details["id"] );
+	if(isset($details["site"] ))
 	$site		= strval ( htmlspecialchars ( $details["site"] ) );
 
 	// grab juga_superusergroup / superuser group id

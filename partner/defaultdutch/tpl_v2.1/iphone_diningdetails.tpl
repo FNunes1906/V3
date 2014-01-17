@@ -16,7 +16,7 @@
 	
 		
 		<p>
-		<strong>Telefoonnummer:</strong>&nbsp;&nbsp;<a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$row[phone])?>"><?php echo $row[phone];?></a>
+		<strong>Telefoonnummer:</strong>&nbsp;&nbsp;<a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$row['phone'])?>"><?php echo $row['phone'];?></a>
 		</p>
 		
 		<p><strong>Afstand:</strong>&nbsp;&nbsp;<?php echo round(distance($lat1, $lon1, $lat2, $lon2,$dunit),'1');?><?php echo $dunit;?></p>
@@ -38,13 +38,13 @@
 
 		<?php } ?>
 		<ul class="btnList">
-			<li><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$row[phone])?>" class="button small">Bel</a></li>
+			<li><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$row['phone'])?>" class="button small">Bel</a></li>
 			
 			<?php
 			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 			if(stripos($ua,'iphone') == true) { 
 			?>
-			<li><a href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row[geolat];?>:<?php echo $row[geolon];?>')" class="button small">Inchecken</a></li>
+			<li><a href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row['geolat'];?>:<?php echo $row[geolon];?>')" class="button small">Inchecken</a></li>
 			<?php } ?>
 		</ul>
 		<?php  } ?>

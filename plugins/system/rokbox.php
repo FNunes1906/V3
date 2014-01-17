@@ -95,7 +95,7 @@ class  plgSystemRokBox extends JPlugin
 		$agent = ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) ? strtolower( $_SERVER['HTTP_USER_AGENT'] ) : false;
 		$ie_version = false;
 				
-		if (eregi("msie", $agent) && !eregi("opera", $agent)){
+		if (preg_match("/msie/", $agent) && !preg_match("/opera/", $agent)){
             $val = explode(" ",stristr($agent, "msie"));
             $ver = explode(".", $val[1]);
 			$ie_version = $ver[0];

@@ -27,7 +27,7 @@
 	$site_name=mysql_fetch_row($sn);
 	
 ?>
-<h2 class="componentheading"><?php echo $menuname." ". $parent." in ".$site_name[0];?></h2>
+<h2 class="componentheading"><?php echo $menuname." ". isset($parent)." in ".$site_name[0];?></h2>
 <form action="<?php echo JRoute::_("index.php?option=com_jevlocations&task=locations.locations&Itemid=$Itemid");?>" method="post" name="adminForm">
 
 <?php if ($locparams->get("showfilters",1)) { ?>
@@ -50,7 +50,7 @@
 </table>
 <?php } ?>
 
-<?php if($_REQUEST['searchcat']!='') {
+<?php if(isset($_REQUEST['searchcat']) && $_REQUEST['searchcat']!='') {
 	
 		$ser= $_REQUEST['searchcat'];
 		if($ser!='0'){

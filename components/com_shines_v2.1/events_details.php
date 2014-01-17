@@ -83,7 +83,7 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 <script src="javascript/libs/ical.js"></script>
 <?php 
 $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-if(stripos($ua,'android') == True) { ?>
+if(stripos($ua,'android') != True) { ?>
 <script type="text/javascript">
 addthisevent.settings({
 	mouse	: false,
@@ -119,6 +119,8 @@ addthisevent.settings({
 		$page_title = 'Evenementen Detail';
 	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
 		$page_title = 'Događaj Detalj';
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultfrench'){
+		$page_title = 'Détails des évènements';
 	}elseif($_SESSION['tpl_folder_name'] == 'default'){
 		$page_title = 'Event Detail';
 	}

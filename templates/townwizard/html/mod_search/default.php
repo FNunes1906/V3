@@ -33,7 +33,7 @@ function redirecturl(val)
 				{
 				?>
 				
-				<option value="<?php echo $rowsub['id'];?>" <?php if ($_REQUEST['searchcat']==$rowsub['id']) {?> selected="selected" <?php }?>>
+				<option value="<?php echo $rowsub['id'];?>" <?php if (isset($_REQUEST['searchcat']) && $_REQUEST['searchcat']==$rowsub['id']) {?> selected="selected" <?php }?>>
 					<?php echo $rowsub['title'];?>
 				</option>
 			<?php

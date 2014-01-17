@@ -18,7 +18,7 @@ global $var;
 			
 			$f=0;
 			$imagecount = 0;
-			$tempeventid;
+			$tempeventid = array();
 
 			foreach($LocationSlider as $fearow) :
 
@@ -38,7 +38,7 @@ global $var;
 				<!--This code is for slider part-->
 		    	<li id="item<?php echo $imagecount;?>" class="<?php echo $imagecount;?>">
 					<div class="event">
-					<a href="/index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $fearow->loc_id;?>&se=1&title=<?php echo $fearow->alias;?>&Itemid=<?php echo $_REQUEST[Itemid];?>"><img src="<?php echo $singleimagearray;?>" /></a>
+					<a href="/index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $fearow->loc_id;?>&se=1&title=<?php echo $fearow->alias;?>&Itemid=<?php if(isset($_REQUEST['Itemid'])) echo $_REQUEST['Itemid'];?>"><img src="<?php echo $singleimagearray;?>" /></a>
 		    		<div class="infoCont">
 		    			<strong class="bold">
 						<?php
@@ -59,16 +59,16 @@ global $var;
 						   if(isset($strArray) && $strArray != ''){
 						    for($i = 0; $i <= count($strArray); ++$i){
 						     
-						     $strFound = strpos($strArray[$i],'" />');
+						     $strFound = strpos(isset($strArray[$i]),'" />');
 						     
 						     if(isset($strFound) && $strFound != ''){
 						      $s = explode('" />',$strArray[$i]);
 						      $strConcat = $s[1];
 						     }else{
-						      $strConcat = $strArray[$i]; 
+						      $strConcat = isset($strArray[$i]); 
 						     }
 						     /*$finalDescription .= $strConcat;*/
-							 $finalDescription .= strip_tags($strConcat);
+							 $finalDescription = strip_tags($strConcat);
 							 $finalDescription=str_replace("<br />","",$finalDescription);
 						    }
 						   if(strlen($finalDescription)>="140"){

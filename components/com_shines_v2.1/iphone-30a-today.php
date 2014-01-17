@@ -18,7 +18,8 @@ $db=mysql_select_db(DB_NAME) or die(mysql_error());*/
 function db_fetch($sql, $list = false, $all = false) {
   global $var;
   $result = array();
-  $tmp = $var->tmp;
+if(isset($var->tmp))
+ { $tmp = $var->tmp;}
   if(isset($tmp[$sql])) {
     unset($result);
     return $tmp[$sql];
@@ -105,7 +106,7 @@ $todaydate = date("Y-m-j",strtotime("+1 day"));
 $today = date("Y-m-d G:i:s");
 $root = $uri->toString( array('scheme', 'host', 'port') );
 $sql = "select jc.*,jcf.ordering from `jos_content` jc, `jos_categories` jcs ,`jos_content_frontpage` jcf where jcs.title = 'Today' and jcs.id = jc.catid and jc.id = jcf.content_id and jc.state=1 and (jc.publish_down>'".$today."' or jc.publish_down='0000-00-00 00:00:00') and (jc.publish_up <= '".$todaydate."' or jc.publish_up='0000-00-00 00:00:00') order by jcf.ordering";
-  $param = db_fetch($sql, true, true);
+ $param = db_fetch($sql, true, true);
  
   //fprint($sql);
   //fprint($param);
@@ -156,7 +157,7 @@ $pagemeta =mysql_fetch_array($pagemeta_res);
 		echo $title;
 	}
 	else{
-		$title = $site_name.' : '.$t;
+		$title = $site_name.' : '.isset($t);
 		if($pagemeta['title']!='')
 		{
 			$title .= ' : '.$pagemeta['title'];

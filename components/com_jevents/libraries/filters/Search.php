@@ -12,8 +12,8 @@
 defined('_VALID_MOS') or defined('_JEXEC') or die( 'No Direct Access' );
 
 // searches event
-class jevSearchFilter extends jevFilter
-{
+class jevSearchFilter extends jevFilter{
+	
 	function __construct($tablename, $filterfield, $isstring=true){
 		$this->filterType="search";
 		$this->filterLabel=JText::_("Search Event");
@@ -31,12 +31,9 @@ class jevSearchFilter extends jevFilter
 	function _createFilter($prefix=""){
 		if (!$this->filterField ) return "";
 		if (trim($this->filter_value)==$this->filterNullValue) return "";
-
 		$db = JFactory::getDBO();
 		$text = $db->Quote( '%'.$db->getEscaped( $this->filter_value, true ).'%', false );
-				
 		$filter = "(det.summary LIKE $text OR det.description LIKE $text OR det.extra_info LIKE $text)";
-
 		return $filter;
 	}
 
@@ -45,19 +42,18 @@ class jevSearchFilter extends jevFilter
 	}
 
 	function _createfilterHTML(){
+		
+		if(isset($_POST['search_fv']))
+		$searchvalue = $_POST['search_fv'];
 
 		if (!$this->filterField) return "";
-
 		$db = JFactory::getDBO();
-				
 		$filterList=array();
 		$filterList["title"]="<label class='evsearch_label' for='".$this->filterType."_fv'>".$this->filterLabel."</label>";
-		$filterList["html"] = '<input type="text" name="'.$this->filterType.'_fv" id="'.$this->filterType.'_fv"  class="evsearch"  placeholder="'. JText::_('TW_SEARCH_EVENTS').'" value="'.$_POST[search_fv].'"   />';
-
+		$filterList["html"] = '<input type="text" name="'.$this->filterType.'_fv" id="'.$this->filterType.'_fv"  class="evsearch"  placeholder="'. JText::_('TW_SEARCH_EVENTS').'" value="'.$searchvalue.'" />';
 		$script = "JeventsFilters.filters.push({id:'".$this->filterType."_fv',value:''});";
 		$document = JFactory::getDocument();
 		$document->addScriptDeclaration($script);
-		
 		return $filterList;
 
 	}

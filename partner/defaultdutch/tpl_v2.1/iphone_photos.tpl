@@ -24,17 +24,18 @@
 	<div id="content" style="text-align:center;">
 	  <ul  class="mainList" id="placesList">
 	    <li class="textbox">
-	      <?php while($row=mysql_fetch_array($rec)) {
+	      <?php 	$j=0;
+	   			while($row=mysql_fetch_array($rec)) {
 				$file=explode('/',$row['filename']);
 				$j++;
 				if (count($file)>=2)
 				{
 				?>
-	      <a href="photos_view.php?start=<?php echo $photoindent+$j?>&backstart=<?php echo (int)$_REQUEST[start]?>&id=<?php echo $CatId ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/phocagallery/<?php echo $file[0]?>/thumbs/phoca_thumb_s_<?php echo $file[1]?>" width="55" border="0" /></a>
+	      <a href="photos_view.php?start=<?php echo $photoindent+$j?>&backstart=<?php echo (int)(isset($_REQUEST['start']))?>&id=<?php echo $CatId ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/phocagallery/<?php echo $file[0]?>/thumbs/phoca_thumb_s_<?php echo $file[1]?>" width="55" border="0" /></a>
 	   
 	      <?php } else { ?>
 	   
-	      <a href="photos_view.php?start=<?php echo $photoindent+$j?>&backstart=<?php echo (int)$_REQUEST[start]?>&id=<?php echo $CatId ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/phocagallery/thumbs/phoca_thumb_s_<?php echo $row['filename']?>" width="55" border="0"/></a>
+	      <a href="photos_view.php?start=<?php echo $photoindent+$j?>&backstart=<?php echo (int)(isset($_REQUEST['start']))?>&id=<?php echo $CatId ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/phocagallery/thumbs/phoca_thumb_s_<?php echo $row['filename']?>" width="55" border="0"/></a>
 
 	      <?php } } 	?>
 	    </li>

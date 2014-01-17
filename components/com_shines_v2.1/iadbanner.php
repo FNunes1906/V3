@@ -56,7 +56,11 @@ function db_fetch12($sql, $list = false, $all = false) {
     $items_per_page = $var->items_per_page;
   }
   $result = array();
-  $tmp = $var->tmp;
+  
+  if(isset($var->tmp)){
+  	$tmp = $var->tmp;  	
+  }
+	
   if(isset($tmp[$sql])) {
     unset($result);
     return $tmp[$sql];

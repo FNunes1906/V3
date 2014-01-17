@@ -225,8 +225,8 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 					<?php if(isset($_SESSION['tw_user_name'])) { ?>
 						<div id="LoggedIn" class="fl" style="font-size:11.5px; width:270px; text-align: right;">
 							<img style="float:right;padding:0px;" src="<?php echo $_SESSION['tw_user_image_url']; ?>">
-                			<span style="padding-right:60px; display: block;">Welcome to <?php echo $var->site_name.' '.$_SESSION['tw_user_name']; ?>!</span>
-							<span><a style="padding-right:60px;"   class="logOut" href="javascript:void(0)" onclick="tw_logout();">Click here to sign out</a></span>
+                			<span style="padding-right:60px; display: block;"><?php echo JText::_("TW_WELCOME").' '.$var->site_name.' '.$_SESSION['tw_user_name']; ?>!</span>
+							<span><a style="padding-right:60px;"   class="logOut" href="javascript:void(0)" onclick="tw_logout();"><?php echo JText::_("TW_CLICKHERE_SIGHOUT") ?></a></span>
 							<?php $user = $_SESSION['tw_user']; ?>                      				
 						</div>	
 					<?php }  else { ?>
@@ -271,8 +271,10 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 	            <div id="Local" class="fl">
 					<div id="Weather" class="fr">
 	  				<?php
+					if(isset($data['weather']['cc']['tmp'])){
 						echo str_replace('N/A','--',$data['weather']['cc']['tmp']) . "&#176; ";
 						echo " <a href='http://www.weather.com/weather/today/$var->location_code' target='_blank'><img alt='weather'  src='/common/images/weather/" . $data['weather']['cc']['icon'] . ".png' /></a>";
+					}
 					?>
 					</div> 
 	  	      	    <?php echo '<h1>'.$var->beach.'</h1>'; ?> 

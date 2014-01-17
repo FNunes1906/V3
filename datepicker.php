@@ -1,9 +1,9 @@
 <?php 
-
 global $Itemid;
 
 $lang = JFactory::getLanguage();
 $cur_language = $lang->getName();
+
 if($cur_language == "Español"){
 	$final_lang = "es";
 }elseif($cur_language == "Nederlands - nl-NL"){
@@ -12,6 +12,8 @@ if($cur_language == "Español"){
 	$final_lang = "pt-PT";	
 }elseif($cur_language == "Croatian(HR)"){
 	$final_lang = "cr";	
+}elseif($cur_language == "French (Fr)"){
+	$final_lang = "fr";	
 }else{
 	$final_lang = "";	
 }

@@ -90,6 +90,8 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 				$t = 'Locatie Detail';
 			}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
 				$t = 'Lokacija Detalj';
+			}elseif($_SESSION['tpl_folder_name'] == 'defaultfrench'){
+				$t = 'Détails location';
 			}elseif($_SESSION['tpl_folder_name'] == 'default'){
 				$t = 'Location Detail';
 			}

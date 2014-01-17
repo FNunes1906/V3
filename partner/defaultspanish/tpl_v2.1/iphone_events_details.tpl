@@ -37,13 +37,13 @@ $todaestring =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime
 			
 			if($time_format == "12"){
 			
-				if($row[timestart]=='12:00 AM' && $row[timeend]=='11:59 PM'){   
+				if($row['timestart']=='12:00 AM' && $row['timeend']=='11:59 PM'){   
 					$displayTime.='Todo el día';
 				}		
 				else{
-					$displayTime.= $row[timestart];
-					if ($row[timeend] != '11:59 PM' ){
-						$displayTime.="-".$row[timeend];
+					$displayTime.= $row['timestart'];
+					if ($row['timeend'] != '11:59 PM' ){
+						$displayTime.="-".$row['timeend'];
 					}
 				}
 			
@@ -73,7 +73,7 @@ $todaestring =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime
 		<p><strong>Ubicaci&#243;n:</strong><?php echo $rowlocdetail['title'];?></p>
 		<p><strong>Direcci&#243;n:</strong><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" ><?php echo $rowlocdetail['street'];?></a></p>
 		<p><strong>Tel&#233;fono:</strong><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone']);?>"><?php echo $rowlocdetail['phone'];?></a></p>
-		<p><strong>Distancia:</strong><?php echo round(distance($_SESSION['lat_device1'], $_SESSION['lon_device1'], $lat2, $lon2,$dunit),'1');?>&nbsp;<?php echo $dunit;?></p>
+		<p><strong>Distancia:</strong><?php echo round(distance(isset($_SESSION['lat_device1']), isset($_SESSION['lon_device1']), $lat2, $lon2,$dunit),'1');?>&nbsp;<?php echo $dunit;?></p>
 		<?php if(trim($rowlocdetail['url']) != '') { ?>
 		<p><strong>Sitio Web:</strong><a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" target="_blank"><?php echo str_replace('http://','',$rowlocdetail['url']); ?></a></p>
 			<?php } ?>
@@ -85,7 +85,7 @@ $todaestring =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime
 					<?php if($displayTime=='All Day Event'){ ?> 
 				 	<span class="_all_day_event">true</span>
 				   	<?php } ?>
-				 	<span class="_start"><?php echo $cal_date.' '.$row[timestart] ?></span>
+				 	<span class="_start"><?php echo $cal_date.' '.$row['timestart'] ?></span>
 		    			<span class="_end"><?php echo $cal_date.' '.$row['timeend'] ?></span> 
 				  	<span class="_summary"><?php echo $rowvevdetail['summary'] ?></span>
 				   	<span class="_description"><?php echo $rowvevdetail['description'];?></span>
@@ -93,36 +93,7 @@ $todaestring =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime
 				  	<span class="_date_format">MM/DD/YYYY</span>
 				</div>
 		<!-- code for ical calendar end-->
-		
-		
-		<?php
-		//#DD#
-		$mailContent.= "
-		{$rowvevdetail['summary']} %0D%0A%0D%0A
-		Date: {$todaestring} %0D%0A%0D%0A
-		Time: " . ltrim($row[timestart], "0"). " %0D%0A%0D%0A
-		Location: {$rowlocdetail['title']} %0D%0A%0D%0A
-		Address: {$rowlocdetail['street']} %0D%0A%0D%0A
-		Phone: {$rowlocdetail['phone']} %0D%0A%0D%0A
-		";
-		if(trim($rowlocdetail['url']) != '') { 
-		$mailContent.="Website: ". str_replace('http://','',$rowlocdetail['url']) ."%0D%0A%0D%0A";
-		} 
-		$mailContent.="Description: {$rowvevdetail['description']} %0D%0A%0D%0A";
-		$mailContent = str_replace('
-		<br/>
-			',"%0D%0A", $mailContent);
-			$mailContent = str_replace('
-				<br>
-					',"%0D%0A", $mailContent);
-					$mailContent = str_replace('
-				<br />
-				',"%0D%0A", $mailContent);
-				$mailContent = str_replace('"','\"', $mailContent);
-				$mailContent = strip_tags($mailContent);
-				//#DD#
-				}
-				?>
+		<?php	}	?>
 				<!-- Added by yogi for Facebook Share feature Begin -->
 				<?php 
 				//$eddate_array = explode(" ",$rowvevdetail['modified']);

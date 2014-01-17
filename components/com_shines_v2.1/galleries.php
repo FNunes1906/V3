@@ -35,19 +35,22 @@ $rec=mysql_query($query) or die(mysql_error());
 			}
 			
 			$id = rand(0, (count($v['photos']) - 1));
-			
-			$tmp_arr = explode('/', $v['photos'][$id]['filename']);
-			$userfolder = '';
-			$filename = $v['photos'][$id]['filename'];
-			if(count($tmp_arr) > 1) {
-				$userfolder = $tmp_arr[0].'/';
-				$filename = $tmp_arr[1];
+			if(isset($v['photos'][$id]['filename']))
+			{
+				$tmp_arr = explode('/', $v['photos'][$id]['filename']);
+				$userfolder = '';
+				$filename = $v['photos'][$id]['filename'];
+				if(count($tmp_arr) > 1) {
+					$userfolder = $tmp_arr[0].'/';
+					$filename = $tmp_arr[1];
+				}
+				unset($tmp_arr);
+				if(trim($userfolder) == '' && trim($filename) == '')
+					$param[$k]['avatar'] = '';
+				else
+					$param[$k]['avatar'] = '/partner/'.$_SESSION['partner_folder_name'].'/images/phocagallery/'.$userfolder.'thumbs/phoca_thumb_s_'.$filename;
 			}
-			unset($tmp_arr);
-			if(trim($userfolder) == '' && trim($filename) == '')
-				$param[$k]['avatar'] = '';
-			else
-				$param[$k]['avatar'] = '/partner/'.$_SESSION['partner_folder_name'].'/images/phocagallery/'.$userfolder.'thumbs/phoca_thumb_s_'.$filename;
+			
       
 	 }
 	

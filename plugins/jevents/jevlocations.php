@@ -819,10 +819,10 @@ SCRIPT;
 				JHTML::_('behavior.modal');
 
 				if ($detailpopup){
-					$location->linkstart = "<a href='$locurl' class='modal' rel='{handler:\"iframe\",\"size\": {\"x\": $pwidth, \"y\": $pheight}}'>";
+					$location->linkstart = "<a href=' ".isset($locurl)." ' class='modal' rel='{handler:\"iframe\",\"size\": {\"x\": $pwidth, \"y\": $pheight}}'>";
 				}
 				else {
-					$location->linkstart = "<a href='$locurl'>";
+					$location->linkstart = "<a href=' ".isset($locurl)." '>";
 				}
 
 				$template = $this->params->get("template","");

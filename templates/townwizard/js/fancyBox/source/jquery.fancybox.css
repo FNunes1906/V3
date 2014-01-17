@@ -20,7 +20,7 @@
 .fancybox-wrap {
 	position: absolute;
 	top: 0;
-	left: 0;
+	left:28% !important;
 	z-index: 8020;
 }
 

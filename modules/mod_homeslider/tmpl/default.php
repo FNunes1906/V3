@@ -17,7 +17,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			
 			$f=0;
 			$imagecount = 0;
-			$tempeventid;
+			$tempeventid = Array();
 			$homeslider1;
 			$k=0;
 			
@@ -25,7 +25,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			$finalDescription="";
 			##Image Fetched for slide show##
 				
-			    $imagesrc= strstr($fearow['description'],'src=');
+				$imagesrc= strstr($fearow['description'],'src=');
 				$imageurl= strstr($imagesrc,'http');
 				$singleimagearray = explode('"',$imageurl);
 				if($singleimagearray[0] == ""){
@@ -33,13 +33,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			##end##
 			$displayTime = '';
 			
-			if($fearow[timestart]=='12:00 AM' && $fearow[timeend]=='11:59PM'){   
+			if($fearow['timestart']=='12:00 AM' && $fearow['timeend']=='11:59PM'){   
 				$displayTime.='All Day Event';
 			}
 			else{
-				$displayTime.= $fearow[timestart];
-				if ($fearow[timeend] != '11:59PM'){
-					$displayTime.="-".$fearow[timeend];
+				$displayTime.= $fearow['timestart'];
+				if ($fearow['timeend'] != '11:59PM'){
+					$displayTime.="-".$fearow['timeend'];
 				}
 			}
 			$homeslider1[$k]['eve_id'] = $fearow['ev_id'];
@@ -47,20 +47,20 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			$homeslider1[$k]['Date'] = $fearow['Date'];
 			$homeslider1[$k]['title'] = $fearow['title'];
 			$homeslider1[$k]['time'] = $displayTime;
-			$homeslider1[$k]['timestart'] = $fearow[timestart];
-   			$homeslider1[$k]['timeend'] = $fearow[timeend];
+			$homeslider1[$k]['timestart'] = $fearow['timestart'];
+   			$homeslider1[$k]['timeend'] = $fearow['timeend'];
 
-			if(in_array($fearow['ev_id'], $tempeventid)){
-			}else{
+			if(!in_array($fearow['ev_id'], $tempeventid)){
+			//}else{
 			if($imagecount<3){
 			
 			?> 
 				<!--This code is for slider part-->
-		    	<li id="item<?php echo $imagecount;?>" class="<?php echo $imagecount;?>">
+		<li id="item<?php echo $imagecount;?>" class="<?php echo $imagecount;?>">
 					<div class="event">
 					<a href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=97&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img src="<?php echo $singleimagearray[0];?>" /></a>
 					<div class="infoCont">
-	                  <strong class="bold">
+					<strong class="bold">
 					  	<?php 
 						if(strlen($fearow['summary'])>="90"){
 							$strProcess1 = substr($fearow['summary'], 0 , 90);
@@ -72,40 +72,48 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 						}
 						?>
 					  </strong>
-	                  <p>
+					<p>
 					  	<?php 
-						   $strArray = explode('<img',$fearow['description']);
-						   if(isset($strArray) && $strArray != ''){
-						    for($i = 0; $i <= count($strArray); ++$i){
-						     
-						     $strFound = strpos($strArray[$i],'" />');
-						     
-						     if(isset($strFound) && $strFound != ''){
-						      $s = explode('" />',$strArray[$i]);
-							  $strConcat = strip_tags($s[1]);
-						      /*$strConcat = $s[1];*/
-						     }else{
-						      $strConcat = $strArray[$i]; 
-						     }
-						     $finalDescription .= $strConcat;
-							 $finalDescription=str_replace("<br />","",$finalDescription);
-							 $finalDescription = strip_tags($finalDescription);
-						    }
-						   if(strlen($finalDescription)>="140"){
-								$strProcess12 = substr($finalDescription, 0 , 140);
-								$strInput1 = explode(' ',$strProcess12);
-								$str12 = array_slice($strInput1, 0, -1);
-								echo implode(' ',$str12).' ...';
-							}else{
-								echo $finalDescription;
+						   	$strArray = explode('<img',$fearow['description']);
+							if(isset($strArray) && $strArray != ''){
+								for($i = 0; $i <= count($strArray); ++$i){
+									
+									# Changed for error log
+									$strFound = '';
+									
+									# put if conditoin for error log
+									if(isset($strArray[$i]) && !empty($strArray[$i])){
+										$strFound = strpos($strArray[$i],'" />');
+									}
+									
+									if(isset($strFound) && $strFound != ''){
+										$s = explode('" />',$strArray[$i]);
+										$strConcat = strip_tags($s[1]);
+									}else{
+										# put if conditoin for error log
+										if(!empty($strArray[$i]))
+											$strConcat = $strArray[$i]; 
+									}
+									
+									 isset($strConcat)?$finalDescription .= $strConcat:'';
+									 $finalDescription=str_replace("<br />","",$finalDescription);
+									 $finalDescription = strip_tags($finalDescription);
+								}
+							   if(strlen($finalDescription)>="140"){
+									$strProcess12 = substr($finalDescription, 0 , 140);
+									$strInput1 = explode(' ',$strProcess12);
+									$str12 = array_slice($strInput1, 0, -1);
+									echo implode(' ',$str12).' ...';
+								}else{
+									echo $finalDescription;
+								}
 							}
-						   }
 						?>					  
 					  </p>
-	                  <div class="cl"></div>
-	                </div>
-					</div>
-		    	</li>
+					<div class="cl"></div>
+				</div>
+				</div>
+			</li>
 			<?php
 			++$imagecount;/*3 featured event counter */
 			$tempeventid[] = $fearow['ev_id'];
@@ -125,7 +133,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
           <ul>
 		  <?php 
 		  $i = 0;
-		  $tempeventid2;
+		  $tempeventid2 = Array();
 		  $d=0;
 		  while($i<count($homeslider1)){
 		  if(!in_array($homeslider1[$i]['eve_id'],$tempeventid2)){

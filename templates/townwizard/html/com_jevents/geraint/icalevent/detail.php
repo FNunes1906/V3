@@ -4,7 +4,6 @@ define("TOWNWIZARD_LOCATION_IMAGE_PATH", "http://".$_SERVER['HTTP_HOST']."/partn
 define("TOWNWIZARD_LOCATION_IMAGE_PATH_FULL", "http://".$_SERVER['HTTP_HOST']."/partner/".$_SESSION['partner_folder_name']."/images/stories/jevents/jevlocations/");
 
 global $var;
-
 include_once($_SERVER['DOCUMENT_ROOT'].'/inc/var.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 
@@ -24,7 +23,7 @@ if( !$this->pop ){
 $this->_footer();
 */
 
-$data = $this->data[row];
+$data = $this->data['row'];
 $ev_start_date = ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date)));
 
 //Created date to manage repeat date - Yogi
@@ -44,31 +43,27 @@ if($lan=="Español"){
 	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
 }
 else if($lan=="Croatian(HR)"){
-	
 	setlocale(LC_TIME,"Croatian");
 	/*$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));*/
 	$ev_start_date= iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
 }
 else if($lan=="Nederlands - nl-NL"){
-	
 	setlocale(LC_TIME,"Dutch");
 	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
 }
 else if($lan=="Português (Brasil)"){
-	
 	setlocale(LC_TIME,"Portuguese");
 	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
-}
-else{
+}else if($lan=="French (Fr)"){
+ setlocale(LC_TIME,"French");
+ $ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
+}else{
 	$ev_start_date	= $data->start_date;
 }
 
-if($data->_alldayevent == 1)
-{
+if($data->_alldayevent == 1){
 	$ev_time =JText::_('ALL_DAY');
-}
-else
-{
+}else{
 	if($data->_noendtime == '0')
 		$ev_time = $data->start_time.' - '.$data->stop_time;
 	else
@@ -124,7 +119,7 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 			<!-- RSVP Images code Begin -->
 				<div class="checkins fl">
 					<div class="pad">
-					<?php if($userCount > 0): ?>
+					<?php if(isset($userCount) > 0): ?>
 						<span><?php echo $userCount.' '.JText::_("TW_ATTENDING") ?>:</span>
 						<?php
 						$i = 0;

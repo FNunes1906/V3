@@ -12,7 +12,7 @@
 				</p>
 			
 				<p>
-					<strong>Phone:</strong>&nbsp;&nbsp;<a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$row[phone])?>"><?php echo $row[phone]?></a>
+					<strong>Phone:</strong>&nbsp;&nbsp;<a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$row['phone'])?>"><?php echo $row['phone']?></a>
 				</p>
 				
 				<p><strong>Distance:</strong>&nbsp;&nbsp;<?php echo round(distance($lat1, $lon1, $lat2, $lon2,$dunit),'1');?><?php echo $dunit;?></p>
@@ -34,8 +34,8 @@
 				<?php } ?>
 
 				<ul class="btnList">
-					<li><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$row[phone])?>" class="button small">Call</a></li>
-					<li><a href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row[geolat]; ?>:<?php echo $row[geolon]; ?>')" class="button small">Check In</a></li>
+					<li><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$row['phone'])?>" class="button small">Call</a></li>
+					<li><a href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row['geolat']; ?>:<?php echo $row['geolon']; ?>')" class="button small">Check In</a></li>
 				</ul>
 			<?php  } ?>
 		</li> <!-- end place -->

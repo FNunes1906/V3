@@ -1230,7 +1230,7 @@ a.saved span {
 }
 #ShareTool span {
  display:block;
- line-height:28px;
+ line-height:15px;
  height:32px;
  margin-bottom:10px;    
  width: 33px;
@@ -1801,13 +1801,13 @@ Last Updated Date:29-01-2013
 }
 .takeOverlay .fbLogin span, 
 .takeOverlay .twtLogin span {
-  font-size:10px;
+  font-size:8px;
   color:#666;
   text-transform:uppercase;
   line-height:10px;
   position:absolute;
   top:10px;
-  left:39px;
+  left:38px;
   padding:0;
 }
 .takeOverlay .rsvp {

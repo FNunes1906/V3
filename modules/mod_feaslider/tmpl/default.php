@@ -17,7 +17,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			
 			$f=0;
 			$imagecount = 0;
-			$tempeventid;
+			$tempeventid = Array();
 
 			while($fearow = mysql_fetch_array($FeaturedSlider)){
 
@@ -31,13 +31,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			##end##
 			$displayTime = '';
 
-			if($fearow[timestart]=='12:00 AM' && $fearow[timeend]=='11:59PM')
+			if($fearow['timestart']=='12:00 AM' && $fearow['timeend']=='11:59PM')
             {    $displayTime.='All Day Event';
 			}
 			else{
-			$displayTime.= $fearow[timestart];
-			if ($fearow[timeend] != '11:59PM'){
-				$displayTime.="-".$fearow[timeend];
+			$displayTime.= $fearow['timestart'];
+			if ($fearow['timeend'] != '11:59PM'){
+				$displayTime.="-".$fearow['timeend'];
 			}
 			}
 		
@@ -49,7 +49,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 				<!--This code is for slider part-->
 		    	<li id="item<?php echo $imagecount;?>" class="<?php echo $imagecount;?>">
 					<div class="event">
-					<a href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=<?php echo $_REQUEST[Itemid];?>&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img src="<?php echo $singleimagearray[0];?>" /></a>
+					<a href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=<?php echo $_REQUEST['Itemid'];?>&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>"><img src="<?php echo $singleimagearray[0];?>" /></a>
 		    		<div class="infoCont">
 		    			<strong class="bold">
 						<?php 

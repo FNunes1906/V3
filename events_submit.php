@@ -1,8 +1,8 @@
 
 <?php
-define( '_JEXEC', 1 );
-define('JPATH_BASE', dirname(__FILE__) );
-define( 'DS', DIRECTORY_SEPARATOR );
+//define( '_JEXEC', 1 );
+//define('JPATH_BASE', dirname(__FILE__) );
+//define( 'DS', DIRECTORY_SEPARATOR );
 
 //echo "<pre>";
 //print_r($_SESSION);
@@ -32,10 +32,10 @@ $session = JFactory::getSession();*/
 
 
 $jconfig = new JConfig();
-define(DB_HOST, $jconfig->host);
-define(DB_USER,$jconfig->user);
-define(DB_PASSWORD,$jconfig->password);
-define(DB_NAME,$jconfig->db);
+define('DB_HOST', $jconfig->host);
+define('DB_USER',$jconfig->user);
+define('DB_PASSWORD',$jconfig->password);
+define('DB_NAME',$jconfig->db);
 $conn=mysql_connect(DB_HOST,DB_USER,DB_PASSWORD) or die(mysql_error());
 $db=mysql_select_db(DB_NAME) or die(mysql_error());
 // Query for default ics record.
@@ -45,7 +45,8 @@ $ics=$ics_res['ics_id'];
 global $msg;
 $msg="";
 
-if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']=='Spremi' || $_POST['action']=='Bewaar' || $_POST['action']=='Salve'){	
+if (isset($_POST['action']))
+if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']=='Spremi' || $_POST['action']=='Bewaar' || $_POST['action']=='Salve' ||  $_POST['action']=='Sauvegarder'){
 	
 	$postRecheck = checkPostParameter($_POST);
 	
@@ -240,8 +241,7 @@ if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']==
 */
 //echo $validCode."hello";
 function checkPostParameter($postValue){
-
-global $msg;
+	global $msg;
 	if(!isvalidchar($postValue['title'])){
 		$msg=JText::_('VALID_EV_NAME');
 		return false;
@@ -254,22 +254,16 @@ global $msg;
 		$msg=JText::_('VALID_EV_DES');
 		return false;
 	}
-	
 	if(!isvalidchar($postValue['custom_anonusername'])){
 		$msg=JText::_('VALID_EV_USER');
 		return false;
 	}
-	
 	if(!isValidEmail($postValue['custom_anonemail'])){ 
 		$msg=JText::_('VALID_EMAIL');
 		return false;
 		}
-
 	return true;
-}
-
-
-?>
+}?>
 
 <link rel="stylesheet" type="text/css" href="/templates/townwizard/css/core.css" />
 <link rel="stylesheet" type="text/css" href="/templates/townwizard/css/fonts.css" />
@@ -366,49 +360,41 @@ if(check) {
 }
 }
 function noendtimetog(){
-var noendchecked = document.adminForm.noendtime.checked;
-var epm = document.getElementById("endPM");
-var eam = document.getElementById("endAM");
-	if (noendchecked && document.adminForm.allDayEvent.checked) {
-		document.adminForm.allDayEvent.checked = false;
-		alldayeventtog();
+	var noendchecked = document.adminForm.noendtime.checked;
+	var epm = document.getElementById("endPM");
+	var eam = document.getElementById("endAM");
+		if (noendchecked && document.adminForm.allDayEvent.checked) {
+			document.adminForm.allDayEvent.checked = false;
+			alldayeventtog();
+		}
+	if(noendchecked){
+		epm.disabled=true;
+		eam.disabled=true;
+		document.adminForm.end_12h.disabled=true;
+	}else{
+		epm.disabled=false;
+		eam.disabled=false;
+		document.adminForm.end_12h.disabled=false;
 	}
-
-if(noendchecked) {
-	epm.disabled=true;
-	eam.disabled=true;
-	document.adminForm.end_12h.disabled=true;
-} else {
-	epm.disabled=false;
-	eam.disabled=false;
-	document.adminForm.end_12h.disabled=false;
-}
-
 }
 
 function form_validation() {
-
-	if (document.adminForm.title.value=="")
-	{
-		
+	if (document.adminForm.title.value==""){
 		alert('<?php echo JText::_("VALID_EV_NAME") ?>');
 		document.adminForm.title.focus();
 		return false;
 	}
-	if (document.adminForm.catid.value=="0")
-	{
+	if (document.adminForm.catid.value=="0"){
 		alert ('<?php echo JText::_("VALID_EV_CAT") ?>');
 		document.adminForm.catid.focus();
 		return false;
 	}
-	if (document.adminForm.custom_anonusername.value=="")
-	{
+	if (document.adminForm.custom_anonusername.value==""){
 		alert ('<?php echo JText::_("VALID_EV_USER") ?>');
 		document.adminForm.custom_anonusername.focus();
 		return false;
 	}
-	if (document.adminForm.custom_anonemail.value=="")
-	{
+	if (document.adminForm.custom_anonemail.value==""){
 		alert ('<?php echo JText::_("VALID_EMAIL") ?>');
 		document.adminForm.custom_anonemail.focus();
 		return false;
@@ -419,8 +405,6 @@ function form_validation() {
 		document.adminForm.custom_anonemail.focus();
 		return false;
 	}
-	
-	
 }
 </script>
 
@@ -521,7 +505,7 @@ text-decoration:none;
 	<table width="65%" cellpadding="5" cellspacing="2" border="0"  class="adminform" id="jevadminform">
 	<tr>
 		<td align="left"><?php echo JText::_('JEV_EVNAME'); ?>:</td>
-		<td align="left"><input class="inputbox" type="text" name="title" size="41" maxlength="255" value="<?php echo $_SESSION['title']?>" /></td>
+		<td align="left"><input class="inputbox" type="text" name="title" size="41" maxlength="255" value="<?php if(isset($_SESSION['title'])) echo $_SESSION['title']?>" /></td>
 		<td colspan="2"><input type="hidden" name="priority" value="0" /></td>
 	</tr>
 	<tr>
@@ -531,7 +515,7 @@ text-decoration:none;
 			<select name="catid" id="catid">
 				<option value="0" ><?php echo JText::_('JEV_CHOOSE'); ?></option>
 				<?php while($row=mysql_fetch_array($cat_query)) { 
-				if($_SESSION['catid']==$row['id']){
+				if(isset($_SESSION['catid']) == $row['id']){
 					$selectedVal = 'selected';
 				}else{
 					$selectedVal = '';
@@ -554,7 +538,7 @@ text-decoration:none;
 					<legend><?php echo JText::_('JEV_EVSED'); ?></legend>
 					<span>
 						<span ><?php echo JText::_('JEV_UNTIME'); ?></span>
-						<span><input type="checkbox" id='allDayEvent' name='allDayEvent' <?php if($_SESSION['allDayEvent']=='on') {echo 'checked'; }?>  onclick="alldayeventtog()" />
+						<span><input type="checkbox" id='allDayEvent' name='allDayEvent' <?php if(isset($_SESSION['allDayEvent']) && $_SESSION['allDayEvent']=='on') {echo 'checked'; }?>  onclick="alldayeventtog()" />
 						</span>
 					</span>
 					<span style="margin:20px" class='checkbox12h'>
@@ -595,12 +579,12 @@ text-decoration:none;
 											$start_12h_value = $_SESSION['start_12h']; 
 										} 
 
-										if($_SESSION['start_ampm']=='pm'){ 
+										if(isset($_SESSION['start_ampm']) && $_SESSION['start_ampm']=='pm'){ 
 											$start_ampm_check = 'checked="checked"';
 										} 
 
 										$end_ampm_check = array();
-										if($_SESSION['start_ampm']=='pm'){ 
+										if(isset($_SESSION['start_ampm']) && $_SESSION['start_ampm']=='pm'){ 
 											$end_ampm_check['pm'] = 'checked="checked"';
 											$end_ampm_check['am'] = '';
 										}else{
@@ -650,7 +634,7 @@ text-decoration:none;
 									} 
 
 									$end_ampm_check = array();
-									if($_SESSION['start_ampm']=='pm'){ 
+									if(isset($_SESSION['start_ampm']) && $_SESSION['start_ampm']=='pm'){ 
 										$end_ampm_check['pm'] = 'checked="checked"';
 										$end_ampm_check['am'] = '';
 									}else{
@@ -680,7 +664,7 @@ text-decoration:none;
 							
 						</div><br/>
 						<span>
-								<span><br/><input type="checkbox" id='noendtime' name='noendtime'  onclick="noendtimetog();" <?php if($_SESSION['noendtime']==1) {echo 'checked'; }?> value="1" />
+								<span><br/><input type="checkbox" id='noendtime' name='noendtime'  onclick="noendtimetog();" <?php if(isset($_SESSION['noendtime']) && $_SESSION['noendtime']==1) {echo 'checked'; }?> value="1" />
 										<span><?php echo JText::_('JEV_NOENDTIME'); ?></span>
 								</span>
 							</span>
@@ -696,7 +680,7 @@ text-decoration:none;
 		
 		<td colspan="3">
 			
-			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea name="jevcontent" cols="70" rows="10" style="width:99%;height:230px;" ><?php echo $_SESSION['jevcontent'];?></textarea>
+			<div id='jeveditor' style="width:404px"><?php echo JText::_('JEV_DES'); ?>:<br/><br/><textarea name="jevcontent" cols="70" rows="10" style="width:99%;height:230px;" ><?php if(isset($_SESSION['jevcontent'])) echo $_SESSION['jevcontent'];?></textarea>
 			</div>
 			
 		</td>
@@ -720,11 +704,11 @@ text-decoration:none;
 	</tr>
 	<tr class="jevplugin_anonusername">
 		<td valign="top"  width="130" align="left"><?php echo JText::_('JEV_YOURNAME'); ?></td>
-		<td colspan="3"><input size="41" type="text" name="custom_anonusername" id="custom_anonusername" value="<?php echo $_SESSION['custom_anonusername']?>" /></td>
+		<td colspan="3"><input size="41" type="text" name="custom_anonusername" id="custom_anonusername" value="<?php if(isset($_SESSION['custom_anonusername'])) echo $_SESSION['custom_anonusername']?>" /></td>
 	</tr>
 	<tr class="jevplugin_anonemail">
 		<td valign="top"  width="130" align="left"><?php echo JText::_('JEV_YOUREMAIL'); ?></td>
-		<td colspan="3"><input size="41" type="text" name="custom_anonemail" id="custom_anonemail" value="<?php echo $_SESSION['custom_anonemail']?>" /></td>
+		<td colspan="3"><input size="41" type="text" name="custom_anonemail" id="custom_anonemail" value="<?php if(isset($_SESSION['custom_anonemail'])) echo $_SESSION['custom_anonemail']?>" /></td>
 	</tr>
 	
 	<!--#DD#-->
