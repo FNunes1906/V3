@@ -17,6 +17,8 @@ if($_SESSION['tpl_folder_name'] == "defaultspanish"){
 		$final_lang = "de";
 }elseif($_SESSION['tpl_folder_name'] == "defaultportuguese"){
 	$final_lang = "pt-PT";
+}elseif($_SESSION['tpl_folder_name'] == "defaultfrench"){
+	$final_lang = "fr";
 }else{
 	$final_lang = "";
 }
@@ -264,9 +266,9 @@ header('Content-Type:text/html;charset=utf-8');
 		</script>
 
 		<!--Code for Mobiscroll NEW date picker - Yogi START -->
-		<script src="javascript/jquery-1.9.1.min.js"></script>
-		<link href="css/mobiscroll.custom-2.7.2.min.css" rel="stylesheet" type="text/css" />
-		<script src="javascript/mobiscroll.custom-2.7.2.min.js" type="text/javascript"></script>
+		<script src="/templates/townwizard/js/jquery-1.9.0.min.js" type="text/javascript"></script>
+		<link href="/templates/townwizard/css/mobiscroll.custom-2.7.2.min.css" rel="stylesheet" type="text/css" />
+		<script src="/templates/townwizard/js/mobiscroll.custom-2.7.2.min.js" type="text/javascript"></script>
 		<script type="text/javascript">
 		 jQuery(function () {
 		 var now = new Date();
@@ -279,7 +281,7 @@ header('Content-Type:text/html;charset=utf-8');
 		  if (!($("#demo_"+demo).length))
 		  demo = 'default';
 		  jQuery("#demo_" + demo).show();
-		  jQuery('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "modal", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
+		  jQuery('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "bottom", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
 		 });
 		 jQuery('#demo').trigger('change');
 		 });

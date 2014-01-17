@@ -1,3 +1,7 @@
+<?php 
+setlocale(LC_TIME,"french");
+?>
+
 <div id="featuredEvents">
 	<div class="flexslider-container">
 		<div class="flexslider">
@@ -29,14 +33,12 @@
 				$rawdate1 = $fearow['Emonth'];
 				$displayDate= $rawdate."/".$rawdate1;
 			}
+
 			$displayTime = '';
-			
 			if($time_format == "12"){
-			
 				if($fearow[timestart]=='12:00 AM' && $fearow[timeend]=='11:59 PM'){   
-					$displayTime.='All Day Event';
-				}		
-				else{
+					$displayTime.='Todo el día';
+				}else{
 					$displayTime.= $fearow[timestart];
 					if ($fearow[timeend] != '11:59 PM' ){
 						$displayTime.="-".$fearow[timeend];
@@ -44,14 +46,12 @@
 				}
 			
 			}else{
-			
 				$stime = date("H:i", strtotime($fearow['timestart']));
 				$etime = date("H:i", strtotime($fearow['timeend']));
 				
 				if($stime=='00:00' && $etime=='23:59'){   
-					$displayTime.='All Day Event';
-				}		
-				else{
+					$displayTime.='Todo el día';
+				}else{
 					$displayTime.= $stime;
 					if ($etime!='23:59' ){
 						$displayTime.="-".$etime;
@@ -92,12 +92,13 @@
 <div class="section">
 	<!--Code for Mobiscroll NEW date picker - Yogi START -->
 	<input style="display: none;" type="text" name="test_default" id="test_default" onChange="redirecturl(this.value);"/>
-	<label for="test_default" class="ui-btn-hidden">Events By Day</label>
+	<label for="test_default" class="ui-btn-hidden">événements par jour</label>
 	<!--Code for Mobiscroll NEW date picker - Yogi END -->
 	
 	<!--Code for Event Category drop down Yogi Start -->
 		<form id="event_cat_form" class="cls_event_cat_form">
 			<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
+				<option value="0"><?php echo strtoupper("catégories")?></option>
 				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
 					<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
 						<?php echo strtoupper($row_cat['name']);?>
@@ -139,8 +140,11 @@ if(stripos($ua,'android') == True) { ?>
 <div id="main" role="main">
 <?php
 if($todaestring != null){
+	$todaestring =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));
 	echo "<h1>$todaestring";?><?php echo "</h1>";
 }elseif($seachStartFullDate == $searchEndFullDate){
+	$seachStartDate =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear))));
+	$searchEndDate  =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));	
 	echo "<h1>$seachStartDate";?><?php echo "</h1>";
 }
 ?>
@@ -179,7 +183,7 @@ if($todaestring != null){
 			$displayTime2 = '';
 			if($time_format == "12"){
 				if($row['timestart']=='12:00 AM' && $row['timeend']=='11:59 PM'){   
-					$displayTime2.='All Day Event';
+					$displayTime2.='Todo el día';
 				}else{
 					$displayTime2.= $row['timestart'];
 					if($row['timeend'] != '11:59 PM' ){
@@ -190,7 +194,7 @@ if($todaestring != null){
 				$stime = date("H:i", strtotime($row['timestart']));
 				$etime = date("H:i", strtotime($row['timeend']));
 				if($stime == '00:00' && $etime == '23:59'){   
-					$displayTime2.='All Day Event';
+					$displayTime2.='Todo el día';
 				}else{
 					$displayTime2.= $stime;
 					if($etime!='23:59' ){
@@ -208,11 +212,11 @@ if($todaestring != null){
 					echo $displayTime2.' &bull; ';
 					echo $categoryname[$n]; ?>
 					<ul class="btnList">
-						<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>">call</a</li>
+						<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>">Appeller</a</li>
 						<?php
 						$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 							if(stripos($ua,'android') != true) { ?>
-								<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">check in</a></li>
+								<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">Ajouter un lieu</a></li>
 							<?php }
 						
 						# Code for Moreinfo link Date
@@ -226,7 +230,7 @@ if($todaestring != null){
 							$dateValue = explode('-',$dateValue[0]);
 						}?>
 							
-						<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">more info</a></li>
+						<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">Plus d’informations</a></li>
 					</ul>
 				</h3> 
 			</li>
@@ -246,7 +250,7 @@ if($todaestring != null){
 			unset($categoryname);
 			$n = 0;
 			
-			$disp_date = date('l, j M', mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear));
+			$disp_date =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear))));
 			/*echo "<h1 id='datezig'>$disp_date</h1>";*/
 			if($x == 1){
 				echo "<h1 id='datezig'>$disp_date";?><?php echo "</h1>";
@@ -303,7 +307,7 @@ if($todaestring != null){
 				$displayTime2 = '';
 				if($time_format == "12"){
 					if($row['timestart']=='12:00 AM' && $row['timeend']=='11:59 PM'){   
-						$displayTime2.='All Day Event';
+						$displayTime2.='Todo el día';
 					}else{
 						$displayTime2.= $row['timestart'];
 						if($row['timeend'] != '11:59 PM' ){
@@ -314,7 +318,7 @@ if($todaestring != null){
 					$stime = date("H:i", strtotime($row['timestart']));
 					$etime = date("H:i", strtotime($row['timeend']));
 					if($stime == '00:00' && $etime == '23:59'){   
-						$displayTime2.='All Day Event';
+						$displayTime2.='Todo el día';
 					}else{
 						$displayTime2.= $stime;
 						if($etime!='23:59' ){
@@ -332,11 +336,11 @@ if($todaestring != null){
 						echo $displayTime2.' &bull; ';
 						echo $categoryname[$n]; ?>
 						<ul class="btnList">
-							<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>">call</a</li>
+							<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>">Appeller</a</li>
 							<?php
 							$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 								if(stripos($ua,'android') != true) { ?>
-									<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">check in</a></li>
+									<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">Ajouter un lieu</a></li>
 								<?php }
 							
 							# Code for Moreinfo link Date
@@ -351,7 +355,7 @@ if($todaestring != null){
 							}
 							
 							?>	
-							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">more info</a></li>
+							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">Plus d’informations</a></li>
 						</ul>
 					</h3> 
 				</li>
