@@ -14,7 +14,7 @@ if($_SESSION['tpl_folder_name'] == "defaultspanish"){
 }elseif($_SESSION['tpl_folder_name'] == "defaultcroatian"){
 	$final_lang = "cr";
 }elseif($_SESSION['tpl_folder_name'] == "defaultdutch"){
-		$final_lang = "de";
+	$final_lang = "de";
 }elseif($_SESSION['tpl_folder_name'] == "defaultportuguese"){
 	$final_lang = "pt-PT";
 }elseif($_SESSION['tpl_folder_name'] == "defaultfrench"){
@@ -25,12 +25,12 @@ if($_SESSION['tpl_folder_name'] == "defaultspanish"){
 
 // Function for distance calculation
 function distance($lat1, $lon1, $lat2, $lon2, $unit) { 
-  $theta = $lon1 - $lon2; 
-  $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)); 
-  $dist = acos($dist); 
-  $dist = rad2deg($dist); 
-  $miles = $dist * 60 * 1.1515;
-  $unit = strtoupper($unit);
+  $theta 	= $lon1 - $lon2; 
+  $dist 		= sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)); 
+  $dist 		= acos($dist); 
+  $dist 		= rad2deg($dist); 
+  $miles 	= $dist * 60 * 1.1515;
+  $unit 	= strtoupper($unit);
 
 	if ($unit == "KM") {
 		return ($miles * 1.609344); 
@@ -56,28 +56,29 @@ if (isset($_REQUEST['lon']) && $_REQUEST['lon'] != "" ){
 // timezone value assigning to current Servertime Setting up Timezone time hour, minut and second varible
 $timeZoneArray	= explode(':',$timezone);
 $totalHours		= date("H") + $timeZoneArray[0];
-$totalMinutes	= date("i") + $timeZoneArray[1];
-$totalSeconds	= date("s") + $timeZoneArray[2];
+$totalMinutes		= date("i") + $timeZoneArray[1];
+$totalSeconds		= date("s") + $timeZoneArray[2];
 
-if ($_REQUEST['d'] == ""){
-	$featureday = date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+if (isset($_REQUEST['d']) == ""){
+	$featureday 	= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
 	$today 		= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
-	$fromDay 	= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+	$fromDay 		= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
 }
 
-if ($_REQUEST['m'] == ""){
-	$featuremonth	= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
+if (isset($_REQUEST['m']) == ""){
+	$featuremonth= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
 	$tomonth 		= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
-	$fromMonth		= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
+	$fromMonth	= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
 }
 
-if ($_REQUEST['Y'] == ""){
+if (isset($_REQUEST['Y']) == ""){
 	$featureyear	= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
 	$toyear 		= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
-	$fromYear 		= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
+	$fromYear 	= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
 }
 
 //#DD#
+if(isset($_REQUEST['eventdate']))
 $_REQUEST['eventdate'] = trim($_REQUEST['eventdate']);
 // If date is select from datepicker then assign below date variable
 
@@ -89,21 +90,25 @@ if(!empty($_REQUEST['eventdate'])){
 	$startDate = explode('-',$_REQUEST['eventdate']);
 
 	# Creating Daterange variable
-	$fromDay	= date('d',strtotime($startDate[0]));
+	$fromDay		= date('d',strtotime($startDate[0]));
 	$fromMonth	= date('m',strtotime($startDate[0]));
-	$fromYear	= date('Y',strtotime($startDate[0]));
-	$today		= date('d',strtotime($startDate[1]));
-	$tomonth	= date('m',strtotime($startDate[1]));
+	$fromYear		= date('Y',strtotime($startDate[0]));
+	$today			= date('d',strtotime($startDate[1]));
+	$tomonth		= date('m',strtotime($startDate[1]));
 	$toyear		= date('Y',strtotime($startDate[1]));
 	
 	$seachStartFullDate	=	$fromYear.'-'.$fromMonth.'-'.$fromDay;
 	$searchEndFullDate	=	$toyear.'-'.$tomonth.'-'.$today ;
 	$seachStartDate		=	date('l, j M', mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear));
 	$searchEndDate		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
-	$single_day_date	= 	($fromYear.'-'.$fromMonth.'-'.$fromDay);
+	$single_day_date		= 	($fromYear.'-'.$fromMonth.'-'.$fromDay);
 }else{
-	$todaestring		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
-	$single_day_date	= 	($toyear.'-'.$tomonth.'-'.$today);
+	if(isset($tomonth) && isset($today) && isset($toyear)){
+		$todaestring			=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
+		$single_day_date		= 	($toyear.'-'.$tomonth.'-'.$today);
+		$seachStartDate		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
+		$searchEndDate		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
+	}
 }
 //#DD#
 
@@ -126,25 +131,33 @@ while($row_cat = mysql_fetch_array($rec_cat)){
 	$array_cat[] = $row_cat['id'];
 }
 
-
+if(isset($tomonth) && isset($today) && isset($toyear))
 $byday = strtoupper(substr(date('D',mktime(0, 0, 0, $tomonth, $today, $toyear)),0,2));
 $arrstrcat = implode(',',array_merge(array(-1), $array_cat));
 
-$ser_start_date = date("Y-m-d",strtotime($startDate[0]));
-$ser_end_date   = date("Y-m-d",strtotime($startDate[1]));
-
-if(!isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == '' || $seachStartDate == $searchEndDate ){
-	$query_filter = "SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00' AND rpt.startrepeat <= '".$toyear."-".$tomonth."-".$today." 23:59:59' AND ev.state=1 AND rpt.endrepeat>='".date('Y',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('m',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('d', mktime($totalHours, $totalMinutes, $totalSeconds))." 00:00:00' AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$toyear." and MONTH(rpt.startrepeat )=".$tomonth." and DAYOFMONTH(rpt.startrepeat )=".$today.") or freq<>'WEEKLY')GROUP BY rpt.rp_id";
+if(isset($startDate)){
+	$ser_start_date = date("Y-m-d",strtotime($startDate[0]));
+	$ser_end_date   = date("Y-m-d",strtotime($startDate[1]));
 }
 
+
+
+if(isset($tomonth) && isset($today) && isset($toyear)){
+	if(!isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == '' || $seachStartDate == $searchEndDate ){
+		$query_filter = "SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00' AND rpt.startrepeat <= '".$toyear."-".$tomonth."-".$today." 23:59:59' AND ev.state=1 AND rpt.endrepeat>='".date('Y',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('m',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('d', mktime($totalHours, $totalMinutes, $totalSeconds))." 00:00:00' AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$toyear." and MONTH(rpt.startrepeat )=".$tomonth." and DAYOFMONTH(rpt.startrepeat )=".$today.") or freq<>'WEEKLY')GROUP BY rpt.rp_id";
+	}
+}
+
+if(isset($query_filter))
 $rec_filter = mysql_query($query_filter);
 mysql_set_charset("UTF8");
 
+if(isset($rec_filter))
 while($row_filter = mysql_fetch_array($rec_filter)){
 	$arr_rr_id[] = $row_filter['rp_id'];
 }
 
-if (count($arr_rr_id)){
+if (isset($arr_rr_id) && count($arr_rr_id)){
 	$strchk = implode(',',$arr_rr_id);
 }else{
 	$strchk = 0;
@@ -159,7 +172,11 @@ $LD = Date('d', strtotime("+30 days"));
 $LM = Date('m', strtotime("+30 days"));
 $LY = Date('y', strtotime("+30 days"));
 	
-$query_featuredeve	= "SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%h:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%h:%i %p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE (cat.id=".$cat_id." OR cat.parent_id=".$cat_id.") and cat.access <= 2 AND cat.published = 1 AND cat.section = 'com_jevents' AND rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND cf.value = 1 AND rpt.endrepeat >= '".$featureyear."-".$featuremonth."-".$featureday." 00:00:00' AND rpt.startrepeat <= '".$LY."-".$LM."-".$LD." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";	
+if(isset($cat_id)){	
+	$query_featuredeve	= "SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%h:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%h:%i %p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE (cat.id=".$cat_id." OR cat.parent_id=".$cat_id.") and cat.access <= 2 AND cat.published = 1 AND cat.section = 'com_jevents' AND rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND cf.value = 1 AND rpt.endrepeat >= '".isset($featureyear)."-".isset($featuremonth)."-".isset($featureday)." 00:00:00' AND rpt.startrepeat <= '".$LY."-".$LM."-".$LD." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";	
+	}
+
+if(isset($query_featuredeve))
 $featured_filter	= mysql_query($query_featuredeve);
 
 /* code start by rinkal for page title */
@@ -182,6 +199,8 @@ header('Content-Type:text/html;charset=utf-8');
 				$t = 'Evenementen';
 			}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
 				$t = 'Događanja';
+			}elseif($_SESSION['tpl_folder_name'] == 'defaultfrench'){
+				$t = 'Évènements';
 			}elseif($_SESSION['tpl_folder_name'] == 'default'){
 				$t = 'Events';
 			}

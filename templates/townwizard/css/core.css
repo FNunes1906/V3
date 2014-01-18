@@ -1948,6 +1948,7 @@ Last Updated Date:29-01-2013
     margin-right: 6%;
     padding: 0 1%;
     width: 94%;
+	text-transform: capitalize;
 }
 
 .your{

@@ -9,10 +9,11 @@ setlocale(LC_TIME,"french");
 			<?php
 			$f=0;
 			$imagecount = 0;
-			$tempeventid;
+			$tempeventid = array();
 			$homeslider1;
 			$k=0;
 
+			if(isset($featured_filter))
 			while($fearow=mysql_fetch_array($featured_filter)){
 			
 			$finalDescription="";
@@ -36,12 +37,12 @@ setlocale(LC_TIME,"french");
 
 			$displayTime = '';
 			if($time_format == "12"){
-				if($fearow[timestart]=='12:00 AM' && $fearow[timeend]=='11:59 PM'){   
+				if($fearow['timestart']=='12:00 AM' && $fearow['timeend']=='11:59 PM'){   
 					$displayTime.='Todo el día';
 				}else{
-					$displayTime.= $fearow[timestart];
-					if ($fearow[timeend] != '11:59 PM' ){
-						$displayTime.="-".$fearow[timeend];
+					$displayTime.= $fearow['timestart'];
+					if ($fearow['timeend'] != '11:59 PM' ){
+						$displayTime.="-".$fearow['timeend'];
 					}
 				}
 			
@@ -100,7 +101,7 @@ setlocale(LC_TIME,"french");
 			<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
 				<option value="0"><?php echo strtoupper("catégories")?></option>
 				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
-					<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
+					<option value="<?php echo $row_cat['id'];?>"<?php if(isset($catId) && $row_cat['id'] == $catId) echo "selected='selected'";?>>
 						<?php echo strtoupper($row_cat['name']);?>
 					</option>
 				<?php }?>
@@ -118,7 +119,7 @@ Developer:Rinkal
 Last update Date:23-09-2013
 */
 	
-$res = mysql_query("select id,title from jos_categories where id=".$_REQUEST[category_id]." AND published = 1 AND section = 'com_jevents'");
+$res = mysql_query("select id,title from jos_categories where id=".$_REQUEST['category_id']." AND published = 1 AND section = 'com_jevents'");
 $bann_cat_name = mysql_fetch_row($res);
 
 $id = $bann_cat_name[0];
@@ -139,14 +140,14 @@ if(stripos($ua,'android') == True) { ?>
 
 <div id="main" role="main">
 <?php
-if($todaestring != null){
-	$todaestring =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));
-	echo "<h1>$todaestring";?><?php echo "</h1>";
-}elseif($seachStartFullDate == $searchEndFullDate){
-	$seachStartDate =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear))));
-	$searchEndDate  =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));	
-	echo "<h1>$seachStartDate";?><?php echo "</h1>";
-}
+	if($todaestring != null){
+		$todaestring =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));
+		echo "<h1>$todaestring";?><?php echo "</h1>";
+	}elseif(isset($seachStartFullDate) && isset($searchEndFullDate) && $seachStartFullDate ==$searchEndFullDate){
+		$seachStartDate =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear))));
+		$searchEndDate  =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));	
+		echo "<h1>$seachStartDate";?><?php echo "</h1>";
+	}
 ?>
 
 <ul id="eventList" class="mainList" ontouchstart="touchStart(event,'eventList');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
@@ -175,8 +176,8 @@ if($todaestring != null){
 				$querylocdetail="select *  from jos_jev_locations where loc_id=".$rowvevdetail['location'];
 				$reclocdetail = mysql_query($querylocdetail) or die(mysql_error());
 				$rowlocdetail = mysql_fetch_array($reclocdetail);
-				$lat2 = $rowlocdetail[geolat];
-				$lon2 = $rowlocdetail[geolon];
+				$lat2 = $rowlocdetail['geolat'];
+				$lon2 = $rowlocdetail['geolon'];
 			}
 
 			// Coded By Akash
@@ -230,7 +231,7 @@ if($todaestring != null){
 							$dateValue = explode('-',$dateValue[0]);
 						}?>
 							
-						<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">Plus d’informations</a></li>
+						<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo isset($lat1);?>&lon=<?php echo isset($lon1);?>">Plus d’informations</a></li>
 					</ul>
 				</h3> 
 			</li>
@@ -299,8 +300,8 @@ if($todaestring != null){
 					$querylocdetail="select *  from jos_jev_locations where loc_id=".$rowvevdetail['location'];
 					$reclocdetail = mysql_query($querylocdetail) or die(mysql_error());
 					$rowlocdetail = mysql_fetch_array($reclocdetail);
-					$lat2 = $rowlocdetail[geolat];
-					$lon2 = $rowlocdetail[geolon];
+					$lat2 = $rowlocdetail['geolat'];
+					$lon2 = $rowlocdetail['geolon'];
 				}
 
 				// Coded By Akash
@@ -355,7 +356,7 @@ if($todaestring != null){
 							}
 							
 							?>	
-							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">Plus d’informations</a></li>
+							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo isset($lat1);?>&lon=<?php echo isset($lon1);?>">Plus d’informations</a></li>
 						</ul>
 					</h3> 
 				</li>

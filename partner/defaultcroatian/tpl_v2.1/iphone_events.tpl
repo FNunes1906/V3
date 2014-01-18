@@ -8,8 +8,6 @@ setlocale(LC_TIME,"croatian");
 			<?php
 			$f=0;
 			$imagecount = 0;
-			$tempeventid;
-			$homeslider1;
 			$k=0;
 
 			while($fearow=mysql_fetch_array($featured_filter)){
@@ -36,13 +34,13 @@ setlocale(LC_TIME,"croatian");
 			
 			if($time_format == "12"){
 			
-				if($fearow[timestart]=='12:00 AM' && $fearow[timeend]=='11:59 PM'){   
+				if($fearow["timestart"]=='12:00 AM' && $fearow["timeend"]=='11:59 PM'){   
 					$displayTime.='Cijeli dan';
 				}		
 				else{
-					$displayTime.= $fearow[timestart];
-					if ($fearow[timeend] != '11:59 PM' ){
-						$displayTime.="-".$fearow[timeend];
+					$displayTime.= $fearow["timestart"];
+					if ($fearow["timeend"] != '11:59 PM' ){
+						$displayTime.="-".$fearow["timeend"];
 					}
 				}
 			
@@ -63,11 +61,9 @@ setlocale(LC_TIME,"croatian");
 				
 			}/* End By Akash */		
 					
-			if(in_array($fearow['ev_id'], $tempeventid)){
+			if(isset($tempeventid) && in_array($fearow['ev_id'], $tempeventid)){
 			}else{
-			if($imagecount<5){
-			
-			?> 
+				if($imagecount<5){?> 
 		    	<li>
 				<a href="/components/com_shines_v2.1/events_details.php?eid=<?php echo $fearow['rp_id'];?>&y=<?php echo $fearow['Eyear'];?>&m=<?php echo $fearow['Emonth'];?>&d=<?php echo $fearow['EDate'];?>"><img src="<?php echo $singleimagearray[0];?>" /></a>
 		    		<div class="flex-caption">
@@ -103,7 +99,7 @@ setlocale(LC_TIME,"croatian");
 		<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
 			<option value="0"><?php echo strtoupper("Kategorije");?></option>
 			<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
-				<option value="<?php echo $row_cat['id'];?>"<?php if($row_cat['id'] == $catId) echo "selected='selected'";?>>
+				<option value="<?php echo $row_cat['id'];?>"<?php if(isset($catId) && $row_cat['id'] == $catId) echo "selected='selected'";?>>
 					<?php echo strtoupper($row_cat['name']);?>
 				</option>
 			<?php }?>
@@ -144,7 +140,7 @@ if($todaestring != null){
 
 			<?php 
 			$n = 0;
-			if($seachStartDate == $searchEndDate || !isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == ''){
+			if((isset($seachStartDate) && $seachStartDate == $searchEndDate) || !isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == ''){
 			while($row = mysql_fetch_array($rec)){
 
 				# Fetch event data from "event" table
@@ -167,8 +163,8 @@ if($todaestring != null){
 					$querylocdetail="select *  from jos_jev_locations where loc_id=".$rowvevdetail['location'];
 					$reclocdetail = mysql_query($querylocdetail) or die(mysql_error());
 					$rowlocdetail = mysql_fetch_array($reclocdetail);
-					$lat2 = $rowlocdetail[geolat];
-					$lon2 = $rowlocdetail[geolon];
+					$lat2 = $rowlocdetail["geolat"];
+					$lon2 = $rowlocdetail["geolon"];
 				}
 
 				// Coded By Akash
@@ -222,7 +218,7 @@ if($todaestring != null){
 								$dateValue = explode('-',$dateValue[0]);
 							}?>
 								
-							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">Vi&#353;e</a></li>
+							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo isset($lat1);?>&lon=<?php echo isset($lon1);?>">Vi&#353;e</a></li>
 						</ul>
 					</h3> 
 				</li>
@@ -291,8 +287,8 @@ if($todaestring != null){
 					$querylocdetail="select *  from jos_jev_locations where loc_id=".$rowvevdetail['location'];
 					$reclocdetail = mysql_query($querylocdetail) or die(mysql_error());
 					$rowlocdetail = mysql_fetch_array($reclocdetail);
-					$lat2 = $rowlocdetail[geolat];
-					$lon2 = $rowlocdetail[geolon];
+					$lat2 = $rowlocdetail["geolat"];
+					$lon2 = $rowlocdetail["geolon"];
 				}
 
 				// Coded By Akash
@@ -347,7 +343,7 @@ if($todaestring != null){
 							}
 							
 							?>	
-							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">Vi&#353;e</a></li>
+							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo isset($lat1);?>&lon=<?php echo isset($lon1);?>">Vi&#353;e</a></li>
 						</ul>
 					</h3> 
 				</li>

@@ -67,26 +67,23 @@ $totalHours		= date("H") + $timeZoneArray[0];
 $totalMinutes	= date("i") + $timeZoneArray[1];
 $totalSeconds	= date("s") + $timeZoneArray[2];
 
-if ($_REQUEST['d'] == ""){
-	$featureday = date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
-	$today 		= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
-	$fromDay 	= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
-}
-if ($_REQUEST['m'] == ""){
-	$featuremonth	= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
-	$tomonth 		= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
-	$fromMonth		= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
-}
-if ($_REQUEST['Y'] == ""){
-	$featureyear	= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
-	$toyear 		= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
-	$fromYear 		= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
+$featureday = date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+$today 		= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+$fromDay 	= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+
+$featuremonth	= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
+$tomonth 		= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
+$fromMonth		= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
+
+$featureyear	= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
+$toyear 		= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
+$fromYear 		= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
+
+if(isset($_REQUEST['eventdate'])){
+	$_REQUEST['eventdate'] = trim($_REQUEST['eventdate']);	
 }
 
-//#DD#
-$_REQUEST['eventdate'] = trim($_REQUEST['eventdate']);
 // If date is select from datepicker then assign below date variable
-
 $todaestring = '';
 
 if(!empty($_REQUEST['eventdate'])){
@@ -98,6 +95,7 @@ if(!empty($_REQUEST['eventdate'])){
 	$fromDay	= date('d',strtotime($startDate[0]));
 	$fromMonth	= date('m',strtotime($startDate[0]));
 	$fromYear	= date('Y',strtotime($startDate[0]));
+	
 	$today		= date('d',strtotime($startDate[1]));
 	$tomonth	= date('m',strtotime($startDate[1]));
 	$toyear		= date('Y',strtotime($startDate[1]));
@@ -132,21 +130,27 @@ while($row_cat = mysql_fetch_array($rec_cat)){
 $byday = strtoupper(substr(date('D',mktime(0, 0, 0, $tomonth, $today, $toyear)),0,2));
 $arrstrcat = implode(',',array_merge(array(-1), $array_cat));
 
-$ser_start_date = date("Y-m-d",strtotime($startDate[0]));
-$ser_end_date   = date("Y-m-d",strtotime($startDate[1]));
+if(isset($startDate)){
+	$ser_start_date = date("Y-m-d",strtotime($startDate[0]));
+	$ser_end_date   = date("Y-m-d",strtotime($startDate[1]));
+}
 
 if(!isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == '' || $seachStartDate == $searchEndDate ){
 	$query_filter = "SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00' AND rpt.startrepeat <= '".$toyear."-".$tomonth."-".$today." 23:59:59' AND ev.state=1 AND rpt.endrepeat>='".date('Y',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('m',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('d', mktime($totalHours, $totalMinutes, $totalSeconds))." 00:00:00' AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$toyear." and MONTH(rpt.startrepeat )=".$tomonth." and DAYOFMONTH(rpt.startrepeat )=".$today.") or freq<>'WEEKLY')GROUP BY rpt.rp_id";
 }
 
-$rec_filter = mysql_query($query_filter);
-mysql_set_charset("UTF8");
-
-while($row_filter = mysql_fetch_array($rec_filter)){
-	$arr_rr_id[] = $row_filter['rp_id'];
+if(isset($query_filter)){
+	$rec_filter = mysql_query($query_filter);
+	mysql_set_charset("UTF8");
 }
 
-if (count($arr_rr_id)){
+if(isset($rec_filter)){
+	while($row_filter = mysql_fetch_array($rec_filter)){
+		$arr_rr_id[] = $row_filter['rp_id'];
+	}
+}
+
+if(isset($arr_rr_id) && count($arr_rr_id)){
 	$strchk = implode(',',$arr_rr_id);
 }else{
 	$strchk = 0;
@@ -186,7 +190,10 @@ header('Content-Type:text/html;charset=utf-8');
 			$t = 'Događanja';
 		}elseif($_SESSION['tpl_folder_name'] == 'default'){
 			$t = 'Events';
+		}elseif($_SESSION['tpl_folder_name'] == 'defaultfrench'){
+			$t = 'évènements';
 		}
+		
 		
 		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 		if(stripos($ua,'android') == True){ 
@@ -283,7 +290,7 @@ header('Content-Type:text/html;charset=utf-8');
 				if (!($("#demo_"+demo).length))
 				demo = 'default';
 				jQuery("#demo_" + demo).show();
-				jQuery('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "bottom", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
+				jQuery('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "modal", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
 			});
 			jQuery('#demo').trigger('change');
 		});

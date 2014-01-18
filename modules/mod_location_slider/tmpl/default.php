@@ -55,31 +55,41 @@ global $var;
 		    			<!-- <p><?php echo substr($fearow->description, 0, 75);?></p> -->
 		    			 <p>
 					  	<?php 
-						   $strArray = explode('<img',$fearow->description);
-						   if(isset($strArray) && $strArray != ''){
-						    for($i = 0; $i <= count($strArray); ++$i){
-						     
-						     $strFound = strpos(isset($strArray[$i]),'" />');
-						     
-						     if(isset($strFound) && $strFound != ''){
-						      $s = explode('" />',$strArray[$i]);
-						      $strConcat = $s[1];
-						     }else{
-						      $strConcat = isset($strArray[$i]); 
-						     }
-						     /*$finalDescription .= $strConcat;*/
-							 $finalDescription = strip_tags($strConcat);
-							 $finalDescription=str_replace("<br />","",$finalDescription);
-						    }
-						   if(strlen($finalDescription)>="140"){
-								$strProcess12 = substr($finalDescription, 0 , 140);
-								$strInput1 = explode(' ',$strProcess12);
-								$str12 = array_slice($strInput1, 0, -1);
-								echo implode(' ',$str12).' ...';
-							}else{
-								echo $finalDescription;
+							$strArray = explode('<img',$fearow->description);
+							
+							if(isset($strArray) && $strArray != ''){
+								for($i = 0; $i <= count($strArray); ++$i){
+									
+									# Changed for error log
+									$strFound = '';
+									
+									# put if conditoin for error log
+									if(isset($strArray[$i]) && !empty($strArray[$i])){
+										$strFound = strpos($strArray[$i],'" />');
+									}									
+							
+									if(isset($strFound) && $strFound != ''){
+										$s = explode('" />',$strArray[$i]);
+										$strConcat = $s[1];
+									}else{
+										# put if conditoin for error log
+										if(!empty($strArray[$i]))
+											$strConcat = $strArray[$i]; 
+									}
+									/*$finalDescription .= $strConcat;*/
+									isset($strConcat)?$finalDescription .= $strConcat:'';
+									$finalDescription=str_replace("<br />","",$finalDescription);
+									$finalDescription = strip_tags($finalDescription);
+								}
+								if(strlen($finalDescription)>="140"){
+									$strProcess12 = substr($finalDescription, 0 , 140);
+									$strInput1 = explode(' ',$strProcess12);
+									$str12 = array_slice($strInput1, 0, -1);
+									echo implode(' ',$str12).' ...';
+								}else{
+									echo $finalDescription;
+								}
 							}
-						   }
 						?>					  
 					  </p>
 						<div class="cl"></div>
