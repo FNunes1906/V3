@@ -53,7 +53,7 @@
 								      		$strConcat = $strArray[$i]; 
 							     }
 							   	# put turnery condition for error log
-							     isset($strConcat)?$finalDescription .= $strConcat:'';
+							     isset($strConcat)?$finalDescription = $strConcat:'';
 								 $finalDescription=str_replace("<br />","",$finalDescription);
 							    }
 								/* lenth of the description count 110 char */
