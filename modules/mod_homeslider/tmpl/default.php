@@ -95,9 +95,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 											$strConcat = $strArray[$i]; 
 									}
 									
-									 isset($strConcat)?$finalDescription .= $strConcat:'';
-									 $finalDescription=str_replace("<br />","",$finalDescription);
-									 $finalDescription = strip_tags($finalDescription);
+									isset($strConcat)?$finalDescription .= $strConcat:'';
+									$finalDescription=str_replace("<br />","",$finalDescription);
+									$finalDescription = strip_tags($finalDescription);
 								}
 							   if(strlen($finalDescription)>="140"){
 									$strProcess12 = substr($finalDescription, 0 , 140);
