@@ -539,8 +539,9 @@ function showcatImages(){
 				$j = mysql_num_rows($rows);
 				while ($row = mysql_fetch_array($rows)){
 					
-				$imgFileArray = explode('/',isset($row['filename']));
-					
+				if(isset($row['filename'])){
+    				$imgFileArray = explode('/',$row['filename']);
+				}
 					
 				if(count($imgFileArray) > 1)
 				{

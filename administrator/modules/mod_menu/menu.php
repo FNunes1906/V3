@@ -108,7 +108,7 @@ class JAdminCSSMenu extends JTree
 			echo "<span></span>";
 		}elseif ($this->_current->link != null) {
 			echo "<a class=\"".$this->getIconClass($this->_current->class)."\" href=\"".$this->_current->link."\">".$this->_current->title."</a>";
-		}elseif ($this->_current->title != null && $usertype == 'TW_Admin' && $this->_current->title == 'Menus') {
+		}elseif (($this->_current->title != null && $usertype == 'TW_Admin' && $this->_current->title == 'Menus') || ($this->_current->title != null && $usertype == 'TW_Admin' && $this->_current->title == 'Help')) {
 			echo "<span></span>";
 		}elseif ($this->_current->title != null ) {
 			echo "<a>".$this->_current->title."</a>\n";

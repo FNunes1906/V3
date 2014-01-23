@@ -9,6 +9,8 @@
 defined('_JEXEC') or die('Restricted access');
 
 JHTML::_('behavior.calendar');
+$user =& JFactory::getUser();
+$usertype = $user->get('usertype');
 ?>
 <script type="text/javascript">
 function submitbutton(task)
@@ -65,6 +67,7 @@ function resetForm()
 				<button class="rs_button rs_left" type="button" onclick="this.form.submit();"><?php echo JText::_( 'Go' ); ?></button>
 				<button class="rs_button rs_left" type="button" onclick="resetForm();this.form.submit();"><?php echo JText::_( 'Reset' ); ?></button>
 			</td>
+			<?php if($usertype != 'TW_Admin'){ ?>
 			<td nowrap="nowrap">
 				<button class="rs_button" type="button" onclick="toggleCustomizeColumns();"><?php echo JText::_('RSFP_CUSTOMIZE_COLUMNS'); ?></button>
 				<div id="columnsContainer">
@@ -85,6 +88,7 @@ function resetForm()
 				</div>
 				</div>
 			</td>
+			<?php } ?>
 		</tr>
 	</table>
 	

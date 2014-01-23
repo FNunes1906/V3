@@ -107,7 +107,7 @@ else {
 
 <div id="main" role="main">
 	<div id="searchBar">
-		<form id="placeCatForm" method="GET">
+		<form id="placeCatForm" method="GET" autocomplete="off">
 			<?php $recsubsql="select * from jos_categories where (parent_id=151 OR id=151) AND section='com_jevlocations2' and published=1 ORDER BY title ASC";
 			$recsub = mysql_query($recsubsql) or die(mysql_error());?>
 			<select name="d" onChange="redirecturl(this.value)" >

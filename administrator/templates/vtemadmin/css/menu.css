@@ -48,9 +48,9 @@ border-radius:0 5px 5px 5px;
 }
 #menu ul li.separator {
 height:1px;
-border-top:1px solid #111;
-background:#555;
-margin:2px 0;
+/*	border-top:1px solid #111;
+	background:#555;	*/
+margin:0px 0;
 }
 
 #menu a, #menu div {

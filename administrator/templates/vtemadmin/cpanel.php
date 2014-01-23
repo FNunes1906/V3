@@ -47,6 +47,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	  </div>
 	  <div class="clr"></div>
 	</div>
+	<jdoc:include type="message" />
 	<table class="vt_cpanel" cellspacing="10">
 		<tr>
 			<td width="55%" valign="top" align="right">

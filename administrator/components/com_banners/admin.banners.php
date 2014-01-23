@@ -17,6 +17,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 // Make sure the user is authorized to view this page
 $user = & JFactory::getUser();
+$usertype	= $user->get('usertype');
 if (!$user->authorize( 'com_banners', 'manage' )) {
 	$mainframe->redirect( 'index.php', JText::_('ALERTNOTAUTH') );
 }
@@ -33,7 +34,10 @@ if($controllerName == 'client') {
 } else {
 	JSubMenuHelper::addEntry(JText::_('Banners'), 'index.php?option=com_banners', true );
 	JSubMenuHelper::addEntry(JText::_('Clients'), 'index.php?option=com_banners&c=client');
-	JSubMenuHelper::addEntry(JText::_('Categories'), 'index.php?option=com_categories&section=com_banner');
+	if($usertype != 'TW_Admin'){
+		JSubMenuHelper::addEntry(JText::_('Categories'), 'index.php?option=com_categories&section=com_banner');
+	}
+	
 }
 
 switch ($controllerName)

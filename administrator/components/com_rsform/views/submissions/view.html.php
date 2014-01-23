@@ -11,26 +11,31 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.view');
 jimport('joomla.html.pane');
 
+
 class RSFormViewSubmissions extends JView
 {
 	function display($tpl = null)
 	{
 		$mainframe =& JFactory::getApplication();
+		$user	 = & JFactory::getUser();
+		$usertype = $user->get('usertype');
 		
 		JToolBarHelper::title('RSForm! Pro','rsform');
 		
-		if (RSFormProHelper::isJ16())
-		{
+		//if (RSFormProHelper::isJ16())
+		//{
 			$lang =& JFactory::getLanguage();
 			$lang->load('com_rsform.sys', JPATH_ADMINISTRATOR);
-			
+		
 			JSubMenuHelper::addEntry(JText::_('COM_RSFORM_MANAGE_FORMS'), 'index.php?option=com_rsform&task=forms.manage');
 			JSubMenuHelper::addEntry(JText::_('COM_RSFORM_MANAGE_SUBMISSIONS'), 'index.php?option=com_rsform&task=submissions.manage', true);
-			JSubMenuHelper::addEntry(JText::_('COM_RSFORM_CONFIGURATION'), 'index.php?option=com_rsform&task=configuration.edit');
 			JSubMenuHelper::addEntry(JText::_('COM_RSFORM_BACKUP_RESTORE'), 'index.php?option=com_rsform&task=backup.restore');
-			JSubMenuHelper::addEntry(JText::_('COM_RSFORM_UPDATES'), 'index.php?option=com_rsform&task=updates.manage');
-			JSubMenuHelper::addEntry(JText::_('COM_RSFORM_PLUGINS'), 'index.php?option=com_rsform&task=goto.plugins');
-		}
+			if($usertype != 'TW_Admin'){
+				JSubMenuHelper::addEntry(JText::_('COM_RSFORM_CONFIGURATION'), 'index.php?option=com_rsform&task=configuration.edit');
+				JSubMenuHelper::addEntry(JText::_('COM_RSFORM_UPDATES'), 'index.php?option=com_rsform&task=updates.manage');
+				JSubMenuHelper::addEntry(JText::_('COM_RSFORM_PLUGINS'), 'index.php?option=com_rsform&task=goto.plugins');
+			}
+		//}
 		
 		$layout = $this->getLayout();
 		
@@ -99,17 +104,23 @@ class RSFormViewSubmissions extends JView
 		}
 		else
 		{
-			JToolBarHelper::custom('submissions.export.csv', 'archive', 'archive', JText::_('RSFP_EXPORT_CSV'), false);
-			JToolBarHelper::custom('submissions.export.excel', 'archive', 'archive', JText::_('RSFP_EXPORT_EXCEL'), false);
-			JToolBarHelper::custom('submissions.export.xml', 'archive', 'archive', JText::_('RSFP_EXPORT_XML'), false);
-			JToolBarHelper::spacer();
-			JToolBarHelper::custom('submissions.cancelform', 'back', 'back', JText::_('RSFP_BACK_TO_FORM'), false);
-			JToolBarHelper::spacer();
-			JToolBarHelper::custom('submissions.resend', 'send', 'send', JText::_('RSFP_RESEND_EMAILS'), false);
+			// Hide menu for TW admin 
+			
+			if($usertype != 'TW_Admin'){
+				JToolBarHelper::custom('submissions.export.csv', 'archive', 'archive', JText::_('RSFP_EXPORT_CSV'), false);
+				JToolBarHelper::custom('submissions.export.excel', 'archive', 'archive', JText::_('RSFP_EXPORT_EXCEL'), false);
+				JToolBarHelper::custom('submissions.export.xml', 'archive', 'archive', JText::_('RSFP_EXPORT_XML'), false);
+				JToolBarHelper::spacer();
+				JToolBarHelper::custom('submissions.cancelform', 'back', 'back', JText::_('RSFP_BACK_TO_FORM'), false);
+				JToolBarHelper::spacer();
+				JToolBarHelper::custom('submissions.resend', 'send', 'send', JText::_('RSFP_RESEND_EMAILS'), false);
+				
+				JToolBarHelper::spacer();
+				JToolBarHelper::cancel('submissions.cancel', RSFormProHelper::isJ16() ? JText::_('JTOOLBAR_CLOSE') : JText::_('Close'));
+			}
+			
 			JToolBarHelper::editListX('submissions.edit', RSFormProHelper::isJ16() ? JText::_('JTOOLBAR_EDIT') : JText::_('Edit'));
 			JToolBarHelper::deleteList(JText::_('VALIDDELETEITEMS'), 'submissions.delete', RSFormProHelper::isJ16() ? JText::_('JTOOLBAR_DELETE') : JText::_('DELETE'));
-			JToolBarHelper::spacer();
-			JToolBarHelper::cancel('submissions.cancel', RSFormProHelper::isJ16() ? JText::_('JTOOLBAR_CLOSE') : JText::_('Close'));
 			
 			$forms = $this->get('forms');
 			$formId = $this->get('formId');
