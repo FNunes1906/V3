@@ -1,28 +1,22 @@
 <div id="main" role="main">
-<div id="searchBar">
-<form id="placeCatForm">
-<?php	
-$recsubsql="select * from jos_categories where (parent_id=".$category_id." OR id=".$category_id.") AND section='com_jevlocations2' and published=1 ORDER BY title ASC";
-$recsub=mysql_query($recsubsql) or die(mysql_error());	?>
-<select name="d" onChange="redirecturl(this.value)" >
-<option value="0">
-Seleccione una categor&#237;a
-</option>
-<option value="0">
-Todos
-</option>
-<option value="alp" <?php if (isset($_REQUEST['filter_loccat']) && $_REQUEST['filter_loccat'] == 'alp') {?> selected <?php }?>>
-Alfab&#233;tico
-</option>
-<?php	while($rowsub=mysql_fetch_array($recsub))
-{
-	$querycount = "SELECT * FROM jos_jev_locations WHERE published=1 and loccat=".$rowsub['id'];
-	if($filter_order != "")
-		$querycount .= " ORDER BY title ASC ";
-	else
-	$querycount .= " ORDER BY ordering ASC";
-	$reccount=mysql_query($querycount) or die(mysql_error());
-	if(mysql_num_rows($reccount)){
+	<div id="searchBar">
+		<form id="placeCatForm" autocomplete="off">
+			<?php	
+			$recsubsql="SELECT c . * , pc.title AS parenttitle FROM jos_categories AS c LEFT JOIN jos_categories AS pc ON c.parent_id = pc.id LEFT JOIN jos_categories AS mc ON pc.parent_id = mc.id LEFT JOIN jos_categories AS gpc ON mc.parent_id = gpc.id WHERE c.section = 'com_jevlocations2' AND (c.id =".$category_id." OR pc.id =".$category_id." OR mc.id =".$category_id." OR gpc.id =".$category_id.") AND c.published=1 ORDER BY c.title";
+			$recsub=mysql_query($recsubsql) or die(mysql_error());	?>
+			<select name="d" onChange="redirecturl(this.value)" >
+			<option value="0">Seleccione una categor&#237;a</option>
+			<option value="0">Todos</option>
+			<option value="alp" <?php if (isset($_REQUEST['filter_loccat']) && $_REQUEST['filter_loccat'] == 'alp') {?> selected <?php }?>>Alfab&#233;tico</option>
+			<?php while($rowsub=mysql_fetch_array($recsub))
+			{
+				$querycount = "SELECT * FROM jos_jev_locations WHERE published=1 and loccat=".$rowsub['id'];
+				if($filter_order != "")
+					$querycount .= " ORDER BY title ASC ";
+				else
+				$querycount .= " ORDER BY ordering ASC";
+				$reccount=mysql_query($querycount) or die(mysql_error());
+				if(mysql_num_rows($reccount)){
 						if(($_REQUEST['filter_loccat'] != 'alp') || ($_REQUEST['filter_loccat'] != '0')){?>
 							<option value="<?php echo $rowsub['id'];?>" <?php if (isset($_REQUEST['filter_loccat']) && $_REQUEST['filter_loccat']==$rowsub['id']) {?> selected <?php }?>><?php echo $rowsub['title'];?></option>
 				<?php }}
@@ -33,7 +27,7 @@ Alfab&#233;tico
 		<div onclick="divopen('q1')">
 		<!-- <img width="37px" height="31px" src="/components/com_shines/images/searchIcon.png"> -->
 		<a id="searchIcon" href="#">s</a>
-		<form action="" method="post" name="location_form" id="searchForm">
+		<form action="" method="post" name="location_form" id="searchForm" autocomplete="off">
 			<fieldset>
 				<input type="search" name="searchvalue" value="" size="15"/>
 				<input type="submit" name="search_rcd" value="Buscar"/>
@@ -44,19 +38,20 @@ Alfab&#233;tico
 
 		<ul id="placesList" class="mainList">
 		
-		<?php if(isset($_POST['search_rcd'])!="Buscar") { ?>
-			<?php
-			$query = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180)) + cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations $customfields3_table WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ".isset($subquery);
+		<?php
+		if(isset($_POST['search_rcd'])!="Buscar") { 
+			 $query = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180)) + cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations $customfields3_table WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ".$subquery;
 			if(isset($filter_loccat)){
 				if($filter_loccat == 'Featured')
 					$query .= " AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ";
 				elseif($filter_loccat != 0 && $_REQUEST['filter_loccat'] != 'alp')
 					$query .= " AND loccat = $filter_loccat ";
 			}
-			if(($filter_order != "") || (isset($_REQUEST['filter_loccat'])=='alp'))
+			if(($filter_order != "") || ($_REQUEST['filter_loccat']=='alp'))
 				$query .= " ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
 			else 
-			$query .= " ORDER BY dist ASC LIMIT " .$start_at.','.$entries_per_page;
+				$query .= " ORDER BY dist ASC LIMIT " .$start_at.','.$entries_per_page;
+				
 			$rec=mysql_query($query) or die(mysql_error());
 			$n=0;
 			while($row=mysql_fetch_assoc($rec))
@@ -79,23 +74,20 @@ Alfab&#233;tico
 				<li><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $row['geolon']; ?>:<?php echo $row['geolat']; ?>')"></a></li>
 				</ul>
 				</li>
-		
-				<?php
-				++$n;
+			<?php ++$n;
 			}
-			?>
-			<?php } ?>
+		}
 		
-		
-		<?php
-		if(isset($_POST['search_rcd'])=="Buscar") {$searchdata = addslashes($_POST['searchvalue']);
-			?>
-			<?php
-		if((isset($filter_loccat)==0) || ($_REQUEST['filter_loccat']=='alp') && ($_POST['search_rcd']=="Buscar")) {$search_query1="select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;}
+		if(isset($_POST['search_rcd'])=="Buscar"){ 
+			$searchdata = addslashes($_POST['searchvalue']);
 			
-		else if($filter_loccat == 'Featured' && $_POST['search_rcd']=="Buscar" ) {$search_query1="select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%'  AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;}
-			
-		else if($_POST['search_rcd']=="Buscar"){ $search_query1="select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and loccat=$filter_loccat and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;}
+			if((isset($filter_loccat)==0) || ($_REQUEST['filter_loccat']=='alp') && ($_POST['search_rcd']=="Buscar")){
+				 $search_query1="select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+			}else if(($filter_loccat == 'Featured') && $_POST['search_rcd']=="Buscar" ){
+				 $search_query1="select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+			}else if($_POST['search_rcd'] == "Buscar"){
+				 $search_query1="select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and loccat=".isset($filter_loccat)." and title like '%$searchdata%'  ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+			}
 			
 			$search_query=mysql_query($search_query1) or die(mysql_error());
 			
@@ -132,7 +124,7 @@ Alfab&#233;tico
 		</li>
 		</ul>
 		<?php 
-		if(isset($n) =='50') {
+		if($n =='50') {
 			echo get_paginate_links($total_rows,$entries_per_page,$current_page,$link_to);
 			}?>
 		<div style='display:none;'>

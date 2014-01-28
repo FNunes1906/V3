@@ -9,6 +9,10 @@ session_start();
 include("connection.php");
 include("iadbanner.php");
 
+if(!isset($_SESSION['generic_category']) && $_SESSION['generic_category'] == NULL){
+	$_SESSION['generic_category'] = $_REQUEST['category_id'];
+}
+
 if($_SESSION['tpl_folder_name'] == "defaultspanish"){
 	$final_lang = "es";
 }elseif($_SESSION['tpl_folder_name'] == "defaultcroatian"){

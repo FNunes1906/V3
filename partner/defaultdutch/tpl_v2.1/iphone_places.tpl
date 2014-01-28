@@ -34,28 +34,27 @@
 							/*Replace images from description */
 							$strArray = explode('<img',$fealoc['description']);
 							   if(isset($strArray) && $strArray != ''){
-							    for($i = 0; $i <= count($strArray); $i++){
-							  	
-							  	# Changed for error log
+							    for($i = 0; $i <= count($strArray); ++$i){
+            
+	   							# Changed for error log
 								$strFound = '';
-							     
-							   	# put if conditoin for error log
-							   if(isset($strArray[$i]) && !empty($strArray[$i])){
+								
+						             if(isset($strArray[$i]) && !empty($strArray[$i])){
 							 	   $strFound = strpos($strArray[$i],'" />');
-							   }
-							     
-							     if(isset($strFound) && $strFound != ''){
-							      		$s = explode('" />',$strArray[$i]);
-							      		$strConcat = $s[1];
-							     }else{
-							   		# put if conditoin for error log
+							   	}
+						            
+						            if(isset($strFound) && $strFound != ''){
+							             $s = explode('" />',$strArray[$i]);
+							             $strConcat = $s[1];
+						            }else{
+						             		# put if conditoin for error log
 								   	if(!empty($strArray[$i]))
-								      		$strConcat = $strArray[$i]; 
-							     }
-							   	# put turnery condition for error log
-							     isset($strConcat)?$finalDescription .= $strConcat:'';
-								 $finalDescription=str_replace("<br />","",$finalDescription);
-							    }
+								      		 $strConcat = $strArray[$i];
+						            }
+						           isset($strConcat)?$finalDescription .= $strConcat:'';
+						         	$finalDescription=str_replace("<br />","",$finalDescription);
+								$strConcat='';
+						           }
 								/* lenth of the description count 110 char */
 							   if(strlen($finalDescription)>="110"){
 									$strProcess12 = substr(strip_tags($finalDescription), 0 , 110);
@@ -93,13 +92,13 @@
 $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 if(stripos($ua,'android') == true) { ?>
 	<div class="iphoneads" style="vertical-align:bottom;">
-		<?php m_show_banner('android-places-screen'); ?>
+		<?php m_show_banner('android-restaurants-screen'); ?>
 	</div>
 	<?php } 
 else {
 	?>
 	<div class="iphoneads" style="vertical-align:bottom;">
-	<?php m_show_banner('iphone-places-screen'); ?>
+	<?php m_show_banner('iphone-restaurants-screen'); ?>
 	</div>
 	<?php } ?>
 	
@@ -107,8 +106,8 @@ else {
 
 <div id="main" role="main">
 	<div id="searchBar">
-		<form id="placeCatForm" autocomplete="off">
-			<?php	$recsubsql="select * from jos_categories where (parent_id=151 OR id=151) AND section='com_jevlocations2' and published=1 ORDER BY title ASC";
+		<form id="placeCatForm">
+			<?php	 $recsubsql="SELECT c . * , pc.title AS parenttitle FROM jos_categories AS c LEFT JOIN jos_categories AS pc ON c.parent_id = pc.id LEFT JOIN jos_categories AS mc ON pc.parent_id = mc.id LEFT JOIN jos_categories AS gpc ON mc.parent_id = gpc.id WHERE c.section = 'com_jevlocations2' AND (c.id =151 OR pc.id =151 OR mc.id =151 OR gpc.id =151) AND c.published=1 ORDER BY c.title";
 			$recsub=mysql_query($recsubsql) or die(mysql_error());
 			mysql_set_charset("UTF8");
 			?>
@@ -197,11 +196,14 @@ else {
 		if(isset($_POST['search_rcd'])=="Zoeken") {$searchdata = addslashes($_POST['searchvalue']);
 			?>
 			<?php
-		if((isset($filter_loccat)==0) || ($_REQUEST['filter_loccat']=='alp') && ($_POST['search_rcd']=="Zoeken")) {$search_query1="select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;}
+		if((isset($filter_loccat)==0) || ($_REQUEST['filter_loccat']=='alp') && ($_POST['search_rcd']=="Zoeken")) {
+			$search_query1="select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;}
 			
-		else if($filter_loccat == 'Featured' && $_POST['search_rcd']=="Zoeken" ) {$search_query1="select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%'  AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;}
+		else if($filter_loccat == 'Featured' && $_POST['search_rcd']=="Zoeken" ) {
+			$search_query1="select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;}
 			
-		else if($_POST['search_rcd']=="Zoeken"){ $search_query1="select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and loccat=$filter_loccat and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;}
+		else if($_POST['search_rcd']=="Zoeken"){ 
+			$search_query1="select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and loccat=$filter_loccat and title like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;}
 			
 			$search_query=mysql_query($search_query1) or die(mysql_error());
 			mysql_set_charset("UTF8");
@@ -230,15 +232,15 @@ else {
 					<?php } ?>
 					<li><a class="button small" href="diningdetails.php?did=<?php echo $data['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">Meer informatie</a></li>
 					<li><a  href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $data['geolon']; ?>:<?php echo $data['geolat']; ?>')"></a></li>
-				</ul>
+				</ul></li>
 				<?php } ?>
 		<?php }
 		//include("connection.php");
 		?>
-		</li>
+		
 		</ul>
 		<?php 
-		if(isset($n) =='50') {
+		if(($n) =='50') {
 			echo get_paginate_links($total_rows,$entries_per_page,$current_page,$link_to);
 			}?>
 		<div style='display:none;'>

@@ -203,11 +203,14 @@ class RSFormViewForms extends JView
 		}
 		else
 		{
-			JToolBarHelper::addNewX('forms.add', RSFormProHelper::isJ16() ? JText::_('JTOOLBAR_NEW') : JText::_('New'));
+			if($usertype != 'TW_Admin'){
+				JToolBarHelper::addNewX('forms.add', RSFormProHelper::isJ16() ? JText::_('JTOOLBAR_NEW') : JText::_('New'));
+				JToolBarHelper::spacer();
+				JToolBarHelper::deleteList(JText::_('VALIDDELETEITEMS'), 'forms.delete', RSFormProHelper::isJ16() ? JText::_('JTOOLBAR_DELETE') : JText::_('DELETE'));
+			}
 			JToolBarHelper::spacer();
 			JToolBarHelper::custom('forms.copy', 'copy.png', 'copy_f2.png', JText::_('RSFP_DUPLICATE'), false);
-			JToolBarHelper::spacer();
-			JToolBarHelper::deleteList(JText::_('VALIDDELETEITEMS'), 'forms.delete', RSFormProHelper::isJ16() ? JText::_('JTOOLBAR_DELETE') : JText::_('DELETE'));
+			
 			JToolBarHelper::spacer();
 			JToolBarHelper::publishList('forms.publish', RSFormProHelper::isJ16() ? JText::_('JTOOLBAR_PUBLISH') : JText::_('Publish'));
 			JToolBarHelper::unpublishList('forms.unpublish', RSFormProHelper::isJ16() ? JText::_('JTOOLBAR_UNPUBLISH') : JText::_('Unpublish'));

@@ -99,9 +99,9 @@ setlocale(LC_TIME,"spanish");
 	<!--Code for Event Category drop down Yogi Start -->
 		<form id="event_cat_form" class="cls_event_cat_form">
 			<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
-				<option value="0">Categories</option>
+				<option value="<?php echo $_SESSION['generic_category'];?>"><?php echo strtoupper("Categorías");?></option>
 				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
-					<option value="<?php echo $row_cat['id'];?>"<?php if(isset($catId) && $row_cat['id'] == $catId) echo "selected='selected'";?>>
+					<option value="<?php echo $row_cat['id'];?>"<?php if(isset($cat_id) && $row_cat['id'] == $cat_id) echo "selected='selected'";?>>
 						<?php echo strtoupper($row_cat['name']);?>
 					</option>
 				<?php }?>

@@ -30,7 +30,9 @@ $controllerName = JRequest::getCmd( 'c', 'banner' );
 if($controllerName == 'client') {
 	JSubMenuHelper::addEntry(JText::_('Banners'), 'index.php?option=com_banners');
 	JSubMenuHelper::addEntry(JText::_('Clients'), 'index.php?option=com_banners&c=client', true );
-	JSubMenuHelper::addEntry(JText::_('Categories'), 'index.php?option=com_categories&section=com_banner');
+	if($usertype != 'TW_Admin'){
+		JSubMenuHelper::addEntry(JText::_('Categories'), 'index.php?option=com_categories&section=com_banner');
+	}
 } else {
 	JSubMenuHelper::addEntry(JText::_('Banners'), 'index.php?option=com_banners', true );
 	JSubMenuHelper::addEntry(JText::_('Clients'), 'index.php?option=com_banners&c=client');

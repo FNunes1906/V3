@@ -52,40 +52,40 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 	}
 }
 
-if (isset($_REQUEST['lat']) && $_REQUEST['lat'] != '')
+if (isset($_REQUEST['lat']) && $_REQUEST['lat']!="")
 	$lat1=$_REQUEST['lat'];
 else
-	$lat1=0;
+	$lat1='0';
 
-if (isset($_REQUEST['lon']) && $_REQUEST['lon'] != '')
+if (isset($_REQUEST['lon']) && $_REQUEST['lon']!="")
 	$lon1=$_REQUEST['lon'];
 else
-	$lon1=0;
+	$lon1='0';
 
 if (isset($_REQUEST['filter_loccat']) && $_REQUEST['filter_loccat'] != '0')
-	
-$filter_loccat=$_REQUEST['filter_loccat'];
+	 $filter_loccat=$_REQUEST['filter_loccat'];
 
 if(isset($filter_loccat) && $filter_loccat == 'Featured')
 	$customfields3_table = ", `jos_jev_customfields3` ";
 else
-$customfields3_table = "";
+	$customfields3_table = "";
+
 if (isset($_REQUEST['start']))
 	$ii=$_REQUEST['start'];
 else
 $ii=0;
 if(isset($_REQUEST['filter_order']) && $_REQUEST['filter_order']!="")
 	$filter_order = $_REQUEST['filter_order'];
-else    
-$filter_order = "";	
+else	
+$filter_order = "";
 if(isset($_REQUEST['filter_order_Dir']) && $_REQUEST['filter_order_Dir']!="")
 	$filter_order_Dir = $_REQUEST['filter_order_Dir'];
-else    
+else	
 $filter_order_Dir = "ASC";
 
 $category_id = $_REQUEST['category_id'];
 #@#
-$RES=mysql_query("select id,title from jos_categories where parent_id=".$category_id." AND section='com_jevlocations2' and published=1 order by `ordering`");
+$RES=mysql_query("SELECT c . * , pc.title AS parenttitle FROM jos_categories AS c LEFT JOIN jos_categories AS pc ON c.parent_id = pc.id LEFT JOIN jos_categories AS mc ON pc.parent_id = mc.id LEFT JOIN jos_categories AS gpc ON mc.parent_id = gpc.id WHERE c.section = 'com_jevlocations2' AND (c.id =".$category_id." OR pc.id =".$category_id." OR mc.id =".$category_id." OR gpc.id =".$category_id.") AND c.published=1");
 
 while($idsrow=mysql_fetch_assoc($RES)){
 	$allCatIds[] = $idsrow['id'];
@@ -93,10 +93,10 @@ while($idsrow=mysql_fetch_assoc($RES)){
 $allCatIds[] = $category_id;
 #@#
 
-$path= $_SERVER['PHP_SELF'] . "?option=com_jevlocations&task=locations.listlocations&tmpl=component&needdistance=1&sortdistance=1&lat=".$lat1."&lon=".$lon1."&bIPhone=". isset($_REQUEST['bIPhone'])."&iphoneapp=1&search=". isset($_REQUEST['search'])."&limit=0&jlpriority_fv=0&filter_loccat=".isset($filter_loccat)."&filter_order=".$filter_order."&filter_order_Dir=".$filter_order_Dir;
+$path= $_SERVER['PHP_SELF'] . "?category_id=".$category_id."&option=com_jevlocations&task=locations.listlocations&tmpl=component&needdistance=1&sortdistance=1&lat=".$lat1."&lon=".$lon1."&bIPhone=". $_REQUEST['bIPhone']."&iphoneapp=1&search=". $_REQUEST['search']."&limit=0&jlpriority_fv=0&filter_loccat=".$filter_loccat."&filter_order=".$filter_order."&filter_order_Dir=".$filter_order_Dir;
 
 if ((isset($_REQUEST['search']) && $_REQUEST['search'] != '') || (isset($_REQUEST['Buscar']) && $_REQUEST['Buscar'] != '') || (isset($_REQUEST['Traži']) && $_REQUEST['Traži']!='') || (isset($_REQUEST['Pesquisar']) && $_REQUEST['Pesquisar'] != '') || (isset($_REQUEST['Zoeken']) && $_REQUEST['Zoeken'] != '') || (isset($_REQUEST['Recherche']) && $_REQUEST['Recherche'] != ''))
-	$subquery="  and title like '%".$_REQUEST['search']."%' or description like '%".$_REQUEST['search']."%'";
+	$subquery="  and title like '%".$_REQUEST['search']."%'";
 
 $query1 = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180)) + cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations $customfields3_table WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ".isset($subquery);
 
@@ -104,14 +104,14 @@ $query1 = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180
 if(isset($filter_loccat) && $filter_loccat == 'Featured')
 	$query .= " AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ";
 elseif(isset($filter_loccat) && $filter_loccat!=0 && $_REQUEST['filter_loccat']!='alp')
-	$query .= " AND loccat = $filter_loccat ";
+	 $query .= " AND loccat = $filter_loccat ";
 
 if(($filter_order != "") || (isset($_REQUEST['filter_loccat']) && $_REQUEST['filter_loccat']=='alp'))
 	$query1 .= " ORDER BY title ASC ";
 else
-	$query1 .= " ORDER BY dist ASC";
+$query1 .= " ORDER BY dist ASC";
 
-$rec1 = mysql_query($query1) or die(mysql_error());
+$rec1=mysql_query($query1) or die(mysql_error());
 mysql_set_charset("UTF8");
 $total_data=mysql_num_rows($rec1);
 $total_rows=$total_data;
@@ -199,7 +199,7 @@ ddsmoothmenu.init({
 	function redirecturl(val)
 {
 	
-	url="<?php echo $_SERVER['PHP_SELF']; ?>?category_id=<?php echo $category_id?>&option=com_jevlocations&task=locations.listlocations&tmpl=component&needdistance=1&sortdistance=1&lat=<?php echo isset($_REQUEST['lat'])?>&lon=<?php echo isset($_REQUEST['lon'])?>&bIPhone=<?php echo isset($_REQUEST['bIPhone'])?>&iphoneapp=1&search=<?php echo $_REQUEST['search']?>&limit=0&jlpriority_fv=0&filter_loccat="+val + "&filter_order=<?php echo $filter_order?>&filter_order_Dir=<?php echo $filter_order_Dir?>";
+	url="<?php echo $_SERVER['PHP_SELF']; ?>?category_id=<?php echo $category_id?>&option=com_jevlocations&task=locations.listlocations&tmpl=component&needdistance=1&sortdistance=1&lat=<?php echo $_REQUEST['lat']?>&lon=<?php echo $_REQUEST['lon']?>&bIPhone=<?php echo isset($_REQUEST['bIPhone'])?>&iphoneapp=1&search=<?php echo $_REQUEST['search']?>&limit=0&jlpriority_fv=0&filter_loccat="+val + "&filter_order=<?php echo $filter_order?>&filter_order_Dir=<?php echo $filter_order_Dir?>";
 	window.location=url;
 }
 

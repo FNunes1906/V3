@@ -8,9 +8,9 @@
 			?>
 
 			<select name="d" onChange="redirecturl(this.value)" >
-				<option value="0">Select a Category</option>
-				<option value="0">All</option>
-				<option value="alp" <?php if (isset($_REQUEST['filter_loccat']) && $_REQUEST['filter_loccat'] == 'alp') {?> selected <?php }?>>Alphabetic</option>
+				<option value="0">Seleccione una categor&#237;a</option>
+				<option value="0">Todos</option>
+				<option value="alp" <?php if (isset($_REQUEST['filter_loccat']) && $_REQUEST['filter_loccat'] == 'alp') {?> selected <?php }?>>Alfab&#233;tico</option>
 				<?php
 				while($rowsub = mysql_fetch_array($recsub)){
 					$querycount = "SELECT * FROM jos_jev_locations WHERE published=1 and loccat=".$rowsub['id'];
@@ -35,7 +35,7 @@
 			<form action="" method="post" name="location_form" id="searchForm" autocomplete="off">
 				<fieldset>
 					<input type="search" name="searchvalue" value="" size="15"/>
-					<input type="submit" name="search_rcd" value="Search"/>
+					<input type="submit" name="search_rcd" value="Buscar"/>
 				</fieldset>
 			</form>
 		</div>
@@ -45,7 +45,7 @@
 	<ul id="placesList" class="mainList">
 		<?php # If search value is NOT entered in serch box BEGIN ?>
 		<?php
-		if(isset($_POST['search_rcd'])!="Search") { 
+		if(isset($_POST['search_rcd'])!="Buscar") { 
 				$query  = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180)) + cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations $customfields3_table WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ".$subquery;
 				$query1 = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180))";
 				$query2 = "cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations $customfields3_table WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ".$subquery;
@@ -76,16 +76,16 @@
 				<li>
 					<h1><?php echo $row['title'];?></h1>
 					<p><?php echo stripJunk(showBrief($row['description'],30)); ?></p>
-					<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?php echo $dunit;?> Away</p>
+					<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?php echo $dunit;?> Lejos</p>
 					<ul class="btnList">
 						<?php if (isset($_REQUEST['bIPhone'])=='0'){?>
-									<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row['phone']); ?>">call</a></li>
+									<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row['phone']); ?>">llamar</a></li>
 						<?php } else { ?>
-									<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row['phone']); ?>">call</a></li>
+									<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row['phone']); ?>">llamar</a></li>
 						<?php } ?>
 
-						<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row['geolat']; ?>:<?php echo $row['geolon']; ?>')">check in</a></li>
-						<li><a class="button small" href="diningdetails.php?did=<?php echo $row['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">more info</a></li>
+						<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row['geolat']; ?>:<?php echo $row['geolon']; ?>')">Registrar visita</a></li>
+						<li><a class="button small" href="diningdetails.php?did=<?php echo $row['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">m&#225;s info</a></li>
 						<li><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $row['geolon']; ?>:<?php echo $row['geolat']; ?>')"></a></li>
 					</ul>
 				</li>
@@ -122,16 +122,16 @@
 		# END 
 		
 		# If search value is entered BEGIN - [Regular listing]
-		if(isset($_POST['search_rcd'])=="Search"){
+		if(isset($_POST['search_rcd'])=="Buscar"){
 			$searchdata = $_POST['searchvalue'];
 		
-			if((isset($filter_loccat)==0) || ($_REQUEST['filter_loccat']=='alp') && ($_POST['search_rcd']=="Search")){
+			if((isset($filter_loccat)==0) || ($_REQUEST['filter_loccat']=='alp') && ($_POST['search_rcd']=="Buscar")){
 				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
 				$ajaxquery1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' ORDER BY title ASC LIMIT ";
-			}elseif($filter_loccat == 'Featured' && $_POST['search_rcd'] == "Search" ){
+			}elseif($filter_loccat == 'Featured' && $_POST['search_rcd'] == "Buscar" ){
 				$search_query1 = "select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
 				$ajaxquery1 = "select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT ";
-			}elseif($_POST['search_rcd'] == "Search"){
+			}elseif($_POST['search_rcd'] == "Buscar"){
 				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and loccat=$filter_loccat and title like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
 				$ajaxquery1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and loccat=$filter_loccat and title like '%$searchdata%' ORDER BY title ASC LIMIT ";
 			}
@@ -147,16 +147,16 @@
 				<li>
 					<h1><?php echo utf8_encode($data['title'])?></h1>
 					<p><?php echo stripJunk(showBrief(strip_tags(utf8_encode($data['description'])),30)); ?></p>
-					<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?php echo $dunit?> Away</p>
+					<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?php echo $dunit?> Lejos</p>
 					<ul class="btnList">
 						<?php if (isset($_REQUEST['bIPhone']) == '0'){?>
-							   	<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data['phone']); ?>">call</a></li>
+							   	<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data['phone']); ?>">llamar</a></li>
 						<?php } else { ?>
-							   	<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data['phone']); ?>">call</a></li>
+							   	<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data['phone']); ?>">llamar</a></li>
 						<?php } ?>
 						
-						<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $data['geolat']; ?>:<?php echo $data['geolon']; ?>')">check in</a></li>
-						<li><a class="button small" href="diningdetails.php?did=<?php echo $data['loc_id']?>&lat=<?php echo $lat1?>&lon=<?php echo $lon1?>">more info</a></li>
+						<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $data['geolat']; ?>:<?php echo $data['geolon']; ?>')">Registrar visita</a></li>
+						<li><a class="button small" href="diningdetails.php?did=<?php echo $data['loc_id']?>&lat=<?php echo $lat1?>&lon=<?php echo $lon1?>">m&#225;s info</a></li>
 						<li><a  href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $data['geolon']; ?>:<?php echo $data['geolat']; ?>')"></a></li>
 					</ul>
 				<?php } ?>

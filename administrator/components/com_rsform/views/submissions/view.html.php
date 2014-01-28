@@ -88,7 +88,9 @@ class RSFormViewSubmissions extends JView
 		}
 		elseif ($layout == 'edit')
 		{
-			JToolBarHelper::custom('submission.export.pdf', 'archive', 'archive', JText::_('RSFP_EXPORT_PDF'), false);
+			if($usertype != 'TW_Admin'){
+				JToolBarHelper::custom('submission.export.pdf', 'archive', 'archive', JText::_('RSFP_EXPORT_PDF'), false);
+			}
 			JToolBarHelper::spacer();
 			JToolBarHelper::apply('submissions.apply');
 			JToolBarHelper::save('submissions.save');
