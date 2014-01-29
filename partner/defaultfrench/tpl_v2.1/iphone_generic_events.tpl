@@ -95,7 +95,7 @@
 	<!--Code for Mobiscroll NEW date picker - Yogi END -->
 	
 	<!--Code for Event Category drop down Yogi Start -->
-		<form id="event_cat_form" class="cls_event_cat_form">
+		<form id="event_cat_form" class="cls_event_cat_form" autocomplete="off">
 			<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
 				<option value="<?php echo $_SESSION['generic_category'];?>"><?php echo strtoupper("Categories");?></option>
 				<option value="0"><?php echo strtoupper("catégories")?></option>
