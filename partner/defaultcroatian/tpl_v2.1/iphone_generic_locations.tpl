@@ -1,7 +1,7 @@
 
 <div id="main" role="main">
 	<div id="searchBar">
-		<form id="placeCatForm">
+		<form id="placeCatForm" autocomplete="off">
 		<?php
 		$recsubsql="SELECT c . * , pc.title AS parenttitle FROM jos_categories AS c LEFT JOIN jos_categories AS pc ON c.parent_id = pc.id LEFT JOIN jos_categories AS mc ON pc.parent_id = mc.id LEFT JOIN jos_categories AS gpc ON mc.parent_id = gpc.id WHERE c.section = 'com_jevlocations2' AND (c.id =".$category_id." OR pc.id =".$category_id." OR mc.id =".$category_id." OR gpc.id =".$category_id.") AND c.published=1 ORDER BY c.title";
 $recsub=mysql_query($recsubsql) or die(mysql_error());
@@ -30,7 +30,7 @@ $recsub=mysql_query($recsubsql) or die(mysql_error());
 		<div onclick="divopen('q1')">
 		<!-- <img width="37px" height="31px" src="/components/com_shines/images/searchIcon.png"> -->
 		<a id="searchIcon" href="#">s</a>
-		<form action="" method="post" name="location_form" id="searchForm">
+		<form action="" method="post" name="location_form" id="searchForm" autocomplete="off">
 			<fieldset>
 				<input type="search" name="searchvalue" value="" size="15"/>
 				<input type="submit" name="search_rcd" value="Traži"/>

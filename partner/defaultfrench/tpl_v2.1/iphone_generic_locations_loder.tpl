@@ -161,7 +161,7 @@
 					</ul>
 				<?php } ?>
 					<!--Infinite Scroller Begin	-->
-					<div id="loadMoreComments" style="display:none;" > <center>Dimitrios</center></div>	
+					<div id="loadMoreComments" style="display:none;" ></div>	
 					<script type="text/javascript">
 						 $(document).ready(function() { 
 						 var lpage = 0;
