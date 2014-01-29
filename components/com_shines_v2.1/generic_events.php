@@ -125,10 +125,10 @@ if(isset($_REQUEST['category_id'])){
 	$cat_id 	= $_REQUEST['category_id'];
 	$query_cat	= "SELECT c.id,c.name FROM jos_categories AS c WHERE (c.id=".$cat_id." OR parent_id=".$cat_id.") and c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents' ORDER BY c.name";
 }
-
+mysql_set_charset("UTF8");
 $rec_cat 		= mysql_query($query_cat);
 $result_event_cat = mysql_query($query_cat);
-mysql_set_charset("UTF8");
+
 
 while($row_cat = mysql_fetch_array($rec_cat)){
 	# Creating Category array

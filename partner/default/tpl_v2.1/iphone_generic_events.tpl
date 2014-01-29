@@ -119,25 +119,25 @@ Developer:Rinkal
 Last update Date:23-09-2013
 */
 	
-if(isset($_REQUEST['category_id']))
-$res = mysql_query("select id,title from jos_categories where id=".$_REQUEST['category_id']." AND published = 1 AND section = 'com_jevents'");
-$bann_cat_name = mysql_fetch_row($res);
+if(isset($_SESSION['generic_category']) && $_SESSION['generic_category'] != ''){
+	$res = mysql_query("select id,title from jos_categories where id=".$_SESSION['generic_category']." AND published = 1 AND section = 'com_jevents'");
+	$bann_cat_name = mysql_fetch_row($res);
 
-$id = $bann_cat_name[0];
-$banner_cat_name = $bann_cat_name[1];
-$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+	$id = $bann_cat_name[0];
+	$banner_cat_name = $bann_cat_name[1];
+	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 
-if(stripos($ua,'android') == True) { ?>
-	<div class="iphoneads" style="vertical-align:bottom;">
-		<?php m_show_banner('android-'.$banner_cat_name.'-screen'); ?>
-	</div>
-	<?php }else {?>
-	<div class="iphoneads" style="vertical-align:bottom;">
-		<?php m_show_banner('iphone-'.$banner_cat_name.'-screen');?>
-	</div>
-	<?php } ?>
+	if(stripos($ua,'android') == True) { ?>
+		<div class="iphoneads" style="vertical-align:bottom;">
+			<?php m_show_banner('android-'.$banner_cat_name.'-screen'); ?>
+		</div>
+		<?php }else {?>
+		<div class="iphoneads" style="vertical-align:bottom;">
+			<?php m_show_banner('iphone-'.$banner_cat_name.'-screen');?>
+		</div>
+		<?php }
+}?>	
 <!--Code End -->
-
 
 <div id="main" role="main">
 <?php

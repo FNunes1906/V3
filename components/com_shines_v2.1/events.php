@@ -44,9 +44,11 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != 0){
 	$catId		= $_REQUEST['category_id'];
 	$event_cat_query = "SELECT  id,name FROM `jos_categories` WHERE (`parent_id` =".$catId." OR `id` =".$catId.") AND PUBLISHED = 1 ORDER BY name";
+	mysql_set_charset("UTF8");
 	$result_event_cat = mysql_query($event_cat_query);
 }else{
 	$event_cat_query = "SELECT id,name FROM jos_categories WHERE section LIKE 'com_jevents' AND PUBLISHED = 1 ORDER BY name";
+	mysql_set_charset("UTF8");
 	$result_event_cat = mysql_query($event_cat_query);
 } 
 

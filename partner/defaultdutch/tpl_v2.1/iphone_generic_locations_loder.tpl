@@ -1,7 +1,7 @@
 <div id="main" role="main">
 	<?php # Filter Category list drop down code BEGIN ?>
 	<div id="searchBar">
-		<form id="placeCatForm">
+		<form id="placeCatForm" autocomplete="off">
 			<?php	
 			$recsubsql = "SELECT c . * , pc.title AS parenttitle FROM jos_categories AS c LEFT JOIN jos_categories AS pc ON c.parent_id = pc.id LEFT JOIN jos_categories AS mc ON pc.parent_id = mc.id LEFT JOIN jos_categories AS gpc ON mc.parent_id = gpc.id WHERE c.section = 'com_jevlocations2' AND (c.id =".$category_id." OR pc.id =".$category_id." OR mc.id =".$category_id." OR gpc.id =".$category_id.") AND c.published=1 ORDER BY c.title";
 			$recsub    = mysql_query($recsubsql) or die(mysql_error());	
@@ -32,7 +32,7 @@
 		<?php # Search input box and submit button BEGIN ?>
 		<div onclick="divopen('q1')">
 			<a id="searchIcon" href="#">s</a>
-			<form action="" method="post" name="location_form" id="searchForm">
+			<form action="" method="post" name="location_form" id="searchForm" autocomplete="off">
 				<fieldset>
 					<input type="search" name="searchvalue" value="" size="15"/>
 					<input type="submit" name="search_rcd" value="Zoeken"/>
@@ -126,14 +126,14 @@
 			$searchdata = $_POST['searchvalue'];
 		
 			if((isset($filter_loccat)==0) || ($_REQUEST['filter_loccat']=='alp') && ($_POST['search_rcd']=="Zoeken")){
-				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
-				$ajaxquery1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' ORDER BY title ASC LIMIT ";
+				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+				$ajaxquery1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT ";
 			}elseif($filter_loccat == 'Featured' && $_POST['search_rcd'] == "Zoeken" ){
-				$search_query1 = "select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
-				$ajaxquery1 = "select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT ";
+				$search_query1 = "select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%'  AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+				$ajaxquery1 = "select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%'  AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT ";
 			}elseif($_POST['search_rcd'] == "Zoeken"){
-				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and loccat=$filter_loccat and title like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
-				$ajaxquery1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and loccat=$filter_loccat and title like '%$searchdata%' ORDER BY title ASC LIMIT ";
+				$search_query1="select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%'  or description like '%$searchdata%' ORDER BY title ASC";
+				$ajaxquery1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and loccat=$filter_loccat and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT ";
 			}
 				
 			$search_query = mysql_query($search_query1) or die(mysql_error());
@@ -161,7 +161,7 @@
 					</ul>
 				<?php } ?>
 					<!--Infinite Scroller Begin	-->
-					<div id="loadMoreComments" style="display:none;" ></div>	
+					<div id="loadMoreComments" style="display:none;" > <center>Dimitrios</center></div>	
 					<script type="text/javascript">
 						 $(document).ready(function() { 
 						 var lpage = 0;

@@ -94,7 +94,7 @@
 				<option value="0"><?php echo strtoupper("Categorías");?></option>
 				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
 					<option value="<?php echo $row_cat['id'];?>"<?php if(isset($catId) && $row_cat['id'] == $catId) echo "selected='selected'";?>>
-						<?php echo strtoupper($row_cat['name']);?>
+						<?php echo mb_strtoupper($row_cat['name'], 'UTF-8');?>
 					</option>
 				<?php }?>
 			</select>

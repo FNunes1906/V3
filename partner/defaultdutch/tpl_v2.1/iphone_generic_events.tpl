@@ -123,7 +123,7 @@ Developer:Rinkal
 Last update Date:23-09-2013
 */
 	
-$res = mysql_query("select id,title from jos_categories where id=".$_REQUEST['category_id']." AND published = 1 AND section = 'com_jevents'");
+$res = mysql_query("select id,title from jos_categories where id=".$_SESSION['generic_category']." AND published = 1 AND section = 'com_jevents'");
 $bann_cat_name = mysql_fetch_row($res);
 
 $id = $bann_cat_name[0];
