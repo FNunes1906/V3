@@ -187,11 +187,13 @@ else {
 			$searchdata = addslashes($_POST['searchvalue']);
 			
 			if((isset($filter_loccat)==0) || ($_REQUEST['filter_loccat']=='alp') && ($_POST['search_rcd']=="Search")){
-				$search_query1="select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
 			}else if(($filter_loccat == 'Featured') && $_POST['search_rcd']=="Search" ){
-				$search_query1="select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%' AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+				$search_query1 = "select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%' AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+			}else if($_POST['search_rcd'] == "Search" && $filter_loccat!=0){
+				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND loccat=$filter_loccat and published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC";
 			}else if($_POST['search_rcd'] == "Search"){
-				$search_query1="select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%'  or description like '%$searchdata%' ORDER BY title ASC";
+				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") and published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC";
 			}
 			
 			$search_query = mysql_query($search_query1) or die(mysql_error());
@@ -200,7 +202,6 @@ else {
 				$title=$data['title'];
 				$lat2=$data['geolat'];
 				$lon2=$data['geolon'];
-				
 				$dist = distance($lat1, $lon1, $lat2, $lon2, $dunit);?>
 				<li>
 					<h1><?php echo $data['title'];?></h1>
@@ -208,7 +209,7 @@ else {
 					<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?php echo $dunit;?> Away</p>
 					<ul class="btnList">
 						<?php if (isset($_REQUEST['bIPhone']) && $_REQUEST['bIPhone'] == '0'){?>
-						   			<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data['phone']); ?>">call</a></li>
+						  			<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data['phone']); ?>">call</a></li>
 						<?php } else { ?>
 									<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data['phone']); ?>">call</a></li>
 						<?php } ?>
@@ -224,7 +225,7 @@ else {
 		?>
 	</ul>
 	<?php 
-	if(($n) == '50'){
+	if(($n) == '2'){
 		echo get_paginate_links($total_rows,$entries_per_page,$current_page,$link_to);
 	}?>
 	<div style='display:none;'>

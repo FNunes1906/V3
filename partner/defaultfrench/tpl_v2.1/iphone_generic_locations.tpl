@@ -27,14 +27,13 @@
 		</form>
 		
 		<div onclick="divopen('q1')">
-		<!-- <img width="37px" height="31px" src="/components/com_shines/images/searchIcon.png"> -->
-		<span id="searchIcon">s</span>
-		<form action="" method="post" name="location_form" id="searchForm" autocomplete="off">
-			<fieldset>
-				<input type="search" name="searchvalue" value="" size="15"/>
-				<input type="submit" name="search_rcd" value="Recherche"/>
-			</fieldset>
-		</form>
+			<span id="searchIcon">s</span>
+			<form action="" method="post" name="location_form" id="searchForm" autocomplete="off">
+				<fieldset>
+					<input type="search" name="searchvalue" value="" size="15"/>
+					<input type="submit" name="search_rcd" value="Recherche"/>
+				</fieldset>
+			</form>
 		</div>
 		</div>
 
@@ -84,11 +83,13 @@
 			$searchdata = addslashes($_POST['searchvalue']);
 			
 			if((isset($filter_loccat)==0) || ($_REQUEST['filter_loccat']=='alp') && ($_POST['search_rcd']=="Recherche")){
-				 $search_query1="select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%' ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
 			}else if(($filter_loccat == 'Featured') && $_POST['search_rcd']=="Recherche" ){
-				 $search_query1="select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%' AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+				$search_query1 = "select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%' AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
+			}else if($_POST['search_rcd'] == "Recherche" && $filter_loccat!=0){
+				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND loccat=$filter_loccat and published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC";
 			}else if($_POST['search_rcd'] == "Recherche"){
-				$search_query1="select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%'  or description like '%$searchdata%' ORDER BY title ASC";
+				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") and published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC";
 			}
 			
 			$search_query = mysql_query($search_query1) or die(mysql_error());
