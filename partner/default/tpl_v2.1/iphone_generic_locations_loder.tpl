@@ -31,7 +31,7 @@
 		
 		<?php # Search input box and submit button BEGIN ?>
 		<div onclick="divopen('q1')">
-			<a id="searchIcon" href="#">s</a>
+			<span id="searchIcon">s</span>
 			<form action="" method="post" name="location_form" id="searchForm" autocomplete="off">
 				<fieldset>
 					<input type="search" name="searchvalue" value="" size="15"/>

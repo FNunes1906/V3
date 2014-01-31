@@ -795,3 +795,12 @@ li.textbox a img{max-width:100%;}
 .addthisevent_dropdown .frs:hover   {color:#6d84b4;}
 .addthisevent        {visibility:hidden;}
 /* AddThisEvent (add to your existing CSS) END */
+
+#main #searchBar span {
+float: right;
+text-decoration: none;
+font-size: 2.2em;
+color: #6abc43;
+line-height: 1;
+cursor: pointer;
+}

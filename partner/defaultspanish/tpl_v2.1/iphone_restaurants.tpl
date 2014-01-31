@@ -132,7 +132,7 @@ else {
 		
 		<div onclick="divopen('q1')">
 		<!-- <img width="37px" height="31px" src="/components/com_shines/images/searchIcon.png"> -->
-		<a id="searchIcon" href="#">s</a>
+		<span id="searchIcon">s</span>
 		<form action="" method="post" name="location_form" id="searchForm" autocomplete="off">
 			<fieldset>
 				<input type="search" name="searchvalue" value="" size="15"/>
