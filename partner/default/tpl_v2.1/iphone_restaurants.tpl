@@ -225,7 +225,7 @@ else {
 		?>
 	</ul>
 	<?php 
-	if(($n) == '2'){
+	if(($n) == '50'){
 		echo get_paginate_links($total_rows,$entries_per_page,$current_page,$link_to);
 	}?>
 	<div style='display:none;'>

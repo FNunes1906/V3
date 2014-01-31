@@ -102,7 +102,7 @@ setlocale(LC_TIME,"spanish");
 				<option value="<?php echo $_SESSION['generic_category'];?>"><?php echo strtoupper("Categorías");?></option>
 				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
 					<option value="<?php echo $row_cat['id'];?>"<?php if(isset($cat_id) && $row_cat['id'] == $cat_id) echo "selected='selected'";?>>
-						<?php echo mb_strtoupper($row_cat['name'], 'UTF-8');?>
+						<?php echo mb_convert_case($row_cat['name'], MB_CASE_TITLE, "UTF-8");?>
 					</option>
 				<?php }?>
 			</select>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<params>
+		<param name="name" type="text" default="" label="Display Name" description="If not specified then default section name will be used" />
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		<param name="iphoneurl" type="text" default="" label="Iphone URL" description="Add Webview or Json URL here. Leave Blank to not show this menu on Device." />
+		
+		<param name="iphoneurlview" type="list" default="0" label="Iphone Method" description="Add Webview or Json URL here. Use 'Use Global' to not show this menu on Device.">
+			<option value="0">Json</option>
+			<option value="1">WebView</option>
+			<option value="2">none</option>
+		</param>
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		
+		<param name="andurl" type="text" default="" label="Android URL" description="Add Webview or Json URL here. Leave Blank to not show this menu on Device." />
+		
+		<param name="androidurlview" type="list" default="1" label="Android Method" description="Add Webview or Json URL here. Use 'Use Global' to not show this menu on Device.">
+			<option value="0">Json</option>
+			<option value="1">WebView</option>
+			<option value="2">none</option>
+		</param>
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		
+		<param name="mobilemenu_image" type="imagelist" default="1" label="Select image" description="If not specified then default section icon will be used" directory="/images/stories/food" exclude="" stripext="" />
+	<!--	<param name="@spacer" type="spacer" default="" label="" description="" />-->
+			
+<!--		<param name="Parent" type="list" default="" label="Parent" description="Select parent menu.">
+			<option value="0">Events</option>
+			<option value="1">News</option>
+			<option value="2">Places</option>
+		</param>-->
+	</params>
+</config>

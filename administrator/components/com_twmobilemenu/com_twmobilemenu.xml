@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="component" version="1.5.0">
+	<name>TW Mobile Menu</name>
+	<author>Akash Barot</author>
+	<creationDate>06/06/2012</creationDate>
+	<authorEmail>akashbarot985@gmail.com</authorEmail>
+	<authorUrl>www.akashbarot.com</authorUrl>
+	<version>1.0.0</version>
+	<description>This component made to display menu URL for web services</description>
+  
+  <files folder="site">
+     <filename>twmobilemenu.php</filename>
+     <filename>index.html</filename>
+  </files>
+  <administration>
+  	<menu>TW Mobile Menu</menu>
+ 	 <files folder="admin">
+     	<filename>admin.twmobilemenu.php</filename>
+     	<filename>index.html</filename>
+     	<filename>config.xml</filename>
+  	</files>
+ </administration>
+
+</install>

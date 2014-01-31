@@ -125,6 +125,22 @@ $query_featured  = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * p
 $query_featured .= " AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ";
 $query_featured .= " ORDER BY dist ASC";
 
+/* CODE ADDED BY AKASH FOR SLIDER */
+
+	//If retrived data is array then
+	if(count($allCatIds) > 1){
+		$modifycat =	implode(',',$allCatIds);
+	}else{
+		$modifycat = $allCatIds[0];
+	}
+
+	$query_location="SELECT loc.loc_id, loc.title, loc.alias, loc.image, loc.description, loc.created, cate.title as category, cate.id as cateid, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 AND loc.loc_id = cf.target_id AND cf.value = 1 AND loc.loccat IN (".$modifycat.") ORDER BY cateid ASC";
+
+$featured_loc=mysql_query($query_location);
+mysql_set_charset("UTF8");
+
+/*CODE END AKASH FOR SLIDER*/
+
 /* code start by rinkal for page title */
 $cat_query=mysql_query("select title from jos_categories where id=".$category_id." AND section='com_jevlocations2' and published=1 order by `ordering`");
 $cat_title = mysql_fetch_array($cat_query);
@@ -243,29 +259,6 @@ header( 'Content-Type:text/html;charset=utf-8');
 
 	<body>
 		<?php
-		/* 
-		Code Begin 
-		Result  : display banner for category
-		Request : Fetching Title from category id
-		*/
-			
-		$res = mysql_query("select title from jos_categories where id=".$category_id."");
-		while($bann_cat_name = mysql_fetch_array($res)){
-			$banner_cat_name = $bann_cat_name['title'];
-			//$banner_cat_name=explode(" -", $banner_cat_name);
-		}
-
-		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-		if(stripos($ua,'android') == True) { ?>
-			<div class="iphoneads" style="vertical-align:bottom;">
-				<?php m_show_banner('android-'.$banner_cat_name.'-screen'); ?>
-			</div>
-		<?php }else{?>
-			<div class="iphoneads" style="vertical-align:bottom;">
-				<?php m_show_banner('iphone-'.$banner_cat_name.'-screen');?>
-			</div>
-		<?php } 
-		# Code End
 		
 		# Code added for iphone_generic_locations_loder.tpls
 		require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_generic_locations_loder.tpl");

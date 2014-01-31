@@ -1,3 +1,110 @@
+<!-- CODE ADDED BY AKASH FOR SLIDER -->
+<div id="featuredEvents">
+	<div class="flexslider-container">
+		<div class="flexslider">
+		    <ul class="slides">
+			<?php
+			$f=0;
+			$imagecount = 0;
+			$templocid = array();
+			$finalDescription = "";
+			while($fealoc=mysql_fetch_array($featured_loc)){
+
+			/*Image FEtched for slide show*/
+				if($fealoc['image'] == ""){
+				$singleimagearray = "/partner/".$_SESSION['partner_folder_name']."/images/stories/nofe_loc.png"; }
+				else{
+				$imageurl = "http://".$_SERVER['HTTP_HOST']."/partner/".$_SESSION['partner_folder_name']."/images/stories/jevents/jevlocations/".$fealoc['image'];
+				$singleimagearray = $imageurl;
+				}
+			/*end*/
+			if(in_array($fealoc['loc_id'], $templocid)){
+			}else{
+			if($imagecount<5){
+			
+			?> 
+			<!-- creating loop for slider -->
+		    	<li>
+				<a href="/components/com_shines_v2.1/diningdetails.php?did=<?php echo $fealoc['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><img  src="<?php echo $singleimagearray;?>" /></a> 
+		    		<div class="flex-caption">
+		    			<h1><?php echo $fealoc['title'] ;?></h1>
+		    			<h2><?php echo $fealoc['category'] ;?></h2>
+		    			<h3 style="font-size: 12px;text-transform:none;">
+							<?php
+							/*Replace images from description */
+							$strArray = explode('<img',$fealoc['description']);
+							   if(isset($strArray) && $strArray != ''){
+							    for($i = 0; $i <= count($strArray); ++$i){
+            
+	   							# Changed for error log
+								$strFound = '';
+								
+						             if(isset($strArray[$i]) && !empty($strArray[$i])){
+							 	   $strFound = strpos($strArray[$i],'" />');
+							   	}
+						            
+						            if(isset($strFound) && $strFound != ''){
+							             $s = explode('" />',$strArray[$i]);
+							             $strConcat = $s[1];
+						            }else{
+						             		# put if conditoin for error log
+								   	if(!empty($strArray[$i]))
+								      		 $strConcat = $strArray[$i];
+						            }
+						           isset($strConcat)?$finalDescription .= $strConcat:'';
+						         	$finalDescription=str_replace("<br />","",$finalDescription);
+								$strConcat='';
+						           }
+								/* lenth of the description count 110 char */
+							   if(strlen($finalDescription)>="110"){
+									$strProcess12 = substr(strip_tags($finalDescription), 0 , 110);
+									$strInput1 = explode(' ',$strProcess12);
+									$str12 = array_slice($strInput1, 0, -1);
+									//$str12 = strip_tags($str12);
+									echo implode(' ',$str12).'...';
+								}else{
+									$finalDescription = strip_tags($finalDescription);
+									echo $finalDescription;
+								}
+							   }
+							?>
+						</h3>
+		    		</div> <!-- caption -->
+		    	</li>
+				<!-- End of the loop for slider -->
+			<?php
+			$finalDescription = "";
+			++$imagecount;/*5 featured event counter */
+			$templocid[] = $fealoc['loc_id'];
+			}
+			}
+			++$f;
+			}
+			?>
+
+			</ul>
+		</div>
+	</div>
+</div>  
+<!-- featured events -->
+
+<?php
+/*Device testing for banner*/
+$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+if(stripos($ua,'android') == true) { ?>
+	<div class="iphoneads" style="vertical-align:bottom;">
+		<?php m_show_banner('android-restaurants-screen'); ?>
+	</div>
+	<?php } 
+else {
+	?>
+	<div class="iphoneads" style="vertical-align:bottom;">
+	<?php m_show_banner('iphone-restaurants-screen'); ?>
+	</div>
+	<?php } ?>
+	
+<!-- CODE END AKASH FOR SLIDER -->	
+
 <div id="main" role="main">
 	<?php # Filter Category list drop down code BEGIN ?>
 	<div id="searchBar">
