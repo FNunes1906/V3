@@ -80,7 +80,7 @@ var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){
 			function linkClicked(link) { document.location = link; } 
 </script>
 <!-- AddThisEvent Settings -->
-<script src="javascript/libs/ical.js"></script>
+<!--<script src="javascript/libs/ical.js"></script>-->
 <?php 
 $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 if(stripos($ua,'android') != True) { ?>

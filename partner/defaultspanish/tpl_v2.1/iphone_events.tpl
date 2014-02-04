@@ -94,7 +94,7 @@
 				<option value="0"><?php echo strtoupper("Categorías");?></option>
 				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
 					<option value="<?php echo $row_cat['id'];?>"<?php if(isset($catId) && $row_cat['id'] == $catId) echo "selected='selected'";?>>
-						<?php echo mb_convert_case($row_cat['name'], MB_CASE_TITLE, "UTF-8");?>
+						<?php echo ucfirst($row_cat['name']);?>
 					</option>
 				<?php }?>
 			</select>
@@ -211,7 +211,7 @@ if($todaestring != null){
 								$dateValue = explode('-',$dateValue[0]);
 							}?>
 								
-							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo isset($lat1);?>&lon=<?php echo isset($lon1);?>">m&#225;s info</a></li>
+							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">m&#225;s info</a></li>
 						</ul>
 					</h3> 
 				</li>
@@ -336,7 +336,7 @@ if($todaestring != null){
 							}
 							
 							?>	
-							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo isset($lat1);?>&lon=<?php echo isset($lon1);?>">m&#225;s info</a></li>
+							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">m&#225;s info</a></li>
 						</ul>
 					</h3> 
 				</li>

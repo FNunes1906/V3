@@ -214,7 +214,7 @@ if($todaestring != null){
 							$dateValue = explode('-',$dateValue[0]);
 						}?>
 							
-						<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo isset($lat1);?>&lon=<?php echo isset($lon1);?>">more info</a></li>
+						<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">more info</a></li>
 					</ul>
 				</h3> 
 			</li>
@@ -341,7 +341,7 @@ if($todaestring != null){
 							}
 							
 							?>	
-							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo isset($lat1);?>&lon=<?php echo isset($lon1);?>">more info</a></li>
+							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">more info</a></li>
 						</ul>
 					</h3> 
 				</li>

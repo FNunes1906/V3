@@ -79,7 +79,7 @@ h1, h2, h3, h4, p, span, div { font-weight:normal; font-family:'AllerLightRegula
 }
 #GuideInfo .search {
   position:relative;
-  top:-7px;
+  top:-3px;
 }
 #GuideInfo .search #search_fv {
  background: none repeat scroll 0 0 #F8F8F8;
@@ -1934,7 +1934,7 @@ Last Updated Date:29-01-2013
     border-bottom: 1px solid #D6D6D6;
     float: none;
     margin: 10px 0 10px;
-    min-height: 90px;
+/*    min-height: 90px;*/
     padding: 10px 0;
     width: 100%;
 	overflow: hidden;
@@ -2493,3 +2493,31 @@ input.dashboard, select.dashboard {
 }
 /* CSS for click here link in event submit module End */
 #Weather a img{height: 25px;border: 0px;vertical-align: middle;}
+
+/* Search module CSS START */
+#GuideInfo .search #mod_search_searchword {
+    background: none repeat scroll 0 0 #F8F8F8;
+    font-size: 12px;
+    height: 23px;
+    line-height: 27px;
+    padding-left: 5px;
+    padding-right: 25px;
+    width:240px !important;
+}
+a.ev_link_row:link {
+    color: #00467F;
+    font-family: 'AllerBold',Arial,sans-serif;
+    font-size: 13px;
+    font-weight: normal !important;
+    line-height: 13px;
+    text-decoration: underline;
+}
+.details {
+    font-size: 12px;
+    padding-left: 65px;
+}
+ul#SearchResults{
+	margin-top: 25px !important;
+	margin-bottom: 13px;
+}
+/* Search module CSS END */

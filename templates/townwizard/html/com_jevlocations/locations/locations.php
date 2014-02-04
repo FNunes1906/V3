@@ -57,18 +57,26 @@
 		$ser= $_REQUEST['searchcat'];
 		if($ser!='0'){
 				$db =& JFactory::getDBO();
-				//$sql = "select *,jjl.title,jjl.image as locimg,jc.title as cat from `jos_jev_locations` jjl, `jos_categories` jc where (jjl.loccat = jc.id ) and jjl.loccat=".$_REQUEST['searchcat']." and jjl.published=1 order by jjl.title";
-				 $sql = "select DISTINCT jc.title AS cat, jc . * , jjl . * , jjl.image AS locimg from `jos_jev_locations` jjl, `jos_categories` jc where (jc.parent_id = ".$_REQUEST['searchcat']." OR jc.id = ".$_REQUEST['searchcat'].")  AND (jjl.loccat = jc.id OR jjl.loccat = jc.parent_id) and jjl.published=1 group by loc_id order by jjl.title";
-				$db->setQuery($sql);
-				$rows=$db->query();
-				
+				$sql = "select DISTINCT jc.title AS cat,jjl . * , jjl.image AS locimg from `jos_jev_locations` jjl, `jos_categories` jc where jjl.loccat IN (".$_REQUEST['searchcat'].") and jjl.loccat=jc.id and jjl.published=1 order by jjl.title";
+		}elseif($ser == '0'){
+			$menu = &JSite::getMenu();
+			$temp = $menu->getItem($Itemid);
+			$iParams = new JParameter($temp->params);
+			$categories = $iParams->get('catfilter');
+			if(count($categories) > 1){
+				$ser_cat = implode(',',$iParams->get('catfilter'));
+			}else{
+				$ser_cat = $iParams->get('catfilter');
+			}
+			$db =& JFactory::getDBO();
+			$sql = "select *,jjl.title,jjl.image as locimg,jc.title as cat from `jos_jev_locations` jjl, `jos_categories` jc where jjl.loccat IN (".$ser_cat.") and jjl.loccat=jc.id and jjl.published=1 order by jjl.title";
 		}
 		else{
 				$db =& JFactory::getDBO();
 				$sql = "select *,jjl.title,jjl.image as locimg,jc.title as cat from `jos_jev_locations` jjl, `jos_categories` jc where jjl.loccat = jc.id and jjl.published=1 order by jjl.title";
-				$db->setQuery($sql);
-				$rows=$db->query();
 		}
+		$db->setQuery($sql);
+		$rows=$db->query();
 ?>		
 			<?php if(mysql_num_rows($rows)!='0'){ ?>
 			

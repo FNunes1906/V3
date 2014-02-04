@@ -98,7 +98,6 @@
 		<form id="event_cat_form" class="cls_event_cat_form" autocomplete="off">
 			<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
 				<option value="<?php echo $_SESSION['generic_category'];?>"><?php echo strtoupper("Categories");?></option>
-				<option value="0"><?php echo strtoupper("catégories")?></option>
 				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
 					<option value="<?php echo $row_cat['id'];?>"<?php if(isset($cat_id) && $row_cat['id'] == $cat_id) echo "selected='selected'";?>>
 						<?php echo strtoupper($row_cat['name']);?>
@@ -230,7 +229,7 @@ if(stripos($ua,'android') == True) { ?>
 							$dateValue = explode('-',$dateValue[0]);
 						}?>
 							
-						<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo isset($lat1);?>&lon=<?php echo isset($lon1);?>">Plus d’informations</a></li>
+						<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">Plus d’informations</a></li>
 					</ul>
 				</h3> 
 			</li>
@@ -355,7 +354,7 @@ if(stripos($ua,'android') == True) { ?>
 							}
 							
 							?>	
-							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo isset($lat1);?>&lon=<?php echo isset($lon1);?>">Plus d’informations</a></li>
+							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">Plus d’informations</a></li>
 						</ul>
 					</h3> 
 				</li>

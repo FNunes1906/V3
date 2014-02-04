@@ -71,7 +71,7 @@
 		<p><strong>Location:</strong> <?php echo $rowlocdetail['title'];?></p>
 		<p><strong>Address:</strong> <a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" ><?php echo $rowlocdetail['street'];?></a></p>
 		<p><strong>Phone:</strong> <a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo $rowlocdetail['phone'];?></a></p>
-		<p><strong>Distance:</strong> <?php echo round(distance(isset($_SESSION['lat_device1']), isset($_SESSION['lon_device1']), $lat2, $lon2,$dunit),'1')?>&nbsp;<?php echo $dunit;?></p>
+		<p><strong>Distance:</strong> <?php echo round(distance(($_SESSION['lat_device1']), ($_SESSION['lon_device1']), $lat2, $lon2,$dunit),'1')?>&nbsp;<?php echo $dunit;?></p>
 		<?php if(trim($rowlocdetail['url']) != '') { ?>
 		<p><strong>Website:</strong> <a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" target="_blank"><?php echo str_replace('http://','',$rowlocdetail['url']); ?></a></p>
 			<?php } ?>
