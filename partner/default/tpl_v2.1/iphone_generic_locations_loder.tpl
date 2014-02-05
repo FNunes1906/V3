@@ -199,14 +199,17 @@ else {
 			<?php ++$n;
 			}?>
 				<!--Infinite Scroller Begin	-->
-				<div id="loadMoreComments" style="display:none;" > <center>Loading...</center></div>	
+				<div class="loadMoreComments" style="display:none;" > <center>Loading...</center></div>	
 				<script type="text/javascript">
 					 $(document).ready(function() { 
 					 var lpage = 0;
 						$(window).scroll(function() {
+							
 						   	if($(window).scrollTop() == $(document).height() - $(window).height()) {
 								lpage = lpage + 1;
-								$('div#loadMoreComments').show();
+								//alert(lpage);
+								
+								$('.loadMoreComments').show();
 								$.ajax({
 									dataType : "html" ,
 									contentType : "application/x-www-form-urlencoded" ,
@@ -214,7 +217,7 @@ else {
 									success: function(html) {
 										if(html){		
 											$("#placesList").append(html);
-											$('div#loadMoreComments').hide();
+											$('.loadMoreComments').hide(3000);
 										}else{		
 											$('div#loadMoreComments').replaceWith("<center><h1 style='color:red'>End of Record.</h1></center>");
 										}
@@ -310,6 +313,6 @@ else {
 			echo get_paginate_links($total_rows,$entries_per_page,$current_page,$link_to);
 			}*/?>
 		<div style='display:none;'>
-		<?php echo $pageglobal['googgle_map_api_keys']; ?>
+		<?php echo $pageglobal['google_map_api_keys']; ?>
 		</div>
 </div>

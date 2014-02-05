@@ -1,4 +1,35 @@
-<?php defined('_JEXEC') or die('Restricted access'); ?>
+<?php defined('_JEXEC') or die('Restricted access'); 
+// display search result for common search
+function displayData($row,$menu_ids){ ?>
+	<div class="thumb fr">
+		<?php if($row['locimg']!='') {?>
+			<a href="index.php?option=com_jevlocations&task=locations.detail&&Itemid=<?php echo $menu_ids[1] ?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/stories/jevents/jevlocations/thumbnails/thumb_<?php echo $row['locimg']; ?>"></a><?php }?>
+	</div>
+	<a class="venueName bold fl" href="index.php?option=com_jevlocations&task=locations.detail&&Itemid=<?php echo $menu_ids[1] ?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a>
+	<div class="bc fr bold">
+					<?php echo $row['cat']; ?>
+	</div>
+	<div class="rating">
+					<h3><br/>
+						<?php if($row['street']!='')
+					 	 		echo $row['street'].","; 
+						?><br/>
+					  <?php if($row['state']!='' || $row['city']!='')
+					  			echo $row['city'].",";
+					  ?><br/>
+					  <?php if($row['postcode']!='')
+					  	echo $row['state'].", ".$row['postcode'] ?>
+					</h3>
+					<?php if($row['url']!=''){?>
+						<h2><a class="bold" href="<?php echo "http://".$row['url'] ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
+					<?php }?>
+					<?php if($row['phone']!=''){?>
+						<h2 class="bold"><?php echo $row['phone'] ?></h2>
+					<?php }?>
+					
+	</div>
+<?php } ?>
+
 <?php if(isset($_REQUEST['m_id']) && $_REQUEST['m_id']!=''){ //search for particular menu item like places and restaurants
 		$ser = $_REQUEST['searchword'];
 		$cat_id = $_REQUEST['m_id'];
@@ -14,7 +45,7 @@
 
 		if($ser!=''){
 				$db =& JFactory::getDBO();
-				$sql = "select *,jjl.title,jjl.image as locimg,jc.title as cat from `jos_jev_locations` jjl, `jos_categories` jc where jjl.loccat IN (".$ser_cat.") and jjl.loccat=jc.id and jjl.published=1 AND (jjl.title LIKE '%$ser%' OR jjl.description LIKE '%$ser%') order by jjl.title";
+				$sql = "select *,jjl.title,jjl.image as locimg,jc.title as cat from `jos_jev_locations` jjl, `jos_categories` jc where jjl.loccat IN (".$ser_cat.") and jjl.loccat=jc.id and jjl.published=1 AND (jjl.title LIKE '%".addslashes($ser)."%') order by jjl.title";
 				$db->setQuery($sql);
 				$rows=$db->query();
 		}
@@ -64,7 +95,7 @@
 				if($ser!=''){
 					/*fetching locations */
 					$db =& JFactory::getDBO();
-					$sql = "select *,jjl.title,jjl.image as locimg,jc.title as cat from `jos_jev_locations` jjl, `jos_categories` jc where jjl.loccat = jc.id and jjl.published=1 AND (jjl.title LIKE '%$ser%') order by jjl.title";
+					$sql = "select *,jjl.title,jjl.image as locimg,jc.title as cat from `jos_jev_locations` jjl, `jos_categories` jc where jjl.loccat = jc.id and jjl.published=1 AND (jjl.title LIKE '%".addslashes($ser)."%') order by jjl.title";
 					$db->setQuery($sql);
 					$rows=$db->query();
 					
@@ -77,7 +108,7 @@
 					$tomonth 	= date('m');
 					$toyear 	= date('Y');
 					
-					$event_query="SELECT ev.ev_id,evd.summary,rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'".$format[0]."') as Date,DATE_FORMAT(rpt.startrepeat,'%h:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%h:%i%p') as timeend,rpt.endrepeat,evd.evdet_id, ev.catid,cat.title as category,evd.description, loc.title, evd.location FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt WHERE rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND evd.summary LIKE '%$ser%' AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00' GROUP BY ev.ev_id ORDER BY rpt.startrepeat" ;
+					$event_query="SELECT ev.ev_id,evd.summary,rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'".$format[0]."') as Date,DATE_FORMAT(rpt.startrepeat,'%h:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%h:%i%p') as timeend,rpt.endrepeat,evd.evdet_id, ev.catid,cat.title as category,evd.description, loc.title, evd.location FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt WHERE rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND evd.summary LIKE '%".addslashes($ser)."%' AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00' GROUP BY ev.ev_id ORDER BY rpt.startrepeat" ;
 					$db->setQuery($event_query);
 					$rows2=$db->query();
 				}
@@ -130,33 +161,21 @@
 									<ul id="SearchResults">
 									<?php while($row = mysql_fetch_array($rows)){ ?>
 										<li>
-											<div class="thumb fr">
-													<?php if($row['locimg']!='') {?>
-													<a href="restaurants/detail/<?php echo $row['loc_id'] ?>/<?php echo $row['title'] ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/stories/jevents/jevlocations/thumbnails/thumb_<?php echo $row['locimg']; ?>"></a><?php }?>
-											</div>
-											<a class="venueName bold fl" href="restaurants/detail/<?php echo $row['loc_id'] ?>/<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a>
-											<div class="bc fr bold">
-															<?php echo $row['cat']; ?>
-											</div>
-											<div class="rating">
-															<h3><br/>
-																<?php if($row['street']!='')
-															 	 		echo $row['street'].","; 
-																?><br/>
-															  <?php if($row['state']!='' || $row['city']!='')
-															  			echo $row['city'].",";
-															  ?><br/>
-															  <?php if($row['postcode']!='')
-															  	echo $row['state'].", ".$row['postcode'] ?>
-															</h3>
-															<?php if($row['url']!=''){?>
-																<h2><a class="bold" href="<?php echo "http://".$row['url'] ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
-															<?php }?>
-															<?php if($row['phone']!=''){?>
-																<h2 class="bold"><?php echo $row['phone'] ?></h2>
-															<?php }?>
-															
-											</div>
+											<?php 
+											$param_res = "SELECT `parent`,`id`,`params` FROM `jos_menu` WHERE `link`='index.php?option=com_jevlocations&task=locations.locations' and parent='0' AND published = '1'";
+											$db->setQuery($param_res);
+											$menu_param=$db->query();
+											while($menu_ids = mysql_fetch_array($menu_param)){
+												$iParams = new JParameter($menu_ids[2]);
+												$categories = $iParams->get('catfilter');
+												if(count($categories) >= 1){
+													if(in_array($row['id'],$categories,TRUE)){
+														displayData($row,$menu_ids);
+													}
+													if(count($categories)==1 && $categories==$row['id']){
+														displayData($row,$menu_ids);
+													}
+											}} ?>
 										 </li>
 								 	 <?php } ?>
 									  </ul>
