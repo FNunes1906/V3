@@ -28,6 +28,39 @@ function displayData($row,$menu_ids){ ?>
 					<?php }?>
 					
 	</div>
+<?php } 
+// display results for events
+function displayEvents($ev_res,$menu_ids,$format_res){ 
+				$displayTime = '';
+				if($ev_res['timestart']=='12:00 AM' && $ev_res['timeend']=='11:59PM'){
+					    $displayTime.='All Day Event';
+				}else{
+					$displayTime.= $ev_res['timestart'];
+					if ($ev_res['timeend'] != '11:59PM'){
+						 $displayTime.="-".$ev_res['timeend'];
+					}
+				}
+?>
+	<div class="event">
+		<div class="date fl"><?php echo $ev_res['Date'];?></div>
+		<div class="details">
+				<h3 style="font-size:12px;margin-bottom:3px;"><a class="ev_link_row" href="index.php?option=com_jevents&task=icalrepeat.detail&Itemid=<?php echo $menu_ids[1] ?>&evid=<?php echo $ev_res['rp_id'];?>&year=<?php echo $ev_res['Eyear'];?>&month=<?php echo $ev_res['Emonth'];?>&day=<?php echo $ev_res['EDate'];?>&catids=<?php echo $ev_res['catid'];?>&title=<?php echo $ev_res['summary'];?>"><?php echo $ev_res['summary'];?></a></h3>
+					<?php echo $ev_res['category'];?> &bull; 
+				    <?php if($format_res[1] == "12"){
+				        		echo $displayTime;
+					       }else{
+						   		if ($ev_res['timeend'] != '11:59PM'){
+									echo date("H:i", strtotime($ev_res['timestart']))." - ".date("H:i", strtotime($ev_res['timeend']));
+								}else{
+									echo date("H:i", strtotime($ev_res['timestart']));
+								}
+					        	
+					       }
+					?>
+					&bull; <?php echo $ev_res['title'];?>
+				<div class="cl"></div>
+		</div>
+	</div>
 <?php } ?>
 
 <?php if(isset($_REQUEST['m_id']) && $_REQUEST['m_id']!=''){ //search for particular menu item like places and restaurants
@@ -103,12 +136,12 @@ function displayData($row,$menu_ids){ ?>
 					$dateformat = "SELECT date_format,time_format FROM jos_pageglobal LIMIT 1";
 					$db->setQuery($dateformat);
 					$format 	= $db->query();
-					$format 	= mysql_fetch_row($format);
+					$format_res 	= mysql_fetch_row($format);
 					$today 		= date('d');
 					$tomonth 	= date('m');
 					$toyear 	= date('Y');
 					
-					$event_query="SELECT ev.ev_id,evd.summary,rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'".$format[0]."') as Date,DATE_FORMAT(rpt.startrepeat,'%h:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%h:%i%p') as timeend,rpt.endrepeat,evd.evdet_id, ev.catid,cat.title as category,evd.description, loc.title, evd.location FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt WHERE rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND evd.summary LIKE '%".addslashes($ser)."%' AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00' GROUP BY ev.ev_id ORDER BY rpt.startrepeat" ;
+					$event_query="SELECT ev.ev_id,evd.summary,rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'".$format_res[0]."') as Date,DATE_FORMAT(rpt.startrepeat,'%h:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%h:%i%p') as timeend,rpt.endrepeat,evd.evdet_id, ev.catid,cat.title as category,evd.description, loc.title, evd.location FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt WHERE rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND evd.summary LIKE '%".addslashes($ser)."%' AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00' GROUP BY ev.ev_id ORDER BY rpt.startrepeat" ;
 					$db->setQuery($event_query);
 					$rows2=$db->query();
 				}
@@ -121,36 +154,17 @@ function displayData($row,$menu_ids){ ?>
 								<ul id="SearchResults">
 									<?php while($ev_res = mysql_fetch_array($rows2)){ ?>
 									  	<li>
-											<?php 	$displayTime = '';
-													if($ev_res['timestart']=='12:00 AM' && $ev_res['timeend']=='11:59PM'){
-														    $displayTime.='All Day Event';
-													}else{
-														$displayTime.= $ev_res['timestart'];
-														if ($ev_res['timeend'] != '11:59PM'){
-															 $displayTime.="-".$ev_res['timeend'];
-														}
-													}
-											?>
-											<div class="event">
-												<div class="date fl"><?php echo $ev_res['Date'];?></div>
-									    		<div class="details">
-													<h3 style="font-size:12px;margin-bottom:3px;"><a class="ev_link_row" href="index.php?option=com_jevents&task=icalrepeat.detail&Itemid=97&evid=<?php echo $ev_res['rp_id'];?>&year=<?php echo $ev_res['Eyear'];?>&month=<?php echo $ev_res['Emonth'];?>&day=<?php echo $ev_res['EDate'];?>"><?php echo $ev_res['summary'];?></a></h3>
-														<?php echo $ev_res['category'];?> &bull; 
-													    <?php if($format[1] == "12"){
-													        	echo $displayTime;
-														       }else{
-															   		if ($ev_res['timeend'] != '11:59PM'){
-																		echo date("H:i", strtotime($ev_res['timestart']))." - ".date("H:i", strtotime($ev_res['timeend']));
-																	}else{
-																		echo date("H:i", strtotime($ev_res['timestart']));
-																	}
-														        	
-														       }
-							      						?>
-														&bull; <?php echo $ev_res['title'];?>
-													<div class="cl"></div>
-									    		</div>
-											</div>
+											<?php 
+											$param_res = "SELECT `parent`,`id`,`params` FROM `jos_menu` WHERE `link`='index.php?option=com_jevents&view=week&task=week.listevents' and parent='0' AND published = '1'";
+											$db->setQuery($param_res);
+											$menu_param=$db->query();
+											while($menu_ids = mysql_fetch_array($menu_param)){
+												$iParams = new JParameter($menu_ids[2]);
+												$categories = $iParams->get('catid0');
+												if($categories == $ev_res['catid']){
+													displayEvents($ev_res,$menu_ids,$format_res);
+												}
+											} ?>
 										</li>
 									<?php } ?>
 								</ul>

@@ -199,34 +199,29 @@ else {
 			<?php ++$n;
 			}?>
 				<!--Infinite Scroller Begin	-->
-				<div class="loadMoreComments" style="display:none;" > <center>Loading...</center></div>	
 				<script type="text/javascript">
-					 $(document).ready(function() { 
-					 var lpage = 0;
+					$(document).ready(function() { 
+						var lpage = 0;
 						$(window).scroll(function() {
-							
-						   	if($(window).scrollTop() == $(document).height() - $(window).height()) {
+							if($(window).scrollTop() == $(document).height() - $(window).height()) {
 								lpage = lpage + 1;
-								//alert(lpage);
-								
-								$('.loadMoreComments').show();
+								//$('div#loadMoreComments').show();
 								$.ajax({
 									dataType : "html" ,
 									contentType : "application/x-www-form-urlencoded" ,
 									url: "generic_locations_loder_ajax.php?ajaxquery1=<?php echo $ajaxquery1?>&ajaxquery2=<?php echo $ajaxquery2?>&lat1=<?php echo $lat1?>&lon1=<?php echo $lon1?>&dunit=<?php echo $dunit?>&entries_per_page=<?php echo $entries_per_page?>&lpage="+lpage ,
 									success: function(html) {
-										if(html){		
+										if(html){  
+											$('#placesList').append('<div id="loadMoreComments"> <center><b>Loading</b></center></div>');
 											$("#placesList").append(html);
-											$('.loadMoreComments').hide(3000);
-										}else{		
-											$('div#loadMoreComments').replaceWith("<center><h1 style='color:red'>End of Record.</h1></center>");
+											$('div#loadMoreComments').fadeOut(1000);
 										}
 									}
 								});
 							}
 						});
 					});
-				</script>
+			    </script>
 				<!--Infinite Scroller Ends	-->
 		<?php }
 		# END 
@@ -274,31 +269,29 @@ else {
 					</ul>
 				<?php } ?>
 					<!--Infinite Scroller Begin	-->
-					<div id="loadMoreComments" style="display:none;" ><center></center></div>	
 					<script type="text/javascript">
-						 $(document).ready(function() { 
-						 var lpage = 0;
+						$(document).ready(function() { 
+							var lpage = 0;
 							$(window).scroll(function() {
-							   	if($(window).scrollTop() == $(document).height() - $(window).height()) {
+								if($(window).scrollTop() == $(document).height() - $(window).height()) {
 									lpage = lpage + 1;
-									$('div#loadMoreComments').show();
+									//$('div#loadMoreComments').show();
 									$.ajax({
 										dataType : "html" ,
 										contentType : "application/x-www-form-urlencoded" ,
 										url: "generic_locations_loder_search_ajax.php?ajaxquery1=<?php echo $ajaxquery1?>&lat1=<?php echo $lat1?>&lon1=<?php echo $lon1?>&dunit=<?php echo $dunit?>&entries_per_page=<?php echo $entries_per_page?>&lpage="+lpage ,
 										success: function(html) {
-											if(html){		
+											if(html){  
+												$('#placesList').append('<div id="loadMoreComments"> <center><b>Loading</b></center></div>');
 												$("#placesList").append(html);
-												$('div#loadMoreComments').hide();
-											}else{		
-												$('div#loadMoreComments').replaceWith("<center><h1 style='color:red'>End of Record.</h1></center>");
+												$('div#loadMoreComments').fadeOut(1000);
 											}
 										}
 									});
 								}
 							});
 						});
-					</script>
+			   		</script>
 					<!--Infinite Scroller Ends	-->				
 				<?php }
 				# END
@@ -313,6 +306,6 @@ else {
 			echo get_paginate_links($total_rows,$entries_per_page,$current_page,$link_to);
 			}*/?>
 		<div style='display:none;'>
-		<?php echo $pageglobal['google_map_api_keys']; ?>
+		<?php echo $pageglobal['googgle_map_api_keys']; ?>
 		</div>
 </div>
