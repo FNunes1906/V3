@@ -38,7 +38,7 @@ global $var;
 				<!--This code is for slider part-->
 		    	<li id="item<?php echo $imagecount;?>" class="<?php echo $imagecount;?>">
 					<div class="event">
-					<a href="/index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $fearow->loc_id;?>&se=1&title=<?php echo $fearow->alias;?>&Itemid=<?php if(isset($_REQUEST['Itemid'])) echo $_REQUEST['Itemid'];?>"><img src="<?php echo $singleimagearray;?>" /></a>
+					<a href="index.php?option=com_jevlocations&task=locations.detail&Itemid=<?php if(isset($_REQUEST['Itemid'])) echo $_REQUEST['Itemid'];?>&loc_id=<?php echo $fearow->loc_id;?>&se=1&title=<?php echo $fearow->alias;?>"><img src="<?php echo $singleimagearray;?>" /></a>
 		    		<div class="infoCont">
 		    			<strong class="bold">
 						<?php
@@ -76,17 +76,19 @@ global $var;
 							          if(!empty($strArray[$i]))
 							           $strConcat = $strArray[$i]; 
 							         }
-							         /*$finalDescription .= $strConcat;*/
 							         
-							         $finalDescription = strip_tags($strConcat);
-							         $finalDescription=str_replace("<br />","",$finalDescription);
+							         isset($strConcat)?$finalDescription .= $strConcat:'';
+							         //$finalDescription = strip_tags($strConcat);
+							         $finalDescription=str_replace("<br />","",$finalDescription);$strConcat='';
+									 
 							     }
 								if(strlen($finalDescription)>="140"){
-									$strProcess12 = substr($finalDescription, 0 , 140);
+									$strProcess12 = substr(strip_tags($finalDescription), 0 , 140);
 									$strInput1 = explode(' ',$strProcess12);
 									$str12 = array_slice($strInput1, 0, -1);
 									echo implode(' ',$str12).' ...';
 								}else{
+									$finalDescription = strip_tags($finalDescription);
 									echo $finalDescription;
 								}
 							}
