@@ -161,8 +161,13 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 											while($menu_ids = mysql_fetch_array($menu_param)){
 												$iParams = new JParameter($menu_ids[2]);
 												$categories = $iParams->get('catid0');
-												if($categories == $ev_res['catid']){
-													displayEvents($ev_res,$menu_ids,$format_res);
+												$sub_res = "SELECT `id` FROM `jos_categories` WHERE (parent_id='".$categories."' or id='".$categories."') AND published = '1'";
+												$db->setQuery($sub_res);
+												$sub_menu_id=$db->query();
+												while($sub_menu_ids = mysql_fetch_array($sub_menu_id)){
+													if($sub_menu_ids[0] == $ev_res['catid']){
+														displayEvents($ev_res,$menu_ids,$format_res);
+													}
 												}
 											} ?>
 										</li>

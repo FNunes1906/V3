@@ -7,6 +7,7 @@ $jconfig = new JConfig();
 $link = @mysql_pconnect($jconfig->host,  $jconfig->user, $jconfig->password);
 mysql_select_db($jconfig->db);
 
+
 $query				= $_GET['ajaxquery1'].' + '.$_GET['ajaxquery2'];
 $lat1				= $_GET['lat1'];
 $lon1				= $_GET['lon1'];

@@ -214,9 +214,14 @@ else {
 										if(html){  
 											$('#placesList').append('<div id="loadMoreComments"> <center><b>Loading</b></center></div>');
 											$("#placesList").append(html);
-											$('div#loadMoreComments').fadeOut(1000);
+											$('div#loadMoreComments').fadeOut(300);
+										}else{
+											alert('No more data available !');
 										}
-									}
+									},
+									error: function(xhr, textStatus, errorThrown){
+       									alert('Data Connection Error !');
+   									}
 								});
 							}
 						});
@@ -285,8 +290,12 @@ else {
 												$('#placesList').append('<div id="loadMoreComments"> <center><b>Loading</b></center></div>');
 												$("#placesList").append(html);
 												$('div#loadMoreComments').fadeOut(1000);
+											}else{
+												alert('No more data available !');
 											}
-										}
+										},error: function(xhr, textStatus, errorThrown){
+       										alert('Data Connection Error !');
+   										}
 									});
 								}
 							});
