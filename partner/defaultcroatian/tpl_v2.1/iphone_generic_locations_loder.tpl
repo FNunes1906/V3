@@ -211,17 +211,20 @@ else {
 									contentType : "application/x-www-form-urlencoded" ,
 									url: "generic_locations_loder_ajax.php?ajaxquery1=<?php echo $ajaxquery1?>&ajaxquery2=<?php echo $ajaxquery2?>&lat1=<?php echo $lat1?>&lon1=<?php echo $lon1?>&dunit=<?php echo $dunit?>&entries_per_page=<?php echo $entries_per_page?>&lpage="+lpage ,
 									success: function(html) {
-											if(html){  
-												$('#placesList').append('<div id="loadMoreComments"> <center><b>Loading</b></center></div>');
-												$("#placesList").append(html);
-												$('div#loadMoreComments').fadeOut(1000);
-											}else{
-												alert('No more data available !');
-											}
-										},error: function(xhr, textStatus, errorThrown){
-       										alert('Data Connection Error !');
-   										}
-									});
+										if(html){  
+											$('#placesList').append('<div id="loadMoreComments"> <center><b>Loading</b></center></div>');
+											$("#placesList").append(html);
+											$('div#loadMoreComments').fadeOut(300);
+										}else{
+											$('div#loadMoreComments').hide();
+											$('#placesList').append('<div id="loadMoreComments"> <center><br>End of records</center></div>');
+										}
+									},
+									error: function(xhr, textStatus, errorThrown){
+       									alert('No Data Connectivity');
+										location.reload();
+   									}
+								});
 							}
 						});
 					});
@@ -241,10 +244,10 @@ else {
 				$search_query1 = "select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%'  AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
 				$ajaxquery1 = "select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and title like '%$searchdata%' or description like '%$searchdata%'  AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT ";
 			}else if($_POST['search_rcd'] == "Traži" && $filter_loccat!=0){
-				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND loccat=$filter_loccat and published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC";
+				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND loccat=$filter_loccat and published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
 				$ajaxquery1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND loccat=$filter_loccat and published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC LIMIT ";
 			}elseif($_POST['search_rcd'] == "Traži"){
-				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") and published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC";
+				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") and published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
 				$ajaxquery1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") and published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC LIMIT ";
 			}
 				
@@ -279,7 +282,6 @@ else {
 							$(window).scroll(function() {
 								if($(window).scrollTop() == $(document).height() - $(window).height()) {
 									lpage = lpage + 1;
-									//$('div#loadMoreComments').show();
 									$.ajax({
 										dataType : "html" ,
 										contentType : "application/x-www-form-urlencoded" ,
@@ -288,12 +290,14 @@ else {
 											if(html){  
 												$('#placesList').append('<div id="loadMoreComments"> <center><b>Loading</b></center></div>');
 												$("#placesList").append(html);
-												$('div#loadMoreComments').fadeOut(1000);
+												$('div#loadMoreComments').fadeOut(300);
 											}else{
-												alert('No more data available !');
+											$('div#loadMoreComments').hide();
+											$('#placesList').append('<div id="loadMoreComments"> <center><br>End of records</center></div>');
 											}
 										},error: function(xhr, textStatus, errorThrown){
-       										alert('Data Connection Error !');
+       										alert('No Data Connectivity');
+											location.reload();
    										}
 									});
 								}
