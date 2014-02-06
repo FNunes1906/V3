@@ -164,7 +164,7 @@ else {
 				$query  .= " AND loccat = $filter_loccat ";
 				$query2 .= " AND loccat = $filter_loccat ";
 			}
-			$totalRecQry = $query;
+			//$totalRecQry = $query;
 			if(($filter_order != "") || ($_REQUEST['filter_loccat'] == 'alp')){
 				$query  .= " ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
 				$query2 .= " ORDER BY title ASC LIMIT ";
@@ -176,7 +176,7 @@ else {
 			$ajaxquery2 = $query2;
 			
 			$rec = mysql_query($query) or die(mysql_error());
-			$totalRec = mysql_query($totalRecQry) or die(mysql_error());
+			//$totalRec = mysql_query($totalRecQry) or die(mysql_error());
 			$n   = 0;
 			
 			while($row=mysql_fetch_assoc($rec)){
@@ -199,7 +199,6 @@ else {
 				</li>
 			<?php ++$n;
 			}?>
-			<?php if(mysql_num_rows($totalRec) > 20){?>
 				<!--Infinite Scroller Begin	-->
 				<script type="text/javascript">
 					$(document).ready(function() { 
@@ -232,7 +231,6 @@ else {
 					});
 			    </script>
 				<!--Infinite Scroller Ends	-->
-			<?php } ?>
 		<?php }
 		# END 
 		
@@ -299,6 +297,7 @@ else {
 											}
 										},error: function(xhr, textStatus, errorThrown){
        										alert('No Data Connectivity');
+											location.reload();
    										}
 									});
 								}
