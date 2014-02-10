@@ -38,6 +38,7 @@ $query.="published = 1 AND parent = 0 ORDER BY menutype ASC, ordering ASC";
 $rec=mysql_query($query) or die(mysql_error());
 $num_records = mysql_num_rows($rec);
 
+
 $k = 0; 
 while($row	= mysql_fetch_array($rec)){
 	
@@ -59,6 +60,7 @@ while($row	= mysql_fetch_array($rec)){
 	
 	$dataimage = explode("Parent",$dataandroidurltype[1]);
 	$displayimage = explode("=",$dataimage[0],2);
+	$finalimage = explode("page_title",$displayimage[1]);
 	
 	$arr=explode('mobilemenu_image=',$row['params']);
 	$arr1=explode('secure=',$arr[1]);
@@ -70,7 +72,13 @@ while($row	= mysql_fetch_array($rec)){
 	//Menu name to display
 	$data[$k]['display_name']	= str_replace("\n","",$displayname[1]);
 	
-	$data[$k]['image_url']		= "/images/stories/food/".$displayimage[1];
+	if(isset($finalimage[0])!= "" && $finalimage[0] != -1){
+		$temp		= "/images/stories/mobilenav/".$finalimage[0];
+		$data[$k]['image_url']		= str_replace("\n","",$temp);
+	}else{
+		$data[$k]['image_url']		= "";
+	}
+	
 	$data[$k]['partner_id']		= $partnerid;
 	
 	//Section Name
@@ -97,12 +105,24 @@ while($row	= mysql_fetch_array($rec)){
 		$data[$k]['android_ui_type']	= "none";
 		$data[$k]['android_url']		= "";
 	}
-	
+
+//	$akash[] = array;
+	$data[$k]['sub_sections'] = "";
 	
 	++$k;
 }
+
+if(count($data) > 1){
+	$status = "1";
+	$error = "";	
+}else{
+	$status = "0";
+	$error = "No data found for menu.";
+}
 	  
 $response = array(
+	'status' => $status,
+	'error' => $error,
    	'data' => $data,
    	'meta' => array(
 		'total' => $num_records,

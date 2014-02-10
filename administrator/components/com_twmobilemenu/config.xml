@@ -21,13 +21,7 @@
 		</param>
 		<param name="@spacer" type="spacer" default="" label="" description="" />
 		
-		<param name="mobilemenu_image" type="imagelist" default="1" label="Select image" description="If not specified then default section icon will be used" directory="/images/stories/food" exclude="" stripext="" />
-	<!--	<param name="@spacer" type="spacer" default="" label="" description="" />-->
-			
-<!--		<param name="Parent" type="list" default="" label="Parent" description="Select parent menu.">
-			<option value="0">Events</option>
-			<option value="1">News</option>
-			<option value="2">Places</option>
-		</param>-->
+		<param name="mobilemenu_image" type="imagelist" default="1" label="Select image" description="If not specified then default section icon will be used" directory="/images/stories/mobilenav" exclude="" stripext="" />
+			<option value="0">None</option>
 	</params>
 </config>
