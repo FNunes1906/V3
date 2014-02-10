@@ -107,7 +107,7 @@ while($row	= mysql_fetch_array($rec)){
 	}
 
 //	$akash[] = array;
-	$data[$k]['sub_sections'] = "";
+	$data[$k]['sub_sections'] = array();
 	
 	++$k;
 }
