@@ -72,12 +72,14 @@ while($row	= mysql_fetch_array($rec)){
 	//Menu name to display
 	$data[$k]['display_name']	= str_replace("\n","",$displayname[1]);
 	
-	if(isset($finalimage[0])!= "" && $finalimage[0] != -1){
+	 if($finalimage[0] != "" && $finalimage[0] != -1 && strstr($finalimage[0],".")){
 		$temp		= "/images/stories/mobilenav/".$finalimage[0];
 		$data[$k]['image_url']		= str_replace("\n","",$temp);
 	}else{
 		$data[$k]['image_url']		= "";
 	}
+	
+	
 	
 	$data[$k]['partner_id']		= $partnerid;
 	
