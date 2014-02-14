@@ -3,40 +3,49 @@
 include("connection.php");
 include("class.paggination.php");
 include("iadbanner.php");
-include("model/galleries_class.php");
+
+//#DD#
+
+//$select_query = "select * from jos_phocagallery where catid<>2 and published=1 and approved=1 order by id desc";
 
 $CatId = isset($_GET['id']) ? $_GET['id'] : 0 ;
-$start = isset($_REQUEST['start']) ? $_REQUEST['start'] : 0 ;
 
-$data = new photosdata();
-$photos = $data->photos($CatId,$start);
+if($CatId>0){
 
-$rec_no=mysql_query($photos);
-$mydb=new pagination(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-$mydb->connection();
-$num_records=mysql_num_rows($rec_no);
-$num_rec=30;
-$mydb->set_qry($photos);
-$mydb->set_record_per_sheet($num_rec);
-$num_pages=$mydb->num_pages();
+	$select_query = "select jpc.title as cattitle,jp.* from jos_phocagallery as jp,jos_phocagallery_categories as jpc where jp.catid={$CatId} and jpc.id={$CatId} and jp.published=1 and jp.approved=1 order by jp.id desc";
 
- if (isset($_REQUEST['start'])){
-	$recno=$_REQUEST['start'];
 }else{
-	$recno=0;
+	$select_query = "select * from jos_phocagallery where catid<>2 and published=1 and approved=1 order by id desc";
 }
 
-$rec=$mydb->execute_query($recno);
-$current_page=$mydb->current_page();
-$start_page=$mydb->start_page();
-$end_page=$mydb->end_page();
-$photoindent=$recno-1;
+//#DD#
+ $rec_no=mysql_query($select_query);
+ $mydb=new pagination(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+ $mydb->connection();
+ $num_records=mysql_num_rows($rec_no);
+ $num_rec=30;
+ $mydb->set_qry($select_query);
+ $mydb->set_record_per_sheet($num_rec);
+ $num_pages=$mydb->num_pages();
+
+ if (isset($_REQUEST['start']))
+	 	 $recno=$_REQUEST['start'];
+ else
+	 	 $recno=0;
+		 $rec=$mydb->execute_query($recno);
+		 $current_page=$mydb->current_page();
+		 $start_page=$mydb->start_page();
+		 $end_page=$mydb->end_page();
+		 $photoindent=$recno-1;
 		
-$title_res=mysql_query($photos);
+/* code start by rinkal for page title */
+$title_res=mysql_query($select_query);
 $row=mysql_fetch_row($title_res);
 
-$urlpara = '/photos/category/'.$CatId.'-'.$row[0];
-$pagemeta = $data->title($urlpara);
+$pagemeta_res = mysql_query("select title from `jos_pagemeta`where uri='/photos/category/$CatId-$row[0]'");
+$pagemeta =mysql_fetch_array($pagemeta_res);
+
+/* code end by rinkal for page title */
 
  ?>
 
@@ -54,17 +63,30 @@ $pagemeta = $data->title($urlpara);
 <script src="javascript/functions.js" type="text/javascript"></script>
 <title>
 <?php
-	/*Code for Page Title*/
+	/* code start by rinkal for page title */
+	if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
+		$t = 'Fotos';
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
+		$t = "Foto's";
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
+		$t = 'Fotografije';
+	}elseif($_SESSION['tpl_folder_name'] == 'default'){
+		$t = 'Photos';
+	}
+	
 	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 	if(stripos($ua,'android') == True) { 
-		$title = $site_name.' ~ '.JText::_('TW_GALLERY').' ~ '.$row['0'];
-		if($pagemeta['title']!=''){
+		$title = $site_name.' ~ '.$t.' ~ '.$row['0'];
+		if($pagemeta['title']!='')
+		{
 			$title .= ' ~ '.$pagemeta['title'];
 		}
 		echo $title;
-	}else{
-		$title = $site_name.' : '.JText::_('TW_GALLERY').' : '.$row['0'];
-		if($pagemeta['title']!=''){
+	}
+	else{
+		$title = $site_name.' : '.$t.' : '.$row['0'];
+		if($pagemeta['title']!='')
+		{
 			$title .= ' : '.$pagemeta['title'];
 		}
 		echo $title;

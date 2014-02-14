@@ -2,12 +2,27 @@
 
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
 
+define( '_JEXEC', 1 );
+define( 'DS', DIRECTORY_SEPARATOR );
+$x = realpath(dirname(__FILE__)."/../../") ;
+// SVN version
+if (!file_exists($x.DS.'includes'.DS.'defines.php')){
+	$x = realpath(dirname(__FILE__)."/../../../") ;
+}
+define( 'JPATH_BASE', $x );
+@ini_set("display_errors",0);
+require_once JPATH_BASE.DS.'includes'.DS.'defines.php';
+require_once JPATH_BASE.DS.'includes'.DS.'framework.php';
+include($_SERVER['DOCUMENT_ROOT']."/pagination.php");
+//require_once($_SERVER['DOCUMENT_ROOT']."/configuration.php");
 include("connection.php");
 include("iadbanner.php");
-
-# Include location class file
-include("model/location_class.php");
-$objloclist = new location();
+//$jconfig = new JConfig();
+//$link = @mysql_pconnect($jconfig->host,  $jconfig->user, $jconfig->password);
+//mysql_select_db($jconfig->db);
+$rec01 = mysql_query("select * from `jos_pageglobal`");
+mysql_set_charset("UTF8");
+$pageglobal=mysql_fetch_array($rec01);
 
 function showBrief($str, $length) {
 	$str = strip_tags($str);
@@ -58,51 +73,57 @@ else
 if (isset($_REQUEST['start']))
 	$ii=$_REQUEST['start'];
 else
-	$ii=0;
-	
+$ii=0;
 if(isset($_REQUEST['filter_order']) && $_REQUEST['filter_order']!="")
 	$filter_order = $_REQUEST['filter_order'];
 else	
-	$filter_order = "";
-	
+$filter_order = "";
 if(isset($_REQUEST['filter_order_Dir']) && $_REQUEST['filter_order_Dir']!="")
 	$filter_order_Dir = $_REQUEST['filter_order_Dir'];
 else	
-	$filter_order_Dir = "ASC";
+$filter_order_Dir = "ASC";
 
-//fetching category id and calling class file
+$category_id = $_REQUEST['category_id'];
+#@#
+$RES=mysql_query("SELECT c . * , pc.title AS parenttitle FROM jos_categories AS c LEFT JOIN jos_categories AS pc ON c.parent_id = pc.id LEFT JOIN jos_categories AS mc ON pc.parent_id = mc.id LEFT JOIN jos_categories AS gpc ON mc.parent_id = gpc.id WHERE c.section = 'com_jevlocations2' AND (c.id =".$category_id." OR pc.id =".$category_id." OR mc.id =".$category_id." OR gpc.id =".$category_id.") AND c.published=1");
 
-if(isset($_REQUEST['category_id']))
-{
-	$category_id = $_REQUEST['category_id'];
+while($idsrow=mysql_fetch_assoc($RES)){
+	$allCatIds[] = $idsrow['id'];
 }
-//$category_id = $_REQUEST['category_id'];
-$res = $objloclist->fetch_location_categories($category_id);
-
-while($idsrow=mysql_fetch_assoc($res)){
-		$allCatIds[] = $idsrow['id'];
-}
+$allCatIds[] = $category_id;
 #@#
 
 $path= $_SERVER['PHP_SELF'] . "?category_id=".$category_id."&option=com_jevlocations&task=locations.listlocations&tmpl=component&needdistance=1&sortdistance=1&lat=".$lat1."&lon=".$lon1."&bIPhone=". $_REQUEST['bIPhone']."&iphoneapp=1&search=". $_REQUEST['search']."&limit=0&jlpriority_fv=0&filter_loccat=".$filter_loccat."&filter_order=".$filter_order."&filter_order_Dir=".$filter_order_Dir;
 
-		$default_values = array(
-			"lat1" => $lat1,
-			"lon1" => $lon1,
-			"allCatIds" => $allCatIds,
-			"subquery" => $subquery,
-			"filter_loccat" =>$filter_loccat
-			);
-		// count number of data for pagination
-		$rec1 = $objloclist->fetch_for_pagination($default_values);
-		mysql_set_charset("UTF8");
-		$total_data			= mysql_num_rows($rec1);
-		$total_rows			= $total_data;
-		$page_limit			= 20;
-		$entries_per_page	= $page_limit;
-		$current_page		= (empty($_REQUEST['page']))? 1:$_REQUEST['page'];
-		$start_at			= ($current_page * $entries_per_page)-$entries_per_page;
-		$link_to			= $path;
+if ((isset($_REQUEST['search']) && $_REQUEST['search'] != '') || (isset($_REQUEST['Buscar']) && $_REQUEST['Buscar'] != '') || (isset($_REQUEST['Traži']) && $_REQUEST['Traži']!='') || (isset($_REQUEST['Pesquisar']) && $_REQUEST['Pesquisar'] != '') || (isset($_REQUEST['Zoeken']) && $_REQUEST['Zoeken'] != '') || (isset($_REQUEST['Recherche']) && $_REQUEST['Recherche'] != ''))
+	$subquery="  and title like '%".$_REQUEST['search']."%'";
+
+$query1 = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180)) + cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations $customfields3_table WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ".isset($subquery);
+
+//and loccat=".$filter_loccat
+if(isset($filter_loccat) && $filter_loccat == 'Featured')
+	$query .= " AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ";
+elseif(isset($filter_loccat) && $filter_loccat!=0 && $_REQUEST['filter_loccat']!='alp')
+	 $query .= " AND loccat = $filter_loccat ";
+
+if(($filter_order != "") || (isset($_REQUEST['filter_loccat']) && $_REQUEST['filter_loccat']=='alp'))
+	$query1 .= " ORDER BY title ASC ";
+else
+$query1 .= " ORDER BY dist ASC";
+
+$rec1=mysql_query($query1) or die(mysql_error());
+mysql_set_charset("UTF8");
+$total_data=mysql_num_rows($rec1);
+$total_rows=$total_data;
+$page_limit=20;
+$entries_per_page=$page_limit;
+$current_page=(empty($_REQUEST['page']))? 1:$_REQUEST['page'];
+$start_at=($current_page * $entries_per_page)-$entries_per_page;
+$link_to=$path;
+
+$query_featured  = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180)) + cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations, jos_jev_customfields3 WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ";
+$query_featured .= " AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ";
+$query_featured .= " ORDER BY dist ASC";
 
 /* CODE ADDED BY AKASH FOR SLIDER */
 
@@ -112,13 +133,21 @@ $path= $_SERVER['PHP_SELF'] . "?category_id=".$category_id."&option=com_jevlocat
 	}else{
 		$modifycat = $allCatIds[0];
 	}
-	$featured_loc = $objloclist->fetch_feature_location($modifycat);
+
+	$query_location="SELECT loc.loc_id, loc.title, loc.alias, loc.image, loc.description, loc.created, cate.title as category, cate.id as cateid, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 AND loc.loc_id = cf.target_id AND cf.value = 1 AND loc.loccat IN (".$modifycat.") ORDER BY cateid ASC";
+
+$featured_loc=mysql_query($query_location);
+mysql_set_charset("UTF8");
 
 /*CODE END AKASH FOR SLIDER*/
 
 /* code start by rinkal for page title */
-$pagemeta = $objloclist->fetch_page_title($category_id);
-$cat_title = $objloclist->cat_title;
+$cat_query=mysql_query("select title from jos_categories where id=".$category_id." AND section='com_jevlocations2' and published=1 order by `ordering`");
+$cat_title = mysql_fetch_array($cat_query);
+
+$pagemeta_res = mysql_query("select title from `jos_pagemeta`where uri='/$cat_title[title]'");
+$pagemeta =mysql_fetch_array($pagemeta_res);
+
 /* code end by rinkal for page title */
 
 header( 'Content-Type:text/html;charset=utf-8');

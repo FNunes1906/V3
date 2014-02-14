@@ -3,10 +3,6 @@
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
 
 include("connection.php");
-# Include location class file
-include("model/location_class.php");
-$objdetail = new location();
-
 function distance($lat1, $lon1, $lat2, $lon2, $unit) { 
 	$theta = $lon1 - $lon2; 
 	$dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)); 
@@ -17,37 +13,36 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 	
 	if ($unit == "KM") {
 		return ($miles * 1.609344); 
-	} else if ($unit == "N") {
+		} else if ($unit == "N") {
 		return ($miles * 0.8684);
-	} else {
+		} else {
 		return $miles;
-	}
-}
+	}}
 	
-if ($_REQUEST['lat']!="")
-	$lat1=$_REQUEST['lat'];
-else
+	$did=$_REQUEST['did'];
+	if ($_REQUEST['lat']!="")
+		$lat1=$_REQUEST['lat'];
+	else
 	$lat1=0;
-
-if ($_REQUEST['lon']!="")
-	$lon1=$_REQUEST['lon'];
-else
+	if ($_REQUEST['lon']!="")
+		$lon1=$_REQUEST['lon'];
+	else
 	$lon1=0;
 	
-// fetching location detail id from url and call function for location detail data
-$did = $_REQUEST['did'];
-$rec = $objdetail->fetch_detail_data($did);
-
-function stripJunk($string) { 
-	$cleanedString = preg_replace("/[^A-Za-z0-9\s\.\-\/+\!;\n\t\r\(\)\'\"._\?>,~\*<}{\[\]\=\&\@\#\$\%\^` ]:/","", $string); 
-	$cleanedString = preg_replace("/\s+/"," ",$cleanedString); 
-	return $cleanedString;
-}
-header( 'Content-Type:text/html;charset=utf-8');
-
-?>
+	$query="select * from jos_jev_locations where loc_id=$did";
+	mysql_set_charset("UTF8");
+	$rec=mysql_query($query) or die(mysql_error());
 	
-	<!DOCTYPE html>
+	function stripJunk($string) { 
+		$cleanedString = preg_replace("/[^A-Za-z0-9\s\.\-\/+\!;\n\t\r\(\)\'\"._\?>,~\*<}{\[\]\=\&\@\#\$\%\^` ]:/","", $string); 
+		$cleanedString = preg_replace("/\s+/"," ",$cleanedString); 
+	return $cleanedString; }
+	
+	header( 'Content-Type:text/html;charset=utf-8');
+	
+	?>
+	
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	<link rel="image_src" href="http://<?php echo $_SERVER['HTTP_HOST']?>/partner/<?php echo $_SESSION['partner_folder_name']?>/images/logo/logo.png" />  
@@ -57,13 +52,14 @@ header( 'Content-Type:text/html;charset=utf-8');
 	<meta content="index,follow" name="robots" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="viewport" content="width=device-width">
+      <meta name="MobileOptimized" content="320">
+      <meta name="viewport" content="width=device-width">
 	<meta http-equiv="cleartype" content="on">
+	<!--<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />-->
 	<meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 	<meta content="destin, vacactions in destin florida, destin, florida, real estate, sandestin resort, beaches, destin fl, maps of florida, hotels, hotels in florida, destin fishing, destin hotels, best florida beaches, florida beach house rentals, destin vacation rentals for destin, destin real estate, best beaches in florida, condo rentals in destin, vacaction rentals, fort walton beach, destin fishing, fl hotels, destin restaurants, florida beach hotels, hotels in destin, beaches in florida, destin, destin fl" name="keywords" />
 	<meta content="Destin Florida's FREE iPhone application and website guide to local events, live music, restaurants and attractions" name="description" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/h/apple-touch-icon.png">
+    	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/h/apple-touch-icon.png">
   	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/m/apple-touch-icon.png">
   	<link rel="apple-touch-icon-precomposed" href="img/l/apple-touch-icon-precomposed.png">
   	<link rel="shortcut icon" href="img/l/apple-touch-icon.png">
@@ -81,17 +77,31 @@ header( 'Content-Type:text/html;charset=utf-8');
 	<title>
 	<?php
 		/* code start by rinkal for page title */
-		$title = $objdetail->fetch_detail_data($did);
+		
+		$title=mysql_query($query) or die(mysql_error());
 	
-		while($locations = mysql_fetch_array($title))
+		while($row=mysql_fetch_array($title))
 		{
-			$page_title = JText::_('LOC_DETAIL');
+			if ($_SESSION['tpl_folder_name'] == 'defaultspanish'){
+				$t = 'Detalles De Ubicación';
+			}elseif($_SESSION['tpl_folder_name'] == 'defaultportuguese'){
+				$t = 'Detalhe Localização';
+			}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
+				$t = 'Locatie Detail';
+			}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
+				$t = 'Lokacija Detalj';
+			}elseif($_SESSION['tpl_folder_name'] == 'defaultfrench'){
+				$t = 'Détails location';
+			}elseif($_SESSION['tpl_folder_name'] == 'default'){
+				$t = 'Location Detail';
+			}
+			
 			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 			if(stripos($ua,'android') == True) { 
-				echo $site_name.' ~ '.$page_title.' ~ '.$locations['title'];
+				echo $site_name.' ~ '.$t.' ~ '.$row['title'];
 			}
 			else{
-				echo $site_name.' : '.$page_title.' : '.$locations['title'];
+				echo $site_name.' : '.$t.' : '.$row['title'];
 			}
 		}
 		?>		
@@ -219,9 +229,17 @@ header( 'Content-Type:text/html;charset=utf-8');
 
 </head>
 <body>
+
+	<!--<header>
+	<a id="navBack" href="javascript:history.go(-1)">Back</a>
+	</header>-->
+	
 	<?php
+
 	/* Code added for iphone_diningdetails.tpl */
 	require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_diningdetails.tpl");
+	
 	?>
+	
 </body>
 </html>

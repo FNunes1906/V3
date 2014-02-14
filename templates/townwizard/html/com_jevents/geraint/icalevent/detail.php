@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('_JEXEC') or die('Restricted access');
 define("TOWNWIZARD_LOCATION_IMAGE_PATH", "http://".$_SERVER['HTTP_HOST']."/partner/".$_SESSION['partner_folder_name']."/images/stories/jevents/jevlocations/thumbnails/thumb_");
 define("TOWNWIZARD_LOCATION_IMAGE_PATH_FULL", "http://".$_SERVER['HTTP_HOST']."/partner/".$_SESSION['partner_folder_name']."/images/stories/jevents/jevlocations/");
@@ -8,21 +8,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/var.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 
 _init();
-//$this->_header();
-//  don't show navbar stuff for events detail popup
-/*
-if( !$this->pop ){
-	$this->_showNavTableBar();
-}
-*/
-$this->loadTemplate("body");
-/*
-if( !$this->pop ){
-	$this->_viewNavAdminPanel();
-}
-$this->_footer();
-*/
 
+$this->loadTemplate("body");
 $data = $this->data['row'];
 $ev_start_date = ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date)));
 
@@ -41,24 +28,31 @@ $lan = $lang->getName();
 if($lan=="Español"){
 	setlocale(LC_TIME,"spanish");
 	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
+	$lang="es";
 }
 else if($lan=="Croatian(HR)"){
 	setlocale(LC_TIME,"Croatian");
 	/*$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));*/
 	$ev_start_date= iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
+	$lang="hr";
 }
 else if($lan=="Nederlands - nl-NL"){
 	setlocale(LC_TIME,"Dutch");
 	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
+	$lan1="nl";
 }
 else if($lan=="Português (Brasil)"){
 	setlocale(LC_TIME,"Portuguese");
 	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
-}else if($lan=="French (Fr)"){
- setlocale(LC_TIME,"French");
- $ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
+	$lang="pt";
+}
+else if($lan=="French (Fr)"){
+	 setlocale(LC_TIME,"French");
+	 $ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
+	 $lang="fr";
 }else{
 	$ev_start_date	= $data->start_date;
+	$lang="en";
 }
 
 if($data->_alldayevent == 1){
@@ -75,7 +69,7 @@ $ev_desc = $data->_description;
 
 # Assign Current date to variable
 $currentDate =  date("l, F d, Y");
-
+//print_r($data->_jevlocation);
 # Location detail variables
 $lc_title 		= $data->_jevlocation->title;
 $lc_street 		= $data->_jevlocation->street;
@@ -84,9 +78,20 @@ $lc_city 		= $data->_jevlocation->city;
 $lc_country 	= $data->_jevlocation->country;
 $lc_state 		= $data->_jevlocation->state;
 $lc_phone 		= $data->_jevlocation->phone;
+$lc_geolon 		= $data->_jevlocation->geolon;
+$lc_geolat 		= $data->_jevlocation->geolat;
+$lc_geozoom 	= $data->_jevlocation->geozoom;
 $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 ?>
-
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&callback=initialize&language=<?php echo $lang;?>"></script>
+<script>
+    function initialize() {
+      var myLatlng = new google.maps.LatLng(<?php echo $lc_geolat;?>,<?php echo $lc_geolon;?>);
+      var myOptions = {zoom:<?php echo $lc_geozoom;?>,center: myLatlng, mapTypeId: google.maps.MapTypeId.ROADMAP}
+      var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+	  marker = new google.maps.Marker({draggable: true, position: myLatlng,  map: map, title: "Your location" });
+    }
+</script>
 
 <div id="Feat">
     <div class="detailFeature sect" id="EventDetail">
@@ -102,14 +107,23 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
         <div class="rating"></div>
         <div class="evtTmb fr"></div>
         <div style="text-transform: capitalize;" class="bold"><?php echo $lc_title; ?></div>
-        <p class="desc"><?php echo $ev_desc; ?></p>
-        <div class="address">
-			<?php include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
-			<div><?php echo $lc_title;?></div>
-			<div><?php echo $lc_street;?></div>
-			<div><?php echo $lc_city.' '.$lc_state.', '.$lc_postcode;?></div>
-			<div>&nbsp;</div>
-			<div><?php echo $lc_phone;?></div>
+       	<div class="map fr">
+			<div id="map_canvas" style="width:200px; height:156px;margin:5px 0px 5px 5px;"></div>
+		</div>
+	    <p class="desc"><?php echo $ev_desc; ?></p>
+        <a href="https://maps.google.com/maps?q=<?php echo $lc_street ?>+<?php echo $lc_city ?>+<?php echo $lc_state ?>+<?php echo $lc_country ?>+<?php echo $lc_postcode ?>&hl=<?php echo $lan1;?>&z=<?php echo $lc_geozoom;?>" target="_blank">
+			<div class="address">
+				<?php //include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
+				<div><?php echo $lc_title;?></div>
+				<div><?php echo $lc_street;?></div>
+				<div><?php echo $lc_city.' '.$lc_state.', '.$lc_postcode;?></div>
+			</div>
+		</a>
+		<div style="margin-bottom: 10px;">
+			<?php 
+				$remove = array("(","-",")"," ");
+				$new_phone = str_replace($remove, "", $lc_phone);?>
+			<a href=tel:<?php echo $new_phone?>><?php echo $lc_phone;?></a>
 		</div>
 		<div class="people cb">
 

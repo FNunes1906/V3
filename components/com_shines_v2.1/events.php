@@ -1,66 +1,56 @@
 <?php
-if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')){
-	ob_start("ob_gzhandler");
-}else{
-	ob_start();
-}
+if(substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')){	ob_start("ob_gzhandler");
+}else{ ob_start(); }
 
 session_start();
 include("connection.php");
 include("iadbanner.php");
 
-if($_SESSION['tpl_folder_name'] == "defaultspanish"){
-	$final_lang = "es";
-}elseif($_SESSION['tpl_folder_name'] == "defaultcroatian"){
-	$final_lang = "cr";
-}elseif($_SESSION['tpl_folder_name'] == "defaultdutch"){
-	$final_lang = "de";
-}elseif($_SESSION['tpl_folder_name'] == "defaultportuguese"){
-	$final_lang = "pt-PT";
-}elseif($_SESSION['tpl_folder_name'] == "defaultfrench"){
-	$final_lang = "fr";	
-}else{
-	$final_lang = "";
-}
+# Include event class file
+include("model/events_class.php");
+$objEvent = new event();
+
+# Code to fetch Joomla Language Variable
+$lang =& JFactory::getLanguage();
+$lan = $lang->getName();
+
+if($lan == "Español")				{$final_lang = "es"; 	$page_title = 'Eventos';}
+elseif($lan == "Croatian(HR)")			{$final_lang = "cr";	$page_title = 'Događanja';}
+elseif($lan == "Nederlands - nl-NL")	{$final_lang = "de";	$page_title = 'Evenementen';}
+elseif($lan == "Português (Brasil)")	{$final_lang = "pt-PT";	$page_title = 'Eventos';}
+elseif($lan == "French (Fr)")			{$final_lang = "fr";	$page_title = 'évènements';}
+else									{$final_lang = "";		$page_title = 'Events';}
 
 // Function for distance calculation
 function distance($lat1, $lon1, $lat2, $lon2, $unit) { 
-  $theta = $lon1 - $lon2; 
-  $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)); 
-  $dist = acos($dist); 
-  $dist = rad2deg($dist); 
-  $miles = $dist * 60 * 1.1515;
-  $unit = strtoupper($unit);
-	if ($unit == "KM") {
-		return ($miles * 1.609344); 
-	} else if ($unit == "N") {
-		return ($miles * 0.8684);
-	} else {
-		return $miles;
-	}
+	$theta = $lon1 - $lon2; 
+	$dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)); 
+	$dist = acos($dist); 
+	$dist = rad2deg($dist); 
+	$miles = $dist * 60 * 1.1515;
+	$unit = strtoupper($unit);
+	if($unit == "KM")		{return ($miles * 1.609344);}
+	elseif($unit == "N")	{return ($miles * 0.8684);}
+	else					{return  $miles;}
 }
 
-// Display all published category from J_Events component
+// Display all published category from JEvents component
 if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != 0){
-	$catId		= $_REQUEST['category_id'];
-	$event_cat_query = "SELECT  id,name FROM `jos_categories` WHERE (`parent_id` =".$catId." OR `id` =".$catId.") AND PUBLISHED = 1 ORDER BY name";
-	mysql_set_charset("UTF8");
-	$result_event_cat = mysql_query($event_cat_query);
+	$catId = $_REQUEST['category_id'];
+	$result_event_cat = $objEvent->select_event_categories_from_id($catId);
 }else{
-	$event_cat_query = "SELECT id,name FROM jos_categories WHERE section LIKE 'com_jevents' AND PUBLISHED = 1 ORDER BY name";
-	mysql_set_charset("UTF8");
-	$result_event_cat = mysql_query($event_cat_query);
+	$result_event_cat = $objEvent->select_event_categories();
 } 
 
 // Assigning latitude value
-if (isset($_REQUEST['lat']) && $_REQUEST['lat'] != "" ){
+if(isset($_REQUEST['lat']) && $_REQUEST['lat'] != "" ){
 	$_SESSION['lat_device1'] = $_REQUEST['lat'];
-	$lat1 = $_SESSION['lat_device1'];
+	$lat1					 = $_SESSION['lat_device1'];
 }
 // Assigning longitude value
-if (isset($_REQUEST['lon']) && $_REQUEST['lon'] != "" ){
-	$_SESSION['lon_device1']=$_REQUEST['lon'];
-	$lon1=$_SESSION['lon_device1'];
+if(isset($_REQUEST['lon']) && $_REQUEST['lon'] != "" ){
+	$_SESSION['lon_device1'] = $_REQUEST['lon'];
+	$lon1					 = $_SESSION['lon_device1'];
 }
 
 // timezone value assigning to current Servertime Setting up Timezone time hour, minut and second varible
@@ -69,9 +59,9 @@ $totalHours		= date("H") + $timeZoneArray[0];
 $totalMinutes	= date("i") + $timeZoneArray[1];
 $totalSeconds	= date("s") + $timeZoneArray[2];
 
-$featureday = date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
-$today 		= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
-$fromDay 	= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+$featureday 	= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+$today 			= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+$fromDay 		= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
 
 $featuremonth	= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
 $tomonth 		= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
@@ -89,7 +79,6 @@ if(isset($_REQUEST['eventdate'])){
 $todaestring = '';
 
 if(!empty($_REQUEST['eventdate'])){
-	
 	#Creating Array for Start and end date
 	$startDate = explode('-',$_REQUEST['eventdate']);
 
@@ -111,18 +100,13 @@ if(!empty($_REQUEST['eventdate'])){
 	$todaestring		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
 	$single_day_date	= 	($toyear.'-'.$tomonth.'-'.$today);
 }
-//#DD#
 
-//Query to fetch ID of all categories created in Jevents from category table
-$query_cat = "SELECT c.id FROM jos_categories AS c LEFT JOIN jos_categories AS p ON p.id=c.parent_id LEFT JOIN jos_categories AS gp ON gp.id=p.parent_id LEFT JOIN jos_categories AS ggp ON ggp.id=gp.parent_id WHERE c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents'";
-
-// checking cat id is set or not 
+# Display all published category from JEvents component
 if(isset($catId) && $catId != ''){
-	$query_cat = "SELECT c.id FROM jos_categories AS c WHERE (c.id=".$catId." OR parent_id=".$catId.") and c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents'";
-}
-
-$rec_cat   = mysql_query($query_cat);
-
+	$rec_cat = $objEvent->select_cat_id($catId);
+}else{
+	$rec_cat = $objEvent->select_cat();
+} 
 mysql_set_charset("UTF8");
 
 while($row_cat = mysql_fetch_array($rec_cat)){
@@ -138,28 +122,16 @@ if(isset($startDate)){
 }
 
 if(!isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == '' || $seachStartDate == $searchEndDate ){
-	$query_filter = "SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00' AND rpt.startrepeat <= '".$toyear."-".$tomonth."-".$today." 23:59:59' AND ev.state=1 AND rpt.endrepeat>='".date('Y',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('m',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('d', mktime($totalHours, $totalMinutes, $totalSeconds))." 00:00:00' AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$toyear." and MONTH(rpt.startrepeat )=".$tomonth." and DAYOFMONTH(rpt.startrepeat )=".$today.") or freq<>'WEEKLY')GROUP BY rpt.rp_id";
-}
-
-if(isset($query_filter)){
-	$rec_filter = mysql_query($query_filter);
+	$rec_filter = $objEvent->select_events($toyear,$tomonth,$today,$totalHours,$totalMinutes,$totalSeconds,$arrstrcat);
 	mysql_set_charset("UTF8");
-}
+	$arr_rr_id = $objEvent->select_rowfilter_rpid($rec_filter);
 
-if(isset($rec_filter)){
-	while($row_filter = mysql_fetch_array($rec_filter)){
-		$arr_rr_id[] = $row_filter['rp_id'];
-	}
+	if(isset($arr_rr_id) && count($arr_rr_id)){
+		$strchk = implode(',',$arr_rr_id);
+		$rec = $objEvent->select_events_from_rpid($strchk);
+		mysql_set_charset("UTF8");
+	}	
 }
-
-if(isset($arr_rr_id) && count($arr_rr_id)){
-	$strchk = implode(',',$arr_rr_id);
-}else{
-	$strchk = 0;
-}	
-	$query = "select *,DATE_FORMAT(`startrepeat`,'%h:%i %p') as timestart, DATE_FORMAT(`endrepeat`,'%h:%i %p') as timeend from jos_jevents_repetition where rp_id in ($strchk) ORDER BY `startrepeat` ASC ";
-	$rec   = mysql_query($query) or die(mysql_error());
-	mysql_set_charset("UTF8");
 	
 /*Feature Event Query By Akash*/
 /*Last Day of the Month*/
@@ -183,29 +155,15 @@ header('Content-Type:text/html;charset=utf-8');
 	<title>
 
 	<?php
-		/* code start by rinkal for page title */
-		if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese'){
-			$t = 'Eventos';
-		}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
-			$t = 'Evenementen';
-		}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
-			$t = 'Događanja';
-		}elseif($_SESSION['tpl_folder_name'] == 'default'){
-			$t = 'Events';
-		}elseif($_SESSION['tpl_folder_name'] == 'defaultfrench'){
-			$t = 'évènements';
-		}
-		
-		
 		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 		if(stripos($ua,'android') == True){ 
-			$title = $site_name.' ~ '.$t;
+			$title = $site_name.' ~ '.$page_title;
 			if($pagemeta['title']!=''){
 				$title.= ' ~ '.$pagemeta['title'];
 			}
 			echo $title;
 		}else{
-			$title = $site_name.' : '.$t;
+			$title = $site_name.' : '.$page_title;
 			if($pagemeta['title']!=''){
 				$title.= ' : '.$pagemeta['title'];
 			}

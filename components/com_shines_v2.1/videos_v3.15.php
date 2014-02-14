@@ -1,13 +1,16 @@
 <?php
 include("connection.php");
 include("iadbanner.php");
-include("model/galleries_class.php");	
 
-$data = new photosdata();
-$rec = $data->fetchVideo();
+$query="select * from jos_phocagallery where catid=2 AND published = 1 order by id desc";
 
-$urlpara = '/videos';
-$pagemeta = $data->title($urlpara);
+mysql_set_charset("UTF8");
+$rec=mysql_query($query) or die(mysql_error());
+
+/* code start by rinkal for page title */
+$pagemeta_res = mysql_query("select title from `jos_pagemeta`where uri='/videos'");
+$pagemeta =mysql_fetch_array($pagemeta_res);
+/* code end by rinkal for page title */
 
 header( 'Content-Type:text/html;charset=utf-8');
 
@@ -29,17 +32,28 @@ header( 'Content-Type:text/html;charset=utf-8');
 
 <title>
 <?php 
-	/*Code for Page Title*/
+	/* code start by rinkal for page title */
+	if ($_SESSION['tpl_folder_name'] == 'defaultspanish' || $_SESSION['tpl_folder_name'] == 'defaultportuguese' || $_SESSION['tpl_folder_name'] == 'default'){
+		$t = 'Videos';
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultdutch'){
+		$t = 'Filmpjesl';
+	}elseif($_SESSION['tpl_folder_name'] == 'defaultcroatian'){
+		$t = 'Video';
+	}
+	
 	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 	if(stripos($ua,'android') == True) { 
-		$title = $site_name.' ~ '.JText::_('TW_VID');
-		if($pagemeta['title']!=''){
+		$title = $site_name.' ~ '.$t;
+		if($pagemeta['title']!='')
+		{
 			$title.= ' ~ '.$pagemeta['title'];
 		}
 		echo $title;
-	}else{
-		$title = $site_name.' : '.JText::_('TW_VID');
-		if($pagemeta['title']!=''){
+	}
+	else{
+		$title = $site_name.' : '.$t;
+		if($pagemeta['title']!='')
+		{
 			$title .= ' : '.$pagemeta['title'];
 		}
 		echo $title;

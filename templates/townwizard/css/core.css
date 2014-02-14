@@ -1134,6 +1134,7 @@ a.saved span {
 .detailFeature a {
   display:block;
   margin:8px 0;
+  max-width: 260px;
 }
 .detailFeature a:hover {
   text-decoration:underline;
@@ -1165,14 +1166,14 @@ a.saved span {
 .detailFeature .desc {
   padding:10px 0 0;
   /* width:210px; */
-  font-size:11px;
+  font-size:12px;
 }
 .detailFeature .evtTmb img {
   width:200px;
   height:156px;
 }
 .detailFeature .address {
-  margin:30px 0;
+  margin:20px 0;
 }
 .detailFeature .address div {
   margin-bottom:5px;
@@ -2248,8 +2249,9 @@ h1.upload {
 
 /* event info page */
 p.desc img {
-	float: right;
-	padding-left: 12px;
+	/*float: right;*/
+	padding-top: 12px;
+	padding-bottom: 12px;
 	max-width:200px !important;
 	}
 	

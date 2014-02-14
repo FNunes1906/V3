@@ -1,5 +1,21 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/configuration.php");
+
+
+// Set flag that this is a parent file
+define( '_JEXEC', 1 );
+define( 'DS', DIRECTORY_SEPARATOR );
+$x = realpath(dirname(__FILE__)."/../../") ;
+// SVN version
+if (!file_exists($x.DS.'includes'.DS.'defines.php')){
+	$x = realpath(dirname(__FILE__)."/../../../") ;
+}
+define( 'JPATH_BASE', $x );
+require_once JPATH_BASE.DS.'includes'.DS.'defines.php';
+require_once JPATH_BASE.DS.'includes'.DS.'framework.php';
+$mainframe =& JFactory::getApplication('site');
+$mainframe->initialise();
+
 $jconfig = new JConfig();
 
 define("DB_HOST",$jconfig->host);
