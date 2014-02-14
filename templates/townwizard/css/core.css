@@ -1134,7 +1134,8 @@ a.saved span {
 .detailFeature a {
   display:block;
   margin:8px 0;
-  max-width: 260px;
+  max-width: 225px;
+  line-height: 18px
 }
 .detailFeature a:hover {
   text-decoration:underline;
@@ -2249,10 +2250,9 @@ h1.upload {
 
 /* event info page */
 p.desc img {
-	/*float: right;*/
-	padding-top: 12px;
-	padding-bottom: 12px;
+	float: right;
 	max-width:200px !important;
+	padding: 12px 0px 12px 5px;
 	}
 	
 p.ven_desc img {

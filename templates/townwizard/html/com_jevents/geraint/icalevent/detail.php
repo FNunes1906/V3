@@ -28,31 +28,31 @@ $lan = $lang->getName();
 if($lan=="Español"){
 	setlocale(LC_TIME,"spanish");
 	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
-	$lang="es";
+	$map_lang="es";
 }
 else if($lan=="Croatian(HR)"){
 	setlocale(LC_TIME,"Croatian");
 	/*$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));*/
 	$ev_start_date= iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
-	$lang="hr";
+	$map_lang="hr";
 }
 else if($lan=="Nederlands - nl-NL"){
 	setlocale(LC_TIME,"Dutch");
 	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
-	$lan1="nl";
+	$map_lang="nl";
 }
 else if($lan=="Português (Brasil)"){
 	setlocale(LC_TIME,"Portuguese");
 	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
-	$lang="pt";
+	$map_lang="pt";
 }
 else if($lan=="French (Fr)"){
 	 setlocale(LC_TIME,"French");
 	 $ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
-	 $lang="fr";
+	 $map_lang="fr";
 }else{
 	$ev_start_date	= $data->start_date;
-	$lang="en";
+	$map_lang="en";
 }
 
 if($data->_alldayevent == 1){
@@ -83,7 +83,7 @@ $lc_geolat 		= $data->_jevlocation->geolat;
 $lc_geozoom 	= $data->_jevlocation->geozoom;
 $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 ?>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&callback=initialize&language=<?php echo $lang;?>"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&callback=initialize&language=<?php echo $map_lang;?>"></script>
 <script>
     function initialize() {
       var myLatlng = new google.maps.LatLng(<?php echo $lc_geolat;?>,<?php echo $lc_geolon;?>);
@@ -111,22 +111,21 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 			<div id="map_canvas" style="width:200px; height:156px;margin:5px 0px 5px 5px;"></div>
 		</div>
 	    <p class="desc"><?php echo $ev_desc; ?></p>
-        <a href="https://maps.google.com/maps?q=<?php echo $lc_street ?>+<?php echo $lc_city ?>+<?php echo $lc_state ?>+<?php echo $lc_country ?>+<?php echo $lc_postcode ?>&hl=<?php echo $lan1;?>&z=<?php echo $lc_geozoom;?>" target="_blank">
-			<div class="address">
-				<?php include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
-				<div><?php echo $lc_title;?></div>
-				<div><?php echo $lc_street;?></div>
-				<div><?php echo $lc_city.' '.$lc_state.', '.$lc_postcode;?></div>
+        <div class="address">
+			<?php include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
+			<div>
+				<?php $new_lc_street = str_replace("#", "", $lc_street);?>
+				<a href="https://maps.google.com/maps?q=<?php echo $new_lc_street ?>+<?php echo $lc_city ?>+<?php echo $lc_state ?>+<?php echo $lc_country ?>+<?php echo $lc_postcode ?>&hl=<?php echo $lan1;?>&z=<?php echo $lc_geozoom;?>" target="_blank"><?php echo $lc_title;?><br/><?php echo $lc_street;?><br/><?php echo $lc_city.' '.$lc_state.', '.$lc_postcode;?></a>
 			</div>
-		</a>
-		<div style="margin-bottom: 10px;">
-			<?php 
+			<div style="margin-bottom: 10px;">
+				<?php 
 				$remove = array("(","-",")"," ");
 				$new_phone = str_replace($remove, "", $lc_phone);?>
-			<a href=tel:<?php echo $new_phone?>><?php echo $lc_phone;?></a>
+				<a href=tel:<?php echo $new_phone?>><?php echo $lc_phone;?></a>
+			</div>
 		</div>
-		<div class="people cb">
 
+		<div class="people cb">
 			<div class="likes fl"><span><?php echo JText::_("TW_LIKEDBY") ?>:</span>
 	            <div class="fb-like" data-send="false" data-layout="standard" data-width="45%" data-show-faces="true"></div>
 			</div>
