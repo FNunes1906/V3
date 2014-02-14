@@ -113,7 +113,7 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 	    <p class="desc"><?php echo $ev_desc; ?></p>
         <a href="https://maps.google.com/maps?q=<?php echo $lc_street ?>+<?php echo $lc_city ?>+<?php echo $lc_state ?>+<?php echo $lc_country ?>+<?php echo $lc_postcode ?>&hl=<?php echo $lan1;?>&z=<?php echo $lc_geozoom;?>" target="_blank">
 			<div class="address">
-				<?php //include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
+				<?php include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
 				<div><?php echo $lc_title;?></div>
 				<div><?php echo $lc_street;?></div>
 				<div><?php echo $lc_city.' '.$lc_state.', '.$lc_postcode;?></div>
