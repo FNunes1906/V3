@@ -14,11 +14,11 @@ $objEvent = new event();
 $lang =& JFactory::getLanguage();
 $lan = $lang->getName();
 
-if($lan == "Español")				{$final_lang = "es"; 	$page_title = 'Eventos';}
-elseif($lan == "Croatian(HR)")			{$final_lang = "cr";	$page_title = 'Događanja';}
-elseif($lan == "Nederlands - nl-NL")	{$final_lang = "de";	$page_title = 'Evenementen';}
-elseif($lan == "Português (Brasil)")	{$final_lang = "pt-PT";	$page_title = 'Eventos';}
-elseif($lan == "French (Fr)")			{$final_lang = "fr";	$page_title = 'évènements';}
+if($lan == "Español")					{$final_lang = "es"; 	$page_title = 'Eventos';     setlocale(LC_TIME,"spanish");}
+elseif($lan == "Croatian(HR)")			{$final_lang = "cr";	$page_title = 'Događanja';   setlocale(LC_TIME,"croatian");}
+elseif($lan == "Nederlands - nl-NL")	{$final_lang = "de";	$page_title = 'Evenementen'; setlocale(LC_TIME,"dutch");}
+elseif($lan == "Português (Brasil)")	{$final_lang = "pt-PT";	$page_title = 'Eventos';     setlocale(LC_TIME,"portuguese");}
+elseif($lan == "French (Fr)")			{$final_lang = "fr";	$page_title = 'évènements';  setlocale(LC_TIME,"French");}
 else									{$final_lang = "";		$page_title = 'Events';}
 
 // Function for distance calculation
@@ -132,165 +132,146 @@ if(!isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == '' || $seachStart
 		mysql_set_charset("UTF8");
 	}	
 }
-	
-/*Feature Event Query By Akash*/
-/*Last Day of the Month*/
+
+# Feature Event Query By Akash
+
+# Last Day of the Month
 $LD = Date('d', strtotime("+30 days"));
 $LM = Date('m', strtotime("+30 days"));
 $LY = Date('y', strtotime("+30 days"));
-	
-$query_featuredeve	= "SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%h:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%h:%i %p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND cf.value = 1 AND rpt.endrepeat >= '".$featureyear."-".$featuremonth."-".$featureday." 00:00:00' AND rpt.startrepeat <= '".$LY."-".$LM."-".$LD." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";	
-$featured_filter	= mysql_query($query_featuredeve);
 
-/* code start by rinkal for page title */
-$pagemeta_res	= mysql_query("select title from `jos_pagemeta`where uri='/events'");
-$pagemeta		= mysql_fetch_array($pagemeta_res);
-/* code end by rinkal for page title */
+$featured_filter = $objEvent->select_featured_event($featureyear,$featuremonth,$featureday,$LY,$LM,$LD);
 
-header('Content-Type:text/html;charset=utf-8');
-?>
+# code for page title
+$pagemeta = $objEvent->select_pagemeta_title();
+
+header('Content-Type:text/html;charset=utf-8');?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<title>
-
-	<?php
-		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-		if(stripos($ua,'android') == True){ 
-			$title = $site_name.' ~ '.$page_title;
-			if($pagemeta['title']!=''){
-				$title.= ' ~ '.$pagemeta['title'];
+	<head>
+		<title>
+		<?php
+			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+			if(stripos($ua,'android') == True){ 
+				$title = $site_name.' ~ '.$page_title;
+				if($pagemeta['title']!=''){ $title.= ' ~ '.$pagemeta['title']; }
+			}else{
+				$title = $site_name.' : '.$page_title;
+				if($pagemeta['title']!=''){ $title.= ' : '.$pagemeta['title']; }
 			}
-			echo $title;
-		}else{
-			$title = $site_name.' : '.$page_title;
-			if($pagemeta['title']!=''){
-				$title.= ' : '.$pagemeta['title'];
+			echo $title;?>
+		</title>
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="index,follow" name="robots" />
+		<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+		<link rel="shortcut icon" href="images/l/apple-touch-icon.png">
+		<link href="pics/startup.png" rel="apple-touch-startup-image" />
+		<meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta content="destin, vacactions in destin florida, destin, florida, real estate, sandestin resort, beaches, destin fl, maps of florida, hotels, hotels in florida, destin fishing, destin hotels, best florida beaches, florida beach house rentals, destin vacation rentals for destin, destin real estate, best beaches in florida, condo rentals in destin, vacaction rentals, fort walton beach, destin fishing, fl hotels, destin restaurants, florida beach hotels, hotels in destin, beaches in florida, destin, destin fl" name="keywords" />
+		<meta content="Destin Florida's FREE iPhone application and website guide to local events, live music, restaurants and attractions" name="description" />
+		<link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
+		<script type="text/javascript" src="/components/com_shines_v2.1/javascript/mobileswipe.js"></script>
+		<script type="text/javascript">
+		var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){var a=document.getElementsByTagName("a");for(var i=0;i<a.length;i++){if(a[i].className.match("noeffect")){}else{a[i].onclick=function(){window.location=this.getAttribute("href");return false}}}}function hideURLbar(){window.scrollTo(0,0.9)}iWebkit.init=function(){fullscreen();hideURLbar()};iWebkit.init()}}
+		</script>
+		<script type="text/javascript">
+			function linkClicked(link) { document.location = link; }
+		</script>
+		<script type="text/javascript">
+			function submitForm() {
+				document.events.submit();
 			}
-			echo $title;
-		}
-		/* code end by rinkal for page title */
-	?>
-	</title>
-	<meta content="yes" name="apple-mobile-web-app-capable" />
-	<meta content="index,follow" name="robots" />
-	<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
-	<link rel="shortcut icon" href="images/l/apple-touch-icon.png">
-	<link href="pics/startup.png" rel="apple-touch-startup-image" />
-	<!--<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />-->
-	<meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-	<meta content="destin, vacactions in destin florida, destin, florida, real estate, sandestin resort, beaches, destin fl, maps of florida, hotels, hotels in florida, destin fishing, destin hotels, best florida beaches, florida beach house rentals, destin vacation rentals for destin, destin real estate, best beaches in florida, condo rentals in destin, vacaction rentals, fort walton beach, destin fishing, fl hotels, destin restaurants, florida beach hotels, hotels in destin, beaches in florida, destin, destin fl" name="keywords" />
-	<meta content="Destin Florida's FREE iPhone application and website guide to local events, live music, restaurants and attractions" name="description" />
-	<link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
-	<!--<link href="../../mobiscroll/css/mobiscroll-1.5.1.css" rel="stylesheet" type="text/css" />-->
+			$(document).ready(function () {
+				// Date with external button
+				$('#date1').scroller({ showOnFocus: false });
+				$('#show').click(function() { $('#date1').scroller('show'); return false; });
+				// Time
+				$('#date2').scroller({ preset: 'time' });
+				// Datetime
+				 $('#date3').scroller({ preset: 'date' });
+				$('#custom').scroller({ showOnFocus: false });
+				$('#custom').click(function() { $(this).scroller('show'); });
+				$('#disable').click(function() {
+					$('#date1').scroller('disable');
+					return false;
+				});
+				$('#enable').click(function() {
+					$('#date1').scroller('enable');
+					return false;
+				});
+				$('#get').click(function() {
+					alert($('#date1').scroller('getDate'));
+					return false;
+				});
+				$('#set').click(function() {
+					$('#date1').scroller('setDate', new Date(), true);
+					return false;
+				});
+				$('#theme, #mode').change(function() {
+					var t = $('#theme').val();
+					var m = $('#mode').val();
+					$('#date1').scroller('destroy').scroller({ showOnFocus: false, theme: t, mode: m });
+					$('#date2').scroller('destroy').scroller({ preset: 'time', theme: t, mode: m });
+					$('#date3').scroller('destroy').scroller({ preset: 'date', theme: t, mode: m });
+					$('#custom').scroller('destroy').scroller({ showOnFocus: false, theme: t, mode: m });
+				});
+			});
+		</script>
 
-	<script type="text/javascript" src="/components/com_shines_v2.1/javascript/mobileswipe.js"></script>
-	<script type="text/javascript">
-	var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){var a=document.getElementsByTagName("a");for(var i=0;i<a.length;i++){if(a[i].className.match("noeffect")){}else{a[i].onclick=function(){window.location=this.getAttribute("href");return false}}}}function hideURLbar(){window.scrollTo(0,0.9)}iWebkit.init=function(){fullscreen();hideURLbar()};iWebkit.init()}}
-	</script>
-	<script type="text/javascript">
-		function linkClicked(link) { document.location = link; }
-	</script>
-	<!--<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>-->
-	<!--<script src="../../mobiscroll/js/mobiscroll-1.5.1.js" type="text/javascript"></script>-->
-	<script type="text/javascript">
-		function submitForm() {
-			document.events.submit(); //#DD#
-		}
-		$(document).ready(function () {
-			// Date with external button
-			$('#date1').scroller({ showOnFocus: false });
-			$('#show').click(function() { $('#date1').scroller('show'); return false; });
-			// Time
-			$('#date2').scroller({ preset: 'time' });
-			// Datetime
-			 $('#date3').scroller({ preset: 'date' });
-			$('#custom').scroller({ showOnFocus: false });
-			$('#custom').click(function() { $(this).scroller('show'); });
-			$('#disable').click(function() {
-				$('#date1').scroller('disable');
-				return false;
+		<!--Code for Mobiscroll NEW date picker - Yogi START -->
+		<script src="/templates/townwizard/js/jquery-1.9.0.min.js" type="text/javascript"></script>
+		<link href="/templates/townwizard/css/mobiscroll.custom-2.7.2.min.css" rel="stylesheet" type="text/css" />
+		<script src="/templates/townwizard/js/mobiscroll.custom-2.7.2.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			jQuery(function (){
+				var now = new Date();
+				var curr = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+				var opt = {}
+				opt.rangepicker = {preset : 'rangepicker'};
+				jQuery('select.changes').bind('change', function(){
+					var demo = "rangepicker";
+					jQuery(".demos").hide();
+					if (!($("#demo_"+demo).length))
+					demo = 'default';
+					jQuery("#demo_" + demo).show();
+					jQuery('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "modal", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
+				});
+				jQuery('#demo').trigger('change');
 			});
-			$('#enable').click(function() {
-				$('#date1').scroller('enable');
-				return false;
-			});
-			$('#get').click(function() {
-				alert($('#date1').scroller('getDate'));
-				return false;
-			});
-			$('#set').click(function() {
-				$('#date1').scroller('setDate', new Date(), true);
-				return false;
-			});
-			$('#theme, #mode').change(function() {
-				var t = $('#theme').val();
-				var m = $('#mode').val();
-				$('#date1').scroller('destroy').scroller({ showOnFocus: false, theme: t, mode: m });
-				$('#date2').scroller('destroy').scroller({ preset: 'time', theme: t, mode: m });
-				$('#date3').scroller('destroy').scroller({ preset: 'date', theme: t, mode: m });
-				$('#custom').scroller('destroy').scroller({ showOnFocus: false, theme: t, mode: m });
-			});
-		});
-	</script>
-
-	<!--Code for Mobiscroll NEW date picker - Yogi START -->
-	<script src="/templates/townwizard/js/jquery-1.9.0.min.js" type="text/javascript"></script>
-	<link href="/templates/townwizard/css/mobiscroll.custom-2.7.2.min.css" rel="stylesheet" type="text/css" />
-	<script src="/templates/townwizard/js/mobiscroll.custom-2.7.2.min.js" type="text/javascript"></script>
-	<script type="text/javascript">
-		jQuery(function (){
-			var now = new Date();
-			var curr = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-			var opt = {}
-			opt.rangepicker = {preset : 'rangepicker'};
-			jQuery('select.changes').bind('change', function(){
-				var demo = "rangepicker";
-				jQuery(".demos").hide();
-				if (!($("#demo_"+demo).length))
-				demo = 'default';
-				jQuery("#demo_" + demo).show();
-				jQuery('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "modal", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
-			});
-			jQuery('#demo').trigger('change');
-		});
-	</script>
-	<script type="text/javascript">
-		function redirecturl(val){
-			url="/components/com_shines_v2.1/events.php?eventdate="+val; 
+		</script>
+		<script type="text/javascript">
+			function redirecturl(val){
+				url="/components/com_shines_v2.1/events.php?eventdate="+val; 
+				window.location = url;
+			}
+		</script>
+		<!--Code for Mobiscroll NEW date picker - Yogi END -->
+		
+		<!--Code for event Category drop down - Yogi START -->
+		<script type="text/javascript">
+		function redirecturlcat(val){
+			if(val == 'all')
+				url = "<?php echo $_SERVER['PHP_SELF'];?>";
+			else
+				url = "<?php echo $_SERVER['PHP_SELF']; ?>?category_id="+val;
 			window.location = url;
 		}
-	</script>
-	<!--Code for Mobiscroll NEW date picker - Yogi END -->
-	
-	<!--Code for event Category drop down - Yogi START -->
-	<script type="text/javascript">
-	function redirecturlcat(val){
-		if(val == 'all')
-			url = "<?php echo $_SERVER['PHP_SELF'];?>";
-		else
-			url = "<?php echo $_SERVER['PHP_SELF']; ?>?category_id="+val;
-		window.location = url;
-	}
-	</script>
-	<!--Code for event Category drop down - Yogi END -->
-	
-	<?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
-</head>
-<body>
-	<div style="display: none">
-		<label for="demo">Demo</label>
-		<select name="demo" id="demo" class="changes">
-			<option value="date" selected>Date</option>
-			<option value="datetime" >Datetime</option>
-			<option value="time" >Time</option>
-			<option value="rangepicker" selected="selected" >Range Picker</option>
-		</select>
-	</div>
-	
-	<?php
-	/* Code added for iphone_places.tpl */
-	require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_events.tpl");
-	?>
-</body>
+		</script>
+		<!--Code for event Category drop down - Yogi END -->
+		
+		<?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
+	</head>
+	<body>
+		<div style="display: none">
+			<label for="demo">Demo</label>
+			<select name="demo" id="demo" class="changes">
+				<option value="date" selected>Date</option>
+				<option value="datetime" >Datetime</option>
+				<option value="time" >Time</option>
+				<option value="rangepicker" selected="selected" >Range Picker</option>
+			</select>
+		</div>
+		<?php require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_events.tpl"); ?>
+	</body>
 </html>

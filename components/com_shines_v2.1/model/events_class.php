@@ -16,6 +16,61 @@ class event {
 		return $result;
 	}
 	
+	# Select Pagemeta Title for Event
+	function select_pagemeta_title(){
+		$query 		= "select title from `jos_pagemeta`where uri='/events'";
+		$result		= mysql_query($query) or die(mysql_error());
+		$pagemeta	= mysql_fetch_array($result);
+		return $pagemeta;
+	}
+	
+	/* @@@@ Event TPL File function BEGIN @@@ */
+	
+	# Fetch event data from "event" table
+	function ev_from_id($eventid){
+		$query 		= "select *  from jos_jevents_vevent where ev_id=$eventid";
+		$result		= mysql_query($query) or die(mysql_error());
+		$evDetails 	= mysql_fetch_array($result);
+		return $evDetails;
+	}
+	# Fetch category name of the event from "category" table
+	function cat_from_id($catid){
+		$query 		= "select title  from jos_categories where id=$catid";
+		$result		= mysql_query($query) or die(mysql_error());
+		$catData 	= mysql_fetch_object($result);
+		return $catData;
+	}
+	# Fetch Event detail from "event detail" table
+	function evdetail_from_id($evDetailId){
+		$query 			= "select *  from jos_jevents_vevdetail where evdet_id=$evDetailId";
+		$result			= mysql_query($query) or die(mysql_error());
+		$evDetailData 	= mysql_fetch_array($result);
+		return $evDetailData;
+	}
+	# Fetch event location detail from "location" table
+	function location_from_id($locationId){
+		$query 			= "select *  from jos_jev_locations where loc_id=$locationId";
+		$result			= mysql_query($query) or die(mysql_error());
+		$locationData 	= mysql_fetch_array($result);
+		return $locationData;
+	}
+	
+	# Function to fetch Event for given date	
+	function fetch_ev_for_given_date($arrstrcat,$ev_toyear,$ev_tomonth,$ev_today,$totalHours,$totalMinutes,$totalSeconds){
+		$query 	= "SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat >= '".$ev_toyear."-".$ev_tomonth."-".$ev_today." 00:00:00' AND rpt.startrepeat <= '".$ev_toyear."-".$ev_tomonth."-".$ev_today." 23:59:59' AND ev.state=1 AND rpt.endrepeat>='".date('Y',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('m',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('d', mktime($totalHours, $totalMinutes, $totalSeconds))." 00:00:00' AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$ev_toyear." and MONTH(rpt.startrepeat )=".$ev_tomonth." and DAYOFMONTH(rpt.startrepeat )=".$ev_today.") or freq<>'WEEKLY')GROUP BY rpt.rp_id";
+		$result		= mysql_query($query) or die(mysql_error());
+		return $result;
+	}
+	
+	/* @@@ Event TPL File function END @@@ */
+	
+	# Fetch Featured event
+	function select_featured_event($featureyear,$featuremonth,$featureday,$LY,$LM,$LD){
+		$query = "SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%h:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%h:%i %p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND cf.value = 1 AND rpt.endrepeat >= '".$featureyear."-".$featuremonth."-".$featureday." 00:00:00' AND rpt.startrepeat <= '".$LY."-".$LM."-".$LD." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";
+		$result = mysql_query($query) or die(mysql_error());
+		return $result;
+	}
+	
 	function select_rowfilter_rpid($rec_filter){
 		while($row_filter = mysql_fetch_array($rec_filter)){
 			$arr_rr_id[] = $row_filter['rp_id'];

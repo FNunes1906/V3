@@ -30,7 +30,7 @@
 					$displayTime = '';
 					if($time_format == "12"){
 						if($fearow["timestart"]=='12:00 AM' && $fearow["timeend"]=='11:59 PM'){   
-							$displayTime.='All Day Event';
+							$displayTime.=JText::_('EV_ALL_DAY');
 						}else{
 							$displayTime.= $fearow["timestart"];
 							if($fearow["timeend"] != '11:59 PM' ){
@@ -42,7 +42,7 @@
 						$etime = date("H:i", strtotime($fearow['timeend']));
 						
 						if($stime=='00:00' && $etime=='23:59'){   
-							$displayTime.='All Day Event';
+							$displayTime.=JText::_('EV_ALL_DAY');
 						}else{
 							$displayTime.= $stime;
 							if($etime!='23:59' ){
@@ -60,7 +60,7 @@
 					    			<h1><?php echo $fearow['summary'];?></h1>
 					    			<h2><?php echo $fearow['title'];?></h2>
 					    			<h3><?php echo $displayDate;?> &bull;
-										<!--below Varialbe for 24 vs 12 hours time format for HOME SLIDER yogi-->
+										<!-- below Varialbe for 24 vs 12 hours time format for HOME SLIDER yogi-->
 										<?php echo $displayTime; ?>
 									</h3>
 					    		</div> <!-- caption -->
@@ -81,13 +81,13 @@
 <div class="section">  
 	<!--Code for Mobiscroll NEW date picker - Yogi START -->
 	<input style="display: none;" type="text" name="test_default" id="test_default" onChange="redirecturl(this.value);"/>
-	<label for="test_default" class="ui-btn-hidden">Events By Day</label>
+	<label for="test_default" class="ui-btn-hidden"><?php echo JText::_('DP_EVENT_BY_DAY'); ?></label>
 	<!--Code for Mobiscroll NEW date picker - Yogi END -->
 	
 	<!--Code for Event Category drop down Yogi Start -->
 	<form id="event_cat_form" class="cls_event_cat_form" autocomplete="off">
 		<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
-			<option value="0"><?php echo strtoupper("Categories");?></option>
+			<option value="0"><?php echo strtoupper(JText::_('DD_CATEGORIES'));?></option>
 			<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
 				<option value="<?php echo $row_cat['id'];?>"<?php if(isset($catId) && $row_cat['id'] == $catId) echo "selected='selected'";?>>
 					<?php echo strtoupper($row_cat['name']);?>
@@ -112,10 +112,21 @@ if(stripos($ua,'android') == true){ ?>
 
 <div id="main" role="main">
 	<?php
-	if($todaestring != null){
-		echo "<h1>$todaestring</h1>";
-	}elseif($seachStartFullDate == $searchEndFullDate){
-		echo "<h1>$seachStartDate</h1>";
+	if($lan == "English (United Kingdom)"){
+		if($todaestring != null){
+			echo "<h1>$todaestring</h1>";
+		}elseif($seachStartFullDate == $searchEndFullDate){
+			echo "<h1>$seachStartDate</h1>";
+		}
+	}else{
+		if($todaestring != null){
+			$todaestring =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));
+			echo "<h1>$todaestring</h1>";
+		}elseif($seachStartFullDate == $searchEndFullDate){
+			$seachStartDate =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear))));
+			$searchEndDate  =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));	
+			echo "<h1>$seachStartDate</h1>";
+		}
 	}?>
 
 	<ul id="eventList" class="mainList" ontouchstart="touchStart(event,'eventList');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
@@ -123,35 +134,30 @@ if(stripos($ua,'android') == true){ ?>
 		$n = 0;
 		if((isset($seachStartDate) && $seachStartDate == $searchEndDate) || !isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == ''){
 			while($row = mysql_fetch_array($rec)){
+				
 				# Fetch event data from "event" table
-				$ev			= mysql_query("select *  from jos_jevents_vevent where ev_id=".$row['eventid']) or die(mysql_error());
-				$evDetails 	= mysql_fetch_array($ev);
+				$evDetails 	= $objEvent->ev_from_id($row['eventid']);
 				$evrawdata 	= unserialize($evDetails['rawdata']);
 
 				# Fetch category name of the event from "category" table
-				$event_category	= mysql_query("select title  from jos_categories where id=".$evDetails['catid']) or die(mysql_error());
-				$ev_cat 		= mysql_fetch_object($event_category);
+				$ev_cat 		= $objEvent->cat_from_id($evDetails['catid']);
 				$categoryname[] = $ev_cat->title;
 
 				# Fetch Event detail from "event detail" table
-				$queryvevdetail = "select *  from jos_jevents_vevdetail where evdet_id=".$row['eventdetail_id'];
-				$recvevdetail	= mysql_query($queryvevdetail) or die(mysql_error());
-				$rowvevdetail 	= mysql_fetch_array($recvevdetail);
+				$rowvevdetail = $objEvent->evdetail_from_id($row['eventdetail_id']);
 
 				# Fetch event location detail from "location" table
 				if((int) ($rowvevdetail['location'])){
-					$querylocdetail="select *  from jos_jev_locations where loc_id=".$rowvevdetail['location'];
-					$reclocdetail = mysql_query($querylocdetail) or die(mysql_error());
-					$rowlocdetail = mysql_fetch_array($reclocdetail);
-					$lat2 = $rowlocdetail["geolat"];
-					$lon2 = $rowlocdetail["geolon"];
+					$rowlocdetail	= $objEvent->location_from_id($rowvevdetail['location']);
+					$lat2			= $rowlocdetail["geolat"];
+					$lon2			= $rowlocdetail["geolon"];
 				}
 
 				// Coded By Akash
 				$displayTime2 = '';
 				if($time_format == "12"){
 					if($row['timestart']=='12:00 AM' && $row['timeend']=='11:59 PM'){   
-						$displayTime2.='All Day Event';
+						$displayTime2.=JText::_('EV_ALL_DAY');
 					}else{
 						$displayTime2.= $row['timestart'];
 						if($row['timeend'] != '11:59 PM' ){
@@ -162,7 +168,7 @@ if(stripos($ua,'android') == true){ ?>
 					$stime = date("H:i", strtotime($row['timestart']));
 					$etime = date("H:i", strtotime($row['timeend']));
 					if($stime == '00:00' && $etime == '23:59'){   
-						$displayTime2.='All Day Event';
+						$displayTime2.=JText::_('EV_ALL_DAY');
 					}else{
 						$displayTime2.= $stime;
 						if($etime!='23:59' ){
@@ -181,13 +187,13 @@ if(stripos($ua,'android') == true){ ?>
 						echo $categoryname[$n]; ?>
 						<ul class="btnList">
 							<li>
-								<a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>">call</a>
+								<a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo JText::_('CALL'); ?></a>
 							</li>
 							<?php
 							$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 								if(stripos($ua,'android') != true){ ?>
 									<li>
-										<a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">check in</a>
+										<a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')"><?php echo JText::_('CHECK_IN'); ?></a>
 									</li>
 								<?php }
 							
@@ -203,7 +209,7 @@ if(stripos($ua,'android') == true){ ?>
 							}?>
 								
 							<li>
-								<a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">more info</a>
+								<a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><?php echo JText::_('MORE_INFO'); ?></a>
 							</li>
 						</ul>
 					</h3> 
@@ -224,16 +230,20 @@ if(stripos($ua,'android') == true){ ?>
 				unset($categoryname);
 				$n = 0;
 				
-				$disp_date = date('l, j M', mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear));
+				if($lan == "English (United Kingdom)"){
+					$disp_date = date('l, j M', mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear));
+				}else{
+					$disp_date =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear))));	
+				}	
+				
 				if($x == 1){
 					echo "<h1 id='datezig'>$disp_date</h1>";
 				}else{
 					echo "<h1 id='datezig'>$disp_date</h1>";
 				}
 				
-				# Event fetch query for given date	
-				$ev_query_filter = "SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat >= '".$ev_toyear."-".$ev_tomonth."-".$ev_today." 00:00:00' AND rpt.startrepeat <= '".$ev_toyear."-".$ev_tomonth."-".$ev_today." 23:59:59' AND ev.state=1 AND rpt.endrepeat>='".date('Y',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('m',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('d', mktime($totalHours, $totalMinutes, $totalSeconds))." 00:00:00' AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$ev_toyear." and MONTH(rpt.startrepeat )=".$ev_tomonth." and DAYOFMONTH(rpt.startrepeat )=".$ev_today.") or freq<>'WEEKLY')GROUP BY rpt.rp_id";	
-				$ev_rec_filter = mysql_query($ev_query_filter);
+				# Function to fetch Event for given date
+				$ev_rec_filter 	= $objEvent->fetch_ev_for_given_date($arrstrcat,$ev_toyear,$ev_tomonth,$ev_today,$totalHours,$totalMinutes,$totalSeconds);
 				mysql_set_charset("UTF8");
 				
 				while($ev_row_filter = mysql_fetch_array($ev_rec_filter)){
@@ -246,30 +256,24 @@ if(stripos($ua,'android') == true){ ?>
 					$ev_strchk	= 0;
 				}	
 				
-				$ev_query = "select *,DATE_FORMAT(`startrepeat`,'%h:%i %p') as timestart, DATE_FORMAT(`endrepeat`,'%h:%i %p') as timeend from jos_jevents_repetition where rp_id in ($ev_strchk) ORDER BY `startrepeat` ASC ";
-				$ev_rec = mysql_query($ev_query) or die(mysql_error());
+				# Function to fetch Event from Repeat Id
+				$ev_rec	= $objEvent->select_events_from_rpid($ev_strchk);
 				
 				while($row = mysql_fetch_array($ev_rec)){
-					# Fetch event data from "event" table
-					$ev			= mysql_query("select *  from jos_jevents_vevent where ev_id=".$row['eventid']) or die(mysql_error());
-					$evDetails 	= mysql_fetch_array($ev);
+					# Fetch Event detail from "event detail" table
+					$evDetails	= $objEvent->ev_from_id($row['eventid']);
 					$evrawdata 	= unserialize($evDetails['rawdata']);
 
 					# Fetch category name of the event from "category" table
-					$event_category	= mysql_query("select title  from jos_categories where id=".$evDetails['catid']) or die(mysql_error());
-					$ev_cat 		= mysql_fetch_object($event_category);
+					$ev_cat = $objEvent->cat_from_id($evDetails['catid']);
 					$categoryname[] = $ev_cat->title;
 
 					# Fetch Event detail from "event detail" table
-					$queryvevdetail = "select *  from jos_jevents_vevdetail where evdet_id=".$row['eventdetail_id'];
-					$recvevdetail	= mysql_query($queryvevdetail) or die(mysql_error());
-					$rowvevdetail 	= mysql_fetch_array($recvevdetail);
-
+					$rowvevdetail = $objEvent->evdetail_from_id($row['eventdetail_id']);
+						
 					# Fetch event location detail from "location" table
 					if ((int) ($rowvevdetail['location'])){
-						$querylocdetail="select *  from jos_jev_locations where loc_id=".$rowvevdetail['location'];
-						$reclocdetail = mysql_query($querylocdetail) or die(mysql_error());
-						$rowlocdetail = mysql_fetch_array($reclocdetail);
+						$rowlocdetail = $objEvent->location_from_id($rowvevdetail['location']);
 						$lat2 = $rowlocdetail["geolat"];
 						$lon2 = $rowlocdetail["geolon"];
 					}
@@ -278,7 +282,7 @@ if(stripos($ua,'android') == true){ ?>
 					$displayTime2 = '';
 					if($time_format == "12"){
 						if($row['timestart']=='12:00 AM' && $row['timeend']=='11:59 PM'){   
-							$displayTime2.='All Day Event';
+							$displayTime2.=JText::_('EV_ALL_DAY');
 						}else{
 							$displayTime2.= $row['timestart'];
 							if($row['timeend'] != '11:59 PM' ){
@@ -289,7 +293,7 @@ if(stripos($ua,'android') == true){ ?>
 						$stime = date("H:i", strtotime($row['timestart']));
 						$etime = date("H:i", strtotime($row['timeend']));
 						if($stime == '00:00' && $etime == '23:59'){   
-							$displayTime2.='All Day Event';
+							$displayTime2.=JText::_('EV_ALL_DAY');
 						}else{
 							$displayTime2.= $stime;
 							if($etime!='23:59' ){
@@ -341,7 +345,7 @@ if(stripos($ua,'android') == true){ ?>
 </div>
 
 <div style='display:none;'>
-	<?php echo $pageglobal['googgle_map_api_keys']; ?>
+	<?php echo $pageglobal['google_map_api_keys']; ?>
 </div>
 
 <!-- scripts for sliders -->
