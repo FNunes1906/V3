@@ -79,7 +79,7 @@ header('Content-Type:text/html;charset=utf-8');
 			}
 		</script>
 		<!-- AddThisEvent Settings -->
-		<!--<script src="javascript/libs/ical.js"></script>-->
+		<script src="javascript/libs/ical.js"></script>
 
 		<?php
 		$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
@@ -104,7 +104,8 @@ header('Content-Type:text/html;charset=utf-8');
 						},
 						ical	:
 						{
-							show:false, text:"Add to iCal"
+							show:false, text:"<?php echo JText::_('TW_ADDTO'); ?>"
+							
 						},
 						hotmail	:
 						{
@@ -134,7 +135,7 @@ header('Content-Type:text/html;charset=utf-8');
 						},
 						ical	:
 						{
-							show:true,  text:"Add to iCal"
+							show:true,  text:"<?php echo JText::_('TW_ADDTO'); ?>"
 						},
 						hotmail	:
 						{

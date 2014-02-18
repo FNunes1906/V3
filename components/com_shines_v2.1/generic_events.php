@@ -9,9 +9,10 @@ session_start();
 include("connection.php");
 include("iadbanner.php");
 
-if(!isset($_SESSION['generic_category']) && $_SESSION['generic_category'] == NULL){
+/*if(!isset($_SESSION['generic_category']) && $_SESSION['generic_category'] == NULL){
 	$_SESSION['generic_category'] = $_REQUEST['category_id'];
 }
+*/
 
 if($_SESSION['tpl_folder_name'] == "defaultspanish"){
 	$final_lang = "es";
@@ -176,8 +177,8 @@ $LD = Date('d', strtotime("+30 days"));
 $LM = Date('m', strtotime("+30 days"));
 $LY = Date('y', strtotime("+30 days"));
 	
-if(isset($_SESSION['generic_category'])){	
-	$query_featuredeve	= "SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%h:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%h:%i %p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE (cat.id=".$_SESSION['generic_category']." OR cat.parent_id=".$_SESSION['generic_category'].") and cat.access <= 2 AND cat.published = 1 AND cat.section = 'com_jevents' AND rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND cf.value = 1 AND rpt.endrepeat >= '".$featureyear."-".$featuremonth."-".$featureday." 00:00:00' AND rpt.startrepeat <= '".$LY."-".$LM."-".$LD." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";	
+if(isset($_REQUEST['category_id'])){	
+	$query_featuredeve	= "SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%h:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%h:%i %p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE (cat.id=".$_REQUEST['category_id']." OR cat.parent_id=".$_REQUEST['category_id'].") and cat.access <= 2 AND cat.published = 1 AND cat.section = 'com_jevents' AND rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND cf.value = 1 AND rpt.endrepeat >= '".$featureyear."-".$featuremonth."-".$featureday." 00:00:00' AND rpt.startrepeat <= '".$LY."-".$LM."-".$LD." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";	
 	}
 
 if(isset($query_featuredeve))
@@ -321,7 +322,9 @@ header('Content-Type:text/html;charset=utf-8');
 		<!--Code for event Category drop down - Yogi START -->
 		<script type="text/javascript">
 		function redirecturlcat(val){
-				url = "<?php echo $_SERVER['PHP_SELF']; ?>?category_id="+val;
+				var mastercat;
+				mastercat = <?php echo $_REQUEST['category_id'];?>;
+				url = "<?php echo $_SERVER['PHP_SELF']; ?>?category_id="+mastercat+"&subcat_id="+val;
 				window.location = url;
 		}
 		</script>

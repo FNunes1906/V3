@@ -117,7 +117,7 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 				<?php 
 				$replace = array("#","&");
 				$new_lc_street = str_replace($replace, "", $lc_street);?>
-				<a href="https://maps.google.com/maps?q=<?php echo $new_lc_street ?>+<?php echo $lc_city ?>+<?php echo $lc_state ?>+<?php echo $lc_country ?>+<?php echo $lc_postcode ?>&hl=<?php echo $lan1;?>&z=<?php echo $lc_geozoom;?>" target="_blank"><?php echo $lc_title;?><br/><?php echo $lc_street;?><br/><?php echo $lc_city.' '.$lc_state.', '.$lc_postcode;?></a>
+				<a href="https://maps.google.com/maps?q=<?php echo $new_lc_street ?>+<?php echo $lc_city ?>+<?php echo $lc_state ?>+<?php echo $lc_country ?>+<?php echo $lc_postcode ?>&hl=<?php echo $map_lang;?>&z=<?php echo $lc_geozoom;?>" target="_blank"><?php echo $lc_title;?><br/><?php echo $lc_street;?><br/><?php echo $lc_city.' '.$lc_state.', '.$lc_postcode;?></a>
 			</div>
 			<div style="margin-bottom: 10px;">
 				<?php 

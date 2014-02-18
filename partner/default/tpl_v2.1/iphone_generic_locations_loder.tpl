@@ -210,7 +210,7 @@ else {
 									url: "generic_locations_loder_ajax.php?ajaxquery1=<?php echo $ajaxquery1?>&ajaxquery2=<?php echo $ajaxquery2?>&lat1=<?php echo $lat1?>&lon1=<?php echo $lon1?>&dunit=<?php echo $dunit?>&entries_per_page=<?php echo $entries_per_page?>&lpage="+lpage ,
 									success: function(html) {
 										if(html){  
-											$('#placesList').append('<div id="loadMoreComments"> <center><b>Loading</b></center></div>');
+											$('#placesList').append('<div id="loadMoreComments"> <center><b><?php echo JText::_("LOADING");?></b></center></div>');
 											$("#placesList").append(html);
 											$('div#loadMoreComments').fadeOut(300);
 										}else{

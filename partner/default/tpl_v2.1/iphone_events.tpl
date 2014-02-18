@@ -311,11 +311,11 @@ if(stripos($ua,'android') == true){ ?>
 							echo $displayTime2.' &bull; ';
 							echo $categoryname[$n]; ?>
 							<ul class="btnList">
-								<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>">call</a</li>
+								<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo JText::_('CALL'); ?></a</li>
 								<?php
 								$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 									if(stripos($ua,'android') != true) { ?>
-										<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')">check in</a></li>
+										<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')"><?php echo JText::_('CHECK_IN')?></a></li>
 									<?php }
 								
 								# Code for Moreinfo link Date
@@ -329,7 +329,7 @@ if(stripos($ua,'android') == true){ ?>
 									$dateValue = explode('-',$dateValue[0]);
 								}?>	
 								<li>
-									<a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">more info</a>
+									<a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><?php echo JText::_('MORE_INFO')?></a>
 								</li>
 							</ul>
 						</h3> 

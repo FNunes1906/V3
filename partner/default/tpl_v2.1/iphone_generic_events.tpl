@@ -99,13 +99,14 @@
 	<!--Code for Event Category drop down Yogi Start -->
 		<form id="event_cat_form" class="cls_event_cat_form" autocomplete="off">
 			<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
-				<option value="<?php echo $_SESSION['generic_category'];?>"><?php echo strtoupper("Categories");?></option>
+				<option value="<?php echo $_REQUEST['category_id'];?>"><?php echo strtoupper("Categories");?></option>
 				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
 					<option value="<?php echo $row_cat['id'];?>"<?php if(isset($cat_id) && $row_cat['id'] == $cat_id) echo "selected='selected'";?>>
 						<?php echo strtoupper($row_cat['name']);?>
 					</option>
 				<?php }?>
 			</select>
+			<input type="hidden" name="maincat" value="<?php echo $_REQUEST['category_id'];?>"/>
 		</form>
 	<!--Code for Event Category drop down Yogi End -->	
 </div>
@@ -119,8 +120,8 @@ Developer:Rinkal
 Last update Date:23-09-2013
 */
 	
-if(isset($_SESSION['generic_category']) && $_SESSION['generic_category'] != ''){
-	$res = mysql_query("select id,title from jos_categories where id=".$_SESSION['generic_category']." AND published = 1 AND section = 'com_jevents'");
+if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
+	$res = mysql_query("select id,title from jos_categories where id=".$_REQUEST['category_id']." AND published = 1 AND section = 'com_jevents'");
 	$bann_cat_name = mysql_fetch_row($res);
 
 	$id = $bann_cat_name[0];

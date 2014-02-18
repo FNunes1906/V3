@@ -4,19 +4,17 @@
 $lang =& JFactory::getLanguage();
 $lan = $lang->getName();
 if($lan=="Español"){
- $lan1="es";
-}
-else if($lan=="Croatian(HR)"){
- $lan1="hr";
-}
-else if($lan=="Nederlands - nl-NL"){
- $lan1="nl";
-}
-else if($lan=="Português (Brasil)"){
- $lan1="pt";
-}
-else{
- $lan1="en";
+	$lan1="es";
+}else if($lan=="Croatian(HR)"){
+	$lan1="hr";
+}else if($lan=="Nederlands - nl-NL"){
+	$lan1="nl";
+}else if($lan=="Português (Brasil)"){
+	$lan1="pt";
+}else if($lan=="French (Fr)"){
+	$lan1="fr";
+}else{
+	$lan1="en";
 }
 /* code ended by rinkal for map in all language */
 ?>

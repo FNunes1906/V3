@@ -44,27 +44,48 @@
 			?>
 			</p>
 			<p><strong><?php echo JText::_('LOCATION'); ?>:</strong> <?php echo $rowlocdetail['title'];?></p>
-			<p><strong><?php echo JText::_('ADDRESS'); ?>:</strong> <a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" ><?php echo $rowlocdetail['street'];?></a></p>
-			<p><strong><?php echo JText::_('PHONE'); ?>:</strong> <a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo $rowlocdetail['phone'];?></a></p>
-			<p><strong><?php echo JText::_('DISTANCE'); ?>:</strong> <?php echo round(distance(($_SESSION['lat_device1']), ($_SESSION['lon_device1']), $lat2, $lon2,$dunit),'1')?>&nbsp;<?php echo $dunit;?></p>
-			<?php if(trim($rowlocdetail['url']) != '') { ?>
-			<p><strong><?php echo JText::_('WEBSITE'); ?>:</strong> <a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" target="_blank"><?php echo str_replace('http://','',$rowlocdetail['url']); ?></a></p>
-				<?php } ?>
-			<p><strong><?php echo JText::_('DISCRIPTION'); ?>:</strong> <?php echo $rowvevdetail['description'];?></p>
-			<!-- code for ical calendar start-->
-			<?php 	$cal_date=date('m-d-Y', mktime(0, 0, 0, $tomonth, $today, $toyear)); ?>						<div class="addthisevent">
-						<?php if($displayTime=='All Day Event'){ ?> 
-					 	<span class="_all_day_event">true</span>
-					   	<?php } ?>
-					 	<span class="_start"><?php echo $cal_date.' '.$row['timestart'] ?></span>
-			    			<span class="_end"><?php echo $cal_date.' '.$row['timeend'] ?></span> 
-					  	<span class="_summary">Jazz's Fest</span>
-					   	<span class="_description"><?php echo $rowvevdetail['description'];?></span>
-					    	<span class="_location"><?php echo $rowlocdetail['title'];?></span>
-					  	<span class="_date_format">MM/DD/YYYY</span>
-					</div>
-			<!-- code for ical calendar end-->
-			<?php }?>
-		</li>
-	</ul>
+   <p><strong><?php echo JText::_('ADDRESS'); ?>:</strong><?php echo $rowlocdetail['street'];?></p>
+<!--   <p><strong><?php echo JText::_('PHONE'); ?>:</strong> <a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo $rowlocdetail['phone'];?></a></p>-->
+   <p><strong><?php echo JText::_('DISTANCE'); ?>:</strong> <?php echo round(distance(($_SESSION['lat_device1']), ($_SESSION['lon_device1']), $lat2, $lon2,$dunit),'1')?>&nbsp;<?php echo $dunit;?></p>
+<!--   <?php if(trim($rowlocdetail['url']) != '') { ?>
+   <p><strong><?php echo JText::_('WEBSITE'); ?>:</strong> <a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" target="_blank"><?php echo str_replace('http://','',$rowlocdetail['url']); ?></a></p>
+    <?php } ?>-->
+   <p><strong><?php echo JText::_('DISCRIPTION'); ?>:</strong> <?php echo $rowvevdetail['description'];?></p>
+ 
+   
+   <ul class="btnList">
+    <li><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>" class="button small"><?php echo $rowlocdetail['phone'];?></a></li>
+    <li><a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" class="button small"><?php echo JText::_('WEBSITE'); ?></a></li>
+    <li><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" class="button small"><?php echo JText::_('TW_MAP'); ?></a></li>
+    <li>
+     <a href="#" class="button small">
+     
+    <!-- code for ical calendar start-->
+    <?php  $cal_date=date('m-d-Y', mktime(0, 0, 0, $tomonth, $today, $toyear)); ?>      
+     <div class="addthisevent">
+      <?php if($displayTime=='All Day Event'){ ?> 
+       <span class="_all_day_event">true</span>
+         <?php } ?>
+       <span class="_start"><?php echo $cal_date.' '.$row['timestart'] ?></span>
+          <span class="_end"><?php echo $cal_date.' '.$row['timeend'] ?></span> 
+        <span class="_summary"><?php echo $rowvevdetail['summary'];?></span>
+         <span class="_description"><?php echo $rowvevdetail['description'];?></span>
+          <span class="_location"><?php echo $rowlocdetail['title'];?></span>
+        <span class="_date_format">MM/DD/YYYY</span>
+     </div>
+   <!-- code for ical calendar end--> 
+     </a>
+    </li>
+    <li><a href="javascript:linkClicked('APP30A:FBCHECKIN:34.13828278:-118.35331726')" class="button small"><?php echo JText::_('CHECK_IN');?></a></li>
+    <li><a href="http://www.addthis.com/bookmark.php?v=300&amp;pubid=xa-530314602dbf0b6a" class="button small addthis_button"><?php echo JText::_('TW_SHARE');?></a></li>
+   </ul>
+   <?php }?>
+  </li>
+
+ </ul>
+
 </div>
+
+<!-- AddThis Button BEGIN -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-530314602dbf0b6a"></script>
+<!-- AddThis Button END -->
