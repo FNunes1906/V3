@@ -18,7 +18,7 @@ if($lan == "Español")					{$final_lang = "es"; 	$page_title = 'Eventos';     se
 elseif($lan == "Croatian(HR)")			{$final_lang = "cr";	$page_title = 'Događanja';   setlocale(LC_TIME,"croatian");}
 elseif($lan == "Nederlands - nl-NL")	{$final_lang = "de";	$page_title = 'Evenementen'; setlocale(LC_TIME,"dutch");}
 elseif($lan == "Português (Brasil)")	{$final_lang = "pt-PT";	$page_title = 'Eventos';     setlocale(LC_TIME,"portuguese");}
-elseif($lan == "French (Fr)")			{$final_lang = "fr";	$page_title = 'évènements';  setlocale(LC_TIME,"French");}
+elseif($lan == "French (Fr)")			{$final_lang = "fr";	$page_title = 'évènements';  setlocale(LC_TIME,"french");}
 else									{$final_lang = "";		$page_title = 'Events';}
 
 // Function for distance calculation

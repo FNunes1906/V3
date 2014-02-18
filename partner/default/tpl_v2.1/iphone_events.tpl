@@ -121,11 +121,11 @@ if(stripos($ua,'android') == true){ ?>
 	}else{
 		if($todaestring != null){
 			$todaestring =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));
-			echo "<h1>$todaestring</h1>";
+			echo "<h1>$todaestring";?><?php echo "</h1>";
 		}elseif($seachStartFullDate == $searchEndFullDate){
 			$seachStartDate =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear))));
 			$searchEndDate  =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));	
-			echo "<h1>$seachStartDate</h1>";
+			echo "<h1>$seachStartDate";?><?php echo "</h1>";
 		}
 	}?>
 

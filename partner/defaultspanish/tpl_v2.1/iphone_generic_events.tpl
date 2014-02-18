@@ -99,7 +99,7 @@ setlocale(LC_TIME,"spanish");
 	<!--Code for Event Category drop down Yogi Start -->
 		<form id="event_cat_form" class="cls_event_cat_form" autocomplete="off">
 			<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
-				<option value="<?php echo $_SESSION['generic_category'];?>"><?php echo strtoupper("Categorías");?></option>
+				<option value="<?php echo $_REQUEST['category_id'];?>"><?php echo strtoupper("Categorías");?></option>
 				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
 					<option value="<?php echo $row_cat['id'];?>"<?php if(isset($cat_id) && $row_cat['id'] == $cat_id) echo "selected='selected'";?>>
 						<?php echo strtoupper($row_cat['name']);?>
@@ -119,22 +119,24 @@ Developer:Rinkal
 Last update Date:23-09-2013
 */
 	
-$res = mysql_query("select id,title from jos_categories where id=".$_SESSION['generic_category']." AND published = 1 AND section = 'com_jevents'");
-$bann_cat_name = mysql_fetch_row($res);
+if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
+	$res = mysql_query("select id,title from jos_categories where id=".$_REQUEST['category_id']." AND published = 1 AND section = 'com_jevents'");
+	$bann_cat_name = mysql_fetch_row($res);
 
-$id = $bann_cat_name[0];
-$banner_cat_name = $bann_cat_name[1];
-$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+	$id = $bann_cat_name[0];
+	$banner_cat_name = $bann_cat_name[1];
+	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 
-if(stripos($ua,'android') == True) { ?>
-	<div class="iphoneads" style="vertical-align:bottom;">
-		<?php m_show_banner('android-'.$banner_cat_name.'-screen'); ?>
-	</div>
-	<?php }else {?>
-	<div class="iphoneads" style="vertical-align:bottom;">
-		<?php m_show_banner('iphone-'.$banner_cat_name.'-screen');?>
-	</div>
-	<?php } ?>
+	if(stripos($ua,'android') == True) { ?>
+		<div class="iphoneads" style="vertical-align:bottom;">
+			<?php m_show_banner('android-'.$banner_cat_name.'-screen'); ?>
+		</div>
+		<?php }else {?>
+		<div class="iphoneads" style="vertical-align:bottom;">
+			<?php m_show_banner('iphone-'.$banner_cat_name.'-screen');?>
+		</div>
+		<?php }
+}?>	
 <!--Code End -->
 
 

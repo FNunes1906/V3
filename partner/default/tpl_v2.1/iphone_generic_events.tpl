@@ -106,7 +106,6 @@
 					</option>
 				<?php }?>
 			</select>
-			<input type="hidden" name="maincat" value="<?php echo $_REQUEST['category_id'];?>"/>
 		</form>
 	<!--Code for Event Category drop down Yogi End -->	
 </div>
