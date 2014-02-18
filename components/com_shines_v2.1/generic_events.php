@@ -8,7 +8,6 @@ if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')){
 session_start();
 include("connection.php");
 include("iadbanner.php");
-
 /*if(!isset($_SESSION['generic_category']) && $_SESSION['generic_category'] == NULL){
 	$_SESSION['generic_category'] = $_REQUEST['category_id'];
 }
@@ -65,28 +64,25 @@ $totalMinutes		= date("i") + $timeZoneArray[1];
 $totalSeconds		= date("s") + $timeZoneArray[2];
 
 if (isset($_REQUEST['d']) == ""){
-	$featureday 	= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+	$featureday = date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
 	$today 		= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
-	$fromDay 		= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
+	$fromDay 	= date('d', mktime($totalHours, $totalMinutes, $totalSeconds));
 }
-
 if (isset($_REQUEST['m']) == ""){
-	$featuremonth= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
+	$featuremonth	= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
 	$tomonth 		= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
-	$fromMonth	= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
+	$fromMonth		= date('m',mktime($totalHours, $totalMinutes, $totalSeconds));
 }
-
 if (isset($_REQUEST['Y']) == ""){
 	$featureyear	= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
 	$toyear 		= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
-	$fromYear 	= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
+	$fromYear 		= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
 }
 
-//#DD#
 if(isset($_REQUEST['eventdate']))
-$_REQUEST['eventdate'] = trim($_REQUEST['eventdate']);
-// If date is select from datepicker then assign below date variable
+	$_REQUEST['eventdate'] = trim($_REQUEST['eventdate']);
 
+// If date is select from datepicker then assign below date variable
 $todaestring = '';
 
 if(!empty($_REQUEST['eventdate'])){
@@ -115,21 +111,24 @@ if(!empty($_REQUEST['eventdate'])){
 		$searchEndDate		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
 	}
 }
-//#DD#
-
 
 /*//Query to fetch ID of all categories created in Jevents from category table
 $query_cat = "SELECT c.id FROM jos_categories AS c LEFT JOIN jos_categories AS p ON p.id=c.parent_id LEFT JOIN jos_categories AS gp ON gp.id=p.parent_id LEFT JOIN jos_categories AS ggp ON ggp.id=gp.parent_id WHERE c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents'";
 */
+
 // checking cat id is set or not 
 if(isset($_REQUEST['category_id'])){
-	$cat_id 	= $_REQUEST['category_id'];
-	$query_cat	= "SELECT c.id,c.name FROM jos_categories AS c WHERE (c.id=".$cat_id." OR parent_id=".$cat_id.") and c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents' ORDER BY c.name";
+	if(isset($_REQUEST['subcat_id']) && $_REQUEST['subcat_id'] != ''){
+		$cat_id 	= $_REQUEST['subcat_id'];
+		$query_cat	= "SELECT c.id,c.name FROM jos_categories AS c WHERE (c.id=".$cat_id." OR parent_id=".$cat_id.") and c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents' ORDER BY c.name";
+	}else{
+		$cat_id 	= $_REQUEST['category_id'];
+		$query_cat	= "SELECT c.id,c.name FROM jos_categories AS c WHERE (c.id=".$cat_id." OR parent_id=".$cat_id.") and c.access <= 2 AND c.published = 1 AND c.section = 'com_jevents' ORDER BY c.name";
+	}
 }
 mysql_set_charset("UTF8");
-$rec_cat 		= mysql_query($query_cat);
-$result_event_cat = mysql_query($query_cat);
-
+$rec_cat 			= mysql_query($query_cat);
+$result_event_cat	= mysql_query($query_cat);
 
 while($row_cat = mysql_fetch_array($rec_cat)){
 	# Creating Category array
@@ -324,8 +323,12 @@ header('Content-Type:text/html;charset=utf-8');
 		function redirecturlcat(val){
 				var mastercat;
 				mastercat = <?php echo $_REQUEST['category_id'];?>;
-				url = "<?php echo $_SERVER['PHP_SELF']; ?>?category_id="+mastercat+"&subcat_id="+val;
-				window.location = url;
+				if(val == mastercat){
+					url = "<?php echo $_SERVER['PHP_SELF']; ?>?category_id="+val;
+				}else{
+					url = "<?php echo $_SERVER['PHP_SELF']; ?>?category_id="+mastercat+"&subcat_id="+val;
+				}
+				window.location = url;	
 		}
 		</script>
 		<!--Code for event Category drop down - Yogi END -->
