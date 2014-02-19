@@ -31,23 +31,23 @@ if($lan=="Español"){
 	$map_lang="es";
 }
 else if($lan=="Croatian(HR)"){
-	setlocale(LC_TIME,"Croatian");
+	setlocale(LC_TIME,"croatian");
 	/*$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));*/
 	$ev_start_date= iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
 	$map_lang="hr";
 }
 else if($lan=="Nederlands - nl-NL"){
-	setlocale(LC_TIME,"Dutch");
+	setlocale(LC_TIME,"dutch");
 	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
 	$map_lang="nl";
 }
 else if($lan=="Português (Brasil)"){
-	setlocale(LC_TIME,"Portuguese");
+	setlocale(LC_TIME,"portuguese");
 	$ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
 	$map_lang="pt";
 }
 else if($lan=="French (Fr)"){
-	 setlocale(LC_TIME,"French");
+	 setlocale(LC_TIME,"french");
 	 $ev_start_date=UTF8_encode(ucwords(strftime ('%A, %b %d,%Y',strtotime($data->start_date))));
 	 $map_lang="fr";
 }else{

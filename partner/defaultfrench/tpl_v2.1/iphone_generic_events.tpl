@@ -1,4 +1,5 @@
-<?php setlocale(LC_TIME,"french"); ?>
+<?php
+setlocale(LC_TIME,"french"); ?>
 
 <div id="featuredEvents">
 	<div class="flexslider-container">

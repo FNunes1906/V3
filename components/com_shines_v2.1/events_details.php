@@ -302,7 +302,7 @@ header('Content-Type:text/html;charset=utf-8');
 				setlocale(LC_TIME,"portuguese");
 				$todaestring = iconv('ISO-8859-2','UTF-8',ucwords(strftime('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));
 			}else if($lan == "French (Fr)"){
-				 setlocale(LC_TIME,"French");
+				 setlocale(LC_TIME,"french");
 				 $todaestring = iconv('ISO-8859-2','UTF-8',ucwords(strftime('%a, %b %d',mktime(0, 0, 0, $tomonth, $today, $toyear))));
 			}
 		

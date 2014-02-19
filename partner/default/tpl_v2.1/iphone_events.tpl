@@ -177,7 +177,7 @@ if(stripos($ua,'android') == true){ ?>
 					}
 				}// End By Akash?>
 
-				<li>	
+				<li><a href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">	
 					<h1><?php echo $rowvevdetail['summary'];?></h1>
 					<h2><?php echo $rowlocdetail['title'];?></h2>
 					<h3>
@@ -212,7 +212,7 @@ if(stripos($ua,'android') == true){ ?>
 								<a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><?php echo JText::_('MORE_INFO'); ?></a>
 							</li>
 						</ul>
-					</h3> 
+					 <a href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><div style="width: 100%;line-height: 25px;">&nbsp;</div></a></h3></a>
 				</li>
 				<?php $displayTime2 = ""; $rowlocdetail['title']=""; ++$n; 
 			}

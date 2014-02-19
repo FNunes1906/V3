@@ -319,7 +319,7 @@ td { vertical-align: top; }
 		}
 		.section .button, .button.small{
 			display: block; text-align: center;
-			text-transform: uppercase; color: #fff;
+			text-transform: uppercase; color: #fff !important;
 			text-decoration: none; font-weight: bold;
 			padding: 14px 10px;
 			font-size: 14px; text-shadow: 1px 1px 1px rgba(0,0,0,.4);
@@ -805,3 +805,8 @@ line-height: 1;
 cursor: pointer;
 }
 
+#main ul.mainList a{
+   color: #222222;
+   text-decoration: none;
+   display: block;
+}
