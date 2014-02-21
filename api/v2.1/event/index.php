@@ -26,7 +26,7 @@ $banner_code =  m_show_banner('iphone-events-screen');
 
 
 /* All REQUEST paramter variable  */
-$catId		= isset($_GET['category_id']) ? $_GET['category_id']:'';
+$catId		= isset($_GET['category_id']) ? $_GET['category_id']:'34';
 $eventId	= isset($_GET['id']) ? $_GET['id']:'';
 $glat		= isset($_GET['latitude']) ? $_GET['latitude']:'';
 $glon		= isset($_GET['longitude']) ? $_GET['longitude']:'';
