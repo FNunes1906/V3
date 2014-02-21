@@ -28,7 +28,7 @@
 	
 ?>
 <h2 class="componentheading">
-	<?php $heading = $menuname.' '; $heading .= isset($parent)?$parent.' ':''; $heading .= "in ".$site_name[0]; echo $heading; ?>
+	<?php $heading = $menuname.' '; $heading .= isset($parent)?$parent.' ':''; $heading .= JText::_( 'IN' ).' '.$site_name[0]; echo $heading; ?>
 </h2>
 <form action="<?php echo JRoute::_("index.php?option=com_jevlocations&task=locations.locations&Itemid=$Itemid");?>" method="post" name="adminForm">
 

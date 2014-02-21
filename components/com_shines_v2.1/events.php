@@ -126,10 +126,12 @@ if(!isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == '' || $seachStart
 	mysql_set_charset("UTF8");
 	$arr_rr_id = $objEvent->select_rowfilter_rpid($rec_filter);
 
-	if(isset($arr_rr_id) && count($arr_rr_id)){
+	if(isset($arr_rr_id) && (count($arr_rr_id) > 0)){
 		$strchk = implode(',',$arr_rr_id);
 		$rec = $objEvent->select_events_from_rpid($strchk);
 		mysql_set_charset("UTF8");
+	}else{
+		$rec = NULL;
 	}	
 }
 

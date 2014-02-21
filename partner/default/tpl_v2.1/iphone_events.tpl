@@ -133,149 +133,25 @@ if(stripos($ua,'android') == true){ ?>
 		<?php 
 		$n = 0;
 		if((isset($seachStartDate) && $seachStartDate == $searchEndDate) || !isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == ''){
-			while($row = mysql_fetch_array($rec)){
-				
-				# Fetch event data from "event" table
-				$evDetails 	= $objEvent->ev_from_id($row['eventid']);
-				$evrawdata 	= unserialize($evDetails['rawdata']);
-
-				# Fetch category name of the event from "category" table
-				$ev_cat 		= $objEvent->cat_from_id($evDetails['catid']);
-				$categoryname[] = $ev_cat->title;
-
-				# Fetch Event detail from "event detail" table
-				$rowvevdetail = $objEvent->evdetail_from_id($row['eventdetail_id']);
-
-				# Fetch event location detail from "location" table
-				if((int) ($rowvevdetail['location'])){
-					$rowlocdetail	= $objEvent->location_from_id($rowvevdetail['location']);
-					$lat2			= $rowlocdetail["geolat"];
-					$lon2			= $rowlocdetail["geolon"];
-				}
-
-				// Coded By Akash
-				$displayTime2 = '';
-				if($time_format == "12"){
-					if($row['timestart']=='12:00 AM' && $row['timeend']=='11:59 PM'){   
-						$displayTime2.=JText::_('EV_ALL_DAY');
-					}else{
-						$displayTime2.= $row['timestart'];
-						if($row['timeend'] != '11:59 PM' ){
-							$displayTime2.="-".$row['timeend'];
-						}
-					}
-				}else{
-					$stime = date("H:i", strtotime($row['timestart']));
-					$etime = date("H:i", strtotime($row['timeend']));
-					if($stime == '00:00' && $etime == '23:59'){   
-						$displayTime2.=JText::_('EV_ALL_DAY');
-					}else{
-						$displayTime2.= $stime;
-						if($etime!='23:59' ){
-							$displayTime2.="-".$etime;
-						}
-					}
-				}// End By Akash?>
-
-				<li><a href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">	
-					<h1><?php echo $rowvevdetail['summary'];?></h1>
-					<h2><?php echo $rowlocdetail['title'];?></h2>
-					<h3>
-						<!--Code for 24 vs 12 hour time format for LISTING Yogi -->
-						<?php
-						echo $displayTime2.' &bull; ';
-						echo $categoryname[$n]; ?>
-						<ul class="btnList">
-							<li>
-								<a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo JText::_('CALL'); ?></a>
-							</li>
-							<?php
-							$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-								if(stripos($ua,'android') != true){ ?>
-									<li>
-										<a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')"><?php echo JText::_('CHECK_IN'); ?></a>
-									</li>
-								<?php }
-							
-							# Code for Moreinfo link Date
-							$e_start_rpt	= strstr($row['startrepeat']," ",true);
-							$e_end_rpt		= strstr($row['endrepeat']," ",true);
-							
-							if($e_start_rpt != $e_end_rpt){
-								$dateValue = explode('-',$single_day_date);
-							}else{
-								$dateValue = explode(' ',$row['startrepeat']);
-								$dateValue = explode('-',$dateValue[0]);
-							}?>
-								
-							<li>
-								<a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><?php echo JText::_('MORE_INFO'); ?></a>
-							</li>
-						</ul>
-					 <a href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><div style="width: 100%;line-height: 25px;">&nbsp;</div></a></h3></a>
-				</li>
-				<?php $displayTime2 = ""; $rowlocdetail['title']=""; ++$n; 
-			}
-		
-		# If search start and end date are different	
-		}else{
-			for($x=1;$ser_start_date <= $ser_end_date;$x++){
-				
-				$dateArray		= explode('-',$ser_start_date);
-				$ev_toyear		= $dateArray[0];
-				$ev_tomonth		= $dateArray[1];
-				$ev_today		= $dateArray[2];
-				
-				unset($ev_arr_rr_id);
-				unset($categoryname);
-				$n = 0;
-				
-				if($lan == "English (United Kingdom)"){
-					$disp_date = date('l, j M', mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear));
-				}else{
-					$disp_date =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear))));	
-				}	
-				
-				if($x == 1){
-					echo "<h1 id='datezig'>$disp_date</h1>";
-				}else{
-					echo "<h1 id='datezig'>$disp_date</h1>";
-				}
-				
-				# Function to fetch Event for given date
-				$ev_rec_filter 	= $objEvent->fetch_ev_for_given_date($arrstrcat,$ev_toyear,$ev_tomonth,$ev_today,$totalHours,$totalMinutes,$totalSeconds);
-				mysql_set_charset("UTF8");
-				
-				while($ev_row_filter = mysql_fetch_array($ev_rec_filter)){
-					$ev_arr_rr_id[] = $ev_row_filter['rp_id'];
-				}
-
-				if (count($ev_arr_rr_id)){
-					$ev_strchk	= implode(',',$ev_arr_rr_id);
-				}else{
-					$ev_strchk	= 0;
-				}	
-				
-				# Function to fetch Event from Repeat Id
-				$ev_rec	= $objEvent->select_events_from_rpid($ev_strchk);
-				
-				while($row = mysql_fetch_array($ev_rec)){
-					# Fetch Event detail from "event detail" table
-					$evDetails	= $objEvent->ev_from_id($row['eventid']);
+			if($rec != NULL){
+				while($row = mysql_fetch_array($rec)){
+					
+					# Fetch event data from "event" table
+					$evDetails 	= $objEvent->ev_from_id($row['eventid']);
 					$evrawdata 	= unserialize($evDetails['rawdata']);
 
 					# Fetch category name of the event from "category" table
-					$ev_cat = $objEvent->cat_from_id($evDetails['catid']);
+					$ev_cat 		= $objEvent->cat_from_id($evDetails['catid']);
 					$categoryname[] = $ev_cat->title;
 
 					# Fetch Event detail from "event detail" table
 					$rowvevdetail = $objEvent->evdetail_from_id($row['eventdetail_id']);
-						
+
 					# Fetch event location detail from "location" table
-					if ((int) ($rowvevdetail['location'])){
-						$rowlocdetail = $objEvent->location_from_id($rowvevdetail['location']);
-						$lat2 = $rowlocdetail["geolat"];
-						$lon2 = $rowlocdetail["geolon"];
+					if((int) ($rowvevdetail['location'])){
+						$rowlocdetail	= $objEvent->location_from_id($rowvevdetail['location']);
+						$lat2			= $rowlocdetail["geolat"];
+						$lon2			= $rowlocdetail["geolon"];
 					}
 
 					// Coded By Akash
@@ -300,22 +176,27 @@ if(stripos($ua,'android') == true){ ?>
 								$displayTime2.="-".$etime;
 							}
 						}
-					}// End By Akash	?>
+					}// End By Akash?>
 
-					<li>	
-						<h1><?php echo $rowvevdetail['summary'];?></h1>
-						<h2><?php echo $rowlocdetail['title'];?></h2>
+					<li class="block_link">
+						<a style="padding-bottom: 10px;" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">	
+							<h1><?php echo $rowvevdetail['summary'];?></h1>
+							<h2 style="padding: 3px 0px 7px;"><?php echo $rowlocdetail['title'];?></h2>
+							<?php echo $displayTime2.' &bull; ';echo $categoryname[$n]; ?>
+						</a>
 						<h3>
 							<!--Code for 24 vs 12 hour time format for LISTING Yogi -->
-							<?php
-							echo $displayTime2.' &bull; ';
-							echo $categoryname[$n]; ?>
+							
 							<ul class="btnList">
-								<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo JText::_('CALL'); ?></a</li>
+								<li>
+									<a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo JText::_('CALL'); ?></a>
+								</li>
 								<?php
 								$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-									if(stripos($ua,'android') != true) { ?>
-										<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')"><?php echo JText::_('CHECK_IN')?></a></li>
+									if(stripos($ua,'android') != true){ ?>
+										<li>
+											<a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')"><?php echo JText::_('CHECK_IN'); ?></a>
+										</li>
 									<?php }
 								
 								# Code for Moreinfo link Date
@@ -323,23 +204,153 @@ if(stripos($ua,'android') == true){ ?>
 								$e_end_rpt		= strstr($row['endrepeat']," ",true);
 								
 								if($e_start_rpt != $e_end_rpt){
-									$dateValue = explode('-',$ser_start_date);
+									$dateValue = explode('-',$single_day_date);
 								}else{
 									$dateValue = explode(' ',$row['startrepeat']);
 									$dateValue = explode('-',$dateValue[0]);
-								}?>	
+								}?>
+									
 								<li>
-									<a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><?php echo JText::_('MORE_INFO')?></a>
+									<a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><?php echo JText::_('MORE_INFO'); ?></a>
 								</li>
 							</ul>
-						</h3> 
+						 <a href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><div style="width: 100%;line-height: 28px;">&nbsp;</div></a></h3>
 					</li>
 					<?php $displayTime2 = ""; $rowlocdetail['title']=""; ++$n; 
-				} // End of while loop		
+				}
+			}else{?>
+				<li class="block_link">
+					<div style='text-align:center;font-weight:bold;'><br/><?php echo JText::_("LOC_RES");?></div>
+				</li>	
+		<?php }
+		
+		# If search start and end date are different	
+		}else{
+			for($x=1;$ser_start_date <= $ser_end_date;$x++){
+				
+				$dateArray		= explode('-',$ser_start_date);
+				$ev_toyear		= $dateArray[0];
+				$ev_tomonth		= $dateArray[1];
+				$ev_today		= $dateArray[2];
+				
+				unset($ev_arr_rr_id);
+				unset($categoryname);
+				$n = 0;
+				
+				if($lan == "English (United Kingdom)"){
+					$disp_date = date('l, j M', mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear));
+				}else{
+					$disp_date =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear))));	
+				}	
+				
+				# Function to fetch Event for given date
+				$ev_rec_filter 	= $objEvent->fetch_ev_for_given_date($arrstrcat,$ev_toyear,$ev_tomonth,$ev_today,$totalHours,$totalMinutes,$totalSeconds);
+				mysql_set_charset("UTF8");
+				
+				while($ev_row_filter = mysql_fetch_array($ev_rec_filter)){
+					$ev_arr_rr_id[] = $ev_row_filter['rp_id'];
+				}
+
+				if (count($ev_arr_rr_id)){
+					$ev_strchk	= implode(',',$ev_arr_rr_id);
+				}else{
+					$ev_strchk	= 0;
+				}	
+				
+				# Function to fetch Event from Repeat Id
+				$ev_rec	= $objEvent->select_events_from_rpid($ev_strchk);
+				
+				if(mysql_num_rows($ev_rec) > 0){
+					if($x == 1){
+						echo "<h1 id='datezig'>$disp_date</h1>";
+					}else{
+						echo "<h1 id='datezig'>$disp_date</h1>";
+					}
+					while($row = mysql_fetch_array($ev_rec)){
+						# Fetch Event detail from "event detail" table
+						$evDetails	= $objEvent->ev_from_id($row['eventid']);
+						$evrawdata 	= unserialize($evDetails['rawdata']);
+
+						# Fetch category name of the event from "category" table
+						$ev_cat = $objEvent->cat_from_id($evDetails['catid']);
+						$categoryname[] = $ev_cat->title;
+
+						# Fetch Event detail from "event detail" table
+						$rowvevdetail = $objEvent->evdetail_from_id($row['eventdetail_id']);
+							
+						# Fetch event location detail from "location" table
+						if ((int) ($rowvevdetail['location'])){
+							$rowlocdetail = $objEvent->location_from_id($rowvevdetail['location']);
+							$lat2 = $rowlocdetail["geolat"];
+							$lon2 = $rowlocdetail["geolon"];
+						}
+
+						// Coded By Akash
+						$displayTime2 = '';
+						if($time_format == "12"){
+							if($row['timestart']=='12:00 AM' && $row['timeend']=='11:59 PM'){   
+								$displayTime2.=JText::_('EV_ALL_DAY');
+							}else{
+								$displayTime2.= $row['timestart'];
+								if($row['timeend'] != '11:59 PM' ){
+									$displayTime2.="-".$row['timeend'];
+								}
+							}
+						}else{
+							$stime = date("H:i", strtotime($row['timestart']));
+							$etime = date("H:i", strtotime($row['timeend']));
+							if($stime == '00:00' && $etime == '23:59'){   
+								$displayTime2.=JText::_('EV_ALL_DAY');
+							}else{
+								$displayTime2.= $stime;
+								if($etime!='23:59' ){
+									$displayTime2.="-".$etime;
+								}
+							}
+						}// End By Akash	?>
+
+						<li class="block_link"><a style="padding-bottom: 10px;" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">	
+							<h1><?php echo $rowvevdetail['summary'];?></h1>
+							<h2 style="padding: 3px 0px 7px;"><?php echo $rowlocdetail['title'];?></h2>
+							<?php echo $displayTime2.' &bull; ';echo $categoryname[$n]; ?></a>
+							<h3>
+								<!--Code for 24 vs 12 hour time format for LISTING Yogi -->
+								<ul class="btnList">
+									<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo JText::_('CALL'); ?></a></li>
+									<?php
+									$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+										if(stripos($ua,'android') != true) { ?>
+											<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')"><?php echo JText::_('CHECK_IN')?></a></li>
+										<?php }
+									
+									# Code for Moreinfo link Date
+									$e_start_rpt	= strstr($row['startrepeat']," ",true);
+									$e_end_rpt		= strstr($row['endrepeat']," ",true);
+									
+									if($e_start_rpt != $e_end_rpt){
+										$dateValue = explode('-',$ser_start_date);
+									}else{
+										$dateValue = explode(' ',$row['startrepeat']);
+										$dateValue = explode('-',$dateValue[0]);
+									}?>	
+									<li>
+										<a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><?php echo JText::_('MORE_INFO')?></a>
+									</li>
+								</ul>
+							<a href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><div style="width: 100%;line-height: 28px;">&nbsp;</div></a></h3> 
+						</li>
+						<?php $displayTime2 = ""; $rowlocdetail['title']=""; ++$n; 
+					} // End of while loop		
+				} // End of IF condition
 				
 				# Date increment for loop , this will add +1 to each date loop	
 				$ser_start_date = date('Y-m-d', strtotime( "$ser_start_date + 1 day" ));
 			} // End of date for loop
+			if(mysql_num_rows($ev_rec) == 0):?>
+				<li class="block_link">
+					<div style='text-align:center;font-weight:bold;'><br/><?php echo JText::_("LOC_RES");?></div>
+				</li>
+			<?php endif;
 		}// End of IF Condition ?>
 	</ul>
 </div>

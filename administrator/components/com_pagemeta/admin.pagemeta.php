@@ -27,10 +27,11 @@ switch ($task) {
 
 function listmeta(){
 	$db	=& JFactory::getDBO();
+	
 	$query = "SELECT * FROM #__pagemeta";
 	$db->setQuery( $query );
-	$row = $db->loadAssocList();	
-		
+	$row = $db->loadAssocList();		
+	
 ?>
 <form method="post" action="" name="adminForm">
 <input type="hidden" name="task" value="" />
@@ -132,6 +133,10 @@ function globalseting(){
 	$query = "SELECT * FROM #__pageglobal";
 	$db->setQuery( $query );
 	$row = $db->loadAssoc();
+	
+	$query2 = "SELECT `id`,`name` FROM `jos_categories` WHERE section = 'com_jevents'";
+	$db->setQuery( $query2 );
+	$row2 = $db->loadAssocList();	
 ?>
 <form method="post" action="" name="adminForm">
 <input type="hidden" name="task" value="" />	
@@ -238,11 +243,21 @@ function globalseting(){
     <td width="80%"><input type="text" name="Header_color" class="inputbox" size="10" value="<?php echo $row['Header_color'];?>" /></td>
   </tr>
   <tr>
-	    <td width="20%" class="key"><label>Footer Menu Link:</label></td>
-	    <td width="80%"><input  style="vertical-align: top;" type="text" name="Footer_Menu_Link" class="inputbox" size="50" value="<?php echo $row['Footer_Menu_Link'];?>" />
-	   	<img src="../partner/<?php echo $_SESSION['partner_folder_name'];?>/images/edit_f2.png" height="18" title="Enter URL with http://, Example: http://www.townwizard.com" /> 
-	    </td>
-   
+	<td width="20%" class="key"><label>Footer Menu Link:</label></td>
+	<td width="80%"><input  style="vertical-align: top;" type="text" name="Footer_Menu_Link" class="inputbox" size="50" value="<?php echo $row['Footer_Menu_Link'];?>" />
+	<img src="../partner/<?php echo $_SESSION['partner_folder_name'];?>/images/edit_f2.png" height="18" title="Enter URL with http://, Example: http://www.townwizard.com" /> </td>
+  </tr>
+    <tr>
+	<td width="20%" class="key"><label>Homepage Slider Events Cat:</label></td>
+	<td width="80%"><!--<input type="text" name="homeslidercat" class="inputbox" size="50" value="<?php echo $row['homeslidercat'];?>" />-->
+	<?php // print_r($row2); ?>
+			<select size="1" class="inputbox" id="offset" name="homeslidercat">
+			<?php
+			foreach($row2 as $data){?>
+					 <option <?php echo ($data['id'] == $row['homeslidercat'])?"selected='selected'":''?> value="<?php echo $data['id'];?>"><?php echo $data['name'];?></option>
+			<?php }?>
+		</select>
+	</td>
   </tr>
   <tr>
     <td width="20%" class="key"><label>distance unit:</label></td>
@@ -310,6 +325,7 @@ function globalseting(){
       <?php } ?>
    </td>
   </tr>
+
   
 </table>
 </form>
@@ -337,7 +353,7 @@ function save(){
 	}
 	elseif(isset($_POST['global'])){
 		
-		$query = "UPDATE #__pageglobal SET site_name ='".$_POST['site_name']."', email ='".$_POST['email']."', googgle_map_api_keys ='".addslashes($_POST['googgle_map_api_keys'])."', location_code ='".$_POST['location_code']."', beach ='".$_POST['beach']."', photo_mini_slider_cat ='".$_POST['photo_mini_slider_cat']."', photo_upload_cat ='".$_POST['photo_upload_cat']."', facebook ='".$_POST['facebook']."', iphone ='".$_POST['iphone']."', android ='".$_POST['android']."', Header_color='".$_POST['Header_color']."',Footer_Menu_Link='".$_POST['Footer_Menu_Link']."', distance_unit ='".$_POST['dunit']."', weather_unit ='".$_POST['wunit']."', twitter ='".$_POST['twitter']."',date_format ='".$_POST['dformat']."',time_format ='".$_POST['tformat']."', youtube ='".$_POST['youtube']."',time_zone ='".$_POST['timezone']."' WHERE id='1'";
+		$query = "UPDATE #__pageglobal SET site_name ='".$_POST['site_name']."', email ='".$_POST['email']."', googgle_map_api_keys ='".addslashes($_POST['googgle_map_api_keys'])."', location_code ='".$_POST['location_code']."', beach ='".$_POST['beach']."', photo_mini_slider_cat ='".$_POST['photo_mini_slider_cat']."', photo_upload_cat ='".$_POST['photo_upload_cat']."', facebook ='".$_POST['facebook']."', iphone ='".$_POST['iphone']."', android ='".$_POST['android']."', Header_color='".$_POST['Header_color']."',Footer_Menu_Link='".$_POST['Footer_Menu_Link']."', distance_unit ='".$_POST['dunit']."', weather_unit ='".$_POST['wunit']."', twitter ='".$_POST['twitter']."',date_format ='".$_POST['dformat']."',time_format ='".$_POST['tformat']."', youtube ='".$_POST['youtube']."',time_zone ='".$_POST['timezone']."', homeslidercat ='".$_POST['homeslidercat']."' WHERE id='1'";
 		
 		$db->setQuery( $query );
 		
