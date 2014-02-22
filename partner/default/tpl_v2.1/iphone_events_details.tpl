@@ -64,10 +64,6 @@
 				<?php } ?>
 				
 				<li><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" class="button small"><?php echo JText::_('TW_MAP'); ?></a></li>
-				<?php
-					$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-					if(stripos($ua,'android') != True){
-				 ?>
 				<li>
 					<a href="#" class="button small">
 					
@@ -87,7 +83,6 @@
 			<!-- code for ical calendar end--> 
 					</a>
 				</li>
-				<?php } ?>
 				<li><a href="javascript:linkClicked('APP30A:FBCHECKIN:34.13828278:-118.35331726')" class="button small"><?php echo JText::_('CHECK_IN');?></a></li>
 				<li><a href="http://www.addthis.com/bookmark.php?v=300&amp;pubid=xa-530314602dbf0b6a" class="button small addthis_button"><?php echo JText::_('TW_SHARE');?></a></li>
 			</ul>

@@ -96,7 +96,7 @@ header('Content-Type:text/html;charset=utf-8');
 						},
 						google	:
 						{
-							show:true,  text:"Add to Gcal"
+							show:true,  text:"<?php echo JText::_('TW_ADDTO'); ?>"
 						},
 						yahoo	:
 						{
