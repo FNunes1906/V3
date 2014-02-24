@@ -217,7 +217,7 @@ if(stripos($ua,'android') == true){ ?>
 						 <a href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><div style="width: 100%;line-height: 28px;">&nbsp;</div></a></h3>
 					</li>
 					<?php $displayTime2 = ""; $rowlocdetail['title']=""; ++$n; 
-				}
+				}// end of while loop
 			}else{?>
 				<li class="block_link">
 					<div style='text-align:center;font-weight:bold;'><br/><?php echo JText::_("LOC_RES");?></div>

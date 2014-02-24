@@ -71,6 +71,13 @@ class event {
 		return $result;
 	}
 	
+	# Fetch Featured event for GENERIC EVENT PAGE
+	function select_featured_event_generic($cat_id,$featureyear,$featuremonth,$featureday,$LY,$LM,$LD){
+		$query = "SELECT rpt.rp_id, rpt.startrepeat,DATE_FORMAT(rpt.startrepeat,'%Y') as Eyear,DATE_FORMAT(rpt.startrepeat,'%m') as Emonth,DATE_FORMAT(rpt.startrepeat,'%d') as EDate,DATE_FORMAT(rpt.startrepeat,'%m/%d') as Date,DATE_FORMAT(rpt.startrepeat,'%h:%i %p') as timestart,DATE_FORMAT(rpt.endrepeat,'%h:%i %p') as timeend,rpt.endrepeat,ev.ev_id,evd.evdet_id, ev.catid,cat.title as category,evd.description, loc.title, evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd,jos_jev_locations as loc, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE (cat.id=".$cat_id." OR cat.parent_id=".$cat_id.") and cat.access <= 2 AND cat.published = 1 AND cat.section = 'com_jevents' AND rpt.eventid = ev.ev_id AND loc.loc_id = evd.location AND rpt.eventdetail_id = evd.evdet_id AND ev.catid = cat.id AND ev.state = 1 AND rpt.eventdetail_id = cf.evdet_id AND cf.value = 1 AND rpt.endrepeat >= '".$featureyear."-".$featuremonth."-".$featureday." 00:00:00' AND rpt.startrepeat <= '".$LY."-".$LM."-".$LD." 23:59:59' GROUP BY rpt.eventid,rpt.startrepeat ORDER BY rpt.startrepeat";
+		$result = mysql_query($query) or die(mysql_error());
+		return $result;
+	}
+	
 	function select_rowfilter_rpid($rec_filter){
 		while($row_filter = mysql_fetch_array($rec_filter)){
 			$arr_rr_id[] = $row_filter['rp_id'];
@@ -129,4 +136,14 @@ class event {
 		$rowlocdetail	= mysql_fetch_array($reclocdetail);
 		return $rowlocdetail;
 	}
+	
+	function select_category_info($catId){
+		$query				= "select id,title from jos_categories where id=".$catId." AND published = 1 AND section = 'com_jevents'";
+		$result_event_cat 	= mysql_query($query) or die(mysql_error());
+		$bann_cat_name 		= mysql_fetch_row($result_event_cat);
+		return $bann_cat_name;
+	}
+
+	
+	
 }	

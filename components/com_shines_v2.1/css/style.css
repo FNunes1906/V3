@@ -385,7 +385,7 @@ td { vertical-align: top; }
 			padding: 0px;
 		}
 		#main ul.mainList h2, #main ul.mainList h3{font-weight: normal; font-size: 1em;margin: 0px;}
-		#main ul.mainList h3{padding: 0 0 0;font-size: 12px;}
+		#main ul.mainList h3{padding: 10px 0 0;font-size: 12px;}
 		#main ul.mainList h3.hasRSVP{
 			float: left; height: 28px;padding-right: 24px;
 			background: url(../images/l/check.png) no-repeat right 9px;
@@ -412,7 +412,7 @@ td { vertical-align: top; }
 
 		/* ========= PLACES & RESTAURANTS STYLES ============= */
 		#main ul.mainList li{overflow: hidden;background: none !important;}	
-		#main ul.mainList ul.btnList {padding: 0px;margin: 0px}
+		#main ul.mainList ul.btnList {padding: 0px;}
 		#main ul.mainList ul.btnList li{
 			list-style: none; background: none; border: none; float: left; padding: 0 5px 0 0;
 		}
@@ -805,8 +805,32 @@ line-height: 1;
 cursor: pointer;
 }
 
-.block_link a{
+#main ul.mainList a{
    color: #222222;
    text-decoration: none;
    display: block;
 }
+
+
+/*NEW CSS FOR NEW BUTTONS IN EVENT DETAIL*/
+#main ul.mainList ul.btnList2 li{list-style: none; background: none; border: none; float: left; padding: 0 4px;width: 91px;}
+.button2.small2 {border-radius: 6px;border-width: 2px; font-size: 0.8em;padding: 6% 12%;}
+.section .button2, .button2.small2 {
+    background: linear-gradient(to bottom, #EDEDED 0%, #CBCBCB 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) inset, 2px 1px 1px #E8E8E8 inset;
+    color: #555555 !important;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+}
+ul.btnList2{
+    background: linear-gradient(to bottom, #F1F1F1 0%, #C9C9C9 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    overflow: hidden;padding: 0;margin: 0;
+}
+.setwidth{
+  padding: 0 4px !important;
+    width: 91px;
+}
+/*.setwidth a{
+	padding: 6% 12% !important;
+}*/

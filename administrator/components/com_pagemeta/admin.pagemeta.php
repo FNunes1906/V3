@@ -134,7 +134,7 @@ function globalseting(){
 	$db->setQuery( $query );
 	$row = $db->loadAssoc();
 	
-	$query2 = "SELECT `id`,`name` FROM `jos_categories` WHERE section = 'com_jevents'";
+	$query2 = "SELECT `id`,`name` FROM `jos_categories` WHERE section = 'com_jevents' AND published=1";
 	$db->setQuery( $query2 );
 	$row2 = $db->loadAssocList();	
 ?>

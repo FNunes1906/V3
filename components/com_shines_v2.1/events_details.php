@@ -5,7 +5,7 @@ session_start();
 
 include("connection.php");
 header( 'Content-Type:text/html;charset=utf-8');
-
+include("iadbanner.php");
 # Include event detail class file
 include("model/events_class.php");
 $objevdetail = new event();

@@ -1,8 +1,7 @@
 <?php
-if(substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')){	ob_start("ob_gzhandler");
-}else{ ob_start(); }
-
+if(substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')){	ob_start("ob_gzhandler");}else{ ob_start(); }
 session_start();
+
 include("connection.php");
 include("iadbanner.php");
 
@@ -45,15 +44,15 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != 0){
 // Assigning latitude value
 if(isset($_REQUEST['lat']) && $_REQUEST['lat'] != "" ){
 	$_SESSION['lat_device1'] = $_REQUEST['lat'];
-	$lat1					 = $_SESSION['lat_device1'];
+	$lat1 = $_SESSION['lat_device1'];
 }
 // Assigning longitude value
 if(isset($_REQUEST['lon']) && $_REQUEST['lon'] != "" ){
 	$_SESSION['lon_device1'] = $_REQUEST['lon'];
-	$lon1					 = $_SESSION['lon_device1'];
+	$lon1 = $_SESSION['lon_device1'];
 }
 
-// timezone value assigning to current Servertime Setting up Timezone time hour, minut and second varible
+# timezone value assigning to current Servertime Setting up Timezone time hour, minut and second varible
 $timeZoneArray	= explode(':',$timezone);
 $totalHours		= date("H") + $timeZoneArray[0];
 $totalMinutes	= date("i") + $timeZoneArray[1];
@@ -75,7 +74,7 @@ if(isset($_REQUEST['eventdate'])){
 	$_REQUEST['eventdate'] = trim($_REQUEST['eventdate']);	
 }
 
-// If date is select from datepicker then assign below date variable
+# If date is select from datepicker then assign below date variable
 $todaestring = '';
 
 if(!empty($_REQUEST['eventdate'])){
@@ -83,14 +82,12 @@ if(!empty($_REQUEST['eventdate'])){
 	$startDate = explode('-',$_REQUEST['eventdate']);
 
 	# Creating Daterange variable
-	$fromDay	= date('d',strtotime($startDate[0]));
-	$fromMonth	= date('m',strtotime($startDate[0]));
-	$fromYear	= date('Y',strtotime($startDate[0]));
-	
-	$today		= date('d',strtotime($startDate[1]));
-	$tomonth	= date('m',strtotime($startDate[1]));
-	$toyear		= date('Y',strtotime($startDate[1]));
-	
+	$fromDay			= date('d',strtotime($startDate[0]));
+	$fromMonth			= date('m',strtotime($startDate[0]));
+	$fromYear			= date('Y',strtotime($startDate[0]));
+	$today				= date('d',strtotime($startDate[1]));
+	$tomonth			= date('m',strtotime($startDate[1]));
+	$toyear				= date('Y',strtotime($startDate[1]));
 	$seachStartFullDate	=	$fromYear.'-'.$fromMonth.'-'.$fromDay;
 	$searchEndFullDate	=	$toyear.'-'.$tomonth.'-'.$today ;
 	$seachStartDate		=	date('l, j M', mktime(0, 0, 0, $fromMonth, $fromDay, $fromYear));
@@ -135,7 +132,7 @@ if(!isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == '' || $seachStart
 	}	
 }
 
-# Feature Event Query By Akash
+/* Feature Event Query By Akash */
 
 # Last Day of the Month
 $LD = Date('d', strtotime("+30 days"));

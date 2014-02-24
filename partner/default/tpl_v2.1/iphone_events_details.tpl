@@ -56,16 +56,32 @@
 			<ul class="btnList">
 			
 				<?php if(trim($rowlocdetail['phone']) != '') { ?>
-				<li><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>" class="button small"><?php echo $rowlocdetail['phone'];?></a></li>
+				<li class="setwidth"><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>" class="button small"><?php echo $rowlocdetail['phone'];?></a></li>
 				<?php } ?>
 				
 				<?php if(trim($rowlocdetail['url']) != '') { ?>
-				<li><a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" class="button small" target="_blank"><?php echo JText::_('WEBSITE'); ?></a></li>
+				<li class="setwidth"><a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" class="button small" target="_blank"><?php echo JText::_('WEBSITE'); ?></a></li>
 				<?php } ?>
 				
-				<li><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" class="button small"><?php echo JText::_('TW_MAP'); ?></a></li>
+				<li class="setwidth"><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" class="button small"><?php echo JText::_('TW_MAP'); ?></a></li>
+			</ul>
+				
+			<?php
+				$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+				if(stripos($ua,'android') == true){ ?>
+					<div class="iphoneads" style="vertical-align:bottom;">
+						<?php m_show_banner('android-events-screen'); ?>
+					</div>
+				<?php }else{?>
+					<div class="iphoneads" style="vertical-align:bottom;">
+					<?php m_show_banner('iphone-events-screen'); ?>
+					</div>
+			<?php } ?>
+
+			
+			<ul class="btnList2">
 				<li>
-					<a href="#" class="button small">
+					<a href="#" class="button2 small2">
 					
 				<!-- code for ical calendar start-->
 				<?php 	$cal_date=date('m-d-Y', mktime(0, 0, 0, $tomonth, $today, $toyear)); ?>						
@@ -83,15 +99,18 @@
 			<!-- code for ical calendar end--> 
 					</a>
 				</li>
-				<li><a href="javascript:linkClicked('APP30A:FBCHECKIN:34.13828278:-118.35331726')" class="button small"><?php echo JText::_('CHECK_IN');?></a></li>
-				<li><a href="http://www.addthis.com/bookmark.php?v=300&amp;pubid=xa-530314602dbf0b6a" class="button small addthis_button"><?php echo JText::_('TW_SHARE');?></a></li>
+				<li><a href="javascript:linkClicked('APP30A:FBCHECKIN:34.13828278:-118.35331726')" class="button2 small2"><?php echo JText::_('CHECK_IN');?></a></li>
+				<li><a href="http://www.addthis.com/bookmark.php?v=300&amp;pubid=xa-530314602dbf0b6a" class="button2 small2 addthis_button"><?php echo JText::_('TW_SHARE');?></a></li>
 			</ul>
+			
 			<?php }?>
+			
 		</li>
 
 	</ul>
 
 </div>
+
 
 <!-- AddThis Button BEGIN -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-530314602dbf0b6a"></script>
