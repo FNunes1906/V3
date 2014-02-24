@@ -103,6 +103,7 @@
 					</option>
 				<?php }?>
 			</select>
+			<input type="hidden" name="hdn_subcat_id" id="hdn_subcat_id" value="<?php echo $_REQUEST['subcat_id'];?>"/>
 		</form>
 	<!--Code for Event Category drop down Yogi End -->	
 </div>
@@ -152,27 +153,22 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
 			while($row = mysql_fetch_array($rec)){
 
 				# Fetch event data from "event" table
-				$ev			= mysql_query("select *  from jos_jevents_vevent where ev_id=".$row['eventid']) or die(mysql_error());
-				$evDetails 	= mysql_fetch_array($ev);
+				$evDetails 	= $objEvent->ev_from_id($row['eventid']);
 				$evrawdata 	= unserialize($evDetails['rawdata']);
 
 				# Fetch category name of the event from "category" table
-				$event_category	= mysql_query("select title  from jos_categories where id=".$evDetails['catid']) or die(mysql_error());
-				$ev_cat 		= mysql_fetch_object($event_category);
+				$ev_cat 		= $objEvent->cat_from_id($evDetails['catid']);
 				$categoryname[] = $ev_cat->title;
 
 				# Fetch Event detail from "event detail" table
-				$queryvevdetail = "select *  from jos_jevents_vevdetail where evdet_id=".$row['eventdetail_id'];
-				$recvevdetail	= mysql_query($queryvevdetail) or die(mysql_error());
-				$rowvevdetail 	= mysql_fetch_array($recvevdetail);
+				$rowvevdetail = $objEvent->evdetail_from_id($row['eventdetail_id']);
 
 				# Fetch event location detail from "location" table
-				if ((int) ($rowvevdetail['location'])){
-					$querylocdetail="select *  from jos_jev_locations where loc_id=".$rowvevdetail['location'];
-					$reclocdetail = mysql_query($querylocdetail) or die(mysql_error());
-					$rowlocdetail = mysql_fetch_array($reclocdetail);
-					$lat2 = $rowlocdetail['geolat'];
-					$lon2 = $rowlocdetail['geolon'];
+				if((int) ($rowvevdetail['location'])){
+						$rowlocdetail	= $objEvent->location_from_id($rowvevdetail['location']);
+						$lat2			= $rowlocdetail["geolat"];
+						$lon2			= $rowlocdetail["geolon"];
+						$lon2 = $rowlocdetail['geolon'];
 				}
 
 				// Coded By Akash
@@ -258,10 +254,8 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
 				$disp_date =  iconv('ISO-8859-2', 'UTF-8',ucwords(strftime ('%a, %b %d',mktime(0, 0, 0, $ev_tomonth, $ev_today, $ev_toyear))));	
 			}
 			
-			# Event fetch query for given date	
-			$ev_query_filter = "SELECT rpt.*, ev.*, rr.*, det.*, ev.state as published , loc.loc_id,loc.title as loc_title, loc.title as location, loc.street as loc_street, loc.description as loc_desc, loc.postcode as loc_postcode, loc.city as loc_city, loc.country as loc_country, loc.state as loc_state, loc.phone as loc_phone , loc.url as loc_url    , loc.geolon as loc_lon , loc.geolat as loc_lat , loc.geozoom as loc_zoom    , YEAR(rpt.startrepeat) as yup, MONTH(rpt.startrepeat ) as mup, DAYOFMONTH(rpt.startrepeat ) as dup , YEAR(rpt.endrepeat ) as ydn, MONTH(rpt.endrepeat ) as mdn, DAYOFMONTH(rpt.endrepeat ) as ddn , HOUR(rpt.startrepeat) as hup, MINUTE(rpt.startrepeat ) as minup, SECOND(rpt.startrepeat ) as sup , HOUR(rpt.endrepeat ) as hdn, MINUTE(rpt.endrepeat ) as mindn, SECOND(rpt.endrepeat ) as sdn FROM jos_jevents_repetition as rpt LEFT JOIN jos_jevents_vevent as ev ON rpt.eventid = ev.ev_id LEFT JOIN jos_jevents_icsfile as icsf ON icsf.ics_id=ev.icsid LEFT JOIN jos_jevents_vevdetail as det ON det.evdet_id = rpt.eventdetail_id LEFT JOIN jos_jevents_rrule as rr ON rr.eventid = rpt.eventid LEFT JOIN jos_jev_locations as loc ON loc.loc_id=det.location LEFT JOIN jos_jev_peopleeventsmap as persmap ON det.evdet_id=persmap.evdet_id LEFT JOIN jos_jev_people as pers ON pers.pers_id=persmap.pers_id WHERE ev.catid IN(".$arrstrcat.") AND rpt.endrepeat >= '".$ev_toyear."-".$ev_tomonth."-".$ev_today." 00:00:00' AND rpt.startrepeat <= '".$ev_toyear."-".$ev_tomonth."-".$ev_today." 23:59:59' AND ev.state=1 AND rpt.endrepeat>='".date('Y',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('m',mktime($totalHours, $totalMinutes, $totalSeconds))."-".date('d', mktime($totalHours, $totalMinutes, $totalSeconds))." 00:00:00' AND ev.access <= 0 AND icsf.state=1 AND icsf.access <= 0 and ((YEAR(rpt.startrepeat)=".$ev_toyear." and MONTH(rpt.startrepeat )=".$ev_tomonth." and DAYOFMONTH(rpt.startrepeat )=".$ev_today.") or freq<>'WEEKLY')GROUP BY rpt.rp_id";	
-			
-			$ev_rec_filter = mysql_query($ev_query_filter);
+			# Function to fetch Event for given date
+			$ev_rec_filter 	= $objEvent->fetch_ev_for_given_date($arrstrcat,$ev_toyear,$ev_tomonth,$ev_today,$totalHours,$totalMinutes,$totalSeconds);
 			mysql_set_charset("UTF8");
 			
 			while($ev_row_filter = mysql_fetch_array($ev_rec_filter)){
@@ -274,8 +268,7 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
 				$ev_strchk	= 0;
 			}	
 			
-			$ev_query = "select *,DATE_FORMAT(`startrepeat`,'%h:%i %p') as timestart, DATE_FORMAT(`endrepeat`,'%h:%i %p') as timeend from jos_jevents_repetition where rp_id in ($ev_strchk) ORDER BY `startrepeat` ASC ";
-			$ev_rec = mysql_query($ev_query) or die(mysql_error());
+			$ev_rec	= $objEvent->select_events_from_rpid($ev_strchk);
 			
 			if(mysql_num_rows($ev_rec) > 0){
 				if($x == 1){
@@ -286,28 +279,22 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
 			
 				while($row = mysql_fetch_array($ev_rec)){	
 					
-					# Fetch event data from "event" table
-					$ev			= mysql_query("select *  from jos_jevents_vevent where ev_id=".$row['eventid']) or die(mysql_error());
-					$evDetails 	= mysql_fetch_array($ev);
+					# Fetch Event detail from "event detail" table
+					$evDetails	= $objEvent->ev_from_id($row['eventid']);
 					$evrawdata 	= unserialize($evDetails['rawdata']);
 
 					# Fetch category name of the event from "category" table
-					$event_category	= mysql_query("select title  from jos_categories where id=".$evDetails['catid']) or die(mysql_error());
-					$ev_cat 		= mysql_fetch_object($event_category);
+					$ev_cat = $objEvent->cat_from_id($evDetails['catid']);
 					$categoryname[] = $ev_cat->title;
 
 					# Fetch Event detail from "event detail" table
-					$queryvevdetail = "select *  from jos_jevents_vevdetail where evdet_id=".$row['eventdetail_id'];
-					$recvevdetail	= mysql_query($queryvevdetail) or die(mysql_error());
-					$rowvevdetail 	= mysql_fetch_array($recvevdetail);
+					$rowvevdetail = $objEvent->evdetail_from_id($row['eventdetail_id']);;
 
 					# Fetch event location detail from "location" table
 					if ((int) ($rowvevdetail['location'])){
-						$querylocdetail="select *  from jos_jev_locations where loc_id=".$rowvevdetail['location'];
-						$reclocdetail = mysql_query($querylocdetail) or die(mysql_error());
-						$rowlocdetail = mysql_fetch_array($reclocdetail);
-						$lat2 = $rowlocdetail['geolat'];
-						$lon2 = $rowlocdetail['geolon'];
+						$rowlocdetail = $objEvent->location_from_id($rowvevdetail['location']);
+						$lat2 = $rowlocdetail["geolat"];
+						$lon2 = $rowlocdetail["geolon"];
 					}
 
 					// Coded By Akash

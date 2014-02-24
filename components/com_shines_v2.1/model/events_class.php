@@ -86,7 +86,7 @@ class event {
 	}
 
 	function select_event_categories_from_id($catId){
-		$query				= "SELECT  id,name FROM `jos_categories` WHERE (`parent_id` =".$catId." OR `id` =".$catId.") AND PUBLISHED = 1 ORDER BY name";
+		$query				= "SELECT  id,name FROM `jos_categories` WHERE (`parent_id` =".$catId." OR `id` =".$catId.") AND PUBLISHED = 1 ORDER BY id";
 		$result_event_cat 	= mysql_query($query) or die(mysql_error());
 		return $result_event_cat;
 	}

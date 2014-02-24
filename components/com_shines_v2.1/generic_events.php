@@ -252,7 +252,16 @@ header('Content-Type:text/html;charset=utf-8');?>
 
 		<script type="text/javascript">
 			function redirecturl(val){
-				url="/components/com_shines_v2.1/generic_events.php?category_id="+<?php echo $cat_id?>+"&eventdate="+val; 
+				var mastercat;
+				var subcat;
+				mastercat	= <?php echo $_REQUEST['category_id'];?>;
+				subcat		= document.getElementById('hdn_subcat_id').value;
+
+				if(subcat == ''){
+					url="/components/com_shines_v2.1/generic_events.php?category_id="+mastercat+"&eventdate="+val; 
+				}else{
+					url="/components/com_shines_v2.1/generic_events.php?category_id="+mastercat+"&subcat_id="+subcat+"&eventdate="+val; 
+				}
 				window.location = url;
 			}
 		</script>

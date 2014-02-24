@@ -385,7 +385,7 @@ td { vertical-align: top; }
 			padding: 0px;
 		}
 		#main ul.mainList h2, #main ul.mainList h3{font-weight: normal; font-size: 1em;margin: 0px;}
-		#main ul.mainList h3{padding: 10px 0 0;font-size: 12px;}
+		#main ul.mainList h3{padding: 0x 0 0;font-size: 12px;}
 		#main ul.mainList h3.hasRSVP{
 			float: left; height: 28px;padding-right: 24px;
 			background: url(../images/l/check.png) no-repeat right 9px;
@@ -412,7 +412,7 @@ td { vertical-align: top; }
 
 		/* ========= PLACES & RESTAURANTS STYLES ============= */
 		#main ul.mainList li{overflow: hidden;background: none !important;}	
-		#main ul.mainList ul.btnList {padding: 0px;}
+		#main ul.mainList ul.btnList {padding: 0px; margin: 0px;}
 		#main ul.mainList ul.btnList li{
 			list-style: none; background: none; border: none; float: left; padding: 0 5px 0 0;
 		}
