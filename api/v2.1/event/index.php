@@ -96,7 +96,6 @@ if(isset($catId) && $catId != ''){
 		else	
 			$select_query .= " limit $limit";
 	}
-	echo $select_query;
 	// Creaeating data set variable from Mysql query	
 	$result			= mysql_query($select_query);
 	$num_records	= mysql_num_rows($result);
@@ -191,8 +190,6 @@ if(isset($catId) && $catId != ''){
 	        'offset' => $offset != 0?(int)$offset:(int)0
 	    	)
 		);
-		//echo "<pre>";
-		//print_r($response);
 		header('Content-type: application/json');
 		echo json_encode($response);
 	}else{
@@ -273,8 +270,6 @@ API Request	: /event/?id=1
 	}else{
 		$data["error"] = "Not Found";
 	}	
-	//echo "<pre>";
-	//print_r($data);
 	header('Content-type: application/json');
 	echo json_encode($data);
 /*------------------------------------*/
@@ -425,8 +420,6 @@ API Request	: /event/
 			'offset' => $offset != 0?(int)$offset:(int)0
 	    	)
 		);
-		//echo "<pre>";
-		//print_r($response);
 		header('Content-type: application/json');
 		echo json_encode($response);
 	}else{
