@@ -1,6 +1,5 @@
 <?php
 ini_set('display_errors',1);
-
 include("../connection.php");
 include("../iadbanner.php");
 
@@ -79,7 +78,9 @@ if(isset($catId) && $catId != ''){
 		$select_query .= " AND rpt.endrepeat >= '".$toyear."-".$tomonth."-".$today." 00:00:00'";
 	}	
 	
-	$select_query .= "AND ev.catid = cat.id AND ev.catid = $catId AND ev.state = 1";
+//	$select_query .= "AND ev.catid = cat.id AND ev.catid = $catId AND ev.state = 1";
+	$select_query .= "AND ev.catid = cat.id AND (cat.id=$catId OR cat.parent_id=$catId) AND ev.state = 1";
+	
 
 	/* Query for Featured parameter if featured = 1 in URL */
 	if(isset($featured) && $featured == 1){
@@ -95,7 +96,7 @@ if(isset($catId) && $catId != ''){
 		else	
 			$select_query .= " limit $limit";
 	}
-	
+	echo $select_query;
 	// Creaeating data set variable from Mysql query	
 	$result			= mysql_query($select_query);
 	$num_records	= mysql_num_rows($result);
@@ -284,7 +285,6 @@ Parameter	: N/A
 API Request	: /event/
 */
 }else{
-
 
 //featured = 1	
 	//$today = date('d'); $tomonth = date('m'); $toyear = date('Y');

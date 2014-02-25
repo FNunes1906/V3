@@ -6,7 +6,7 @@ include("../connection.php");
 // Display all published category from J_Events component
 if(isset($_REQUEST['category_id'])){
 	$catId		= $_REQUEST['category_id'];
-	$select_query = "SELECT  id,name FROM `jos_categories` WHERE (`parent_id` =".$catId." OR `id` =".$catId.") AND PUBLISHED = 1 ORDER BY name";
+	$select_query = "SELECT  id,name FROM `jos_categories` WHERE (`parent_id` =".$catId." OR `id` =".$catId.") AND PUBLISHED = 1 ORDER BY id";
 	$catResult = mysql_query($select_query);
 	$i=0;
 
@@ -16,7 +16,7 @@ if(isset($_REQUEST['category_id'])){
 		++$i;
 	} 
 }else{
-	$select_query = "SELECT id,name FROM jos_categories WHERE section LIKE 'com_jevents' AND PUBLISHED = 1 ORDER BY name";
+	$select_query = "SELECT id,name FROM jos_categories WHERE section LIKE 'com_jevents' AND PUBLISHED = 1 ORDER BY id";
 	$catResult = mysql_query($select_query);
 	$i=0;
 
@@ -29,5 +29,4 @@ if(isset($_REQUEST['category_id'])){
 
 header('Content-type: application/json');
 echo json_encode($data);
-
 ?>

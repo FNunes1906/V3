@@ -78,7 +78,7 @@
 					</div>
 			<?php } ?>
 
-			
+
 			<ul class="btnList2">
 				<li>
 					<a href="#" class="button2 small2">
@@ -100,7 +100,26 @@
 					</a>
 				</li>
 				<li><a href="javascript:linkClicked('APP30A:FBCHECKIN:34.13828278:-118.35331726')" class="button2 small2"><?php echo JText::_('CHECK_IN');?></a></li>
-				<li><a href="http://www.addthis.com/bookmark.php?v=300&amp;pubid=xa-530314602dbf0b6a" class="button2 small2 addthis_button"><?php echo JText::_('TW_SHARE');?></a></li>
+				<!--<li><a href="http://www.addthis.com/bookmark.php?v=300&amp;pubid=xa-530314602dbf0b6a" class="button2 small2 addthis_button"><?php echo JText::_('TW_SHARE');?></a></li>-->
+				<li>
+					<span id="myshare" class="button2 small2"><?php echo JText::_('TW_SHARE');?></span>
+									 <div id="share-wrapper">
+						    <ul class="share-inner-wrp">
+						        <!-- Facebook -->
+						        <li class="facebook button-wrap"><a href="#">Facebook</a></li>
+						        
+						        <!-- Twitter -->
+						        <li class="twitter button-wrap"><a href="#">Tweet</a></li>
+						        
+						        <!-- Google -->
+						        <li class="google button-wrap"><a href="#">Google Plus</a></li>
+						        
+						        <!-- Email -->
+						        <li class="email button-wrap"><a href="#">Email</a></li>
+						    </ul>
+						</div>
+				
+				</li>
 			</ul>
 			
 			<?php }?>
@@ -112,6 +131,7 @@
 </div>
 
 
+	<!--<div  id="myshare">Share</div>-->
 <!-- AddThis Button BEGIN -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-530314602dbf0b6a"></script>
+<!--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-530314602dbf0b6a"></script>-->
 <!-- AddThis Button END -->

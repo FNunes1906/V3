@@ -1,11 +1,7 @@
 <?php
-if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')){
-	ob_start("ob_gzhandler");
-}else{
-	ob_start();
-}
-
+if(substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')){	ob_start("ob_gzhandler");}else{ ob_start(); }
 session_start();
+
 include("connection.php");
 include("iadbanner.php");
 
@@ -37,13 +33,21 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 	else					{return  $miles;}
 }
 
-# Assigning latitude value
-if (isset($_REQUEST['lat']) && $_REQUEST['lat'] != "" ){
+// Display all published category from JEvents component
+if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != 0){
+	$catId = $_REQUEST['category_id'];
+	$result_event_cat = $objEvent->select_event_categories_from_id($catId);
+}else{
+	$result_event_cat = $objEvent->select_event_categories();
+} 
+
+// Assigning latitude value
+if(isset($_REQUEST['lat']) && $_REQUEST['lat'] != "" ){
 	$_SESSION['lat_device1'] = $_REQUEST['lat'];
 	$lat1 = $_SESSION['lat_device1'];
 }
-# Assigning longitude value
-if (isset($_REQUEST['lon']) && $_REQUEST['lon'] != "" ){
+// Assigning longitude value
+if(isset($_REQUEST['lon']) && $_REQUEST['lon'] != "" ){
 	$_SESSION['lon_device1'] = $_REQUEST['lon'];
 	$lon1 = $_SESSION['lon_device1'];
 }
@@ -67,9 +71,9 @@ $toyear 		= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
 $fromYear 		= date('Y',mktime($totalHours, $totalMinutes, $totalSeconds));
 
 if(isset($_REQUEST['eventdate'])){
-	$_REQUEST['eventdate'] = trim($_REQUEST['eventdate']);
+	$_REQUEST['eventdate'] = trim($_REQUEST['eventdate']);	
 }
-	
+
 # If date is select from datepicker then assign below date variable
 $todaestring = '';
 
@@ -90,30 +94,19 @@ if(!empty($_REQUEST['eventdate'])){
 	$searchEndDate		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
 	$single_day_date	= 	($fromYear.'-'.$fromMonth.'-'.$fromDay);
 }else{
-	if(isset($tomonth) && isset($today) && isset($toyear)){
-		$todaestring		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
-		$single_day_date	= 	($toyear.'-'.$tomonth.'-'.$today);
-		$seachStartDate		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
-		$searchEndDate		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
-	}
+	$todaestring		=	date('l, j M', mktime(0, 0, 0, $tomonth, $today, $toyear));
+	$single_day_date	= 	($toyear.'-'.$tomonth.'-'.$today);
 }
 
-# checking cat id is set or not 
-if(isset($_REQUEST['category_id'])){
-	if(isset($_REQUEST['subcat_id']) && $_REQUEST['subcat_id'] != ''){
-		$cat_id 			= $_REQUEST['subcat_id'];
-		$rec_cat			= $objEvent->select_event_categories_from_id($cat_id);
-		$result_event_cat	= $objEvent->select_event_categories_from_id($cat_id);
-	}else{
-		$cat_id 			= $_REQUEST['category_id'];
-		$rec_cat			= $objEvent->select_event_categories_from_id($cat_id);
-		$result_event_cat	= $objEvent->select_event_categories_from_id($cat_id);
-	}
-}
+# Display all published category from JEvents component
+if(isset($catId) && $catId != ''){
+	$rec_cat = $objEvent->select_cat_id($catId);
+}else{
+	$rec_cat = $objEvent->select_cat();
+} 
 mysql_set_charset("UTF8");
 
 while($row_cat = mysql_fetch_array($rec_cat)){
-	# Creating Category array
 	$array_cat[] = $row_cat['id'];
 }
 
@@ -125,31 +118,28 @@ if(isset($startDate)){
 	$ser_end_date   = date("Y-m-d",strtotime($startDate[1]));
 }
 
-if(isset($tomonth) && isset($today) && isset($toyear)){
-	if(!isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == '' || $seachStartDate == $searchEndDate ){
-		$rec_filter = $objEvent->select_events($toyear,$tomonth,$today,$totalHours,$totalMinutes,$totalSeconds,$arrstrcat);
+if(!isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == '' || $seachStartDate == $searchEndDate ){
+	$rec_filter = $objEvent->select_events($toyear,$tomonth,$today,$totalHours,$totalMinutes,$totalSeconds,$arrstrcat);
+	mysql_set_charset("UTF8");
+	$arr_rr_id = $objEvent->select_rowfilter_rpid($rec_filter);
+
+	if(isset($arr_rr_id) && (count($arr_rr_id) > 0)){
+		$strchk = implode(',',$arr_rr_id);
+		$rec = $objEvent->select_events_from_rpid($strchk);
 		mysql_set_charset("UTF8");
-		$arr_rr_id = $objEvent->select_rowfilter_rpid($rec_filter);
-		
-		if(isset($arr_rr_id) && (count($arr_rr_id) > 0)){
-			$strchk = implode(',',$arr_rr_id);
-			$rec = $objEvent->select_events_from_rpid($strchk);
-			mysql_set_charset("UTF8");
-		}else{
-			$rec = NULL;
-		}	
-	}
+	}else{
+		$rec = NULL;
+	}	
 }
 
 /* Feature Event Query By Akash */
+
 # Last Day of the Month
 $LD = Date('d', strtotime("+30 days"));
 $LM = Date('m', strtotime("+30 days"));
 $LY = Date('y', strtotime("+30 days"));
-	
-if(isset($_REQUEST['category_id'])){
-	$featured_filter = $objEvent->select_featured_event_generic($_REQUEST['category_id'],$featureyear,$featuremonth,$featureday,$LY,$LM,$LD);
-}
+
+$featured_filter = $objEvent->select_featured_event($featureyear,$featuremonth,$featureday,$LY,$LM,$LD);
 
 # code for page title
 $pagemeta = $objEvent->select_pagemeta_title();
@@ -185,47 +175,47 @@ header('Content-Type:text/html;charset=utf-8');?>
 		var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){var a=document.getElementsByTagName("a");for(var i=0;i<a.length;i++){if(a[i].className.match("noeffect")){}else{a[i].onclick=function(){window.location=this.getAttribute("href");return false}}}}function hideURLbar(){window.scrollTo(0,0.9)}iWebkit.init=function(){fullscreen();hideURLbar()};iWebkit.init()}}
 		</script>
 		<script type="text/javascript">
-		    function linkClicked(link) { document.location = link; }
+			function linkClicked(link) { document.location = link; }
 		</script>
 		<script type="text/javascript">
-		            function submitForm() {
-		                    document.events.submit();
-		}
-		    $(document).ready(function () {
-		            // Date with external button
-		            $('#date1').scroller({ showOnFocus: false });
-		            $('#show').click(function() { $('#date1').scroller('show'); return false; });
-		            // Time
-		            $('#date2').scroller({ preset: 'time' });
-		            // Datetime
-		             $('#date3').scroller({ preset: 'date' });
-		            $('#custom').scroller({ showOnFocus: false });
-		            $('#custom').click(function() { $(this).scroller('show'); });
-		            $('#disable').click(function() {
-		                $('#date1').scroller('disable');
-		                return false;
-		            });
-		            $('#enable').click(function() {
-		                $('#date1').scroller('enable');
-		                return false;
-		            });
-		            $('#get').click(function() {
-		                alert($('#date1').scroller('getDate'));
-		                return false;
-		            });
-		            $('#set').click(function() {
-		                $('#date1').scroller('setDate', new Date(), true);
-		                return false;
-		            });
-		            $('#theme, #mode').change(function() {
-		                var t = $('#theme').val();
-		                var m = $('#mode').val();
-		                $('#date1').scroller('destroy').scroller({ showOnFocus: false, theme: t, mode: m });
-		                $('#date2').scroller('destroy').scroller({ preset: 'time', theme: t, mode: m });
-		               $('#date3').scroller('destroy').scroller({ preset: 'date', theme: t, mode: m });
-		                $('#custom').scroller('destroy').scroller({ showOnFocus: false, theme: t, mode: m });
-		            });
-		        });
+			function submitForm() {
+				document.events.submit();
+			}
+			$(document).ready(function () {
+				// Date with external button
+				$('#date1').scroller({ showOnFocus: false });
+				$('#show').click(function() { $('#date1').scroller('show'); return false; });
+				// Time
+				$('#date2').scroller({ preset: 'time' });
+				// Datetime
+				 $('#date3').scroller({ preset: 'date' });
+				$('#custom').scroller({ showOnFocus: false });
+				$('#custom').click(function() { $(this).scroller('show'); });
+				$('#disable').click(function() {
+					$('#date1').scroller('disable');
+					return false;
+				});
+				$('#enable').click(function() {
+					$('#date1').scroller('enable');
+					return false;
+				});
+				$('#get').click(function() {
+					alert($('#date1').scroller('getDate'));
+					return false;
+				});
+				$('#set').click(function() {
+					$('#date1').scroller('setDate', new Date(), true);
+					return false;
+				});
+				$('#theme, #mode').change(function() {
+					var t = $('#theme').val();
+					var m = $('#mode').val();
+					$('#date1').scroller('destroy').scroller({ showOnFocus: false, theme: t, mode: m });
+					$('#date2').scroller('destroy').scroller({ preset: 'time', theme: t, mode: m });
+					$('#date3').scroller('destroy').scroller({ preset: 'date', theme: t, mode: m });
+					$('#custom').scroller('destroy').scroller({ showOnFocus: false, theme: t, mode: m });
+				});
+			});
 		</script>
 
 		<!--Code for Mobiscroll NEW date picker - Yogi START -->
@@ -233,35 +223,25 @@ header('Content-Type:text/html;charset=utf-8');?>
 		<link href="/templates/townwizard/css/mobiscroll.custom-2.7.2.min.css" rel="stylesheet" type="text/css" />
 		<script src="/templates/townwizard/js/mobiscroll.custom-2.7.2.min.js" type="text/javascript"></script>
 		<script type="text/javascript">
-		 jQuery(function () {
-		 var now = new Date();
-		 var curr = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-		 var opt = {}
-		 opt.rangepicker = {preset : 'rangepicker'};
-		 jQuery('select.changes').bind('change', function() {
-		  var demo = "rangepicker";
-		  jQuery(".demos").hide();
-		  if (!($("#demo_"+demo).length))
-		  demo = 'default';
-		  jQuery("#demo_" + demo).show();
-		  jQuery('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "bottom", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
-		 });
-		 jQuery('#demo').trigger('change');
-		 });
+			jQuery(function (){
+				var now = new Date();
+				var curr = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+				var opt = {}
+				opt.rangepicker = {preset : 'rangepicker'};
+				jQuery('select.changes').bind('change', function(){
+					var demo = "rangepicker";
+					jQuery(".demos").hide();
+					if (!($("#demo_"+demo).length))
+					demo = 'default';
+					jQuery("#demo_" + demo).show();
+					jQuery('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "modal", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
+				});
+				jQuery('#demo').trigger('change');
+			});
 		</script>
-
 		<script type="text/javascript">
 			function redirecturl(val){
-				var mastercat;
-				var subcat;
-				mastercat	= <?php echo $_REQUEST['category_id'];?>;
-				subcat		= document.getElementById('hdn_subcat_id').value;
-
-				if(subcat == ''){
-					url="<?php echo $_SERVER['PHP_SELF']; ?>?category_id="+mastercat+"&eventdate="+val; 
-				}else{
-					url="<?php echo $_SERVER['PHP_SELF']; ?>?category_id="+mastercat+"&subcat_id="+subcat+"&eventdate="+val; 
-				}
+				url="/components/com_shines_v2.1/events.php?eventdate="+val; 
 				window.location = url;
 			}
 		</script>
@@ -270,33 +250,27 @@ header('Content-Type:text/html;charset=utf-8');?>
 		<!--Code for event Category drop down - Yogi START -->
 		<script type="text/javascript">
 		function redirecturlcat(val){
-				var mastercat;
-				mastercat = <?php echo $_REQUEST['category_id'];?>;
-				if(val == mastercat){
-					url = "<?php echo $_SERVER['PHP_SELF']; ?>?category_id="+val;
-				}else{
-					url = "<?php echo $_SERVER['PHP_SELF']; ?>?category_id="+mastercat+"&subcat_id="+val;
-				}
-				window.location = url;	
+			if(val == 'all')
+				url = "<?php echo $_SERVER['PHP_SELF'];?>";
+			else
+				url = "<?php echo $_SERVER['PHP_SELF']; ?>?category_id="+val;
+			window.location = url;
 		}
 		</script>
 		<!--Code for event Category drop down - Yogi END -->
-
+		
 		<?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
 	</head>
 	<body>
-	    <div style="display: none">
-	        <label for="demo">Demo</label>
-	        <select name="demo" id="demo" class="changes">
-	            <option value="date" selected>Date</option>
+		<div style="display: none">
+			<label for="demo">Demo</label>
+			<select name="demo" id="demo" class="changes">
+				<option value="date" selected>Date</option>
 				<option value="datetime" >Datetime</option>
 				<option value="time" >Time</option>
 				<option value="rangepicker" selected="selected" >Range Picker</option>
-	        </select>
-	    </div>
-		<?php
-	    /* Code added for iphone_places.tpl */
-		require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_generic_events.tpl");
-		?>
+			</select>
+		</div>
+		<?php require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_events.tpl"); ?>
 	</body>
 </html>

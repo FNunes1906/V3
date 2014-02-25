@@ -216,7 +216,9 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
 					</a>
 					<h3>
 						<ul class="btnList">
-							<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo JText::_('CALL'); ?></a</li>
+							<?php if(trim($rowlocdetail['phone']) != '') { ?>
+								<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo JText::_('CALL'); ?></a</li>
+							<?php } ?>
 							<?php
 							$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 								if(stripos($ua,'android') != true) { ?>
@@ -237,6 +239,7 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
 		<?php }
 	# If search start and end date are different	
 	}else{
+		$rec_counter = 0;
 		for($x=1;$ser_start_date <= $ser_end_date;$x++){
 			
 			$dateArray		= explode('-',$ser_start_date);
@@ -271,6 +274,7 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
 			$ev_rec	= $objEvent->select_events_from_rpid($ev_strchk);
 			
 			if(mysql_num_rows($ev_rec) > 0){
+				$rec_counter = 1;
 				if($x == 1){
 					echo "<h1 id='datezig'>$disp_date</h1>";
 				}else{
@@ -343,7 +347,9 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
 						</a>
 						<h3>
 							<ul class="btnList">
+								<?php if(trim($rowlocdetail['phone']) != '') { ?>
 								<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>"><?php echo JText::_('CALL'); ?></a</li>
+								<?php } ?>
 								<?php
 								$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 									if(stripos($ua,'android') != true) { ?>
@@ -361,7 +367,7 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
 			# Date increment for loop , this will add +1 to each date loop	
 			$ser_start_date = date('Y-m-d', strtotime( "$ser_start_date + 1 day" ));
 		} // End of date for loop
-		if(mysql_num_rows($ev_rec) == 0):?>
+		if($rec_counter == 0):?>
 			<li class="block_link">
 				<div style='text-align:center;font-weight:bold;'><br/><?php echo JText::_("LOC_RES");?></div>
 			</li>
