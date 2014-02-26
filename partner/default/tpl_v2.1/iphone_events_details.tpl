@@ -51,22 +51,7 @@
 			<p><strong><?php echo JText::_('WEBSITE'); ?>:</strong> <a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" target="_blank"><?php echo str_replace('http://','',$rowlocdetail['url']); ?></a></p>
 				<?php } ?>-->
 			<p><strong><?php echo JText::_('DISCRIPTION'); ?>:</strong> <?php echo $rowvevdetail['description'];?></p>
-	
-			
-			<ul class="btnList">
-			
-				<?php if(trim($rowlocdetail['phone']) != '') { ?>
-				<li class="setwidth"><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>" class="button small"><?php echo $rowlocdetail['phone'];?></a></li>
-				<?php } ?>
-				
-				<?php if(trim($rowlocdetail['url']) != '') { ?>
-				<li class="setwidth"><a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" class="button small" target="_blank"><?php echo JText::_('WEBSITE'); ?></a></li>
-				<?php } ?>
-				
-				<li class="setwidth"><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" class="button small"><?php echo JText::_('TW_MAP'); ?></a></li>
-			</ul>
-				
-			<?php
+				<?php
 				$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 				if(stripos($ua,'android') == true){ ?>
 					<div class="iphoneads" style="vertical-align:bottom;">
@@ -77,9 +62,19 @@
 					<?php m_show_banner('iphone-events-screen'); ?>
 					</div>
 			<?php } ?>
-
-
+			
 			<ul class="btnList2">
+			
+				<?php if(trim($rowlocdetail['phone']) != '') { ?>
+				<li><a href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '',$rowlocdetail['phone'])?>" class="button2 small2"><?php echo $rowlocdetail['phone'];?></a></li>
+				<?php } ?>
+				
+				<?php if(trim($rowlocdetail['url']) != '') { ?>
+				<li><a href="http://<?php echo str_replace('http://','',$rowlocdetail['url']); ?>" class="button2 small2" target="_blank"><?php echo JText::_('WEBSITE'); ?></a></li>
+				<?php } ?>
+				
+				<li><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" class="button2 small2"><?php echo JText::_('TW_MAP'); ?></a></li>
+
 				<li>
 					<a href="#" class="button2 small2">
 					
