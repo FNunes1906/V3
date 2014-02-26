@@ -263,7 +263,7 @@ else {
 					<p><?php echo stripJunk(showBrief(strip_tags(utf8_encode($data['description'])),30)); ?></p>
 					<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?php echo $dunit?> <?php echo JText::_('AWAY'); ?></p>
 					<ul class="btnList">
-						<?php if(trim($row['phone'] != '')) {
+						<?php if(trim($data['phone'] != '')) {
 								if (isset($_REQUEST['bIPhone']) == '0'){?>
 							   	<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data['phone']); ?>"><?php echo JText::_('CALL'); ?></a></li>
 						<?php } else { ?>

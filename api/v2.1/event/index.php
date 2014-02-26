@@ -25,15 +25,15 @@ $banner_code =  m_show_banner('iphone-events-screen');
 
 
 /* All REQUEST paramter variable  */
-$catId		= isset($_GET['category_id']) ? $_GET['category_id']:'34';
-$eventId	= isset($_GET['id']) ? $_GET['id']:'';
-$glat		= isset($_GET['latitude']) ? $_GET['latitude']:'';
-$glon		= isset($_GET['longitude']) ? $_GET['longitude']:'';
-$dfrom		= isset($_GET['from']) ? $_GET['from']:0;
-$dto		= isset($_GET['to']) ? $_GET['to']:0;
-$offset		= isset($_GET['offset']) ? $_GET['offset']:0;
-$limit		= isset($_GET['limit']) ? $_GET['limit']:0;
-$featured	= isset($_GET['featured']) ? $_GET['featured']:0;
+$catId		= isset($_REQUEST['category_id']) ? $_REQUEST['category_id']:'34';
+$eventId	= isset($_REQUEST['id']) ? $_REQUEST['id']:'';
+$glat		= isset($_REQUEST['latitude']) ? $_REQUEST['latitude']:'';
+$glon		= isset($_REQUEST['longitude']) ? $_REQUEST['longitude']:'';
+$dfrom		= isset($_REQUEST['from']) ? $_REQUEST['from']:0;
+$dto		= isset($_REQUEST['to']) ? $_REQUEST['to']:0;
+$offset		= isset($_REQUEST['offset']) ? $_REQUEST['offset']:0;
+$limit		= isset($_REQUEST['limit']) ? $_REQUEST['limit']:0;
+$featured	= isset($_REQUEST['featured']) ? $_REQUEST['featured']:0;
 $startDate		= explode('-',$dfrom);
 $endDate		= explode('-',$dto);
 /*$today_date = date('Y-m-d');
