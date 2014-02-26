@@ -110,11 +110,13 @@ $egurl = str_replace('%20','%2B',$eurl);
 			<div style='float:left;padding:3px 3px 3px 8px;'>
 				<a href="https://plus.google.com/share?url=<?php echo $egurl; ?>" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><div class="google">google</div></a>
 			</div>
+			   <div style='float:left;padding:3px 3px 3px 8px;'>
+    <a href="https://twitter.com/share" class="twitter-share-buttons">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+   </div>
 			<div style='float:left;padding:3px 3px 3px 8px;'>
 				<a href="mailto:<?php echo $email;?>?body=<?php echo $eurl; ?>">mail</a>
 			</div>
 		</div>
 	</body>
 </html>
-
-

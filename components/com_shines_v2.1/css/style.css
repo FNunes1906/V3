@@ -812,8 +812,7 @@ cursor: pointer;
 }
 
 /*NEW CSS FOR NEW BUTTONS IN EVENT DETAIL*/
-#main ul.mainList ul.btnList2 li{border-bottom:none;padding: 1px;}
-
+#main ul.mainList ul.btnList2 li{padding: 1px;border-bottom: medium none;list-style: none outside none;overflow: visible;}
 ul.btnList2{padding: 0;margin: 0;}
 .setwidth{padding: 0 1% !important;width: 91px;}
 #myshare{cursor:pointer;}

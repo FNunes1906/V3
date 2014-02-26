@@ -49,19 +49,21 @@ if(mysql_num_rows($rec) > 0){
 		$distance = distance($lat1, $lon1, $geolat,  $geolon, $dunit);
 		$distance		= round($distance,1);
 		$description 	= showBrief(strip_tags(utf8_encode($row['description'])),30);
-		//print("swaminarayan");
 
-		echo "<li>
+		$code = "<li>
 				<h1>$title</h1>
 				<p>$description</p>
 				<p class='distance'>$distance&nbsp;$dunit&nbsp;$away</p>
-				<ul class='btnList'>
-					<li><a class='button small' href='tel:$phone'>$call</a></li>
-					<li><a class='button small' href='javascript:linkClicked('APP30A:FBCHECKIN:$geolat:$geolon')'>$checkin</a></li>
+				<ul class='btnList'>";
+					if($phone!=''){
+						$code.="<li><a class='button small' href='tel:$phone'>$call</a></li>";
+					}
+					$code.="<li><a class='button small' href='javascript:linkClicked('APP30A:FBCHECKIN:$geolat:$geolon')'>$checkin</a></li>
 					<li><a class='button small' href='diningdetails.php?did=$loc_id&lat=$lat1&lon=$lon1'>$moreinfo</a></li>
 					<li><a href='javascript:linkClicked('APP30A:SHOWMAP:$geolon:$geolat')'></a></li>
 				</ul>
 			</li>";	
+		echo $code;
 		
 	}
 }else{

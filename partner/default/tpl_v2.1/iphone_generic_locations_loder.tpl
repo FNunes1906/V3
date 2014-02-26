@@ -183,11 +183,12 @@ else {
 					<p><?php echo stripJunk(showBrief($row['description'],30)); ?></p>
 					<p class="distance"><?php echo round($distance,1); ?>&nbsp;<?php echo $dunit;?> <?php echo JText::_('AWAY'); ?></p>
 					<ul class="btnList">
-						<?php if (isset($_REQUEST['bIPhone'])=='0'){?>
+						<?php if(trim($row['phone'] != '')) {
+							  if (isset($_REQUEST['bIPhone'])=='0'){?>
 									<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row['phone']); ?>"><?php echo JText::_('CALL'); ?></a></li>
 						<?php } else { ?>
 									<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row['phone']); ?>"><?php echo JText::_('CALL'); ?></a></li>
-						<?php } ?>
+						<?php } } ?>
 
 						<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row['geolat']; ?>:<?php echo $row['geolon']; ?>')"><?php echo JText::_('CHECK_IN'); ?></a></li>
 						<li><a class="button small" href="diningdetails.php?did=<?php echo $row['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><?php echo JText::_('MORE_INFO'); ?></a></li>
@@ -262,11 +263,12 @@ else {
 					<p><?php echo stripJunk(showBrief(strip_tags(utf8_encode($data['description'])),30)); ?></p>
 					<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?php echo $dunit?> <?php echo JText::_('AWAY'); ?></p>
 					<ul class="btnList">
-						<?php if (isset($_REQUEST['bIPhone']) == '0'){?>
+						<?php if(trim($row['phone'] != '')) {
+								if (isset($_REQUEST['bIPhone']) == '0'){?>
 							   	<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data['phone']); ?>"><?php echo JText::_('CALL'); ?></a></li>
 						<?php } else { ?>
 							   	<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data['phone']); ?>"><?php echo JText::_('CALL'); ?></a></li>
-						<?php } ?>
+						<?php } } ?>
 						
 						<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $data['geolat']; ?>:<?php echo $data['geolon']; ?>')"><?php echo JText::_('CHECK_IN'); ?></a></li>
 						<li><a class="button small" href="diningdetails.php?did=<?php echo $data['loc_id']?>&lat=<?php echo $lat1?>&lon=<?php echo $lon1?>"><?php echo JText::_('MORE_INFO'); ?></a></li>
