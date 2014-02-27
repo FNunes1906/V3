@@ -817,15 +817,11 @@ ul.btnList2{padding: 0;margin: 0;}
 .setwidth{padding: 0 1% !important;width: 91px;}
 #myshare{cursor:pointer;}
 #share-wrapper{position:relative;}
-ul.share-inner-wrp{display:none;position: absolute;bottom: 29px;margin: 0;padding: 0;background: #ffffff;box-shadow: 0px 0px 2px 2px #999;}
-#main ul.mainList ul.btnList2 ul.share-inner-wrp li.button-wrap{line-height: 25px;padding: 0 3px;width: 103px;}
-#main ul.share-inner-wrp a {color: #015D90;display: block;text-decoration: none;font-weight: bold;padding-left: 24px;}
-/* background image for each link */
-#share-wrapper .facebook > a{background: url("../images/facebook.jpg") no-repeat left;}
-#share-wrapper .twitter > a{background: url("../images/twitter.jpg") no-repeat left;}
-#share-wrapper .google > a{background: url("../images/google.jpg") no-repeat left;}
-#share-wrapper .email > a{background: url("../images/email.jpg") no-repeat left;}
-#main ul.mainList ul.btnList2 li span {display: block; text-decoration: none;}
+ul.share-inner-wrp{display:none;position: absolute;bottom: 29px;margin: 0;padding: 3px;background: #ffffff;box-shadow: 0px 0px 2px 2px #999;width: 90px;}
+#main ul.mainList ul.btnList2 ul.share-inner-wrp li{line-height: 25px;list-style: none outside none;overflow: visible;}
+#main ul.mainList ul.btnList2 ul.share-inner-wrp li.button-wrap a {color: #015D90;text-decoration: none;font-weight: bold;padding: 3px;}
+#main ul.mainList ul.btnList2 ul.share-inner-wrp li.button-wrap a span{float: left;margin-top: 3px;}
+ul.btnList2 li span {display: block; text-decoration: none;}
 .visible{background: none repeat scroll 0 0 #87CEEB !important;}
 
 /*GREEN BUTTON*/

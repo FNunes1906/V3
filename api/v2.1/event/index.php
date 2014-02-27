@@ -25,7 +25,7 @@ $banner_code =  m_show_banner('iphone-events-screen');
 
 
 /* All REQUEST paramter variable  */
-$catId		= isset($_REQUEST['category_id']) ? $_REQUEST['category_id']:'34';
+$catId		= isset($_REQUEST['category_id'])?$_REQUEST['category_id']:'34';
 $eventId	= isset($_REQUEST['id']) ? $_REQUEST['id']:'';
 $glat		= isset($_REQUEST['latitude']) ? $_REQUEST['latitude']:'';
 $glon		= isset($_REQUEST['longitude']) ? $_REQUEST['longitude']:'';
@@ -190,6 +190,7 @@ if(isset($catId) && $catId != ''){
 	        'offset' => $offset != 0?(int)$offset:(int)0
 	    	)
 		);
+		
 		header('Content-type: application/json');
 		echo json_encode($response);
 	}else{

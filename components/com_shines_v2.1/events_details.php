@@ -90,45 +90,6 @@ $(document).ready(
 		 $("ul.share-inner-wrp").delay(3500).fadeOut("slow");
 		});
 		
-		$('.button-wrap').click(function(event) {
-			var shareName = $(this).attr('class').split(' ')[0]; //get the first class name of clicked element
-			
-			switch (shareName) //switch to different links based on different social name
-			{
-				case 'facebook':
-					var openLink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(pageUrl) + '&amp;title=' + encodeURIComponent(pageTitle);
-					break;
-				case 'twitter':
-					var openLink = 'http://twitter.com/home?status=' + encodeURIComponent(pageTitle + ' ' + pageUrl);
-					break;
-				case 'digg':
-					var openLink = 'http://www.digg.com/submit?phase=2&amp;url=' + encodeURIComponent(pageUrl) + '&amp;title=' + encodeURIComponent(pageTitle);
-					break;
-				case 'stumbleupon':
-					var openLink = 'http://www.stumbleupon.com/submit?url=' + encodeURIComponent(pageUrl) + '&amp;title=' + encodeURIComponent(pageTitle);
-					break;
-				case 'delicious':
-					var openLink = 'http://del.icio.us/post?url=' + encodeURIComponent(pageUrl) + '&amp;title=' + encodeURIComponent(pageTitle);
-					break;
-				case 'google':
-					var openLink = 'https://plus.google.com/share?url=' + encodeURIComponent(pageUrl) + '&amp;title=' + encodeURIComponent(pageTitle);
-					break;
-				case 'email':
-					var openLink = 'mailto:?subject=' + pageTitle + '&body=Found this useful link for you : ' + pageUrl;
-					break;
-			}
-
-			//Parameters for the Popup window
-			winWidth 	= 650;	
-			winHeight	= 450;
-			winLeft   	= ($(window).width()  - winWidth)  / 2,
-			winTop    	= ($(window).height() - winHeight) / 2,	
-			winOptions   = 'width='  + winWidth  + ',height=' + winHeight + ',top='    + winTop    + ',left='   + winLeft;
-
-			//open Popup window and redirect user to share website.
-			window.open(openLink,'Share This Link',winOptions);
-			return false;
-		});
     });
 </script>
 		
@@ -145,61 +106,28 @@ $(document).ready(
 		if(stripos($ua,'android') == True){
 			?>
 			<script type="text/javascript">
-				addthisevent.settings(
-					{
+				addthisevent.settings({
 						mouse	: false,
 						css		: false,
-						outlook	:
-						{
-							show:false, text:"Outlook"
-						},
-						google	:
-						{
-							show:true,  text:"<?php echo JText::_('TW_ADDTO'); ?>"
-						},
-						yahoo	:
-						{
-							show:false, text:"Yahoo"
-						},
-						ical	:
-						{
-							show:false, text:"<?php echo JText::_('TW_ADDTO'); ?>"
-							
-						},
-						hotmail	:
-						{
-							show:false, text:"Hotmail"
-						}
+						outlook:{show:false, text:"Outlook"},
+						google	:{show:true,  text:"Add to cal"},
+						yahoo:{show:false, text:"Yahoo"},
+						ical	:{show:false, text:"Add to cal"},
+						hotmail:{show:false, text:"Hotmail"}
 					});
 			</script>
 			<?php
 		}else{
 			?>
 			<script type="text/javascript">
-				addthisevent.settings(
-					{
+				addthisevent.settings({
 						mouse	: false,
-						css		: false,
-						outlook	:
-						{
-							show:false, text:"Outlook"
-						},
-						google	:
-						{
-							show:false, text:"Add to Gcal"
-						},
-						yahoo	:
-						{
-							show:false, text:"Yahoo"
-						},
-						ical	:
-						{
-							show:true,  text:"<?php echo JText::_('TW_ADDTO'); ?>"
-						},
-						hotmail	:
-						{
-							show:false, text:"Hotmail"
-						}
+						css	: false,
+						outlook:{show:false, text:"Outlook"},
+						google	:{show:false, text:"Add to Gcal"},
+						yahoo:{show:false, text:"Yahoo"},
+						ical	:{show:true,  text:"Add to cal"},
+						hotmail:{show:false, text:"Hotmail"}
 					});
 			</script>
 			<?php
