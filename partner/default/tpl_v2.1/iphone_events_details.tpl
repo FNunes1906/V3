@@ -1,15 +1,15 @@
-		<?php
-			/* Banner Code */
-			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-			if(stripos($ua,'android') == true){ ?>
-			<div class="iphoneads" style="vertical-align:bottom;">
-			<?php m_show_banner('android-events-screen'); ?>
-			</div>
-		<?php }else{?>
-			<div class="iphoneads" style="vertical-align:bottom;">
-			<?php m_show_banner('iphone-events-screen'); ?>
-			</div>
-		<?php } ?>
+<?php
+	/* Banner Code */
+	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+	if(stripos($ua,'android') == true){ ?>
+	<div class="iphoneads" style="vertical-align:bottom;">
+	<?php m_show_banner('android-events-screen'); ?>
+	</div>
+<?php }else{?>
+	<div class="iphoneads" style="vertical-align:bottom;">
+	<?php m_show_banner('iphone-events-screen'); ?>
+	</div>
+<?php } ?>
 
 <div id="main" role="main" ontouchstart="touchStart(event,'list');"  ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 	<ul id="placesList" class="mainList">
@@ -99,18 +99,18 @@
 					<span id="myshare" class="button2 small2"><?php echo JText::_('TW_SHARE');?></span>
 					<div id="share-wrapper">
 						<ul class="share-inner-wrp">
-							<!-- Facebook -->
-							<li class="button-wrap"><a  class="addthis_button_facebook" addthis:url="http://<?php echo $_SERVER['SERVER_NAME'];?>/events/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Facebook</a></li>
-							
-							<!-- Twitter -->
-							<li class="button-wrap"><a class="addthis_button_twitter" addthis:url="http://<?php echo $_SERVER['SERVER_NAME'];?>/events/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Tweet</a></li>
-							
-							<!-- Google -->
-							<li class="button-wrap"><a class="addthis_button_google_plusone_share" addthis:url="http:<?php echo $_SERVER['SERVER_NAME'];?>/events/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Google +</a></li>
-							
-							<!-- Email -->
-							<li class="button-wrap"><a class="addthis_button_email" addthis:url="http://<?php echo $_SERVER['SERVER_NAME'];?>/events/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Email</a></li>
-						</ul>
+					       <!-- Facebook -->
+					       <li class="button-wrap"><a  class="addthis_button_facebook" addthis:url="http://<?php echo $_SERVER['SERVER_NAME']."/".$banner_cat_name;?>/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Facebook</a></li>
+					       
+					       <!-- Twitter -->
+					       <li class="button-wrap"><a class="addthis_button_twitter" addthis:url="http://<?php echo $_SERVER['SERVER_NAME']."/".$banner_cat_name;?>/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Tweet</a></li>
+					       
+					       <!-- Google -->
+					       <li class="button-wrap"><a class="addthis_button_google_plusone_share" addthis:url="http://<?php echo $_SERVER['SERVER_NAME']."/".$banner_cat_name;?>/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Google +</a></li>
+					       
+					       <!-- Email -->
+					       <li class="button-wrap"><a class="addthis_button_email" addthis:url="http://<?php echo $_SERVER['SERVER_NAME']."/".$banner_cat_name;?>/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Email</a></li>
+					      </ul>
 					</div>
 				</li>
 			</ul>

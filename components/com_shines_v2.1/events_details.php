@@ -60,6 +60,17 @@ $rec         = $objevdetail->fetch_eventdetail_time($eid);
 $title = $objevdetail->fetch_eventdetail_time($eid);
 /* code end by rinkal for page title */
 
+$catId = $_REQUEST['catId'];
+if($catId == "34"){
+ 	$banner_cat_name = "events";
+}else{
+	 $loc_cat = mysql_query("select alias from jos_categories where id=".$catId);
+	 while($bann_cat_name = mysql_fetch_assoc($loc_cat)){
+	   $banner_cat_name = $bann_cat_name['alias'];
+	 }
+}
+
+
 header('Content-Type:text/html;charset=utf-8');
 ?>
 
