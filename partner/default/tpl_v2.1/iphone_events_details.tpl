@@ -1,24 +1,24 @@
-<?php
-	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-	if(stripos($ua,'android') == true){ ?>
-	<div class="iphoneads" style="vertical-align:bottom;">
-	<?php m_show_banner('android-events-screen'); ?>
-	</div>
-<?php }else{?>
-	<div class="iphoneads" style="vertical-align:bottom;">
-	<?php m_show_banner('iphone-events-screen'); ?>
-	</div>
-<?php } ?>
+		<?php
+			/* Banner Code */
+			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+			if(stripos($ua,'android') == true){ ?>
+			<div class="iphoneads" style="vertical-align:bottom;">
+			<?php m_show_banner('android-events-screen'); ?>
+			</div>
+		<?php }else{?>
+			<div class="iphoneads" style="vertical-align:bottom;">
+			<?php m_show_banner('iphone-events-screen'); ?>
+			</div>
+		<?php } ?>
 
 <div id="main" role="main" ontouchstart="touchStart(event,'list');"  ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 	<ul id="placesList" class="mainList">
 		<li>
+
 			<?php 
-			while($row = mysql_fetch_array($rec))
-			{	
+			while($row = mysql_fetch_array($rec)){	
 				$rowvevdetail = $objevdetail->fetch_eventdetail_data($row['eventdetail_id']);
-				if ((int) ($rowvevdetail['location']))
-				{
+				if ((int) ($rowvevdetail['location'])){
 					$rowlocdetail =	$objevdetail->fetch_location_detail($rowvevdetail['location']);
 					$lat2 = $rowlocdetail['geolat'];
 					$lon2 = $rowlocdetail['geolon'];
@@ -100,16 +100,16 @@
 					<div id="share-wrapper">
 						<ul class="share-inner-wrp">
 							<!-- Facebook -->
-							<li class="button-wrap"><a class="addthis_button_facebook ">Facebook</a></li>
+							<li class="button-wrap"><a  class="addthis_button_facebook" addthis:url="http://<?php echo $_SERVER['SERVER_NAME'];?>/events/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Facebook</a></li>
 							
 							<!-- Twitter -->
-							<li class="button-wrap"><a class="addthis_button_twitter">Tweet</a></li>
+							<li class="button-wrap"><a class="addthis_button_twitter" addthis:url="http://<?php echo $_SERVER['SERVER_NAME'];?>/events/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Tweet</a></li>
 							
 							<!-- Google -->
-							<li class="button-wrap"><a class="addthis_button_google_plusone_share">Google +</a></li>
+							<li class="button-wrap"><a class="addthis_button_google_plusone_share" addthis:url="http:<?php echo $_SERVER['SERVER_NAME'];?>/events/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Google +</a></li>
 							
 							<!-- Email -->
-							<li class="button-wrap"><a class="addthis_button_email">Email</a></li>
+							<li class="button-wrap"><a class="addthis_button_email" addthis:url="http://<?php echo $_SERVER['SERVER_NAME'];?>/events/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Email</a></li>
 						</ul>
 					</div>
 				</li>
