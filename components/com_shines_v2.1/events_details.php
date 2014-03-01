@@ -61,16 +61,24 @@ $title = $objevdetail->fetch_eventdetail_time($eid);
 /* code end by rinkal for page title */
 
 $catId = $_REQUEST['catId'];
-if($catId == "34"){
- 	$banner_cat_name = "events";
-}else{
-	 $loc_cat = mysql_query("select alias from jos_categories where id=".$catId);
-	 while($bann_cat_name = mysql_fetch_assoc($loc_cat)){
-	   $banner_cat_name = $bann_cat_name['alias'];
-	 }
-}
 
-
+$param_res = "SELECT `parent`,`id`,`params`,`alias` FROM `jos_menu` WHERE `link`='index.php?option=com_jevents&view=week&task=week.listevents' and parent='0' AND published = '1'";
+	$menu_param=mysql_query($param_res);
+	
+	while($menu_ids = mysql_fetch_array($menu_param)){
+		$iParams = new JParameter($menu_ids[2]);
+		$categories = $iParams->get('catid0');
+		$sub_res = "SELECT `id` FROM `jos_categories` WHERE (parent_id='".$categories."' or id='".$categories."') AND published = '1'";
+		$sub_menu_id = mysql_query($sub_res);
+		while($sub_cat_ids = mysql_fetch_array($sub_menu_id)){ 
+			//echo "<pre>";
+			//print_r($sub_cat_ids);
+			if($sub_cat_ids[0] == $catId){
+				$cat_name = $menu_ids[3];
+			}
+		}
+		
+	}
 header('Content-Type:text/html;charset=utf-8');
 ?>
 

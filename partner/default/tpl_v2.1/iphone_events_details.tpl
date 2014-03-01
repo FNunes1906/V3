@@ -1,5 +1,4 @@
-<?php
-	/* Banner Code */
+<?php 
 	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 	if(stripos($ua,'android') == true){ ?>
 	<div class="iphoneads" style="vertical-align:bottom;">
@@ -14,11 +13,12 @@
 <div id="main" role="main" ontouchstart="touchStart(event,'list');"  ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 	<ul id="placesList" class="mainList">
 		<li>
-
 			<?php 
-			while($row = mysql_fetch_array($rec)){	
+			while($row = mysql_fetch_array($rec))
+			{	
 				$rowvevdetail = $objevdetail->fetch_eventdetail_data($row['eventdetail_id']);
-				if ((int) ($rowvevdetail['location'])){
+				if ((int) ($rowvevdetail['location']))
+				{
 					$rowlocdetail =	$objevdetail->fetch_location_detail($rowvevdetail['location']);
 					$lat2 = $rowlocdetail['geolat'];
 					$lon2 = $rowlocdetail['geolon'];
@@ -98,18 +98,28 @@
 				<li>
 					<span id="myshare" class="button2 small2"><?php echo JText::_('TW_SHARE');?></span>
 					<div id="share-wrapper">
-						<ul class="share-inner-wrp">
+						 <ul class="share-inner-wrp">
+						
+						<?php 
+						if($cat_name != ""){
+							$url = "http://".$_SERVER['SERVER_NAME']."/".$cat_name."/icalrepeat.detail/". $toyear."/".$tomonth."/".$today."/".$eid;
+						}else{
+							$url = "http://".$_SERVER['SERVER_NAME'];
+						}
+						?>						
+						
 					       <!-- Facebook -->
-					       <li class="button-wrap"><a  class="addthis_button_facebook" addthis:url="http://<?php echo $_SERVER['SERVER_NAME']."/".$banner_cat_name;?>/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Facebook</a></li>
+					       <li class="button-wrap"><a  class="addthis_button_facebook" addthis:url="<?php echo $url;?>">Facebook</a></li>
 					       
 					       <!-- Twitter -->
-					       <li class="button-wrap"><a class="addthis_button_twitter" addthis:url="http://<?php echo $_SERVER['SERVER_NAME']."/".$banner_cat_name;?>/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Tweet</a></li>
+					       <li class="button-wrap"><a class="addthis_button_twitter" addthis:url="<?php echo $url;?>">Tweet</a></li>
 					       
 					       <!-- Google -->
-					       <li class="button-wrap"><a class="addthis_button_google_plusone_share" addthis:url="http://<?php echo $_SERVER['SERVER_NAME']."/".$banner_cat_name;?>/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Google +</a></li>
+					       <li class="button-wrap"><a class="addthis_button_google_plusone_share" addthis:url="<?php echo $url;?>">Google +</a></li>
 					       
 					       <!-- Email -->
-					       <li class="button-wrap"><a class="addthis_button_email" addthis:url="http://<?php echo $_SERVER['SERVER_NAME']."/".$banner_cat_name;?>/icalrepeat.detail/<?php echo $toyear.'/'.$tomonth.'/'.$today.'/'.$eid;?>">Email</a></li>
+					       <li class="button-wrap"><a class="addthis_button_email" addthis:url="<?php echo $url;?>">Email</a></li>
+						
 					      </ul>
 					</div>
 				</li>
@@ -122,3 +132,4 @@
 </div>
 <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-530f25e212b3622b"></script>
+

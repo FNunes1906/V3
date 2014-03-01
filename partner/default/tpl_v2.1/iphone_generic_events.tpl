@@ -65,7 +65,7 @@
 					}else{
 						if($imagecount<5){?> 
 					    	<li>
-							<a href="/components/com_shines_v2.1/events_details.php?eid=<?php echo $fearow['rp_id'];?>&y=<?php echo $fearow['Eyear'];?>&m=<?php echo $fearow['Emonth'];?>&d=<?php echo $fearow['EDate'];?>"><img src="<?php echo $singleimagearray[0];?>" /></a>
+							<a href="/components/com_shines_v2.1/events_details.php?eid=<?php echo $fearow['rp_id'];?>&y=<?php echo $fearow['Eyear'];?>&m=<?php echo $fearow['Emonth'];?>&d=<?php echo $fearow['EDate'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>&catId=<?php echo $cat_id;?>"><img src="<?php echo $singleimagearray[0];?>" /></a>
 					    		<div class="flex-caption">
 					    			<h1><?php echo $fearow['summary'];?></h1>
 					    			<h2><?php echo $fearow['title'];?></h2>
@@ -96,10 +96,10 @@
 	<!--Code for Event Category drop down Yogi Start -->
 		<form id="event_cat_form" class="cls_event_cat_form" autocomplete="off">
 			<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
-				<option value="<?php echo $_REQUEST['category_id'];?>"><?php echo strtoupper(JText::_('DD_CATEGORIES'));?></option>
+				<option value="<?php echo $_REQUEST['category_id'];?>"><?php echo (JText::_('DD_CATEGORIES'));?></option>
 				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
 					<option value="<?php echo $row_cat['id'];?>"<?php if(isset($cat_id) && $row_cat['id'] == $cat_id) echo "selected='selected'";?>>
-						<?php echo strtoupper($row_cat['name']);?>
+						<?php echo ucfirst($row_cat['name']);?>
 					</option>
 				<?php }?>
 			</select>
