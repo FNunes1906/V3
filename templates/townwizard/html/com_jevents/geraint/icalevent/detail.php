@@ -108,11 +108,14 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
         <div class="evtTmb fr"></div>
         <div style="text-transform: capitalize;" class="bold"><?php echo $lc_title; ?></div>
        	<div class="map fr">
-			<div id="map_canvas" style="width:200px; height:156px;margin:5px 0px 5px 5px;"></div>
+		    <?php 
+		    $replace = array("#","&");
+		    $new_lc_street = str_replace($replace, "", $lc_street);?>
+		   <a href="https://maps.google.com/maps?q=<?php echo $new_lc_street ?>+<?php echo $lc_city ?>+<?php echo $lc_state ?>+<?php echo $lc_country ?>+<?php echo $lc_postcode ?>&hl=<?php echo $map_lang;?>&z=<?php echo $lc_geozoom;?>" target="_blank"><div id="map_canvas" style="width:200px; height:156px;margin:5px 0px 5px 5px;"></div></a>
 		</div>
 	    <p class="desc"><?php echo $ev_desc; ?></p>
         <div class="address">
-			<?php include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
+			<?php  include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
 			<div>
 				<?php 
 				$replace = array("#","&");

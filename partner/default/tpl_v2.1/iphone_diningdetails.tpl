@@ -1,5 +1,5 @@
  <div id="main" role="main">
-	<ul id="placesList" class="mainList" ontouchstart="touchStart(event,'list');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
+	<ul id="placesList" class="mainList">
 		<li>
 			<?php while($row = mysql_fetch_array($rec))	{
 				$lat2=$row['geolat'];

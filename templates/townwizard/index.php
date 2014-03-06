@@ -41,8 +41,19 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 <meta name="description" content="<?php echo $var->extra_meta; ?>" />
 <meta property="og:image" content="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/logo/logo.png"/>
 
-<!-- set css and js path for new design v3 -->
+<?php
+// CODE FOR EVENT DETAIL DESCRIPTION TO SHARING DETAIL
+if(JRequest::getVar('task') == 'icalrepeat.detail'){
+	if($_REQUEST['evid'] != ""){
+		$query = mysql_query("SELECT * FROM `jos_jevents_vevdetail` where evdet_id = (SELECT `eventdetail_id` FROM `jos_jevents_repetition` WHERE `rp_id` = ".$_REQUEST['evid'].")");
+		$data = mysql_fetch_assoc($query);
+		if($data['description'] !=""){?>
+			<meta property="og:description" content="<?php echo strip_tags($data['description']); ?>"/>
+	<?php }else{ ?>
+			<meta property="og:description" content="&nbsp;"/>
+<?php }}}?>
 
+<!-- set css and js path for new design v3 -->
 <meta name="viewport" content="width=device-width;initial-scale = 1.0,maximum-scale = 1.0" />
 <link rel="stylesheet" type="text/css" href="<?php echo TOWNWIZARD_TMPL_PATH ?>/css/fonts.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo TOWNWIZARD_TMPL_PATH ?>/css/core.css" />
