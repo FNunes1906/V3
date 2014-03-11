@@ -764,8 +764,8 @@ li.textbox a img{max-width:100%;}
     text-decoration: none;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
     text-transform: uppercase;
-    width: 65px;
-   
+    width: 78px;
+    float: right;
 }
 
 
@@ -847,3 +847,5 @@ ul.btnList2 li span {display: block; text-decoration: none;}
 	text-decoration: none;
 	display: block;
 }
+#main ul.mainList ul.share-inner-wrpr li{border: none;float: left;padding: 0 9px;}
+#main ul.mainList ul.share-inner-wrpr{margin: 0 auto; overflow: hidden; padding: 0;width: 136px;}

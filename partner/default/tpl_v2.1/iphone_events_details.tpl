@@ -92,9 +92,8 @@
 					</a>
 				</li> -->
 				<li>
-					<a href="javascript:linkClicked('APP30A:FBCHECKIN:34.13828278:-118.35331726')" class="button2 small2"><?php echo JText::_('CHECK_IN');?></a>
-				</li>
-				
+     				<a href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2;?>:<?php echo $lon2;?>')" class="button2 small2"><?php echo JText::_('CHECK_IN');?></a>
+    			</li>
 				<li>
 					<span id="myshare" class="button2 small2"><?php echo JText::_('TW_SHARE');?></span>
 					<div id="share-wrapper">

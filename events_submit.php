@@ -258,10 +258,10 @@ function checkPostParameter($postValue){
 		$msg=JText::_('VALID_EV_USER');
 		return false;
 	}
-	if(!isValidEmail($postValue['custom_anonemail'])){ 
+	/*if(!isValidEmail($postValue['custom_anonemail'])){ 
 		$msg=JText::_('VALID_EMAIL');
 		return false;
-		}
+		}*/
 	return true;
 }?>
 
@@ -708,7 +708,7 @@ text-decoration:none;
 	</tr>
 	<tr class="jevplugin_anonemail">
 		<td valign="top"  width="130" align="left"><?php echo JText::_('JEV_YOUREMAIL'); ?></td>
-		<td colspan="3"><input size="41" type="text" name="custom_anonemail" id="custom_anonemail" value="<?php if(isset($_SESSION['custom_anonemail'])) echo $_SESSION['custom_anonemail']?>" /></td>
+		<td colspan="3"><input size="41" type="email" name="custom_anonemail" id="custom_anonemail" value="<?php if(isset($_SESSION['custom_anonemail'])) echo $_SESSION['custom_anonemail']?>" /></td>
 	</tr>
 	
 	<!--#DD#-->
