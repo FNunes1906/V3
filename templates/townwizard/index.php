@@ -45,13 +45,25 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 // CODE FOR EVENT DETAIL DESCRIPTION TO SHARING DETAIL
 if(JRequest::getVar('task') == 'icalrepeat.detail'){
 	if($_REQUEST['evid'] != ""){
-		$query = mysql_query("SELECT * FROM `jos_jevents_vevdetail` where evdet_id = (SELECT `eventdetail_id` FROM `jos_jevents_repetition` WHERE `rp_id` = ".$_REQUEST['evid'].")");
+		$query = mysql_query("SELECT `description` FROM `jos_jevents_vevdetail` where evdet_id = (SELECT `eventdetail_id` FROM `jos_jevents_repetition` WHERE `rp_id` = ".$_REQUEST['evid'].")");
 		$data = mysql_fetch_assoc($query);
-		if($data['description'] !=""){?>
-			<meta property="og:description" content="<?php echo strip_tags($data['description']); ?>"/>
-	<?php }else{ ?>
-			<meta property="og:description" content="&nbsp;"/>
-<?php }}}?>
+			if($data['description'] !=""){?>
+				<meta property="og:description" content="<?php echo strip_tags($data['description']); ?>"/>
+			<?php }
+	}
+// ARTICLE AND BLOG SHARING
+}else if(JRequest::getVar('option') == 'com_content' && JRequest::getVar('view') == 'article'){
+	$cleanid = explode(":",$_REQUEST['id']);
+	if($_REQUEST['id'] != ""){
+		$query = mysql_query("SELECT `introtext`,`fulltext` FROM `jos_content` where `id` = ".$cleanid[0]);
+		$data = mysql_fetch_assoc($query);
+		if(isset($data) && $data !=""){ ?>
+			<meta property="og:description" content="<?php echo strip_tags($data['introtext'].$data['fulltext']); ?>"/>
+		<?php }
+	}
+}else { ?>
+ 	<meta property="og:description" content="&nbsp;"/>
+<?php } ?>
 
 <!-- set css and js path for new design v3 -->
 <meta name="viewport" content="width=device-width;initial-scale = 1.0,maximum-scale = 1.0" />
