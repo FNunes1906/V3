@@ -97,11 +97,13 @@
 		<form id="event_cat_form" class="cls_event_cat_form" autocomplete="off">
 			<select name="category_id" onChange="redirecturlcat(this.value)" class="event_cat_drop">
 				<option value="<?php echo $_REQUEST['category_id'];?>"><?php echo (JText::_('DD_CATEGORIES'));?></option>
-				<?php while($row_cat = mysql_fetch_array($result_event_cat)){?>
-					<option value="<?php echo $row_cat['id'];?>"<?php if(isset($cat_id) && $row_cat['id'] == $cat_id) echo "selected='selected'";?>>
-						<?php echo ucfirst($row_cat['name']);?>
-					</option>
-				<?php }?>
+				<?php while($row_cat = mysql_fetch_array($result_event_cat)){
+					if($row_cat['id'] != $_REQUEST['category_id']){?>
+						<option value="<?php echo $row_cat['id'];?>"<?php if(isset($cat_id) && $row_cat['id'] == $cat_id) echo "selected='selected'";?>>
+							<?php echo ucfirst($row_cat['name']);?>
+						</option>
+				<?php }
+				 }?>
 			</select>
 			<input type="hidden" name="hdn_subcat_id" id="hdn_subcat_id" value="<?php echo $_REQUEST['subcat_id'];?>"/>
 		</form>
