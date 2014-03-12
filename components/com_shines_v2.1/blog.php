@@ -109,7 +109,7 @@ if(isset($cat_id) && $cat_id!=''){
 		 	while($data=mysql_fetch_array($param))
 			{ ?>
 				<li style="text-align:center;" id="blog_text">
-					<div class="contentheading"><?php echo $data['title'] ?></div>
+					<a href="blog_details.php?id=<?php echo $data['id'] ?>&category_id=<?php echo $cat_id ?>"><div class="contentheading"><?php echo $data['title'] ?></div></a>
 					
 					<p><?php echo $data['introtext'] ?></p><br/>
 					<?php if($data['fulltext']!=''){ ?>

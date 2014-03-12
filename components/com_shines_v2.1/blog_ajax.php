@@ -27,7 +27,7 @@ if(mysql_num_rows($recblogdata) > 0)
 		$b_full = $data["fulltext"];
 		$b_id = $data["id"];
 		
-		$code = "<li style='text-align:center;' id='blog_text'><div class='contentheading'>$b_title</div><p>$b_intro</p>";
+		$code = "<li style='text-align:center;' id='blog_text'><a href='blog_details.php?id=$b_id&category_id=$cat_id'><div class='contentheading'>$b_title</div></a><p>$b_intro</p>";
 		if($b_full!=''){
 			$code.="<br/><a class='readmore' href='blog_details.php?id=$b_id&category_id=$cat_id'>$readmore</a><br/><br/></li>";
 		}

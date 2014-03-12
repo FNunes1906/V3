@@ -4,7 +4,7 @@ include("connection.php");
 
 $todaydate = date("Y-m-j",strtotime("+1 day"));
 $today = date("Y-m-d G:i:s");
-$sql = "select jc.*,jcf.ordering from `jos_content` jc,`jos_categories` jcs,`jos_content_frontpage` jcf where jc.id = jcf.content_id and jcs.id = jc.catid and jc.state=1 and (jc.publish_down>'".$today."' or jc.publish_down='0000-00-00 00:00:00') and (jc.publish_up <= '".$todaydate."' or jc.publish_up='0000-00-00 00:00:00') order by jcf.ordering";
+$sql = "select jc.*,jcf.ordering from `jos_content` jc,`jos_categories` jcs,`jos_content_frontpage` jcf where jc.id = jcf.content_id and (jcs.id = jc.catid || jc.catid=0) and jc.state=1 and (jc.publish_down>'".$today."' or jc.publish_down='0000-00-00 00:00:00') and (jc.publish_up <= '".$todaydate."' or jc.publish_up='0000-00-00 00:00:00') GROUP BY jc.id order by jcf.ordering";
 $param = mysql_query($sql);
   
 header('Content-type: text/html;charset=utf-8', true);
@@ -65,7 +65,7 @@ $pagemeta =mysql_fetch_array($pagemeta_res);
 			 	while($data = mysql_fetch_array($param))
 				{ ?>
 					<li style="text-align:center;" id="blog_text">
-						<div class="contentheading"><?php echo $data['title'] ?></div>
+						<a href="blog_details.php?id=<?php echo $data['id'] ?>&category_id=<?php echo $data['catid'] ?>"><div class="contentheading"><?php echo $data['title'] ?></div></a>
 						<p><?php echo $data['introtext'] ?></p>
 						<?php if($data['fulltext']!=''){ ?>
 						<a class="readmore" href="blog_details.php?id=<?php echo $data['id'] ?>&category_id=<?php echo $data['catid'] ?>"><?php echo JText::_('APP_READMORE');?></a>

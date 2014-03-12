@@ -339,7 +339,7 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
 					?>
 
 					<li class="block_link">
-						<a style="padding-bottom: 10px;" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>">
+						<a style="padding-bottom: 10px;" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>&catId=<?php echo $cat_id;?>">
 							<h1><?php echo $rowvevdetail['summary'];?></h1>
 							<h2 style="padding: 3px 0px 7px;"><?php echo $rowlocdetail['title'];?></h2>
 							<!--Code for 24 vs 12 hour time format for LISTING Yogi -->
@@ -355,9 +355,9 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
 									if(stripos($ua,'android') != true) { ?>
 										<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')"><?php echo JText::_('CHECK_IN'); ?></a></li>
 									<?php }	?>	
-								<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><?php echo JText::_('MORE_INFO'); ?></a></li>
+								<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>&catId=<?php echo $cat_id;?>"><?php echo JText::_('MORE_INFO'); ?></a></li>
 							</ul>
-						<a href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><div style="width: 100%;line-height: 28px;">&nbsp;</div></a></h3> 
+						<a href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>&catId=<?php echo $cat_id;?>"><div style="width: 100%;line-height: 28px;">&nbsp;</div></a></h3> 
 					</li>
 					
 					<?php $displayTime2 = ""; $rowlocdetail['title']=""; ++$n; 
