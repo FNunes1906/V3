@@ -4,23 +4,23 @@
 $lang =& JFactory::getLanguage();
 $lan = $lang->getName();
 if($lan=="Español"){
-	$lan1="es";
+	$map_lang="es";
 }else if($lan=="Croatian(HR)"){
-	$lan1="hr";
+	$map_lang="hr";
 }else if($lan=="Nederlands - nl-NL"){
-	$lan1="nl";
+	$map_lang="nl";
 }else if($lan=="Português (Brasil)"){
-	$lan1="pt";
+	$map_lang="pt";
 }else if($lan=="French (Fr)"){
-	$lan1="fr";
+	$map_lang="fr";
 }else{
-	$lan1="en";
+	$map_lang="en";
 }
 /* code ended by rinkal for map in all language */
 ?>
 <html>
 <head>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=<?php echo $lan1?>"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=<?php echo $map_lang?>"></script>
 <script type="text/javascript">
   var geocoder;
   var map;
@@ -72,7 +72,12 @@ function resetLatLngTxtFields(lat, lng){
 	echo "<h2 class='display'>".$this->location->title. "</h2>";?>
 	
 	<div class="map fr">
-	<div id="map_canvas" style="width:200px; height:156px"></div>
+		<?php 
+		$replace = array("#","&");
+		$new_lc_street = str_replace($replace, "", $this->location->street);?>
+		<a href="https://maps.google.com/maps?q=<?php echo $new_lc_street ?>+<?php echo $this->location->city ?>+<?php echo $this->location->state ?>+<?php echo $this->location->country ?>+<?php echo $this->location->postcode ?>&hl=<?php echo $map_lang;?>" target="_blank">
+			<div id="map_canvas" style="width:200px; height:156px;margin:5px 0px 5px 5px;"></div>
+		</a>
 	</div>
 	<?php
 	if (strlen($this->location->phone)>0) {
@@ -99,13 +104,12 @@ function resetLatLngTxtFields(lat, lng){
 		echo $this->location->street."<br/>";
 		echo $this->location->category."<br/>";
 	}
-	else {
-		if (strlen($this->location->street)>0) echo "<div>".$this->location->street."</div>";
-		if (strlen($this->location->city)>0) echo "<div>".$this->location->city."</div>";
-		if (strlen($this->location->state)>0) echo "<div>".$this->location->state.", ".$this->location->postcode."</div>";
-		
-		
-	}?>
+	else { ?> <a href="https://maps.google.com/maps?q=<?php echo $new_lc_street ?>+<?php echo $this->location->city ?>+<?php echo $this->location->state ?>+<?php echo $this->location->country ?>+<?php echo $this->location->postcode ?>&hl=<?php echo $map_lang;?>" target="_blank">
+	<?php	
+	    if (strlen($this->location->street)>0) echo $this->location->street."<br/>";
+		if (strlen($this->location->city)>0) echo $this->location->city."<br/>";
+		if (strlen($this->location->state)>0) echo $this->location->state.", ".$this->location->postcode;
+	?> </a> <?php }?> 
 
 </div>
 	<?php

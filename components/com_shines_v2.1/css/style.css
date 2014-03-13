@@ -734,6 +734,7 @@ li.textbox a img{max-width:100%;}
 	border: 0 none;
 	font-size: 14px;
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+	width:135px;
 }
 
 .event_cat_drop option{

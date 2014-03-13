@@ -2173,7 +2173,7 @@ h1.upload {
 }
 
 #Try3 .contentheading h2 {
-    color: #0B121F;
+    color: #00467F;
     font-family: 'AllerDisplayRegular',Arial,sans-serif;
     font-size: 15px;
     line-height: 20px;
@@ -2426,7 +2426,7 @@ dd.message li{
 }
 
 #blog-page h3{
-	color: #0B121F;
+	color: #00467F;
     font-family: 'AllerDisplayRegular',Arial,sans-serif;
     font-size: 15px;
     line-height: 20px;
@@ -2450,7 +2450,7 @@ dd.message li{
 }
 
 #blog-page,.cont .contentpaneopen{
-	font-size: 13.5px;
+	font-size: 12px;
 	line-height: 17px;
 	
 }

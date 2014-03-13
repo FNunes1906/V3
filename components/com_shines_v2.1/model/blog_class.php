@@ -5,7 +5,7 @@ class blog {
 
 	// Fetch blog data from the content table
 	function fetch_blog_data($todaydate, $today,$start_at,$end_at,$cat_id) {
-		$sql = "select jc.* from `jos_content` jc, `jos_categories` jcs where jcs.id = jc.catid and jc.state=1 and (jc.publish_down>'".$today."' or jc.publish_down='0000-00-00 00:00:00') and (jc.publish_up <= '".$todaydate."' or jc.publish_up='0000-00-00 00:00:00') ";
+		$sql = "select jc.* from `jos_content` jc, `jos_categories` jcs where jcs.id = jc.catid and jc.state=1 AND jcs.published=1 and (jc.publish_down>'".$today."' or jc.publish_down='0000-00-00 00:00:00') and (jc.publish_up <= '".$todaydate."' or jc.publish_up='0000-00-00 00:00:00') ";
 		if($cat_id==''){
 			$sql.="and jcs.title='blog'";
 		}else{
