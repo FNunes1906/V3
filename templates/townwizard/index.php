@@ -44,25 +44,32 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 <?php
 // CODE FOR EVENT DETAIL DESCRIPTION TO SHARING DETAIL
 if(JRequest::getVar('task') == 'icalrepeat.detail'){
-	if($_REQUEST['evid'] != ""){
-		$query = mysql_query("SELECT `description` FROM `jos_jevents_vevdetail` where evdet_id = (SELECT `eventdetail_id` FROM `jos_jevents_repetition` WHERE `rp_id` = ".$_REQUEST['evid'].")");
-		$data = mysql_fetch_assoc($query);
-			if($data['description'] !=""){?>
-				<meta property="og:description" content="<?php echo strip_tags($data['description']); ?>"/>
-			<?php }
-	}
+        if($_REQUEST['evid'] != ""){
+                $query = mysql_query("SELECT `description` FROM `jos_jevents_vevdetail` where evdet_id = (SELECT `eventdetail_id` FROM `jos_jevents_repetition` WHERE `rp_id` = ".$_REQUEST['evid'].")");
+                $data = mysql_fetch_assoc($query);
+                        $fetchimage = explode('<img src="',$data['description']);
+                        $finalimage = explode('" />',$fetchimage[1]);
+                        if($data['description'] !=""){?>
+                                <meta property="og:description" content="<?php echo strip_tags($data['description']); ?>"/>
+                                <meta id="ogimage" property="og:image" content="<?php echo $finalimage[0]; ?>"/>
+                        <?php }
+        }
 // ARTICLE AND BLOG SHARING
 }else if(JRequest::getVar('option') == 'com_content' && JRequest::getVar('view') == 'article'){
-	$cleanid = explode(":",$_REQUEST['id']);
-	if($_REQUEST['id'] != ""){
-		$query = mysql_query("SELECT `introtext`,`fulltext` FROM `jos_content` where `id` = ".$cleanid[0]);
-		$data = mysql_fetch_assoc($query);
-		if(isset($data) && $data !=""){ ?>
-			<meta property="og:description" content="<?php echo strip_tags($data['introtext'].$data['fulltext']); ?>"/>
-		<?php }
-	}
+        $cleanid = explode(":",$_REQUEST['id']);
+        if($_REQUEST['id'] != ""){
+                $query = mysql_query("SELECT `introtext`,`fulltext` FROM `jos_content` where `id` = ".$cleanid[0]);
+                $data = mysql_fetch_assoc($query);
+                $fetchimage = explode('<img src="',$data['introtext'].$data['fulltext']);
+                $finalimage = explode('" />',$fetchimage[1]);
+                if(isset($data) && $data !=""){ ?>
+                        <meta property="og:description" content="<?php echo strip_tags($data['introtext'].$data['fulltext']); ?>"/>
+                        <meta id="ogimage" property="og:image" content="<?php echo $finalimage[0]; ?>"/>
+                <?php }
+        }
 }else { ?>
- 	<meta property="og:description" content="&nbsp;"/>
+        <meta property="og:description" content="&nbsp;"/>
+         <meta property="og:image" content="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/logo/logo.png"/>
 <?php } ?>
 
 <!-- set css and js path for new design v3 -->
@@ -338,7 +345,6 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
                   <?php endif;?>
                 </div>
                   <?php endif;?>
-
                 
                 <?php if($var->youtube != "" || $var->twitter != ""):?>
                   <div id="SideSocial" class="sect">
@@ -357,9 +363,10 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
                             <div class="ad space">
                                 <jdoc:include type="modules" name="banner2" style="rounded" />
                             </div>
-                   
                 </div>
-                <?php endif; ?>
+               <?php else: ?>
+     				<img alt="Default Banner" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/Left_banner.png" />
+               <?php endif; ?>
         </div>
 	<?php endif; ?>
   	  <!-- Left Column End -->
@@ -511,7 +518,9 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 		  	  	<div class="ad space">
 		  	  		 <jdoc:include type="modules" name="banner3" style="rounded" />
 		        </div>
-		       <?php endif; ?>
+		       <?php else: ?>
+      			<img alt="Default Banner" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/Right_banner.png" />
+         		<?php endif; ?>
 
 		  	  	<!-- 300 x 100 Banner Ad End -->
 
