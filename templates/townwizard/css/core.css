@@ -1,6 +1,5 @@
 /* Resets and global Styles */
 
-
 * { margin:0; padding:0;outline:none; }
 .sWidth { max-width:970px; min-width:758px; padding:0 5px; margin:auto; }
 .fl { float:left; }
@@ -932,12 +931,12 @@ a.saved span {
   font-size:12px;
 }
 .rotator .gallery .pag {
-  position:absolute;
-  bottom:9px; 
-  left:50%;
-  margin-left:-45px;
-  text-align:center;
-  z-index:900;
+	position: relative;
+	margin: -20px auto auto;
+	text-align: center;
+	z-index: 900;
+	width: 185px;
+	overflow: hidden;
 }
 
  .contentpaneopen img.caption{
@@ -945,13 +944,12 @@ a.saved span {
  }
 
 .rotator .gallery .pag a {
-  background:#666;
-  display:block;
-  float:left;
-  text-indent:-20000px;
-  width:7px;
-  height:7px;
-  margin:0 10px;
+	background:#666;
+	display:inline-block;
+	text-indent:-20000px;
+	width:7px;
+	height:7px;
+	margin:0 10px;
 }
 .rotator .gallery .pag a.selected, 
 .rotator .gallery .pag a:hover {
