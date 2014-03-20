@@ -20,6 +20,9 @@ switch ($task) {
 	case 'globalseting':
 		globalseting();
 		break;	
+	case 'advanceseting':
+		advanceseting();
+		break;	
 	default:		
 		listmeta( );
 		break;
@@ -153,7 +156,7 @@ function globalseting(){
   <tr>
     <td width="20%" class="key"><label>google analytics code:</label></td>
     <td width="80%"><input  style="vertical-align: top;" type="text" name="googgle_map_api_keys" class="inputbox" size="50" maxlength="25" value="<?php echo $row['googgle_map_api_keys'];?>" />
-    <img src="../partner/<?php echo $_SESSION['partner_folder_name'];?>/images/edit_f2.png" height="18" title="Enter Only UA code in the box, Example: UA-29293639-3" />
+    <img src="../administrator/templates/khepri/images/tooltip.png" height="18" title="Enter Only UA code in the box, Example: UA-29293639-3" />
     </td>
   </tr>
   <tr>
@@ -245,7 +248,7 @@ function globalseting(){
   <tr>
 	<td width="20%" class="key"><label>Footer Menu Link:</label></td>
 	<td width="80%"><input  style="vertical-align: top;" type="text" name="Footer_Menu_Link" class="inputbox" size="50" value="<?php echo $row['Footer_Menu_Link'];?>" />
-	<img src="../partner/<?php echo $_SESSION['partner_folder_name'];?>/images/edit_f2.png" height="18" title="Enter URL with http://, Example: http://www.townwizard.com" /> </td>
+	<img src="../administrator/templates/khepri/images/tooltip.png" height="18" title="Enter URL with http://, Example: http://www.townwizard.com" /> </td>
   </tr>
     <tr>
 	<td width="20%" class="key"><label>Homepage Slider Events Cat:</label></td>
@@ -363,6 +366,38 @@ function save(){
 			$mainframe->redirect( 'index.php?option=com_pagemeta' , 'Global Settings updated sucessfully');
 		}	
 	}
+	elseif(isset($_POST['advance'])){
+		echo "<pre>";
+		print_r($_FILES);
+		echo "</pre>";
+		
+		echo "<pre>";
+		print_r($_POST);
+		echo "</pre>";
+		
+		/*CODE FOR SITEMAP XML FILE UPLOAD BEGIN */
+		if($_FILES["file"]["name"] != ''){
+			$allowedExts = array("xml", "XML");
+			$temp = explode(".", $_FILES["file"]["name"]);
+			$extension = end($temp);
+			if(($_FILES["file"]["type"] == "text/xml") && ($_FILES["file"]["size"] < 6000000) && in_array($extension, $allowedExts)){
+				
+				# Assigning default file name as sitemap.xml
+				$xmlFileName = "sitemap.xml";
+				
+				# If sitemap.xml file is already exists then remove it
+				if(file_exists("../partner/".$_SESSION['partner_folder_name']."/images/".$xmlFileName)){
+					unlink("../partner/".$_SESSION['partner_folder_name']."/images/".$xmlFileName);
+				}
+				# Move new uploaded file to partner images folder
+				move_uploaded_file($_FILES["file"]["tmp_name"],"../partner/".$_SESSION['partner_folder_name']."/images/".$xmlFileName);
+			}else{
+				$mainframe->redirect( 'index.php?option=com_pagemeta' , 'Unable to Save, Invalid file type or Upload file size limit exceed. (Maximum file upload limit: 5.5 MB)');
+			}
+		}
+			/*CODE FOR SITEMAP XML FILE UPLOAD END */		
+			$mainframe->redirect( 'index.php?option=com_pagemeta' , 'Advance Settings updated sucessfully');
+	}
 	else{	
 		$query = "INSERT INTO #__pagemeta (`id`, `uri`, `title`, `metadesc`, `keywords`, `extra_meta`) VALUES (NULL, '".$_POST['url']."', '".$_POST['title']."', '".addslashes($_POST['metadesc'])."', '".addslashes($_POST['keywords'])."', '".addslashes($_POST['extra_meta'])."')";
 		
@@ -386,5 +421,32 @@ function remove(){
 		$mainframe->redirect( 'index.php?option=com_pagemeta' , 'Page Meta remove sucessfully');
 	}	
 }
-?>
 
+function advanceseting(){
+	$db	=& JFactory::getDBO();
+	$query = "SELECT * FROM #__pageglobal";
+	$db->setQuery( $query );
+	$row = $db->loadAssoc();
+	$query2 = "SELECT `id`,`name` FROM `jos_categories` WHERE section = 'com_jevents' AND published=1";
+	$db->setQuery( $query2 );
+	$row2 = $db->loadAssocList();?>
+	<!--XML Popup setting BEGIN-->
+	<!--XML Popup setting END-->
+
+	<form method="post" action="" name="adminForm" enctype="multipart/form-data">
+		<input type="hidden" name="task" value="" />	
+		<input type="hidden" name="advance"  value="1" />
+		<table class="pagemetatable" cellspacing="1">
+			<tr>
+				<td width="20%" class="key"><label>Sitemap XML:</label></td>
+				<td width="80%">
+					<?php if(file_exists("../partner/".$_SESSION['partner_folder_name']."/images/sitemap.xml")){
+						echo "SITEMAP.XML";
+					}?>
+					<input style="vertical-align: top;height:auto" type="file" name="file" id="metastyle" class="inputbox" size="50" />
+					<img src="../administrator/templates/khepri/images/tooltip.png" height="18" title="You may upload your [sitemap.xml] file here" />
+				</td>
+			</tr>
+		</table>
+	</form>
+<?php }?>

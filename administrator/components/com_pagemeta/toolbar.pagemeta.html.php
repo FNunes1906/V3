@@ -16,8 +16,14 @@ class TOOLBAR_pagemeta {
 		JToolBarHelper::save();		
 		JToolBarHelper::cancel();
 	}
+	function _ADVANCE() {
+		JToolBarHelper::title( JText::_( 'Advance Settings' ) , 'generic.png' );		
+		JToolBarHelper::save();		
+		JToolBarHelper::cancel();
+	}
 	function _DEFAULT() {
-		JToolBarHelper::title( JText::_( 'Page Meta' ), 'generic.png' );			
+		JToolBarHelper::title( JText::_( 'Page Meta' ), 'generic.png' );	
+		JToolBarHelper::custom('advanceseting','advance.png','advance.png','Advance',0,0);		
 		JToolBarHelper::custom('globalseting','config.png','config.png','Global',0,0);
 		JToolBarHelper::editList();
 		JToolBarHelper::deleteList();

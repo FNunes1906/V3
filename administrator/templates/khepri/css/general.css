@@ -622,3 +622,24 @@ table.pagemetatable td {
 	padding-right: 35px;
 	padding-top: 10px;
 }
+
+.pagemetatable input[type="text"]{
+	font-family: calibri,Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    height: 20px;
+	padding-left: 3px;
+}
+.pagemetatable select{
+	font-family: calibri,Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    height: 20px;
+	padding-left:0px;
+}
+.pagemetatable label{
+    font-size: 11.5px;
+}
+.icon-32-advance {
+    background-image: url("../images/toolbar/advance.png");
+}
+
+#element_to_pop_up { display:none; }

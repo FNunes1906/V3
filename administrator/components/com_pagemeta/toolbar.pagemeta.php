@@ -12,6 +12,9 @@ switch($task)
 	case 'globalseting':
 		TOOLBAR_pagemeta::_GLOBAL();
 		break;
+	case 'advanceseting':
+		TOOLBAR_pagemeta::_ADVANCE();
+		break;
 	default:
 		TOOLBAR_pagemeta::_DEFAULT();
 		break;
