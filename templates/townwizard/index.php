@@ -518,7 +518,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 		  	  	<div class="ad space">
 		  	  		 <jdoc:include type="modules" name="banner3" style="rounded" />
 		        </div>
-		       <?php else: ?>
+		       <?php elseif(JRequest::getVar('view') != 'reset'): ?>
       			<img alt="Default Banner" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/Right_banner.png" />
          		<?php endif; ?>
 

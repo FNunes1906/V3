@@ -392,7 +392,7 @@ function save(){
 				# Move new uploaded file to partner images folder
 				move_uploaded_file($_FILES["file"]["tmp_name"],"../partner/".$_SESSION['partner_folder_name']."/images/".$xmlFileName);
 			}else{
-				$mainframe->redirect( 'index.php?option=com_pagemeta' , 'Unable to Save, Invalid file type or Upload file size limit exceed. (Maximum file upload limit: 5.5 MB)');
+				$mainframe->redirect( 'index.php?option=com_pagemeta' , 'Unable to Save, Invalid file type or Upload file size limit exceed. (File size limit: 5 MB)');
 			}
 		}
 			/*CODE FOR SITEMAP XML FILE UPLOAD END */		
@@ -444,7 +444,7 @@ function advanceseting(){
 						echo "SITEMAP.XML";
 					}?>
 					<input style="vertical-align: top;height:auto" type="file" name="file" id="metastyle" class="inputbox" size="50" />
-					<img src="../administrator/templates/khepri/images/tooltip.png" height="18" title="You may upload your [sitemap.xml] file here" />
+					<img src="../administrator/templates/khepri/images/tooltip.png" height="18" title="You may upload your [sitemap.xml] file here. [File size limit: 5 MB]" />
 				</td>
 			</tr>
 		</table>
