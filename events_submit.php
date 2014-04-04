@@ -4,9 +4,6 @@
 //define('JPATH_BASE', dirname(__FILE__) );
 //define( 'DS', DIRECTORY_SEPARATOR );
 
-//echo "<pre>";
-//print_r($_SESSION);
-
 include(JPATH_BASE .DS.'formValidation.php');
 require_once ( JPATH_BASE .DS.'includes'.DS.'defines.php' );
 require_once ( JPATH_BASE .DS.'includes'.DS.'framework.php');
@@ -24,13 +21,6 @@ include_once(JPATH_BASE .DS.'/inc/var.php');
 include_once(JPATH_BASE .DS.'/inc/base.php');
 _init();
 // end v2 code
-
-/*$mainframe =& JFactory::getApplication('site');
-$mainframe->initialise();
-$session = JFactory::getSession();*/
-
-
-
 $jconfig = new JConfig();
 define('DB_HOST', $jconfig->host);
 define('DB_USER',$jconfig->user);
@@ -38,6 +28,8 @@ define('DB_PASSWORD',$jconfig->password);
 define('DB_NAME',$jconfig->db);
 $conn=mysql_connect(DB_HOST,DB_USER,DB_PASSWORD) or die(mysql_error());
 $db=mysql_select_db(DB_NAME) or die(mysql_error());
+
+
 // Query for default ics record.
 $ics_query=mysql_query("select * from jos_jevents_icsfile where isdefault='1' and state='1'");
 $ics_res=mysql_fetch_array($ics_query);
@@ -203,11 +195,14 @@ if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']==
 				$_SESSION['start_12h']="";
 				$_SESSION['publish_down']="";
 				$_SESSION['end_12h']="";
+				$_SESSION['noendtime']="";
+				$_SESSION['allDayEvent']="";
 				$_SESSION['jevcontent']="";
 				$_SESSION['location']="";
 				$_SESSION['custom_anonusername']="";
 				$_SESSION['custom_anonemail']="";
 				$_SESSION['custom_field4']="";
+				$_SESSION['start_ampm']="";
 			}
 	}else{
 				$_SESSION['title']=$_POST['title'];
@@ -239,7 +234,7 @@ if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']==
 #Date          : 27-06-2012
 #Version       : 1.0
 */
-//echo $validCode."hello";
+
 function checkPostParameter($postValue){
 	global $msg;
 	if(!isvalidchar($postValue['title'])){
@@ -321,7 +316,7 @@ function gotoindex(str){
 //alert(str);
 var id=document.getElementById(str).value;
 	if(id=="Cancel") {
-		document.location='/index.php'
+		document.location='/index.php?option=com_jevents&view=week&task=week.listevents&Itemid=97'
 		return false;
 	}
 }
@@ -510,12 +505,13 @@ text-decoration:none;
 	</tr>
 	<tr>
 		<td valign="top" align="left"><?php echo JText::_('JEV_EVCAT'); ?></td>
-		<?php $cat_query=mysql_query("select * from jos_categories where section='com_jevents' and published='1'");?> 
+		<?php $cat_query=mysql_query("select * from jos_categories where section='com_jevents' and published='1'");	?> 
 		<td style="width:200px" >
 			<select name="catid" id="catid">
 				<option value="0" ><?php echo JText::_('JEV_CHOOSE'); ?></option>
 				<?php while($row=mysql_fetch_array($cat_query)) { 
-				if(isset($_SESSION['catid']) == $row['id']){
+				echo $row['name'];
+				if($_SESSION['catid'] == $row['id']){
 					$selectedVal = 'selected';
 				}else{
 					$selectedVal = '';
@@ -644,8 +640,8 @@ text-decoration:none;
 								?>
 
 								<input class="inputbox" type="text" name="end_12h" id="end_12h" size="8" maxlength="8"  value="<?php echo $end_12h_value?>" onChange="check12hTime(this);" />
-								<input type="radio" name="end_ampm" id="endAM" value="am" <?php echo $end_ampm_check['am']?> checked="checked" onClick="toggleAMPM('endAM');"  />am  
-								<input type="radio" name="end_ampm" id="endPM" value="pm" <?php echo $end_ampm_check['pm']?> onClick="toggleAMPM('endPM');"  />pm
+								<input type="radio" name="end_ampm" id="endAM" value="am" <?php echo $end_ampm_check['am']?> onClick="toggleAMPM('endAM');"  />am  
+								<input type="radio" name="end_ampm" id="endPM" value="pm" <?php echo $end_ampm_check['pm']?> checked="checked" onClick="toggleAMPM('endPM');"  />pm
 								
 								<?php }else{
 									if(empty($_SESSION['end_12h'])){ 

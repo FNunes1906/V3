@@ -163,9 +163,21 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 				<?php
 					/*condition for hour format*/ 
 				    if($var->timeformat == "12"){
-				     echo $homeslider1[$i]['time'];
+				     		echo $homeslider1[$i]['time'];
 				    }else{
-				     echo date("H:i", strtotime($homeslider1[$i]['timestart']))." - ".date("H:i", strtotime($homeslider1[$i]['timeend']));
+						$starttime = date("H:i", strtotime($homeslider1[$i]['timestart']));
+						$endtime = date("H:i", strtotime($homeslider1[$i]['timeend']));
+						$displayTime2 = '';
+						 if($starttime=='00:00' && $endtime=='23:59'){   
+							$displayTime2.='All Day Event';
+						}
+						else{
+							$displayTime2.= $starttime;
+							if ($endtime != '23:59'){
+								$displayTime2.="-".$endtime;
+							}
+						}	
+						echo $displayTime2;			
 				    }
 				?>
               </a>

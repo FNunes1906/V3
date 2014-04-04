@@ -5,6 +5,7 @@ defined('_JEXEC') or die('Restricted access');
 global $current_cat;		
 $current_cat =  $this->datamodel->catidList;
 
+$_SESSION['__default']['registry']->_registry['session']['data']->search_fv_ses = '';
 /* Timezone Block Begin August 2013 */
 $timezoneValue 	= $_SESSION['tw_timezone'];
 
@@ -103,7 +104,11 @@ if(isset($_REQUEST['searchdate']) && $_REQUEST['searchdate']!=''){
 				}
 				echo "</div>";
 			}
-		} 
+		$ev_res = $ev_res + $num_events;
+                } 
+                if($ev_res == '0'){
+                        echo "<h3 style='padding-top: 10px; font-size: 15px; padding-left: 0px; margin-left: -5px;'>".JText::_("LOC_RES")."</h3>";
+                } 
 	//CODE END BY AKASH 
 	
 }else{/* Code End by Rinkal */
@@ -140,7 +145,11 @@ if(isset($_REQUEST['searchdate']) && $_REQUEST['searchdate']!=''){
 			}
 			echo "</div>";
 		}
-	} 
+            $ev_res = $ev_res + $num_events;
+            } 
+            if($ev_res == '0'){
+                    echo "<h3 style='padding-top: 10px; font-size: 15px; padding-left: 0px; margin-left: -5px;'>".JText::_("LOC_RES")."</h3>";
+            } 
 	
 	echo "</ul>\n";
 }

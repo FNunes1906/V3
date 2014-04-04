@@ -31,8 +31,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			##end##
 			$displayTime = '';
 
-			if($fearow['timestart']=='12:00 AM' && $fearow['timeend']=='11:59PM')
-            {    $displayTime.='All Day Event';
+			if($fearow['timestart']=='12:00 AM' && $fearow['timeend']=='11:59PM'){
+				$displayTime.='All Day Event';
 			}
 			else{
 			$displayTime.= $fearow['timestart'];
@@ -67,9 +67,22 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 						<?php echo $fearow['Date'];?> &bull; 
 						<?php
 					        if($var->timeformat == "12"){
-					        echo $displayTime;
+					        	echo $displayTime;
 					       }else{
-					        echo date("H:i", strtotime($fearow['timestart']))." - ".date("H:i", strtotime($fearow['timeend']));
+							$starttime = date("H:i", strtotime($fearow['timestart']));
+							$endtime = date("H:i", strtotime($fearow['timeend']));
+							$displayTime2 = '';
+							 if($starttime=='00:00' && $endtime=='23:59'){   
+								$displayTime2.='All Day Event';
+							}
+							else{
+								$displayTime2.= $starttime;
+								if ($endtime != '23:59'){
+									$displayTime2.="-".$endtime;
+								}
+							}	
+							echo $displayTime2;	
+					        	//echo date("H:i", strtotime($fearow['timestart']))." - ".date("H:i", strtotime($fearow['timeend']));
 					       }
       					?>
 						</p>
