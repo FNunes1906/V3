@@ -201,7 +201,9 @@ else {
 				<script type="text/javascript">
 					$(document).ready(function() { 
 						var lpage = 0;
-						$(window).scroll(function() {
+
+						$(window).scroll(function(e) {
+							e.preventDefault();
 							if($(window).scrollTop() == $(document).height() - $(window).height()) {
 								lpage = lpage + 1;
 								//$('div#loadMoreComments').show();
@@ -209,23 +211,35 @@ else {
 									dataType : "html" ,
 									contentType : "application/x-www-form-urlencoded" ,
 									url: "generic_locations_loder_ajax.php?ajaxquery1=<?php echo $ajaxquery1?>&ajaxquery2=<?php echo $ajaxquery2?>&lat1=<?php echo $lat1?>&lon1=<?php echo $lon1?>&dunit=<?php echo $dunit?>&entries_per_page=<?php echo $entries_per_page?>&lpage="+lpage ,
-									success: function(html) {
-										if(html){  
+								//	alert(url);
+									success: function(data, textStatus, jqXHR){
+										//setTimeout(callAjax, my_delay);
+										
+										if(data){
+											  
 											$('#placesList').append('<div id="loadMoreComments"> <center><b><?php echo JText::_("LOADING");?></b></center></div>');
-											$("#placesList").append(html);
+											$("#placesList").append(data);
 											$('div#loadMoreComments').fadeOut(300);
 										}else{
 											$('div#loadMoreComments').hide();
 											$('#placesList').append('<div id="loadMoreComments"> <center><br><?php echo JText::_("NO_MORE_RECORDS");?></center></div>');
 										}
 									},
-									error: function(xhr, textStatus, errorThrown){
-       									alert('No Data Connectivity');
-										location.reload();
-   									}
+									error: function(jqXHR, textStatus, exception){
+             								if (jqXHR.status === 0) { alert('Not connect.\n Verify Network.'); }
+              								else if (jqXHR.status == 404) { alert('Requested page not found. [404]'); } 
+              								else if (jqXHR.status == 500) { alert('Internal Server Error [500].'); } 
+              								else if (exception === 'parsererror') { alert('Requested JSON parse failed.'); }
+              								else if (exception === 'timeout') { alert('Time out error.'); }
+             								else if (exception === 'abort') { alert('Ajax request aborted.'); }
+             								else { alert('Uncaught Error.\n' + jqXHR.responseText); }
+            							}
 								});
+								
 							}
 						});
+					
+						//}
 					});
 			    </script>
 				<!--Infinite Scroller Ends	-->
@@ -281,26 +295,33 @@ else {
 					<script type="text/javascript">
 						$(document).ready(function() { 
 							var lpage = 0;
-							$(window).scroll(function() {
+							$(window).scroll(function(e) {
+								e.preventDefault();
 								if($(window).scrollTop() == $(document).height() - $(window).height()) {
 									lpage = lpage + 1;
 									$.ajax({
 										dataType : "html" ,
 										contentType : "application/x-www-form-urlencoded" ,
 										url: "generic_locations_loder_search_ajax.php?ajaxquery1=<?php echo addslashes($ajaxquery1)?>&lat1=<?php echo $lat1?>&lon1=<?php echo $lon1?>&dunit=<?php echo $dunit?>&entries_per_page=<?php echo $entries_per_page?>&lpage="+lpage ,
-										success: function(html) {
-											if(html){  
+										success: function(data, textStatus, jqXHR){
+											if(data){  
 												$('#placesList').append('<div id="loadMoreComments"> <center><b>Loading</b></center></div>');
-												$("#placesList").append(html);
+												$("#placesList").append(data);
 												$('div#loadMoreComments').fadeOut(300);
 											}else{
 											$('div#loadMoreComments').hide();
 											$('#placesList').append('<div id="loadMoreComments"> <center><br><?php echo JText::_("NO_MORE_RECORDS");?></center></div>');
 											}
-										},error: function(xhr, textStatus, errorThrown){
-       										alert('No Data Connectivity');
-											location.reload();
-   										}
+										},
+										error: function(jqXHR, textStatus, exception){
+	             								if (jqXHR.status === 0) { alert('Not connect.\n Verify Network.'); }
+	              								else if (jqXHR.status == 404) { alert('Requested page not found. [404]'); } 
+	              								else if (jqXHR.status == 500) { alert('Internal Server Error [500].'); } 
+	              								else if (exception === 'parsererror') { alert('Requested JSON parse failed.'); }
+	              								else if (exception === 'timeout') { alert('Time out error.'); }
+	             								else if (exception === 'abort') { alert('Ajax request aborted.'); }
+	             								else { alert('Uncaught Error.\n' + jqXHR.responseText); }
+	            							}
 									});
 								}
 							});
