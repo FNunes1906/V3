@@ -54,9 +54,9 @@ $_SESSION['login_page_shown'] = "no";
 		}else if($total_failed_attempt_minutes > FAILED_ATTEMPTS_TIME_WINDOW){
 			// not enough failed attempt in the failed_attempt_window
 			// reset counts
-			$Obj_iplog->_reset_ip_value($_SERVER['REMOTE_ADDR']);
-			/*	failed_login_count      = 0;
-			    first_failed_login_time = null;
+			$Obj_iplog->_reset_ip_value_count_one($_SERVER['REMOTE_ADDR']);
+			/*	failed_login_count      = 1;
+			    first_failed_login_time = NOW();
 			    is_IP_locked            = no;
 			    IP_locked_time          = null 
 			*/

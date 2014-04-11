@@ -315,7 +315,7 @@ function checkPostParameter($postValue){
 function gotoindex(str){
 //alert(str);
 var id=document.getElementById(str).value;
-	if(id=="Cancel") {
+	if(id=='<?php echo JText::_("JEV_CANCEL") ?>') {
 		document.location='/index.php?option=com_jevents&view=week&task=week.listevents&Itemid=97'
 		return false;
 	}

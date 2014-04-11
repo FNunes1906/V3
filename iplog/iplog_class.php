@@ -65,7 +65,13 @@ class iplog {
 		$sql 	= "UPDATE `iplog` SET `failed_login_count` = '0', `first_failed_login_time` = '', `ip_locked_time` = '', `is_ip_locked` = 'No' WHERE `ip_address` = '$user_ip'";
 		$result	= mysql_query($sql);
 	}
-	
+
+        # Function to reset and update IP table value for IP address when,IP is locked and if request from this IP is coming after lockout_time_window
+	function _reset_ip_value_count_one($user_ip){
+		$sql 	= "UPDATE `iplog` SET `failed_login_count` = '1', `first_failed_login_time` = NOW(), `ip_locked_time` = '', `is_ip_locked` = 'No' WHERE `ip_address` = '$user_ip'";
+		$result	= mysql_query($sql);
+	}
+
 	# Function to Update IP Status to locked and capture locked time
 	function _update_ip_locked_status_blocked($user_ip){
 		# Query to Update IP Status to locked and capture locked time
