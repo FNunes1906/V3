@@ -101,7 +101,7 @@ class iplog {
 		# Code for 403 forbidden page Begin
 		header("HTTP/1.0 403 Forbidden");?>
 		<div><h1>Forbidden</h1>
-			<h4>your account is locked, please call customer support to unlock it.</h4><hr>
+                    <h4>Your account is locked for invalid login attempts, please create a support ticket or send an email to <a href="mailto:support@townwizard.com">support@townwizard.com</a> to unlock it.</h4><hr>
 		</div>
 		<?php exit;
 		# Code for 403 forbidden page End
