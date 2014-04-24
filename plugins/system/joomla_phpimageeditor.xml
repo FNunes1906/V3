@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5.2" type="plugin" group="system">
+	<name>PHP Image Editor - Edit your images directly in Joomla!</name>
+	<author>Patrik Hultgren</author>
+	<creationDate>November 2008</creationDate>
+	<copyright>Copyright (C) 2008, 2009, 2010, 2011 Holder.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-3.0.html GPLv3</license>
+	<authorEmail>patrik.hult@gmail.com</authorEmail>
+	<authorUrl>http://www.phpimageeditor.se</authorUrl>
+	<version>3.5</version>
+	<description>Activate the PHP Image Editor plugin, then you can edit your images directly in Joomla! Just open the Media Manager and a new "Edit Image" link has appeared.</description>
+	<files>
+		<filename plugin="joomla_phpimageeditor">joomla_phpimageeditor.php</filename>
+		<filename>phpimageeditor/editimagesoriginal/sample.jpg</filename>
+		<filename>phpimageeditor/editimagespng/sample.png</filename>
+		<filename>phpimageeditor/editimagesworkwith/sample.png</filename>
+		<filename>phpimageeditor/index.php</filename>
+		<filename>phpimageeditor/includes/joomla_login_redirect.php</filename>
+		<filename>phpimageeditor/install_joomla_plugin.php</filename>
+		<filename>phpimageeditor/language/ar-AA.ini</filename>
+		<filename>phpimageeditor/language/en-GB.ini</filename>
+		<filename>phpimageeditor/language/sv-SE.ini</filename>
+        <filename>phpimageeditor/language/hu-HU.ini</filename>
+        <filename>phpimageeditor/language/de-DE.ini</filename>
+        <filename>phpimageeditor/language/pt-BR.ini</filename>
+        <filename>phpimageeditor/language/nl-NL.ini</filename>
+        <filename>phpimageeditor/language/es-ES.ini</filename>
+        <filename>phpimageeditor/language/es-LA.ini</filename>
+        <filename>phpimageeditor/language/nb-NO.ini</filename>
+        <filename>phpimageeditor/language/ru-RU.ini</filename>
+        <filename>phpimageeditor/language/pl-PL.ini</filename>
+        <filename>phpimageeditor/language/bg-BG.ini</filename>
+        <filename>phpimageeditor/language/he-IL.ini</filename>
+        <filename>phpimageeditor/language/fr-FR.ini</filename>
+        <filename>phpimageeditor/language/it-IT.ini</filename>
+        <filename>phpimageeditor/language/zh-CN.ini</filename>
+        <filename>phpimageeditor/language/sr-YU.ini</filename>
+		<filename>phpimageeditor/lite/shared/classes/phpimageeditor.php</filename>
+		<filename>phpimageeditor/lite/shared/config.php</filename>
+		<filename>phpimageeditor/lite/shared/css/jquery.jcrop.css</filename>
+		<filename>phpimageeditor/lite/shared/css/style.css</filename>
+		<filename>phpimageeditor/lite/shared/css/ui.resizable.css</filename>
+		<filename>phpimageeditor/lite/shared/css/ui.slider.css</filename>
+		<filename>phpimageeditor/lite/shared/index.php</filename>
+		<filename>phpimageeditor/lite/shared/images/edit.gif</filename>
+		<filename>phpimageeditor/lite/shared/images/empty.gif</filename>
+		<filename>phpimageeditor/lite/shared/images/jcrop.gif</filename>
+		<filename>phpimageeditor/lite/shared/images/slider_pointer.gif</filename>
+		<filename>phpimageeditor/lite/shared/images/slider_track_small.gif</filename>
+		<filename>phpimageeditor/lite/shared/images/slider_track.gif</filename>
+		<filename>phpimageeditor/lite/shared/images/slider.png</filename>
+		<filename>phpimageeditor/lite/shared/images/tab_body.png</filename>
+		<filename>phpimageeditor/lite/shared/images/tab_not_selected.png</filename>
+		<filename>phpimageeditor/lite/shared/images/tab_selected.png</filename>
+		<filename>phpimageeditor/lite/shared/includes/acl_functions.php</filename>
+		<filename>phpimageeditor/lite/shared/includes/constants.php</filename>
+		<filename>phpimageeditor/lite/shared/includes/functions.php</filename>
+		<filename>phpimageeditor/lite/shared/javascript/jquery-1.7.1.min.js</filename>
+		<filename>phpimageeditor/lite/shared/javascript/jquery-ui-1.8.16.custom.min.js</filename>
+		<filename>phpimageeditor/lite/shared/javascript/jquery.jcrop.js</filename>
+        <filename>phpimageeditor/lite/shared/javascript/jquery.numeric.js</filename>
+		<filename>phpimageeditor/lite/shared/javascript/edit_link.js</filename>
+        <filename>phpimageeditor/lite/shared/javascript/phpimageeditor.js</filename>
+        <filename>phpimageeditor/sample.jpg</filename>
+	</files>
+</install>

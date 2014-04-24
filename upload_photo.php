@@ -6,33 +6,24 @@
 	_init();
 ?>
 <script type="text/javascript" language="javascript">
-	document.createElement('header');
-	document.createElement('nav');
-	document.createElement('section');
-	document.createElement('article');
-	document.createElement('aside');
-	document.createElement('footer');
-  
+	  
 	  function form_validation() {
-	 	
 		var filename=document.uploadForm.image.value;
 		var ext = filename.substring(filename.lastIndexOf('.') + 1);
 		var iSize = ($("#image")[0].files[0].size / 1024); 
-		
 		if (iSize  > 2048) {
-			alert ("File size is greater than 2MB !");
+			alert ("<?php echo JText::_('GREATER_FILE_SIZE') ?>");
 			document.uploadForm.image.focus();
 			return false; 
 		}
-		
 		if(filename == ""){
-			alert ("Choose image for upload!");
+			alert ("<?php echo JText::_('CHOOSE_IMAGE') ?>");
 			document.uploadForm.image.focus();
 			return false;
 	 	}else if(ext == "gif" || ext == "GIF" || ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG" || ext == "PNG" || ext == "png"){
 			return true;
 		}else{
-			alert ("File Type must be GIF or JPG or PNG images only!");
+			alert ("<?php echo JText::_('FILE_TYPE') ?>");
 			document.uploadForm.image.value="";
 			document.uploadForm.image.focus();
 			return false;
@@ -47,31 +38,31 @@
 	function datavalidation(){
 	global $msg;
 		if(!isvalidchar($_POST['name'])){
-			$msg="Please Enter Valid Name!<br/>";
+			$msg=JText::_('VALID_NAME')."<br/>";
 			return false;
 		}
 		if(!isvalidchar($_POST['location'])){
-			$msg="Please Enter Valid Location!<br/>";
+			$msg=JText::_('VALID_LOCATION')."<br/>";
 			return false;
 		}
 		if(!isvalidchar($_POST['caption'])){
-			$msg="Please Enter Valid Photo Caption!<br/>";
+			$msg=JText::_('VALID_CAPTION')."<br/>";
 			return false;
 		}		
 		if(!isvalidchar($_POST['description'])){
-			$msg="Please Enter Valid Description!<br/>";
+			$msg=JText::_('VALID_DESC')."<br/>";
 			return false;
 		}
 		return true;
 	}
  
 	if(isset($var->post['formname']) && $var->post['formname'] && (datavalidation()==true) == 'upload.event.photo') {
-	
+		
 		$filename = $_FILES['image']['name'];
 		$ext = substr($filename,(strripos($filename,'.') + 1));
 		
 		if(empty($filename) || $filename == ""){
-			$msg="Choose image for upload!";
+			$msg=JText::_("CHOOSE_IMAGE");
 		}else if($ext == "gif" || $ext == "GIF" || $ext == "JPEG" || $ext == "jpeg" || $ext == "jpg" || $ext == "JPG" || $ext == "PNG" || $ext == "png"){
 		
 			if(($image = file_upload(array(
@@ -136,7 +127,7 @@
 		    }
 			
 		}else{
-			$msg="File Type must be GIF or JPG or PNG images only!";
+			$msg=JText::_("FILE_TYPE");
 			$filename="";
 		}
 		
