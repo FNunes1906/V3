@@ -78,6 +78,7 @@ $lc_city 		= $data->_jevlocation->city;
 $lc_country 	= $data->_jevlocation->country;
 $lc_state 		= $data->_jevlocation->state;
 $lc_phone 		= $data->_jevlocation->phone;
+$lc_url    		= $data->_jevlocation->url;
 $lc_geolon 		= $data->_jevlocation->geolon;
 $lc_geolat 		= $data->_jevlocation->geolat;
 $lc_geozoom 	= $data->_jevlocation->geozoom;
@@ -115,7 +116,7 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 		</div>
 	    <p class="desc"><?php echo $ev_desc; ?></p>
         <div class="address">
-			<?php  include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
+			<?php include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
 			<div>
 				<?php 
 				$replace = array("#","&");
@@ -128,6 +129,12 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 				$new_phone = str_replace($remove, "", $lc_phone);?>
 				<a href=tel:<?php echo $new_phone?>><?php echo $lc_phone;?></a>
 			</div>
+			<div style="margin-bottom: 10px;">
+			    <?php 
+			    $link = strip_tags($lc_url);
+			    $new_url = str_replace("http://", "",$link);?>
+			    <a href="<?php echo $link?>" target="_blank"><?php echo $new_url ;?></a>
+		   	</div>
 		</div>
 
 		<div class="people cb">

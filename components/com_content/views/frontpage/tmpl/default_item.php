@@ -13,12 +13,26 @@ $canEdit	= ($this->user->authorize('com_content', 'edit', 'content', 'all') || $
 	<?php if ($this->item->params->get('show_title')) : ?>
 	<td class="contentheading<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>" width="280px">
 		<?php if ($this->item->params->get('link_titles') && $this->item->readmore_link != '') : ?>
-		<a href="<?php echo $this->item->readmore_link; ?>" class="contentpagetitle<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>">
+		<?php 
+		$search = "/component/content/article";
+		$string = $this->item->readmore_link;
+		if (strpos($string,$search)===false) { 
+			$newlink = $this->item->readmore_link;
+		}else { 
+			$menu = JSite::getMenu();
+			$alias = $menu->getActive()->alias;
+			$title = '/'.$alias;
+			$newlink = str_replace('/component/content/article',$title,$this->item->readmore_link); 
+		}
+		?>
+		<a href="<?php echo $newlink; ?>" class="contentpagetitle<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>">
 			<?php echo '<h2>'. $this->escape($this->item->title).'</h2>'; ?></a>
 		<?php else : ?>
 			<?php echo '<h2>'.$this->escape($this->item->title).'</h2>'; ?>
 		<?php endif; ?>
+		
 	</td>
+	
 	<?php endif; ?>
 	<?php if ($this->item->params->get('show_create_date')) : ?>
 	
@@ -131,7 +145,7 @@ endif; ?>
 <?php if ($this->item->params->get('show_readmore') && $this->item->readmore) : ?>
 <tr>
 	<td  colspan="2">
-		<a href="<?php echo $this->item->readmore_link; ?>" class="readon<?php echo $this->escape($this->item->params->get('pageclass_sfx')); ?>">
+		<a href="<?php echo $newlink; ?>" class="readon<?php echo $this->escape($this->item->params->get('pageclass_sfx')); ?>">
 			<?php if ($this->item->readmore_register) :
 				echo JText::_('Register to read more...');
 			elseif ($readmore = $this->item->params->get('readmore')) :
