@@ -321,54 +321,59 @@ var id=document.getElementById(str).value;
 	}
 }
 function alldayeventtog() {
-var check = document.adminForm.allDayEvent.checked;
-var noendchecked = document.adminForm.noendtime.checked;
-var spm = document.getElementById("startPM");
-var sam = document.getElementById("startAM");
-var epm = document.getElementById("endPM");
-var eam = document.getElementById("endAM");
-if(check) {
-	document.adminForm.noendtime.checked = false;
-	document.adminForm.start_12h.disabled=true;
-	document.adminForm.end_12h.disabled=true;
-	spm.disabled=true;
-	sam.disabled=true;
-	epm.disabled=true;
-	eam.disabled=true;
+	var check = document.adminForm.allDayEvent.checked;
+	var noendchecked = document.adminForm.noendtime.checked;
+	var spm = document.getElementById("startPM");
+	var sam = document.getElementById("startAM");
+	var epm = document.getElementById("endPM");
+	var eam = document.getElementById("endAM");
+	if(check) {
+		document.adminForm.noendtime.checked = false;
+		document.adminForm.start_12h.disabled=true;
+		document.adminForm.end_12h.disabled=true;
+		spm.disabled=true;
+		sam.disabled=true;
+		epm.disabled=true;
+		eam.disabled=true;
 
-	if(!noendchecked) {
-	epm.disabled=true;
-	eam.disabled=true;
-	document.adminForm.start_12h.disabled=true;
-	document.adminForm.end_12h.disabled=true;
-	spm.disabled=true;
-	sam.disabled=true;
-	} 
+		if(!noendchecked) {
+		epm.disabled=true;
+		eam.disabled=true;
+		document.adminForm.start_12h.disabled=true;
+		document.adminForm.end_12h.disabled=true;
+		spm.disabled=true;
+		sam.disabled=true;
+		} 
 
-} else {
-	document.adminForm.start_12h.disabled=false;
-	document.adminForm.end_12h.disabled=false;
-	spm.disabled=false;
-	sam.disabled=false;
-	epm.disabled=false;
-	eam.disabled=false;
-}
+	} else {
+		document.adminForm.start_12h.disabled=false;
+		document.adminForm.end_12h.disabled=false;
+		spm.disabled=false;
+		sam.disabled=false;
+		epm.disabled=false;
+		eam.disabled=false;
+	}
 }
 function noendtimetog(){
 	var noendchecked = document.adminForm.noendtime.checked;
 	var epm = document.getElementById("endPM");
 	var eam = document.getElementById("endAM");
-		if (noendchecked && document.adminForm.allDayEvent.checked) {
-			document.adminForm.allDayEvent.checked = false;
-			alldayeventtog();
-		}
+
+	if (noendchecked && document.adminForm.allDayEvent.checked) {
+		document.adminForm.allDayEvent.checked = false;
+		alldayeventtog();
+	}
 	if(noendchecked){
-		epm.disabled=true;
-		eam.disabled=true;
+		if(epm != null){
+			epm.disabled=true;
+			eam.disabled=true;	
+		}
 		document.adminForm.end_12h.disabled=true;
 	}else{
-		epm.disabled=false;
-		eam.disabled=false;
+		if(epm != null){
+			epm.disabled=false;
+			eam.disabled=false;
+		}	
 		document.adminForm.end_12h.disabled=false;
 	}
 }
