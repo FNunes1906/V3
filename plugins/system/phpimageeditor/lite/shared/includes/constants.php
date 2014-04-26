@@ -23,17 +23,16 @@
 	    along with PHP Image Editor Joomla. If not, see <http://www.gnu.org/licenses/>.
 	    */
 	
-
 	if (!defined("PIE_PHP_VERSION_MINIMUM"))
 	{
 		define("PIE_PHP_VERSION_MINIMUM", "5");
 		define("PIE_GD_VERSION_MINIMUM", "2.0.28");
-		define("PIE_IMAGE_ORIGINAL_PATH", "editimagesoriginal/");
-		define("PIE_IMAGE_WORK_WITH_PATH", "editimagesworkwith/");
-		define("PIE_IMAGE_PNG_PATH", "editimagespng/");
-		define("PIE_MENU_RESIZE", "0");
+		define("PIE_IMAGE_ORIGINAL_PATH", $_SERVER['DOCUMENT_ROOT']."/crop-images/editimagesoriginal/");
+		define("PIE_IMAGE_WORK_WITH_PATH", $_SERVER['DOCUMENT_ROOT']."/crop-images/editimagesworkwith/");
+		define("PIE_IMAGE_PNG_PATH", $_SERVER['DOCUMENT_ROOT']."/crop-images/editimagespng/");
+		define("PIE_MENU_RESIZE", "2");
 		define("PIE_MENU_ROTATE", "1");
-		define("PIE_MENU_CROP", "2");
+		define("PIE_MENU_CROP", "0");
 		define("PIE_MENU_EFFECTS", "3");
 	}
 ?>

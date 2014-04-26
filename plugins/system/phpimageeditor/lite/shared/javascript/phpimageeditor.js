@@ -394,6 +394,7 @@ function phpimageeditor_crop_activator(selectedIndex)
 			objCrop.disable();
 			$(".jcrop-holder").css("display", "none");
 			$("#image").css("display", "block");
+			
 		}
 		else
 		{
@@ -407,25 +408,30 @@ function phpimageeditor_crop_activator(selectedIndex)
 
 function phpimageeditor_init()
 {
-	$('input[name=imagesize]').click(function() {
+	$('input[name=imagesize]').change(function() {
       	imagesize = this.value;
-		
 		if(imagesize == 'slider'){
 			objCrop.setOptions({minSize: [800, 300],maxSize: [800, 300] });
+			objCrop.animateTo([100,100,800,300]);
 	    }else if(imagesize =='right_banner'){
 	        objCrop.setOptions({minSize: [300, 250],maxSize: [300, 250] });
+			objCrop.animateTo([100,100,300,250]);
 	    }else if(imagesize =='left_banner'){
 	        objCrop.setOptions({minSize: [180, 150],maxSize: [180, 150] });
+			objCrop.animateTo([100,100,180,150]);
 	    }else if(imagesize =='top_banner'){
 	        objCrop.setOptions({minSize: [468, 60],maxSize: [468, 60] });
+			objCrop.animateTo([100,100,468,60]);
 	    }else if(imagesize =='iphone_banner'){
 	        objCrop.setOptions({minSize: [320, 50],maxSize: [320, 50] });
+			objCrop.animateTo([100,100,320,50]);
 	    }else if(imagesize =='custom'){
 	        objCrop.setOptions({minSize: [0, 0],maxSize: [0,0]});
 	    }
     });
+	
 
-    objCrop = $.Jcrop('#image',{minSize: [800, 300],maxSize: [800, 300],onChange: set_crop_values,onSelect: set_crop_values, aspectRatio: $("input#cropkeepproportions").attr('checked') ? $("input#cropkeepproportionsratio").val() : 0});
+    objCrop = $.Jcrop('#image',{minSize: [180, 150],maxSize: [180, 150],onChange: set_crop_values,onSelect: set_crop_values, aspectRatio: $("input#cropkeepproportions").attr('checked') ? $("input#cropkeepproportionsratio").val() : 0});
     
     $("#imageResizerKeepProportions").resizable(
     {

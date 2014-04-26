@@ -31,7 +31,7 @@
 		if ($mainframe)
 		{
 			//In Joomla 1.5, change this code if you wan´t to adjust which users who can edit images.
-			return ($user->usertype == 'Manager' || $user->usertype == 'Administrator' || $user->usertype == 'Super Administrator');
+			return ($user->usertype == 'Manager' || $user->usertype == 'TW_Admin' || $user->usertype == 'Administrator' || $user->usertype == 'Super Administrator');
 		}
 		else
 		{

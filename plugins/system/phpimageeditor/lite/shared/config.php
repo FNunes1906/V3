@@ -31,9 +31,9 @@
 		define("PIE_RELOAD_PARENT_BROWSER_ON_SAVE", true);
 		define("PIE_AJAX_POST_TIMEOUT_MS", 20000);
 		
+		define("PIE_CROP_ENABLED", true);
 		define("PIE_RESIZE_ENABLED", true);
 		define("PIE_ROTATE_ENABLED", false);
-		define("PIE_CROP_ENABLED", true);
 		define("PIE_EFFECTS_ENABLED", false);
 		
 		/*	

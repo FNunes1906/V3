@@ -460,7 +460,6 @@
 					}
 					else if ($actionDetail[0] == "crop")
 					{
-						
 						$actionValueLeft = (int)$actionValues[0];
 						$actionValueRight = (int)$actionValues[1];
 						$actionValueTop = (int)$actionValues[2];

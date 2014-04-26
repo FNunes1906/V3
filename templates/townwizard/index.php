@@ -375,7 +375,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 		 <!-- Placeholder for Header Banner Ad in Vertical Layout Start -->
 
      	<div id="LowerBannerAd" class="bannerAd"></div>
-		<?php if($this->countModules('FrontSlider')) : ?>
+		<?php if($this->countModules('FrontSlider') && (JRequest::getVar( 'view' )!='article')) : ?>
             <div id="EvtRot" class="rotator carousel fl">
                   <jdoc:include type="modules" name="FrontSlider" style="xhtml" />
                    <div class="cb"></div>
