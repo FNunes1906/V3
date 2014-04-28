@@ -431,7 +431,7 @@ function phpimageeditor_init()
     });
 	
 
-    objCrop = $.Jcrop('#image',{minSize: [180, 150],maxSize: [180, 150],onChange: set_crop_values,onSelect: set_crop_values, aspectRatio: $("input#cropkeepproportions").attr('checked') ? $("input#cropkeepproportionsratio").val() : 0});
+    objCrop = $.Jcrop('#image',{onChange: set_crop_values,onSelect: set_crop_values, aspectRatio: $("input#cropkeepproportions").attr('checked') ? $("input#cropkeepproportionsratio").val() : 0});
     
     $("#imageResizerKeepProportions").resizable(
     {

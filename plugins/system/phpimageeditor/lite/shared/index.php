@@ -170,13 +170,13 @@
 										<div style="text-align: right;">Size in px</div>
 									</div>
 									<div style="float: left;margin-right: 20px;">
-										<input type="radio" name="imagesize" value="left_banner" />Left Side Banner <span class="size" style="padding-left: 48px;">180x150</span>
-										<br/><input type="radio" name="imagesize" value="right_banner" />Right Side Banner <span class="size" style="padding-left: 40px;">300x250</span>
-										<br/><input type="radio" name="imagesize" value="top_banner" />Top Side Banner <span class="size" style="padding-left: 50px;">468x60</span>
-										<br/><input type="radio" name="imagesize" value="iphone_banner" />Iphone/Android Banner <span class="size" style="padding-left:14px;">320x50</span>
-										<br/><input type="radio" name="imagesize" value="slider"  />Rotator Image <span class="size" style="padding-left: 64px;">800x300</span>
-										<br/><input type="radio" name="imagesize" value="custom" />Custom Size Cropping
-									</div>
+                                                                             <input <?php if($_POST['imagesize']=='left_banner') { echo 'checked="checked"';}?> type="radio" name="imagesize" value="left_banner" />Left Side Banner <span class="size" style="padding-left: 48px;">180x150</span>
+                                                                             <br/><input <?php if ($_POST['imagesize']== 'right_banner') { echo 'checked="checked"';}?> type="radio" name="imagesize" value="right_banner" />Right Side Banner <span class="size" style="padding-left: 40px;">300x250</span>
+                                                                             <br/><input <?php if ($_POST['imagesize']== 'top_banner') { echo 'checked="checked"';}?> type="radio" name="imagesize" value="top_banner" />Top Side Banner <span class="size" style="padding-left: 50px;">468x60</span>
+                                                                             <br/><input <?php if ($_POST['imagesize']== 'iphone_banner') { echo 'checked="checked"';}?> type="radio" name="imagesize" value="iphone_banner" />Iphone/Android Banner <span class="size" style="padding-left:14px;">320x50</span>
+                                                                             <br/><input <?php if ($_POST['imagesize']== 'slider') { echo 'checked="checked"';}?> type="radio" name="imagesize" value="slider"  />Rotator Image <span class="size" style="padding-left: 64px;">800x300</span>
+                                                                             <br/><input <?php if ($_POST['imagesize']== 'custom') { echo 'checked="checked"';}?> type="radio" name="imagesize" value="custom" />Custom Size Cropping
+                                                                        </div>
 									<div style="float: left" class="help" id="crophelp">
 										<div class="help-header" id="crophelpheader"><?php PIE_Echo($objPHPImageEditor->texts["INSTRUCTIONS"]); ?></div>
 										<div class="help-content" id="crophelpcontent"><?php PIE_Echo($objPHPImageEditor->texts["CROP HELP"]); ?></div>
