@@ -242,9 +242,7 @@
 				<ul id="ulJsErrors" style="display: none;"><li></li></ul>
 			</div>
 			<div><img src="lite/shared/images/empty.gif" alt=""/></div>
-			<?php if (!$objPHPImageEditor->ErrorHasOccurred()) { 
-				$objPHPImageEditor->srcWorkWith = str_replace($_SERVER['DOCUMENT_ROOT'],'',$objPHPImageEditor->srcWorkWith);
-			?>
+			<?php if (!$objPHPImageEditor->ErrorHasOccurred()) { ?>
 				<div id="editimage">
 					<img id="image" style="position: absolute; left: 0px; top: 0px; width: <?php PIE_Echo($objPHPImageEditor->GetWidthFinal()); ?>px; height: <?php PIE_Echo($objPHPImageEditor->GetHeightFinal()); ?>px;" alt="" src="<?php PIE_Echo($objPHPImageEditor->srcWorkWith); ?>?timestamp=<?php PIE_Echo(time()); ?>"/>
 					<div id="imageResizerKeepProportions" style="diplay: <?php PIE_Echo(($objPHPImageEditor->inputKeepProportions && $objPHPImageEditor->inputPanel == PIE_MENU_RESIZE) ? 'block' : 'none'); ?>; width: <?php PIE_Echo($objPHPImageEditor->GetWidthFinal()); ?>px; height: <?php PIE_Echo($objPHPImageEditor->GetHeightFinal()); ?>px;"></div>

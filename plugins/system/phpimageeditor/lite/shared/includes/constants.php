@@ -27,9 +27,9 @@
 	{
 		define("PIE_PHP_VERSION_MINIMUM", "5");
 		define("PIE_GD_VERSION_MINIMUM", "2.0.28");
-		define("PIE_IMAGE_ORIGINAL_PATH", $_SERVER['DOCUMENT_ROOT']."/crop-images/editimagesoriginal/");
-		define("PIE_IMAGE_WORK_WITH_PATH", $_SERVER['DOCUMENT_ROOT']."/crop-images/editimagesworkwith/");
-		define("PIE_IMAGE_PNG_PATH", $_SERVER['DOCUMENT_ROOT']."/crop-images/editimagespng/");
+		define("PIE_IMAGE_ORIGINAL_PATH", "crop-images/editimagesoriginal/");
+		define("PIE_IMAGE_WORK_WITH_PATH", "crop-images/editimagesworkwith/");
+		define("PIE_IMAGE_PNG_PATH", "crop-images/editimagespng/");
 		define("PIE_MENU_RESIZE", "2");
 		define("PIE_MENU_ROTATE", "1");
 		define("PIE_MENU_CROP", "0");
