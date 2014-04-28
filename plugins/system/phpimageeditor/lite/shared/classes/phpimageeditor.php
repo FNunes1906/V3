@@ -569,7 +569,6 @@
 				//4. Resize
 				if ($this->finalWidth > 0 && $this->finalHeight > 0)
 					$this->resourceWorkWith = $this->ActionResize($this->finalWidth, $this->finalHeight, $this->resourceWorkWith);
-
 				$this->SaveImage($this->resourceWorkWith, $this->srcWorkWith, image_type_to_mime_type(IMAGETYPE_PNG));
 			}
 	
@@ -578,36 +577,36 @@
 			$this->inputGrayscale = $finalGrayscale;
 			
 			if ($actionType == $this->actionSaveAndClose)
-                        {
-                           $pi = pathinfo($this->srcEdit);
-                           $dirpath = $pi['dirname']."/".$pi['filename'];
-                           $ext = $pi['extension'];
-                           if($_POST['imagesize']!='' AND $_POST['imagesize']!='undefined'){
-                              if($_POST['imagesize'] == 'slider'){
-                                $this->srcEdit = $dirpath."_".$this->finalWidth."x".$this->finalHeight.".".$ext;
-                               }else if($_POST['imagesize'] =='right_banner'){
-                                 $this->srcEdit = $dirpath."_".$this->finalWidth."x".$this->finalHeight.".".$ext;
-                               }else if($_POST['imagesize'] =='left_banner'){
-                                 $this->srcEdit = $dirpath."_".$this->finalWidth."x".$this->finalHeight.".".$ext;
-                               }else if($_POST['imagesize'] =='top_banner'){
-                                 $this->srcEdit = $dirpath."_".$this->finalWidth."x".$this->finalHeight.".".$ext;
-                               }else if($_POST['imagesize'] =='iphone_banner'){
-                                 $this->srcEdit = $dirpath."_".$this->finalWidth."x".$this->finalHeight.".".$ext;
-                               }else if($_POST['imagesize'] =='custom'){
-                                 $this->srcEdit = $dirpath."_".$this->finalWidth."x".$this->finalHeight.".".$ext;
-                               }
-                           }else{
-                                $this->srcEdit = $dirpath."_".$this->finalWidth."x".$this->finalHeight.".".$ext;
-                           }
-                            $this->SaveImage($this->resourceWorkWith, $this->srcEdit, $this->mimeType);
-                            unlink($this->srcOriginal);
-                            unlink($this->srcPng);
-                            unlink($this->srcWorkWith);
-                            PIE_DeleteOldImages(PIE_IMAGE_ORIGINAL_PATH);
-                            PIE_DeleteOldImages(PIE_IMAGE_PNG_PATH);
-                            PIE_DeleteOldImages(PIE_IMAGE_WORK_WITH_PATH);
-                            $reloadParentBrowser = PIE_RELOAD_PARENT_BROWSER_ON_SAVE ? 'window.opener.location.reload();' : '';
-                            PIE_Echo('<script language="javascript" type="text/javascript">'.$reloadParentBrowser.'window.open(\'\',\'_parent\',\'\');window.close();</script>');
+			{
+				$pi = pathinfo($this->srcEdit);
+				$dirpath = $pi['dirname']."/".$pi['filename'];
+				$ext = $pi['extension'];
+				if($_POST['imagesize']!='' AND $_POST['imagesize']!='undefined'){
+					if($_POST['imagesize'] == 'slider'){
+					  $this->srcEdit = $dirpath."_".$this->finalWidth."x".$this->finalHeight.".".$ext;
+				    }else if($_POST['imagesize'] =='right_banner'){
+				      $this->srcEdit = $dirpath."_".$this->finalWidth."x".$this->finalHeight.".".$ext;
+				    }else if($_POST['imagesize'] =='left_banner'){
+				      $this->srcEdit = $dirpath."_".$this->finalWidth."x".$this->finalHeight.".".$ext;
+				    }else if($_POST['imagesize'] =='top_banner'){
+				      $this->srcEdit = $dirpath."_".$this->finalWidth."x".$this->finalHeight.".".$ext;
+				    }else if($_POST['imagesize'] =='iphone_banner'){
+				      $this->srcEdit = $dirpath."_".$this->finalWidth."x".$this->finalHeight.".".$ext;
+				    }else if($_POST['imagesize'] =='custom'){
+				      $this->srcEdit = $dirpath."_".$this->finalWidth."x".$this->finalHeight.".".$ext;
+				    }
+				}else{
+					$this->srcEdit = $dirpath."_".$this->finalWidth."x".$this->finalHeight.".".$ext;
+				}
+				$this->SaveImage($this->resourceWorkWith, $this->srcEdit, $this->mimeType);
+				unlink($this->srcOriginal);
+				unlink($this->srcPng);
+				unlink($this->srcWorkWith);
+				PIE_DeleteOldImages(PIE_IMAGE_ORIGINAL_PATH);
+				PIE_DeleteOldImages(PIE_IMAGE_PNG_PATH);
+				PIE_DeleteOldImages(PIE_IMAGE_WORK_WITH_PATH);
+				$reloadParentBrowser = PIE_RELOAD_PARENT_BROWSER_ON_SAVE ? 'window.opener.location.reload();' : '';
+				PIE_Echo('<script language="javascript" type="text/javascript">'.$reloadParentBrowser.'window.open(\'\',\'_parent\',\'\');window.close();</script>');
 			}
 		}
 		
