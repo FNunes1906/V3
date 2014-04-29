@@ -15,11 +15,13 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			</div>
 			<?php if(JRequest::getVar('evid') != '' || JRequest::getVar('loc_id') != '') : ?>
 			<div class="lower cl">
+			<?php if(JRequest::getVar('task') != 'locations.detail'):?>
 				<a href="index.php?option=com_rsform&view=rsform&Itemid=117" class='error_large'>
 					<span class="errorBtn btn fl"></span>
 					<span class="bold error"><?php echo JText::_("TW_EV_ERROR") ?></span> 
 					<span class="hideSm error"><?php echo JText::_("TW_EV_CON") ?></span>
 				</a>
+			<?php endif; ?>
 				<div class="cl"></div>  
 				<a href="#" onclick="PrintDiv();">
 					<span class='print_large'>
