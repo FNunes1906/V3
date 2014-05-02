@@ -6,6 +6,18 @@ $canEdit	= ($this->user->authorize('com_content', 'edit', 'content', 'all') || $
 <?php if ($this->item->state == 0) : ?>
 <div class="system-unpublished">
 <?php endif; ?>
+<?php 
+	$search = "/component/content/article";
+	$string = $this->item->readmore_link;
+	if (strpos($string,$search)===false) { 
+		$newlink = $this->item->readmore_link;
+	}else { 
+		$menu = JSite::getMenu();
+		$alias = $menu->getActive()->alias;
+		$title = '/'.$alias;
+		$newlink = str_replace('/component/content/article',$title,$this->item->readmore_link); 
+	}
+	?>
 
 <?php if ($canEdit || $this->item->params->get('show_title') || $this->item->params->get('show_pdf_icon') || $this->item->params->get('show_print_icon') || $this->item->params->get('show_email_icon')) : ?>
 <table cellspacing="0" cellpadding="0" class="contentpaneopen<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>">
@@ -13,18 +25,7 @@ $canEdit	= ($this->user->authorize('com_content', 'edit', 'content', 'all') || $
 	<?php if ($this->item->params->get('show_title')) : ?>
 	<td class="contentheading<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>" width="280px">
 		<?php if ($this->item->params->get('link_titles') && $this->item->readmore_link != '') : ?>
-		<?php 
-		$search = "/component/content/article";
-		$string = $this->item->readmore_link;
-		if (strpos($string,$search)===false) { 
-			$newlink = $this->item->readmore_link;
-		}else { 
-			$menu = JSite::getMenu();
-			$alias = $menu->getActive()->alias;
-			$title = '/'.$alias;
-			$newlink = str_replace('/component/content/article',$title,$this->item->readmore_link); 
-		}
-		?>
+	
 		<a href="<?php echo $newlink; ?>" class="contentpagetitle<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>">
 			<?php echo '<h2>'. $this->escape($this->item->title).'</h2>'; ?></a>
 		<?php else : ?>
