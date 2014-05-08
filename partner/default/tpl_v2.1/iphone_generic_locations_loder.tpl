@@ -25,7 +25,7 @@
 			?> 
 			<!-- creating loop for slider -->
 		    	<li>
-				<a href="/components/com_shines_v2.1/diningdetails.php?did=<?php echo $fealoc['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><img  src="<?php echo $singleimagearray;?>" /></a> 
+				<a href="/components/com_shines_v2.1/diningdetails.php?did=<?php echo $fealoc['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>&catId=<?php echo $category_id;?>"><img  src="<?php echo $singleimagearray;?>" /></a> 
 		    		<div class="flex-caption">
 		    			<h1><?php echo $fealoc['title'] ;?></h1>
 		    			<h2><?php echo $fealoc['category'] ;?></h2>
@@ -191,7 +191,7 @@ else {
 						<?php } } ?>
 
 						<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row['geolat']; ?>:<?php echo $row['geolon']; ?>')"><?php echo JText::_('CHECK_IN'); ?></a></li>
-						<li><a class="button small" href="diningdetails.php?did=<?php echo $row['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>"><?php echo JText::_('MORE_INFO'); ?></a></li>
+						<li><a class="button small" href="diningdetails.php?did=<?php echo $row['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>&catId=<?php echo $category_id;?>"><?php echo JText::_('MORE_INFO'); ?></a></li>
 						<li><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $row['geolon']; ?>:<?php echo $row['geolat']; ?>')"></a></li>
 					</ul>
 				</li>
@@ -210,7 +210,7 @@ else {
 								$.ajax({
 									dataType : "html" ,
 									contentType : "application/x-www-form-urlencoded" ,
-									url: "generic_locations_loder_ajax.php?ajaxquery1=<?php echo $ajaxquery1?>&ajaxquery2=<?php echo $ajaxquery2?>&lat1=<?php echo $lat1?>&lon1=<?php echo $lon1?>&dunit=<?php echo $dunit?>&entries_per_page=<?php echo $entries_per_page?>&lpage="+lpage ,
+									url: "generic_locations_loder_ajax.php?ajaxquery1=<?php echo $ajaxquery1?>&ajaxquery2=<?php echo $ajaxquery2?>&lat1=<?php echo $lat1?>&lon1=<?php echo $lon1?>&dunit=<?php echo $dunit?>&entries_per_page=<?php echo $entries_per_page?>&catId=<?php echo $category_id;?>&lpage="+lpage ,
 								//	alert(url);
 									success: function(data, textStatus, jqXHR){
 										//setTimeout(callAjax, my_delay);
@@ -285,7 +285,7 @@ else {
 						<?php } } ?>
 						
 						<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $data['geolat']; ?>:<?php echo $data['geolon']; ?>')"><?php echo JText::_('CHECK_IN'); ?></a></li>
-						<li><a class="button small" href="diningdetails.php?did=<?php echo $data['loc_id']?>&lat=<?php echo $lat1?>&lon=<?php echo $lon1?>"><?php echo JText::_('MORE_INFO'); ?></a></li>
+						<li><a class="button small" href="diningdetails.php?did=<?php echo $data['loc_id']?>&lat=<?php echo $lat1?>&lon=<?php echo $lon1?>&catId=<?php echo $category_id;?>"><?php echo JText::_('MORE_INFO'); ?></a></li>
 						<li><a  href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $data['geolon']; ?>:<?php echo $data['geolat']; ?>')"></a></li>
 					</ul>
 				<?php } 
@@ -302,7 +302,7 @@ else {
 									$.ajax({
 										dataType : "html" ,
 										contentType : "application/x-www-form-urlencoded" ,
-										url: "generic_locations_loder_search_ajax.php?ajaxquery1=<?php echo addslashes($ajaxquery1)?>&lat1=<?php echo $lat1?>&lon1=<?php echo $lon1?>&dunit=<?php echo $dunit?>&entries_per_page=<?php echo $entries_per_page?>&lpage="+lpage ,
+										url: "generic_locations_loder_search_ajax.php?ajaxquery1=<?php echo addslashes($ajaxquery1)?>&lat1=<?php echo $lat1?>&lon1=<?php echo $lon1?>&dunit=<?php echo $dunit?>&entries_per_page=<?php echo $entries_per_page?>&catId=<?php echo $category_id;?>&lpage="+lpage ,
 										success: function(data, textStatus, jqXHR){
 											if(data){  
 												$('#placesList').append('<div id="loadMoreComments"> <center><b>Loading</b></center></div>');

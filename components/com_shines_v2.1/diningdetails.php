@@ -43,6 +43,25 @@ function stripJunk($string) {
 	$cleanedString = preg_replace("/\s+/"," ",$cleanedString); 
 	return $cleanedString;
 }
+
+$catId = $_REQUEST['catId'];
+
+$param_res = "SELECT `parent`,`id`,`params`,`alias` FROM `jos_menu` WHERE `link`='index.php?option=com_jevlocations&task=locations.locations' and parent='0' AND published = '1'";
+$menu_param=mysql_query($param_res);
+
+while($menu_ids = mysql_fetch_array($menu_param)){
+	$iParams = new JParameter($menu_ids[2]);
+	$categories = $iParams->get('catfilter');
+	if(count($categories) >= 1){
+		if(in_array($catId,$categories,TRUE)){
+			$cat_name = $menu_ids[3];
+		}
+		if(count($categories)==1 && $categories==$catId){
+			$cat_name = $menu_ids[3];
+		}
+	}
+	
+}
 header( 'Content-Type:text/html;charset=utf-8');
 
 ?>
@@ -73,7 +92,22 @@ header( 'Content-Type:text/html;charset=utf-8');
 	<script type="text/javascript">
 		var iWebkit;if(!iWebkit){iWebkit=window.onload=function(){function fullscreen(){var a=document.getElementsByTagName("a");for(var i=0;i<a.length;i++){if(a[i].className.match("noeffect")){}else{a[i].onclick=function(){window.location=this.getAttribute("href");return false}}}}function hideURLbar(){window.scrollTo(0,0.9)}iWebkit.init=function(){fullscreen();hideURLbar()};iWebkit.init()}}
 	</script>
-	
+<script type="text/javascript" src="javascript/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(
+
+	function() {
+		
+		var pageTitle = document.title;
+		var pageUrl = location.href; 
+		
+		$("#myshare").click(function() {
+		  $("ul.share-inner-wrp").fadeToggle();
+		 $("ul.share-inner-wrp").delay(3500).fadeOut("slow");
+		});
+		
+    });
+</script>
 	<script language="javascript">
 		function linkClicked(link) { document.location = link; } 
 	</script>

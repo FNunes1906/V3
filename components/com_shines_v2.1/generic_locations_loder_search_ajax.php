@@ -1,16 +1,6 @@
 <?php 
-define( '_JEXEC', 1 );
-define( 'DS', DIRECTORY_SEPARATOR );
-$x = realpath(dirname(__FILE__)."/../../") ;
-// SVN version
-if (!file_exists($x.DS.'includes'.DS.'defines.php')){
-	$x = realpath(dirname(__FILE__)."/../../../") ;
-}
-define( 'JPATH_BASE', $x );
-require_once JPATH_BASE.DS.'includes'.DS.'defines.php';
-require_once JPATH_BASE.DS.'includes'.DS.'framework.php';
-$mainframe =& JFactory::getApplication('site');
-$mainframe->initialise();
+include("connection.php");
+
 $away		= JText::_('AWAY');
 $call 		= JText::_('CALL');
 $checkin 	= JText::_('CHECK_IN');
@@ -18,17 +8,12 @@ $moreinfo 	= JText::_('MORE_INFO');
 
 global $loder_entry_page;
 
-require_once($_SERVER['DOCUMENT_ROOT']."/configuration.php");
-
-$jconfig = new JConfig();
-$link = @mysql_pconnect($jconfig->host,  $jconfig->user, $jconfig->password);
-mysql_select_db($jconfig->db);
-
 $query				= $_GET['ajaxquery1'];
 $lat1				= $_GET['lat1'];
 $lon1				= $_GET['lon1'];
 $dunit				= $_GET['dunit'];
 $entries_per_page	= $_GET['entries_per_page'];
+$catId				= $_GET['catId'];
 $lpage				= $_GET['lpage'];
 
 $start_at = ($lpage * $entries_per_page);
@@ -59,7 +44,7 @@ if(mysql_num_rows($rec) > 0){
 						$code.="<li><a class='button small' href='tel:$phone'>$call</a></li>";
 					}
 					$code.="<li><a class='button small' href='javascript:linkClicked('APP30A:FBCHECKIN:$geolat:$geolon')'>$checkin</a></li>
-					<li><a class='button small' href='diningdetails.php?did=$loc_id&lat=$lat1&lon=$lon1'>$moreinfo</a></li>
+					<li><a class='button small' href='diningdetails.php?did=$loc_id&lat=$lat1&lon=$lon1&catId=$catId'>$moreinfo</a></li>
 					<li><a href='javascript:linkClicked('APP30A:SHOWMAP:$geolon:$geolat')'></a></li>
 				</ul>
 			</li>";	

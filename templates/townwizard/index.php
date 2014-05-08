@@ -54,6 +54,19 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
                                 <meta id="ogimage" property="og:image" content="<?php echo $finalimage[0]; ?>"/>
                         <?php }
         }
+
+// LOCATION SHARING
+}else if(JRequest::getVar('task') == 'locations.detail'){
+        if($_REQUEST['loc_id'] != ""){
+                $query = mysql_query("SELECT `description` FROM `jos_jev_locations` WHERE `loc_id` = ".$_REQUEST['loc_id']);
+                $data = mysql_fetch_assoc($query);
+                        $fetchimage = explode('<img src="',$data['description']);
+                        $finalimage = explode('" />',$fetchimage[1]);
+                        if($data['description'] !=""){?>
+                                <meta property="og:description" content="<?php echo strip_tags($data['description']); ?>"/>
+                                <meta id="ogimage" property="og:image" content="<?php echo $finalimage[0]; ?>"/>
+                        <?php }
+        }
 // ARTICLE AND BLOG SHARING
 }else if(JRequest::getVar('option') == 'com_content' && JRequest::getVar('view') == 'article'){
         $cleanid = explode(":",$_REQUEST['id']);
