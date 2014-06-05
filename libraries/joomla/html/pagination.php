@@ -200,6 +200,7 @@ class JPagination extends JObject
 		// Build the page navigation list
 		$data = $this->_buildDataObject();
 
+
 		$list = array();
 
 		$itemOverride = false;
@@ -479,8 +480,8 @@ class JPagination extends JObject
 		}
 
 		// Set the start and previous data objects
-		$data->start	= new JPaginationObject(JText::_('Start'));
-		$data->previous	= new JPaginationObject(JText::_('Prev'));
+		$data->start	= new JPaginationObject(JText::_('&#60;&#60;Start'));
+		$data->previous	= new JPaginationObject(JText::_('&#60;Prev'));
 
 		if ($this->get('pages.current') > 1)
 		{
@@ -495,8 +496,8 @@ class JPagination extends JObject
 		}
 
 		// Set the next and end data objects
-		$data->next	= new JPaginationObject(JText::_('Next'));
-		$data->end	= new JPaginationObject(JText::_('End'));
+		$data->next	= new JPaginationObject(JText::_('Next>'));
+		$data->end	= new JPaginationObject(JText::_('End>>'));
 
 		if ($this->get('pages.current') < $this->get('pages.total'))
 		{

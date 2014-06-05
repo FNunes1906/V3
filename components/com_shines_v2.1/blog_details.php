@@ -27,17 +27,15 @@ if(isset($catId) && $catId != ""){
 			$iParams = explode("&id=",$menu_ids["link"]);
 			if($iParams[1] == $catId){
 					$cat_name = $menu_ids[3];
+			}else{ //IF BLOG CONTENT IS NOT ASSIGN TO MENU ID THEN FIND CATEGORY NAME
+				if($cat_name == ""){
+					$param_res = "SELECT `alias` FROM `jos_categories` WHERE `id`='".$_REQUEST['category_id']."' AND published = '1'";
+					$cat_param=mysql_query($param_res);
+					$menu_name = mysql_fetch_assoc($cat_param);
+					$cat_name=$menu_ids['alias']."/".$_REQUEST['category_id']."-".$menu_name['alias'];
+				}
 			}
 		}
-		
-		//IF BLOG CONTENT IS NOT ASSIGN TO MENU ID THEN FIND CATEGORY NAME
-		if($cat_name == ""){
-			$param_res = "SELECT `alias` FROM `jos_categories` WHERE `id`='".$_REQUEST['category_id']."' AND published = '1'";
-			$menu_param=mysql_query($param_res);
-			$menu_name = mysql_fetch_assoc($menu_param);
-			$cat_name="component/content/article/".$_REQUEST['category_id']."-".$menu_name['alias'];
-		}
-		
 	}
 }else{
 	//IF CATEGORY IS NOT ASSIGN THEN BY DEFAUT TAKING "BLOG" IN URL

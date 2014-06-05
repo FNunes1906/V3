@@ -249,7 +249,9 @@
 	</ul>
 	
 </div>
-
+<div class="res_page" style="text-align: center;margin: auto;">
+ <?php echo $this->pagination->getListFooter(); ?>
+</div>
 <?php }?>
 
 <?php if ($compparams->get("showmap",0)) echo $this->loadTemplate("map");?>
