@@ -19,7 +19,7 @@ $catId = $_REQUEST['category_id'];
 if(isset($catId) && $catId != ""){
 	
 	// CHECK FOR MENU ITEMS OF BLOG
-	$param_res = "SELECT `parent`,`id`,`link`,`alias` FROM `jos_menu` WHERE `link` like '%layout=blog%' and parent='0' AND published = '1'";
+	$param_res = "SELECT `parent`,`id`,`link`,`alias` FROM `jos_menu` WHERE `link` like '%option=com_content%' and parent='0' AND menutype='leftmenu' AND published = '1'";
 	$menu_param=mysql_query($param_res);
 	if(count($menu_param)){
 		

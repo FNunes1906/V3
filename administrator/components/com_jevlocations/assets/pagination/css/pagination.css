@@ -62,7 +62,7 @@
   }
   
 .jevbutton-left .next{
-	 margin-right: 8px;
+	 margin-right: 4px;
 }
 
 
@@ -70,7 +70,7 @@
 /*background: url(../images/jevbutton_right.png) 100% 0 no-repeat;
  float: left; */
  display: inline-block;
- margin-right: 8px; 
+ margin-right: 4px; 
  margin-top: 18px;
  }
 
@@ -119,7 +119,7 @@
     color: #000000;
     padding: 5px;
     text-decoration: none;
-   margin-right: 8px; 
+   margin-right: 4px; 
 
  }
  .jevbutton-left .page a{ 
@@ -128,7 +128,7 @@
     border-radius: 5px;
     padding: 5px;
 	text-decoration: none;
-	margin-right: 8px;
+	margin-right: 4px;
 	
  }
 

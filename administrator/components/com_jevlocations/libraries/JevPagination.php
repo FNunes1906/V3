@@ -36,7 +36,9 @@ class JevPagination extends JPagination {
 
 		$html .= "\n<div class=\"limit\">".JText::_('Display Num').$list['limitfield']."</div>";
 		$html .= $list['pageslinks'];
-		$html .= "\n<div class=\"limit\">".$list['pagescounter']."</div>";
+		if(isset($list['pagescounter']) && $list['pagescounter']!=NULL){
+			$html .= "\n<br/><div class=\"limit count\">".$list['pagescounter']."</div>";
+		}
 
 		$html .= "\n<input type=\"hidden\" name=\"limitstart\" value=\"".$list['limitstart']."\" />";
 		$html .= "\n</div></div>";
@@ -65,7 +67,8 @@ class JevPagination extends JPagination {
 			$html .= ' '. $list['next']['data'];
 			$html .= ' '. $list['end']['data'];
 			*/
-
+			
+			$html .="<div class=\"list_buttons\">";
 			if ($list['start']['active']) {
 				$html .= "<div class=\"jevbutton-right\"><div class=\"start\">".$list['start']['data']."</div></div>";
 			} else {
@@ -93,7 +96,7 @@ class JevPagination extends JPagination {
 			} else {
 				$html .= "<div class=\"jevbutton-left off\"><div class=\"end\">".$list['end']['data']."</div></div>";
 			}
-
+			$html .="</div>";
 			return $html;
 		}
 		else {

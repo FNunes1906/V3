@@ -322,7 +322,7 @@ class JPagination extends JObject
 		$limits = array ();
 
 		// Make the option list
-		for ($i = 5; $i <= 30; $i += 5) {
+		for ($i = 30; $i <= 40; $i += 10) {
 			$limits[] = JHTML::_('select.option', "$i");
 		}
 		$limits[] = JHTML::_('select.option', '50');
@@ -479,9 +479,14 @@ class JPagination extends JObject
 			$data->all->link	= JRoute::_("&limitstart=");
 		}
 
-		// Set the start and previous data objects
-		$data->start	= new JPaginationObject(JText::_('&#60;&#60;Start'));
-		$data->previous	= new JPaginationObject(JText::_('&#60;Prev'));
+		if( JRequest::getVar( 'option' ) == 'com_jevlocations' ){
+			// Set the start and previous data objects
+			$data->previous	= new JPaginationObject(JText::_('&#60;Prev'));
+			$data->start	= new JPaginationObject(JText::_('&#60;&#60;Start'));
+		}else{
+			$data->previous	= new JPaginationObject(JText::_('Prev'));
+			$data->start	= new JPaginationObject(JText::_('Start'));
+		}
 
 		if ($this->get('pages.current') > 1)
 		{
@@ -495,10 +500,16 @@ class JPagination extends JObject
 			$data->previous->link	= JRoute::_("&limitstart=".$page);
 		}
 
-		// Set the next and end data objects
-		$data->next	= new JPaginationObject(JText::_('Next>'));
-		$data->end	= new JPaginationObject(JText::_('End>>'));
-
+		if(JRequest::getVar( 'option' ) == 'com_jevlocations' ){
+			// Set the start and previous data objects
+			$data->next	= new JPaginationObject(JText::_('Next>'));
+			$data->end	= new JPaginationObject(JText::_('End>>'));
+		}else{
+			// Set the next and end data objects
+			$data->next	= new JPaginationObject(JText::_('Next'));
+			$data->end	= new JPaginationObject(JText::_('End'));
+		}
+		
 		if ($this->get('pages.current') < $this->get('pages.total'))
 		{
 			$next = $this->get('pages.current') * $this->limit;
