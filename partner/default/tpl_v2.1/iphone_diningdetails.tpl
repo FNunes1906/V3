@@ -36,7 +36,7 @@
 							 <ul class="share-inner-wrp">
 								<?php 
 								if($cat_name != ""){
-									$url = "http://".$_SERVER['SERVER_NAME']."/".$cat_name."/detail/".$row[loc_id]."/".$row[title];
+									$url = "http://".$_SERVER['SERVER_NAME']."/".$cat_name."/detail/".$row['loc_id']."/".str_replace (" ", "", $row['title']);
 								}else{
 									$url = "http://".$_SERVER['SERVER_NAME'];
 								}
