@@ -38,7 +38,7 @@
 	background: none repeat scroll 0 0 #000000;
     border: 2px solid #BABABA;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
 	color: #999999;
 }
 
@@ -46,7 +46,7 @@
 	background: none repeat scroll 0 0 #000000;
     border: 2px solid #BABABA;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
 	color: #999999;
 	}
 
@@ -79,7 +79,7 @@
   background: none repeat scroll 0 0 #000000;
     border: 2px solid #BABABA;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
 }
 
 .jevbutton-right.off .prev span{ 
@@ -87,7 +87,7 @@
   background: none repeat scroll 0 0 #000000;
     border: 2px solid #BABABA;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
 	 color: #999999;
 	 
 }
@@ -97,7 +97,7 @@
   background: none repeat scroll 0 0 #000000;
     border: 2px solid #BABABA;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
 }
 
 .jevbutton-right.off .start span{
@@ -105,7 +105,7 @@
 	background: none repeat scroll 0 0 #000000;
     border: 2px solid #BABABA;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
 	 color: #999999;
 }
 
@@ -117,7 +117,7 @@
     border: 2px solid #BABABA;
     border-radius: 5px;
     color: #000000;
-    padding: 5px;
+    padding: 3px;
     text-decoration: none;
    margin-right: 4px; 
 
@@ -126,7 +126,7 @@
     background: none repeat scroll 0 0 #000000;
     border: 2px solid #BABABA;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
 	text-decoration: none;
 	margin-right: 4px;
 	
@@ -137,7 +137,7 @@
   background: none repeat scroll 0 0 #000000;
     border: 2px solid #BABABA;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
 }
 
 .jevbutton-left.off .next a{ 
@@ -145,7 +145,7 @@
   background: none repeat scroll 0 0 #000000;
     border: 2px solid #BABABA;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
  }
 
 .jevbutton-left .end a{ 
@@ -153,7 +153,7 @@
   background: none repeat scroll 0 0 #000000;
     border: 2px solid #BABABA;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
  }
 
 .jevbutton-left.off .end a{ 
@@ -161,7 +161,7 @@
   background: none repeat scroll 0 0 #000000;
     border: 2px solid #BABABA;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
 	 color: #999999;
 }
 
@@ -171,6 +171,6 @@
     border-radius: 5px;
     color: #000000;
     margin: 10px auto auto;
-    padding: 5px;
-    width: 75px;
+    padding: 3px;
+    width: 110px;
 }
