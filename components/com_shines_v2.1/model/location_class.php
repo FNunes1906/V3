@@ -16,7 +16,7 @@ class location {
 	}
 	
 	function fetch_location_categories($cat_id){
-		$res = mysql_query("SELECT c . * , pc.title AS parenttitle FROM jos_categories AS c LEFT JOIN jos_categories AS pc ON c.parent_id = pc.id LEFT JOIN jos_categories AS mc ON pc.parent_id = mc.id LEFT JOIN jos_categories AS gpc ON mc.parent_id = gpc.id WHERE c.section = 'com_jevlocations2' AND (c.id =".$cat_id." OR pc.id =".$cat_id." OR mc.id =".$cat_id." OR gpc.id =".$cat_id.") AND c.published=1") or die(mysql_error());;
+		$res = mysql_query("SELECT c . * , pc.title AS parenttitle FROM jos_categories AS c LEFT JOIN jos_categories AS pc ON c.parent_id = pc.id LEFT JOIN jos_categories AS mc ON pc.parent_id = mc.id LEFT JOIN jos_categories AS gpc ON mc.parent_id = gpc.id WHERE c.section = 'com_jevlocations2' AND (c.id =".$cat_id." OR pc.id =".$cat_id." OR mc.id =".$cat_id." OR gpc.id =".$cat_id.") AND c.published=1 ORDER BY c.title ASC") or die(mysql_error());
 		return $res;
 	}
 	

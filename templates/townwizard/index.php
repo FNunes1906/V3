@@ -214,13 +214,13 @@ jQuery(document).ready(function(){
 <?php
 $app = JFactory::getApplication();
 if(JRequest::getVar('task') == 'icalrepeat.detail'){
- $this->setTitle( $var->site_name . ' | '. JText::_("TW_EVENT_DETAIL").' | '. $this->getTitle());
+ $this->setTitle( $this->getTitle() . ' | '. JText::_("TW_EVENT_DETAIL") .' | '. $var->site_name);
 }elseif(JRequest::getVar('task') == 'locations.detail'){
- $this->setTitle( $var->site_name . ' | ' . $this->getTitle()); 
+ $this->setTitle( $this->getTitle(). ' | ' . JText::_('TW_LOCATION_DETAIL'). ' | ' .$var->site_name ); 
 }else{
- $this->setTitle( $var->site_name . ' | ' . $this->getTitle() . ' | ' . $var->page_title ); 
-}
-?>
+ $this->setTitle( $this->getTitle() . ' | ' . $var->site_name . ' | ' .  $var->page_title ); 
+}?>
+
 <?php include("ga.php"); ?>
 
 </head>
