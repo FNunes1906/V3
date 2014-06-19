@@ -31,7 +31,7 @@ if(mysql_num_rows($rec) > 0){
 					
 		$distance = distance($lat1, $lon1, $geolat,  $geolon, $dunit);
 		$distance		= round($distance,1);
-		$description 	= showBrief(strip_tags(utf8_encode($row['description'])),30);
+		$description 	= showBrief(strip_tags($row['description']),30);
 		
 		$code = "<li>
 				<h1>$title</h1>

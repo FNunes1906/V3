@@ -273,8 +273,8 @@ else {
 				
 				$dist = distance($lat1, $lon1, $lat2, $lon2, $dunit);?>
 				<li>
-					<h1><?php echo utf8_encode($data['title'])?></h1>
-					<p><?php echo stripJunk(showBrief(strip_tags(utf8_encode($data['description'])),30)); ?></p>
+					<h1><?php echo $data['title']?></h1>
+					<p><?php echo stripJunk(showBrief(strip_tags($data['description']),30)); ?></p>
 					<p class="distance"><?php echo round($dist,1); ?>&nbsp;<?php echo $dunit?> <?php echo JText::_('AWAY'); ?></p>
 					<ul class="btnList">
 						<?php if(trim($data['phone'] != '')) {
