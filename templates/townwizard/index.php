@@ -209,7 +209,34 @@ jQuery(document).ready(function(){
 });
 </script>
 
-<!--  Town wizard Google Analytic code -->
+<!-- Townwizard Ad banner for free product start -->
+<?php if($_SESSION['partner_type']=="free") { ?>
+<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') +
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type='text/javascript'>
+googletag.cmd.push(function() {
+googletag.defineSlot('/44090425/TownWizard-Left-180', [180, 150], 'div-gpt-ad-1403199524717-0').addService(googletag.pubads());
+googletag.defineSlot('/44090425/TownWizard-Right-300', [300, 250], 'div-gpt-ad-1403199524717-1').addService(googletag.pubads());
+googletag.defineSlot('/44090425/TownWizard-Top-468', [468, 60], 'div-gpt-ad-1403199524717-2').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+</script>
+<?php } ?>
+<!-- Townwizard Ad banner for free product end -->
 
 <?php
 $app = JFactory::getApplication();
@@ -221,6 +248,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
  $this->setTitle( $this->getTitle() . ' | ' . $var->site_name . ' | ' .  $var->page_title ); 
 }?>
 
+<!--  Town wizard Google Analytic code -->
 <?php include("ga.php"); ?>
 
 </head>
@@ -236,20 +264,16 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 }(document, 'script', 'facebook-jssdk'));</script>
   
  			  
- <!-- Top Bar Start -->
-  <!--<div id="TopBar" style="background:url('<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/whitezig_zag.png') repeat-x scroll left bottom <?php echo $var->Header_color; ?>;height: 36px;">-->
-  <div id="TopBar" style="background:url('<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/whitezig_zag.png') repeat-x scroll left 30px <?php echo $var->Header_color; ?>;height: 36px;">
-  	<!--<div class="sWidth">
-  	  <div class="fl powered"><?php echo JText::_("TW_POWERED_BY") ?><a href="http://www.townwizard.com/" target="_blank"><img alt="townwizard" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/twBanner.png" /></a></div>
-		  <?php if($this->countModules('top')): ?>
-          <div class="fr links">
-            <jdoc:include type="modules" name="top" style="rounded" />
-          </div>
-          <?php endif; ?>
-  	</div>-->
-  </div>
+<!-- Top Bar Start -->
+<div id="TopBar" style="background:url('<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/whitezig_zag.png') repeat-x scroll left 30px <?php echo $var->Header_color; ?>;height: 36px;">
+	<?php if($_SESSION['partner_type']=="free" AND JRequest::getVar('view') != 'reset') {?>
+		<div class="sWidth">
+			<div class="fr powered"><span style="float: left; font-size: 12px; text-align: center; font-weight: bold; text-transform: capitalize; font-family: arial; padding-top: 8px;"><?php echo JText::_("TW_FREE_GUIDE")." | ".JText::_("POWERED BY") ?></span><a href="http://www.townwizard.com/" target="_blank"><img style="padding: 5px;" alt="townwizard" src="templates/townwizard/images/header/twBanner.png"></a></div>
+		</div>
+	<?php } ?>
+</div>
 
-  <!-- Top Bar End -->
+<!-- Top Bar End -->
 
   <!-- Content Start -->
 
@@ -286,6 +310,15 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 	            </div>
 	          </div>
               <div id="UpperBannerAd" class="bannerAd">
+			  <!-- TW Banner Ad start -->
+			<?php if($_SESSION['partner_type']=="free") {?>
+					<div id='div-gpt-ad-1403199524717-2' style='width:468px; height:60px;'>
+						<script type='text/javascript'>
+							googletag.cmd.push(function() { googletag.display('div-gpt-ad-1403199524717-2'); });
+						</script> 
+					</div>
+			<!-- TW Banner Ad End -->
+			<?php }else { ?>
 	  	  	  	<?php if($this->countModules('banner1')) : ?>
 				<div class="bannerCont">
 	  	  	      <!-- TOP BANNER AD -->
@@ -294,6 +327,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 				 <?php else: ?>
 					 <img alt="Default Banner" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/default_banner.png" />
 				  <?php endif; ?>
+				<?php } ?>
 	  	  	  </div>
 	  	    </div>
 	  	    
@@ -325,9 +359,9 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 	          </div>
               
 			  <?php if($this->countModules('search')) : ?>
-	          <div class="search fr">
-	  	  	    <jdoc:include type="modules" name="search" style="rounded" />
-         	 </div>
+			          <div class="search fr">
+			  	  	    <jdoc:include type="modules" name="search" style="rounded" />
+		         	 </div>
          	 <?php endif; ?>
              
 	  	    </div>
@@ -346,6 +380,8 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 				</div>
 				<?php endif; ?>
                
+			   <?php if($_SESSION['partner_type']!="free") {?>
+			   
                 <?php if($var->android != "" || $var->iphone != ""):?>
                 <div id="SideMobile" class="sect">
                   <strong><?php echo JText::_("TW_MOBILE") ?>!</strong>
@@ -380,6 +416,19 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
                <?php else: ?>
      				<img alt="Default Banner" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/Left_banner.png" />
                <?php endif; ?>
+			   
+			   <!-- TW Banner Ad start -->
+			<?php } else { ?>
+				<div class="sect">
+					<div id='div-gpt-ad-1403199524717-0' style='width:180px; height:150px;'>
+						<script type='text/javascript'>
+							googletag.cmd.push(function() { googletag.display('div-gpt-ad-1403199524717-0'); });
+						</script>
+					</div>
+				</div>
+			<?php } ?>
+			<!-- TW Banner Ad End -->
+			   
         </div>
 	<?php endif; ?>
   	  <!-- Left Column End -->
@@ -525,33 +574,31 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 				       <?php endif; ?>
 				   <?php endif; ?>
 			   <!-- event_submit and photo upload End-->
-				
-		  	  	<!-- 300 x 100 Banner Ad Start -->
-				<?php if($this->countModules('banner3')) : ?>
-		  	  	<div class="ad space">
-		  	  		 <jdoc:include type="modules" name="banner3" style="rounded" />
-		        </div>
-		       <?php elseif(JRequest::getVar('view') != 'reset'): ?>
-      			<img alt="Default Banner" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/Right_banner.png" />
-         		<?php endif; ?>
-
-		  	  	<!-- 300 x 100 Banner Ad End -->
+				<?php if(JRequest::getVar('view') != 'reset'): ?>
+					<?php if($_SESSION['partner_type']!="free") {?>
+					  <!-- 300 x 100 Banner Ad Start -->
+					<?php if($this->countModules('banner3')) : ?>
+					  <div class="ad space">
+					    <jdoc:include type="modules" name="banner3" style="rounded" />
+					    </div>
+					   <?php else: ?>
+					   <img alt="Default Banner" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/Right_banner.png" />
+					     <?php endif; ?>
+					  <!-- 300 x 100 Banner Ad End -->
+					<!-- TW Banner Ad start -->
+					<?php }else { ?> 
+					<div class="ad space">
+					<div id='div-gpt-ad-1403199524717-1' style='width:300px; height:250px;'>
+					<script type='text/javascript'>
+					googletag.cmd.push(function() { googletag.display('div-gpt-ad-1403199524717-1'); });
+					</script>
+					</div>
+					</div>
+					<?php } ?>
+					<!-- TW Banner Ad End -->
+					<?php endif; ?>
 
   	  </div>
-
-		  	   <div class="adSect tall rightCol fr cr">
-
-		            <!-- 300 x 600 Banner Ad Start -->
-		    		<?php if($this->countModules('banner4')) : ?>
-		            <div class="ad">
-		              <jdoc:include type="modules" name="banner4" style="rounded" />
-		            </div>
-		           <?php endif; ?>
-		    
-		            <!-- 300 x 600 Banner Ad End -->
-
-		  	  </div>
-  	  
 		</div>
   	  <div class="cb"></div>
   	</div>

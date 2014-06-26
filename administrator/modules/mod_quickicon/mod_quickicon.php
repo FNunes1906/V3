@@ -14,13 +14,11 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-if (!defined( '_JOS_QUICKICON_MODULE' ))
-{
+if (!defined( '_JOS_QUICKICON_MODULE' )){
 	/** ensure that functions are declared only once */
 	define( '_JOS_QUICKICON_MODULE', 1 );
 
-	function quickiconButton( $link, $image, $text )
-	{
+	function quickiconButton( $link, $image, $text ){
 		global $mainframe;
 		$lang		=& JFactory::getLanguage();
 		$template	= $mainframe->getTemplate();
@@ -32,10 +30,8 @@ if (!defined( '_JOS_QUICKICON_MODULE' ))
 					<span><?php echo $text; ?></span></a>
 			</div>
 		</div>
-		<?php
-	}
-
-	?>
+		<?php } ?>
+		
 	<div id="cpanel">
 		<?php
 		// Get the current JUser object
@@ -69,9 +65,11 @@ if (!defined( '_JOS_QUICKICON_MODULE' ))
 		
 			$link = 'index.php?option=com_pagemeta';
 			quickiconButton( $link, 'twIcon_meta.png', JText::_( 'SETTINGS ' ) );
-		}
-
-		?>
+			
+			if($_SESSION['partner_type']=="free") {
+				$link = 'http://www.townwizard.com/pricing';
+				quickiconButton( $link, 'twIcon_upgrade.png', JText::_( 'UPGRADE ' ) );
+			}
+		}?>
 	</div>
-	<?php
-}
+<?php }

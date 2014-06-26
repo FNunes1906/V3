@@ -29,7 +29,7 @@ h1, h2, h3, h4, p, span, div { font-weight:normal; font-family:'AllerLightRegula
 }
 #TopBar .powered img {
   position:relative;
-  top:5px;
+  /*top:5px;*/
   margin-left:5px;
 }
 #TopBar .links a {
