@@ -64,12 +64,13 @@
 							$("#gname").css('box-shadow','none');	
 						}else if(data.status===103){
 							//console.log('else'); 
-							$("#simple-msg").html('Entry updated and mail sent.');
-							$("#simple-msg").css('color','red');
-							$("#email").css('border','1px solid #CCCCCC');
-							$("#email").css('box-shadow','none');	
-							$("#gname").css('border','1px solid #CCCCCC');
-							$("#gname").css('box-shadow','none');						
+							window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST'];?>/form/thanks.html';
+							//$("#simple-msg").html('Entry updated and mail sent.');
+							//$("#simple-msg").css('color','red');
+							//$("#email").css('border','1px solid #CCCCCC');
+							//$("#email").css('box-shadow','none');	
+							//$("#gname").css('border','1px solid #CCCCCC');
+							//$("#gname").css('box-shadow','none');						
 						}else if(data.status===104){
 							//console.log('else'); 
 							$("#simple-msg").html('This Guide name is already registered in last 24 hours.');
