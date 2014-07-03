@@ -18,29 +18,38 @@ if (isset($_REQUEST['createguide'])) {
 	curl_setopt($ch, CURLOPT_POSTFIELDS,$querystring);
 	$server_output = curl_exec ($ch);
 	curl_close ($ch);
-	if ($server_output == "OK"){ 
 
-		$updateuser="UPDATE user_signup SET signup_type = '0', user_status = '1' WHERE id = '".$_REQUEST['userid']."' ";
-                
+	if ($server_output == "OK"){ 
+		 $updateuser="UPDATE user_signup SET signup_type = '0', user_status = '1' WHERE id = '".$_REQUEST['userid']."' ";
+         
         $result = mysql_query($updateuser);
         // Send the email:
         $twadminemail = $_REQUEST['email'];
 
-        $message.= " Guide Name : ".$_REQUEST['gname']."\n";
-        $message.= " Guide URL : ".$_REQUEST['gname'].".townwizard.com/administrator\n";
-        $message.= " Password : ".$_REQUEST['pass']."\n";
+	   $message = "<h3>Congratulations!!</h3>We have just created your free guide.<br/>Here are the details of your guide's back-end:<br/>\n\n";
+        $message.= " Guide Name : ".$_REQUEST['gname']."<br/>";
+        $message.= " Guide URL : ".$_REQUEST['gname'].".townwizard.com/administrator<br/>";
+        $message.= " Password : ".$_REQUEST['pass'];
+	  
+		$headers = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type:text/html;charset=iso-8859-1' . "\r\n";
+		$headers .= "From: info@townwizard.com";
 
-        $finalmail = mail($twadminemail, 'New Guide Registration Confirmation', $message, 'From: info@townwizard.com');
+        $finalmail = mail($twadminemail, 'New Guide Registration Confirmation', $message,$headers);
 
         if($finalmail){
+
             $_REQUEST[] = "";
             $serverurl = $_SERVER["HTTP_HOST"];
+
 			header('Location:http://'.$serverurl.'/form/thanks2.html');
+//exit;
         }else{
             echo '<div class="errormsgbox">You could not be registered due to error.Please contact at <b>support@townwizard.com</b></div><br/>';
         }
 
 	}else{
+
 	 	echo '<div class="errormsgbox">You could not be registered due to a system error.</div>';
 	}
 }
@@ -83,24 +92,24 @@ if (isset($key)){
 
    // Print a customized message:
 	if($data['activation'] == TRUE){
-		echo '<div class="success">Please select guide configuration given below and click activation button.</div>';
+		echo '<div class="success">Please select guide configuration given below and click activate button.</div>';
 		echo "<br/>";
 		?>
 		
 	<form id="contact2" method="post">	
 		<table width="100%" cellpadding="0" cellspacing="5" border="0">
 			<tr>
-				<td>
+				<td width="97px">
 					<label for="website">Guide Name : </label>
 				</td>
-				<td>		
-					<input type="text" class="disable" name="gname" id="gname" title="Enter your guide name" placeholder="Selected guide name" value="<?php echo $data['guide_name'];?>" ReadOnly=true>
+				<td width="124px">		
+					<input type="text" class="disable" name="gname" id="gname" placeholder="Selected guide name" value="<?php echo $data['guide_name'];?>" ReadOnly=true>
 				</td>					
-				<td>
+				<td width="61px">
 					<label for="fname">First Name : </label>
 				</td>
-				<td>		
-					<input type="text" class="disable" name="fname" id="fname" placeholder="First Name" title="Enter your first name" value="<?php echo $data['first_name'];?>" ReadOnly=true>
+				<td width="114px">		
+					<input type="text" class="disable" name="fname" id="fname" placeholder="First Name" value="<?php echo $data['first_name'];?>" ReadOnly=true>
 				</td>				
 			</tr>
 			<tr>
@@ -108,26 +117,28 @@ if (isset($key)){
 					<label for="email">Guide Login E-mail : </label>
 				</td>
 				<td>
-					<input type="email" class="disable" name="email" id="email" placeholder="yourname@domain.com" title="Enter your e-mail address" value="<?php echo $data['email'];?>" ReadOnly=true>
+					<input type="email" class="disable" name="email" id="email" placeholder="yourname@domain.com" value="<?php echo $data['email'];?>" ReadOnly=true>
 				</td>					
 				<td>
 					<label for="lname">Last Name : </label>
 				</td>
 				<td>
-					<input type="text" class="disable" name="lname" id="lname" placeholder="Last Name" title="Enter your last name" value="<?php echo $data['last_name'];?>" ReadOnly=true>
+					<input type="text" class="disable" name="lname" id="lname" placeholder="Last Name" value="<?php echo $data['last_name'];?>" ReadOnly=true>
 				</td>				
 			</tr>
 			<tr>
 				<td>
 					<input type="hidden" name="pass" id="pass" value="<?php echo $data['password'];?>" ReadOnly=true>
 				</td>
-				<td><input type="hidden" name="userid" id="userid" value="<?php echo $data['userid'];?>">				
+				<td>
+					<input type="hidden" name="userid" id="userid" value="<?php echo $data['id'];?>">		
+				</td>		
 			</tr>
 		</table>
 	
 	<table width="100%" cellpadding="0" cellspacing="5" border="0">
 		<tr><td><label for="zip">City zip code<span class="require">*</span></label></td>
-		<td><input type="text" name="zip" id="zip" placeholder="City zip code" title="Enter your City zip code" required pattern="[a-zA-Z0-9\s]+" /></td></tr>	
+		<td><input type="text" name="zip" id="zip" placeholder="City zip code" required oninvalid="setCustomValidity('Zip code is require and use only a-z,A-Z,0-9.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9]+" /></td></tr>	
 		
 		
 		<tr><td><label for="language">Language</label></td>
@@ -197,7 +208,7 @@ if (isset($key)){
 		</select></td></tr>	
 		</table>		
 		<div style="clear: both"></div>
-		<input type="submit" name="createguide" class="myButton" id="submit" value="Activation" />
+		<input type="submit" name="createguide" class="myButton" id="submit" value="Activate" />
 	</form>
 	
 	<?php

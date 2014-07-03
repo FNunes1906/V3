@@ -82,7 +82,10 @@ if (!empty($_REQUEST['captcha'])) {
 	$request_captcha = htmlspecialchars($_REQUEST['captcha']);
 	unset($_SESSION['captcha']);
 }	 
-
+$response = array('status'=>107); 
+$callback = $_GET["callback"];
+echo $callback . "(" . json_encode($response) . ")";
+exit;
 mysql_close($con2);
 	
 function insertProcess($data){
@@ -98,9 +101,14 @@ function insertProcess($data){
 			//Successfully inserted into database
 			if($result_insert_user){
 				// Send the email:
-				$message = " To activate your account, please click on this link:\n\n";
+				$message = "<h3>Congrats !!</h3>You are just one step away from your free guide.<br/>To activate your account, please click on this link:<br/>\n\n";
 				$message .= 'http://'.$_SERVER[HTTP_HOST].'/form/activate.php?key=' .$activation. "";
-				mail($data['email'], 'Initial Registration Confirmation', $message, 'From: info@townwizard.com');
+				
+				$headers = 'MIME-Version: 1.0' . "\r\n";
+  				$headers .= 'Content-type:text/html;charset=iso-8859-1' . "\r\n";
+				$headers .= "From: info@townwizard.com";
+				
+				mail($data['email'], 'Initial Registration Confirmation', $message,$headers);
 				if(mail){
 					//echo "<br/>Entry Inserted and mail sent.";
 					$response=array('status'=>100);
@@ -114,7 +122,7 @@ function insertProcess($data){
 		}		
 	
 function checkDataLoop($resultguidename){
-		 echo "<br/>Captcha checkDataLoop";
+		 //echo "<br/>Captcha checkDataLoop";
 		while($data = mysql_fetch_array($resultguidename)){
 			$calculateday = $ctime - $data['time'];
 			//Checking entries less that 24 hours
