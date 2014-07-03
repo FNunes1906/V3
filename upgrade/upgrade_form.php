@@ -66,7 +66,7 @@ background: none repeat scroll 0 0 #FFFFFF;
 if(isset($_POST['submit']) && $_POST['submit']!==NULL)
 {
 		//=========MAIL SENT TO SUPPORT ==========//
-		$to = "rinkal@townwizard.com";
+		$to = "darren@townwizard.com";
 		$subject = $_REQUEST['guidename']. "-site needs to be upgrade";
 		$message = "Below are Guide information for upgradation.<br/><br/>";
 		$message .= "<div style='padding-right:125px;float:left'>Name</div><div>:".$_REQUEST['name']."</div>";
