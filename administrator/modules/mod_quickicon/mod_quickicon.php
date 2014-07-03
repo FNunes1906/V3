@@ -30,6 +30,19 @@ if (!defined( '_JOS_QUICKICON_MODULE' )){
 					<span><?php echo $text; ?></span></a>
 			</div>
 		</div>
+		<?php } 
+		function quickiconButtonhreftarget( $link, $image, $text ){
+			global $mainframe;
+			$lang  =& JFactory::getLanguage();
+			$template = $mainframe->getTemplate();
+			?>
+			<div style="float:<?php echo ($lang->isRTL()) ? 'right' : 'left'; ?>;">
+			<div class="icon">
+			<a href="<?php echo $link; ?>" target="_blank">
+			 <?php echo JHTML::_('image.site',  $image, '/templates/'. $template .'/images/header/', NULL, NULL, $text ); ?>
+			 <span><?php echo $text; ?></span></a>
+			</div>
+			</div>
 		<?php } ?>
 		
 	<div id="cpanel">
@@ -67,8 +80,8 @@ if (!defined( '_JOS_QUICKICON_MODULE' )){
 			quickiconButton( $link, 'twIcon_meta.png', JText::_( 'SETTINGS ' ) );
 			
 			if($_SESSION['partner_type']=="free") {
-				$link = 'http://www.townwizard.com/pricing';
-				quickiconButton( $link, 'twIcon_upgrade.png', JText::_( 'UPGRADE ' ) );
+				$link = '/upgrade/upgrade_form.php';
+				quickiconButtonhreftarget( $link, 'twIcon_upgrade.png', JText::_( 'UPGRADE ' ) );
 			}
 		}?>
 	</div>
