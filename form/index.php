@@ -128,10 +128,10 @@
 <form id="contact"  action="process.php" method="POST">
     
 		<label for="fname">First Name</label>
-		<input type="text" name="fname" id="fname" placeholder="First Name" required oninvalid="setCustomValidity('First name is required.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9\s]+">
+		<input type="text" name="fname" id="fname" placeholder="First Name" required oninvalid="setCustomValidity('Please enter valid first name and use only A-Z,a-z and 0-9.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9\s]+">
 		
 		<label for="lname">Last Name</label>
-		<input type="text" name="lname" id="lname" placeholder="Last Name" required oninvalid="setCustomValidity('Last name is required.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9\s]+" />
+		<input type="text" name="lname" id="lname" placeholder="Last Name" required oninvalid="setCustomValidity('Please enter valid last name and use only A-Z,a-z and 0-9.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9\s]+" />
 		
 		<label for="website">Guide Name</label>
 		<input type="text" name="gname" id="gname" placeholder="Selected guide name" required oninvalid="setCustomValidity('Guide name is required without space.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9]+" /><span id="samplegname"></span>
@@ -148,7 +148,7 @@
 		<label for="captcha">Add captcha word:</label>
 		<input type="text" name="captcha" id="captcha-form" autocomplete="off" /><br/>
 		
-		<input type="submit" name="submit" class="myButton" id="Signup" value="Signup" />
+		<input type="submit" name="submit" class="myButton" id="Signup" value="Signup"  />
 	</form>
 
 </body>

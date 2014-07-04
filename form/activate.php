@@ -19,6 +19,7 @@ if (isset($_REQUEST['createguide'])) {
 	$server_output = curl_exec ($ch);
 	curl_close ($ch);
 
+$server_output = "OK";
 	if ($server_output == "OK"){ 
 		 $updateuser="UPDATE user_signup SET signup_type = '0', user_status = '1' WHERE id = '".$_REQUEST['userid']."' ";
          
@@ -72,11 +73,7 @@ if (isset($_REQUEST['key']) && (strlen($_REQUEST['key']) == 32)){//The Activatio
    $key = $_REQUEST['key']; 
    
 }else{
-	echo '<div class="errormsgbox">Key is not Proper.</div>';
-	?>
-	<br/> 
-	<a href="http://akashbarot.com/form/">Click here</a> for registration. 
-	<?php
+	echo '<div class="errormsgbox">Guide has already been activated Or Key is not Proper.</div>';
 	exit;
 }
 
@@ -85,7 +82,7 @@ if (isset($key)){
 	//echo $_REQUEST['key'];
 
 	// Select from database to set the "activation" field
-	$sql="SELECT * FROM user_signup WHERE `activation`='$key' LIMIT 1";
+	$sql="SELECT * FROM user_signup WHERE `activation`='$key' AND user_status='1' LIMIT 1";
 	$result = mysql_query($sql);
 	$data = mysql_fetch_array($result);
 
