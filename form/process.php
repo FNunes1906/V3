@@ -86,6 +86,7 @@ $response = array('status'=>107);
 $callback = $_GET["callback"];
 echo $callback . "(" . json_encode($response) . ")";
 exit;
+
 mysql_close($con2);
 	
 function insertProcess($data){
@@ -104,12 +105,12 @@ function insertProcess($data){
 				$message = "<h3>Congrats !!</h3>You are just one step away from your free guide.<br/>To activate your account, please click on this link:<br/>\n\n";
 				$message .= 'http://'.$_SERVER[HTTP_HOST].'/form/activate.php?key=' .$activation. "";
 				
-				$headers = 'MIME-Version: 1.0' . "\r\n";
-  				$headers .= 'Content-type:text/html;charset=iso-8859-1' . "\r\n";
-				$headers .= "From: info@townwizard.com";
+				$headers = 'MIME-Version: 1.0';
+  				$headers .= 'Content-type:text/html;charset=iso-8859-1';
+				$headers .= 'From: info@townwizard.com';
 				
-				mail($data['email'], 'Initial Registration Confirmation', $message,$headers);
-				if(mail){
+				$insertmail = mail($data['email'], 'Initial Registration Confirmation', $message, $headers);
+				if($insertmail){
 					//echo "<br/>Entry Inserted and mail sent.";
 					$response=array('status'=>100);
 					$callback = $_GET["callback"];
@@ -158,10 +159,15 @@ function updateProcess($did){
 		//Successfully inserted into database
 		if($result_insert_user){
 			// Send the email:
-			$message = " To activate your account, please click on this link:\n\n";
+			$message = "<h3>Congrats !!</h3>You are just one step away from your free guide.<br/>To activate your account, please click on this link:<br/>\n\n";
 			$message .= 'http://'.$_SERVER[HTTP_HOST].'/form/activate.php?key=' .$activation. "";
-			mail($email, 'Initial Registration Confirmation', $message, 'From: info@townwizard.com');
-			if(mail){
+			
+			$headers = 'MIME-Version: 1.0';
+			$headers .= 'Content-type:text/html;charset=iso-8859-1';
+			$headers .= 'From: info@townwizard.com';
+				
+			$updatemail = mail($email, 'Initial Registration Confirmation', $message, $headers);
+			if($updatemail){
 				//echo "<br/>Entry updated and mail sent.";
 				// Confirmation
 				$response=array('status'=>103);

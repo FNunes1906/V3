@@ -19,7 +19,6 @@ if (isset($_REQUEST['createguide'])) {
 	$server_output = curl_exec ($ch);
 	curl_close ($ch);
 
-$server_output = "OK";
 	if ($server_output == "OK"){ 
 		 $updateuser="UPDATE user_signup SET signup_type = '0', user_status = '1' WHERE id = '".$_REQUEST['userid']."' ";
          
@@ -82,7 +81,7 @@ if (isset($key)){
 	//echo $_REQUEST['key'];
 
 	// Select from database to set the "activation" field
-	$sql="SELECT * FROM user_signup WHERE `activation`='$key' AND user_status='1' LIMIT 1";
+	$sql="SELECT * FROM user_signup WHERE `activation`='$key' AND user_status='0' LIMIT 1";
 	$result = mysql_query($sql);
 	$data = mysql_fetch_array($result);
 
