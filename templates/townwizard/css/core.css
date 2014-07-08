@@ -1571,13 +1571,39 @@ dt.notice,dt.message,dt.error{
     text-transform: uppercase;
 }
 
-
 .formError{
  padding-left:9px;
 }
 
 .rsform-captcha-box{
- width: 58% !important;text-align: left !important;
+ /*width: 58% !important;text-align: left !important;*/
+ 	float: left !important;
+    text-align: left !important;
+    width: 57.5% !important;
+	margin-left: 5px;
+}
+
+#userForm{
+	position: relative;
+}
+
+#userForm img{
+	float: right;
+    margin-bottom: 3px;
+    margin-right: 40px;
+    text-align: right;
+}
+
+#userForm a{
+ background: url("../images/captcha_refresh.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    float: right;
+    font-size: 0;
+    height: 47px;
+    margin-right: -5px;
+    margin-top: -109px;
+    width: 45px;
+   
 }
 
 .rsform-calendar-box {
@@ -1610,7 +1636,7 @@ dt.notice,dt.message,dt.error{
 }
 
 .veri{
- line-height: 20px !important;
+ line-height: 52px !important;
  padding-top: 23px;
 }
 
@@ -2283,7 +2309,8 @@ max-width: inherit;
 }
 
 .osolCaptchaBlock img {
-	height: 48px;
+	/*height: 48px;*/
+	/*margin-right: 9px;*/
 }
 
 /* Event submit popup css  */

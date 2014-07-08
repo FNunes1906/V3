@@ -103,11 +103,11 @@ function insertProcess($data){
 			if($result_insert_user){
 				// Send the email:
 				$message = "<h3>Congrats !!</h3>You are just one step away from your free guide.<br/>To activate your account, please click on this link:<br/>\n\n";
-				$message .= 'http://'.$_SERVER[HTTP_HOST].'/form/activate.php?key=' .$activation. "";
-				
-				$headers = 'MIME-Version: 1.0';
-  				$headers .= 'Content-type:text/html;charset=iso-8859-1';
-				$headers .= 'From: info@townwizard.com';
+			    $message .= "http://".$_SERVER[HTTP_HOST]."/form/activate.php?key=" .$activation;
+			    
+			    $headers = "MIME-Version: 1.0\r\n";
+			    $headers .= "Content-type:text/html;charset=iso-8859-1\r\n";
+			    $headers .= "From: info@townwizard.com";
 				
 				$insertmail = mail($data['email'], 'Initial Registration Confirmation', $message, $headers);
 				if($insertmail){
@@ -159,12 +159,12 @@ function updateProcess($did){
 		//Successfully inserted into database
 		if($result_insert_user){
 			// Send the email:
-			$message = "<h3>Congrats !!</h3>You are just one step away from your free guide.<br/>To activate your account, please click on this link:<br/>\n\n";
-			$message .= 'http://'.$_SERVER[HTTP_HOST].'/form/activate.php?key=' .$activation. "";
-			
-			$headers = 'MIME-Version: 1.0';
-			$headers .= 'Content-type:text/html;charset=iso-8859-1';
-			$headers .= 'From: info@townwizard.com';
+				$message = "<h3>Congrats !!</h3>You are just one step away from your free guide.<br/>To activate your account, please click on this link:<br/>\n\n";
+			    $message .= "http://".$_SERVER[HTTP_HOST]."/form/activate.php?key=" .$activation;
+			    
+			    $headers = "MIME-Version: 1.0\r\n";
+			    $headers .= "Content-type:text/html;charset=iso-8859-1\r\n";
+			    $headers .= "From: info@townwizard.com";
 				
 			$updatemail = mail($email, 'Initial Registration Confirmation', $message, $headers);
 			if($updatemail){

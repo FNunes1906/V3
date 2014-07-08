@@ -275,7 +275,7 @@ class plgSystemOSOLCaptcha extends JPlugin
 		//Let's generate a totally random string using md5
 		$md5_hash = md5(rand(0,999)); 
 		//We don't need a 32 character long string so we trim it down to 5 
-		$security_code = str_replace(array("0","O","o"), array("p"),substr($md5_hash, 15, 5)); 
+		$security_code = str_replace(array("0","O","o"), array("p"),substr($md5_hash, 15, 4)); 
 		
 		//Set the session to store the security code
 		//$_SESSION["security_code"] 
@@ -295,9 +295,9 @@ class plgSystemOSOLCaptcha extends JPlugin
 		//Make the background black 
 		imagefill($image, 0, 0, $black); 
 		//imagestring($image, 3, 30, 3, $security_code, $white);
-		$size = 10;
+		$size = 12;
 		$this->ly = (int)(2.4 * $size);
-		$x = 20;
+		$x = 15;
 		for($i=0;$i<strlen($security_code);$i++)
 		{
 			
@@ -585,7 +585,7 @@ class plgSystemOSOLCaptcha extends JPlugin
 	
 
 	<a href=\"http://www.outsource-online.net/osol-captcha-for-joomla.html\" target=\"blank\" style=\"font-size:10px\" >
-	<img id=\"captchaCode".$GLOBALS['totalCaptchas']."\" src=\"".JURI::base()."index.php?showCaptcha=True&amp;instanceNo=".$GLOBALS['totalCaptchas']."\" alt=\"Captcha plugin for Joomla from Outsource Online\" /> 
+	<img  id=\"captchaCode".$GLOBALS['totalCaptchas']."\" src=\"".JURI::base()."index.php?showCaptcha=True&amp;instanceNo=".$GLOBALS['totalCaptchas']."\" alt=\"Captcha plugin for Joomla from Outsource Online\" /> 
 	</a>
   
 
@@ -613,7 +613,7 @@ class plgSystemOSOLCaptcha extends JPlugin
    
   
 </table>
-<div valign=\"top\" ><input type=\"text\" name=\"osolCatchaTxt\" id=\"osolCatchaTxt{$GLOBALS['totalCaptchas']}\"  class=\"inputbox required validate-captcha\" />&nbsp;
+<div valign=\"top\" ><input size=\"17\" type=\"text\" name=\"osolCatchaTxt\" id=\"osolCatchaTxt{$GLOBALS['totalCaptchas']}\"  class=\"inputbox required validate-captcha\" />&nbsp;
 	<input type=\"hidden\" name=\"osolCatchaTxtInst\" id=\"osolCatchaTxtInst\"  value=\"".$GLOBALS['totalCaptchas']."\"   /><br/>
 	
 	</div>

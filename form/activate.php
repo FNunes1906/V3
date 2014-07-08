@@ -144,6 +144,7 @@ if (isset($key)){
 			<option value="dutch">Dutch</option>
 			<option value="portuguese">Portuguese</option>
 			<option value="croatian">Croatian</option>
+			<option value="french">French</option>
 		</select></td></tr>		
 		
 		<tr><td><label for="time_zone">Time zone</label></td>
