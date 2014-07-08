@@ -123,22 +123,22 @@
 <form id="contact"  action="process.php" method="POST">
     
 		<label for="fname">First Name</label>
-		<input type="text" name="fname" id="fname" placeholder="First Name" required oninvalid="setCustomValidity('Please enter valid first name and use only A-Z,a-z and 0-9.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9\s]+" />
+		<input type="text" name="fname" id="fname" placeholder="First Name" required oninvalid="setCustomValidity('Please enter a valid first name. A-Z, a-z or 0-9 only.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9\s]+" />
 		
 		<label for="lname">Last Name</label>
-		<input type="text" name="lname" id="lname" placeholder="Last Name" required oninvalid="setCustomValidity('Please enter valid last name and use only A-Z,a-z and 0-9.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9\s]+" />
+		<input type="text" name="lname" id="lname" placeholder="Last Name" required oninvalid="setCustomValidity('Please enter a valid last name. A-Z, a-z or 0-9 only.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9\s]+" />
 		
 		<label for="website">Guide Name</label>
-		<input type="text" name="gname" id="gname" placeholder="Selected guide name" required oninvalid="setCustomValidity('Guide name is required without space.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9]+" /><span id="samplegname"></span>
+		<input type="text" name="gname" id="gname" placeholder="Selected guide name" required oninvalid="setCustomValidity('Guide Name required. Blank spaces not allowed.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9]+" /><span id="samplegname"></span>
 	
 		<label for="email">Guide Login E-mail</label>
-		<input type="email" name="email" id="email" placeholder="yourname@domain.com" required oninvalid="setCustomValidity('Valid email is required ex: info@townwizard.com')" onchange="try{setCustomValidity('')}catch(e){}" pattern="([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})" />
+		<input type="email" name="email" id="email" placeholder="yourname@domain.com" required oninvalid="setCustomValidity('Valid email address required.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})" />
 		
 		<label for="pass">Guide Login Password</label>
-		<input type="password" name="pass" id="pass" placeholder="Password" required oninvalid="setCustomValidity('Password should be 5 - 15 character long.')" onchange="try{setCustomValidity('')}catch(e){}" pattern=".{5,15}" />		
+		<input type="password" name="pass" id="pass" size="15" placeholder="Password" required oninvalid="setCustomValidity('Password required. Minimum of 5 characters.')" onchange="try{setCustomValidity('')}catch(e){}" pattern=".{5,15}" />		
 		
 		<img src="captcha.php" id="captcha" style="margin-left: 39px;" /><br/>
-		<a href="#" onclick="document.getElementById('captcha').src='captcha.php?'+Math.random(); document.getElementById('captcha-form').focus();" id="change-image" style="color: rgb(102, 102, 102); text-decoration: none; text-align: center; margin-left: 97px;">Update Text.</a><br/><br/>
+		<a href="#" onclick="document.getElementById('captcha').src='captcha.php?'+Math.random(); document.getElementById('captcha-form').focus();" id="change-image" style="color: rgb(102, 102, 102); text-decoration: none; text-align: center; margin-left: 97px;">Refresh Text.</a><br/><br/>
 
 		<label for="captcha">Add captcha word:</label>
 		<input type="text" name="captcha" id="captcha-form" autocomplete="off" /><br/>

@@ -26,16 +26,18 @@ if (isset($_REQUEST['createguide'])) {
         // Send the email:
         $twadminemail = $_REQUEST['email'];
 
-	   $message = "<h3>Congratulations!!</h3>We have just created your free guide.<br/>Here are the details of your guide's back-end:<br/>\n\n";
-        $message.= " Guide Name : ".$_REQUEST['gname']."<br/>";
-        $message.= " Guide URL : ".$_REQUEST['gname'].".townwizard.com/administrator<br/>";
-        $message.= " Password : ".$_REQUEST['pass'];
+	   $message = "Your new local guide is ready! Check out the site  link and login information below.<br/>\n\n";
+        $message.= "<b>Guide Name : </b>".$_REQUEST['gname']."<br/>";
+        $message.= "<b>Guide Administration URL : </b>http://".$_REQUEST['gname'].".townwizard.com/administrator<br/>";
+        $message.= "<b>Username : </b>".$_REQUEST['email']."<br/>";
+        $message.= "<b>Password : </b>".$_REQUEST['pass']."<br/>";
+        $message.= "Also, be sure to check out these helpful links to help you get started:<br/>***knowledge base link***<br/>***link to upgrade to paid account***<br/>Sincerely,<br/>The TownWizard Team";
 	  
-		$headers = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type:text/html;charset=iso-8859-1' . "\r\n";
-		$headers .= "From: info@townwizard.com";
+		$headers = "MIME-Version: 1.0\r\n";
+		$headers .= "Content-type:text/html;charset=iso-8859-1\r\n";
+		$headers .= "From: no-reply@townwizard.com";
 
-        $finalmail = mail($twadminemail, 'New Guide Registration Confirmation', $message,$headers);
+        $finalmail = mail($twadminemail, 'Your TownWizard Local Guide is Ready!', $message,$headers);
 
         if($finalmail){
 
@@ -88,12 +90,19 @@ if (isset($key)){
 
    // Print a customized message:
 	if($data['activation'] == TRUE){
-		echo '<div class="success">Please select guide configuration given below and click activate button.</div>';
-		echo "<br/>";
+
 		?>
 		
 	<form id="contact2" method="post">	
 		<table width="100%" cellpadding="0" cellspacing="5" border="0">
+			<tr>
+				<td colspan="4">
+					<?php 		
+						echo '<div class="success" style="font-size: 133%;padding: 10px 9px;">Please complete the information below and then click the “Activate” button.</div>';
+						echo "<br/>"; 
+					?>
+				</td>
+			</tr>
 			<tr>
 				<td width="97px">
 					<label for="website">Guide Name : </label>
@@ -134,7 +143,7 @@ if (isset($key)){
 	
 	<table width="100%" cellpadding="0" cellspacing="5" border="0">
 		<tr><td><label for="zip">City zip code<span class="require">*</span></label></td>
-		<td><input type="text" name="zip" id="zip" placeholder="City zip code" required oninvalid="setCustomValidity('Zip code is require and use only a-z,A-Z,0-9.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9]+" /></td></tr>	
+		<td><input type="text" name="zip" id="zip" placeholder="City zip code" required oninvalid="setCustomValidity('Zip code required. A-Z, a-z or 0-9 only.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9]+" /></td></tr>	
 		
 		
 		<tr><td><label for="language">Language</label></td>
@@ -144,7 +153,7 @@ if (isset($key)){
 			<option value="dutch">Dutch</option>
 			<option value="portuguese">Portuguese</option>
 			<option value="croatian">Croatian</option>
-			<option value="french">French</option>
+			<option value="French">French</option>
 		</select></td></tr>		
 		
 		<tr><td><label for="time_zone">Time zone</label></td>
@@ -182,8 +191,8 @@ if (isset($key)){
 	
 		<tr><td><label for="time_format">Time format</label></td>
 		<td><select name="time_format" id="time_format">
-			<option value="12">12 hrs (e.g. 07:10 PM)</option>
-			<option value="24">24 hrs (e.g. 19:10)</option>
+			<option value="12">12 - Hour Time (e.g. 07:10 PM)</option>
+			<option value="24">24 - Hour Time (e.g. 19:10)</option>
 		</select></td></tr>		
 
 		<tr><td><label for="date_format">Date Format</label></td>

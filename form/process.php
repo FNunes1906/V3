@@ -102,14 +102,14 @@ function insertProcess($data){
 			//Successfully inserted into database
 			if($result_insert_user){
 				// Send the email:
-				$message = "<h3>Congrats !!</h3>You are just one step away from your free guide.<br/>To activate your account, please click on this link:<br/>\n\n";
-			    $message .= "http://".$_SERVER[HTTP_HOST]."/form/activate.php?key=" .$activation;
-			    
-			    $headers = "MIME-Version: 1.0\r\n";
-			    $headers .= "Content-type:text/html;charset=iso-8859-1\r\n";
-			    $headers .= "From: info@townwizard.com";
+				$message = "<h3>Congratulations and thanks for signing up for your free local guide from TownWizard!</h3>Click the email verification link below to complete the guide setup process.<br/>\n\n";
+				$message .= "http://".$_SERVER[HTTP_HOST]."/form/activate.php?key=" .$activation;
 				
-				$insertmail = mail($data['email'], 'Initial Registration Confirmation', $message, $headers);
+				$headers = "MIME-Version: 1.0\r\n";
+				$headers .= "Content-type:text/html;charset=iso-8859-1\r\n";
+				$headers .= "From: no-reply@townwizard.com";
+				
+				$insertmail = mail($data['email'], 'TownWizard Signup Email Verification', $message, $headers);
 				if($insertmail){
 					//echo "<br/>Entry Inserted and mail sent.";
 					$response=array('status'=>100);
@@ -159,14 +159,14 @@ function updateProcess($did){
 		//Successfully inserted into database
 		if($result_insert_user){
 			// Send the email:
-				$message = "<h3>Congrats !!</h3>You are just one step away from your free guide.<br/>To activate your account, please click on this link:<br/>\n\n";
-			    $message .= "http://".$_SERVER[HTTP_HOST]."/form/activate.php?key=" .$activation;
-			    
-			    $headers = "MIME-Version: 1.0\r\n";
-			    $headers .= "Content-type:text/html;charset=iso-8859-1\r\n";
-			    $headers .= "From: info@townwizard.com";
+				$message = "<h3>Congratulations and thanks for signing up for your free local guide from TownWizard!</h3>Click the email verification link below to complete the guide setup process.<br/>\n\n";
+				$message .= "http://".$_SERVER[HTTP_HOST]."/form/activate.php?key=" .$activation;
 				
-			$updatemail = mail($email, 'Initial Registration Confirmation', $message, $headers);
+				$headers = "MIME-Version: 1.0\r\n";
+				$headers .= "Content-type:text/html;charset=iso-8859-1\r\n";
+				$headers .= "From: no-reply@townwizard.com";
+				
+			$updatemail = mail($email, 'TownWizard Signup Email Verification', $message, $headers);
 			if($updatemail){
 				//echo "<br/>Entry updated and mail sent.";
 				// Confirmation
