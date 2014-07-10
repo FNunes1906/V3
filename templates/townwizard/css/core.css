@@ -1594,7 +1594,7 @@ dt.notice,dt.message,dt.error{
     text-align: right;
 }
 
-#userForm a{
+.rsform-captcha-box + a{
  background: url("../images/captcha_refresh.gif") no-repeat scroll 0 0 transparent;
     display: block;
     float: right;
@@ -1603,7 +1603,6 @@ dt.notice,dt.message,dt.error{
     margin-right: -5px;
     margin-top: -109px;
     width: 45px;
-   
 }
 
 .rsform-calendar-box {
