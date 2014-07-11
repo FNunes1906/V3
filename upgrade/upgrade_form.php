@@ -35,7 +35,7 @@ body {
 	color: #000;
 }
 input{
-	margin: 0px;
+	margin: 0px;vertical-align: top;
 }
 input[type="text"],input[type="email"]{
 	border: 1px solid rgba(0,0,0,0.3);
@@ -58,6 +58,7 @@ input[type="text"],input[type="email"]{
 
 .button {
     background-image: linear-gradient(to top, #c00c13 48%, #d72128 51%);
+	background: -webkit-linear-gradient(top, #c00c13 48%,#d72128 51%,#c00c13 51%,#d72128 100%);
     border-radius: 5px 5px 5px 5px;
 	border: none;
     color: #FFFFFF;
@@ -79,11 +80,11 @@ input[type="text"],input[type="email"]{
 }
 
 .title{
-	color: #FF0000;
+	color: #000;
     font-size: 20px;
     line-height: 50px;
     text-align: center;
-    text-decoration: underline;}
+}
 
 .thanks{
 	margin: 0 auto;
@@ -94,7 +95,7 @@ input[type="text"],input[type="email"]{
 	padding: 10px;
 	background-repeat: no-repeat;
 	background-position: 10px center;
-	text-align: center;
+	text-align: justify;
 	width: 525px;
 	color: #4F8A10;
 	background-color: #DFF2BF;
@@ -115,7 +116,15 @@ input:required{
 input:invalid:focus {
 	outline: 2px solid rgba(200, 76, 76, 0.89);
 }
+
+.invalid input:required:invalid {
+	outline: 2px solid rgba(200, 76, 76, 0.89);
+}
+
 </style>
+
+
+
 </head>
 <body>
 
@@ -130,12 +139,12 @@ input:invalid:focus {
 if(isset($_POST['submit']) && $_POST['submit']!=NULL)
 {
 		//=========MAIL SENT TO SUPPORT ==========//
-		$to = "arpit@townwizard.com";
+		$to = "rinkal@townwizard.com";
 		$subject = $_REQUEST['guidename']. "-site needs to be upgrade";
 		$message = "The following guide has requested an upgrade.<br/><br/>";
 		$message .= "<div style='float: left;width: 190px;line-height:28px;'>
-						<div>Name:</div>
-						<div>Email:</div>
+						<div>Contact Name:</div>
+						<div>Email Address:</div>
 						<div>Guide Name:</div>
 						<div>Phone Number:</div>
 						<div>Package:</div>
@@ -168,16 +177,15 @@ if(isset($_POST['submit']) && $_POST['submit']!=NULL)
 		$mailcheck_p = mail($to_p,$subject_p,$message_p,$headers_p);
 		
 		if($mailcheck && $mailcheck_p){
-			echo "<div class='thanks'><div class='success'>Thanks for upgrading! You will be contacted shortly to complete the upgrade process.<br/><br/>The TownWizard Team</div><a class='admin_button' href='/administrator'>Back to Joomla Admin</a></div>";
+			echo "<div class='thanks'><div class='success'>Thanks for upgrading! You will be contacted shortly to complete the upgrade process.<br/><br/>The TownWizard Team</div><a class='admin_button' href='/administrator'>Back to Site Admin</a></div>";
 		}else{
 			echo "<div class='thanks'>Mail is not sent due to server issue.</div>";
 		}
-	
 }
 ?>
 <?php if(!isset($_POST['submit'])) { ?>
 
-<form id="upgradeform" name="upgradeform" action="" method="POST" >
+<form id="upgradeform" class="validate-form" name="upgradeform" action="" method="POST" onSubmit="return form_validation()" >
 	<table cellpadding="0" cellspacing="10">
 		<tbody>
 			<tr>
@@ -186,20 +194,20 @@ if(isset($_POST['submit']) && $_POST['submit']!=NULL)
 				</td>
 			</tr>
 			<tr>
-				<td><label for="name">Contact Name:</label></td>
-				<td><input name="name" id="name"  value="" type="text"  oninvalid="setCustomValidity('Please complete the Contact Name field.')" onchange="try{setCustomValidity('')}catch(e){}" required>*</td>
+				<td><label for="name">Contact Name:</label><span style="color: red; padding-left: 3px;">*</span></td>
+				<td><input name="name" id="name"  value="" type="text"  oninvalid="setCustomValidity('Please complete the Contact Name field.')" onchange="try{setCustomValidity('')}catch(e){}" required></td>
 			</tr>
 			<tr>
-				<td><label for="email">Email Address:</label></td>
-				<td><input name="email" id="email"  value="<?php echo $email ?>" type="email" pattern="([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})" oninvalid="setCustomValidity('Please complete the Email Address field.')" onchange="try{setCustomValidity('')}catch(e){}" required>*</td>
+				<td><label for="email">Email Address:</label><span style="color: red; padding-left: 3px;">*</span></td>
+				<td><input name="email" id="email"  value="<?php echo $email ?>" type="email" pattern="([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})" oninvalid="setCustomValidity('Please complete the Email Address field.')" onchange="try{setCustomValidity('')}catch(e){}" required></td>
 			</tr>
 			<tr>
 				<td><label for="guidename">Guide Name:</label></td>
-				<td><input name="guidename" id="guidename"  value="<?php echo $guidename; ?>" type="text" oninvalid="setCustomValidity('Please complete the Guide Name field.')" onchange="try{setCustomValidity('')}catch(e){}" required>*</td>
+				<td><input name="guidename" id="guidename"  value="<?php echo $guidename; ?>" type="text" oninvalid="setCustomValidity('Please complete the Guide Name field.')" onchange="try{setCustomValidity('')}catch(e){}" required readonly></td>
 			</tr>
 			<tr>
-				<td><label for="phonenumber">Phone Number:</label></td>
-				<td><input name="phonenumber" id="phonenumber" value="" type="text" pattern="^[+]?([\d]{0,3})?[\(\.\-\s]?([\d]{3})[\)\.\-\s]*([\d]{3})[\.\-\s]?([\d]{4})$" oninvalid="setCustomValidity('Please complete the Phone Number field.ex:(000)000-0000')" onchange="try{setCustomValidity('')}catch(e){}" required>*</td>
+				<td><label for="phonenumber">Phone Number:</label><span style="color: red; padding-left: 3px;">*</span></td>
+				<td><input name="phonenumber" id="phonenumber" value="" type="text" pattern="([0-9().+]| |-)+" oninvalid="setCustomValidity('Please complete the Phone Number field.ex:(000)000-0000')" onchange="try{setCustomValidity('')}catch(e){}" required></td>
 			</tr>
 			<tr>
 				<td><label for="Packages">Packages:</label></td>
@@ -218,5 +226,27 @@ if(isset($_POST['submit']) && $_POST['submit']!=NULL)
 	
 </form>
 <?php } ?>
+<script>
+function form_validation() {
+	if (document.upgradeform.name.value==""){
+		alert('Please complete the Contact Name field.');
+		document.upgradeform.name.focus();
+		return false;
+	}
+	if (document.upgradeform.email.value==""){
+		alert('Please complete the Email Address field.');
+		document.upgradeform.email.focus();
+		return false;
+	}
+	if (document.upgradeform.phonenumber.value==""){
+		alert('Please complete the Phone Number field.ex:(000)000-0000');
+		document.upgradeform.phonenumber.focus();
+		return false;
+	}
+	
+}
+</script>
+
 </body>
+
 </html>
