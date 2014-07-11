@@ -6,7 +6,8 @@
 <head>
 	<link rel="stylesheet" href="css/style.css">
 	<title>Initial Sign Up</title>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -24,7 +25,57 @@
 			
 			function myMethod(){
                  
-				$('#contact').submit(function(e){        
+				$('#contact').submit(function(e){   
+				   
+/**  JQUERY VALIDATION PROCESS  */
+					var guidename = $("#gname").val();
+					var emailid = this.email.value;
+					
+
+					if(this.fname.value == "") {alert("Please enter a valid first name. A-Z, a-z or 0-9 only."); this.fname.focus(); return false;}
+
+					if(this.lname.value == "") {alert("Please enter a valid last name. A-Z, a-z or 0-9 only."); this.lname.focus(); return false;}
+
+					if(guidename == "") { 
+						alert("Guide Name required. Blank spaces not allowed."); this.gname.focus(); return false;
+					}else{
+						if(guidename.indexOf(" ") !== -1 ){
+							alert("Guide Name required. Blank spaces not allowed."); 
+							this.gname.focus(); 
+							return false;
+
+						}
+					}
+					
+					if(emailid == "") { 
+						alert("Email address required."); this.email.focus(); return false;
+					}else{
+						var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+						if (filter.test(emailid)) {
+						}else {
+							alert("Valid email address required.."); 
+							this.email.focus();
+							return false;
+						}
+					}	
+					
+					if(this.pass.value == "") { 
+						alert("Password required. It should be 5 to 15 charater long."); 
+						this.pass.focus(); 
+						return false; 
+					}else{
+						var count = $("#pass").val().length;
+						if(count < 5 || count > 15){
+							alert("Password required. It should be 5 to 15 charater long"); 
+							this.pass.focus(); 
+							return false;
+						}
+					}
+					
+					if(this.captcha.value == "") {alert("Please enter valid captcha.."); this.captcha.focus(); return false;}				
+		
+				
+/**  JQUERY VALIDATION PROCESS END */				
                         
                         var postData = $("#contact").serializeArray();
                         var formURL = $("#contact").attr("action");
@@ -59,13 +110,7 @@
 							$("#gname").css('box-shadow','none');	
 						}else if(data.status===103){
 							//console.log('else'); 
-							window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST'];?>/form/thanks.html';
-							//$("#simple-msg").html('Entry updated and mail sent.');
-							//$("#simple-msg").css('color','red');
-							//$("#email").css('border','1px solid #CCCCCC');
-							//$("#email").css('box-shadow','none');	
-							//$("#gname").css('border','1px solid #CCCCCC');
-							//$("#gname").css('box-shadow','none');						
+							window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST'];?>/form/thanks.html';						
 						}else if(data.status===104){
 							//console.log('else'); 
 							$("#simple-msg").html('This Guide name is already registered in last 24 hours.');
@@ -113,14 +158,12 @@
           	}
    		});
 	</script>
-
 </head>
-<!--<body onload="document.getElementById('captcha-form').focus()">-->
 <body >
 <div id="logo"><img src="http://www.townwizard.com/wp-content/themes/5506/images/2012/header/townwizard_logo.png" alt="townwizard logo"></div>
 <div id="simple-msg"></div>
 
-<form id="contact"  action="process.php" method="POST">
+<form id="contact"  action="process.php" method="POST" class="validate-form">
     
 		<label for="fname">First Name</label>
 		<input type="text" name="fname" id="fname" placeholder="First Name" required oninvalid="setCustomValidity('Please enter a valid first name. A-Z, a-z or 0-9 only.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9\s]+" />
@@ -135,9 +178,9 @@
 		<input type="email" name="email" id="email" placeholder="yourname@domain.com" required oninvalid="setCustomValidity('Valid email address required.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})" />
 		
 		<label for="pass">Guide Login Password</label>
-		<input type="password" name="pass" id="pass" size="15" placeholder="Password" required oninvalid="setCustomValidity('Password required. Minimum of 5 characters.')" onchange="try{setCustomValidity('')}catch(e){}" pattern=".{5,15}" />		
+		<input type="password" name="pass" id="pass" size="15" placeholder="Password" required oninvalid="setCustomValidity('Password required. It should be 5 to 15 charater long.')" onchange="try{setCustomValidity('')}catch(e){}" pattern=".{5,15}" />		
 		
-		<img src="captcha.php" id="captcha" style="margin-left: 39px;" /><br/>
+		<img src="captcha.php" id="captcha" style="margin-left: 39px;margin-top: 5px;" /><br/>
 		<a href="#" onclick="document.getElementById('captcha').src='captcha.php?'+Math.random(); document.getElementById('captcha-form').focus();" id="change-image" style="color: rgb(102, 102, 102); text-decoration: none; text-align: center; margin-left: 97px;">Refresh Text.</a><br/><br/>
 
 		<label for="captcha">Add captcha word:</label>

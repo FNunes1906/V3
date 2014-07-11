@@ -74,7 +74,7 @@ if (isset($_REQUEST['key']) && (strlen($_REQUEST['key']) == 32)){//The Activatio
    $key = $_REQUEST['key']; 
    
 }else{
-	echo '<div class="errormsgbox">Guide has already been activated Or Key is not Proper.</div>';
+	echo '<div class="errormsgbox">Activation key is not Proper.</div>';
 	exit;
 }
 
@@ -191,8 +191,8 @@ if (isset($key)){
 	
 		<tr><td><label for="time_format">Time format</label></td>
 		<td><select name="time_format" id="time_format">
-			<option value="12">12 - Hour Time (e.g. 07:10 PM)</option>
-			<option value="24">24 - Hour Time (e.g. 19:10)</option>
+			<option value="12">12 - Hour Time</option>
+			<option value="24">24 - Hour Time</option>
 		</select></td></tr>		
 
 		<tr><td><label for="date_format">Date Format</label></td>
@@ -219,7 +219,7 @@ if (isset($key)){
 	
 	<?php
 	}else{
-		echo '<div class="errormsgbox">Oops !Your account could not be activated. Link is either expired or wrong.</div>';
+		echo '<div class="errormsgbox">Guide has already been activated.</div>';
 	}	
 
 	$key="";
