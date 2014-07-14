@@ -13,7 +13,10 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 if (($this->error->code) == '404') {
-	header('Location: /index.php?option=com_content&view=article&id=400');
+	mysql_connect("localhost",$_SESSION['c_db_user'],$_SESSION['c_db_password']);
+	$query_result = mysql_query("SELECT id FROM `jos_menu` where `home` = 1");
+	$menuID = mysql_fetch_array($query_result);
+	header('Location: /index.php?option=com_content&view=article&id=400&Itemid='.$menuID['id']);
 	exit;
 }
 

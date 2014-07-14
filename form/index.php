@@ -6,7 +6,10 @@
 <head>
 	<link rel="stylesheet" href="css/style.css">
 	<title>Initial Sign Up</title>
-
+	<link rel="stylesheet" href="css/screen.css">
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.validate.js"></script>
+	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 	<script type="text/javascript">
@@ -25,35 +28,53 @@
 			
 			function myMethod(){
                  
-				$('#contact').submit(function(e){   
-				   
+				$('#contact').submit(function(e){   	
+
 /**  JQUERY VALIDATION PROCESS  */
+				
 					var guidename = $("#gname").val();
-					var emailid = this.email.value;
+					var emailid = this.email.value;	
+				
+					if(this.fname.value == "") {
+						alert("Please enter a valid first name. A-Z, a-z or 0-9 only."); 
+						this.fname.focus();
+						$('#contact').unbind('submit');
+						 return false;
+					}
+
+					if(this.lname.value == "") {
+						alert("Please enter a valid last name. A-Z, a-z or 0-9 only."); 
+						this.lname.focus();
+						$('#contact').unbind('submit'); 
+						return false;
+					}
 					
-
-					if(this.fname.value == "") {alert("Please enter a valid first name. A-Z, a-z or 0-9 only."); this.fname.focus(); return false;}
-
-					if(this.lname.value == "") {alert("Please enter a valid last name. A-Z, a-z or 0-9 only."); this.lname.focus(); return false;}
-
+					
 					if(guidename == "") { 
-						alert("Guide Name required. Blank spaces not allowed."); this.gname.focus(); return false;
+						alert("Guide Name required. Blank spaces not allowed."); 
+						this.gname.focus();
+						$('#contact').unbind('submit'); 
+						return false;
 					}else{
 						if(guidename.indexOf(" ") !== -1 ){
 							alert("Guide Name required. Blank spaces not allowed."); 
 							this.gname.focus(); 
+							$('#contact').unbind('submit');
 							return false;
-
 						}
 					}
 					
 					if(emailid == "") { 
-						alert("Email address required."); this.email.focus(); return false;
+						alert("Email address required."); 
+						this.email.focus();
+						$('#contact').unbind('submit'); 
+						return false;
 					}else{
 						var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 						if (filter.test(emailid)) {
 						}else {
 							alert("Valid email address required.."); 
+							$('#contact').unbind('submit');
 							this.email.focus();
 							return false;
 						}
@@ -62,20 +83,29 @@
 					if(this.pass.value == "") { 
 						alert("Password required. It should be 5 to 15 charater long."); 
 						this.pass.focus(); 
+						$('#contact').unbind('submit');
 						return false; 
 					}else{
 						var count = $("#pass").val().length;
 						if(count < 5 || count > 15){
 							alert("Password required. It should be 5 to 15 charater long"); 
 							this.pass.focus(); 
+							$('#contact').unbind('submit');
 							return false;
 						}
 					}
 					
-					if(this.captcha.value == "") {alert("Please enter valid captcha.."); this.captcha.focus(); return false;}				
+					if(this.captcha.value == "") {
+						alert("Please enter valid captcha.."); 
+						this.captcha.focus();
+						$('#contact').unbind('submit'); 
+						return false;
+					}				
 		
 				
-/**  JQUERY VALIDATION PROCESS END */				
+/**  JQUERY VALIDATION PROCESS END */						
+					
+					
                         
                         var postData = $("#contact").serializeArray();
                         var formURL = $("#contact").attr("action");
@@ -184,7 +214,7 @@
 		<a href="#" onclick="document.getElementById('captcha').src='captcha.php?'+Math.random(); document.getElementById('captcha-form').focus();" id="change-image" style="color: rgb(102, 102, 102); text-decoration: none; text-align: center; margin-left: 97px;">Refresh Text.</a><br/><br/>
 
 		<label for="captcha">Add captcha word:</label>
-		<input type="text" name="captcha" id="captcha-form" autocomplete="off" /><br/>
+		<input type="text" name="captcha" id="captcha-form" placeholder="captcha" autocomplete="off" required oninvalid="setCustomValidity('Please enter valid captcha')" onchange="try{setCustomValidity('')}catch(e){}" /><br/>
 		
 		<input type="submit" name="submit" class="myButton" id="Signup" value="Signup"  />
 	</form>
