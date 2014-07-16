@@ -386,11 +386,17 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
                 <div id="SideMobile" class="sect">
                   <strong><?php echo JText::_("TW_MOBILE") ?>!</strong>
                   <?php if($var->iphone != ""):?>
-                    <a href="<?php echo $var->iphone?>" target="_blank"><img alt="Download for the iPhone/iPad" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/sidebar/iphoneAppBtn.png" /></a>
+                    <a class="iphone_img" href="<?php echo $var->iphone?>" target="_blank">
+							<span style="font-size: 11px;"><?php echo JText::_("DOWNLOAD") ?></span>
+							<b style="font-size: 17px;">Iphone/Ipad</b>
+						</a>
                   <?php endif;?>
                   
                   <?php if($var->android != ""):?>
-                  <a href="<?php echo $var->android?>" target="_blank"><img alt="Download for Android" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/sidebar/androidAppBtn.png" /></a>
+                   <a class="android_img" href="<?php echo $var->android?>" target="_blank">
+					  		<span style="font-size: 11px;"><?php echo JText::_("DOWNLOAD") ?></span>
+							<b style="font-size: 17px;">Android</b>
+					  </a>
                   <?php endif;?>
                 </div>
                   <?php endif;?>
