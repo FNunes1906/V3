@@ -139,7 +139,7 @@ input:invalid:focus {
 if(isset($_POST['submit']) && $_POST['submit']!=NULL)
 {
 		//=========MAIL SENT TO SUPPORT ==========//
-		$to = "rinkal@townwizard.com";
+		$to = "operations@townwizard.com";
 		$subject = $_REQUEST['guidename']. "-site needs to be upgrade";
 		$message = "The following guide has requested an upgrade.<br/><br/>";
 		$message .= "<div style='float: left;width: 190px;line-height:28px;'>
