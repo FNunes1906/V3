@@ -1,4 +1,4 @@
-<?php
+<?php 
 /**
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
  * @license		GNU/GPL, see LICENSE.php
