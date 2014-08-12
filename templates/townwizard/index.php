@@ -268,7 +268,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 <div id="TopBar" style="background:url('<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/whitezig_zag.png') repeat-x scroll left 30px <?php echo $var->Header_color; ?>;height: 36px;">
 	<?php if($_SESSION['partner_type']=="free" AND JRequest::getVar('view') != 'reset') {?>
 		<div class="sWidth">
-			<div class="fr powered"><span style="float: left; font-size: 12px; text-align: center; font-weight: bold; text-transform: capitalize; font-family: arial; padding-top: 8px;"><?php echo JText::_("TW_FREE_GUIDE")." | ".JText::_("POWERED BY") ?></span><a href="http://www.townwizard.com/free" target="_blank"><img style="padding: 5px;" alt="townwizard" src="templates/townwizard/images/header/twBanner.png"></a></div>
+			<div class="fr powered"><a href="http://www.townwizard.com/free" target="_blank"><span style="float: left; font-size: 12px; text-align: center; font-weight: bold; text-transform: capitalize; font-family: arial; padding-top: 8px;color: #fff"><?php echo JText::_("TW_FREE_GUIDE")." | ".JText::_("POWERED BY") ?></span><img style="padding: 5px;" alt="townwizard" src="templates/townwizard/images/header/twBanner.png"></a></div>
 		</div>
 	<?php } ?>
 </div>
