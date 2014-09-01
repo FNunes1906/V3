@@ -76,14 +76,17 @@ if(isset($_REQUEST['category_id']))
 {
 	$category_id = $_REQUEST['category_id'];
 }
-//$category_id = $_REQUEST['category_id'];
+/* fetching all subcategory and creating associate array */
+global $cat_assoc,$allCatIds;
 $res = $objloclist->fetch_location_categories($category_id);
-
 while($idsrow=mysql_fetch_assoc($res)){
-		$allCatIds[] = $idsrow['id'];
+		$cat_assoc[$idsrow['id']] = $idsrow['title'];
 }
-#@#
-
+// create key for category
+$allCatIds = array_keys($cat_assoc);
+/* echo "<pre>";
+print_r($cat_assoc);
+echo "</pre>"; */
 $path= $_SERVER['PHP_SELF'] . "?category_id=".$category_id."&option=com_jevlocations&task=locations.listlocations&tmpl=component&needdistance=1&sortdistance=1&lat=".$lat1."&lon=".$lon1."&bIPhone=". $_REQUEST['bIPhone']."&iphoneapp=1&search=". $_REQUEST['search']."&limit=0&jlpriority_fv=0&filter_loccat=".$filter_loccat."&filter_order=".$filter_order."&filter_order_Dir=".$filter_order_Dir;
 
 		$default_values = array(
@@ -107,12 +110,12 @@ $path= $_SERVER['PHP_SELF'] . "?category_id=".$category_id."&option=com_jevlocat
 /* CODE ADDED BY AKASH FOR SLIDER */
 
 	//If retrived data is array then
-	if(count($allCatIds) > 1){
+	/* if(count($allCatIds) > 1){
 		$modifycat =	implode(',',$allCatIds);
 	}else{
 		$modifycat = $allCatIds[0];
-	}
-	$featured_loc = $objloclist->fetch_feature_location($modifycat);
+	} */
+	$featured_loc = $objloclist->fetch_feature_location($allCatIds);
 
 /*CODE END AKASH FOR SLIDER*/
 

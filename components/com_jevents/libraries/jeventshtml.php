@@ -258,8 +258,12 @@ class JEventsHTML{
 		}
 
 		$categories = array_merge( $categories, $rows );
-		$clist = JHTML::_('select.genericlist', $categories, $fieldname, $args, 'id', 'name', $catid );
-
+						
+		if(JRequest::getVar('task') == 'locations.edit' && $fieldname =='catid_list'){
+			$clist =  JHTML::_('select.genericlist', $categories, $fieldname.'[]', 'multiple="multiple" size="15"', 'id', 'name', explode(",",$catid));
+		}else{
+			$clist = JHTML::_('select.genericlist', $categories, $fieldname, $args, 'id', 'name', $catid );
+		}
 		return $clist;
 	}
 

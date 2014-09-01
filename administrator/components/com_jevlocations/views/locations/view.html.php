@@ -1,4 +1,5 @@
 <?php
+
 /**
  * copyright (C) 2008 GWE Systems Ltd - All rights reserved
  */
@@ -114,6 +115,7 @@ class AdminLocationsViewLocations extends JView
 			$lists['catid'] = str_replace(JText::_('JEV_EVENT_ALLCAT'),JText::_("All Cities"),$lists['catid'] );
 		}
 		// normal category filter
+		
 		$lists['loccat'] = JEventsHTML::buildCategorySelect(intval( $filter_loccat),$javascript,"",false,false,0,'filter_loccat','com_jevlocations2');
 		// state filter
 		$lists['state']	= JHTML::_('grid.state',  $filter_state );
@@ -212,7 +214,7 @@ class AdminLocationsViewLocations extends JView
 			$lists['catid'] = str_replace(JText::_('JEV_EVENT_ALLCAT'),JText::_("All Cities"),$lists['catid'] );
 		}
 		// normal category filter
-		$lists['loccat'] = JEventsHTML::buildCategorySelect(intval( $filter_loccat ),$javascript,"",false,false,0,'filter_loccat','com_jevlocations2');
+		//$lists['loccat'] = JEventsHTML::buildCategorySelect(intval( $filter_loccat ),$javascript,"",false,false,0,'filter_loccat','com_jevlocations2');
 
 		$options = array();
 		$options[] = JHTML::_('select.option', 0 ,JText::_('Any Location'));
@@ -330,11 +332,12 @@ SCRIPT;
 
 		// Edit or Create?
 		if (!$isNew)
-		{
+		{	
 			$model->checkout( $user->get('id') );
+			
 		}
 		else
-		{
+		{	
 			// initialise new record
 			$location->published = 1;
 			$location->approved 	= 1;
@@ -362,6 +365,9 @@ SCRIPT;
 
 		// normal category filter
 		$lists['loccat'] = JEventsHTML::buildCategorySelect($location->loccat,"","",false,true,0,'loccat','com_jevlocations2');
+		
+		// Multi category filter
+		$lists['catid_list'] = JEventsHTML::buildCategorySelect($location->catid_list,"","",false,true,0,'catid_list','com_jevlocations2');
 
 		// build the html select list
 		$lists['published'] 		= JHTML::_('select.booleanlist',  'published', 'class="inputbox"', $location->published );
@@ -441,6 +447,7 @@ SCRIPT;
 		}
 
 		$document =& JFactory::getDocument();
+		//$document->setTitle(JText::_('TW_LOCATION_DETAIL'). " | ". $location->title);
 		$document->setTitle($location->title);
 
 		$subtitle = addslashes(str_replace(" ","+",urlencode($location->title)));

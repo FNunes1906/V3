@@ -1,4 +1,4 @@
-<?php
+<?php 
 /**
  * copyright (C) 2008 GWE Systems Ltd - All rights reserved
  */
@@ -64,7 +64,7 @@ class LocationsModelLocation extends JModel
 	 * @since 1.5
 	 */
 	function &getData()
-	{
+	{ 
 		// Load the location data
 		if ($this->_loadData())
 		{
@@ -189,13 +189,13 @@ class LocationsModelLocation extends JModel
 		// Create the timestamp for the date
 
 		// if new item, order last in appropriate group
-		if (!$row->loc_id) {
+		if (!$row->loc_id) { 
 			$where = 'catid = ' . (int) $row->catid ." and loccat = ".(int) $row->loccat;
 			$row->ordering = $row->getNextOrder( $where );
 		}
 
 		// Make sure the location table is valid
-		if (!$row->check()) {
+		if (!$row->check()) { 
 			$this->setError($row->getError());
 			return false;
 		}
@@ -207,6 +207,12 @@ class LocationsModelLocation extends JModel
 		}
 
 		$this->lastrow = $row;
+			
+		//echo $this->lastrow->_db->_sql;
+		/*echo "<pre>";
+		print_r($this->lastrow->_db);
+		echo "</pre>";*/
+		
 		
 		// Now do any custom fields
 		JLoader::register('JevCfParameter',JPATH_SITE."/plugins/jevents/customfields/jevcfparameter.php");
@@ -363,7 +369,7 @@ class LocationsModelLocation extends JModel
 	 * @since	1.5
 	 */
 	function move($direction)
-	{
+	{	
 		$row =& $this->getTable();
 		if (!$row->load($this->_loc_id)) {
 			$this->setError($this->_db->getErrorMsg());
@@ -448,7 +454,7 @@ class LocationsModelLocation extends JModel
 	 * @since	1.5
 	 */
 	function _initData()
-	{
+	{ 
 		// Lets load the content if it doesn't already exist
 		if (empty($this->_data))
 		{

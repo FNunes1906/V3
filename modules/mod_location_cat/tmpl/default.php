@@ -1,10 +1,11 @@
 <?php
 
-//if ($LocationCates != ""){
+if ($LocationCate != ""){
 
 defined('_JEXEC') or die('Restricted access');
 global $var;
 global $Itemid;
+
 
 ?>
 <!-- Featured Events Slider -->	
@@ -27,7 +28,7 @@ global $Itemid;
 			foreach($LocationCate as $fearow) :
 			//while($fearow = mysql_fetch_array($LocationCate)){
 			?> 
-		    	<li>
+		    	<li style="height: 20px;">
 					<a href=<?php echo "/index.php?option=com_jevlocations&task=locations.locations&Itemid=".$Itemid."&searchcat=".$fearow->id;?>><?php echo $fearow->category;?></a>(<?php echo $fearow->count;?>)
 		    	</li>
 			<?php
@@ -38,5 +39,5 @@ global $Itemid;
 	</div>
 </div> 
 
-<!-- Featured Events Slider End-->
-<?php //} ?>
+
+<?php } ?>

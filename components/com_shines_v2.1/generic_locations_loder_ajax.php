@@ -20,6 +20,7 @@ $query  .= $start_at.','.$entries_per_page;
 
 $rec = mysql_query($query) or die(mysql_error());
 $n   = 0;
+//echo $query;
 if(mysql_num_rows($rec) > 0){
 	while($row = mysql_fetch_assoc($rec)){
 

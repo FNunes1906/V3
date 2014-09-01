@@ -20,8 +20,25 @@ class location {
 		return $res;
 	}
 	
-	function fetch_feature_location($modifycat){
-		$query_location = "SELECT loc.loc_id, loc.title, loc.alias, loc.image, loc.description, loc.created, cate.title as category, cate.id as cateid, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 AND loc.loc_id = cf.target_id AND cf.value = 1 AND loc.loccat IN (".$modifycat.") ORDER BY cateid ASC";
+	function fetch_feature_location($categories){
+		//$query_location = "SELECT loc.loc_id, loc.title, loc.alias, loc.image, loc.description, loc.created, cate.title as category, cate.id as cateid, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 AND loc.loc_id = cf.target_id AND cf.value = 1 AND loc.loccat IN (".$modifycat.") ORDER BY cateid ASC";
+		
+		$query_location = 'SELECT loc.loc_id, loc.title, loc.alias, loc.image, loc.description,loc.catid_list,loc.created, cf.value FROM  jos_jev_locations as loc, jos_jev_customfields3 as cf WHERE (';
+		if (is_array($categories))
+		{
+			for($p = 0; $p < count($categories) ; $p++)
+			{	
+				$query_location .= '  FIND_IN_SET('.$categories[$p].',loc.catid_list )';
+				if($p < count($categories)-1 ){
+					$query_location .=' or';
+				}else{
+					$query_location .=' )';
+				}
+			}
+		}else{
+			$query_location .= '  FIND_IN_SET('.$categories.',loc.catid_list ))';
+		}
+		$query_location .= ' AND loc.loc_id = cf.target_id AND cf.value = 1 AND loc.published = 1 ORDER BY loc.created DESC';
 
 		$featured_loc=mysql_query($query_location) or die(mysql_error());;
 		mysql_set_charset("UTF8");
@@ -64,23 +81,52 @@ class location {
 		
 		$lat1 		 		 = $default_values['lat1'];
 		$lon1				 = $default_values['lon1'];
-		$allCatIds 			 = $default_values['allCatIds'];
+		if($default_values['filter_loccat'] != 0 && $_REQUEST['filter_loccat'] != 'alp'){
+			$allCatIds 		 = $default_values['filter_loccat'];
+		}else { 
+			$allCatIds 		= $default_values['allCatIds'];
+		}
 		$subquery 			 = $default_values['subquery'];
-		$filter_loccat 		 = $default_values['filter_loccat'];
 		$start_at 			 = $default_values['start_at'];
 		$entries_per_page 	 = $default_values['entries_per_page'];
 		
-		$query  = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180)) + cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations $customfields3_table WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ".$subquery;
-		$query1 = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180))";
-		$query2 = "cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations $customfields3_table WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ".$subquery;
+		//$query  = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180)) + cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations $customfields3_table WHERE loccat IN (".implode(',',$allCatIds).") AND published=1 ".$subquery;
 		
-		if($filter_loccat == 'Featured'){
-			$query  .= " AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ";
-			$query2 .= " AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ";
-		}elseif($filter_loccat != 0 && $_REQUEST['filter_loccat'] != 'alp'){
-			$query  .= " AND loccat = $filter_loccat ";
-			$query2 .= " AND loccat = $filter_loccat ";
+		$query  = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180)) + cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations WHERE (";
+		if (is_array($allCatIds))
+		{
+			for($p = 0; $p < count($allCatIds) ; $p++)
+			{	
+				$query .= "  FIND_IN_SET(".$allCatIds[$p].",catid_list )";
+				if($p < count($allCatIds)-1 ){
+					$query .=" or";
+				}else{
+					$query .=" )";
+				}
+			}
+		}else{
+			$query .= "  FIND_IN_SET(".$allCatIds.",catid_list ))";
 		}
+		$query .= " AND published=1 ";
+		
+		$query1 = "SELECT *,(((acos(sin(($lat1 * pi() / 180)) * sin((geolat * pi() / 180))";
+		$query2 = "cos(($lat1 * pi() / 180)) * cos((geolat * pi() / 180)) * cos((($lon1 - geolon) * pi() / 180)))) * 180 / pi()) * 60 * 1.1515) as dist FROM jos_jev_locations WHERE (";
+		if (is_array($allCatIds))
+		{
+			for($q = 0; $q < count($allCatIds) ; $q++)
+			{	
+				$query2 .= "  FIND_IN_SET(".$allCatIds[$q].",catid_list )";
+				if($q < count($allCatIds)-1 ){
+					$query2 .=" or";
+				}else{
+					$query2 .=" )";
+				}
+			}
+		}else{
+			$query2 .= "  FIND_IN_SET(".$allCatIds.",catid_list ))";
+		}
+		$query2 .= " AND published=1 ";
+		
 		if(($filter_order != "") || ($_REQUEST['filter_loccat'] == 'alp')){
 			$query  .= " ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
 			$query2 .= " ORDER BY title ASC LIMIT ";
@@ -88,7 +134,7 @@ class location {
 			$query  .= " ORDER BY dist ASC LIMIT " .$start_at.','.$entries_per_page;
 			$query2 .= " ORDER BY dist ASC LIMIT ";
 		}
-			
+		//echo $query;
 		$res = mysql_query($query) or die(mysql_error());
 		$this->ajax_query1 = $query1;
 		$this->ajax_query2 = $query2;
@@ -96,29 +142,55 @@ class location {
 	}
 	
 	function fetchSearchRecord($search_array){
-		$filter_loccat 		 = $search_array['filter_loccat'];
+		//$filter_loccat 		 = $search_array['filter_loccat'];
 		$_POST['search_rcd'] = $search_array['search_rcd'];
-		$allCatIds 			 = $search_array['allCatIds'];
+		if($search_array['filter_loccat'] != 0 && $search_array['filter_loccat'] != 'alp'){
+			$allCatIds 		 = $search_array['filter_loccat'];
+		}else { 
+			$allCatIds 		= $search_array['allCatIds'];
+		}
+		//$allCatIds 			 = $search_array['allCatIds'];
 		$searchdata 		 = $search_array['searchdata'];
 		$start_at 			 = $search_array['start_at'];
 		$entries_per_page 	 = $search_array['entries_per_page'];
 		
-		if((isset($filter_loccat)==0) || ($_REQUEST['filter_loccat']=='alp') && ($_POST['search_rcd']==JText::_('SEARCH'))){
-				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC LIMIT ".$start_at.','.$entries_per_page;
-				$ajaxquery1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC LIMIT ";
-			}elseif($filter_loccat == 'Featured' && $_POST['search_rcd'] == JText::_('SEARCH') ){
-				$search_query1 = "select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and (title like '%$searchdata%'  or description like '%$searchdata%')  AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
-				$ajaxquery1 = "select * from `jos_jev_locations` $customfields3_table where loccat IN (".implode(',',$allCatIds).") AND published=1 and (title like '%$searchdata%'  or description like '%$searchdata%')  AND (jos_jev_locations.loc_id = jos_jev_customfields3.target_id AND jos_jev_customfields3.value = 1 ) ORDER BY title ASC LIMIT ";
-			}else if($_POST['search_rcd'] == JText::_('SEARCH') && $filter_loccat!=0){
-				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND loccat=$filter_loccat and published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
-				$ajaxquery1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") AND loccat=$filter_loccat and published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC LIMIT ";
-			}elseif($_POST['search_rcd'] == JText::_('SEARCH')){
-				$search_query1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") and published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC LIMIT " .$start_at.','.$entries_per_page;
-				$ajaxquery1 = "select * from `jos_jev_locations` where loccat IN (".implode(',',$allCatIds).") and published=1 and (title like '%$searchdata%'  or description like '%$searchdata%') ORDER BY title ASC LIMIT ";
+		$search_query1 = "select * from `jos_jev_locations` where ("; 
+		if (is_array($allCatIds))
+		{
+			for($r = 0; $r < count($allCatIds) ; $r++)
+			{	
+				$search_query1 .= "  FIND_IN_SET(".$allCatIds[$r].",catid_list )";
+				if($r < count($allCatIds)-1 ){
+					$search_query1 .=" or";
+				}else{
+					$search_query1 .=" )";
+				}
 			}
-			$searchResult = mysql_query($search_query1) or die(mysql_error());
-			$this->ajax_ser_query = $ajaxquery1;
-			return $searchResult;
+		}else{
+			$search_query1 .= "  FIND_IN_SET(".$allCatIds.",catid_list ))";
+		}
+		$search_query1 .= " AND (title like '%".$searchdata."%') AND published=1  ORDER BY title ASC LIMIT ".$start_at.','.$entries_per_page;
+
+		$ajaxquery1 = "select * from `jos_jev_locations` where (";
+		if (is_array($allCatIds))
+		{
+			for($s = 0; $s < count($allCatIds) ; $s++)
+			{	
+				$ajaxquery1 .= "  FIND_IN_SET(".$allCatIds[$s].",catid_list )";
+				if($s < count($allCatIds)-1 ){
+					$ajaxquery1 .=" or";
+				}else{
+					$ajaxquery1 .=" )";
+				}
+			}
+		}else{
+			$ajaxquery1 .= "  FIND_IN_SET(".$allCatIds.",catid_list ))";
+		}
+		$ajaxquery1 .= " AND (title like '%25".$searchdata."%25') AND published=1  ORDER BY title ASC LIMIT ";
+		//echo $search_query1;
+		$searchResult = mysql_query($search_query1) or die(mysql_error());
+		$this->ajax_ser_query = $ajaxquery1;
+		return $searchResult;
 	}
 	
 	

@@ -145,7 +145,14 @@ $document->addScriptDeclaration($uploaderInit);
 <script language="javascript" type="text/javascript">
 function submitbutton(pressbutton) {
 	var form = document.adminForm;
+	
+	if (pressbutton == 'locations.save'){
+		var arr = '<?php print_r($_POST); ?>';
+		alert(arr.toString());
+	}
+	
 	if (pressbutton == 'locations.overview' || pressbutton == 'locations.cancel') {
+		alert(pressbutton);
 		submitform( pressbutton );
 		return;
 	}
@@ -258,7 +265,7 @@ function submitbutton(pressbutton) {
 		<?php
 		}
 		?>
-		<tr>
+		<!--<tr>
 			<td valign="top" align="right" class="key">
 				<label for="loccat">
 					<?php echo JText::_( 'JEV LOCATION CATEGORY' ); ?>:
@@ -266,6 +273,16 @@ function submitbutton(pressbutton) {
 			</td>
 			<td>
 				<?php echo $this->lists['loccat']; ?>
+			</td>
+		</tr>-->
+		<tr>
+			<td valign="top" align="right" class="key">
+				<label for="multicat">
+					<?php echo JText::_( 'JEV LOCATION CATEGORY' ); ?>:
+				</label>
+			</td>
+			<td>
+				<?php echo $this->lists['catid_list']; ?>
 			</td>
 		</tr>
 		<tr>
@@ -638,5 +655,6 @@ function submitbutton(pressbutton) {
 	<?php } ?>
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
+
 </body>
 </html>

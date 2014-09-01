@@ -184,7 +184,6 @@ class TableLocation extends JTable
 	function __construct() {
 		$db =& JFactory::getDBO();
 		parent::__construct('#__jev_locations', 'loc_id', $db);
-		
 		$params = JComponentHelper::getParams("com_jevlocations");
 		$this->geozoom = $params->get("zoom",10);
 		$this->geolon = $params->get("long",-3.6);
@@ -202,14 +201,25 @@ class TableLocation extends JTable
 	*/
 	function bind($array, $ignore = '')
 	{
+		/*echo "<pre>";
+		print_r($array);
+		echo "</pre>";*/
+		
+		$success = parent::bind($array, $ignore);
+		
 		if (key_exists( 'params', $array ) && is_array( $array['params'] ))
 		{
 			$registry = new JRegistry();
 			$registry->loadArray($array['params']);
 			$array['params'] = $registry->toString();
 		}
-
-		return parent::bind($array, $ignore);
+		
+		if (key_exists('catid_list', $array) && is_array($array['catid_list'])) {
+				JArrayHelper::toInteger($array['catid_list']);
+				$this->catid_list = implode(",",$array['catid_list']);
+		}
+		
+		return $success;
 	}
 
 	/**

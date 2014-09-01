@@ -5,9 +5,27 @@ function displayData($row,$menu_ids){ ?>
 		<?php if($row['locimg']!='') {?>
 			<a href="index.php?option=com_jevlocations&task=locations.detail&&Itemid=<?php echo $menu_ids[1] ?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/stories/jevents/jevlocations/thumbnails/thumb_<?php echo $row['locimg']; ?>"></a><?php }?>
 	</div>
-	<a class="venueName bold fl" href="index.php?option=com_jevlocations&task=locations.detail&&Itemid=<?php echo $menu_ids[1] ?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a>
+	<a style="width: 165px;" class="venueName bold fl" href="index.php?option=com_jevlocations&task=locations.detail&&Itemid=<?php echo $menu_ids[1] ?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a>
 	<div class="bc fr bold">
-					<?php echo $row['cat']; ?>
+					<?php //echo $row['cat']; 
+					$db =& JFactory::getDBO();
+					$sep_cat = explode(',',$row['catid_list']);
+					for($s = 0; $s < count($sep_cat) ; $s++){
+						$cat_title = "SELECT title FROM jos_categories WHERE published=1 and id =".$sep_cat[$s];
+						$db->setQuery($cat_title);
+						$cat=$db->query();
+						if(mysql_num_rows($cat)>0){
+							while($cat_res = mysql_fetch_array($cat)){
+								if($s < count($sep_cat)-1){
+									echo $cat_res['title'].",<br>";
+								}else{
+									echo $cat_res['title'];
+								}
+							}
+						}
+					}
+					
+					?>
 	</div>
 	<div class="rating">
 					<h3><br/>
@@ -64,24 +82,34 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 <?php } ?>
 
 <?php if(isset($_REQUEST['m_id']) && $_REQUEST['m_id']!=''){ //search for particular menu item like places and restaurants
+		$db =& JFactory::getDBO();
 		$ser = $_REQUEST['searchword'];
 		$cat_id = $_REQUEST['m_id'];
 		$menu = &JSite::getMenu();
 		$temp = $menu->getItem($cat_id);
 		$iParams = new JParameter($temp->params);
 		$categories = $iParams->get('catfilter');
-		if(count($categories) > 1){
-			$ser_cat = implode(',',$iParams->get('catfilter'));
-		}else{
-			$ser_cat = $iParams->get('catfilter');
-		}
-
 		if($ser!=''){
-				$db =& JFactory::getDBO();
-				$sql = "select *,jjl.title,jjl.image as locimg,jc.title as cat from `jos_jev_locations` jjl, `jos_categories` jc where jjl.loccat IN (".$ser_cat.") and jjl.loccat=jc.id and jjl.published=1 AND (jjl.title LIKE '%".addslashes($ser)."%') order by jjl.title";
-				$db->setQuery($sql);
-				$rows=$db->query();
+			$sql = 'SELECT loc.*,loc.image as locimg FROM jos_jev_locations AS loc where (';
+			if (is_array($categories))
+			{
+				for($p = 0; $p < count($categories) ; $p++)
+				{	
+					$sql .= '  FIND_IN_SET('.$categories[$p].',loc.catid_list )';
+					if($p < count($categories)-1 ){
+						$sql .=' or';
+					}else{
+						$sql .=' )';
+					}
+				}
+			}else{
+				$sql .= '  FIND_IN_SET('.$categories.',loc.catid_list ))';
+			}
+			$sql .= ' AND (loc.title LIKE "%'.addslashes($ser).'%") AND loc.published = 1 order by loc.title,loc.ordering';
+			$db->setQuery($sql);
+			$rows=$db->query();
 		}
+		
 		?>
 			<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 						<?php echo JText::_("TW_RES");?>
@@ -95,9 +123,24 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 								<?php if($row['locimg']!='') {?>
 								<a href="index.php?option=com_jevlocations&task=locations.detail&Itemid=<?php echo $cat_id;?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/stories/jevents/jevlocations/thumbnails/thumb_<?php echo $row['locimg']; ?>"></a><?php }?>
 						</div>
-						<a class="venueName bold fl" href="index.php?option=com_jevlocations&task=locations.detail&Itemid=<?php echo $cat_id;?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a>
+						<a style="width: 165px;" class="venueName bold fl" href="index.php?option=com_jevlocations&task=locations.detail&Itemid=<?php echo $cat_id;?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a>
 						<div class="bc fr bold">
-										<?php echo $row['cat']; ?>
+										<?php //echo $row['cat']; 
+											$temp = explode(',',$row['catid_list']);
+											for($q = 0; $q < count($temp) ; $q++){
+												$cat_title = "SELECT title FROM jos_categories WHERE published=1 and  id =".$temp[$q];
+												$db->setQuery($cat_title);
+												$cat=$db->query();
+												while($cat_res = mysql_fetch_array($cat)){
+													if($q < count($temp)-1 ){
+														echo $cat_res['title'].",<br>";
+													}else{
+														echo $cat_res['title'];
+													}
+												}
+											}
+										
+										?>
 						</div>
 						<div class="rating">
 										<h3><br/>
@@ -128,7 +171,8 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 				if($ser!=''){
 					/*fetching locations */
 					$db =& JFactory::getDBO();
-					$sql = "select *,jjl.title,jjl.image as locimg,jc.title as cat from `jos_jev_locations` jjl, `jos_categories` jc where jjl.loccat = jc.id and jjl.published=1 AND (jjl.title LIKE '%".addslashes($ser)."%') order by jjl.title";
+					$sql = 'SELECT loc.*,loc.image as locimg FROM jos_jev_locations AS loc where (loc.title LIKE "%'.addslashes($ser).'%") AND loc.published = 1 order by loc.title,loc.ordering';
+					
 					$db->setQuery($sql);
 					$rows=$db->query();
 					
@@ -178,7 +222,8 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 										</li>
 									<?php } ?>
 								</ul>
-						<?php } if(mysql_num_rows($rows)!= 0){ //check locations exist or not ?>
+						<?php } 
+						if(mysql_num_rows($rows)!= 0){ //check locations exist or not ?>
 								<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 									<?php echo JText::_("LIST_OF_LOCATIONS");?>
 								</div>
@@ -192,14 +237,29 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 											while($menu_ids = mysql_fetch_array($menu_param)){
 												$iParams = new JParameter($menu_ids[2]);
 												$categories = $iParams->get('catfilter');
-												if(count($categories) >= 1){
-													if(in_array($row['id'],$categories,TRUE)){
-														displayData($row,$menu_ids);
+												if (is_array($categories))
+												{
+													$temp = explode(',',$row['catid_list']);
+													for($r = 0; $r < count($temp) ; $r++)
+													{	
+														
+															if(in_array($temp[$r],$categories,TRUE)){
+																displayData($row,$menu_ids);
+																break 2;
+															}
 													}
-													if(count($categories)==1 && $categories==$row['id']){
-														displayData($row,$menu_ids);
+												}else{ 
+													$temp = explode(',',$row['catid_list']);
+													for($r = 0; $r < count($temp) ; $r++)
+													{	
+														if($temp[$r]==$categories){
+															displayData($row,$menu_ids);
+															break 2;
+														}
 													}
-											}} ?>
+												}
+												
+											} ?>
 										 </li>
 								 	 <?php } ?>
 									  </ul>

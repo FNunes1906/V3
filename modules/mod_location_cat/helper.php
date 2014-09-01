@@ -20,9 +20,30 @@ class modLocationCatHelper
 	$db		  =& JFactory::getDBO();
 	$sessions = null;
 	$result   = array();
+	$compparams = JComponentHelper::getParams("com_jevlocations");
+	$catfilters_arr = $compparams->get("catfilter", "");
 	
-	$query_locationcat="SELECT COUNT(loc.catid) as count, cate.alias, cate.id, cate.title as category FROM  jos_jev_locations as loc, jos_categories as cate WHERE loc.loccat = cate.id AND loc.published = 1 AND cate.published = 1 AND cate.parent_id = ".$cate_id." GROUP BY category ORDER BY `cate`.`title` ASC";
-	//$result = mysql_query($query_locationcat);
+	
+	//$query_locationcat="SELECT COUNT(loc.catid) as count, cate.alias, cate.id, cate.title as category FROM  jos_jev_locations as loc, jos_categories as cate WHERE loc.loccat = cate.id AND loc.published = 1 AND cate.published = 1 AND cate.parent_id = ".$cate_id." GROUP BY category ORDER BY `cate`.`title` ASC";
+	
+	$query_locationcat = 'SELECT COUNT( loc.loc_id ) AS count,cate.id,cate.title as category FROM jos_jev_locations AS loc,jos_categories as cate where (';
+	if (is_array($catfilters_arr))
+	{
+		for($b = 0; $b < count($catfilters_arr) ; $b++)
+		{	
+			$query_locationcat .= '  (FIND_IN_SET('.$catfilters_arr[$b].',loc.catid_list ) and cate.id='.$catfilters_arr[$b];
+			if($b < count($catfilters_arr)-1 ){
+				$query_locationcat .=' ) or';
+			}else{
+				$query_locationcat .=' ))';
+			}
+		}
+	}else{
+		$query_locationcat .= '  FIND_IN_SET('.$catfilters_arr.',loc.catid_list ) and cate.id='.$catfilters_arr.')';
+	}
+	$query_locationcat .= ' and loc.published = 1 AND cate.published = 1 GROUP BY cate.title ORDER BY `cate`.`title` ASC';
+	//echo $query_locationcat;
+	
 	$db->setQuery($query_locationcat);
 	if ($db->getErrorNum()) {
 			JError::raiseWarning( 500, $db->stderr() );

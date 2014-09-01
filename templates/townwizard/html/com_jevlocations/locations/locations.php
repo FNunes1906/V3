@@ -57,24 +57,46 @@
 		$ser= $_REQUEST['searchcat'];
 		if($ser!='0'){
 				$db =& JFactory::getDBO();
-				$sql = "select DISTINCT jc.title AS cat,jjl . * , jjl.image AS locimg from `jos_jev_locations` jjl, `jos_categories` jc where jjl.loccat IN (".$_REQUEST['searchcat'].") and jjl.loccat=jc.id and jjl.published=1 order by jjl.title";
+				$cat_res = "SELECT c . * , pc.title AS parenttitle FROM jos_categories AS c LEFT JOIN jos_categories AS pc ON c.parent_id = pc.id LEFT JOIN jos_categories AS mc ON pc.parent_id = mc.id LEFT JOIN jos_categories AS gpc ON mc.parent_id = gpc.id WHERE c.section = 'com_jevlocations2' AND (c.id =".$ser." OR pc.id =".$ser." OR mc.id =".$ser." OR gpc.id =".$ser.") AND c.published=1 ORDER BY c.title ASC";
+				$db->setQuery($cat_res);
+				$rows=$db->query();
+				while($idsrow=mysql_fetch_assoc($rows)){
+						$cat_ids[] = $idsrow['id'];
+				}
+				
+				$sql = 'SELECT loc.*,loc.image as locimg FROM jos_jev_locations AS loc where (';
+				for($a = 0; $a < count($cat_ids) ; $a++)
+				{	
+					$sql .= '  FIND_IN_SET('.$cat_ids[$a].',loc.catid_list )';
+					if($a < count($cat_ids)-1 ){
+						$sql .=' or';
+					}else{
+						$sql .=' )';
+					}
+				}
+				$sql .= ' and loc.published = 1 order by loc.title,loc.ordering';
+				
 		}elseif($ser == '0'){
-			$menu = &JSite::getMenu();
-			$temp = $menu->getItem($Itemid);
-			$iParams = new JParameter($temp->params);
-			$categories = $iParams->get('catfilter');
-			if(count($categories) > 1){
-				$ser_cat = implode(',',$iParams->get('catfilter'));
-			}else{
-				$ser_cat = $iParams->get('catfilter');
-			}
-			$db =& JFactory::getDBO();
-			$sql = "select *,jjl.title,jjl.image as locimg,jc.title as cat from `jos_jev_locations` jjl, `jos_categories` jc where jjl.loccat IN (".$ser_cat.") and jjl.loccat=jc.id and jjl.published=1 order by jjl.title";
+				$compparams = JComponentHelper::getParams("com_jevlocations");
+				$catfilters_arr = $compparams->get("catfilter", "");
+				$sql = 'SELECT loc.*,loc.image as locimg FROM jos_jev_locations AS loc where (';
+				if (is_array($catfilters_arr))
+				{
+					for($b = 0; $b < count($catfilters_arr) ; $b++)
+					{	
+						$sql .= '  FIND_IN_SET('.$catfilters_arr[$b].',loc.catid_list )';
+						if($b < count($catfilters_arr)-1 ){
+							$sql .=' or';
+						}else{
+							$sql .=' )';
+						}
+					}
+				}else{
+					$sql .= '  FIND_IN_SET('.$catfilters_arr.',loc.catid_list ))';
+				}
+				$sql .= ' and loc.published = 1 order by loc.title,loc.ordering';
 		}
-		else{
-				$db =& JFactory::getDBO();
-				$sql = "select *,jjl.title,jjl.image as locimg,jc.title as cat from `jos_jev_locations` jjl, `jos_categories` jc where jjl.loccat = jc.id and jjl.published=1 order by jjl.title";
-		}
+		//echo $sql;
 		$db->setQuery($sql);
 		$rows=$db->query();
 ?>		
@@ -89,9 +111,22 @@
 							<?php if($row['locimg']!='') {?>
 							<a href="index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/stories/jevents/jevlocations/thumbnails/thumb_<?php echo $row['locimg']; ?>"></a><?php } ?>
 						</div>
-						<h3 style="margin:0px;"><a class="venueName bold fl" href="index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a></h3>
+						<h3 style="margin:0px;width: 165px;"><a class="venueName bold fl" href="index.php?option=com_jevlocations&task=locations.detail&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a></h3>
 						<div class="bc fr bold">
-										<?php echo $row['cat']; ?>
+										<?php // echo $row['cat']; 
+										//display location multi-category name
+										global $cat_assoc_front,$cat_ids_front;
+										$temp = explode(',',$row['catid_list']);
+										for($c = 0; $c < count($temp) ; $c++){
+											if(in_array($temp[$c],$cat_assoc_front)){
+												if($c < count($temp)-1 ){
+													echo $cat_ids_front[$temp[$c]].",<br>";
+												}else{
+													echo $cat_ids_front[$temp[$c]];
+												}
+											}
+										}
+										?>
 						</div>
 						<div class="rating">
 										<h3><br/>
@@ -125,7 +160,7 @@
 				<?php }
 
 } else {?>
-			
+		
 <div id="editcell" >
 	<ul id="SearchResults">
 	
@@ -152,7 +187,7 @@
 	for ($i=0, $n=count( $this->items ); $i < $n; $i++)
 	{
 		$row = &$this->items[$i];
-
+				
 		$tmpl = "";
 		if (JRequest::getString("tmpl","")=="component"){
 			$tmpl = "&tmpl=component";
@@ -193,6 +228,7 @@
 			$url=$row->url;
 			$phone=$row->phone;
 			$category=$row->category;
+			$catlist=$row->catid_list;
 		}
 		?>
 		
@@ -213,10 +249,23 @@
 			</div>
 			<?php } ?>
 			<span class="editlinktip hasTip" title="<?php echo JText::_( 'JEV view Location' );?>::<?php echo $this->escape($row->title); ?>">
-				<h3 style="margin:0px;"><a class="venueName bold fl" href="<?php echo $link; ?>"><?php echo $this->escape($row->title); ?></a></h3>
+				<h3 style="margin:0px;width: 165px;"><a class="venueName bold fl" href="<?php echo $link; ?>"><?php echo $this->escape($row->title); ?></a></h3>
 			</span>
 			<div class="bc fr bold">
-										<?php echo $this->escape($row->category); ?>
+										<?php //echo $this->escape($row->category); 
+										//display location multi-category name
+										global $cat_assoc_front,$cat_ids_front;
+										$temp = explode(',',$row->catid_list);
+										for($j = 0; $j < count($temp) ; $j++){
+											if(in_array($temp[$j],$cat_assoc_front)){
+												if($j < count($temp)-1 ){
+													echo $cat_ids_front[$temp[$j]].",<br>";
+												}else{
+													echo $cat_ids_front[$temp[$j]];
+												}
+											}
+										}
+										?>
 			</div>
 			<div class="rating">
 										<h3><br/>

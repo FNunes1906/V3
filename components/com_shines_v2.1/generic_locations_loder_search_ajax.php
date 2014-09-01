@@ -8,7 +8,7 @@ $moreinfo 	= JText::_('MORE_INFO');
 
 global $loder_entry_page;
 
-$query				= $_GET['ajaxquery1'];
+echo $query				= $_GET['ajaxquery1'];
 $lat1				= $_GET['lat1'];
 $lon1				= $_GET['lon1'];
 $dunit				= $_GET['dunit'];
@@ -18,7 +18,8 @@ $lpage				= $_GET['lpage'];
 
 $start_at = ($lpage * $entries_per_page);
 $query  .= $start_at.','.$entries_per_page;
-
+		
+//echo $query;
 $rec = mysql_query($query) or die(mysql_error());
 $n   = 0;
 

@@ -53,8 +53,11 @@ function saveLocationOrder( n ) {
 			<th class="title">
 				<?php echo JHTML::_('grid.sort',  'Title', 'loc.title', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
-			<th  width="10%">
+			<!--<th  width="10%">
 				<?php echo JHTML::_('grid.sort',  'Category', 'cat.title', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			</th>-->
+			<th  width="10%">
+				<?php echo JHTML::_('grid.sort',  'Assign-Categories', 'cat.title', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
 			<th width="5%" nowrap="nowrap">
 				<?php echo JHTML::_('grid.sort',  'Published', 'loc.published', $this->lists['order_Dir'], $this->lists['order'] ); ?>
@@ -68,7 +71,7 @@ function saveLocationOrder( n ) {
 			<th width="1%">
 				<a href="javascript: saveLocationOrder( <?php echo count( $this->items)-1; ?> )"><img src="images/filesave.png" border="0" width="16" height="16" alt="Save Order" /></a>
 			</th>
-			<th width="5%">
+			<!--<th width="5%">
 				<?php echo JHTML::_('grid.sort',  'Country', ($this->usecats?'c3title':'loc.country'), $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
 			<th width="5%">
@@ -90,7 +93,7 @@ function saveLocationOrder( n ) {
 			</th>
         		<?php
 			}
-			?>
+			?>-->
 			<th width="1%" nowrap="nowrap">
 				<?php echo JHTML::_('grid.sort',  'ID', 'loc.loc_id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
@@ -106,6 +109,11 @@ function saveLocationOrder( n ) {
 	<tbody>
 	<?php
 	$k = 0;
+	
+	/*echo "<pre>";
+	print_r($this->items);
+	echo "</pre>";*/
+	
 	for ($i=0, $n=count( $this->items ); $i < $n; $i++)
 	{
 		$row = &$this->items[$i];
@@ -177,8 +185,28 @@ function saveLocationOrder( n ) {
 				}
 				?>
 			</td>
-			<td align="center">
+			<!--<td align="center">
 				<?php echo $row->category;?>
+			</td>-->
+			<td align="center">
+				<?php 
+					if(isset($row->catid_list) && $row->catid_list!=NULL){
+						//echo $row->catid_list;
+						global $cat_assoc_front,$cat_ids_front;
+						$temp = explode(',',$row->catid_list);
+						for($j = 0; $j < count($temp) ; $j++){
+							if(in_array($temp[$j],$cat_assoc_front)){
+								if($j < count($temp)-1 ){
+									echo $cat_ids_front[$temp[$j]].",";
+								}else{
+									echo $cat_ids_front[$temp[$j]];
+								}
+							}
+						}
+					}
+				
+				
+				?>
 			</td>
 			<td align="center">
 				<?php echo $published;?>
@@ -189,7 +217,7 @@ function saveLocationOrder( n ) {
 			<td align="center" colspan="2">
 				<input type="text" name="order[]" size="5" value="<?php echo $row->ordering; ?>" class="text_area" style="text-align: center" />
 			</td>
-			<td>
+			<!--<td>
 				<?php
 				if ($this->usecats){
 				?>
@@ -241,7 +269,7 @@ function saveLocationOrder( n ) {
 			<td>
 				<?php echo $row->priority; ?>
 			</td>
-			<?php } ?>
+			<?php } ?>-->
 			<td align="center">
 				<?php echo $row->loc_id; ?>
 			</td>

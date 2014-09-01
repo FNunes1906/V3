@@ -43,10 +43,21 @@ class LocationsModelLocations extends JModel
 	{
 		parent::__construct();
 
-		global $mainframe, $option;
+		global $mainframe, $option,$cat_assoc_front,$cat_ids_front;
+		/* for multi-category list create associate array */
+		$db =& JFactory::getDBO();
+		$cat_res_front = "SELECT * FROM  `jos_categories` WHERE section = 'com_jevlocations2' and published=1";
+		$db->setQuery($cat_res_front);
+		$rows=$db->query();
+		while($idsrow=mysql_fetch_assoc($rows)){
+				$cat_ids_front[$idsrow['id']] = $idsrow['title'];
+		}
+		// create associate category array
+		$cat_assoc_front = array_keys($cat_ids_front);
 
 		// Get the pagination request variables
 		$limit = $mainframe->getUserStateFromRequest('global.list.limit', 'limit', $mainframe->getCfg('list_limit'), 'int');
+						
 		$limitstart = $mainframe->getUserStateFromRequest($option . '.limitstart', 'limitstart', 0, 'int');
 
 		// In case limit has been changed, adjust limitstart accordingly
@@ -65,6 +76,7 @@ class LocationsModelLocations extends JModel
 	 */
 	function getData()
 	{
+		
 		// Lets load the content if it doesn't already exist
 		if (empty($this->_data))
 		{
@@ -72,6 +84,7 @@ class LocationsModelLocations extends JModel
 			$this->_data = $this->_getList($query, $this->getState('limitstart'), $this->getState('limit'));
 			$db = & JFactory::getDBO();
 			echo $db->getErrorMsg();
+			
 		}
 
 		return $this->_data;
@@ -90,6 +103,7 @@ class LocationsModelLocations extends JModel
 		{
 			$query = $this->_buildPublicQuery();
 			$this->_publicdata = $this->_getList($query, $this->getState('limitstart'), $this->getState('limit'));
+			//$this->_publicdata = $this->_getList($query, $this->getState('limitstart'),0);
 			$db = & JFactory::getDBO();
 			echo $db->getErrorMsg();
 		}
@@ -194,12 +208,18 @@ class LocationsModelLocations extends JModel
 
 	function _buildQuery()
 	{
+		global $mainframe, $option,$cat_assoc,$cat_ids;
+		$db = & JFactory::getDBO();
+		$filter_state = $mainframe->getUserStateFromRequest($option . 'loc_filter_state', 'filter_state', '', 'word');
+		$filter_loccat = $mainframe->getUserStateFromRequest($option . 'loc_filter_loccat', 'filter_loccat', 0, 'int');
+		$search = $mainframe->getUserStateFromRequest($option . 'loc_search', 'search', '', 'string');
+		$search = JString::strtolower($search);
 		// Get the WHERE and ORDER BY clauses for the query
 		$where = $this->_buildContentWhere();
 		$orderby = $this->_buildContentOrderBy();
-
-		$query = ' SELECT loc.*, cc1.title AS c1title, cc2.title AS c2title, cc3.title AS c3title, cat.title as category, u.name AS editor  '
-				. ' FROM #__jev_locations AS loc '
+		if($filter_loccat==0){ //when filter category is 0(all categories)
+			$query = ' SELECT loc.*, cc1.title AS c1title, cc2.title AS c2title, cc3.title AS c3title, cat.title as category, u.name AS editor  '
+				. ' FROM #__jev_locations AS loc'
 				. ' LEFT JOIN #__categories AS cat ON cat.id = loc.loccat '
 				. ' LEFT JOIN #__categories AS cat2 ON cat2.id = cat.parent_id '
 				. ' LEFT JOIN #__categories AS cc1 ON cc1.id = loc.catid '
@@ -209,14 +229,50 @@ class LocationsModelLocations extends JModel
 				. $where
 				. $orderby
 		;
+		}else if($filter_loccat!=0){ //when filter category is not null or 0
+			$cat_res = "SELECT c . * , pc.title AS parenttitle FROM jos_categories AS c LEFT JOIN jos_categories AS pc ON c.parent_id = pc.id LEFT JOIN jos_categories AS mc ON pc.parent_id = mc.id LEFT JOIN jos_categories AS gpc ON mc.parent_id = gpc.id WHERE c.section = 'com_jevlocations2' AND (c.id =".$filter_loccat." OR pc.id =".$filter_loccat." OR mc.id =".$filter_loccat." OR gpc.id =".$filter_loccat.") AND c.published=1 ORDER BY c.title ASC";
+				$db->setQuery($cat_res);
+				$rows=$db->query();
+				while($idsrow=mysql_fetch_assoc($rows)){
+						$cat_ids[] = $idsrow['id'];
+				}
+				
+				$query = 'SELECT loc.* FROM #__jev_locations AS loc where (';
+				for($i = 0; $i < count($cat_ids) ; $i++)
+				{	
+					$query .= '  FIND_IN_SET('.$cat_ids[$i].',loc.catid_list )';
+					if($i < count($cat_ids)-1 ){
+						$query .=' or';
+					}else{
+						$query .=' )';
+					}
+				}
+				if(trim($search)!=null){
+					$query .= ' and loc.title LIKE "%'.$search.'%"';
+				}
+				if ($filter_state)
+				{
+					if ($filter_state == 'P')
+					{
+						$query .= ' and loc.published = 1';
+					}
+					else if ($filter_state == 'U')
+					{
+						$query .= ' and loc.published = 0';
+					}
+				}
+				
+				$query .= $orderby;
+		}
 		return $query;
 
 	}
 
 	function _buildPublicQuery()
 	{
+		
 		// Get the WHERE and ORDER BY clauses for the query
-		$where = $this->_buildPublicContentWhere();
+		/*$where = $this->_buildPublicContentWhere();
 		$orderby = $this->_buildContentOrderBy();
 
 		$query = ' SELECT loc.*, cc1.title AS c1title, cc2.title AS c2title, cc3.title AS c3title, cat.title as category, u.name AS editor  ';
@@ -235,7 +291,7 @@ class LocationsModelLocations extends JModel
 			$query .= ",(((acos(sin(RADIANS($lat)) * sin(RADIANS(loc.geolat))+cos(RADIANS($lat)) * cos(RADIANS(loc.geolat)) * cos((RADIANS($lon- loc.geolon)))))*180/pi())*60*1.1515*$km) as distance";
 		}
 
-		$compparams = JComponentHelper::getParams("com_jevlocations");
+		
 		$join = "";
 		$groupby = "";
 		if ($compparams->get("onlywithevents", 0))
@@ -305,7 +361,29 @@ class LocationsModelLocations extends JModel
 					. $groupby
 					. $orderby
 			;
+		}*/
+		
+			
+		$compparams = JComponentHelper::getParams("com_jevlocations");
+		$catfilters_arr = $compparams->get("catfilter", "");
+		
+		$query = 'SELECT loc.* FROM #__jev_locations AS loc where (';
+		if (is_array($catfilters_arr))
+		{
+			for($p = 0; $p < count($catfilters_arr) ; $p++)
+			{	
+				$query .= '  FIND_IN_SET('.$catfilters_arr[$p].',loc.catid_list )';
+				if($p < count($catfilters_arr)-1 ){
+					$query .=' or';
+				}else{
+					$query .=' )';
+				}
+			}
+		}else{
+			$query .= '  FIND_IN_SET('.$catfilters_arr.',loc.catid_list ))';
 		}
+		$query .= ' and loc.published = 1 order by loc.title,loc.ordering';
+		//echo $query;
 		return $query;
 
 	}
@@ -373,10 +451,12 @@ class LocationsModelLocations extends JModel
 			{
 				if ($compparams->get("deforder", 0) == 0)
 				{
+					
 					$orderby = ' ORDER BY ' . $filter_order . ' ' . $filter_order_Dir . ' ,  c3title,  c2title,  c1title,  loc.title ASC';
 				}
 				else if ($compparams->get("deforder", 0) == 1)
 				{
+					
 					$orderby = ' ORDER BY ' . $filter_order . ' ' . $filter_order_Dir . ' , loc.title ASC';
 				}
 				else
@@ -391,7 +471,6 @@ class LocationsModelLocations extends JModel
 		{
 			$orderby = ' ORDER BY distance asc ';
 		}
-
 		return $orderby;
 
 	}
@@ -411,7 +490,7 @@ class LocationsModelLocations extends JModel
 		$compparams = JComponentHelper::getParams("com_jevlocations");
 		$usecats = $compparams->get("usecats", 0);
 		if ($usecats)
-		{
+		{ 
 			if ($filter_catid > 0)
 			{
 				$where[] = ' cc1.id = ' . (int) $filter_catid . ' or cc2.id = ' . (int) $filter_catid . ' or cc3.id = ' . (int) $filter_catid;
@@ -431,7 +510,7 @@ class LocationsModelLocations extends JModel
 		}
 
 		if ($filter_loccat > 0)
-		{
+		{ 
 			$where[] = ' ( cat.id = ' . (int) $filter_loccat . ' OR cat2.id = ' . (int) $filter_loccat . ')';
 		}
 
@@ -587,11 +666,13 @@ class LocationsModelLocations extends JModel
 		}
 
 		$catfilters = $compparams->get("catfilter", "");
+		
 		if (is_array($catfilters))
 		{
 			JArrayHelper::toInteger($catfilters);
 			$catfilters = implode(",", $catfilters);
 			$where[] = "loc.loccat IN (" . $catfilters . ")";
+			
 		}
 		else if ($catfilters != "")
 		{
