@@ -171,7 +171,7 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 				if($ser!=''){
 					/*fetching locations */
 					$db =& JFactory::getDBO();
-					$sql = 'SELECT loc.*,loc.image as locimg FROM jos_jev_locations AS loc where (loc.title LIKE "%'.addslashes($ser).'%") AND loc.published = 1 order by loc.title,loc.ordering';
+					$sql = 'SELECT loc.*,loc.image as locimg FROM jos_jev_locations AS loc where (loc.title LIKE "%'.addslashes($ser).'%") AND loc.published = 1 and loc.catid_list!=NULL order by loc.title,loc.ordering';
 					
 					$db->setQuery($sql);
 					$rows=$db->query();

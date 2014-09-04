@@ -28,7 +28,30 @@
 				<a href="/components/com_shines_v2.1/diningdetails.php?did=<?php echo $fealoc['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>&catId=<?php echo $category_id;?>"><img  src="<?php echo $singleimagearray;?>" /></a> 
 		    		<div class="flex-caption">
 		    			<h1><?php echo $fealoc['title'] ;?></h1>
-		    			<h2><?php echo $fealoc['category'] ;?></h2>
+		    			<h2>
+						<?php //echo $fealoc['category'] ;
+							global $cat_assoc,$allCatIds;
+							$temp = explode(',',$fealoc['catid_list']);
+							for($j = 0; $j < count($temp) ; $j++){
+								if(in_array($temp[$j],$allCatIds)){
+									if($j < count($temp)-1 ){
+										echo $cat_assoc[$temp[$j]].",";
+									}else{
+										echo $cat_assoc[$temp[$j]];
+									}
+								}else{
+									$cat_title = mysql_query("SELECT title FROM jos_categories WHERE id =".$temp[$j]."");
+									while($cat_res = mysql_fetch_array($cat_title)){
+										if($j < count($temp)-1 ){
+											echo $cat_res['title'].",";
+										}else{
+											echo $cat_res['title'];
+										}
+									}
+						}
+							}
+						
+						?></h2>
 		    			<h3 style="font-size: 12px;text-transform:none;">
 							<?php
 							/*Replace images from description */
@@ -128,12 +151,12 @@ else {
 				<option value="alp" <?php if (isset($_REQUEST['filter_loccat']) && $_REQUEST['filter_loccat'] == 'alp') {?> selected <?php }?>><?php echo JText::_('ALPHABETIC'); ?></option>
 				<?php
 				while($rowsub = mysql_fetch_array($recsub)){
-					$querycount = "SELECT * FROM jos_jev_locations WHERE published=1 and loccat=".$rowsub['id'];
+					$querycount = "SELECT * FROM jos_jev_locations WHERE published=1 and FIND_IN_SET(".$rowsub['id'].",catid_list )";
 					if($filter_order != "")
 						$querycount .= " ORDER BY title ASC ";
 					else
 						$querycount .= " ORDER BY ordering ASC";
-						
+					
 					$reccount = mysql_query($querycount) or die(mysql_error());
 					if(mysql_num_rows($reccount)){
 						if(($_REQUEST['filter_loccat'] != 'alp') || ($_REQUEST['filter_loccat'] != '0')){?>
@@ -149,7 +172,7 @@ else {
 			<span id="searchIcon">s</span>
 			<form action="" method="post" name="location_form" id="searchForm" autocomplete="off">
 				<fieldset>
-					<input type="search" name="searchvalue" value="" size="15"/>
+					<input type="search" name="searchvalue" value="<?php echo $_POST['searchvalue'];?>" size="15"/>
 					<input type="submit" name="search_rcd" value="<?php echo JText::_('SEARCH'); ?>"/>
 				</fieldset>
 			</form>

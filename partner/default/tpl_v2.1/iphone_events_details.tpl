@@ -1,14 +1,19 @@
-<?php 
-	$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-	if(stripos($ua,'android') == true){ ?>
-	<div class="iphoneads" style="vertical-align:bottom;">
-	<?php m_show_banner('android-events-screen'); ?>
-	</div>
-<?php }else{?>
-	<div class="iphoneads" style="vertical-align:bottom;">
-	<?php m_show_banner('iphone-events-screen'); ?>
-	</div>
-<?php } ?>
+<?php
+/* 
+* Result  : display banner for category
+* Request : Fetching Title from category id
+*/
+if(isset($_REQUEST['catId']) && $_REQUEST['catId'] != ''){
+ $bann_cat_name  = $objevdetail->select_category_info($_REQUEST['catId']);
+ $banner_cat_name = $bann_cat_name[1];
+ $ua     = strtolower($_SERVER['HTTP_USER_AGENT']);
+ if(stripos($ua,'android') == True) { ?>
+  <div class="iphoneads" style="vertical-align:bottom;"><?php m_show_banner('android-'.$banner_cat_name.'-screen'); ?></div>
+ <?php }else {?>
+  <div class="iphoneads" style="vertical-align:bottom;"><?php m_show_banner('iphone-'.$banner_cat_name.'-screen');?></div>
+ <?php }
+}?> 
+<!--Code End -->
 
 <div id="main" role="main" ontouchstart="touchStart(event,'list');"  ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 	<ul id="placesList" class="mainList">
