@@ -80,22 +80,22 @@ function resetLatLngTxtFields(lat, lng){
 		</a>
 	</div>
 	<?php
-	if (strlen($this->location->phone)>0) {
+	# Print Phone number
+	if (strlen($this->location->phone)>0){
 		$phrase = $this->location->phone;
 		$remove = array("(","-",")"," ");
 		$newphrase = str_replace($remove, "", $phrase);
 		 echo "<div class='phone bold'>".JText::_("TW_PHONE").":<a href=tel:".$newphrase.">".$this->location->phone."</a></div>";
 	}
-		if (strlen($this->location->url)>0) {
+	
+	# Print Website
+	if (strlen($this->location->url)>0) {
 		$pattern = '[a-zA-Z0-9&?_.,=%\-\/]';
 		if (strpos($this->location->url,"http://")===false) 
-		$this->location->url = "http://".trim($this->location->url);
-		//$this->location->url = preg_replace('#(http://)('.$pattern.'*)#i', '<a href="\\1\\2" target="_blank">\\1\\2</a>', $this->location->url);
-		//echo $this->location->url;
-		} ?>
+		$this->location->url = "http://".trim($this->location->url);?>
 		<h2><a style="font-size: 15px;" class="bold" href='<?php echo $this->location->url; ?>' target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
-	
-	
+	<?php } ?>
+		
 	<div class="address">
 	<?php
 	$compparams = JComponentHelper::getParams("com_jevlocations");
