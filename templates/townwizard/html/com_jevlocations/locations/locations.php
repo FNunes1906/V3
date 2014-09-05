@@ -116,14 +116,19 @@
 										<?php // echo $row['cat']; 
 										//display location multi-category name
 										global $cat_assoc_front,$cat_ids_front;
+										$cat_name = array();
 										$temp = explode(',',$row['catid_list']);
 										for($c = 0; $c < count($temp) ; $c++){
 											if(in_array($temp[$c],$cat_assoc_front)){
-												if($c < count($temp)-1 ){
-													echo $cat_ids_front[$temp[$c]].",<br>";
-												}else{
-													echo $cat_ids_front[$temp[$c]];
-												}
+												$cat_name[]= $cat_ids_front[$temp[$c]];
+											}
+										}
+										
+										for($k = 0; $k < count($cat_name) ; $k++){
+											if($k < count($cat_name)-1){
+												echo $cat_name[$k].",<br>";
+											}else{
+												echo $cat_name[$k];
 											}
 										}
 										?>
@@ -256,13 +261,18 @@
 										//display location multi-category name
 										global $cat_assoc_front,$cat_ids_front;
 										$temp = explode(',',$row->catid_list);
+										$cat_name1 = array();
 										for($j = 0; $j < count($temp) ; $j++){
 											if(in_array($temp[$j],$cat_assoc_front)){
-												if($j < count($temp)-1 ){
-													echo $cat_ids_front[$temp[$j]].",<br>";
-												}else{
-													echo $cat_ids_front[$temp[$j]];
-												}
+												$cat_name1[]= $cat_ids_front[$temp[$j]];
+											}
+										}
+										
+										for($k = 0; $k < count($cat_name1) ; $k++){
+											if($k < count($cat_name1)-1){
+												echo $cat_name1[$k].",<br>";
+											}else{
+												echo $cat_name1[$k];
 											}
 										}
 										?>

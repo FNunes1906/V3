@@ -10,18 +10,27 @@ function displayData($row,$menu_ids){ ?>
 					<?php //echo $row['cat']; 
 					$db =& JFactory::getDBO();
 					$sep_cat = explode(',',$row['catid_list']);
+					$cat_title = "SELECT title FROM jos_categories WHERE published=1 and (";
 					for($s = 0; $s < count($sep_cat) ; $s++){
-						$cat_title = "SELECT title FROM jos_categories WHERE published=1 and id =".$sep_cat[$s];
-						$db->setQuery($cat_title);
-						$cat=$db->query();
-						if(mysql_num_rows($cat)>0){
-							while($cat_res = mysql_fetch_array($cat)){
-								if($s < count($sep_cat)-1){
-									echo $cat_res['title'].",<br>";
-								}else{
-									echo $cat_res['title'];
-								}
+						$cat_title .= "id =".$sep_cat[$s];
+						if($s < count($sep_cat)-1){
+							$cat_title .=" or ";
+						}else{
+							$cat_title .=" )";
+						}
+					}	
+					$db->setQuery($cat_title);
+					$cat=$db->query();
+					
+					if(mysql_num_rows($cat)>0){
+						$counter = 1;
+						while($cat_res = mysql_fetch_array($cat)){
+							if($counter==mysql_num_rows($cat)){
+								echo $cat_res['title'];
+							}else{
+								echo $cat_res['title'].",<br>";
 							}
+							$counter++;
 						}
 					}
 					
@@ -127,16 +136,28 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 						<div class="bc fr bold">
 										<?php //echo $row['cat']; 
 											$temp = explode(',',$row['catid_list']);
+											
+											$cat_title = "SELECT title FROM jos_categories WHERE published=1 and (";
 											for($q = 0; $q < count($temp) ; $q++){
-												$cat_title = "SELECT title FROM jos_categories WHERE published=1 and  id =".$temp[$q];
-												$db->setQuery($cat_title);
-												$cat=$db->query();
+												$cat_title .= "id =".$temp[$q];
+												if($q < count($temp)-1){
+													$cat_title .=" or ";
+												}else{
+													$cat_title .=" )";
+												}
+											}	
+											$db->setQuery($cat_title);
+											$cat=$db->query();
+											
+											if(mysql_num_rows($cat)>0){
+												$counter2 = 1;
 												while($cat_res = mysql_fetch_array($cat)){
-													if($q < count($temp)-1 ){
-														echo $cat_res['title'].",<br>";
-													}else{
+													if($counter2==mysql_num_rows($cat)){
 														echo $cat_res['title'];
+													}else{
+														echo $cat_res['title'].",<br>";
 													}
+													$counter2++;
 												}
 											}
 										
@@ -171,11 +192,10 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 				if($ser!=''){
 					/*fetching locations */
 					$db =& JFactory::getDBO();
-					$sql = 'SELECT loc.*,loc.image as locimg FROM jos_jev_locations AS loc where (loc.title LIKE "%'.addslashes($ser).'%") AND loc.published = 1 and loc.catid_list!="" order by loc.title,loc.ordering';
+					$sql = 'SELECT loc.*,loc.image as locimg FROM jos_jev_locations AS loc where (loc.title LIKE "%'.addslashes($ser).'%") AND loc.published = 1 and loc.catid_list!="" and loc.catid_list!=0 order by loc.title,loc.ordering';
 					
 					$db->setQuery($sql);
 					$rows=$db->query();
-					
 					/*fetching events */
 					$dateformat = "SELECT date_format,time_format FROM jos_pageglobal LIMIT 1";
 					$db->setQuery($dateformat);
