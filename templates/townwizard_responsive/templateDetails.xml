@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 1.5//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.5/template-install.dtd">
+<install version="1.5" type="template">
+	<name>Townwizard_Responsive</name>
+	<creationDate>01/29/13</creationDate>
+	<author>Townwizard_Responsive</author>
+	<copyright></copyright>
+	<license>GNU/GPL</license>
+	<version>1.0.2</version>
+	<description>Townwizard_Responsive</description>
+	<files>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+		<filename>template_thumbnail.png</filename>
+		<folder>images</folder>
+		<folder>css</folder>
+		<folder>fonts</folder>
+		<folder>js</folder>
+	</files>
+	<positions>
+		<position>breadcrumb</position>
+		<position>left</position>
+		<position>right</position>
+		<position>top</position>
+		<position>banner</position>
+		<position>banner1</position>
+		<position>banner2</position>
+		<position>banner3</position>
+		<position>banner4</position>
+		<position>search</position>
+		<position>menu</position>
+		<position>slider</position>
+		<position>ev_right</position>
+		<position>searchevent</position>
+		<position>user1</position>
+		<position>user2</position>
+		<position>user3</position>
+		<position>user4</position>
+		<position>user5</position>
+		<position>user6</position>
+		<position>footer</position>
+		<position>footer1</position>
+		<position>footer2</position>
+		<position>footer3</position>
+		<position>debug</position>
+		<position>syndicate</position>
+	</positions>
+	
+</install>
