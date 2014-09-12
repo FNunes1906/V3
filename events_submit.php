@@ -179,7 +179,8 @@ if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']==
 				</table>';
 				$headers = 'MIME-Version: 1.0' . "\r\n";
 				$headers .= 'Content-type:text/html;charset=iso-8859-1' . "\r\n";
-				$headers .= 'From: NO-REPLY <admin@'.$_SERVER['HTTP_HOST'].'>' . "\r\n";
+				//$headers .= 'From: NO-REPLY <admin@'.$_SERVER['HTTP_HOST'].'>' . "\r\n";
+				$headers .= 'From: TownWizard<no-reply@partneremail.townwizard.com>' . "\r\n";
 				$headers .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
 				// Email Notification to Administrator
 				mail($adminEmail,$subject,$message,$headers);

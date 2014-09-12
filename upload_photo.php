@@ -118,8 +118,9 @@
 				</table>';
 				$headers = 'MIME-Version: 1.0' . "\r\n";
 				$headers .= 'Content-type:text/html;charset=iso-8859-1' . "\r\n";
-				$_SERVER['SERVER_NAME'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
-				$headers .= 'From: NO-REPLY <admin@'.$_SERVER['SERVER_NAME'].'>' . "\r\n";
+				//$_SERVER['SERVER_NAME'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
+				//$headers .= 'From: NO-REPLY <admin@'.$_SERVER['SERVER_NAME'].'>' . "\r\n";
+				$headers .= 'From: TownWizard <no-reply@partneremail.townwizard.com>' . "\r\n";
 				$headers .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
 				// Email Notification to Administrator
 				$sendmail = mail($adminEmail,$subject,$message,$headers);
