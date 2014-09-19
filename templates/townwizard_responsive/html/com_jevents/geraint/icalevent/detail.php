@@ -1,3 +1,24 @@
+<?php 
+defined('_JEXEC') or die('Restricted access');
+$app = JFactory::getApplication();
+$templateDir = JURI::base() . 'templates/' . $app->getTemplate();
+?>
+
+<link rel="stylesheet" type="text/css" href="<?php echo $templateDir?>/css/pirobox/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<?php echo $templateDir ?>/css/jquery-ui.css" media="screen" />
+<script type="text/javascript" src="<?php echo $templateDir ?>/js/popup/pirobox.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$().piroBox({
+    my_speed: 400, //animation speed
+    bg_alpha: 0.8, //background opacity
+    slideShow : true, // true == slideshow on, false == slideshow off
+    slideSpeed : 4, //slideshow duration in seconds(3 to 6 Recommended)
+    close_all : '.piro_close,.piro_overlay'// add class .piro_overlay(with comma)if you want overlay click close piroBox
+	});
+});
+</script>
+
 <?php
 defined('_JEXEC') or die('Restricted access');
 define("TOWNWIZARD_LOCATION_IMAGE_PATH", "http://".$_SERVER['HTTP_HOST']."/partner/".$_SESSION['partner_folder_name']."/images/stories/jevents/jevlocations/thumbnails/thumb_");

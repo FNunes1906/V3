@@ -9,7 +9,7 @@ global $Itemid;
 ?>
 <!-- Featured Events Slider -->	
 
-<div id="Cuisine" class="sect grid" style="width: 420px;overflow: hidden;">
+<div id="Cuisine" class="sect grid" style="width: 100%;overflow: hidden;">
     <div class="cont">
 		<h2>
 		<?php

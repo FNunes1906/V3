@@ -104,21 +104,19 @@ function pagination_list_render($list)
 	$html .= '</div>';
 	return $html;
 }
-/*function pagination_getPagesCounter()
-	{
-		// Initialize variables
-		$html = null;
-		if ($this->get('pages.total') > 1) {
-			$html .= JText::sprintf('JPAGE_CURRENT_OF_TOTAL', $this->get('pages.current'), $this->get('pages.total'));
-		}
-		return "<span class='pagination'><span class='white'>".$html."</span></span>";
-	}*/
+
 
 function pagination_item_active(&$item) {
 	return "<a class=\"pagenav\" href=\"".$item->link."\" title=\"".$item->text."\">".$item->text."</a>";
 }
 
 function pagination_item_inactive(&$item) {
-	return "<span class=\"pagenav\">".$item->text."</span>";
+	//return "<span class=\"pagenav\">".$item->text."</span>";
+	if(is_numeric($item->text)){
+    	return "<span class=\"white\">".$item->text."</span>";
+    }else{
+    	return "<span class=\"pagenav\">".$item->text."</span>";
+   	}
 }
+
 ?>

@@ -31,13 +31,14 @@ $(window).scroll(function(){
 		$('#Darkness').fadeOut(300);
 	});
 	
-	/*$('#VenuePhotoGallery ul a').click(function(){
-		
-		$('#HelpTT span').empty();
-		$( ".pirobox_gall img" ).clone().appendTo( "#HelpTT span" );
-		$('#HelpTT').fadeIn(300);
+	$('.clickrsvp .rsvpBtn').click(function(){
+		$('#LoginPanel').fadeIn(300);
 		$('#Darkness').fadeIn(300);
-	});*/
+	});
+	$('#LoginPanel .close').click(function(){
+		$('#LoginPanel').fadeOut(300);
+		$('#Darkness').fadeOut(300);
+	});
 	
   topSliderPager();
   setInterval(topSliderPager, 1000);

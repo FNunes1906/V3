@@ -1,33 +1,56 @@
 <?php defined('_JEXEC') or die('Restricted access'); 
 // display search result for common search
 function displayData($row,$menu_ids){ ?>
-	<div class="thumb fr">
 		<?php if($row['locimg']!='') {?>
 			<a href="index.php?option=com_jevlocations&task=locations.detail&&Itemid=<?php echo $menu_ids[1] ?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/stories/jevents/jevlocations/thumbnails/thumb_<?php echo $row['locimg']; ?>"></a><?php }?>
-	</div>
-	<a class="venueName bold fl" href="index.php?option=com_jevlocations&task=locations.detail&&Itemid=<?php echo $menu_ids[1] ?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a>
-	<div class="bc fr bold">
-					<?php echo $row['cat']; ?>
-	</div>
-	<div class="rating">
-					<h3><br/>
-						<?php if($row['street']!='')
-					 	 		echo $row['street'].","; 
-						?><br/>
-					  <?php if($row['state']!='' || $row['city']!='')
-					  			echo $row['city'].",";
-					  ?><br/>
-					  <?php if($row['postcode']!='')
-					  	echo $row['state'].", ".$row['postcode'] ?>
-					</h3>
-					<?php if($row['url']!=''){?>
-						<h2><a class="bold" href="<?php echo "http://".$row['url'] ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
-					<?php }?>
-					<?php if($row['phone']!=''){?>
-						<h2 class="bold"><?php echo $row['phone'] ?></h2>
-					<?php }?>
+	<h3 itemprop="name"><a href="index.php?option=com_jevlocations&task=locations.detail&&Itemid=<?php echo $menu_ids[1] ?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a></h3>
+	<span class="placesCategorie">
+					<?php //echo $row['cat']; 
+					$db =& JFactory::getDBO();
+					$sep_cat = explode(',',$row['catid_list']);
+					$cat_title = "SELECT title FROM jos_categories WHERE published=1 and (";
+					for($s = 0; $s < count($sep_cat) ; $s++){
+						$cat_title .= "id =".$sep_cat[$s];
+						if($s < count($sep_cat)-1){
+							$cat_title .=" or ";
+						}else{
+							$cat_title .=" )";
+						}
+					}	
+					$db->setQuery($cat_title);
+					$cat=$db->query();
 					
-	</div>
+					if(mysql_num_rows($cat)>0){
+						$counter = 1;
+						while($cat_res = mysql_fetch_array($cat)){
+							if($counter==mysql_num_rows($cat)){
+								echo $cat_res['title'];
+							}else{
+								echo $cat_res['title'].",<br>";
+							}
+							$counter++;
+						}
+					}
+					
+					?>
+	</span>
+	<ul itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address">
+		<li><?php if($row['street']!='') echo $row['street'].","; ?></li>
+		<li><?php if($row['state']!='' || $row['city']!='') echo $row['city'].",";?></li>
+		<li><?php if($row['postcode']!='') echo $row['state'].", ".$row['postcode'] ?></li>
+	</ul>
+	<?php if($row['url']!=''){?>
+		<p><a itemprop="sameAs" href="<?php echo "http://".$row['url'] ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></p>
+	<?php }?>
+	
+	<?php if($row['phone']!=''){
+		$remove = array("(","-",")"," ");
+		$newphrase = str_replace($remove,"", $row['phone']);
+		//echo $newphrase;
+	?>
+	<p><a itemprop="telephone" href="tel:<?php echo $newphrase;?>"><?php echo $row['phone'];?></a></p>
+	<?php }?>
+					
 <?php } 
 // display results for events
 function displayEvents($ev_res,$menu_ids,$format_res){ 
@@ -41,83 +64,121 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 					}
 				}
 ?>
-	<div class="event">
-		<div class="date fl"><?php echo $ev_res['Date'];?></div>
-		<div class="details">
-				<h3 style="font-size:12px;margin-bottom:3px;"><a class="ev_link_row" href="index.php?option=com_jevents&task=icalrepeat.detail&Itemid=<?php echo $menu_ids[1] ?>&evid=<?php echo $ev_res['rp_id'];?>&year=<?php echo $ev_res['Eyear'];?>&month=<?php echo $ev_res['Emonth'];?>&day=<?php echo $ev_res['EDate'];?>&catids=<?php echo $ev_res['catid'];?>&title=<?php echo $ev_res['summary'];?>"><?php echo $ev_res['summary'];?></a></h3>
-					<?php echo $ev_res['category'];?> &bull; 
-				    <?php if($format_res[1] == "12"){
-				        		echo $displayTime;
-					       }else{
-						   		if ($ev_res['timeend'] != '11:59PM'){
-									echo date("H:i", strtotime($ev_res['timestart']))." - ".date("H:i", strtotime($ev_res['timeend']));
-								}else{
-									echo date("H:i", strtotime($ev_res['timestart']));
-								}
-					        	
-					       }
-					?>
-					&bull; <?php echo $ev_res['title'];?>
-				<div class="cl"></div>
-		</div>
+	<div style="padding-left: 8px; margin: 15px 0px ! important;">
+		<li class="ev_td_li" style="border-bottom: 1px solid #d6d6d6;padding-bottom: 6px;">
+			<div class="date fl"><?php echo $ev_res['Date'];?></div>
+			<div class="details">
+					<h3 style="font-size:12px;margin-bottom:3px;"><a class="ev_link_row" href="index.php?option=com_jevents&task=icalrepeat.detail&Itemid=<?php echo $menu_ids[1] ?>&evid=<?php echo $ev_res['rp_id'];?>&year=<?php echo $ev_res['Eyear'];?>&month=<?php echo $ev_res['Emonth'];?>&day=<?php echo $ev_res['EDate'];?>&catids=<?php echo $ev_res['catid'];?>&title=<?php echo $ev_res['summary'];?>"><?php echo $ev_res['summary'];?></a><br/>
+						<?php echo $ev_res['category'];?> &bull; 
+					    <?php if($format_res[1] == "12"){
+					        		echo $displayTime;
+						       }else{
+							   		if ($ev_res['timeend'] != '11:59PM'){
+										echo date("H:i", strtotime($ev_res['timestart']))." - ".date("H:i", strtotime($ev_res['timeend']));
+									}else{
+										echo date("H:i", strtotime($ev_res['timestart']));
+									}
+						        	
+						       }
+						?>
+						&bull; <?php echo $ev_res['title'];?>
+					</h3>
+			</div>
+			
+		</li>
+		
 	</div>
 <?php } ?>
 
 <?php if(isset($_REQUEST['m_id']) && $_REQUEST['m_id']!=''){ //search for particular menu item like places and restaurants
+		$db =& JFactory::getDBO();
 		$ser = $_REQUEST['searchword'];
 		$cat_id = $_REQUEST['m_id'];
 		$menu = &JSite::getMenu();
 		$temp = $menu->getItem($cat_id);
 		$iParams = new JParameter($temp->params);
 		$categories = $iParams->get('catfilter');
-		if(count($categories) > 1){
-			$ser_cat = implode(',',$iParams->get('catfilter'));
-		}else{
-			$ser_cat = $iParams->get('catfilter');
-		}
-
 		if($ser!=''){
-				$db =& JFactory::getDBO();
-				$sql = "select *,jjl.title,jjl.image as locimg,jc.title as cat from `jos_jev_locations` jjl, `jos_categories` jc where jjl.loccat IN (".$ser_cat.") and jjl.loccat=jc.id and jjl.published=1 AND (jjl.title LIKE '%".addslashes($ser)."%') order by jjl.title";
-				$db->setQuery($sql);
-				$rows=$db->query();
+			$sql = 'SELECT loc.*,loc.image as locimg FROM jos_jev_locations AS loc where (';
+			if (is_array($categories))
+			{
+				for($p = 0; $p < count($categories) ; $p++)
+				{	
+					$sql .= '  FIND_IN_SET('.$categories[$p].',loc.catid_list )';
+					if($p < count($categories)-1 ){
+						$sql .=' or';
+					}else{
+						$sql .=' )';
+					}
+				}
+			}else{
+				$sql .= '  FIND_IN_SET('.$categories.',loc.catid_list ))';
+			}
+			$sql .= ' AND (loc.title LIKE "%'.addslashes($ser).'%") AND loc.published = 1 order by loc.title,loc.ordering';
+			$db->setQuery($sql);
+			$rows=$db->query();
 		}
+		
 		?>
 			<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 						<?php echo JText::_("TW_RES");?>
 			</div>
-			<div class="your"><?php echo "<br/>".JText::_("TW_YOUR");?></div>
+			<div class="your"><?php echo JText::_("TW_YOUR");?></div>
 			<?php if (mysql_num_rows($rows)!= 0){ ?>
 				<ul id="SearchResults">
 				<?php while($row = mysql_fetch_array($rows)){ ?>
-					<li>
-						<div class="thumb fr">
-								<?php if($row['locimg']!='') {?>
-								<a href="index.php?option=com_jevlocations&task=locations.detail&Itemid=<?php echo $cat_id;?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/stories/jevents/jevlocations/thumbnails/thumb_<?php echo $row['locimg']; ?>"></a><?php }?>
-						</div>
-						<a class="venueName bold fl" href="index.php?option=com_jevlocations&task=locations.detail&Itemid=<?php echo $cat_id;?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a>
-						<div class="bc fr bold">
-										<?php echo $row['cat']; ?>
-						</div>
-						<div class="rating">
-										<h3><br/>
-											<?php if($row['street']!='')
-										 	 		echo $row['street'].","; 
-											?><br/>
-										  <?php if($row['state']!='' || $row['city']!='')
-										  			echo $row['city'].",";
-										  ?><br/>
-										  <?php if($row['postcode']!='')
-										  	echo $row['state'].", ".$row['postcode'] ?>
-										</h3>
-										<?php if($row['url']!=''){?>
-											<h2><a class="bold" href="<?php echo "http://".$row['url'] ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></h2>
-										<?php }?>
-										<?php if($row['phone']!=''){?>
-											<h2 class="bold"><?php echo $row['phone'] ?></h2>
-										<?php }?>
-						</div>
-					 </li>
+					<div class="placesContainer" itemtype="http://schema.org/Organisation" itemscope="">
+						<?php if($row['locimg']!='') {?>
+						<a href="index.php?option=com_jevlocations&task=locations.detail&Itemid=<?php echo $cat_id;?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><img src="/partner/<?php echo $_SESSION['partner_folder_name']?>/images/stories/jevents/jevlocations/thumbnails/thumb_<?php echo $row['locimg']; ?>"></a><?php }?>
+						<h3 itemprop="name"><a href="index.php?option=com_jevlocations&task=locations.detail&Itemid=<?php echo $cat_id;?>&loc_id=<?php echo $row['loc_id'] ?>&title=<?php echo $row['title'] ?>"><?php echo $row['title'] ?></a></h3>
+						<span class="placesCategorie">
+										<?php //echo $row['cat']; 
+											$temp = explode(',',$row['catid_list']);
+											
+											$cat_title = "SELECT title FROM jos_categories WHERE published=1 and (";
+											for($q = 0; $q < count($temp) ; $q++){
+												$cat_title .= "id =".$temp[$q];
+												if($q < count($temp)-1){
+													$cat_title .=" or ";
+												}else{
+													$cat_title .=" )";
+												}
+											}	
+											$db->setQuery($cat_title);
+											$cat=$db->query();
+											
+											if(mysql_num_rows($cat)>0){
+												$counter2 = 1;
+												while($cat_res = mysql_fetch_array($cat)){
+													if($counter2==mysql_num_rows($cat)){
+														echo $cat_res['title'];
+													}else{
+														echo $cat_res['title'].",<br>";
+													}
+													$counter2++;
+												}
+											}
+										
+										?>
+						</span>
+						<ul itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address">
+								<li><?php if($row['street']!='') echo $row['street'].","; ?></li>
+								<li><?php if($row['state']!='' || $row['city']!='') echo $row['city'].",";?></li>
+								<li><?php if($row['postcode']!='') echo $row['state'].", ".$row['postcode'] ?></li>
+						</ul>
+						<?php if($row['url']!=''){?>
+							<p><a itemprop="sameAs" href="<?php echo "http://".$row['url'] ?>" target="_blank"><?php echo JText::_("TW_VISIT");?></a></p>
+						<?php } ?>
+						
+						<?php if($row['phone']!=''){
+							$phrase = $this->escape($row['phone']);
+							$remove = array("(","-",")");
+							$newphrase = str_replace($remove, "", $phrase);
+							//echo $newphrase;
+						?>
+						<p><a itemprop="telephone" href="tel:<?php echo $newphrase;?>"><?php echo $row['phone'];?></a></p>
+						<?php }?>
+					 </div>
 			 	<?php } ?>
 				 </ul>
 				<?php }else{ ?>
@@ -128,10 +189,10 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 				if($ser!=''){
 					/*fetching locations */
 					$db =& JFactory::getDBO();
-					$sql = "select *,jjl.title,jjl.image as locimg,jc.title as cat from `jos_jev_locations` jjl, `jos_categories` jc where jjl.loccat = jc.id and jjl.published=1 AND (jjl.title LIKE '%".addslashes($ser)."%') order by jjl.title";
+					$sql = 'SELECT loc.*,loc.image as locimg FROM jos_jev_locations AS loc where (loc.title LIKE "%'.addslashes($ser).'%") AND loc.published = 1 and loc.catid_list!="" and loc.catid_list!=0 order by loc.title,loc.ordering';
+					
 					$db->setQuery($sql);
 					$rows=$db->query();
-					
 					/*fetching events */
 					$dateformat = "SELECT date_format,time_format FROM jos_pageglobal LIMIT 1";
 					$db->setQuery($dateformat);
@@ -151,9 +212,9 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 								<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 									<?php echo JText::_("TW_LIST_OF_EVENTS");?>
 								</div>
-								<ul id="SearchResults">
+								<ul class="ev_td_right">
 									<?php while($ev_res = mysql_fetch_array($rows2)){ ?>
-									  	<li>
+									  	
 											<?php 
 											$param_res = "SELECT `parent`,`id`,`params` FROM `jos_menu` WHERE `link`='index.php?option=com_jevents&view=week&task=week.listevents' and parent='0' AND published = '1'";
 											$db->setQuery($param_res);
@@ -175,16 +236,17 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 													}
 												}
 											} ?>
-										</li>
+										
 									<?php } ?>
 								</ul>
-						<?php } if(mysql_num_rows($rows)!= 0){ //check locations exist or not ?>
+						<?php } 
+						if(mysql_num_rows($rows)!= 0){ //check locations exist or not ?>
 								<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 									<?php echo JText::_("LIST_OF_LOCATIONS");?>
 								</div>
 									<ul id="SearchResults">
 									<?php while($row = mysql_fetch_array($rows)){ ?>
-										<li>
+										<div class="placesContainer" itemtype="http://schema.org/Organisation" itemscope="">
 											<?php 
 											$param_res = "SELECT `parent`,`id`,`params` FROM `jos_menu` WHERE `link`='index.php?option=com_jevlocations&task=locations.locations' and parent='0' AND published = '1'";
 											$db->setQuery($param_res);
@@ -192,15 +254,30 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 											while($menu_ids = mysql_fetch_array($menu_param)){
 												$iParams = new JParameter($menu_ids[2]);
 												$categories = $iParams->get('catfilter');
-												if(count($categories) >= 1){
-													if(in_array($row['id'],$categories,TRUE)){
-														displayData($row,$menu_ids);
+												if (is_array($categories))
+												{
+													$temp = explode(',',$row['catid_list']);
+													for($r = 0; $r < count($temp) ; $r++)
+													{	
+														
+															if(in_array($temp[$r],$categories,TRUE)){
+																displayData($row,$menu_ids);
+																break 2;
+															}
 													}
-													if(count($categories)==1 && $categories==$row['id']){
-														displayData($row,$menu_ids);
+												}else{ 
+													$temp = explode(',',$row['catid_list']);
+													for($r = 0; $r < count($temp) ; $r++)
+													{	
+														if($temp[$r]==$categories){
+															displayData($row,$menu_ids);
+															break 2;
+														}
 													}
-											}} ?>
-										 </li>
+												}
+												
+											} ?>
+										 </div>
 								 	 <?php } ?>
 									  </ul>
 				<?php } 
@@ -212,4 +289,3 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 					<h3 style="clear: both;padding-top: 20px;"><?php echo JText::_("LOC_RES");?></h3>
 				<?php }
 			}?>
-		

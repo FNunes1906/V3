@@ -11,7 +11,6 @@ foreach( $headerstuff['scripts'] as $key => $value ) {
 }
 $this->setHeadData($headerstuff);
 
-	
 global $var;
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/inc/var.php');
@@ -31,7 +30,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 		<meta name="keywords" content="<?php echo $var->keywords; ?>" />
 		<meta name="description" content="<?php echo $var->metadesc; ?>" />
 		<meta name="description" content="<?php echo $var->extra_meta; ?>" />
-		
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		<?php
 		// CODE FOR EVENT DETAIL DESCRIPTION TO SHARING DETAIL
 		if(JRequest::getVar('task') == 'icalrepeat.detail'){
@@ -78,7 +77,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 	
 	
 		<meta charset="utf-8">
-		<jdoc:include type="head" />
 		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
 		Remove this if you use the .htaccess -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -148,7 +146,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 	<div id="TopBar" style="background-color:<?php echo $var->Header_color; ?>;"></div>
 		
 	<div id="pageContent">
-				
+		<?php if(JRequest::getVar('view') != 'reset') {?>		
 		<header id="mainHeader">
 				<div id="mobNav">
 				
@@ -332,7 +330,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 	<?php if(JRequest::getVar('task') != 'icalrepeat.detail'):?>
 		<?php if($this->countModules('searchevent')) : ?>
 			<nav id="eventsCategoriesSearch">
-				<jdoc:include type="modules" name="searchevent" />
+				<jdoc:include type="modules" name="searchevent" style="rounded" />
 			</nav>
 		<?php endif; ?>
 	<?php endif; ?>
@@ -344,9 +342,9 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 			</nav>
 		<?php endif; ?>
 	<?php endif; ?>
-	
+	<?php } ?>
 	<div id="middleColumn">
-		
+		<?php if(JRequest::getVar('view') != 'reset') {?>
 		<div id="topBanner">
 		<!-- TW Banner Ad start -->
 	  	<?php if($_SESSION['partner_type']=="free") {?>
@@ -364,7 +362,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 			<?php endif; ?>
 		<?php } ?>
 		</div>
-		
+		<?php } ?>
 		<?php if($this->countModules('FrontSlider') && (JRequest::getVar( 'view' )!='article')) : ?>
 		<section id="mainContent">
 		<?php else: ?>
@@ -385,7 +383,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
     
 		
 	</div><!--page content cloasing tag-->
-	
+	<?php if(JRequest::getVar('view') != 'reset') {?>	
 		<div id="pageFooterContainer">
 		<footer id="pageFooter">
 			<?php if($this->countModules('footer1')) : ?>
@@ -422,7 +420,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 			<span id="copyRight">&copy; <?PHP $time = time () ; $year= date("Y",$time); echo $year . "&nbsp;" . $var->site_name; ?> </span>
 			</footer>	
 		</div>
-		
+		<?php } ?>
 <!-- Tooltip Overlay Start -->
 	<div id="Darkness"></div>
 
@@ -446,8 +444,20 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 		publisher:'fe72f22e-436e-4b4e-9486-bbcb87276adc',
 	});
 </script>
+
+<!-- Code for Print Icon begin -->
+<script type="text/javascript">     
+        function PrintDiv() {    
+           var divToPrint = document.getElementById('placeContainer');
+           var popupWin = window.open('', 'My Event', 'width=550,height=450');
+           popupWin.document.open();
+           popupWin.document.write('<html><head><title>My Event</title><link rel="stylesheet" type="text/css" href="<?php echo TOWNWIZARD_TMPL_PATH ?>/css/print.css" /></head><body>' + '<input class="printBtn" type="button" value="" onclick="window.print();" /><div id="placeContainer">' + divToPrint.innerHTML +  '</div></html>');
+            popupWin.document.close();
+                }
+</script>
+<!-- Code for Print Icon end -->
 <!-- Share This End-->
-	<?php if(JRequest::getVar('view') != 'categories'){ ?>
+	<?php if(JRequest::getVar('view') != 'categories' AND  JRequest::getVar( 'option' ) != 'com_jevents'AND JRequest::getVar('task') !='locations.detail'){ ?>
 		<script src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/jQuery.js"></script>
 	<?php } ?>
 	

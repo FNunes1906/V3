@@ -60,7 +60,7 @@ if(isset($_REQUEST['searchdate']) && $_REQUEST['searchdate']!=''){
 }elseif ( JRequest::getVar('task') === 'week.listevents' AND JRequest::getVar('view') === 'week' ){
 	echo "<h2 id='middleColumnHeader'>". JText::_('TW_THIS_WEEK')." ".$menuname." ".JText::_('EVENTS_IN')." ".$d[2]."</h2><br/>";
 }else {
-	echo "<h2 id='middleColumnHeader'>". JText::_('TW_LIST_OF_EVENTS'). "</h2>";
+	echo "<h2 id='middleColumnHeader'>". JText::_('TW_LIST_OF_EVENTS'). "</h2><br/>";
 }
 
 //CODE START BY AKASH
@@ -75,7 +75,7 @@ if(isset($_REQUEST['searchdate']) && $_REQUEST['searchdate']!=''){
 
 		$data1 = $this->datamodel->getRangeDataCalender($ser_start_date, $ser_end_date);
 		
-		echo "<div class='dayEventsSeparator'>\n";
+		echo "<ul class='ev_ul'>\n";
 		
 		$loopcounter = $_SESSION['listcaldays'];
 		$_SESSION['listcaldays'] = "";
@@ -91,7 +91,7 @@ if(isset($_REQUEST['searchdate']) && $_REQUEST['searchdate']!=''){
 			$num_events	= count($data1['days'][$d]['rows']);
 			if ($num_events>0) {
 				
-				echo "<div class='eventsContainer'>";
+				echo "<div class='ev_td_right'>";
 				for( $r = 0; $r < $num_events; $r++ ){
 					$row = $data1['days'][$d]['rows'][$r];
 					echo "<li class='ev_td_li' $listyle><div class='date fl'>$day_link </div><div class='details'>\n";
@@ -107,11 +107,11 @@ if(isset($_REQUEST['searchdate']) && $_REQUEST['searchdate']!=''){
 		$ev_res = $ev_res + $num_events;
                 } 
                 if($ev_res == '0'){
-                        echo "<h3 style='padding-top: 10px; font-size: 15px; padding-left: 0px; margin-left: -5px;'>".JText::_("LOC_RES")."</h3>";
+                        echo "<h3 style='padding-top: 10px; font-size: 15px; padding-left: 0px; margin-left: 6px;'>".JText::_("LOC_RES")."</h3>";
                 } 
 	//CODE END BY AKASH 
 	
-}else{/* Code End by Rinkal */
+}else{
 
 	if (isset($data['catids']) && count($data['catids'])==1 && $data['catids'][0]!=0 && strlen($data['catdesc'])>0){
 		echo "<div class='jev_catdesc'>".$data['catdesc']."</div>";
@@ -148,7 +148,7 @@ if(isset($_REQUEST['searchdate']) && $_REQUEST['searchdate']!=''){
             $ev_res = $ev_res + $num_events;
             } 
             if($ev_res == '0'){
-                    echo "<h3 style='padding-top: 10px; font-size: 15px; padding-left: 0px; margin-left: -5px;'>".JText::_("LOC_RES")."</h3>";
+                    echo "<h3 style='padding-top: 10px; font-size: 15px; padding-left: 0px; margin-left: 6px;'>".JText::_("LOC_RES")."</h3>";
             } 
 	
 	echo "</div>\n";

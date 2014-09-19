@@ -1,4 +1,25 @@
-<?php defined('_JEXEC') or die('Restricted access'); 
+<?php 
+defined('_JEXEC') or die('Restricted access');
+$app = JFactory::getApplication();
+$templateDir = JURI::base() . 'templates/' . $app->getTemplate();
+?>
+
+<link rel="stylesheet" type="text/css" href="<?php echo $templateDir?>/css/pirobox/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<?php echo $templateDir ?>/css/jquery-ui.css" media="screen" />
+<script type="text/javascript" src="<?php echo $templateDir ?>/js/popup/pirobox.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$().piroBox({
+    my_speed: 400, //animation speed
+    bg_alpha: 0.8, //background opacity
+    slideShow : true, // true == slideshow on, false == slideshow off
+    slideSpeed : 4, //slideshow duration in seconds(3 to 6 Recommended)
+    close_all : '.piro_close,.piro_overlay'// add class .piro_overlay(with comma)if you want overlay click close piroBox
+	});
+});
+</script>
+
+<?php  
 
 /* code added by rinkal for map in all languages */
 $lang =& JFactory::getLanguage();
@@ -66,15 +87,15 @@ function resetLatLngTxtFields(lat, lng){
 <body onload="initialize()">
 	<div id="placeContainer" itemtype="http://schema.org/Organisation" itemscope="">
 	<?php 
-	echo "<span>".$this->location->category."</span>";
+	//echo "<span>".$this->location->category."</span>";
 	echo "<h2 itemprop='name'>".$this->location->title. "</h2>";?>
 	
-	<span class="gmap">
+	<span id="gmap">
 		<?php 
 		$replace = array("#","&");
 		$new_lc_street = str_replace($replace, "", $this->location->street);?>
 		<a href="https://maps.google.com/maps?q=<?php echo $new_lc_street ?>+<?php echo $this->location->city ?>+<?php echo $this->location->state ?>+<?php echo $this->location->country ?>+<?php echo $this->location->postcode ?>&hl=<?php echo $map_lang;?>" target="_blank">
-			<div id="map_canvas" style="width:200px; height:156px;margin:5px 0px 5px 5px;"></div>
+			<div id="map_canvas" style="width:100%; height:156px;margin:5px 0px 5px 5px;"></div>
 		</a>
 	</span>
 	<?php
@@ -94,7 +115,7 @@ function resetLatLngTxtFields(lat, lng){
 		<p><a href='<?php echo $this->location->url; ?>' target="_blank"><?php echo JText::_("TW_VISIT");?></a></p>
 	
 	
-	<ul itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address">
+	<ul class="address" itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address">
 	<?php
 	$compparams = JComponentHelper::getParams("com_jevlocations");
 	$usecats = $compparams->get("usecats",0);
@@ -111,8 +132,8 @@ function resetLatLngTxtFields(lat, lng){
 
 	</ul>
 	<?php
-	echo "<p class='ven_desc'>".$this->location->description."</p>";
-	echo "<br/><br/><div class='likes fl'><span>".JText::_("TW_LIKEDBY").":</span><div class='fb-like' data-send='false' data-layout='standard' data-width='45%' data-show-faces='true'></div></div>";
+	echo "<div itemprop='description' class='ven_desc'>".$this->location->description."</div>";
+	echo "<div class='likes fl' style='margin-bottom: 10px;'><span>".JText::_("TW_LIKEDBY").":</span><div class='fb-like' data-send='false' data-layout='standard' data-width='45%' data-show-faces='true'></div></div>";
 	if ($this->location->image!=""){
 		// Get the media component configuration settings
 		$params =& JComponentHelper::getParams('com_media');
@@ -125,7 +146,7 @@ function resetLatLngTxtFields(lat, lng){
 		$thimg = '<img src="'.$mediapath.'/'.$folder.'/thumbnails/thumb_'.$this->location->image.'" />' ;
 		$img = '<img src="'.$mediapath.'/'.$folder.'/'.$this->location->image.'" />' ;
 		$imgbig = $mediapath.'/'.$folder.'/'.$this->location->image ;
-		echo "<div id='VenuePhotoGallery' class='photoGallerySect sect' style='width: 412px;overflow: hidden;'><h3 class='fl'><a class='heading display' href='/index.php?option=com_phocagallery&view=categories&Itemid=102'>".JText::_('TW_PHOTO_GALLERY')."</a></h3><div class='bc fr'><a href='/index.php?option=com_phocagallery&view=categories&Itemid=102'>".JText::_("LOC_SEND_PHOTO")."</a></div><ul><li>
+		echo "</div><div id='VenuePhotoGallery' class='photoGallerySect sect' style='width: 97%;overflow: hidden;'><h3 class='fl'><a class='heading display' href='/index.php?option=com_phocagallery&view=categories&Itemid=102'>".JText::_('TW_PHOTO_GALLERY')."</a></h3><div class='bc fr'><a href='/index.php?option=com_phocagallery&view=categories&Itemid=102'>".JText::_("LOC_SEND_PHOTO")."</a></div><ul><li>
   
   <a title='Open image in new window' class='pirobox_gall' href='$imgbig'>".$thimg."</a>
   
@@ -172,58 +193,6 @@ function resetLatLngTxtFields(lat, lng){
 	?>
 
 
-
-
-
-
-<?php
-if (JRequest::getInt("se",0)){
-?>
-<!--<fieldset class="adminform">
-	<legend><?php echo JText::_( 'JEV UPCOMING EVENTS' ); ?></legend>
-	<?php
-	require_once (JPATH_SITE."/modules/mod_jevents_latest/helper.php");
-
-	$jevhelper = new modJeventsLatestHelper();
-	$theme = JEV_CommonFunctions::getJEventsViewName();
-
-	JPluginHelper::importPlugin("jevents");
-	$viewclass = $jevhelper->getViewClass($theme, 'mod_jevents_latest',$theme.DS."latest", $compparams);
-
-	// record what is running - used by the filters
-	$registry	=& JRegistry::getInstance("jevents");
-	$registry->setValue("jevents.activeprocess","mod_jevents_latest");
-	$registry->setValue("jevents.moduleid", "cb");
-
-	$menuitem = intval($compparams->get("targetmenu",0));
-	if ($menuitem>0){
-		$compparams->set("target_itemid",$menuitem);
-	}
-	// ensure we use these settings
-	$compparams->set("modlatest_useLocalParam",1);
-	// disable link to main component
-	$compparams->set("modlatest_LinkToCal",0);
-
-	$registry->setValue("jevents.moduleparams", $compparams);
-
-	$loclkup_fv = JRequest::setVar("loclkup_fv",$this->location->loc_id);
-	$modview = new $viewclass($compparams, 0);
-	echo $modview->displayLatestEvents();
-	JRequest::setVar("loclkup_fv",$loclkup_fv);
-
-	echo "<br style='clear:both'/>";
-
-	$task = $compparams->get("view",",month.calendar");
-	$link = JRoute::_("index.php?option=com_jevents&task=$task&loclkup_fv=".$this->location->loc_id."&Itemid=".$menuitem);
-
-	echo "<strong>".JText::sprintf("JEV ALL EVENTS",$link)."</strong>";
-	?>
-</fieldset> -->
-
-<?php
-}
-?>
-</div>
 
 </body>
 </html>

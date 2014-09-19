@@ -8,7 +8,7 @@
 ?>
 
 <!-- Featured Events Slider -->
-
+<div class="home_slider">
 	<span id="leftArrow" style="background:<?php echo $var->Header_color; ?>">
 		<img alt="prev" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/marquee/marqueeArrowLt.png" />
 	</span>
@@ -154,6 +154,6 @@
 		}
 	?>
 		<div id="bottomPager"></div>	
-		
+	</div>	
 		
 <?php } ?>		

@@ -7,7 +7,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/var.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 ?>
 <!-- Featured Events Slider -->	
-
+<div class="other_slider">
 	<span id="leftArrow" style="background:<?php echo $var->Header_color; ?>">
 		<img alt="prev" src="<?php echo "http://".$_SERVER['HTTP_HOST'] ?>/templates/townwizard/images/marquee/marqueeArrowLt.png" />
 	</span>
@@ -136,6 +136,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 			}
 			?>
 <div id="bottomPager"></div>
-
+</div>
 <!-- Featured Events Slider End-->
 <?php } ?>

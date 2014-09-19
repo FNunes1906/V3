@@ -12,9 +12,9 @@ defined('_JEXEC') or die('Restricted access');
 $cfg  = & JEVConfig::getInstance();
 $data2 = $this->data;
 if(JRequest::getVar('Itemid') == 98){
- echo "<h2 id='middleColumnHeader'>".JText::_('JEV_VIEWBYWEEK')." ".JText::_('EVENTS_IN')." ".$d[0]."</h2>";
+ echo "<h2 id='middleColumnHeader'>".JText::_('JEV_VIEWBYWEEK')." ".JText::_('EVENTS_IN')." ".$d[0]."</h2><br/>";
 }else{
- echo "<h2 id='middleColumnHeader'>".JText::_('TW_THISMONTH')." ".JText::_('EVENTS_IN')." ".$d[0]."</h2>";
+ echo "<h2 id='middleColumnHeader'>".JText::_('TW_THISMONTH')." ".JText::_('EVENTS_IN')." ".$d[0]."</h2><br/>";
 }
 
 ?>

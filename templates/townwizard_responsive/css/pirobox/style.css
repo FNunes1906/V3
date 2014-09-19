@@ -19,22 +19,29 @@ a:hover.piro_prev{background:url(prev_h.png) center left no-repeat;}
 
 
 
-.pirobox_content {position:absolute; top:15%; left: 25%; padding:0;margin:0px 0 0 0px !important; display:block; z-index:99998;font-family:Trebuchet MS,Arial;}
+.pirobox_content {position:fixed; top:15%; left: 25%; padding:0;margin:0px 0 0 0px !important; display:block; z-index:99998;font-family:Trebuchet MS,Arial;}
 .pirobox_content table,tbody,tr,th,td{margin:0;padding:0;border:none;}
 .pirobox_content img{ margin:0; padding:0; border:none;}
 .
-.t_l{background:url(t_l.png) no-repeat; width:20px; height:20px;}
-.t_r{background: url(t_r.png) no-repeat; width:20px; height:20px;}
-.t_c{height:20px; background:url(t_c.png) repeat-x;}
+.t_l{/*background:url(t_l.png) no-repeat; */width:20px; height:20px;}
+.t_r{/*background: url(t_r.png) no-repeat;*/ width:20px; height:20px;}
+.t_c{height:20px; /*background:url(t_c.png) repeat-x;*/}
 
-.c_l{width:20px; background: url(c_l.png) repeat-y;}
-.c_c{/*background:white;*/ margin:0; padding:0;}
+.c_l{width:20px; /*background: url(c_l.png) repeat-y;*/}
+.c_c {
+    background: none repeat scroll 0 0 #000;
+    border: 1px solid #666666;
+    border-radius: 10px;
+    margin: 0;
+    padding: 3px;
+    width: 93%;
+}
 .c_c div{width: 100% !important;height: 100% !important; margin:0; padding:0 0 0px 0; overflow:hidden;}
-.c_r{width:20px; background: url(c_r.png) repeat-y;}
+.c_r{width:20px; /*background: url(c_r.png) repeat-y;*/}
 
-.b_c{height:20px; background:url(b_c.png) repeat-x;}
-.b_l{background:url(b_l.png) no-repeat; width:20px; height:20px;}
-.b_r{background:url(b_r.png) no-repeat; width:20px; height:20px;}
+.b_c{height:20px; /*background:url(b_c.png) repeat-x;*/}
+.b_l{/*background:url(b_l.png) no-repeat;*/ width:20px; height:20px;}
+.b_r{/*background:url(b_r.png) no-repeat; */width:20px; height:20px;}
 
 /*.t_l{background:#000; width:10px; height:10px;}
 .t_r{background:#000; width:10px; height:10px;}
@@ -60,7 +67,7 @@ a:hover.play{background:url(play_h.png) no-repeat;}
 a.stop{position:absolute;top:20px!important;top:20px;left:20px!important;left:20px;;width:40px; height:40px; margin:0; outline:none; display:block;background:url(pause.png) no-repeat;text-indent:-999em; border:none;cursor:pointer;}
 a:hover.stop{background:url(pause_h.png) no-repeat;}
 
-@media only screen and (min-width:990px) and (max-width:1024px){
+@media only screen and (min-width:990px) and (max-width:1025px){
 	
 	.pirobox_content {
 	    display: block;
@@ -69,7 +76,7 @@ a:hover.stop{background:url(pause_h.png) no-repeat;}
 	    left: 18%;
 	    margin: 0 !important;
 	    padding: 0;
-	    position: absolute;
+	    position:fixed;
 	    top: 15%;
 	    width: 52% !important;
 	    z-index: 99998;
@@ -83,16 +90,16 @@ a:hover.stop{background:url(pause_h.png) no-repeat;}
 @media only screen and (min-width:720px) and (max-width:837px){
 	
 	.pirobox_content {
-    display: block;
-    font-family: Trebuchet MS,Arial;
-    height: 75% !important;
-    left: 18%;
-    margin: 0 !important;
-    padding: 0;
-    position: absolute;
-    top: 32%;
-    width: 62% !important;
-    z-index: 99998;
+	    display: block;
+	    font-family: Trebuchet MS,Arial;
+	    height: 75% !important;
+	    left: 18%;
+	    margin: 0 !important;
+	    padding: 0;
+	    position:fixed;
+	    top: 10%;
+	    width: 62% !important;
+	    z-index: 99998;
 	}
 	.pirobox_content img {
 		height: 68% !important;
@@ -102,16 +109,16 @@ a:hover.stop{background:url(pause_h.png) no-repeat;}
 
 @media only screen and (min-width:480px) and (max-width:719px){
 	.pirobox_content {
-    display: block;
-    font-family: Trebuchet MS,Arial;
-    height: 60% !important;
-    left: 12%;
-    margin: 0 !important;
-    padding: 0;
-    position: absolute;
-    top: 24%;
-    width: 80% !important;
-    z-index: 99998;
+	    display: block;
+	    font-family: Trebuchet MS,Arial;
+	    height: 60% !important;
+	    left: 12%;
+	    margin: 0 !important;
+	    padding: 0;
+	    position:fixed;
+	    top: 14%;
+	    width: 80% !important;
+	    z-index: 99998;
 	}
 	.pirobox_content img {
 		height: 50% !important;
@@ -121,16 +128,16 @@ a:hover.stop{background:url(pause_h.png) no-repeat;}
 
 @media only screen and (min-width:320px) and (max-width:479px){
 	.pirobox_content {
-     display: block;
-    font-family: Trebuchet MS,Arial;
-    height: 50% !important;
-    left: 1%;
-    margin: 0 !important;
-    padding: 0;
-    position: absolute;
-    top: 30%;
-    width: 100% !important;
-    z-index: 99998;
+	     display: block;
+	    font-family: Trebuchet MS,Arial;
+	    height: 50% !important;
+	    left: 1%;
+	    margin: 0 !important;
+	    padding: 0;
+	   position:fixed;
+	    top: 22%;
+	    width: 100% !important;
+	    z-index: 99998;
 	}
 	
 	.pirobox_content img {
@@ -142,16 +149,16 @@ a:hover.stop{background:url(pause_h.png) no-repeat;}
 @media only screen and (min-width:240px) and (max-width:319px){
 	
 	.pirobox_content {
-    display: block;
-    font-family: Trebuchet MS,Arial;
-    height: 38% !important;
-    left: 0;
-    margin: 0 !important;
-    padding: 0;
-    position: absolute;
-    top: 30%;
-    width: 100% !important;
-    z-index: 99998;
+	    display: block;
+	    font-family: Trebuchet MS,Arial;
+	    height: 38% !important;
+	    left: 0;
+	    margin: 0 !important;
+	    padding: 0;
+	  	position:fixed;
+	    top: 18%;
+	    width: 100% !important;
+	    z-index: 99998;
 	}
 	
 	.pirobox_content img {

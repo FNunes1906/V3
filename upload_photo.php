@@ -106,7 +106,7 @@
 				$adminEmail = $pageglobal['email'];
 				//$adminEmail	= $adminuser->email;
 				$sitename =  $pageglobal['site_name'];
-				$subject= 'New Photo Uploaded ';
+				$subject= 'New Photo Uploaded';
 				$message = '
 				<table cellpadding="3" cellspacing="3">
 				<tr><td colspan="2" align="left"><h2>Photo Details</h2></td></tr>
