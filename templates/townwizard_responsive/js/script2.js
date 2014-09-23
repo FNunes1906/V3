@@ -1,18 +1,25 @@
+(function($) {
+
 $(window).load(function(){
 	topSliderPager();
+	
 });	
 	
 $(document).ready(function(){
 var windowState = "large";	
+	
 $("#middleColumn").after('<a href="#" id="backToTop">Back to top!</a>');   
 	
 $('#backToTop').hide();
 $(window).scroll(function(){
 		if ($(this).scrollTop() > 100) {
-			$('#backToTop').fadeIn();	
+			$('#backToTop').fadeIn();
+			
 		} else {
 			$('#backToTop').fadeOut();
 		}
+		
+		
 	});
 	
 //Click event to scroll to top
@@ -20,6 +27,7 @@ $(window).scroll(function(){
 		$('body,html').animate({scrollTop : 0},800);
 		return false;
 	});
+
 	$('.helpBtn').click(function(){
 		$('#HelpTT').fadeIn(300);
 		$('#Darkness').fadeIn(300);
@@ -49,7 +57,7 @@ $(window).scroll(function(){
 	
   topSliderPager();
   setInterval(topSliderPager, 1000);
-$( "#current a:first span span" ).clone().appendTo( "#mainHeader strong" );
+$( ".menuSelected a:first" ).clone().appendTo( "#mainHeader strong" );
 	
 var url = window.location.href;
 
@@ -221,55 +229,56 @@ function smartphone () {
 function smallTouch(){
 	
 	removeFrontPageClass();
-	$("#mobileMenuBttn").off('click');
-    if($("#mainNav").css("display") == "none"){
-	$("#mainNav").css("display", "block");
-}
-        var newValue = $("#mobileMenuBttn").find('.indicator').text() == '-' ? '+': '+';
-		// set the new value of the indicator
-		$("#mobileMenuBttn").find('.indicator').text(newValue);
+	
+	
+	
+		j$("#mobileMenuBttn").off('click');
 		
-    if($("#leftColumn").css("display") == "block"){
-	$("#leftColumn").css("display", "none");
-}
+		if(j$("#mainNav").css("display") == "none"){
+			j$("#mainNav").css("display", "block");
+		}
+	      var newValue = j$("#mobileMenuBttn").find('.indicator').text() == '-' ? '+': '+';
+			// set the new value of the indicator
+		j$("#mobileMenuBttn").find('.indicator').text(newValue);
+			
+		if(j$("#leftColumn").css("display") == "block"){
+			j$("#leftColumn").css("display", "none");
+		}
 
-
-	$( "#mobileMenuBttn" ).click(function() {
-    $( "#leftColumn" ).toggle("slow");
-    
-    var newValue = $(this).find('.indicator').text() == '+' ? '-' : '+';
-		// set the new value of the indicator
-		$(this).find('.indicator').text(newValue);
-		
-		windowState = "smallTouch";	
-         	
-});
+		j$( "#mobileMenuBttn" ).click(function() {
+			j$( "#leftColumn" ).toggle("slow");
+			var newValue = $(this).find('.indicator').text() == '+' ? '-' : '+';
+			// set the new value of the indicator
+			j$(this).find('.indicator').text(newValue);
+			windowState = "smallTouch";	
+		});
+	
 }
 function iPad(){
 	
 	
    removeFrontPageClass();
 	
-	$("#mainNav").css("display", "none");
+	j$("#mainNav").css("display", "none");
 
-$("#mobileMenuBttn").off('click');
-    if($("#mainNav").css("display") == "block"){
-	$("#mainNav").css("display", "none");
+j$("#mobileMenuBttn").off('click');
+    if(j$("#mainNav").css("display") == "block"){
+	j$("#mainNav").css("display", "none");
 }
 
-    if($("#leftColumn").css("display") == "none"){
-	$("#leftColumn").css("display", "block");
+    if(j$("#leftColumn").css("display") == "none"){
+	j$("#leftColumn").css("display", "block");
 }
- var newValue = $("#mobileMenuBttn").find('.indicator').text() == '-' ? '+': '+';
+ var newValue = j$("#mobileMenuBttn").find('.indicator').text() == '-' ? '+': '+';
 		// set the new value of the indicator
-		$("#mobileMenuBttn").find('.indicator').text(newValue);
+		j$("#mobileMenuBttn").find('.indicator').text(newValue);
 	
 	
-$( "#mobileMenuBttn" ).click(function() {
-$( "#mainNav" ).toggle( "slow");
- var newValue = $(this).find('.indicator').text() == '+' ? '-' : '+';
+j$( "#mobileMenuBttn" ).click(function() {
+j$( "#mainNav" ).toggle( "slow");
+ var newValue = j$(this).find('.indicator').text() == '+' ? '-' : '+';
 		// set the new value of the indicator
-		$(this).find('.indicator').text(newValue);
+		j$(this).find('.indicator').text(newValue);
 
 });	
 	
@@ -413,8 +422,8 @@ function frontPageSliderToLeft() {
    
    
    function removeFrontPageClass () {
-   	$("#topSlider.frontPage a").css("background", "FFFFFF");
-   	$("#topSlider.frontPage").addClass('temparary').addClass('otherPages').removeClass('frontPage');
+   	j$("#topSlider.frontPage a").css("background", "FFFFFF");
+   	j$("#topSlider.frontPage").addClass('temparary').addClass('otherPages').removeClass('frontPage');
      
    }
     function removeTempararyClass () {
@@ -439,6 +448,6 @@ function frontPageSliderToLeft() {
     
  }  	
    
-   
+   })(jQuery);
    
 

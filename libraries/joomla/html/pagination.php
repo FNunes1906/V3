@@ -150,7 +150,9 @@ class JPagination extends JObject
 		if ($this->get('pages.total') > 1) {
 			$html .= JText::sprintf('JPAGE_CURRENT_OF_TOTAL', $this->get('pages.current'), $this->get('pages.total'));
 		}
-		return $html;
+		if(isset($html)){
+			return "<span class='pagination'><span class='white'>".$html."</span></span>";
+		}
 	}
 
 	/**
@@ -422,17 +424,15 @@ class JPagination extends JObject
 		$html = null;
 
 		// Reverse output rendering for right-to-left display
-		$html .= '&lt;&lt; ';
+		$html .= '<div class="pagination">';
 		$html .= $list['start']['data'];
-		$html .= ' &lt; ';
 		$html .= $list['previous']['data'];
 		foreach( $list['pages'] as $page ) {
 			$html .= ' '.$page['data'];
 		}
 		$html .= ' '. $list['next']['data'];
-		$html .= ' &gt;';
 		$html .= ' '. $list['end']['data'];
-		$html .= ' &gt;&gt;';
+		$html .= '</div>';
 
 		return $html;
 	}
@@ -457,7 +457,11 @@ class JPagination extends JObject
 		if ($mainframe->isAdmin()) {
 			return "<span>".$item->text."</span>";
 		} else {
-			return "<span class=\"pagenav\">".$item->text."</span>";
+			if(is_numeric($item->text)){
+				return "<span class=\"white\">".$item->text."</span>";
+			}else{
+				return "<span class=\"pagenav\">".$item->text."</span>";
+			}
 		}
 	}
 
@@ -479,14 +483,10 @@ class JPagination extends JObject
 			$data->all->link	= JRoute::_("&limitstart=");
 		}
 
-		if( JRequest::getVar( 'option' ) == 'com_jevlocations' ){
 			// Set the start and previous data objects
-			$data->previous	= new JPaginationObject(JText::_('&#60;Prev'));
-			$data->start	= new JPaginationObject(JText::_('&#60;&#60;Start'));
-		}else{
-			$data->previous	= new JPaginationObject(JText::_('Prev'));
-			$data->start	= new JPaginationObject(JText::_('Start'));
-		}
+			$data->previous	= new JPaginationObject(JText::_('< Prev'));
+			$data->start	= new JPaginationObject(JText::_('<< Start'));
+
 
 		if ($this->get('pages.current') > 1)
 		{
@@ -500,15 +500,10 @@ class JPagination extends JObject
 			$data->previous->link	= JRoute::_("&limitstart=".$page);
 		}
 
-		if(JRequest::getVar( 'option' ) == 'com_jevlocations' ){
 			// Set the start and previous data objects
-			$data->next	= new JPaginationObject(JText::_('Next>'));
-			$data->end	= new JPaginationObject(JText::_('End>>'));
-		}else{
-			// Set the next and end data objects
-			$data->next	= new JPaginationObject(JText::_('Next'));
-			$data->end	= new JPaginationObject(JText::_('End'));
-		}
+			$data->next	= new JPaginationObject(JText::_('Next >'));
+			$data->end	= new JPaginationObject(JText::_('End >>'));
+
 		
 		if ($this->get('pages.current') < $this->get('pages.total'))
 		{
@@ -536,6 +531,8 @@ class JPagination extends JObject
 				$data->pages[$i]->link	= JRoute::_("&limitstart=".$offset);
 			}
 		}
+		//echo "<pre>";
+		//print_r($data);
 		return $data;
 	}
 }

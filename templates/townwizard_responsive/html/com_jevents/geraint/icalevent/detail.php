@@ -193,7 +193,7 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 	<?php if(isset($data->_jevlocation->image) && !empty($data->_jevlocation->image)): ?>
 	
 		<!-- IMAGE CODE Begin -->
-		<div style="width: 420px; overflow: hidden;" class="photoGallerySect sect" id="VenuePhotoGallery">
+		<div class="photoGallerySect sect" id="VenuePhotoGallery">
 			<h3 class="fl">
 				<a href="/index.php?option=com_phocagallery&amp;view=categories&amp;Itemid=102" class="heading display"><?php echo JText::_("TW_PHOTO_GALLERY") ?></a>
 			</h3>

@@ -268,9 +268,9 @@ function checkPostParameter($postValue){
  
 <link rel="stylesheet" href="../../../administrator/components/com_jevents/assets/css/eventsadmin.css" type="text/css" />
 <link rel="stylesheet" href="../../../media/system/css/modal.css" type="text/css" />
-<!--<link rel="stylesheet" href="../../../components/com_jevents/assets/css/dashboard.css" type="text/css" />
-<link rel="stylesheet" href="../../../plugins/system/rokbox/themes/light/rokbox-style.css" type="text/css" />-->
-<!--<link rel="stylesheet" href="../../../components/com_gantry/css/joomla.css" type="text/css" />
+<link rel="stylesheet" href="../../../components/com_jevents/assets/css/dashboard.css" type="text/css" />
+<!--<link rel="stylesheet" href="../../../plugins/system/rokbox/themes/light/rokbox-style.css" type="text/css" />
+<link rel="stylesheet" href="../../../components/com_gantry/css/joomla.css" type="text/css" />
 <link rel="stylesheet" href="../../../templates/rt_quantive_j15/css/joomla.css" type="text/css" />
 <link rel="stylesheet" href="../../../templates/rt_quantive_j15/css/style8.css" type="text/css" />
 <link rel="stylesheet" href="../../../templates/rt_quantive_j15/css/light-body.css" type="text/css" />
@@ -281,13 +281,15 @@ function checkPostParameter($postValue){
 <link rel="stylesheet" href="../../../templates/rt_quantive_j15/css/fusionmenu.css" type="text/css" />
 <link rel="stylesheet" href="../../../modules/mod_rokajaxsearch/css/rokajaxsearch.css" type="text/css" />
 <link rel="stylesheet" href="../../../modules/mod_rokajaxsearch/themes/blue/rokajaxsearch-theme.css" type="text/css" />-->
-<script type="text/javascript">
+<!--<script type="text/javascript">
 jQuery.noConflict();
 $.noConflict();
-</script>
+</script>-->
 <script type="text/javascript" src="../../../includes/js/joomla.javascript.js"></script>
 <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
-
+<script>
+    var j$ = jQuery.noConflict();
+</script>
 <script type="text/javascript" src="../../../media/system/js/mootools.js"></script>
 <script type="text/javascript" src="../../../administrator/components/com_jevents/assets/js/editical.js?v=1.5.4"></script>
 <script type="text/javascript" src="../../../administrator/components/com_jevpeople/assets/js/people.js"></script>
@@ -305,8 +307,8 @@ $.noConflict();
 <script type="text/javascript" src="../../../plugins/system/rokbox/rokbox.js"></script>
 <script type="text/javascript" src="../../../plugins/system/rokbox/themes/light/rokbox-config.js"></script>-->
 
-<script type="text/javascript" src="../../../components/com_gantry/js/gantry-buildspans.js"></script>
-<!--<script type="text/javascript" src="../../../modules/mod_roknavmenu/themes/fusion/js/fusion.js"></script>
+<!--<script type="text/javascript" src="../../../components/com_gantry/js/gantry-buildspans.js"></script>
+<script type="text/javascript" src="../../../modules/mod_roknavmenu/themes/fusion/js/fusion.js"></script>
 <script type="text/javascript" src="../../../modules/mod_rokajaxsearch/js/rokajaxsearch.js"></script>-->
 
 <script type="text/javascript" src="../../../plugins/system/pc_includes/ajax_1.3.js"></script>
@@ -424,8 +426,8 @@ if($msg!='') {?>
 	height:auto;  
 	width:381px;  
 	background:#E6E6E6;  
-	left: 31%;
-	 top: 48%;
+	left: 23%;
+	 top: 128%;
 	z-index:2000; /* Layering ( on-top of others), if you have lots of layers: I just maximized, you can change it yourself */
 	margin-left: 0px;
 	line-height:25px; 
@@ -463,7 +465,8 @@ text-decoration:none;
     text-align: center;
     top: -12px;
 	color:#6fa5e2;  
-	font-weight:500; 
+	font-weight:500;
+	width: 18px; 
    
 }
 .black {

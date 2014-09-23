@@ -182,7 +182,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 				<a href="<?php echo $this->baseurl ?>" title="HOME"> <img alt="Site logo" src="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/logo/logo.png"/> </a>
 			</div>
 			
-			<?php echo '<h1 id="siteName" class="sitestitle">'.$var->site_name.'</h1>'; ?>
+			<?php echo '<h1 id="siteName" class="sitestitle"><a href="index.php">'.$var->site_name.'</a></h1>'; ?>
 			<?php echo '<h1 id="siteName" class="siteslogan">'.$var->beach.'</h1>'; ?>
 			<div id="weather">  				
 				<?php
@@ -457,11 +457,17 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 </script>
 <!-- Code for Print Icon end -->
 <!-- Share This End-->
-	<?php if(JRequest::getVar('view') != 'categories' AND  JRequest::getVar( 'option' ) != 'com_jevents'AND JRequest::getVar('task') !='locations.detail'){ ?>
-		<script src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/jQuery.js"></script>
-	<?php } ?>
-	
-	<script src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/script.js"></script>
+	<?php if(JRequest::getVar('view') != 'categories' AND JRequest::getVar( 'option' ) != 'com_jevents' AND JRequest::getVar('task') !='locations.detail' AND JRequest::getVar('Itemid') != 105) { ?>
+  		<script src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/jQuery.js"></script>
+ 	<?php } ?>
+	 <?php if(JRequest::getVar('Itemid') != 105){ ?>
+	  <script src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/script.js"></script>
+	 <?php }else{ ?>
+	  <script src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/script2.js"></script>
+	 <?php } ?>
+ 
+	 
+ 
 	<script type="text/javascript">
 		/* Facebook login function */
 		function fb_login() {

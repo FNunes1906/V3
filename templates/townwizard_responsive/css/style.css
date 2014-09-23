@@ -192,6 +192,13 @@ a ,p, span, form{
 	font-weight: normal;
 	font-family: 'AllerLightRegular',Arial,sans-serif;
 }
+
+#siteName a{
+	   font-size: 11px;
+       text-transform: uppercase;
+       display: block;
+}
+
 #mainHeader strong{
  	display: none;
  	}
@@ -411,7 +418,7 @@ a ,p, span, form{
     color: #515151;
     display: block;
     font-family: arial;
-    padding: 17px;
+    padding: 18px;
     text-transform: uppercase;
 }
 .android_img span,.iphone_img span{font-size: 11px;}
@@ -517,7 +524,7 @@ a ,p, span, form{
 }
 #topSlider.otherPages p, #topSlider.frontPage p{
 	width: 94%;
-	padding:5px 3% 0 3%;
+	padding:5px 3% 0px 3%;
 }
 #topSlider .timePlace{
 	padding-left:0;
@@ -832,7 +839,7 @@ padding: 5px;
 	margin-left:5px;
 }
 #topRightAside ul.bottomShareThis li .wrongInfo{ 
-     background:url('../images/header/quest.png') no-repeat;
+     background:url('../images/header/questionIcon.png') no-repeat;
      padding-left: 35px;
 	 display: block;
 	 float: left;
@@ -1366,26 +1373,27 @@ width: 61%;
 	text-align: center;
 }
 
-#mainContent form,#mainContentwhite form{
+#mainContent form,#mainContentwhite #submitevent{
 	width: 97.5%;
 	margin-left:2.5%;
 	float: left;
 }
-#mainContent form span,#mainContentwhite form span{
+#mainContent form span,#mainContentwhite #submitevent span{
 	width: 30%;
 	float: left;
 	display: block;
 	margin-bottom:10px;
 	padding-top:5px;
 }
-#mainContent form input:first-of-type,#mainContentwhite form input:first-of-type{
+#mainContent form input:first-of-type,#mainContentwhite #submitevent input:first-of-type{
 	width: 68%;
 	margin-bottom:10px;
 	float: left;
 	display: block;
 	float: left;
+	text-align: left;
 }
-#mainContent form select:first-of-type,#mainContentwhite form select:first-of-type{
+#mainContent form select:first-of-type,#mainContentwhite #submitevent select:first-of-type{
 	margin-bottom:20px;
 	float: left;
 	width: auto;
@@ -1393,30 +1401,30 @@ width: 61%;
 #mainFieldset{
 	width: 96%;
 }
-#mainContent form fieldset legend:nth-of-type(2),#mainContentwhite form fieldset legend:nth-of-type(2) {
+#mainContent form fieldset legend:nth-of-type(2),#mainContentwhite #submitevent fieldset legend:nth-of-type(2) {
 	float: left;
 	line-height: 20px;
 }
-#mainContent form input[name=allDayEvent],#mainContentwhite form input[name=allDayEvent]{
+#mainContent form input[name=allDayEvent],#mainContentwhite #submitevent input[name=allDayEvent]{
 	width:50px;
 	float: left;
 }
-#mainContent form input[name=publish_up],#mainContentwhite form input[name=publish_up]{
+#mainContent form input[name=publish_up],#mainContentwhite #submitevent input[name=publish_up]{
 	width:65px;
 	float: left;
 	text-align: center;
 }
-#mainContent form input[name=publish_down],#mainContentwhite form input[name=publish_down]{
+#mainContent form input[name=publish_down],#mainContentwhite #submitevent input[name=publish_down]{
 	width:65px;
 	float: left;
 	text-align: center;
 }
-#mainContent form fieldset,#mainContentwhite form fieldset{
+#mainContent form fieldset,#mainContentwhite #submitevent fieldset{
 	float:left;
 	width: 95%;
 	margin:0 0 10px 0;
 }
-#mainContent form fieldset button,#mainContentwhite form fieldset button{
+#mainContent form fieldset button,#mainContentwhite #submitevent fieldset button{
 	width:20px;
 	height: 20px;
 	background:url('../images/header/dashboard-icon.gif') no-repeat;
@@ -1426,30 +1434,30 @@ width: 61%;
 	margin-left:5px;
 	transition:.3s;
 }
-#mainContent form fieldset button:hover,#mainContentwhite form fieldset button:hover{
+#mainContent form fieldset button:hover,#mainContentwhite #submitevent fieldset button:hover{
 	background-position:0 -20px;
 }
-#mainContent form button + span,#mainContentwhite form button + span{
+#mainContent form button + span,#mainContentwhite #submitevent button + span{
 	float: left;
 	margin-left: 5px;
 	width: 57px;
 }
-#mainContent form .inputbox,#mainContentwhite form .inputbox{
+#mainContent form .inputbox,#mainContentwhite #submitevent .inputbox{
 	width: 34px;
 	text-align: center;
 	float: left;
 }
-#mainContent #eventDescription,#mainContentwhite #eventDescription{
+#mainContent #eventDescription,#mainContentwhite #submitevent #eventDescription{
 	width: 100%;
 }
-#mainContent textarea,#mainContentwhite textarea{
+#mainContent textarea,#mainContentwhite #submitevent textarea{
 	width:100%;
 	max-width: 100%;
 	min-width:100%;
 	height:200px; 
 	margin-bottom:10px;
 }
-#mainContent form #formBottom input:nth-of-type(1),#mainContentwhite form #formBottom input:nth-of-type(1){ 
+#mainContent form #formBottom input:nth-of-type(1),#mainContentwhite #submitevent #formBottom input:nth-of-type(1){ 
     width: 30%;
     margin-left:0;
     margin-right: 5px;
@@ -1461,9 +1469,9 @@ width: 61%;
     padding: 0;
 }
 #mainContent #noSpecTime,#mainContentwhite #noSpecTime {
-    margin: 5px 0 0;
-    padding: 0;
-    width: 40%;
+    margin: 5px 0 0 !important;
+    padding: 0 !important;
+    width: 40% !important;
 }
 #formBottom a.button {
   background: none repeat scroll 0 0 #dadada;
@@ -1477,7 +1485,7 @@ width: 61%;
 #formBottom a.button:hover{
 	color:#000000;
 }
-#formBottom p,.osolCaptchaBlock label [for=osolCatchaTxt0]{
+#formBottom p{
 	width: 51%;
 	float: left;
 	font-size: 10px;
@@ -1488,19 +1496,22 @@ width: 61%;
 }
 .osolCaptchaBlock table{
 	float: left;
-	margin-left: 30%;
+	margin-left: 17%;
 }
-#mainContent form #formBottom span,#mainContentwhite form #formBottom span{
+#mainContent form #formBottom span,#mainContentwhite #submitevent #formBottom span{
 	display: block;
 	float: left;
 	width:30%;
 }
-#mainContent form #formBottom span:last-of-type,#mainContentwhite form #formBottom span:last-of-type{
-	margin-top:-20px;
+#mainContent form #formBottom span:last-of-type,#mainContentwhite #submitevent #formBottom span:last-of-type{
+	margin-top:-23px;
 }
 #formBottom input{
 	float: left;
 	width: 68%;
+}
+#custom_anonemail{
+ margin-top:10px;
 }
 #formBottom img{
 	float: left;
@@ -1508,11 +1519,11 @@ width: 61%;
 #formBottom #captchaCode0{
 	margin-left:30%;
 }
-#mainContent #formBottom #osolCatchaTxt0,#mainContentwhite #formBottom #osolCatchaTxt0{
-	width: 170px; 
+#mainContentwhite #osolCatchaTxt0{
+	width: 170px !important; 
 	clear: both;
 	margin-top: 10px; 
-	margin:10px 50px 10px 30%;
+	margin:10px 50px 10px 30% !important;
 }
 #formBottom input[type=submit] {
     background: none repeat scroll 0 0 #000000;
@@ -1524,6 +1535,15 @@ width: 61%;
     width: 70px;
     margin-left:10px;
 }   
+#mainContentwhite .osolCaptchaBlock > label:first-of-type{
+  clear: both;
+  float: left;
+  font-size: 10px;
+  margin-bottom: 10px;
+  padding-left: 30%;
+  padding-right: 12%;
+  width: 51%;
+}
 /*submit events ends here*/
 /*Restaurants and Places styles starts here*/
 .your {
@@ -1571,7 +1591,8 @@ width: 61%;
 .placesContainer ul{
 	margin-bottom:15px;
 	float: left;
-	min-width: 39%;
+	/*min-width: 38%;*/
+	width: 39%;
 }
 .placesContainer ul li{
 	font-size: 13px;
@@ -1726,6 +1747,7 @@ width: 61%;
 	font-size: 14px;
 	line-height:14px;
 	margin-bottom:10px;
+	font-weight: normal;
 }
 #eventContainer p:nth-of-type(3){
 width: 100%;
@@ -1758,15 +1780,16 @@ margin-bottom: 10px;
 	margin:5px 1% 5px 5px;
 }
 #eventContainer ul{
-	width:150px;
+	/*width:150px;*/
 	float: left;
-	width: 69%;
+	width: 56%;
+	margin-bottom: 10px;
 }
 #eventContainer ul li{
 	width: 100%;
 }
 #eventContainer ul li:first-child{
-	width:300px;
+	/*width:300px;*/
 }
 #eventContainer span[itemprop=postalCode]{
 	margin-left:5px;
@@ -1785,11 +1808,12 @@ margin-bottom: 10px;
 	display: block;
 	float: right;
 	margin-top:10px;
-	height: 30px;
+	/*height: 30px;
+	line-height: 38px;*/
 	font-family: 'AllerBold',Arial,sans-serif;
 	color: #000000;
 	text-decoration: underline;
-	line-height: 38px;
+	
 }
 #eventContainer #yogi{
 	width:125px;
@@ -1833,6 +1857,8 @@ margin-bottom: 10px;
     margin: 8px 0;
     max-width: 225px;
     text-decoration: underline;
+	width: 56%;
+	
 }
 #VenuePhotoGallery h3 {
 	float: left;
@@ -1844,6 +1870,8 @@ margin-bottom: 10px;
     margin-bottom: 0;
 	margin-left: 2.5%;
 	padding-top: 5px;
+	overflow: hidden;
+	clear: both;
 }
 #VenuePhotoGallery  .heading {
     clear: both;
@@ -1933,7 +1961,7 @@ margin-bottom: 10px;
 	float: right;
 	display: block;
 	float: right;
-	width: 30%;
+	/*width: 30%;*/
 }
 .blogSummaryContainer,#blogContainer{
 	width: 97.5%;
@@ -2297,11 +2325,13 @@ div.takeOverlay a.close {
   border: 2px solid rgb(0, 186, 232) !important;
   border-radius: 50px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.31);
+  color: rgb(0, 186, 232) !important;
   cursor: pointer;
   display: block !important;
   font-size: 12px !important;
   height: 18px !important;
   line-height: 16px !important;
+  margin: 0 !important;
   position: absolute;
   right: -10px;
   text-align: center;
@@ -2315,7 +2345,7 @@ div.takeOverlay a.close {
   line-height: 28px !important;
   padding: 10px;
   text-align: center;
-  width: 100% !important;
+  width: 95% !important;
 }
 .takeOverlay .socialLinks {
     height: auto;
@@ -2347,7 +2377,7 @@ div.takeOverlay a.close {
 }
 .takeOverlay .twtLogin {
     background: url("../images/header/twtLoginBtn.png") no-repeat scroll left top rgba(0, 0, 0, 0);
-    margin-left: 4px;
+   /* margin-left: 4px;*/
     margin-top: 20px;
     width: 113px;
 }
@@ -2455,7 +2485,7 @@ a.ev_link_row:link {
 #mobNav{
 	margin:15px 0 0 0;
     float: right;
-    width: 280px;
+    width: 287px;
 }
 #mobileMenuBttn{ 
    display: none;
@@ -2475,7 +2505,7 @@ a.ev_link_row:link {
 	}
 #twtLogin{
 	  background:url("../images/header/twtLoginBtn.png");
-      width: 113px;
+      width: 122px;
       margin-left:3px;
 }
 #twtLogin a{
@@ -2761,7 +2791,7 @@ a.ev_link_row:link {
 @media only screen and (min-width:720px) and (max-width:837px){
 .android_img span,.iphone_img span{font-size: 10px;}
 .android_img b,.iphone_img b{font-size: 14px;}
-.android_img {padding: 11px;}
+.android_img {padding: 12px;}
 .iphone_img{padding:15px 12px 17px}
 #LoggedIn a{
 	color:#fff;text-decoration: underline;
@@ -3016,14 +3046,12 @@ body{
 	display: none !important;
 }
 #mainHeader h1 {
-    display: block;
-    float: none;
-    font-size: 11px;
-    font-weight: normal;
-    margin: 5px auto auto;
-    text-align: center;
-    text-transform: uppercase;
-    width: 18%;
+	font-size: 1em;
+	text-transform: capitalize;
+	font-weight: normal;
+	float: none;
+	margin: 5px auto auto;
+	text-align: center;
 }
 #mainHeader strong {
 	 display: block;
@@ -3122,8 +3150,9 @@ body{
     border-width: 2px;
     font-size: 0.8em;
     padding: 6px;
-    background:linear-gradient(to bottom, #6ABC43 0%, #4B832F 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+   background:linear-gradient(to bottom, #6ABC43 0%, #4B832F 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
     background:-webkit-linear-gradient(to bottom, #6ABC43 0%, #4B832F 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6ABC43), color-stop(50%,#6ABC43), color-stop(51%,#6ABC43), color-stop(100%,#4B832F));
     background:-moz-linear-gradient(to bottom, #6ABC43 0%, #4B832F 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
     background:-o-linear-gradient(to bottom, #6ABC43 0%, #4B832F 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) inset;
@@ -3203,6 +3232,7 @@ body{
 	margin-left:2%;
 	padding:0;
 	font-size: 12px;
+	vertical-align: text-bottom;
 }
 
 #demo_default {
@@ -3281,7 +3311,7 @@ body{
 	display: none;
 }
 #eventsCategoriesSearch #mod_search_searchword,#eventsCategoriesSearch #cat_drop,#eventsCategoriesSearch input.submit{
-	   margin:8px 0 0 3%;
+	   margin:12px 0 0 3%;
 }
 }
 @media only screen and (max-width:340px){
@@ -3291,11 +3321,18 @@ body{
        padding-left:10px;
 	   padding-right:10px;
 	}
+	#topSlider.otherPages p.description{
+		height: 27px;
+	}
 }
 
 /* for photo's popup */
 
 @media only screen and (min-width:240px) and (max-width:319px){
+	
+	.timePlace{
+		height: 33px;
+	}
 	.window-container{
 	height: 50%;
 	width: 98%;
@@ -3384,9 +3421,20 @@ body{
 	#cuisinePlacesType ul li{
 		width: 50%;
 	}
+	#topSlider.otherPages p.description{
+		height: 27px;
+	}
+	#mainHeader h1{
+		width: 30% !important;
+    	margin: 5px auto auto;
+	}
 }
 
 @media only screen and (min-width:320px) and (max-width:479px){
+	
+	.timePlace{
+		height: 33px;
+	}
 	.window-container{
 	height: 70%;
 	width: 94%;
@@ -3464,10 +3512,13 @@ body{
 		width: 55px;
 	}
 	.placesContainer h3{
-		width: 32%;
+		width: 38%;
 	}
 	#cuisinePlacesType ul li{
 		width: 50%;
+	}
+	#topSlider.otherPages p.description{
+		height: 27px;
 	}
 }
 
@@ -3529,6 +3580,9 @@ body{
 	    width: 57% !important;
 	}
 	.btnCal {margin-left: 20%;}
+	#topSlider.otherPages p.description{
+		height: 27px;
+	}
 }
 
 @media only screen and (min-width:768px) and (max-width:1023px){
@@ -3594,7 +3648,13 @@ body{
 	    text-align: left !important;
 	    width: 58% !important;
 	}
-	
 	.btnCal {margin-left: 12%;}
+	#topSlider.otherPages p.description{
+		height: 27px;
+	}
+	#topSlider.otherPages p, #topSlider.frontPage p{
+		width: 94%;
+		padding:5px 3% 2px 3%;
+	}
 }
 
