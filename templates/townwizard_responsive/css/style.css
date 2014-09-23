@@ -1480,7 +1480,7 @@ width: 61%;
   color: #666666;
   font-size: 11px;
   margin-left: 5px;
-  padding: 4px 7px;
+  padding: 4px 6px;
 }
 #formBottom a.button:hover{
 	color:#000000;
@@ -1590,8 +1590,8 @@ width: 61%;
 }
 .placesContainer ul{
 	margin-bottom:15px;
-	float: left;
-	/*min-width: 38%;*/
+	/*float: left;
+	min-width: 38%;*/
 	width: 39%;
 }
 .placesContainer ul li{
@@ -3052,6 +3052,7 @@ body{
 	float: none;
 	margin: 5px auto auto;
 	text-align: center;
+	overflow: hidden;
 }
 #mainHeader strong {
 	 display: block;
@@ -3329,7 +3330,11 @@ body{
 /* for photo's popup */
 
 @media only screen and (min-width:240px) and (max-width:319px){
-	
+	.osolCaptchaBlock td + td img{ margin-left: 28px;}
+	.osolCaptchaBlock table{
+		width:84%;
+	}
+	#formBottom #custom_anonusername,#formBottom #custom_anonemail,#submitevent input.inputbox:first-of-type{width:50% !important}
 	.timePlace{
 		height: 33px;
 	}
@@ -3431,7 +3436,11 @@ body{
 }
 
 @media only screen and (min-width:320px) and (max-width:479px){
-	
+	.osolCaptchaBlock td + td img{ margin-left: 28px;}
+	.osolCaptchaBlock table{
+		width:84%;
+	}
+	#formBottom #custom_anonusername,#formBottom #custom_anonemail,#submitevent input.inputbox:first-of-type{width:50% !important}
 	.timePlace{
 		height: 33px;
 	}

@@ -639,8 +639,9 @@ text-decoration:none;
 	<textarea name="jevcontent" cols="70" rows="10" style="width:99%;height:230px;" ><?php if(isset($_SESSION['jevcontent'])) echo $_SESSION['jevcontent'];?></textarea>
 	<div id="formBottom">
 		<span><?php echo JText::_('JEV_LOC'); ?></span>
+		
+		<input type="text" name="evlocation_notused" disabled="disabled" id="evlocation" value="--"/>
 		<input type="hidden" name="location" id="locn" value=""/>
-		<input type="text" name="evlocation_notused" disabled="disabled" id="evlocation" value="--" style="float:left;margin-top: 2px;width: 128px;"/>
 		<a class="button" href="javascript:selectLocation('' ,'/index.php?option=com_jevlocations&amp;task=locations.select&amp;tmpl=component','750','500')" title="Select Location"  ><?php echo JText::_('JEV_SELECT'); ?></a>
 		<a class="button" href="javascript:removeLocation();" title="Remove Location"  ><?php echo JText::_('JEV_REMOVE'); ?></a>
 		<p><?php echo JText::_('JEV_LOCDES'); ?></p>
