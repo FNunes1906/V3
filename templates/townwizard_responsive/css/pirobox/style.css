@@ -71,7 +71,7 @@ a:hover.stop{background:url(pause_h.png) no-repeat;}
 	.pirobox_content {
 	    display: block;
 	    font-family: Trebuchet MS,Arial;
-	    height: 84% !important;
+	     height: initial !important;
 	    left: 18%;
 	    margin: 0 !important;
 	    padding: 0;
@@ -91,7 +91,7 @@ a:hover.stop{background:url(pause_h.png) no-repeat;}
 	.pirobox_content {
 	    display: block;
 	    font-family: Trebuchet MS,Arial;
-	    height: 75% !important;
+	    height: initial !important;
 	    left: 18%;
 	    margin: 0 !important;
 	    padding: 0;
@@ -101,7 +101,7 @@ a:hover.stop{background:url(pause_h.png) no-repeat;}
 	    z-index: 99998;
 	}
 	.pirobox_content img {
-		height: initial !important;
+		height: 100% !important;
 		width: 99% !important;
 	}
 }
@@ -110,7 +110,7 @@ a:hover.stop{background:url(pause_h.png) no-repeat;}
 	.pirobox_content {
 	    display: block;
 	    font-family: Trebuchet MS,Arial;
-	    height: 60% !important;
+	     height: initial !important;
 	    left: 12%;
 	    margin: 0 !important;
 	    padding: 0;
@@ -129,7 +129,7 @@ a:hover.stop{background:url(pause_h.png) no-repeat;}
 	.pirobox_content {
 	     display: block;
 	    font-family: Trebuchet MS,Arial;
-	    height: 50% !important;
+	    height: initial !important;
 	    left: 1%;
 	    margin: 0 !important;
 	    padding: 0;
@@ -141,7 +141,7 @@ a:hover.stop{background:url(pause_h.png) no-repeat;}
 	
 	.pirobox_content img {
 		height: initial !important;
-		width: 99% !important;
+		width: 98% !important;
 	}
 }
 
@@ -150,7 +150,7 @@ a:hover.stop{background:url(pause_h.png) no-repeat;}
 	.pirobox_content {
 	    display: block;
 	    font-family: Trebuchet MS,Arial;
-	    height: 38% !important;
+	    height: initial !important;
 	    left: 0;
 	    margin: 0 !important;
 	    padding: 0;

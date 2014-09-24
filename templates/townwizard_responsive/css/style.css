@@ -126,16 +126,15 @@ a ,p, span, form{
       text-transform: uppercase;
       color: #666666;
 }
-.search{
-	margin-right: 7px;
+/*.search{
+	margin-right: 2px;
     clear: both;
     overflow: hidden;
-}
+}*/
 .searchbar{
-
 	 float: right;
     margin: 7px 0 0;
-    width: 267px;
+    width: 284px;
 }
 #mobNav input[type="text"]{ 
     background: none repeat scroll 0 0 #f8f8f8;
@@ -144,9 +143,10 @@ a ,p, span, form{
     height: 23px;
     line-height: 27px;
     margin: 0;
-    padding-left:2px;
-    padding-right: 25px;
-    width: 240px;
+    padding-left: 2px;
+    width: 254px;
+	padding-right: 25px;
+	color: #666;
 }
 #mobNav input[type="submit"]{ 
     background: url("../images/header/searchBtn.png") no-repeat scroll 75% 65% transparent;
@@ -666,7 +666,7 @@ a ,p, span, form{
 }
 #topRightAside a.latestPhotos img,#topRightAside a.jaklightbox img{
 	width: 100%;
-	height: 100%;
+	height:70%;
 	margin-bottom:10px;
 }
 #topRightAside p a.uploadPhotos{
@@ -708,6 +708,14 @@ h1.upload {
 
 .php_page{
 	text-align: left;
+}
+
+.php_page h1+div{
+	margin-left: 8px;
+}
+
+.php_page h1+div#jevents{
+	margin-left: 1px;
 }
 
 #jevents .button {
@@ -1234,6 +1242,7 @@ width: 61%;
 #mainContent span.pagenav,#mainContentwhite span.pagenav{
     color: #999999;
 }
+
 .pagenav{
 	display: inline-block;
 	padding:5px;
@@ -1244,6 +1253,19 @@ width: 61%;
 	font-size:10px;
 	font-family:  sans-serif, Arial;
 }
+
+#phocagallery a.pagenav:hover,#phocagallery a.pagenav:active,#phocagallery a.pagenav:focus{
+	display: inline-block;
+	padding:5px;
+	background:#000000;
+	border-radius: 5px;
+	border: 2px solid #BABABA;
+	margin-left:5px;
+	font-size:10px;
+	font-family:  sans-serif, Arial;
+	text-decoration:underline;
+}
+
 #mainContent a.pagenav:hover {
 	text-decoration:underline;
 }
@@ -1279,10 +1301,10 @@ width: 61%;
     margin:11px 0 0 3%;
     display:inline-block;
     width:35%;
-	height: 19px;
+	height: 17px;
 	line-height:20px;
 	font-size: 14px;
-	padding:0 5px 3px 0;
+	padding:2px 5px 3px 0;
 }
 
 
@@ -1717,7 +1739,7 @@ width: 61%;
 	font-size: 16px;
 	line-height: 18px;
 	margin-bottom:12px;
-	width: 70%;
+	width: 64%;
 	float: left;
 	margin:0;
 	font-weight: normal;
@@ -1728,7 +1750,7 @@ width: 61%;
 	font-family: 'AllerBold',Arial,sans-serif;
 	font-size: 12px;
 	clear: right;
-	width:29%;
+	width:35%;
 	text-align: right;
 	padding-right:1%; 
 }
@@ -1776,7 +1798,7 @@ margin-bottom: 10px;
 }
 #eventContainer img{
 	width:50%;
-	float: right;
+	float: left;
 	margin:5px 1% 5px 5px;
 }
 #eventContainer ul{
@@ -1839,8 +1861,8 @@ margin-bottom: 10px;
 }
 #eventContainer .checkins {
     float: right;
-    text-align: left;
-    width: 35%;
+    text-align: right;
+    width: 22% !important;
 }
 #eventContainer .checkins span {
     display: block;
@@ -1853,11 +1875,11 @@ margin-bottom: 10px;
     display: block;
     float: none;
     font-size: 11px;
-    line-height: 32px;
-    margin: 8px 0;
+    line-height: 23px;
+    margin: 0px 0;
     max-width: 225px;
     text-decoration: underline;
-	width: 56%;
+	width: 97%;
 	
 }
 #VenuePhotoGallery h3 {
@@ -2749,6 +2771,9 @@ a.ev_link_row:link {
 }
 #eventsCategoriesSearch #mod_search_searchword{
 	   margin:15px 0 0 3%;
+	   padding-left: 5px;
+       padding-top: 3px;
+}
 }
 }
 @media only screen and (min-width:838px) and (max-width:989px){
@@ -2841,13 +2866,18 @@ a.ev_link_row:link {
 }
 @media only screen and (min-width:551px) and (max-width:989px){
 .searchbar {
-    width: 191px;
+    width: 220px;
 }
 #mobNav input[type="text"] {
-    width: 167px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 2px;
+    padding-right: 30px;
+    width: 175px;
 }
 #mobNav input[type="submit"] {
-    margin-top: -26px;
+    margin-right: 12px;
+    margin-top: -27px;
 }
 #LoggedIn a{
 	color:#fff;text-decoration: underline;
@@ -2917,13 +2947,18 @@ a.ev_link_row:link {
 }
 @media only screen and (min-width:551px) and (max-width:719px){
 .searchbar {
-    width: 191px;
+    width: 214px;
 }
 #mobNav input[type="text"] {
-    width: 167px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 2px;
+    padding-right: 30px;
+    width: 175px;
 }
 #mobNav input[type="submit"] {
-    margin-top: -26px;
+    margin-right: 12px;
+    margin-top: -27px;
 }
 #LoggedIn a{
 	color:#fff;text-decoration: underline;
@@ -3433,6 +3468,15 @@ body{
 		width: 30% !important;
     	margin: 5px auto auto;
 	}
+	.placesCategorie{
+		width: 35px;
+	}
+	.placesContainer h3{
+		width: 26%;
+	}
+	.placesContainer ul{
+		width: 26%;
+	}
 }
 
 @media only screen and (min-width:320px) and (max-width:479px){
@@ -3447,7 +3491,8 @@ body{
 	.window-container{
 	height: 70%;
 	width: 94%;
-	left: 5% !important;
+	left: 3% !important;
+	top: 18% !important;
 	}
 
 	.window-container table{
@@ -3465,9 +3510,9 @@ body{
 	}
 
 	.window-content {
-		height: 98%;
+		height: 100%;
 	    position: relative;
-	    width: 97%;
+	    width: 95%;
 	}
 	.lightBox .image-browser-image{
 		width: 100%;
@@ -3476,7 +3521,7 @@ body{
 
 	.lightBox .image-browser-image img{
 		  height: 100%;
-	    left: 15% !important;
+	    left: 12% !important;
 	    opacity: 1;
 	    position: absolute;
 	    top: 0 !important;
@@ -3486,13 +3531,14 @@ body{
 
 	.lightBox .image-browser-caption{
 		width: 100%;
+		padding-top: 1px;
 	}
 
 	.lightBox .image-browser-close{
 		left: 84%;
 	}
 	.image-browser-slideshow-play,.image-browser-slideshow-pause{
-		top: 82%;
+		top: 78%;
 	}
 	.veri {
 	    line-height: 16px !important;
@@ -3521,7 +3567,7 @@ body{
 		width: 55px;
 	}
 	.placesContainer h3{
-		width: 38%;
+		width: 32%;
 	}
 	#cuisinePlacesType ul li{
 		width: 50%;
@@ -3598,7 +3644,8 @@ body{
 	.window-container{
 	height: 70%;
 	width: 94%;
-	left: 5% !important;
+	left: 3% !important;
+	top: 10% !important;
 	}
 
 	.window-container table{
@@ -3613,10 +3660,11 @@ body{
 	.lightBox {
 	    height: 100%;
 	    width: 98%;
+		padding-left: 6px;
 	}
 
 	.window-content {
-		height: 98%;
+		height: 100%;
 	    position: relative;
 	    width: 100%;
 	}
@@ -3627,7 +3675,7 @@ body{
 
 	.lightBox .image-browser-image img{
 		height: 100%;
-	    left: 15% !important;
+	    left: 11% !important;
 	    opacity: 1;
 	    position: absolute;
 	    top: 0 !important;
@@ -3637,6 +3685,7 @@ body{
 
 	.lightBox .image-browser-caption{
 		width: 100%;
+		padding-top: 1px;
 	}
 
 	.lightBox .image-browser-close{

@@ -159,13 +159,7 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 	    <li><a href="<?php echo $link?>" target="_blank"><?php echo $new_url ;?></a></li>
 	</ul>
 	<?php include_once($_SERVER['DOCUMENT_ROOT'].'/rsvp_data.php'); ?>
-
-	
-	<div>
-		<p><?php echo JText::_("TW_LIKEDBY") ?>:</p>
-			<div class="fb-like" data-send="false" data-layout="standard" data-width="45%" data-show-faces="true"></div>
-		</div>
-		<!-- RSVP Images code Begin -->
+	<!-- RSVP Images code Begin -->
 			<div class="checkins fl">
 				<?php if(isset($userCount) > 0): ?>
 					<span><?php echo $userCount.' '.JText::_("TW_ATTENDING") ?>:</span>
@@ -187,6 +181,12 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 				<?php endif; ?>	
 			</div>
 			<!-- RSVP Images code End -->
+	
+	<span style="margin-bottom: 10px;clear: both;">
+		<p><?php echo JText::_("TW_LIKEDBY") ?>:</p>
+			<span class="fb-like" data-send="false" data-layout="standard" data-width="45%" data-show-faces="true"></span>
+	</span>
+		
 		<div class="cb"></div>	
 	</div>
 
