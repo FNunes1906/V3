@@ -457,7 +457,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 </script>
 <!-- Code for Print Icon end -->
 <!-- Share This End-->
-	<?php if(JRequest::getVar('view') != 'categories' AND JRequest::getVar( 'option' ) != 'com_jevents' AND JRequest::getVar('task') !='locations.detail' AND JRequest::getVar('Itemid') != 105) { ?>
+	<?php if(JRequest::getVar('view') != 'categories' AND JRequest::getVar('view') != 'category' AND JRequest::getVar( 'option' ) != 'com_jevents' AND JRequest::getVar('task') !='locations.detail' AND JRequest::getVar('Itemid') != 105) { ?>
   		<script src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/jQuery.js"></script>
  	<?php } ?>
 	 <?php if(JRequest::getVar('Itemid') != 105){ ?>

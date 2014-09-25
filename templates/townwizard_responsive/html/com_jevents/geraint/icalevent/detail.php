@@ -184,7 +184,7 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 	
 	<span style="margin-bottom: 10px;clear: both;">
 		<p><?php echo JText::_("TW_LIKEDBY") ?>:</p>
-			<span class="fb-like" data-send="false" data-layout="standard" data-width="45%" data-show-faces="true"></span>
+			<span class="fb-like" data-send="false" data-layout="standard" data-width="245" data-show-faces="true"></span>
 	</span>
 		
 		<div class="cb"></div>	

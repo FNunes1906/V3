@@ -943,6 +943,7 @@ padding: 5px;
 
 .osolCaptchaBlock table td {
 	text-align: left !important;
+	padding-left: 10px;
 }
 .validate {
 	background: none repeat scroll 0 0 #000000;
@@ -1032,7 +1033,7 @@ width: 61%;
 }
 
 .lower span {
-	line-height: 36px;
+	/*line-height: 36px;*/
 	height: 32px;
 	width: 33px;
 	color: #00467f;
@@ -1040,20 +1041,21 @@ width: 61%;
 
 #ShareTool .errorBtn.btn {
 	background: url('../images/header/questionIcon.png') no-repeat center top;
-	/*height: 32px;
-	width: 32px;*/
 }
 
 
 #ShareTool .printBtn.btn {
 	background: url('../images/header/printIcon.png') no-repeat center top;
-	/*height: 32px;
-	width: 32px;*/
+	clear: both;
+    margin-top: 10px;
 }
 
 .error_large .bold{
 	color: #00467f;
     font-family: 'AllerBold',Arial,sans-serif;
+}
+.print_large{
+	line-height: 83px;
 }
 
 #middleColumn{ 
@@ -1408,9 +1410,9 @@ width: 61%;
 	padding-top:5px;
 }
 #mainContent form input:first-of-type,#mainContentwhite #submitevent input:first-of-type{
-	width: 68%;
+	width: 50%;
 	margin-bottom:10px;
-	float: left;
+	float: right;
 	display: block;
 	float: left;
 	text-align: left;
@@ -1432,12 +1434,12 @@ width: 61%;
 	float: left;
 }
 #mainContent form input[name=publish_up],#mainContentwhite #submitevent input[name=publish_up]{
-	width:65px;
+	width:83px;
 	float: left;
 	text-align: center;
 }
 #mainContent form input[name=publish_down],#mainContentwhite #submitevent input[name=publish_down]{
-	width:65px;
+	width:83px;
 	float: left;
 	text-align: center;
 }
@@ -1530,13 +1532,13 @@ width: 61%;
 }
 #formBottom input{
 	float: left;
-	width: 68%;
+	width: 50%;
 }
 #custom_anonemail{
  margin-top:10px;
 }
 #formBottom img{
-	float: left;
+	/*float: left;*/
 }
 #formBottom #captchaCode0{
 	margin-left:30%;
@@ -1647,6 +1649,7 @@ width: 61%;
 #gmap iframe{
 	width: 100% !important;
 }
+
 #placeContainer p{
 	font-size: 14px;
 	font-family: 'AllerBold', sans-serif, Arial;
@@ -2865,6 +2868,10 @@ a.ev_link_row:link {
 }
 }
 @media only screen and (min-width:551px) and (max-width:989px){
+	
+.print_large{
+	line-height: 55px;
+}
 .searchbar {
     width: 220px;
 }

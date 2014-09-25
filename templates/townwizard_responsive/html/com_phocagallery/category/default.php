@@ -1,3 +1,27 @@
+<?php 
+$app = JFactory::getApplication();
+$templateDir = JURI::base() . 'templates/' . $app->getTemplate();
+?>
+<script type="text/javascript" src="<?php echo $templateDir?>/js/popup/jquery.poptrox.min.js"></script>
+<style>
+.poptrox-popup{
+	padding-bottom: 20px !important;
+}
+.caption{
+	line-height: 92px !important;
+}
+
+</style>
+<script>
+	$(function() {
+		
+		var foo = $('#gallery');
+		foo.poptrox({
+			usePopupCaption: true
+		});
+	
+	});
+</script>
 
 <?php
 defined('_JEXEC') or die('Restricted access'); 
@@ -42,8 +66,11 @@ if ($this->tmpl['phocagallerywidth'] != '') {
 	echo '<div id="phocagallery" style="width:'. $this->tmpl['phocagallerywidth'].'px;'.$centerPage.'">'. "\n";
 } else {
 	echo '<div id="phocagallery">'. "\n";
+	if($heading == "Videos")
+	{	
+		echo '<div id="gallery">';
+	}
 }
-
 
 
 // Detail Window
@@ -112,13 +139,24 @@ if ( $this->tmpl['displayimageshadow'] != 'none' ) {
 // Images	
 if (!empty($this->items)) {
 	foreach($this->items as $key => $value) {
+		
+		
 		echo "\n\n";
 		echo '<dl><div class="phocagallery-box-file" style="height:'. $imageHeight['boxsize'].'px; width:'.$imageWidth['boxsize'].'px;">';
 		echo '<div class="phocagallery-box-file-first" style="height:'.$imageHeight['size'].'px;width:'.$imageWidth['size'].'px;">';
 		echo '<div class="phocagallery-box-file-second">';
 		echo '<div class="phocagallery-box-file-third">';
+		if($heading == "Videos")
+		{	
 		
-		echo '<dt><a class="'.$value->button->methodname.'"';
+			$rawvid = $value->videocode;
+			$pieces = explode("?", $rawvid);
+			$piece = explode("v/", $pieces[0]);
+			//echo "<img src='http://img.youtube.com/vi/".$piece[1]."/0.jpg'>";
+			echo '<dt><a href="http://youtu.be/'.$piece[1].'" data-poptrox="youtube,800x480"><img src="http://img.youtube.com/vi/'.$piece[1].'/0.jpg" title="'.PhocaGalleryText::wordDelete($value->title, $this->tmpl['charlengthname'], '...').'"></a></dt>';
+		}else{
+		echo '<dt><a class="'.$value->button->methodname.'"';	
+		
 		if ($value->type == 2) {
 			if ($value->overlib == 0) {
 				echo ' title="'. $value->title.'"';
@@ -186,6 +224,7 @@ if (!empty($this->items)) {
 					$pieces = explode("?", $rawvid);
 					$piece = explode("v/", $pieces[0]);
 					echo "<img src='http://img.youtube.com/vi/".$piece[1]."/0.jpg'>";
+					//echo '<a href="http://youtu.be/'.$piece[1].' data-poptrox="youtube,800x480">video</a>';
 				}else{
 					if (isset($value->extid) && $value->extid != '') {
 					echo JHTML::_( 'image', $value->extm, $value->altvalue, array('width' => $correctImageRes['width'], 'height' => $correctImageRes['height']));
@@ -220,6 +259,7 @@ if (!empty($this->items)) {
 		} // if type 2 else type 0, 1 (image, category, folder)
 /*---------------------------------*/
 		echo '</a></dt>';
+		}
 		if ( $this->tmpl['detailwindow'] == 5) {
 			if ($this->tmpl['displaytitleindescription'] == 1) {
 				echo '<div class="highslide-heading">';
@@ -498,7 +538,9 @@ if (!empty($this->items)) {
 
 echo '<div style="clear:both"></div>';
 echo '<div>&nbsp;</div>';
-
+if($heading == "Videos"){
+	echo '</div>'. "\n";
+}
 // Form
 echo '<form action="'.$this->tmpl['action'].'" method="post" name="adminForm">'. "\n";
 
