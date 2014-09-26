@@ -503,7 +503,7 @@ a ,p, span, form{
 	float: left;
 }
 #topSlider.otherPages p.description{
-	height: 30px;
+	height: 48px;
 	overflow: hidden;
 }
 #topSlider img{
@@ -1382,6 +1382,23 @@ width: 61%;
 }
 /*Events list Ends here*/
 /*submit events starts here*/
+#sbox-content{
+	/*width: 100%; 
+	height: 100%;  */
+ 	-webkit-overflow-scrolling:touch !important;
+    overflow: scroll !important;
+	background: red !important;
+}
+#sbox-content iframe{
+	-webkit-overflow-scrolling:touch !important;
+    overflow: scroll !important;
+	/*height: 200px;
+    width: 500px;*/
+}
+#sbox-window{
+	top:50% !important;
+	/*position: absolute !important;*/
+}
 #submitevent{
 	text-align:center;
 }
@@ -1457,6 +1474,7 @@ width: 61%;
 	float: left;
 	margin-left:5px;
 	transition:.3s;
+	margin-top: 2px;
 }
 #mainContent form fieldset button:hover,#mainContentwhite #submitevent fieldset button:hover{
 	background-position:0 -20px;
@@ -1504,7 +1522,8 @@ width: 61%;
   color: #666666;
   font-size: 11px;
   margin-left: 5px;
-  padding: 4px 6px;
+  padding: 3px 6px;
+  line-height: 23px;
 }
 #formBottom a.button:hover{
 	color:#000000;
@@ -2645,7 +2664,7 @@ a.ev_link_row:link {
   width: 400px;
   padding-left:10px;
   padding-right:10px;
-  height: 30px;
+  height: 45px;
 }	
 #topSlider.frontPage h2{
 	 float: right;
@@ -3045,7 +3064,7 @@ body{
 	background:#FFFFFF;
 	color: #000000;
 	font-family: sans-serif;
-	width: 100%;
+	/*width: 100%;*/
 }
 #topSlider.otherPages h3{
 	font-weight: bold;
@@ -3261,17 +3280,17 @@ body{
 	border: none;
 }
 #eventsCategoriesSearch .evsearch[type=text]{
-    height: 17px;
-    line-height:13px;
+    height: 19px;
+    line-height:16px;
     padding:0;
     width: 27.5%;
     font-size: 12px;
     margin-left: 3%;
 }
 #eventsCategoriesSearch select{
-	margin-top:0;
+	margin-top:0px;
 	width: 35%;
-	height: auto;
+	height: 20px;
 	margin-left:2%;
 	padding:0;
 	font-size: 12px;
@@ -3365,7 +3384,7 @@ body{
 	   padding-right:10px;
 	}
 	#topSlider.otherPages p.description{
-		height: 27px;
+		height: 45px;
 	}
 }
 
@@ -3411,13 +3430,13 @@ body{
 	}
 
 	.lightBox .image-browser-image img{
-		  height: 100%;
+		/*  height: 100%;
 	    left: 15% !important;
 	    opacity: 1;
 	    position: absolute;
 	    top: 0 !important;
 	    visibility: visible;
-	    width: 78%;
+	    width: 78%;*/
 	}
 
 	.lightBox .image-browser-caption{
@@ -3469,7 +3488,7 @@ body{
 		width: 50%;
 	}
 	#topSlider.otherPages p.description{
-		height: 27px;
+		height: 72px;
 	}
 	#mainHeader h1{
 		width: 30% !important;
@@ -3527,13 +3546,13 @@ body{
 	}
 
 	.lightBox .image-browser-image img{
-		  height: 100%;
+		/*  height: 100%;
 	    left: 12% !important;
 	    opacity: 1;
 	    position: absolute;
 	    top: 0 !important;
 	    visibility: visible;
-	    width: 78%;
+	    width: 78%;*/
 	}
 
 	.lightBox .image-browser-caption{
@@ -3580,7 +3599,7 @@ body{
 		width: 50%;
 	}
 	#topSlider.otherPages p.description{
-		height: 27px;
+		height:60px;
 	}
 }
 
@@ -3616,13 +3635,13 @@ body{
 	}
 
 	.lightBox .image-browser-image img{
-		  height: 100%;
+		 /* height: 100%;
 	    left: 15% !important;
 	    opacity: 1;
 	    position: absolute;
 	    top: 0 !important;
 	    visibility: visible;
-	    width: 78%;
+	    width: 78%;*/
 	}
 
 	.lightBox .image-browser-caption{
@@ -3643,8 +3662,16 @@ body{
 	}
 	.btnCal {margin-left: 20%;}
 	#topSlider.otherPages p.description{
-		height: 27px;
+		height: 48px;
 	}
+	
+}
+
+@media only screen and (min-width:600px) and (max-width:700px){
+	#topSlider.otherPages #bottomPager{
+		margin-bottom: 15px;
+	}
+	
 }
 
 @media only screen and (min-width:768px) and (max-width:1023px){
@@ -3681,13 +3708,13 @@ body{
 	}
 
 	.lightBox .image-browser-image img{
-		height: 100%;
+		/*height: 100%;
 	    left: 11% !important;
 	    opacity: 1;
 	    position: absolute;
 	    top: 0 !important;
 	    visibility: visible;
-	    width: 78%;
+	    width: 78%;*/
 	}
 
 	.lightBox .image-browser-caption{
@@ -3715,7 +3742,10 @@ body{
 	}
 	.btnCal {margin-left: 12%;}
 	#topSlider.otherPages p.description{
-		height: 27px;
+		height: 45px;
+	}
+	.home_slider {
+    	height: 290px;
 	}
 	#topSlider.otherPages p, #topSlider.frontPage p{
 		width: 94%;

@@ -48,11 +48,13 @@
 		if(!in_array($fearow['ev_id'], $tempeventid)){
 		//}else{
 		if($imagecount<3){
-		
+			if($imagecount==0){
 		?> 
-		
+		<a class="selected" href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=97&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>">
+		<?php }else { ?>
 		<!--This code is for slider part-->
 		<a href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=97&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>">
+		<?php } ?>
 			<img src="<?php echo $singleimagearray[0];?>" />
 			<h3>
 				<?php 

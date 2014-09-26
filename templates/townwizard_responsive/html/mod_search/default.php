@@ -15,7 +15,7 @@ if(count($categories) > 1){
 <script type="text/javascript">
 function redirecturl(val)
 {
-	url="index.php?option=com_jevlocations&task=locations.locations&Itemid=<?php echo $Itemid?>&searchcat="+val;
+	url="/index.php?option=com_jevlocations&task=locations.locations&Itemid=<?php echo $Itemid?>&searchcat="+val;
 	window.location=url;
 }
 </script>

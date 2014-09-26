@@ -3,7 +3,7 @@
 <?php JHTML::_('behavior.tooltip'); 
 	$compparams = JComponentHelper::getParams("com_jevlocations");
 	$usecats = $compparams->get("usecats",0);
-
+	
 	$params =& JComponentHelper::getParams('com_media');
 	$mediabase = JURI::root().$params->get('image_path', 'images/stories');
 	// folder relative to media folder
@@ -77,8 +77,11 @@
 				$sql .= ' and loc.published = 1 order by loc.title,loc.ordering';
 				
 		}elseif($ser == '0'){
-				$compparams = JComponentHelper::getParams("com_jevlocations");
-				$catfilters_arr = $compparams->get("catfilter", "");
+				$menu = &JSite::getMenu();
+				$temp = $menu->getItem($Itemid);
+				$iParams = new JParameter($temp->params);
+				$catfilters_arr = $iParams->get('catfilter');
+							
 				$sql = 'SELECT loc.*,loc.image as locimg FROM jos_jev_locations AS loc where (';
 				if (is_array($catfilters_arr))
 				{
