@@ -318,6 +318,58 @@ $.noConflict();
 <script type="text/javascript" src="../../../common/js/event_submit.js"></script>
 
 <script type="text/javascript" language="javascript">
+
+	j$(document).ready(function(){
+		var cheight = j$('#sbox-window').height();
+		var cwidth = j$('#sbox-window').width();
+/*			var top = ((j$(window).height() - cheight)/1.3)/10 + "%";
+		var left = ((j$(window).width() - cwidth)/1.8)/10 + "%";	*/		
+		var top = (j$(window).height() - cheight)/1.3 + "px";
+		var left = (j$(window).width() - cwidth)/1.8 + "px";
+		j$('#formBottom a.button').click(function(){
+			j$('#sbox-window').css('top',top);
+			j$('#sbox-window').css('left',left);
+			j$('#sbox-window').css('position','absolute');
+			j$('#sbox-window').css('margin','0');
+			j$('#sbox-content').css('width','450px');
+			j$('#sbox-content').css('height','455px');
+			j$('#sbox-content').css('-webkit-overflow-scrolling','touch');
+			j$('#sbox-content').css('overflow-y','scroll');
+		});
+		if (window.matchMedia("(min-width:500px) and (max-width:637px)").matches){
+			j$('#formBottom a.button').click(function(){
+				j$('#sbox-window').css('left','57%');
+				j$('#sbox-window').css('top','105%');
+				j$('#sbox-content').css('width','450px');
+				j$('#sbox-content').css('height','450px');
+			});
+		}
+		if (window.matchMedia("(min-width:361px) and (max-width:499px)").matches){
+			j$('#formBottom a.button').click(function(){
+				j$('#sbox-window').css('left','57%');
+				j$('#sbox-window').css('top','105%');
+				j$('#sbox-content').css('width','305px');
+				j$('#sbox-content').css('height','400px');
+			});
+		}	
+		if (window.matchMedia("(min-width:321px) and (max-width:360px)").matches){
+			j$('#formBottom a.button').click(function(){
+				j$('#sbox-window').css('left','83%');
+				j$('#sbox-window').css('top','95%');
+				j$('#sbox-content').css('width','298px');
+				j$('#sbox-content').css('height','400px');
+			});
+		}
+		if (window.matchMedia("(min-width:300px) and (max-width:320px)").matches){
+			j$('#formBottom a.button').click(function(){
+				j$('#sbox-window').css('left','94%');
+				j$('#sbox-window').css('top','135%');
+				j$('#sbox-content').css('width','261px');
+				j$('#sbox-content').css('height','400px');
+			});
+		}
+	});
+	
 function gotoindex(str){
 //alert(str);
 var id=document.getElementById(str).value;
@@ -383,7 +435,6 @@ function noendtimetog(){
 		document.adminForm.end_12h.disabled=false;
 	}
 }
-
 function form_validation() {
 	if (document.adminForm.title.value==""){
 		alert('<?php echo JText::_("VALID_EV_NAME") ?>');
@@ -413,7 +464,15 @@ function form_validation() {
 	}
 }
 </script>
-
+<style>
+#fadeout {background: none repeat scroll 0 0 rgba(0, 0, 0, 0.86);display: none;height: 100%;left: 0;position: fixed;top: 0;width: 100%;z-index: 4000;}
+.locationcont {left: 10%;position: absolute;top: 2%;width: 80%;z-index: 4001;}
+.locationcont .close {border-radius: 14px;box-shadow: 0 0 5px #fff;color: #fff !important;cursor: pointer;display: block;font-family: verdana;font-size: 24px;height: 14px;line-height: 11px;padding: 5px 6px;position: absolute;right: -28px;text-align: center;top: -26px;}
+#sbox-content iframe{width:450px;}
+@media only screen and (min-width:371px) and (max-width:581px){.locationcont {left:10%;width:80%;}} 
+@media only screen and (max-width:370px){.locationcont {left:5%;width:90%;}} 
+@media only screen and (min-width : 1440px){.locationcont .close {right: -28px;top: -26px;}}
+</style>
 <?php
 // Print Message after event form submission starts.
 if($msg!='') {?>
@@ -503,7 +562,15 @@ text-decoration:none;
 
 <!--Jevent Form Starts-->
 <h2 id="sendEventsHeader"><?php echo JText::_('JEV_SENDEVNTS'); ?></h2>
-
+<!--<button id="selectlocation">Location</button>
+<div id="fadeout"></div>
+<div id="locationcont" class="locationcont" style="margin-left: 6000px">
+	<a class="close">x</a>
+  		<div class="loadform">
+   			<iframe id='signupframe' frameborder="0"  height="540" width="100%" src="/index.php?option=com_jevlocations&task=locations.select&tmpl=component"></iframe>
+  		</div>
+</div>-->
+	
 <form action="" method="post" name="adminForm" enctype='multipart/form-data' onSubmit="return form_validation()" id="submitevent">
 
 	<span><?php echo JText::_('JEV_EVNAME'); ?>:</span>
@@ -642,7 +709,7 @@ text-decoration:none;
 		
 		<input type="text" name="evlocation_notused" disabled="disabled" id="evlocation" value="--"/>
 		<input type="hidden" name="location" id="locn" value=""/>
-		<a class="button" href="javascript:selectLocation('' ,'/index.php?option=com_jevlocations&amp;task=locations.select&amp;tmpl=component','750','500')" title="Select Location"  ><?php echo JText::_('JEV_SELECT'); ?></a>
+		<a class="button"  href="javascript:selectLocation('' ,'/index.php?option=com_jevlocations&amp;task=locations.select&amp;tmpl=component','550','450')" title="Select Location"  ><?php echo JText::_('JEV_SELECT'); ?></a>
 		<a class="button" href="javascript:removeLocation();" title="Remove Location"  ><?php echo JText::_('JEV_REMOVE'); ?></a>
 		<p><?php echo JText::_('JEV_LOCDES'); ?></p>
 		<span><?php echo JText::_('JEV_YOURNAME'); ?></span>
