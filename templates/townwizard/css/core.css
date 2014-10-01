@@ -223,13 +223,26 @@ input:-ms-placeholder,
 
 /* ------------------------------------------------------------------- */
 
-
 /* Main Nav Styles */
-
 #MainNav ul {
-  list-style:none;
- /* border-left:1px solid #c7c7c7;*/
-  border-top:1px solid #c7c7c7;
+	  /*list-style:none;
+  border-left:1px solid #c7c7c7;
+  border-top:1px solid #c7c7c7;*/
+  background: none repeat scroll 0 0 #f1f1f1;
+  clear: both;
+  overflow: hidden;
+  width: 100%;
+}
+#MainNav ul li.active ul {
+  max-height: 300px;
+}
+.topMenu li.hover ul {
+  max-height: 300px;
+}
+.topMenu li ul {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 1s ease-in 0s; 
 }
 #MainNav ul li {
   background:#f1f1f1;
