@@ -26,7 +26,7 @@ input#jevsearch {
     margin-top: 0 !important;
     overflow: visible !important;
     text-align: left !important;
-    width: 145px !important;
+    width: 125px !important;
 	border:1px solid #999 !important;
 }
 #filter_loccat{
@@ -45,4 +45,42 @@ div#toolbar-box div.header.icon-48-jevents {
   color:#666;
   line-height:48px;
   background-color: #FFF;
+}
+
+
+.submitevent .container .pagination .limit,.submitevent .list-footer .limit{
+	display:none;
+}
+.jevlocations .jevbutton-left a{
+	color: #fff !important;
+}
+.jevlocations .adminlist .editlinktip a:link{
+	color: #666 !important;
+}
+.submitevent span.pagenav, .submitevent span.pagenav {
+  color: #999999;
+}
+.submitevent a.pagenav, .submitevent a.pagenav {
+  color: #ffffff !important;
+}
+.submitevent .pagination span.white, .submitevent .pagination span.white {
+  background: none repeat scroll 0 0 #ffffff;
+  border: 2px solid #bababa;
+  border-radius: 5px;
+  color: #000000;
+  display: inline-block;
+  font-family: sans-serif,Arial;
+  font-size: 10px;
+  margin-left: 5px;
+  padding: 5px;
+}
+.pagenav {
+  background: none repeat scroll 0 0 #000000;
+  border: 2px solid #bababa;
+  border-radius: 5px;
+  display: inline-block;
+  font-family: sans-serif,Arial;
+  font-size: 10px;
+  margin-left: 5px;
+  padding: 5px;
 }

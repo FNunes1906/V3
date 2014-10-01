@@ -45,29 +45,32 @@
 	<table class="adminlist">
 	<thead>
 		<tr>
-			<th width="5">
+			<th width="5%">
 				<?php echo JText::_( 'NUM' ); ?>
 			</th>
-			<th class="title">
+			<th class="title" width="46%">
 				<?php echo JHTML::_('grid.sort',  'Title (click to select)', 'loc.title', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>
-			<th width="5%">
+			<th  width="47%">
+				<?php echo JHTML::_('grid.sort',  'Assign-Categories', 'cat.title', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			</th>
+<!--			<th width="5%">
 				<?php echo JHTML::_('grid.sort',  'Country', ($this->usecats?'c3title':'loc.country'), $this->lists['order_Dir'], $this->lists['order'] ); ?>
-			</th>
-			<th width="5%">
+			</th>-->
+<!--			<th width="5%">
 				<?php echo JHTML::_('grid.sort',  'State', ($this->usecats?'c2title':'loc.state'), $this->lists['order_Dir'], $this->lists['order'] ); ?>
-			</th>
-			<th width="5%">
+			</th>-->
+<!--			<th width="5%">
 				<?php echo JHTML::_('grid.sort',  'City', ($this->usecats?'c1title':'loc.city'), $this->lists['order_Dir'], $this->lists['order'] ); ?>
-			</th>
-			<th width="5%">
+			</th>-->
+<!--			<th width="5%">
 				<?php echo JHTML::_('grid.sort',  'Postcode', 'loc.postcode', $this->lists['order_Dir'], $this->lists['order'] ); ?>
-			</th>
+			</th>-->
 		</tr>
 	</thead>
 	<tfoot>
 		<tr>
-			<td colspan="9">
+			<td colspan="9" class="submitevent">
 				<?php echo $this->pagination->getListFooter(); ?>
 			</td>
 		</tr>
@@ -120,7 +123,7 @@
 			<td>
 				<?php echo $this->pagination->getRowOffset( $i ); ?>
 			</td>
-			<td>
+			<td style="text-align: center">
 				<?php
 				if (  JTable::isCheckedOut($this->user->get ('id'), $row->checked_out ) ) {
 					echo $this->escape($row->title);
@@ -132,37 +135,57 @@
 				}
 				?>
 			</td>
+			<td align="center" style="text-align: center">
+				<?php 
+					if(isset($row->catid_list) && $row->catid_list!=NULL){
+						//echo $row->catid_list;
+						global $cat_assoc_front,$cat_ids_front;
+						$temp = explode(',',$row->catid_list);
+						for($j = 0; $j < count($temp) ; $j++){
+							if(in_array($temp[$j],$cat_assoc_front)){
+								if($j < count($temp)-1 ){
+									echo $cat_ids_front[$temp[$j]].",";
+								}else{
+									echo $cat_ids_front[$temp[$j]];
+								}
+							}
+						}
+					}
+				
+				
+				?>
+			</td>
 			<?php
 			if ($this->usecats){
 			?>
-			<td>
+<!--			<td>
 				<?php echo $this->escape($country); ?>
-			</td>
-			<td>
+			</td>-->
+<!--			<td>
 				<?php echo $this->escape($province); ?>
-			</td>
-			<td>
+			</td>-->
+<!--			<td>
 				<?php echo $this->escape($city); ?>
-			</td>
+			</td>-->
 			<?php
 			}
 			else {				
 			?>
-			<td>
+<!--			<td>
 				<?php echo $this->escape($row->country); ?>
-			</td>
-			<td>
+			</td>-->
+<!--			<td>
 				<?php echo $this->escape($row->state); ?>
-			</td>
-			<td>
+			</td>-->
+<!--			<td>
 				<?php echo $this->escape($row->city); ?>
-			</td>
+			</td>-->
 			<?php
 			}
 			?>
-			<td>
+<!--			<td>
 				<?php echo $this->escape($row->postcode); ?>
-			</td>
+			</td>-->
 		</tr>
 		<?php
 		$k = 1 - $k;

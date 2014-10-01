@@ -54,6 +54,10 @@ $(window).scroll(function(){
 		$('#AttendancePanel').fadeOut(300);
 		$('#Darkness').fadeOut(300);
 	});
+	 $('#systemmsg .close').click( function() {  
+	  $('#systemmsg').fadeOut(300);
+	  $('#Darkness').fadeOut(300);
+	 });
 	
   topSliderPager();
   setInterval(topSliderPager, 1000);

@@ -1306,10 +1306,10 @@ width: 61%;
     margin:11px 0 0 3%;
     display:inline-block;
     width:35%;
-	height: 17px;
-	line-height:20px;
+	height: 12px;
+	line-height:18px;
 	font-size: 14px;
-	padding:2px 5px 3px 0;
+	padding:4px 5px 5px 0;
 }
 
 
@@ -1341,12 +1341,17 @@ width: 61%;
 	width: 33%;
 	border:1px inset rgba(238, 238, 238, 0.25);
 	font-size: 13px;
-	height: 24px;
-	padding-top:1px;
+	height: 23px;
+	padding-top:4px;
 	display:inline-block;
 	margin:14px 0 0 5px;
 	border: 2px inset rgba(238, 238, 238, 0.25);
 }
+#cat_drop{
+	height: 25px !important;
+	/*margin:14px 0 0 5px !important;*/
+}
+
 /*middle Search Events styles Ends*/
 /*Events list starts here*/
 .dayEventsSeparator .eventsContainer:last-child{
@@ -1385,23 +1390,6 @@ width: 61%;
 }
 /*Events list Ends here*/
 /*submit events starts here*/
-#sbox-content{
-	/*width: 100%; 
-	height: 100%;  */
- 	-webkit-overflow-scrolling:touch !important;
-    overflow: scroll !important;
-	background: red !important;
-}
-#sbox-content iframe{
-	-webkit-overflow-scrolling:touch !important;
-    overflow: scroll !important;
-	/*height: 200px;
-    width: 500px;*/
-}
-#sbox-window{
-	top:50% !important;
-	/*position: absolute !important;*/
-}
 #submitevent{
 	text-align:center;
 }
@@ -1516,7 +1504,7 @@ width: 61%;
 #mainContent #noSpecTime,#mainContentwhite #noSpecTime {
     margin: 5px 0 0 !important;
     padding: 0 !important;
-    width: 40% !important;
+    width: 44% !important;
 }
 #formBottom a.button {
   background: none repeat scroll 0 0 #dadada;
@@ -1589,6 +1577,20 @@ width: 61%;
   padding-left: 30%;
   padding-right: 12%;
   width: 51%;
+}
+#systemmsg{
+ display: block;
+}
+#mainContentwhite #systemmsg dl{
+  width: auto;
+  margin: 0px;
+}
+#mainContentwhite #systemmsg dl dt{
+ font-weight: bold;
+ max-width: initial;
+}
+#mainContentwhite #systemmsg dl dd{
+ max-width: initial;
 }
 /*submit events ends here*/
 /*Restaurants and Places styles starts here*/
@@ -3508,6 +3510,10 @@ body{
 	}
 }
 @media only screen and (min-width:320px) and (max-width:479px){
+	#category_fv{
+		margin-bottom:-5px !important;
+		height: 24px !important;
+	}
 	.osolCaptchaBlock td + td img{ margin-left: 28px;}
 	.osolCaptchaBlock table{
 		width:84%;
@@ -3751,4 +3757,3 @@ body{
 		padding:5px 3% 2px 3%;
 	}
 }
-

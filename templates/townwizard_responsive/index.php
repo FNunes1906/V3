@@ -368,6 +368,17 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 		<?php else: ?>
 		<section id="mainContentwhite">
 		<?php endif; ?>
+		
+		<?php if ($this->getBuffer('message')) : ?> 
+			<div id="Darkness" style="display: block"></div>
+			<div id="systemmsg" class="takeOverlay">
+				<a class="close">x</a>
+				<span>
+					<jdoc:include type="message" />
+				</span>
+			</div>
+		<?php endif; ?>
+
 			<jdoc:include type="component" />
 		</section>
 		
@@ -449,6 +460,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 <script type="text/javascript">     
         function PrintDiv() {    
            var divToPrint = document.getElementById('placeContainer');
+     if (divToPrint == null){ divToPrint = document.getElementById('eventContainer');}
            var popupWin = window.open('', 'My Event', 'width=550,height=450');
            popupWin.document.open();
            popupWin.document.write('<html><head><title>My Event</title><link rel="stylesheet" type="text/css" href="<?php echo TOWNWIZARD_TMPL_PATH ?>/css/print.css" /></head><body>' + '<input class="printBtn" type="button" value="" onclick="window.print();" /><div id="placeContainer">' + divToPrint.innerHTML +  '</div></html>');
@@ -456,6 +468,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
                 }
 </script>
 <!-- Code for Print Icon end -->
+
 <!-- Share This End-->
 	<?php if(JRequest::getVar('view') != 'categories' AND JRequest::getVar('view') != 'category' AND JRequest::getVar( 'option' ) != 'com_jevents' AND JRequest::getVar('task') !='locations.detail' AND JRequest::getVar('Itemid') != 105) { ?>
   		<script src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/jQuery.js"></script>

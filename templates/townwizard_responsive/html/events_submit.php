@@ -261,32 +261,13 @@ function checkPostParameter($postValue){
 }?>
 
 <!--<link rel="stylesheet" type="text/css" href="../css/style.css" />-->
-<link rel="stylesheet" type="text/css" href="../../../templates/townwizard/css/fonts.css" />
-<link href="../../../templates/rt_quantive_j15/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
-<link rel="stylesheet" href="../../../administrator/templates/khepri/css/icon.css" type="text/css" />
- 
+<!--<link rel="stylesheet" type="text/css" href="../../../templates/townwizard/css/fonts.css" />
+<link href="../../../templates/rt_quantive_j15/favicon.ico" rel="shortcut icon" type="image/x-icon" />-->
+<!--<link rel="stylesheet" href="../../../administrator/templates/khepri/css/icon.css" type="text/css" />-->
 <link rel="stylesheet" href="../../../administrator/components/com_jevents/assets/css/eventsadmin.css" type="text/css" />
 <link rel="stylesheet" href="../../../media/system/css/modal.css" type="text/css" />
 <link rel="stylesheet" href="../../../components/com_jevents/assets/css/dashboard.css" type="text/css" />
-<!--<link rel="stylesheet" href="../../../plugins/system/rokbox/themes/light/rokbox-style.css" type="text/css" />
-<link rel="stylesheet" href="../../../components/com_gantry/css/joomla.css" type="text/css" />
-<link rel="stylesheet" href="../../../templates/rt_quantive_j15/css/joomla.css" type="text/css" />
-<link rel="stylesheet" href="../../../templates/rt_quantive_j15/css/style8.css" type="text/css" />
-<link rel="stylesheet" href="../../../templates/rt_quantive_j15/css/light-body.css" type="text/css" />
-<link rel="stylesheet" href="../../../templates/rt_quantive_j15/css/demo-styles.css" type="text/css" />
-<link rel="stylesheet" href="../../../templates/rt_quantive_j15/css/template.css" type="text/css" />
-<link rel="stylesheet" href="../../../templates/rt_quantive_j15/css/template-firefox.css" type="text/css" />
-<link rel="stylesheet" href="../../../templates/rt_quantive_j15/css/typography.css" type="text/css" />
-<link rel="stylesheet" href="../../../templates/rt_quantive_j15/css/fusionmenu.css" type="text/css" />
-<link rel="stylesheet" href="../../../modules/mod_rokajaxsearch/css/rokajaxsearch.css" type="text/css" />
-<link rel="stylesheet" href="../../../modules/mod_rokajaxsearch/themes/blue/rokajaxsearch-theme.css" type="text/css" />-->
-<!--<script type="text/javascript">
-jQuery.noConflict();
-$.noConflict();
-</script>-->
-<script type="text/javascript" src="../../../includes/js/joomla.javascript.js"></script>
-<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+<!--<script type="text/javascript" src="../../../includes/js/joomla.javascript.js"></script>-->
 <script>
     var j$ = jQuery.noConflict();
 </script>
@@ -296,24 +277,13 @@ $.noConflict();
 <script type="text/javascript" src="../../../common/js/modal.js"></script>
 <script type="text/javascript" src="../../../media/system/js/tabs.js"></script>
 <script type="text/javascript" src="../../../plugins/editors/jce/tiny_mce/tiny_mce.js?version=156"></script>
-
 <script type="text/javascript" src="../../../plugins/editors/jce/libraries/js/editor.js?version=156"></script>
 <script type="text/javascript" src="../../../components/com_jevents/assets/js/calendar11.js"></script>
 <script type="text/javascript" src="../../../administrator/components/com_jevlocations/assets/js/locations.js"></script>
-<!--<script type="text/javascript" src="../../../plugins/content/avreloaded/silverlight.js"></script>
-<script type="text/javascript" src="../../../plugins/content/avreloaded/wmvplayer.js"></script>
-<script type="text/javascript" src="../../../plugins/content/avreloaded/swfobject.js"></script>
-<script type="text/javascript" src="../../../plugins/content/avreloaded/avreloaded.js"></script>
-<script type="text/javascript" src="../../../plugins/system/rokbox/rokbox.js"></script>
-<script type="text/javascript" src="../../../plugins/system/rokbox/themes/light/rokbox-config.js"></script>-->
-
-<!--<script type="text/javascript" src="../../../components/com_gantry/js/gantry-buildspans.js"></script>
-<script type="text/javascript" src="../../../modules/mod_roknavmenu/themes/fusion/js/fusion.js"></script>
-<script type="text/javascript" src="../../../modules/mod_rokajaxsearch/js/rokajaxsearch.js"></script>-->
 
 <script type="text/javascript" src="../../../plugins/system/pc_includes/ajax_1.3.js"></script>
-<link href="/indexiphone.php?option=com_jevents&amp;task=modlatest.rss&amp;format=feed&amp;type=rss&amp;Itemid=111&amp;modid=0"  rel="alternate"  type="application/rss+xml" title="JEvents - RSS 2.0 Feed" />
-<link href="/indexiphone.php?option=com_jevents&amp;task=modlatest.rss&amp;format=feed&amp;type=atom&amp;Itemid=111&amp;modid=0"  rel="alternate"  type="application/rss+xml" title="JEvents - Atom Feed" />
+<!--<link href="/indexiphone.php?option=com_jevents&amp;task=modlatest.rss&amp;format=feed&amp;type=rss&amp;Itemid=111&amp;modid=0"  rel="alternate"  type="application/rss+xml" title="JEvents - RSS 2.0 Feed" />
+<link href="/indexiphone.php?option=com_jevents&amp;task=modlatest.rss&amp;format=feed&amp;type=atom&amp;Itemid=111&amp;modid=0"  rel="alternate"  type="application/rss+xml" title="JEvents - Atom Feed" />-->
 
 <script type="text/javascript" src="../../../common/js/event_submit.js"></script>
 
@@ -324,17 +294,17 @@ $.noConflict();
 		var cwidth = j$('#sbox-window').width();
 /*			var top = ((j$(window).height() - cheight)/1.3)/10 + "%";
 		var left = ((j$(window).width() - cwidth)/1.8)/10 + "%";	*/		
-		var top = (j$(window).height() - cheight)/1.3 + "px";
+		var top = (j$(window).height() - cheight)/1.5 + "px";
 		var left = (j$(window).width() - cwidth)/1.8 + "px";
 		j$('#formBottom a.button').click(function(){
 			j$('#sbox-window').css('top',top);
 			j$('#sbox-window').css('left',left);
 			j$('#sbox-window').css('position','absolute');
 			j$('#sbox-window').css('margin','0');
-			j$('#sbox-content').css('width','450px');
+			j$('#sbox-content').css('width','535px');
 			j$('#sbox-content').css('height','455px');
 			j$('#sbox-content').css('-webkit-overflow-scrolling','touch');
-			j$('#sbox-content').css('overflow-y','scroll');
+			j$('#sbox-content').css('overflow-y','hidden');
 		});
 		if (window.matchMedia("(min-width:500px) and (max-width:637px)").matches){
 			j$('#formBottom a.button').click(function(){
@@ -468,7 +438,7 @@ function form_validation() {
 #fadeout {background: none repeat scroll 0 0 rgba(0, 0, 0, 0.86);display: none;height: 100%;left: 0;position: fixed;top: 0;width: 100%;z-index: 4000;}
 .locationcont {left: 10%;position: absolute;top: 2%;width: 80%;z-index: 4001;}
 .locationcont .close {border-radius: 14px;box-shadow: 0 0 5px #fff;color: #fff !important;cursor: pointer;display: block;font-family: verdana;font-size: 24px;height: 14px;line-height: 11px;padding: 5px 6px;position: absolute;right: -28px;text-align: center;top: -26px;}
-#sbox-content iframe{width:450px;}
+#sbox-content iframe{width:535px;}
 @media only screen and (min-width:371px) and (max-width:581px){.locationcont {left:10%;width:80%;}} 
 @media only screen and (max-width:370px){.locationcont {left:5%;width:90%;}} 
 @media only screen and (min-width : 1440px){.locationcont .close {right: -28px;top: -26px;}}
@@ -476,100 +446,19 @@ function form_validation() {
 <?php
 // Print Message after event form submission starts.
 if($msg!='') {?>
-<style type="text/css">
-/* popup_box DIV-Styles*/
-#popup_box { 
-	display: block; /* Hide the DIV */
-	position:fixed;  
-	position:absolute; /* hack for internet explorer 6 */  
-	height:auto;  
-	width:381px;  
-	background:#E6E6E6;  
-	left: 23%;
-	 top: 128%;
-	z-index:2000; /* Layering ( on-top of others), if you have lots of layers: I just maximized, you can change it yourself */
-	margin-left: 0px;
-	line-height:25px; 
-	
-	/* additional features, can be omitted */
-	border:2px solid #00BAE8;  	
-	border-radius: 10px 10px 10px 10px;
-	padding:15px;  
-	font-size:15px;  
-	-moz-box-shadow: 0 0 5px #00BAE8;
-	-webkit-box-shadow: 0 0 5px #00BAE8;
-	box-shadow: 0 0 5px #00BAE8;
-	
-}
 
-
-a{  
-cursor: pointer;  
-text-decoration:none;  
-} 
-
-/* This is for the positioning of the Close Link */
-#popupBoxClose {
-	background: none repeat scroll 0 0 #E6E6E6;
-    border: 2px solid #00BAE8;
-    border-radius: 50px 50px 50px 50px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.31);
-    cursor: pointer;
-    display: block;
-    font-size: 20px;
-    height: 18px;
-    line-height: 15px;
-    position: absolute;
-    right: -12px;
-    text-align: center;
-    top: -12px;
-	color:#6fa5e2;  
-	font-weight:500;
-	width: 18px; 
-   
-}
-.black {
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
-    display: block;
-    height: 100%;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
-</style>
-
-
-<script type="text/javascript">
-	jQuery(document).ready( function() {
-			
-		jQuery('#popupBoxClose').click( function() {		
-			jQuery('.black').css('display','none');
-			jQuery('#popup_box').css('display','none');
-		});
-		});
-</script>
-
-<div id="popup_box" >
-			<a id="popupBoxClose" class="close">x</a>	
-			<b><?php echo $msg ;?></b>
-			
-</div>
-<div class="black" ></div>	
+<div id="Darkness" style="display: block"></div>
+<div id="systemmsg" class="takeOverlay">
+	<a class="close">x</a>
+	<span>
+		<?php echo $msg ;?>
+	</span>
+</div>	
 <?php } ?>
 
 
 <!--Jevent Form Starts-->
 <h2 id="sendEventsHeader"><?php echo JText::_('JEV_SENDEVNTS'); ?></h2>
-<!--<button id="selectlocation">Location</button>
-<div id="fadeout"></div>
-<div id="locationcont" class="locationcont" style="margin-left: 6000px">
-	<a class="close">x</a>
-  		<div class="loadform">
-   			<iframe id='signupframe' frameborder="0"  height="540" width="100%" src="/index.php?option=com_jevlocations&task=locations.select&tmpl=component"></iframe>
-  		</div>
-</div>-->
 	
 <form action="" method="post" name="adminForm" enctype='multipart/form-data' onSubmit="return form_validation()" id="submitevent">
 

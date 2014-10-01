@@ -1,5 +1,10 @@
 /*Restaurants and Places styles starts here*/
 
+a{
+	color: #00467f;
+    font-size: 14px;
+    text-decoration: none;
+}
 
 #placeContainer{
 	width: 88%;
@@ -13,7 +18,7 @@
 	line-height: 18px;
 	margin-bottom:12px;
 	width: 100%;
-	font-weight: normal;
+	font-weight: bold;
 }
 #gmap{
 	display: block;
@@ -74,14 +79,23 @@
 	line-height: 17px;
 }
 
-#placeContainer .address a{
+#placeContainer .address a,ul li a{
 	color: #00467f;
     font-size: 14px;
     text-decoration: none;
+	line-height: 18px;
+	font-family: 'AllerLightRegular',Arial ,sans-serif;
+	float: left;
+	text-decoration: none;
 }
 #placeContainer img{
 	float: left;
 	margin-top: 10px;
+	margin-right: 10px;
+	width: 40%;
+}
+ul li{
+	list-style: none;
 }
 #placeContainer div h3{
 	width:60%;
