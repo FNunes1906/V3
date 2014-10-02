@@ -796,6 +796,9 @@ padding: 5px;
      width:32px;
      height:32px;
 }
+.side div {
+  overflow: hidden;
+}
 /*
 .facebook{
 	background-image:url('../images/facebook_32.png');
@@ -1014,7 +1017,7 @@ width: 61%;
 .share_font{
 	float: right;
     height: 32px;
-    line-height: 32px;
+    line-height: 15px;
     margin-left: 5px;
     text-align: left;
     width: 102px;
@@ -1970,14 +1973,16 @@ margin-bottom: 10px;
 	float: left;
 	margin-right:5px;
 }
-#eventContainer div{
-	width: 100%;
-	float: left;
-}
+#eventContainer #map_canvas{
+ width: 100%;
+ float: left;
+}/*
 #eventContainer div div{
-	width: initial;
-	float: none;
-}
+ width: initial;
+ width: unset;
+ width: inherit;
+ float: none;
+}*/
 #eventContainer div p{
 	width: 100%;
 	font-size:11px;

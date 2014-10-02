@@ -484,8 +484,8 @@ class JPagination extends JObject
 		}
 
 			// Set the start and previous data objects
-			$data->previous	= new JPaginationObject(JText::_('< Prev'));
-			$data->start	= new JPaginationObject(JText::_('<< Start'));
+			$data->previous = new JPaginationObject('< '.JText::_('Prev'));
+   			$data->start 	= new JPaginationObject('<< '.JText::_('Start'));
 
 
 		if ($this->get('pages.current') > 1)
@@ -501,10 +501,9 @@ class JPagination extends JObject
 		}
 
 			// Set the start and previous data objects
-			$data->next	= new JPaginationObject(JText::_('Next >'));
-			$data->end	= new JPaginationObject(JText::_('End >>'));
-
-		
+			$data->next = new JPaginationObject(JText::_('Next').' >');
+   			$data->end = new JPaginationObject(JText::_('End').' >>');
+			
 		if ($this->get('pages.current') < $this->get('pages.total'))
 		{
 			$next = $this->get('pages.current') * $this->limit;

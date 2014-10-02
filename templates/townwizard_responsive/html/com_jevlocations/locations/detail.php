@@ -106,13 +106,11 @@ function resetLatLngTxtFields(lat, lng){
 		 echo "<p>".JText::_("TW_PHONE").":</p><p><a itemprop='telephone' href=tel:".$newphrase.">".$this->location->phone."</a></p>";
 	}
 		if (strlen($this->location->url)>0) {
-		$pattern = '[a-zA-Z0-9&?_.,=%\-\/]';
-		if (strpos($this->location->url,"http://")===false) 
-		$this->location->url = "http://".trim($this->location->url);
-		//$this->location->url = preg_replace('#(http://)('.$pattern.'*)#i', '<a href="\\1\\2" target="_blank">\\1\\2</a>', $this->location->url);
-		//echo $this->location->url;
-		} ?>
-		<p><a href='<?php echo $this->location->url; ?>' target="_blank"><?php echo JText::_("TW_VISIT");?></a></p>
+			 $pattern = '[a-zA-Z0-9&?_.,=%\-\/]';
+			 if (strpos($this->location->url,"http://")===false) 
+			 $this->location->url = "http://".trim($this->location->url);?>
+			 <p><a href='<?php echo $this->location->url; ?>' target="_blank"><?php echo JText::_("TW_VISIT");?></a></p>
+		 <?php } ?>
 	
 	
 	<ul class="address" itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address">

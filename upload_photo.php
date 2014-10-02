@@ -101,8 +101,11 @@
 		
 		    //#DD#
 		    if($var->photo_uploaded==true){
-				$rec = mysql_query("SELECT * FROM `jos_users` WHERE `id`=62");
-				$pageglobal=mysql_fetch_array($rec);
+				//$rec = mysql_query("SELECT * FROM `jos_users` WHERE `id`=62");
+				//$pageglobal=mysql_fetch_array($rec);
+				$rec		= mysql_query("select * from `jos_pageglobal`");
+				$pageglobal	= mysql_fetch_array($rec);				
+	
 				$adminEmail = $pageglobal['email'];
 				//$adminEmail	= $adminuser->email;
 				$sitename =  $pageglobal['site_name'];

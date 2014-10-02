@@ -5,7 +5,6 @@ defined('_JEXEC') or die('Restricted access');
 global $current_cat;		
 $current_cat =  $this->datamodel->catidList;
 
-$_SESSION['__default']['registry']->_registry['session']['data']->search_fv_ses = '';
 /* Timezone Block Begin August 2013 */
 $timezoneValue 	= $_SESSION['tw_timezone'];
 
@@ -56,6 +55,7 @@ if(isset($_REQUEST['searchdate']) && $_REQUEST['searchdate']!=''){
 	$end_date=(strftime ($df,strtotime($search_date[1])));
 	echo "<h2 id='middleColumnHeader'>". JText::_('JEV_EVENTFROM') ." ".$start_date." to ".$end_date."</h2><br/>";
 }elseif ( JRequest::getVar('task') === 'week.listevents' AND JRequest::getVar('view') === 'week' AND JRequest::getVar('Itemid') == 97){
+	unset($_SESSION['__default']['registry']->_registry['session']['data']->search_fv_ses);
 	echo "<h2 id='middleColumnHeader'>". JText::_('TW_THIS_WEEK')." ".JText::_('EVENTS_IN')." ".$d[2]."</h2><br/>";
 }elseif ( JRequest::getVar('task') === 'week.listevents' AND JRequest::getVar('view') === 'week' ){
 	echo "<h2 id='middleColumnHeader'>". JText::_('TW_THIS_WEEK')." ".$menuname." ".JText::_('EVENTS_IN')." ".$d[2]."</h2><br/>";

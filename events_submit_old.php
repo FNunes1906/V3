@@ -145,9 +145,11 @@ if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']==
 				//require_once($var->tpl_path."events_submit_mail.tpl");
 				$msg=JText::_('THANKS_MSG');
 				$subject= 'New Event Submission';
-				$adminuser = $cat->getAdminUser();
-				$adminEmail	= $adminuser->email;
-				//$adminEmail	= 'rinkal.gandhi@aaditsoftware.com';
+				//$adminuser = $cat->getAdminUser();
+				//$adminEmail	= $adminuser->email;
+				$rec		= mysql_query("select * from `jos_pageglobal`");
+				$pageglobal	= mysql_fetch_array($rec);
+				$adminEmail = $pageglobal['email'];				
 				$sitename =  $jconfig->sitename;
 				
 				$message = '
