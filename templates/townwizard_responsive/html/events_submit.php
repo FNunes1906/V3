@@ -144,7 +144,7 @@ if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']==
 			if(!empty($last_id) && (!empty($last_id1))) {
 				//require_once($var->tpl_path."events_submit_mail.tpl");
 				$msg=JText::_('THANKS_MSG');
-				$subject= 'New Event Submission ';
+				$subject= 'New Event Submission';
 				$adminuser = $cat->getAdminUser();
 				$adminEmail	= $adminuser->email;
 				//$adminEmail	= 'rinkal.gandhi@aaditsoftware.com';
@@ -179,7 +179,8 @@ if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']==
 				</table>';
 				$headers = 'MIME-Version: 1.0' . "\r\n";
 				$headers .= 'Content-type:text/html;charset=iso-8859-1' . "\r\n";
-				$headers .= 'From: NO-REPLY <admin@'.$_SERVER['HTTP_HOST'].'>' . "\r\n";
+				//$headers .= 'From: NO-REPLY <admin@'.$_SERVER['HTTP_HOST'].'>' . "\r\n";
+				$headers .= 'From: TownWizard<no-reply@partneremail.townwizard.com>' . "\r\n";
 				$headers .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
 				// Email Notification to Administrator
 				mail($adminEmail,$subject,$message,$headers);
