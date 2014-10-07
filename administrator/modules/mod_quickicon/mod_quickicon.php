@@ -79,10 +79,10 @@ if (!defined( '_JOS_QUICKICON_MODULE' )){
 			$link = 'index.php?option=com_pagemeta';
 			quickiconButton( $link, 'twIcon_meta.png', JText::_( 'SETTINGS ' ) );
 			
-			if($_SESSION['partner_type']=="free") {
-				$link = '/upgrade/upgrade_form.php';
+			//if($_SESSION['partner_type']=="free") {
+				$link = '/upgrade/upgrade_packages.php';
 				quickiconButtonhreftarget( $link, 'twIcon_upgrade.png', JText::_( 'UPGRADE ' ) );
-			}
+			//}
 		}?>
 	</div>
 <?php }
