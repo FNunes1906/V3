@@ -11,16 +11,18 @@ body {
 ul{
 	margin: 14px;
 	padding: 0px;
+	min-height: 178px;
 }
-li{
-	
+p{
+	min-height: 190px;
+	margin: 0px;
 	}
 input{
 	margin: 0px;vertical-align: top;
 }
 
 #container{
-	width:70%;
+	width:90%;
 	margin: auto;	
 }
 .fl{
@@ -29,11 +31,14 @@ input{
 .basic,.advanced,.unlimited{
 	background: none repeat scroll 0 0 #f4f4f4;
     border-radius: 5px;
-    margin-right: 2%;
 	margin-bottom: 10px;
-    min-height: 300px;
+    min-height: 325px;
    	padding: 10px 15px;
-    width: 28%;
+    width: 29%;
+}
+.advanced{
+	  margin-right: 2%;
+	  margin-left: 2%;
 }
 .red{
 	color: #FF3333;
@@ -78,9 +83,9 @@ input{
 	<div class="basic fl">
 		<span class="red">SUPPORT</span><br/><br/>
 		<span class="green">$25/mo</span><br/><br/>
-		The TownWizard team is made up of highly qualified engineers with support expertise in key TownWizard technologies. Whether you need direct one-on-one support troubleshooting issues, hands-on assistance to accelerate a project, or helpful guidance to the right documentation and sample code, TownWizard support staff are ready to help you.
-		<br/><br/>
-		2-Pack US$25<br/><br/>
+		<p>The TownWizard team is made up of highly qualified engineers with support expertise in key TownWizard technologies. Whether you need direct one-on-one support troubleshooting issues, hands-on assistance to accelerate a project, or helpful guidance to the right documentation and sample code, TownWizard support staff are ready to help you.
+<br/><br/>
+2-Pack US$25</p>
 		<form style="text-align: center;" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 			<input type="hidden" name="cmd" value="_s-xclick">
 			<input type="hidden" name="hosted_button_id" value="D3KYYUDN2ASC2">
@@ -95,7 +100,7 @@ input{
 			<li>Website Ad Inventory</li>
 			<li>Customizable Menus</li>
 			<li>Unlimited Support</li>
-		</ul><br/><br/><br/><br/><br/><br/><br/><br/>
+		</ul>
 		<form style="text-align: center;" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 			<input type="hidden" name="cmd" value="_s-xclick">
 			<input type="hidden" name="hosted_button_id" value="CNNKUQ2KVM48A">

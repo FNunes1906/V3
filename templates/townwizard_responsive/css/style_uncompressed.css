@@ -2730,7 +2730,7 @@ a.ev_link_row:link {
 	z-index: 1000;
 	top: 35px;
 	display: block;
-	background:#087D91;
+	background:none;
 	width:42px;
 	height:39px;
 	text-align: center;
@@ -2740,7 +2740,7 @@ a.ev_link_row:link {
 #leftArrow img, #rightArrow img{
 	position:relative;
 	margin-left:15px;
-	background:#087D91;
+	background:none;
 	width: 16px;
 	height:22px;
 	left: 0;
@@ -2753,7 +2753,7 @@ a.ev_link_row:link {
 	display: block;
 	width: 1000px;
 	height: 200px;
-	background:#087D91;
+	background:none;
 	width:42px;
 	height:39px;
 	text-align: center;
@@ -2769,7 +2769,7 @@ a.ev_link_row:link {
 #topSlider.frontPage #rightArrow img{
 	position:relative;
 	margin-left:15px;
-	background:#087D91;
+	background:none;
 	width: 16px;
 	height:22px;
 	float: none;
@@ -2777,7 +2777,7 @@ a.ev_link_row:link {
 #topSlider.otherPages #leftArrow img, #topSlider.frontPage #leftArrow img{
 	position:relative;
 	margin-left:12px;
-	background:#087D91;
+	background:none;
 	width: 16px;
 	height:22px;
 	float: left;
