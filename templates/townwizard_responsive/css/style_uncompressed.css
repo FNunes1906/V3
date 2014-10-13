@@ -216,6 +216,7 @@ a ,p, span, form{
 #leftColumn{
 	width: 180px;
      background:#FFFFFF;
+	 min-height: 390px;
 }
 #mainNav{
 	   width:180px;
@@ -892,8 +893,8 @@ padding: 5px;
 	border: 1px solid #ccc;
 }
 .veri {
-	line-height: 52px !important;
-	padding-top: 23px;
+	line-height: 17px !important;
+	padding-top: 35px;
 }
 
 #userForm img {
@@ -999,6 +1000,31 @@ width: 61%;
 #rightBanners ul, #rightBanners ul li, #rightBanners img{
 	width: 100%;
 }
+
+.intrinsic-container {
+position: relative;
+height: 0;
+overflow: hidden;
+}
+ 
+/* 16x9 Aspect Ratio */
+.intrinsic-container-16x9 {
+padding-bottom: 56.25%;
+}
+ 
+/* 4x3 Aspect Ratio */
+.intrinsic-container-4x3 {
+padding-bottom: 75%;
+}
+ 
+.intrinsic-container iframe {
+position: absolute;
+top:0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+
 #rightBanners ul li{
    margin-bottom:20px;	
 }
@@ -1057,11 +1083,12 @@ width: 61%;
 	color: #00467f;
     font-family: 'AllerBold',Arial,sans-serif;
 }
-.lower a:first-of-type span.print_large{
-	line-height: 57px;
+.error_large{
+	display: block;
+    padding-bottom: 16px;
 }
 .print_large{
-	line-height: 83px;
+	line-height: 55px;
 }
 
 #middleColumn{ 
@@ -1414,7 +1441,7 @@ width: 61%;
 	float: left;
 }
 #mainContent form span,#mainContentwhite #submitevent span{
-	width: 30%;
+	width: 38%;
 	float: left;
 	display: block;
 	margin-bottom:10px;
@@ -1441,8 +1468,9 @@ width: 61%;
 	line-height: 20px;
 }
 #mainContent form input[name=allDayEvent],#mainContentwhite #submitevent input[name=allDayEvent]{
-	width:50px;
+	width:15px;
 	float: left;
+	margin: 4px 0 10px;
 }
 #mainContent form input[name=publish_up],#mainContentwhite #submitevent input[name=publish_up]{
 	width:83px;
@@ -1476,7 +1504,7 @@ width: 61%;
 #mainContent form button + span,#mainContentwhite #submitevent button + span{
 	float: left;
 	margin-left: 5px;
-	width: 57px;
+	width: 56px;
 }
 #mainContent form .inputbox,#mainContentwhite #submitevent .inputbox{
 	width: 34px;
@@ -1507,7 +1535,7 @@ width: 61%;
 #mainContent #noSpecTime,#mainContentwhite #noSpecTime {
     margin: 5px 0 0 !important;
     padding: 0 !important;
-    width: 44% !important;
+    width: 50% !important;
 }
 #formBottom a.button {
   background: none repeat scroll 0 0 #dadada;
@@ -1571,6 +1599,7 @@ width: 61%;
     padding: 5px 8px;
     width: 70px;
     margin-left:10px;
+	margin-bottom: 10PX;
 }   
 #mainContentwhite .osolCaptchaBlock > label:first-of-type{
   clear: both;
@@ -1882,7 +1911,7 @@ margin-bottom: 10px;
 	display: block;
 	float: right;
 	font-family: "AllerBold",Arial,sans-serif;
-	line-height: 27px;
+	margin-bottom: 10px;
 	margin-top: 0;
 	text-align: right;
 	text-decoration: underline;
@@ -2402,7 +2431,7 @@ div.takeOverlay a.close {
   line-height: 28px !important;
   padding: 10px;
   text-align: center;
-  width: 95% !important;
+  width: 94% !important;
 }
 .takeOverlay .socialLinks {
     height: auto;
@@ -2422,15 +2451,15 @@ div.takeOverlay a.close {
     width: 121px;
 }
 .takeOverlay .fbLogin span, .takeOverlay .twtLogin span {
-  color: #666;
-  font-size: 8px !important;
-  left: 38px;
-  line-height: 10px !important;
-  padding: 0;
-  position: absolute;
-  text-transform: uppercase;
-  top: 10px;
-  width: 50px !important;
+    color: #666;
+    font-size: 8px !important;
+    left: 40px;
+    line-height: 10px !important;
+    padding: 0;
+    position: absolute;
+    text-transform: uppercase;
+    top: 10px;
+    width: 67px !important;
 }
 .takeOverlay .twtLogin {
     background: url("../images/header/twtLoginBtn.png") no-repeat scroll left top rgba(0, 0, 0, 0);
@@ -2833,6 +2862,7 @@ a.ev_link_row:link {
 	width:18.5567010309278%;
 	margin-right:3.60824742268041%;
     float: left;
+	
 }
 #rightColumn{
 	   width:31.927835051546400000%;
@@ -2845,6 +2875,11 @@ a.ev_link_row:link {
 	top: -5px;
 	z-index: 1000;
 	display: none;
+}
+.other_slider{
+	margin-bottom: 20px; 
+	background: #000000;
+	overflow: hidden;
 }
 }
 @media only screen and (min-width:720px) and (max-width:837px){
@@ -2910,8 +2945,8 @@ a.ev_link_row:link {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-top: 2px;
-    padding-right: 30px;
-    width: 175px;
+    padding-right: 22px;
+    width: 185px;
 }
 #mobNav input[type="submit"] {
     margin-right: 12px;
@@ -2944,22 +2979,25 @@ a.ev_link_row:link {
 	width: 104px;
 	background-size:102px 38px;  
 }
+
 #fbLogin a{
-	 width: 69px;
+	 width: 66px;
      height: 38px;
-     font-size: 8px;
-     padding:9px 0 0 33px;
+     font-size:7px;
+     padding:9px 0 0 31px;
+	/* font-weight: bold;*/
 }
 #twtLogin{
      height: inherit;
      width: 97px;
      background-size:95px 38px;
 }
-#twtLogin a{
-	  width: 62px;
-      height:38px;
-      font-size: 8px;
-      padding:9px 0 0 33px;
+#twtLogin a {
+	width: 66px;
+	height: 38px;
+	font-size: 7px;
+	padding: 9px 0 0 31px;
+	/*font-weight: bold;*/
 }	
 #helpBtn img{
 	  height: 40px; 
@@ -2994,6 +3032,7 @@ a.ev_link_row:link {
   margin-top: 2px;
   padding-right: 19px;
   width: 158px;
+  font-size: 10px;
 }
 #mobNav input[type="submit"] {
     margin-right: 5px;
@@ -3517,6 +3556,9 @@ body{
 	}
 }
 @media only screen and (min-width:320px) and (max-width:479px){
+	#mainContentwhite #submitevent fieldset legend:nth-of-type(2) {
+		width: 53%;
+	}
 	#category_fv{
 		margin-bottom:-5px !important;
 		height: 24px !important;
@@ -3588,7 +3630,7 @@ body{
 	}
 	.rsform-captcha-box {
 	    float: left !important;
-	    margin-left: 14%;
+	    margin-left:7%;
 	    text-align: left !important;
 	    width: 57% !important;
 	}
@@ -3676,11 +3718,14 @@ body{
 	}
 	.rsform-captcha-box {
 	    float: left !important;
-	    margin-left: 9%;
+	    margin-left: 2.8%;
 	    text-align: left !important;
 	    width: 57% !important;
 	}
-	
+	.veri {
+	    line-height: 14px !important;
+	    padding-top: 39px;
+	}
 	#topSlider.otherPages p.description{
 		height: 48px;
 	}
@@ -3750,11 +3795,11 @@ body{
 	    line-height: 15px !important;
 	    margin-top: 12px;
 	    padding-top: 23px;
-	    width: 30%;
+	    width: 32%;
 	}
 	.rsform-captcha-box {
 	    float: left !important;
-	    margin-left: 5%;
+	    margin-left:3.8%;
 	    text-align: left !important;
 	    width: 58% !important;
 	}
