@@ -895,6 +895,7 @@ padding: 5px;
 .veri {
 	line-height: 17px !important;
 	padding-top: 35px;
+	width: 132px;
 }
 
 #userForm img {
@@ -921,7 +922,7 @@ padding: 5px;
 }
 
 #Submit, .rsform-submit-button[value="Submit"] {
-    margin-left:-27px !important;
+    margin-left:-12px !important;
 }
 
 #Submit, .rsform-submit-button {
@@ -1535,7 +1536,7 @@ height: 100%;
 #mainContent #noSpecTime,#mainContentwhite #noSpecTime {
     margin: 5px 0 0 !important;
     padding: 0 !important;
-    width: 50% !important;
+    width: 52% !important;
 }
 #formBottom a.button {
   background: none repeat scroll 0 0 #dadada;
@@ -2586,7 +2587,7 @@ a.ev_link_row:link {
 #fbLogin a{
 	  width: 83px;
       height: 33px;   
-	  font-size: 9px;
+	  font-size: 8.8px;
       padding:10px 0 0 40px;  
 	}
 #twtLogin{
@@ -2597,7 +2598,7 @@ a.ev_link_row:link {
 #twtLogin a{
 	  width: 77px;
       height: 33px;   
-	  font-size: 9px;
+	  font-size: 8.8px;
       padding:10px 0 0 40px;  
 }	
 #helpBtn img{
@@ -2734,7 +2735,7 @@ a.ev_link_row:link {
 	color: #00467F;
 	font-weight: normal;
 	font-size: 13px;
-	padding-bottom:3px;
+	padding-bottom:1px;
 }
 #topSlider.frontPage .timePlace{
 	float: right;
@@ -3725,6 +3726,7 @@ body{
 	.veri {
 	    line-height: 14px !important;
 	    padding-top: 39px;
+		width: 127px;
 	}
 	#topSlider.otherPages p.description{
 		height: 48px;
