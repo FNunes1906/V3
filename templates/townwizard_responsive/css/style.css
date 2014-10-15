@@ -616,6 +616,7 @@ a ,p, span, form{
 }
 /*topSlider styles Ends*/
 /*Latest Photos, Share This, Submit Event , Cuisine, Places categories type starts here*/
+
 #topRightAside{
 	 max-width:300px;
      width:100%;
@@ -628,12 +629,26 @@ a ,p, span, form{
      font-size: 12px;
      float: right;
 }
-#topRightAside h2, #cuisinePlacesType h2,#ListEvent h3 a{
+#topRightAside h2, #cuisinePlacesType h2{
     font-family: 'AllerDisplayRegular',Arial,sans-serif;
     font-size: 14px;
     font-weight: normal;
     margin: 0 0 15px 2.6666%;
     text-transform: uppercase;
+}
+#ListEvent h3 a{
+	font-family: 'AllerDisplayRegular',Arial,sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0 0 15px 0%;
+    text-transform: uppercase;
+}
+#ListEvent{
+	margin-left: 2.6666%;
+}
+
+#ListEvent p{
+	margin-left: 0% !important;
 }
 
 #ListEvent h3{
@@ -1505,7 +1520,7 @@ height: 100%;
 #mainContent form button + span,#mainContentwhite #submitevent button + span{
 	float: left;
 	margin-left: 5px;
-	width: 56px;
+	width: 75px;
 }
 #mainContent form .inputbox,#mainContentwhite #submitevent .inputbox{
 	width: 34px;
@@ -2447,6 +2462,10 @@ div.takeOverlay a.close {
   text-align: center;
   width: 122px !important;
 }
+.takeOverlay .socialLinks a span{
+	text-align: left;
+}
+
 .takeOverlay .fbLogin {
     background: url("../images/header/fbLoginBtn.png") no-repeat scroll left top rgba(0, 0, 0, 0);
     width: 121px;
