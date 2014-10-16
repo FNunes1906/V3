@@ -277,7 +277,7 @@ a ,p, span, form{
     color: #000000;
     font-weight: normal;
     margin-top:0;
-    width: 132px;
+    width: 151px;
     min-height:38px;
 	float:left;
 	line-height: 37px;
@@ -1520,7 +1520,7 @@ height: 100%;
 #mainContent form button + span,#mainContentwhite #submitevent button + span{
 	float: left;
 	margin-left: 5px;
-	width: 75px;
+	width: 57px;
 }
 #mainContent form .inputbox,#mainContentwhite #submitevent .inputbox{
 	width: 34px;
@@ -1613,7 +1613,7 @@ height: 100%;
     color: #FFFFFF;
     font-weight: bold;
     padding: 5px 8px;
-    width: 70px;
+    width: 97px;
     margin-left:10px;
 	margin-bottom: 10PX;
 }   
@@ -1927,7 +1927,7 @@ margin-bottom: 10px;
 	display: block;
 	float: right;
 	font-family: "AllerBold",Arial,sans-serif;
-	margin-bottom: 10px;
+	margin-bottom: 18px;
 	margin-top: 0;
 	text-align: right;
 	text-decoration: underline;
@@ -1940,7 +1940,7 @@ margin-bottom: 10px;
 #eventContainer .checkins {
     float: right;
     text-align: right;
-    width: 22% !important;
+    width: 24% !important;
 }
 #eventContainer .checkins span {
     display: block;
@@ -3110,6 +3110,9 @@ a.ev_link_row:link {
 #rightColumn{
 	width: 30.97%;
 }
+#eventsCategoriesSearch #cat_drop {
+    width: 44%;
+}
 }
 @media only screen and (max-width:550px){
 
@@ -3275,7 +3278,7 @@ body{
 }
 #mainContent .blogSummaryContainer .readMore , #mainContent .contentpaneopen .readon,#mainContentwhite #blog-page .readon{
 	float: none;
-	width: 78px;
+	width: 82px;
 	color: #FFFFFF;
 	border: 2px solid #DBDBDB;
 	margin-left: auto;
@@ -3368,7 +3371,12 @@ body{
 	font-size: 12px;
 	vertical-align: text-bottom;
 }
-
+#eventsCategoriesSearch #cat_drop {
+   width: 39% !important;
+}
+#mod_search_searchword{
+	height: 15px !important;
+}
 #demo_default {
     right: 17% !important;
     top: 24% !important;
@@ -3444,8 +3452,11 @@ body{
 #topRightAside{
 	display: none;
 }
-#eventsCategoriesSearch #mod_search_searchword,#eventsCategoriesSearch #cat_drop,#eventsCategoriesSearch input.submit{
+#eventsCategoriesSearch input.submit{
 	   margin:12px 0 0 3%;
+}
+#eventsCategoriesSearch #cat_drop,#eventsCategoriesSearch #mod_search_searchword{
+	 margin:8px 0 0 3%;
 }
 }
 @media only screen and (max-width:340px){
@@ -3575,7 +3586,20 @@ body{
 		width: 26%;
 	}
 }
+@media only screen and (min-width:320px) and (max-width:350px){
+	#siteName{
+		width: 48.5%;
+	}
+}
+@media only screen and (min-width:360px) and (max-width:479px){
+	#siteName{
+		width: 43.3%;
+	}
+}
 @media only screen and (min-width:320px) and (max-width:479px){
+	#mainContentwhite #userForm h1{
+		height: 21px;
+	}
 	#mainContentwhite #submitevent fieldset legend:nth-of-type(2) {
 		width: 53%;
 	}
@@ -3615,7 +3639,7 @@ body{
 	.window-content {
 		height: 100%;
 	    position: relative;
-	    width: 95%;
+	    width: 96%;
 	}
 	.lightBox .image-browser-image{
 		width: 100%;
@@ -3678,6 +3702,9 @@ body{
 	.placesContainer h3{
 		width: 32%;
 	}
+	.placesContainer ul{
+		width: 34%;
+	}
 	#cuisinePlacesType ul li{
 		width: 50%;
 	}
@@ -3709,7 +3736,7 @@ body{
 	.window-content {
 		height: 98%;
 	    position: relative;
-	    width: 97%;
+	    width: 98%;
 	}
 	.lightBox .image-browser-image{
 		width: 100%;
