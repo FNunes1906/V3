@@ -141,7 +141,7 @@ p {
 </style>
 
 </head>
-<body>
+<body> 
 
 <div style="text-align: center;">
 	<img width="296" height="75" title="ttown" alt="TW LOGO" src="tw_logo_icon.png"><br><br>
@@ -162,12 +162,30 @@ p {
 				<p>The TownWizard team is made up of highly qualified engineers with support expertise in key TownWizard technologies. Whether you need direct one-on-one support troubleshooting issues, hands-on assistance to accelerate a project, or helpful guidance to the right documentation and sample code, TownWizard support staff are ready to help you.
 				<br/><br/>
 				2-Pack US$25</p>
-              	 <form style="text-align: center;" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+              	 <!--<form style="text-align: center;" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 					<input type="hidden" name="cmd" value="_s-xclick">
 					<input type="hidden" name="hosted_button_id" value="D3KYYUDN2ASC2">
 					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-				</form>
+				</form>-->
+				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="GLNGLYKLU9GRG">
+<input type="hidden" name="lc" value="US">
+<input type="hidden" name="item_name" value="support">
+<input type="hidden" name="item_number" value="25">
+<input type="hidden" name="amount" value="0.01">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="button_subtype" value="services">
+<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+<input TYPE="hidden" name="return" value="http://<?php echo $_SERVER["SERVER_NAME"]?>/upgrade/thanks.php?item_name=support&payment_gross=0.01">
+<input type="hidden" value="Click here to go back to site" name="cbt"> 
+<!--<input type="hidden" name="notify_url" value="http://<?php echo $_SERVER["SERVER_NAME"]?>/upgrade/thanks.php" />-->
+<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+
+</form>
+
             </div>
         </div>
 
@@ -187,12 +205,28 @@ p {
 					<li>Unlimited Support</li>
                 </ul>
 <br><br>
-                <form style="text-align: center;" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <!--<form style="text-align: center;" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 					<input type="hidden" name="cmd" value="_s-xclick">
 					<input type="hidden" name="hosted_button_id" value="CNNKUQ2KVM48A">
 					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-				</form>
+				</form>-->
+				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="GLNGLYKLU9GRG">
+<input type="hidden" name="lc" value="US">
+<input type="hidden" name="item_name" value="advanced">
+<input type="hidden" name="item_number" value="26">
+<input type="hidden" name="amount" value="1.00">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="button_subtype" value="services">
+<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+<input TYPE="hidden" name="return" value="http://<?php echo $_SERVER["SERVER_NAME"]?>/upgrade/thanks.php?item_name=advanced&payment_gross=$1">
+<input type="hidden" value="Click here to go back to site" name="cbt"> 
+<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
             </div>
         </div>
 
@@ -217,12 +251,27 @@ p {
 					<li>Free use of the TownWizard Professional logo for marketing purposes</li>
                 </ul>
 				<br><br>
-				<form style="text-align: center;" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+				<!--<form style="text-align: center;" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 					<input type="hidden" name="cmd" value="_s-xclick">
 					<input type="hidden" name="hosted_button_id" value="VXPZ7LGX5UDN4">
 					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-				</form>
+				</form>-->
+				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="GLNGLYKLU9GRG">
+<input type="hidden" name="lc" value="US">
+<input type="hidden" name="item_name" value="unlimited">
+<input type="hidden" name="item_number" value="27">
+<input type="hidden" name="amount" value="1.50">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="button_subtype" value="services">
+<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+<input TYPE="hidden" name="return" value="http://<?php echo $_SERVER["SERVER_NAME"]?>/upgrade/thanks.php?item_name=unlimited&payment_gross=$1.50">
+<input type="hidden" value="Click here to go back to site" name="cbt"> 
+<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
             </div>
         </div>
     </div>
