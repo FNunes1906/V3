@@ -124,6 +124,18 @@ p {
     background: #f7f7f7;
     border-bottom: 1px solid #e7e7e7;
 }
+.license{
+    font-size: 10px;
+    padding-right: 10px;
+}
+.license a{
+	color: #ff0000;
+	text-decoration: none;
+}
+.license a:hover{
+	color: #ff0000;
+	text-decoration: underline;
+}
 
 /*
  * -- PHONE MEDIA QUERIES --
@@ -244,6 +256,7 @@ p {
 						<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
 					</form>
 				<?php } ?>
+				<div class="license">By clicking, you are agreeing to the <a target="_blank" href="http://townwizard.com/responsive/license.html"><br>TownWizard License Agreement</a></div>
             </div>
         </div>
 
@@ -297,6 +310,7 @@ p {
 					<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
 				</form>
 				<?php } ?>
+				<div class="license">By clicking, you are agreeing to the <a target="_blank" href="http://townwizard.com/responsive/license.html"><br>TownWizard License Agreement</a></div>
             </div>
         </div>
     </div>
