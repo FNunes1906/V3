@@ -32,7 +32,7 @@ body {margin:0;
       padding:0;
       width:100%;
 }
-html,h1,h2,h3,h4,a,body,ul,li,img,div,article,section,aside, a,span, p, dd, dt, dl,footer{
+html,h1,h2,h3,h4,a,body,ul,ol,li,img,div,article,section,aside, a,span, p, dd, dt, dl,footer{
 	    margin:0;
         padding:0;
         list-style: none;
@@ -40,9 +40,10 @@ html,h1,h2,h3,h4,a,body,ul,li,img,div,article,section,aside, a,span, p, dd, dt, 
         border: none;
         
 }
-a:visited, a:link, a:hover, a:active{text-decoration: none;
-                                     color: #000000;
-                                     font-weight:normal; 
+a:visited, a:link, a:hover, a:active{
+	 text-decoration: none;
+	 color: #000000;
+	 font-weight:normal; 
 }
 /*global styles*/
 a ,p, span, form{
@@ -286,6 +287,7 @@ a ,p, span, form{
 }
 .topMenu span.menu_img_hover{
 	padding-left:48px;
+	transition:background 0.5s ease-in 0s
 }
 .topMenu span.menu_img_hover span{
 	font-family: 'AllerDisplayRegular';
@@ -1197,7 +1199,17 @@ height: 100%;
 	width:100%; 
 	text-align: left;
 }
-
+.contentpaneopen ul,.contentpaneopen ol{
+ margin: 10px 0;
+ padding-left: 30px;
+ text-align: left;
+}
+.contentpaneopen ul li{
+ list-style:disc inside none;
+}
+.contentpaneopen ol li{
+ list-style:decimal inside none;
+}
 #jevents_body .ev_table{
 	width:100%; 
 	text-align: left;
