@@ -253,11 +253,13 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 			   <!-- TW Banner Ad start -->
 			<?php } else { ?>
 				<aside class="leftBanners">
-					<div id='div-gpt-ad-1403199524717-0'>
-						<script type='text/javascript'>
-							googletag.cmd.push(function() { googletag.display('div-gpt-ad-1403199524717-0'); });
-						</script>
-					</div>
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- Left Side Testing Ad -->
+					<ins class="adsbygoogle left-side-testing-ad"
+						 style="display:inline-block"
+						 data-ad-client="ca-pub-7206979589656043"
+						 data-ad-slot="3428266646"></ins>
+					<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 					<?php if($this->countModules('banner2')) : ?>
 						<jdoc:include type="modules" name="banner2" />
 					<?php else: ?>
@@ -321,11 +323,13 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 				<?php endif; ?>
 			<!-- TW Banner Ad start -->
 			<?php }else { ?> 
-					<div id='div-gpt-ad-1403199524717-1'>
-						<script type='text/javascript'>
-						googletag.cmd.push(function() { googletag.display('div-gpt-ad-1403199524717-1'); });
-						</script>
-					</div>
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- Right Side Testing Ad -->
+					<ins class="adsbygoogle right-side-testing-ad"
+						 style="display:inline-block"
+						 data-ad-client="ca-pub-7206979589656043"
+						 data-ad-slot="9474800247"></ins>
+					<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 					<?php if($this->countModules('banner3')) : ?>
 						<jdoc:include type="modules" name="banner3" />
 					<?php else: ?>
@@ -358,11 +362,13 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 		<div id="topBanner">
 		<!-- TW Banner Ad start -->
 	  	<?php if($_SESSION['partner_type']=="free") {?>
-			<div id='div-gpt-ad-1403199524717-2'>
-				<script type='text/javascript'>
-				googletag.cmd.push(function() { googletag.display('div-gpt-ad-1403199524717-2'); });
-				</script>	
-			</div>
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- Top Testing Ad -->
+				<ins class="adsbygoogle top-testing-ad"
+				     style="display:inline-block"
+				     data-ad-client="ca-pub-7206979589656043"
+				     data-ad-slot="4904999847"></ins>
+				<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 		<!-- TW Banner Ad End -->
 		<?php }else { ?>
 			<?php if($this->countModules('banner1')) : ?>

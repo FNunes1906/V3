@@ -278,7 +278,7 @@ a ,p, span, form{
     color: #000000;
     font-weight: normal;
     margin-top:0;
-    width: 151px;
+    width: 172px;
     min-height:38px;
 	float:left;
 	line-height: 37px;
@@ -398,7 +398,6 @@ a ,p, span, form{
 	color: #FFFFFF;
 }
 .topMenu ul li a.underline, #mainNav ul li.active > a.underline{
-	text-decoration:underline;
 }
 #downloadApps{
 	padding-top:24px;
@@ -3879,3 +3878,14 @@ body{
 		padding:5px 3% 2px 3%;
 	}
 }
+
+/* CSS for Responsive banner ads */
+.right-side-testing-ad{width: 300px; height: 250px;}
+@media(max-width: 500px){.right-side-testing-ad{width: 180px; height: 150px;}}
+@media(max-width: 636px){.right-side-testing-ad{width: 200px; height: 200px;}}
+@media(max-width: 1023px){.right-side-testing-ad{width: 200px; height: 200px;}}
+.left-side-testing-ad {width: 180px; height: 150px;}
+@media(max-width: 600px){.left-side-testing-ad {width: 180px; height: 150px;}}
+@media(max-width: 800px){.left-side-testing-ad {width: 125px; height: 125px;}}
+.top-testing-ad {width:  468px; height: 60px;}
+@media(max-width: 600px){.top-testing-ad {width: 320px; height: 50px;}}

@@ -1,5 +1,5 @@
 <?php 
-$prod_server = 0;
+$prod_server = 1;
 ?>
 
 <html>
@@ -177,7 +177,7 @@ p {
                 </div>
 				<p>The TownWizard team is made up of highly qualified engineers with support expertise in key TownWizard technologies. Whether you need direct one-on-one support troubleshooting issues, hands-on assistance to accelerate a project, or helpful guidance to the right documentation and sample code, TownWizard support staff are ready to help you.
 				<br/><br/>
-				2-Pack US$25</p>
+				2-Pack $25</p>
               	<?php if($prod_server == 1) { ?>
 					<form style="text-align: center;" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 						<input type="hidden" name="cmd" value="_s-xclick">
