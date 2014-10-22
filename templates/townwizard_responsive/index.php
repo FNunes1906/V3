@@ -252,13 +252,18 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
                <?php endif; ?>
 			   <!-- TW Banner Ad start -->
 			<?php } else { ?>
-				<div class="leftBanners">
+				<aside class="leftBanners">
 					<div id='div-gpt-ad-1403199524717-0'>
 						<script type='text/javascript'>
 							googletag.cmd.push(function() { googletag.display('div-gpt-ad-1403199524717-0'); });
 						</script>
 					</div>
-				</div>
+					<?php if($this->countModules('banner2')) : ?>
+						<jdoc:include type="modules" name="banner2" />
+					<?php else: ?>
+						<img alt="Default Banner" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/Left_banner.png" />
+					<?php endif; ?>
+				</aside>
 			<?php } ?>
 			<!-- TW Banner Ad End -->
 			</div>
@@ -321,6 +326,11 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 						googletag.cmd.push(function() { googletag.display('div-gpt-ad-1403199524717-1'); });
 						</script>
 					</div>
+					<?php if($this->countModules('banner3')) : ?>
+						<jdoc:include type="modules" name="banner3" />
+					<?php else: ?>
+						<img alt="Default Banner" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/Right_banner.png" />
+					<?php endif; ?>
 			<?php } ?>
 			<!-- TW Banner Ad End -->
 			</aside>

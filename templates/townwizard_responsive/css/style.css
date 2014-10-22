@@ -340,6 +340,10 @@ a ,p, span, form{
 	background-repeat:no-repeat;
 	background-position:7px -36px;
 }
+#mainNav li.active span.menu_img_hover, span.menu_img_hover:hover {
+    background-position: 5% bottom !important;
+   
+}
 /*
 #mainNav li:nth-child(1),#mainNav .menuSelected{
 	background-image:url('../images/nav/home.png');
