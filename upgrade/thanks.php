@@ -35,6 +35,8 @@ body {
 	font-size: 1em;
 	font-family: sans-serif;
 	text-align: center;
+	width: 716px;
+	margin: auto;
 }
 html {
     font-size:100%;
@@ -84,6 +86,11 @@ html {
 .thanks{ 
 	text-transform: capitalize;
 }
+.congrats{
+	border: 1px solid;
+    border-radius: 15px;
+    padding: 15px 20px;
+}
 </style>
 
 </head>
@@ -95,7 +102,8 @@ html {
 //if(isset($_POST['payment_status']) && $_POST['payment_status']=="Completed")
 //{
 		//=========MAIL SENT TO SUPPORT ==========//
-		$to = "operations@townwizard.com";
+		$to = "operations@townwizard.com". ", ";
+		$to .= "support@townwizard.com";
 		$subject = $guidename. "-site needs to be upgrade";
 		$message = "The following guide has requested an upgrade.<br/><br/>";
 		$message .= "<div style='float: left;width: 190px;line-height:28px;'>
@@ -104,10 +112,10 @@ html {
 						<div>Package:</div>
 						<div>Upgrade Request Date:</div>
 					</div>
-					<div style='float: left;line-height:28px;'>
+					<div style='float: left;line-height:28px;text-transform: capitalize'>
 						<div>".$email."</div>
 						<div>".$guidename."</div>
-						<div>".$_GET['item_name']." Plan(".$_GET['payment_gross']." per month)</div>
+						<div>".$_GET['item_name']." Plan</div>
 						<div>".date('F j, Y, g:i a')."</div>
 					</div>
 					<div style='clear: both;'><br/><br/>Thanks!</div>";
@@ -173,7 +181,7 @@ html {
 		$headers_p .= 'From:' . $from_p;
 		$mailcheck_p = mail($to_p,$subject_p,$message_p,$headers_p);
 	
-	echo "<div><b>Congratulations!</b><br><br>You have upgraded to <b class='thanks'>".$_GET['item_name']."</b> plan (". $_GET['payment_gross']." per month).<br>Get started now.</div><br><br>
+	echo "<div class='congrats'><b>Congratulations!</b><br><br>Thanks for upgrading to the <b class='thanks'>".$_GET['item_name']."</b> plan! We are currently working on your upgrade and will contact you as soon as your upgrade is completed. Click the button below to return to your site.</div><br><br>
 <a class='button' href='/administrator'>Back to Site Admin</a>";
 /*}else{
 	echo "<div class='thanks'>Paypal payment is not completed succesfully so please try again.</div>";

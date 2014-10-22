@@ -229,6 +229,8 @@ class JAuthorization extends gacl_api
 		
 		$this->addACL( 'com_templates', 'manage', 'users', 'TW_Admin' );
   		$this->addACL( 'com_installer', 'module', 'users', 'TW_Admin' );
+		$this->addACL( 'com_templates', 'manage', 'users', 'administrator' );
+		$this->addACL( 'com_installer', 'module', 'users', 'administrators' );		
 	}
 
 	/**
