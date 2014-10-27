@@ -90,7 +90,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 		
 <!-- Townwizard Ad banner for free product start -->
 <?php if($_SESSION['partner_type']=="free") { ?>
-<script type='text/javascript'>
+<!--<script type='text/javascript'>
 	var googletag = googletag || {};
 	googletag.cmd = googletag.cmd || [];
 	(function() {
@@ -103,9 +103,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 		var node = document.getElementsByTagName('script')[0];
 		node.parentNode.insertBefore(gads, node);
 	})();
-</script>
+</script>-->
 
-<script type='text/javascript'>
+<!--<script type='text/javascript'>
 	googletag.cmd.push(function() {
 		googletag.defineSlot('/44090425/TownWizard-Left-180', [180, 150], 'div-gpt-ad-1403199524717-0').addService(googletag.pubads());
 		googletag.defineSlot('/44090425/TownWizard-Right-300', [300, 250], 'div-gpt-ad-1403199524717-1').addService(googletag.pubads());
@@ -113,7 +113,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 		googletag.pubads().enableSingleRequest();
 		googletag.enableServices();
 	});
-</script>
+</script>-->
 <?php } ?>
 <!-- Townwizard Ad banner for free product end -->
 
@@ -129,7 +129,17 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 
 <!--  Town wizard Google Analytic code -->
 <?php include("ga.php"); ?>
-
+<style>
+	.right-side-testing-ad{width: 300px; height: 250px;}
+	@media(max-width: 500px){.right-side-testing-ad{width: 180px; height: 150px;}}
+	@media(max-width: 636px){.right-side-testing-ad{width: 200px; height: 200px;}}
+	@media(max-width: 1023px){.right-side-testing-ad{width: 200px; height: 200px;}}
+	.left-side-testing-ad {width: 180px; height: 150px;}
+	@media(max-width: 600px){.left-side-testing-ad {width: 180px; height: 150px;}}
+	@media(max-width: 800px){.left-side-testing-ad {width: 125px; height: 125px;}}
+	.top-testing-ad {width:  468px; height: 60px;}
+	@media(max-width: 600px){.top-testing-ad {width: 320px; height: 50px;}}
+</style>
 </head>
 
 <body>
@@ -252,19 +262,19 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
                <?php endif; ?>
 			   <!-- TW Banner Ad start -->
 			<?php } else { ?>
-				<aside class="leftBanners">
-					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-					<!-- Left Side Testing Ad -->
-					<ins class="adsbygoogle left-side-testing-ad"
-						 style="display:inline-block"
-						 data-ad-client="ca-pub-7206979589656043"
-						 data-ad-slot="3428266646"></ins>
-					<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-					<?php if($this->countModules('banner2')) : ?>
-						<jdoc:include type="modules" name="banner2" />
-					<?php else: ?>
-						<img alt="Default Banner" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/Left_banner.png" />
-					<?php endif; ?>
+				<aside id="leftBanners">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Left Side Testing Ad -->
+<ins class="adsbygoogle left-side-testing-ad"
+     style="display:inline-block"
+     data-ad-client="ca-pub-7206979589656043"
+     data-ad-slot="3428266646"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<?php if($this->countModules('banner2')) : ?>
+	<jdoc:include type="modules" name="banner2" />
+<?php else: ?>
+	<img alt="Default Banner" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/Left_banner.png" />
+<?php endif; ?>
 				</aside>
 			<?php } ?>
 			<!-- TW Banner Ad End -->
@@ -323,18 +333,18 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 				<?php endif; ?>
 			<!-- TW Banner Ad start -->
 			<?php }else { ?> 
-					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-					<!-- Right Side Testing Ad -->
-					<ins class="adsbygoogle right-side-testing-ad"
-						 style="display:inline-block"
-						 data-ad-client="ca-pub-7206979589656043"
-						 data-ad-slot="9474800247"></ins>
-					<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-					<?php if($this->countModules('banner3')) : ?>
-						<jdoc:include type="modules" name="banner3" />
-					<?php else: ?>
-						<img alt="Default Banner" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/Right_banner.png" />
-					<?php endif; ?>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Right Side Testing Ad -->
+<ins class="adsbygoogle right-side-testing-ad"
+     style="display:inline-block"
+     data-ad-client="ca-pub-7206979589656043"
+     data-ad-slot="9474800247"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<?php if($this->countModules('banner3')) : ?>
+	<jdoc:include type="modules" name="banner3" />
+<?php else: ?>
+	<img alt="Default Banner" src="<?php echo TOWNWIZARD_TMPL_PATH ?>/images/header/Right_banner.png" />
+<?php endif; ?>
 			<?php } ?>
 			<!-- TW Banner Ad End -->
 			</aside>
