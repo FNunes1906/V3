@@ -1198,15 +1198,15 @@ height: 100%;
 	width:100%; 
 	text-align: left;
 }
-.contentpaneopen ul,.contentpaneopen ol{
+.blog .contentpaneopen ul,.blog .contentpaneopen ol{
  margin: 10px 0;
  padding-left: 30px;
  text-align: left;
 }
-.contentpaneopen ul li{
+.blog .contentpaneopen ul li{
  list-style:disc inside none;
 }
-.contentpaneopen ol li{
+.blog .contentpaneopen ol li{
  list-style:decimal inside none;
 }
 #jevents_body .ev_table{
