@@ -2581,15 +2581,31 @@ ul#SearchResults{
     text-transform: uppercase;
 	font-family: arial;
 }
- .blog ul,.blog ol{
+
+.licss ul,.licss ol{
 	margin: 10px 0 !important;
 	padding-left: 30px;
 	text-align: left;
 }
-.blog ul li{
+.licss ul li{
 	list-style:disc inside none;
 	float: none !important;
 }
-.blog ol li{
+.licss ol li{
 	list-style:decimal inside none;
 }
+
+/* .contentpaneopen + .contentpaneopen ul,.contentpaneopen + .contentpaneopen ol{
+	margin: 10px 0 !important;
+	padding-left: 30px;
+	text-align: left;
+}
+.contentpaneopen + .contentpaneopen ul li{
+	list-style:disc inside none;
+	float: none !important;
+}
+.contentpaneopen + .contentpaneopen ol li{
+	list-style:decimal inside none;
+}*/
+
+
