@@ -55,6 +55,26 @@ $pagemeta = $data->title($urlpara);
 
 <style type="text/css">
   #placesList img { width:100px;height:83px; }
+  .upload{
+			text-align: center;
+			text-transform: uppercase; color: #fff !important;
+			text-decoration: none; font-weight: bold;
+			padding: 4px 7px;
+			font-size: 10px;
+			text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+			border: 1px solid #dbdbdb;
+			border-radius: 10px;
+			width: 120px;
+			box-shadow: 0px 1px 2px rgba(0,0,0,.4) inset;
+			background: #6abc43;
+			background: -moz-linear-gradient(top,  #6abc43 0%, #4b832f 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6abc43), color-stop(100%,#4b832f));
+			background: -webkit-linear-gradient(top,  #6abc43 0%,#4b832f 100%);
+			background: -o-linear-gradient(top,  #6abc43 0%,#4b832f 100%);
+			background: -ms-linear-gradient(top,  #6abc43 0%,#4b832f 100%);
+			background: linear-gradient(to bottom,  #6abc43 0%,#4b832f 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6abc43', endColorstr='#4b832f',GradientType=0 );
+		}
 </style>
 
 </head>
@@ -75,7 +95,7 @@ if(stripos($ua,'android') == true) { ?>
   <?php } ?>
   
 
-
+<div style="text-align: right; margin-top: 7px; margin-bottom: 7px;"><a class="upload" href="upload_photo.php">Upload Your Photo</a></div>
 <?php
 	/* Code added for iphone_galleries.tpl */
 	require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_galleries.tpl");

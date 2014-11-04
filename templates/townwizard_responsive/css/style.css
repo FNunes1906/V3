@@ -1199,18 +1199,21 @@ height: 100%;
 	text-align: left;
 }
 
-.blog ul,.blog  ol{
-	margin: 10px 0;
+.licss ul,.licss ol{
+	margin: 10px 0 !important;
 	padding-left: 30px;
 	text-align: left;
 }
-
-.blog ul li{
+.licss ul li{
 	list-style:disc inside none;
+	float: none !important;
+	width: auto !important;	
 }
-.blog ol li{
+.licss ol li{
 	list-style:decimal inside none;
+	width: auto !important;
 }
+
 #jevents_body .ev_table{
 	width:100%; 
 	text-align: left;

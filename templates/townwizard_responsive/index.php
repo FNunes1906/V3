@@ -194,6 +194,20 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 			
 			<?php echo '<h1 id="siteName" class="sitestitle"><a href="index.php">'.$var->site_name.'</a></h1>'; ?>
 			<?php echo '<h1 id="siteName" class="siteslogan">'.$var->beach.'</h1>'; ?>
+			
+			<?php require ("./inc/config.php"); 
+			$handle = fopen($query, "r");
+			$xml = '';
+			// Applying condition for $handle variable to check weather it is null or not
+			if($handle != null || !empty($handle)){
+				while (!feof($handle)) {
+					$xml.= fread($handle, 8192);
+				}
+			}
+			fclose($handle);
+			$data = XML_unserialize($xml);
+			?>
+			
 			<div id="weather">  				
 				<?php
 					if(isset($data['weather']['cc']['tmp'])){

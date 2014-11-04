@@ -2590,22 +2590,11 @@ ul#SearchResults{
 .licss ul li{
 	list-style:disc inside none;
 	float: none !important;
+	width: auto !important;	
 }
 .licss ol li{
 	list-style:decimal inside none;
+	width: auto !important;
 }
-
-/* .contentpaneopen + .contentpaneopen ul,.contentpaneopen + .contentpaneopen ol{
-	margin: 10px 0 !important;
-	padding-left: 30px;
-	text-align: left;
-}
-.contentpaneopen + .contentpaneopen ul li{
-	list-style:disc inside none;
-	float: none !important;
-}
-.contentpaneopen + .contentpaneopen ol li{
-	list-style:decimal inside none;
-}*/
 
 
