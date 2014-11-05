@@ -144,6 +144,7 @@ if(isset($_FILES['userphoto'])) {
 		if($photo_upload == True){ ?>
 			<script>
 				alert ("<?php echo JText::_('THANKYOU'); ?>");
+				window.location.href = "galleries.php";
 			</script>
 		<?php } 
     }
