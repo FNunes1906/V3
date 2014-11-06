@@ -128,7 +128,7 @@ if(isset($_FILES['userphoto'])) {
 			$image1=rand().$image;
 		 $sql = "insert into `jos_phocagallery` set 
 		      `catid` = 1, 
-		      `title` = '"._clean($_POST['caption'])."', 
+		      `title` = '"._clean($_POST['caption'] ?: 'No Caption')."', 
 		      `alias` = '"._clean(str_replace(' ', '-', strtolower(trim($_POST['caption']))))."', 
 		      `filename` = '".$image1."', 
 		      `approved` = 0, 

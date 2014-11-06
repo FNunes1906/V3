@@ -78,6 +78,15 @@ a ,p, span, form{
 }
 /*global styles Ends*/
 /*header styles*/
+.create{
+	margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 970px;
+    padding-top: 4px;
+    text-align: right;
+}
+
 #TopBar{
 	width:100%;
 	clear: both;
@@ -1199,21 +1208,18 @@ height: 100%;
 	text-align: left;
 }
 
-.licss ul,.licss ol{
-	margin: 10px 0 !important;
+.blog ul,.blog  ol{
+	margin: 10px 0;
 	padding-left: 30px;
 	text-align: left;
 }
-.licss ul li{
-	list-style:disc inside none;
-	float: none !important;
-	width: auto !important;	
-}
-.licss ol li{
-	list-style:decimal inside none;
-	width: auto !important;
-}
 
+.blog ul li{
+	list-style:disc inside none;
+}
+.blog ol li{
+	list-style:decimal inside none;
+}
 #jevents_body .ev_table{
 	width:100%; 
 	text-align: left;
@@ -2600,7 +2606,9 @@ a.ev_link_row:link {
 /*Events*/
 
 @media only screen and (min-width:990px) {
-
+.powered{
+		display: none;
+}
 
 #TopBar{
 	background-image: url("../images/header/whitezig_zag.png");
@@ -2938,8 +2946,11 @@ a.ev_link_row:link {
 #siteName{
 	margin-top:85px; 
 }
+.powered{
+	 float: left;
+}
 #weather{
-	margin-top:75px;
+	margin-top:80px;
 }	
 #mainNav{
 	display: none;
@@ -2974,6 +2985,10 @@ a.ev_link_row:link {
 }
 }
 @media only screen and (min-width:551px) and (max-width:989px){
+	
+.create{
+	display: none;
+}
 	
 .print_large{
 	line-height: 55px;
@@ -3098,10 +3113,10 @@ a.ev_link_row:link {
 	height: 100%;
 	}
 #siteName{
-	margin-top:70px;
+	margin-top:62px;
 }
 #weather{
-	margin-top:63px; 
+	margin-top:57px; 
 }
 #mainNav{
 	display: block; 
@@ -3610,6 +3625,7 @@ body{
 	#siteName{
 		width: 48.5%;
 	}
+	
 }
 @media only screen and (min-width:360px) and (max-width:479px){
 	#siteName{
@@ -3617,6 +3633,9 @@ body{
 	}
 }
 @media only screen and (min-width:320px) and (max-width:479px){
+	.powered{
+		display: none;
+	}
 	#mainContentwhite #userForm h1{
 		height: 21px;
 	}

@@ -153,7 +153,14 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
 
-	<div id="TopBar" style="background-color:<?php echo $var->Header_color; ?>;"></div>
+	<div id="TopBar" style="background-color:<?php echo $var->Header_color; ?>;">
+		<?php if($_SESSION['partner_type']=="free" AND JRequest::getVar('view') != 'reset') {?>
+		<div class="create">
+			<div><a href="http://www.townwizard.com" target="_blank"><span style="font-size: 12px; text-align: center; font-weight: bold; text-transform: capitalize; font-family: arial;color: #fff"><?php echo JText::_("TW_FREE_GUIDE")." | ".JText::_("POWERED BY") ?></span><img style="vertical-align: middle;padding: 0 5px 5px;" alt="townwizard" src="templates/townwizard_responsive/images/header/twBanner.png"></a></div>
+		</div>
+	<?php } ?>
+		
+	</div>
 		
 	<div id="pageContent">
 		<?php if(JRequest::getVar('view') != 'reset') {?>		
@@ -187,27 +194,25 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
          	<?php endif; ?>	
 			</div>
 			
-			
 			<div id="siteLogo">
 				<a href="<?php echo $this->baseurl ?>" title="HOME"> <img alt="Site logo" src="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/logo/logo.png"/> </a>
 			</div>
 			
 			<?php echo '<h1 id="siteName" class="sitestitle"><a href="index.php">'.$var->site_name.'</a></h1>'; ?>
-			<?php echo '<h1 id="siteName" class="siteslogan">'.$var->beach.'</h1>'; ?>
+			<?php echo '<h1 id="siteName" class="siteslogan"><div style="float: left; padding-top: 5px;">'.$var->beach.'</div><div class="powered"><a href="http://www.townwizard.com" target="_blank"><span style="font-size: 11px; text-align: center;text-transform: lowercase; font-family: arial;color: #000">&nbsp;- '.JText::_("POWERED BY").'</span><img style="vertical-align: middle;padding: 0 5px 5px;" alt="townwizard" src="templates/townwizard_responsive/images/header/twBanner_black.png"></a></div></h1>'; ?>
 			
 			<?php require ("./inc/config.php"); 
-			$handle = fopen($query, "r");
-			$xml = '';
-			// Applying condition for $handle variable to check weather it is null or not
-			if($handle != null || !empty($handle)){
-				while (!feof($handle)) {
-					$xml.= fread($handle, 8192);
+				$handle = fopen($query, "r");
+				$xml = '';
+				// Applying condition for $handle variable to check weather it is null or not
+				if($handle != null || !empty($handle)){
+					while (!feof($handle)) {
+				  		$xml.= fread($handle, 8192);
+					}
 				}
-			}
-			fclose($handle);
-			$data = XML_unserialize($xml);
+				fclose($handle);
+				$data = XML_unserialize($xml);
 			?>
-			
 			<div id="weather">  				
 				<?php
 					if(isset($data['weather']['cc']['tmp'])){
