@@ -199,7 +199,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 			</div>
 			
 			<?php echo '<h1 id="siteName" class="sitestitle"><a href="index.php">'.$var->site_name.'</a></h1>'; ?>
-			<?php echo '<h1 id="siteName" class="siteslogan"><div style="float: left; padding-top: 5px;">'.$var->beach.'</div><div class="powered"><a href="http://www.townwizard.com" target="_blank"><span style="font-size: 11px; text-align: center;text-transform: lowercase; font-family: arial;color: #000">&nbsp;- '.JText::_("POWERED BY").'</span><img style="vertical-align: middle;padding: 0 5px 5px;" alt="townwizard" src="templates/townwizard_responsive/images/header/twBanner_black.png"></a></div></h1>'; ?>
+			<?php echo '<h1 id="siteName" class="siteslogan"><div style="float: left; padding-top: 6.3px;">'.$var->beach.'</div><div class="powered"><a href="http://www.townwizard.com" target="_blank"><span style="font-size: 11px; text-align: center;text-transform: lowercase; font-family: arial;color: #000">&nbsp;- '.JText::_("POWERED BY").'</span><img style="vertical-align: middle;padding: 0 5px 5px;" alt="townwizard" src="templates/townwizard_responsive/images/header/twBanner_black.png"></a></div></h1>'; ?>
 			
 			<?php require ("./inc/config.php"); 
 				$handle = fopen($query, "r");

@@ -1208,16 +1208,16 @@ height: 100%;
 	text-align: left;
 }
 
-.blog ul,.blog  ol{
+.licss ul,.licss  ol{
 	margin: 10px 0;
 	padding-left: 30px;
 	text-align: left;
 }
 
-.blog ul li{
+.licss ul li{
 	list-style:disc inside none;
 }
-.blog ol li{
+.licss ol li{
 	list-style:decimal inside none;
 }
 #jevents_body .ev_table{

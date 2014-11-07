@@ -243,7 +243,7 @@ p {
 					</form>
 
 				<?php } ?>
-				<div class="license">By clicking, you are agreeing to the <a target="_blank" href="http://townwizard.com/responsive/license.html"><br>TownWizard License Agreement</a></div>
+				<div class="license">By clicking, you are agreeing to the <a target="_blank" href="http://townwizard.com/license.html"><br>TownWizard License Agreement</a></div>
             </div>
         </div>
 
@@ -291,7 +291,7 @@ p {
 				</form>
 
 				<?php } ?>
-				<div class="license">By clicking, you are agreeing to the <a target="_blank" href="http://townwizard.com/responsive/license.html"><br>TownWizard License Agreement</a></div>
+				<div class="license">By clicking, you are agreeing to the <a target="_blank" href="http://townwizard.com/license.html"><br>TownWizard License Agreement</a></div>
             </div>
         </div>
     </div>
