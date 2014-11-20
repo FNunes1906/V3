@@ -27,26 +27,29 @@ if($cur_language == "Español"){
 	#Find{position: relative;}		
 </style>
 
-
+<script src="templates/townwizard/js/mobiscroll.custom-2.7.2.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-	jQuery(function () {
+var con = $.noConflict(true);
+</script>
+<script type="text/javascript">
+	con(function () {
 		var now = new Date();
 		var curr = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 		var opt = {}
 		opt.rangepicker = {preset : 'rangepicker'};
-		jQuery('select.changes').bind('change', function() {
+		con('select.changes').bind('change', function() {
 			var demo = "rangepicker";
-			jQuery(".demos").hide();
+			con(".demos").hide();
 			if (!($("#demo_"+demo).length))
 			demo = 'default';
-			jQuery("#demo_" + demo).show();
-			jQuery('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "bottom", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
+			con("#demo_" + demo).show();
+			con('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "bottom", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
 		});
- jQuery('#demo').trigger('change');
+ con('#demo').trigger('change');
  
 	});
 </script>
-<script src="templates/townwizard/js/mobiscroll.custom-2.7.2.min.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 	function redirecturl(val){
 		url="/index.php?option=com_jevents&view=week&task=week.listevents&Itemid=<?php echo $Itemid;?>&searchdate="+val; 

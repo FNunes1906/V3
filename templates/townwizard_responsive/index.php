@@ -90,7 +90,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 		
 <!-- Townwizard Ad banner for free product start -->
 <?php if($_SESSION['partner_type']=="free") { ?>
-<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 <!--<script type='text/javascript'>
 	var googletag = googletag || {};
 	googletag.cmd = googletag.cmd || [];
@@ -398,7 +397,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 				     style="display:inline-block"
 				     data-ad-client="ca-pub-7206979589656043"
 				     data-ad-slot="4904999847"></ins>
-				
+				<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 		<!-- TW Banner Ad End -->
 		<?php }else { ?>
 			<?php if($this->countModules('banner1')) : ?>
@@ -516,7 +515,7 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 <!-- Code for Print Icon end -->
 
 <!-- Share This End-->
-	<?php if(JRequest::getVar('view') != 'categories' AND JRequest::getVar('view') != 'category' AND JRequest::getVar( 'option' ) != 'com_jevents' AND JRequest::getVar('task') !='locations.detail' AND JRequest::getVar('Itemid') != 105) { ?>
+	<?php if(JRequest::getVar('view') != 'categories' AND JRequest::getVar('view') != 'category' AND JRequest::getVar('task') !='locations.detail' AND JRequest::getVar('Itemid') != 105) { ?>
   		<script src="<?php echo TOWNWIZARD_TMPL_PATH ?>/js/jQuery.js"></script>
  	<?php } ?>
 	 <?php if(JRequest::getVar('Itemid') != 105){ ?>
