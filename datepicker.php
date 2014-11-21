@@ -28,28 +28,58 @@ if($cur_language == "Español"){
 </style>
 
 <script src="templates/townwizard/js/mobiscroll.custom-2.7.2.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-var con = $.noConflict(true);
-</script>
-<script type="text/javascript">
-	con(function () {
-		var now = new Date();
-		var curr = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-		var opt = {}
-		opt.rangepicker = {preset : 'rangepicker'};
-		con('select.changes').bind('change', function() {
-			var demo = "rangepicker";
-			con(".demos").hide();
-			if (!($("#demo_"+demo).length))
-			demo = 'default';
-			con("#demo_" + demo).show();
-			con('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "bottom", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
-		});
- con('#demo').trigger('change');
- 
-	});
-</script>
 
+<?php 
+//Event page calender issue with slider so diffrentiate 
+$app = JFactory::getApplication();
+if($app->getTemplate() == "townwizard_responsive"){ ?>
+	<script type="text/javascript">
+	var con = $.noConflict(true);
+	</script>
+	<script type="text/javascript">
+
+		con(function () {
+			var now = new Date();
+			var curr = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+			var opt = {}
+			opt.rangepicker = {preset : 'rangepicker'};
+			con('select.changes').bind('change', function() {
+				var demo = "rangepicker";
+				con(".demos").hide();
+				if (!($("#demo_"+demo).length))
+				demo = 'default';
+				con("#demo_" + demo).show();
+				con('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "bottom", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
+			});
+	 con('#demo').trigger('change');
+	 
+		});
+	</script>
+	
+<?php } if($app->getTemplate() == "townwizard"){ ?>
+	<script type="text/javascript">
+		$(function () {
+			var now = new Date();
+			var curr = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+			var opt = {}
+			opt.rangepicker = {preset : 'rangepicker'};
+			$('select.changes').bind('change', function() {
+				var demo = "rangepicker";
+				$(".demos").hide();
+				if (!($("#demo_"+demo).length))
+				demo = 'default';
+				$("#demo_" + demo).show();
+				$('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["rangepicker"], { theme: "ios7", mode: "mixed", display: "bottom", lang: "<?php echo $final_lang;?>", minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()) }));
+			});
+	 $('#demo').trigger('change');
+	 
+		});
+	</script>
+<?php } ?>
+
+
+
+	
 <script type="text/javascript">
 	function redirecturl(val){
 		url="/index.php?option=com_jevents&view=week&task=week.listevents&Itemid=<?php echo $Itemid;?>&searchdate="+val; 
