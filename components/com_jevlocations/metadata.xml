@@ -23,7 +23,7 @@
 			<param name='linktocalendar' type='jevboolean' default="1" label="LINK TO MATCHING EVENTS" description="" />			
 
 			<param name='onlywithevents' type='jevboolean' default="0" label="JEV ONLY WITH EVENTS" description="JEV ONLY WITH EVENTS DESC" />
-			<param name='checkevents' type='jevboolean' default="1" label="Check for events before offering link" description="Will check for available events based on days before and after below" />
+			<param name='checkevents' type='jevboolean' default="0" label="Check for events before offering link" description="Will check for available events based on days before and after below" />
 			<param name="checkeventbefore" type="text" size="3" default="30" label="Days before today to check for events" description="" />
 			<param name="checkeventafter" type="text" size="3" default="30" label="Days after today to check for events" description="" />
 			
