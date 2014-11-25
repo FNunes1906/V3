@@ -95,7 +95,7 @@ if(stripos($ua,'android') == true) { ?>
   <?php } ?>
   
 
-<div style="text-align: right; margin-top: 7px; margin-bottom: 7px;"><a class="upload" href="upload_photo.php">Upload Your Photo</a></div>
+<!--<div style="text-align: right; margin-top: 7px; margin-bottom: 7px;"><a class="upload" href="upload_photo.php">Upload Your Photo</a></div>-->
 <?php
 	/* Code added for iphone_galleries.tpl */
 	require($_SERVER['DOCUMENT_ROOT']."/partner/".$_SESSION['tpl_folder_name']."/tpl_v2.1/iphone_galleries.tpl");
