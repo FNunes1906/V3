@@ -526,7 +526,8 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 	 <?php } ?>
  
 	<!--  CODE for SAFARI BROWSER DETECTION BEGIN -->
-	<?php if( JRequest::getVar( 'view' ) == 'frontpage' ) { ?>
+<?php if($_SESSION['partner_type'] != "free") { 
+	 if( JRequest::getVar( 'view' ) == 'frontpage' ) { ?>
 	<script type="text/javascript">
 	 // First Time Visit Processing
 	 // copyright 10th January 2006, Stephen Chapman
@@ -552,7 +553,8 @@ if(JRequest::getVar('task') == 'icalrepeat.detail'){
 	 onload = start;
 
 	 </script>
-	<?php } ?>
+	<?php } 
+ } ?>
 	<!--  CODE for SAFARI BROWSER DETECTION END --> 
  
 	<script type="text/javascript">
