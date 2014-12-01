@@ -30,7 +30,7 @@
 			<param name="targetmenu" type="jevmenu" default="" label="Target Menu Item" description="Menu item for target page" />
 
 			<param name="showmap" type="jevboolean" default="0" label="JEV_SHOW_MULTIMAP" description="JEV_SHOW_MULTIMAP_DESC" />
-			<param name="showfilters" type="jevboolean" default="1" label="JEV_SHOW_FILTERS" description="JEV_SHOW_FILTERS_DESC" />
+			<param name="showfilters" type="jevboolean" default="0" label="JEV_SHOW_FILTERS" description="JEV_SHOW_FILTERS_DESC" />
 			
 			<param name="view" type="list" default="month.calendar" label="JEvents view" description="If linking to events - which view?  Only used if target menu item is not set or is not a JEvents menu item">
 				<option value="month.calendar">Monthly Calendar</option>

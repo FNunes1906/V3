@@ -1,4 +1,4 @@
-<div id="main" role="main">
+<div id="main" role="main"> 
 	<div id="zigzag" style="vertical-align:bottom;"> </div>
 	<div id="content">
 		<ul class="mainList" id="placesList">
@@ -8,7 +8,7 @@
 					<li class="textbox"  style="padding-bottom:0px;">
 						<table><tr>
 							<td>
-								<a href="galleries.php?id=<?php echo $v['id']?>"><img class="photo_container" src="<?php echo $v['avatar']; ?>" alt="<?php echo $v['title']; ?>" title="<?php echo $v['title']; ?>" /></a>
+								<a href="photos.php?id=<?php echo $v['id']?>"><img class="photo_container" src="<?php echo $v['avatar']; ?>" alt="<?php echo $v['title']; ?>" title="<?php echo $v['title']; ?>" /></a>
 							</td>
 							<td valign="middle;">
 								&nbsp;&nbsp;<font color="#999999"><strong><a href="photos.php?id=<?php echo $v['id']?>"><?php echo $v['title']?></a></strong></font> 
