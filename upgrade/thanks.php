@@ -83,9 +83,7 @@ html {
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cb811', endColorstr='#77d42a');
 	background-color:#5cb811;
 }
-.thanks{ 
-	text-transform: capitalize;
-}
+
 .congrats{
 	border: 1px solid;
     border-radius: 15px;
@@ -99,17 +97,19 @@ html {
 	<img width="296" height="75" title="ttown" alt="TW LOGO" src="tw_logo_icon.png"><br><br>
 </div>
 <?php 
-//if(isset($_POST['payment_status']) && $_POST['payment_status']=="Completed")
-//{
+
+if(isset($_GET['item_name']) && $_GET['item_name']!="")
+{
 		//=========MAIL SENT TO SUPPORT ==========//
-		$to = "operations@townwizard.com". ", ";
-		$to .= "support@townwizard.com";
-		$subject = $guidename. "-site needs to be upgrade";
-		$message = "The following guide has requested an upgrade.<br/><br/>";
+	if($_GET['item_name']=="support")
+	{
+		$to = "operations@townwizard.com";
+		$subject = $guidename. " has purchased 2 support package instances";
+		$message = "The following guide has purchased 2 support package instances.<br/><br/>";
 		$message .= "<div style='float: left;width: 190px;line-height:28px;'>
 						<div>Email Address:</div>
 						<div>Guide Name:</div>
-						<div>Package:</div>
+						<div>Package Name:</div>
 						<div>Upgrade Request Date:</div>
 					</div>
 					<div style='float: left;line-height:28px;text-transform: capitalize'>
@@ -118,7 +118,7 @@ html {
 						<div>".$_GET['item_name']." Plan</div>
 						<div>".date('F j, Y, g:i a')."</div>
 					</div>
-					<div style='clear: both;'><br/><br/>Thanks!</div>";
+					<div style='clear: both;'><br/><br/>Thank You, <br> TownWizard</div>";
 		
 		$from = $email;
 		$headers = 'MIME-Version: 1.0' . "\r\n";
@@ -128,23 +128,24 @@ html {
 		
 		//=========MAIL SENT TO PARTNER ==========//
 		$to_p = $email;
-		$subject_p = "Your TownWizard Guide Upgrade";
+		$subject_p = "Update regarding purchase of TownWizard ".ucfirst($_GET['item_name'])." Package";
 		$message_p = '<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#f5f5f5"><tbody>
 								<tr>
 									<td>
 										<table width="550" border="0" align="center" cellpadding="0" cellspacing="0"><tbody>
 											<tr>
-												<td width="161"><a href="http://www.townwizard.com" target="_blank"><img src="http://www.townwizard.com/wp-content/themes/5506/images/2012/header/townwizard_logo.png" alt="townwizard" width="262" height="84" border="0"></a></td>
+												<td width="161"><a href="http://www.townwizard.com" target="_blank"><img src="http://www.townwizard.com/img/townwizard_logo.png" alt="townwizard" width="262" height="84" border="0"></a></td>
 												<td width="338" align="right"></td>
 											</tr>
 											<tr>
 												<td height="50" colspan="2" >
 													<table width="550" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" style="border:1px double #e3e3e3;padding:0;margin:0"><tbody>
 														
-														<tr><td height="100" width="40">&nbsp;</td><td>Thanks for upgrading! Your upgrade is currently being processed. You will be contacted shortly to complete the process.</td><td width="40">&nbsp;</td></tr>
+														<tr><td height="100" width="40">&nbsp;</td><td>Thanks for purchasing TownWizard support package! Currently you have 2 support instances left.<br><br>Please just send an email to <a href="mailto:support@townwizard.com">support@townwizard.com</a> to create a support ticket.</td><td width="40">&nbsp;</td></tr>
+														
 														<tr><td height="100">&nbsp;</td><td> 
-							<p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Sincerely,</p>
-							<p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">The TownWizard Team</p>
+							<p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Thank You,</p>
+							<p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">The TownWizard Support</p>
 						</td><td>&nbsp;</td></tr>
 
 						</tbody></table>
@@ -183,9 +184,92 @@ html {
 	
 	echo "<div class='congrats'><b>Congratulations!</b><br><br>Thanks for upgrading to the <b class='thanks'>".$_GET['item_name']."</b> plan! We are currently working on your upgrade and will contact you as soon as your upgrade is completed. Click the button below to return to your site.</div><br><br>
 <a class='button' href='/administrator'>Back to Site Admin</a>";
-/*}else{
+	}else{
+		$to = "operations@townwizard.com";
+		$subject = $guidename. " needs to be an upgrade";
+		$message = "The following guide has requested an upgrade.<br/><br/>";
+		$message .= "<div style='float: left;width: 190px;line-height:28px;'>
+						<div>Email Address:</div>
+						<div>Guide Name:</div>
+						<div>Package Name:</div>
+						<div>Upgrade Request Date:</div>
+					</div>
+					<div style='float: left;line-height:28px;text-transform: capitalize'>
+						<div>".$email."</div>
+						<div>".$guidename."</div>
+						<div>".$_GET['item_name']." Plan</div>
+						<div>".date('F j, Y, g:i a')."</div>
+					</div>
+					<div style='clear: both;'><br/><br/>Thank You, <br> TownWizard</div>";
+		
+		$from = $email;
+		$headers = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type:text/html;charset=iso-8859-1' . "\r\n";	
+		$headers .= 'From:' . $from;
+		$mailcheck = mail($to,$subject,$message,$headers);
+		
+		//=========MAIL SENT TO PARTNER ==========//
+		$to_p = $email;
+		$subject_p = "Site Upgrade Confirmation from TownWizard";
+		$message_p = '<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#f5f5f5"><tbody>
+								<tr>
+									<td>
+										<table width="550" border="0" align="center" cellpadding="0" cellspacing="0"><tbody>
+											<tr>
+												<td width="161"><a href="http://www.townwizard.com" target="_blank"><img src="http://www.townwizard.com/img/townwizard_logo.png" alt="townwizard" width="262" height="84" border="0"></a></td>
+												<td width="338" align="right"></td>
+											</tr>
+											<tr>
+												<td height="50" colspan="2" >
+													<table width="550" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" style="border:1px double #e3e3e3;padding:0;margin:0"><tbody>
+														
+														<tr><td height="100" width="40">&nbsp;</td><td>Dear Partner,<br><br>Thank You for upgrading! Your upgrade is currently being processed.We will process your upgrade ASAP. You will shortly receive an email once your site will be upgraded. </td><td width="40">&nbsp;</td></tr>
+														
+														<tr><td height="100">&nbsp;</td><td> 
+							<p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Thank You,</p>
+							<p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">The TownWizard Support</p>
+						</td><td>&nbsp;</td></tr>
+
+						</tbody></table>
+						</td>
+					</tr>
+					<tr>
+						<td height="10" align="center" valign="middle"  colspan="2" ></td>
+					</tr>
+					<tr>
+						<td align="center" valign="middle" colspan="2"><p style="font:15px Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold;margin:10px 0 10px 0;padding:10px 0 0 0;color:#000000;">OUR ADDRESS & SOCIAL MEDIA DETAILS</p></td>
+
+					</tr>
+					<tr>
+						<td align="center" valign="middle" colspan="2" style="border-top:1px solid #e3e3e3">&nbsp;</td>
+					</tr>
+					<tr>
+						<td height="20" align="center" colspan="2"><p style="font:12px Helvetica Neue,Helvetica,Arial,sans-serif;margin:0;padding:0;color:#777777;text-decoration:none">2, Overhill Road, Suite 400, Scarsdale, NY 10583 , USA</p></td>
+					</tr>
+					<tr>
+						<td height="20" align="center" colspan="2">
+						<p style="font:12px Helvetica Neue,Helvetica,Arial,sans-serif;margin:0;padding:0;color:#777777;text-decoration:none"><a style="font:12px Helvetica Neue,Helvetica,Arial,sans-serif;margin:0;padding:0;color:#777777;text-decoration:none" href="http://www.facebook.com/TownWizard"  target="_blank">Facebook &bull; </a><a style="font:12px Helvetica Neue,Helvetica,Arial,sans-serif;margin:0;padding:0;color:#777777;text-decoration:none" href="http://www.twitter.com/townwiz"  target="_blank">Twitter &bull; </a><a style="font:12px Helvetica Neue,Helvetica,Arial,sans-serif;margin:0;padding:0;color:#777777;text-decoration:none" href="http://www.linkedin.com/company/1592698?trk=tyah&amp;trkInfo=tas%3Atownwizard%20llc"  target="_blank">LinkedIn &bull; </a><a style="font:12px Helvetica Neue,Helvetica,Arial,sans-serif;margin:0;padding:0;color:#777777;text-decoration:none" href="http://www.youtube.com/channel/UCrwiyabEFIS0n0e87CB5nTg"  target="_blank">YouTube</a>
+						</p>
+						</td>
+					</tr>
+					<tr>
+						<td height="50" align="center">&nbsp;</td>
+					</tr>
+		</tbody></table></td>
+		</tr>
+	</tbody></table>';
+		$from_p = "Townwizard-Operations";
+		$headers_p = 'MIME-Version: 1.0' . "\r\n";
+		$headers_p .= 'Content-type:text/html;charset=iso-8859-1' . "\r\n";	
+		$headers_p .= 'From:' . $from_p;
+		$mailcheck_p = mail($to_p,$subject_p,$message_p,$headers_p);
+	
+	echo "<div class='congrats'><b>Congratulations!</b><br><br>Thanks for upgrading to the <b class='thanks'>".$_GET['item_name']."</b> plan! We are currently working on your upgrade and will contact you as soon as your upgrade is completed. Click the button below to return to your site.</div><br><br>
+<a class='button' href='/administrator'>Back to Site Admin</a>";
+	}
+}else{
 	echo "<div class='thanks'>Paypal payment is not completed succesfully so please try again.</div>";
-}*/
+}
 ?>
 
 </body>
