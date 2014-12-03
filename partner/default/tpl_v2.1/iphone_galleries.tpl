@@ -1,4 +1,4 @@
-<div id="main" role="main">
+<div id="main" role="main"> 
 	<div id="zigzag" style="vertical-align:bottom;"> </div>
 	<div id="content">
 		<ul class="mainList" id="placesList">
