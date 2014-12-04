@@ -141,10 +141,11 @@ if(isset($_GET['item_name']) && $_GET['item_name']!="")
 												<td height="50" colspan="2" >
 													<table width="550" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" style="border:1px double #e3e3e3;padding:0;margin:0"><tbody>
 														
-														<tr><td height="100" width="40">&nbsp;</td><td>Thanks for purchasing TownWizard support package! Currently you have 2 support instances left.<br><br>Please just send an email to <a href="mailto:support@townwizard.com">support@townwizard.com</a> to create a support ticket.</td><td width="40">&nbsp;</td></tr>
+														<tr><td height="100" width="40">&nbsp;</td>
+														<td style="vertical-align:top;"><br>Dear Partner,<br><br>Thanks for purchasing TownWizard support package! Currently you have 2 support instances left.<br><br>Please just send an email to <a href="mailto:support@townwizard.com">support@townwizard.com</a> to create a support ticket.</td><td width="40">&nbsp;</td></tr>
 														
-														<tr><td height="100">&nbsp;</td><td> 
-							<p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Thank You,<br> TownWizard Support</p>
+														<tr><td height="100">&nbsp;</td><td style="vertical-align:top;"> 
+							<p style="margin:15px 0 5px 0;padding:0;">Thank You,<br> TownWizard Support</p>
 						</td><td>&nbsp;</td></tr>
 
 						</tbody></table>
@@ -222,10 +223,10 @@ if(isset($_GET['item_name']) && $_GET['item_name']!="")
 												<td height="50" colspan="2" >
 													<table width="550" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" style="border:1px double #e3e3e3;padding:0;margin:0"><tbody>
 														
-														<tr><td height="100" width="40">&nbsp;</td><td>Dear Partner,<br><br>Thank You for upgrading! Your upgrade is currently being processed.We will process your upgrade ASAP. You will shortly receive an email once your site will be upgraded. </td><td width="40">&nbsp;</td></tr>
+														<tr><td height="100" width="40">&nbsp;</td><td><br>Dear Partner,<br><br>Thank You for upgrading! Your upgrade is currently being processed.We will process your upgrade ASAP. You will shortly receive an email once your site will be upgraded. </td><td width="40">&nbsp;</td></tr>
 														
-														<tr><td height="100">&nbsp;</td><td> 
-							<p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Thank You,<br>TownWizard Support</p>
+														<tr><td height="100">&nbsp;</td><td style="vertical-align:top;"> 
+							<p style="margin:15px 0 5px 0;padding:0;">Thank You,<br>TownWizard Support</p>
 						</td><td>&nbsp;</td></tr>
 
 						</tbody></table>
