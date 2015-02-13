@@ -654,7 +654,8 @@ a.saved span {
   text-decoration:none;
 }
 .sect.grid ul li {
-  width:30%;
+  /*width:30%;*/
+  width:47%;
   margin-right:3%;
   font-size:12px;
   margin-bottom:15px;
