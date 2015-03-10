@@ -56,16 +56,19 @@
 			</th>
 <!--			<th width="5%">
 				<?php echo JHTML::_('grid.sort',  'Country', ($this->usecats?'c3title':'loc.country'), $this->lists['order_Dir'], $this->lists['order'] ); ?>
-			</th>-->
-<!--			<th width="5%">
+			</th>
+			<th width="5%">
 				<?php echo JHTML::_('grid.sort',  'State', ($this->usecats?'c2title':'loc.state'), $this->lists['order_Dir'], $this->lists['order'] ); ?>
-			</th>-->
-<!--			<th width="5%">
+			</th>
+			<th width="5%">
 				<?php echo JHTML::_('grid.sort',  'City', ($this->usecats?'c1title':'loc.city'), $this->lists['order_Dir'], $this->lists['order'] ); ?>
-			</th>-->
-<!--			<th width="5%">
+			</th>
+		<th width="5%">
 				<?php echo JHTML::_('grid.sort',  'Postcode', 'loc.postcode', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 			</th>-->
+			<th width="5%">
+				<?php echo JHTML::_('grid.sort',  'Address', ($this->usecats?'c2title':'loc.street'), $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			</th>
 		</tr>
 	</thead>
 	<tfoot>
@@ -160,11 +163,11 @@
 			?>
 <!--			<td>
 				<?php echo $this->escape($country); ?>
-			</td>-->
-<!--			<td>
+			</td>
+			<td>
 				<?php echo $this->escape($province); ?>
-			</td>-->
-<!--			<td>
+			</td>
+			<td>
 				<?php echo $this->escape($city); ?>
 			</td>-->
 			<?php
@@ -173,17 +176,20 @@
 			?>
 <!--			<td>
 				<?php echo $this->escape($row->country); ?>
-			</td>-->
-<!--			<td>
+			</td>
+			<td>
 				<?php echo $this->escape($row->state); ?>
-			</td>-->
-<!--			<td>
+			</td>
+			<td>
 				<?php echo $this->escape($row->city); ?>
 			</td>-->
+			<td>
+				<?php echo $this->escape($row->street)."<br>".$this->escape($row->city).",".$this->escape($row->state)." - ".$this->escape($row->postcode); ?>
+			</td>
 			<?php
 			}
 			?>
-<!--			<td>
+			<!--<td>
 				<?php echo $this->escape($row->postcode); ?>
 			</td>-->
 		</tr>
