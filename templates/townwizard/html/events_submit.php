@@ -410,7 +410,20 @@ function form_validation() {
 	}
 }
 </script>
-
+<style  type="text/css">
+.button2-left a {
+    background: none repeat scroll 0 0 #dadada;
+    border-radius: 4px;
+    box-shadow: 1px 1px 1px #666;
+    color: #666666;
+    float: left;
+    font-size: 11px;
+    line-height: 14px;
+    margin-left: 5px;
+    padding: 3px 6px;
+}
+	
+</style>
 <?php
 // Print Message after event form submission starts.
 if($msg!='') {?>
@@ -508,7 +521,7 @@ text-decoration:none;
 	<table width="65%" cellpadding="5" cellspacing="2" border="0"  class="adminform" id="jevadminform">
 	<tr>
 		<td align="left"><?php echo JText::_('JEV_EVNAME'); ?>:</td>
-		<td align="left"><input class="inputbox" type="text" name="title" size="41" maxlength="255" value="<?php if(isset($_SESSION['title'])) echo $_SESSION['title']?>" /></td>
+		<td align="left"><input style="width: 260px" class="inputbox" type="text" name="title" size="41" maxlength="255" value="<?php if(isset($_SESSION['title'])) echo $_SESSION['title']?>" /></td>
 		<td colspan="2"><input type="hidden" name="priority" value="0" /></td>
 	</tr>
 	<tr>
@@ -708,11 +721,11 @@ text-decoration:none;
 	</tr>
 	<tr class="jevplugin_anonusername">
 		<td valign="top"  width="130" align="left"><?php echo JText::_('JEV_YOURNAME'); ?></td>
-		<td colspan="3"><input size="41" type="text" name="custom_anonusername" id="custom_anonusername" value="<?php if(isset($_SESSION['custom_anonusername'])) echo $_SESSION['custom_anonusername']?>" /></td>
+		<td colspan="3"><input style="width: 260px" size="41" type="text" name="custom_anonusername" id="custom_anonusername" value="<?php if(isset($_SESSION['custom_anonusername'])) echo $_SESSION['custom_anonusername']?>" /></td>
 	</tr>
 	<tr class="jevplugin_anonemail">
 		<td valign="top"  width="130" align="left"><?php echo JText::_('JEV_YOUREMAIL'); ?></td>
-		<td colspan="3"><input size="41" type="email" name="custom_anonemail" id="custom_anonemail" value="<?php if(isset($_SESSION['custom_anonemail'])) echo $_SESSION['custom_anonemail']?>" /></td>
+		<td colspan="3"><input style="width: 260px" size="41" type="email" name="custom_anonemail" id="custom_anonemail" value="<?php if(isset($_SESSION['custom_anonemail'])) echo $_SESSION['custom_anonemail']?>" /></td>
 	</tr>
 	
 	<!--#DD#-->
