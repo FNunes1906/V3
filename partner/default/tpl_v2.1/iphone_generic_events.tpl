@@ -63,7 +63,7 @@
 					
 					if(in_array($fearow['ev_id'], $tempeventid)){
 					}else{
-						if($imagecount<5){?> 
+						if($imagecount<10){?> 
 					    	<li>
 							<a href="/components/com_shines_v2.1/events_details.php?eid=<?php echo $fearow['rp_id'];?>&y=<?php echo $fearow['Eyear'];?>&m=<?php echo $fearow['Emonth'];?>&d=<?php echo $fearow['EDate'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>&catId=<?php echo $cat_id;?>"><img src="<?php echo $singleimagearray[0];?>" /></a>
 					    		<div class="flex-caption">
