@@ -33,7 +33,7 @@ global $var;
 			##end##
 			if(in_array($fearow->loc_id, $tempeventid)){
 			}else{
-			if($imagecount<5){
+			if($imagecount<10){
 				if($imagecount==0){
 			?> 
 				<a class="selected" href="index.php?option=com_jevlocations&task=locations.detail&Itemid=<?php if(isset($_REQUEST['Itemid'])) echo $_REQUEST['Itemid'];?>&loc_id=<?php echo $fearow->loc_id;?>&se=1&title=<?php echo $fearow->alias;?>">

@@ -44,7 +44,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 		
 			if(in_array($fearow['ev_id'], $tempeventid)){
 			}else{
-			if($imagecount<5){
+			if($imagecount<10){
 				if($imagecount==0){
 			?> 
 			<a class="selected" href="index.php?option=com_jevents&task=icalrepeat.detail&evid=<?php echo $fearow['rp_id'];?>&Itemid=<?php echo $_REQUEST['Itemid'];?>&year=<?php echo $fearow['Eyear'];?>&month=<?php echo $fearow['Emonth'];?>&day=<?php echo $fearow['EDate'];?>">

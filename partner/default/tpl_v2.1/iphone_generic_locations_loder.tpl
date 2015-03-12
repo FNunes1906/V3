@@ -20,7 +20,7 @@
 			/*end*/
 			if(in_array($fealoc['loc_id'], $templocid)){
 			}else{
-			if($imagecount<5){
+			if($imagecount<10){
 			
 			?> 
 			<!-- creating loop for slider -->

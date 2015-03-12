@@ -43,7 +43,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/inc/base.php');
 		
 			if(in_array($fearow['ev_id'], $tempeventid)){
 			}else{
-			if($imagecount<5){
+			if($imagecount<10){
 			
 			?> 
 				<!--This code is for slider part-->

@@ -32,7 +32,7 @@ global $var;
 			##end##
 			if(in_array($fearow->loc_id, $tempeventid)){
 			}else{
-			if($imagecount<5){
+			if($imagecount<10){
 			
 			?> 
 				<!--This code is for slider part-->
