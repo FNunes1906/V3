@@ -25,6 +25,11 @@ $total_data 		= mysql_num_rows($param);
 
 header('Content-type: text/html;charset=utf-8', true);
 
+//bhavan: need to tell ios8.3 not to cache the page
+//header('Expires: Thu, 19 Nov 1981 08:52:00 GMT', true);
+header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+//header ('Pragma: no-cache');
+
 /* code start by rinkal for page title */
 $pagemeta = $objBlog->fetch_pagemeta_title();
 /* code end by rinkal for page title */
