@@ -312,7 +312,12 @@ function plural_filter($param){
 }
 
 function id_from_phoca_cat($cat){
-	$result = db_fetch("select `id` from `jos_phocagallery_categories` where `title` = '".$cat."'");
+	//$result = db_fetch("select `id` from `jos_phocagallery_categories` where `title` = '".$cat."'");
+	if(is_numeric($cat)){
+		$result =  $cat;
+	}else{
+		$result = db_fetch("select `id` from `jos_phocagallery_categories` where `title` = '".$cat."'");
+	}
 	return $result;
 }
 
