@@ -125,6 +125,11 @@ $cat_title = $objloclist->cat_title;
 /* code end by rinkal for page title */
 
 header( 'Content-Type:text/html;charset=utf-8');
+
+//bhavan: need to tell ios8.3 not to cache the page
+//header('Expires: Thu, 19 Nov 1981 08:52:00 GMT', true);
+header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+//header ('Pragma: no-cache');
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
