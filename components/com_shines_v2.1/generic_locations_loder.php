@@ -10,7 +10,8 @@ include("model/location_class.php");
 $objloclist = new location();
 
 function showBrief($str, $length) {
-	$str = strip_tags($str);
+	//$str = strip_tags($str);
+    $str = preg_replace("/<img[^>]+\>/i", "", $str);
 	$str = explode(" ", $str);
 	return implode(" " , array_slice($str, 0, $length));
 }
