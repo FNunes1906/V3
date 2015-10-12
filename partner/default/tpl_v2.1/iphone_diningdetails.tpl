@@ -26,9 +26,7 @@
 					<?php } ?>
 					
 					<li><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $lat2;?>:<?php echo $lon2;?>')" class="button2 small2"><?php echo JText::_('TW_MAP'); ?></a></li>
-					<li>
-						<a href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row['geolat']; ?>:<?php echo $row['geolon']; ?>')" class="button2 small2"><?php echo JText::_('CHECK_IN');?></a>
-					</li>
+<!--					<li><a href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row['geolat']; ?>:<?php echo $row['geolon']; ?>')" class="button2 small2"><?php echo JText::_('CHECK_IN');?></a></li>-->
 					
 					<li>
 						<span id="myshare" class="button2 small2"><?php echo JText::_('TW_SHARE');?></span>

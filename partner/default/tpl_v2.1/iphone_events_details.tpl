@@ -96,9 +96,7 @@ if(isset($_REQUEST['catId']) && $_REQUEST['catId'] != ''){
 					// code for ical calendar end
 					</a>
 				</li> -->
-				<li>
-     				<a href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2;?>:<?php echo $lon2;?>')" class="button2 small2"><?php echo JText::_('CHECK_IN');?></a>
-    			</li>
+<!--				<li><a href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2;?>:<?php echo $lon2;?>')" class="button2 small2"><?php echo JText::_('CHECK_IN');?></a></li>-->
 				<li>
 					<span id="myshare" class="button2 small2"><?php echo JText::_('TW_SHARE');?></span>
 					<div id="share-wrapper">
