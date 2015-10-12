@@ -224,7 +224,7 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
 							<?php
 							$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 								if(stripos($ua,'android') != true) { ?>
-									<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')"><?php echo JText::_('CHECK_IN'); ?></a></li>
+									<!--<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')"><?php echo JText::_('CHECK_IN'); ?></a></li>-->
 								<?php } ?>
 								
 							<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>&catId=<?php echo $cat_id;?>"><?php echo JText::_('MORE_INFO'); ?></a></li>
@@ -355,7 +355,7 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
 								<?php
 								$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 									if(stripos($ua,'android') != true) { ?>
-										<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')"><?php echo JText::_('CHECK_IN'); ?></a></li>
+<!--										<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $lat2; ?>:<?php echo $lon2; ?>')"><?php echo JText::_('CHECK_IN'); ?></a></li>-->
 									<?php }	?>	
 								<li><a class="button small" href="events_details.php?eid=<?php echo $row['rp_id'];?>&d=<?php echo $dateValue[2];?>&m=<?php echo $dateValue[1];?>&Y=<?php echo $dateValue[0];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>&catId=<?php echo $cat_id;?>"><?php echo JText::_('MORE_INFO'); ?></a></li>
 							</ul>

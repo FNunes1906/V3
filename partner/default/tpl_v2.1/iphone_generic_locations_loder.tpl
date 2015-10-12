@@ -213,7 +213,7 @@ else {
 									<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $row['phone']); ?>"><?php echo JText::_('CALL'); ?></a></li>
 						<?php } } ?>
 
-						<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row['geolat']; ?>:<?php echo $row['geolon']; ?>')"><?php echo JText::_('CHECK_IN'); ?></a></li>
+						<!--<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $row['geolat']; ?>:<?php echo $row['geolon']; ?>')"><?php echo JText::_('CHECK_IN'); ?></a></li>-->
 						<li><a class="button small" href="diningdetails.php?did=<?php echo $row['loc_id'];?>&lat=<?php echo $lat1;?>&lon=<?php echo $lon1;?>&catId=<?php echo $category_id;?>"><?php echo JText::_('MORE_INFO'); ?></a></li>
 						<li><a href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $row['geolon']; ?>:<?php echo $row['geolat']; ?>')"></a></li>
 					</ul>
@@ -307,7 +307,7 @@ else {
 							   	<li><a class="button small" href="tel:<?php echo str_replace(array(' ','(',')','-','.'), '', $data['phone']); ?>"><?php echo JText::_('CALL'); ?></a></li>
 						<?php } } ?>
 						
-						<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $data['geolat']; ?>:<?php echo $data['geolon']; ?>')"><?php echo JText::_('CHECK_IN'); ?></a></li>
+<!--						<li><a class="button small" href="javascript:linkClicked('APP30A:FBCHECKIN:<?php echo $data['geolat']; ?>:<?php echo $data['geolon']; ?>')"><?php echo JText::_('CHECK_IN'); ?></a></li>-->
 						<li><a class="button small" href="diningdetails.php?did=<?php echo $data['loc_id']?>&lat=<?php echo $lat1?>&lon=<?php echo $lon1?>&catId=<?php echo $category_id;?>"><?php echo JText::_('MORE_INFO'); ?></a></li>
 						<li><a  href="javascript:linkClicked('APP30A:SHOWMAP:<?php echo $data['geolon']; ?>:<?php echo $data['geolat']; ?>')"></a></li>
 					</ul>
