@@ -83,7 +83,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/townwizard-db-api/user-api.php');
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
 		
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="shortcut icon" href="<?php echo TOWNWIZARD_PARTNER_PATH ?>/images/favicon.ico" />
+
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 		
 		<link rel="stylesheet" type="text/css" href="<?php echo TOWNWIZARD_TMPL_PATH ?>/css/style.css" media="screen, projection">
