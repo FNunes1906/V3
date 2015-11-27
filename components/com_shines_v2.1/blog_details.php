@@ -100,7 +100,7 @@ if(stripos($ua,'android') == true) { ?>
     <?php m_show_banner('iphone-blog-screen'); ?>
   </div>
   <?php } ?>
-	<ul style="background:url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twBg.png') repeat-y scroll 100% 100% !important;" id="placesList" class="mainList offer">
+	<ul style="background:url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twbg.png') repeat-y scroll 100% 100% !important;" id="placesList" class="mainList offer">
 		<?php if($article_res){ ?>
 		 	<li style="text-align:left;">
 				<div class="contentheading"><?php echo $article_res['title'] ?></div>
