@@ -107,7 +107,7 @@ if(isset($cat_id) && $cat_id!=''){
 }
 ?>
 <!--Code End -->
-	<ul id="placesList" class="mainList offer">
+	<ul style="background: url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twBg.png') repeat-y scroll 100% 100% !important;" id="placesList" class="mainList offer">
 		<?php
 		 $data = '';
 		 if(mysql_num_rows($param) > 0){

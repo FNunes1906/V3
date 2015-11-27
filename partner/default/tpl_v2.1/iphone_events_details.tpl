@@ -16,7 +16,7 @@ if(isset($_REQUEST['catId']) && $_REQUEST['catId'] != ''){
 <!--Code End -->
 
 <div id="main" role="main" ontouchstart="touchStart(event,'list');"  ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
-	<ul id="placesList" class="mainList">
+	<ul style="background: url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twBg.png') repeat-y scroll 100% 100% !important;" id="placesList" class="mainList">
 		<li>
 			<?php 
 			while($row = mysql_fetch_array($rec))

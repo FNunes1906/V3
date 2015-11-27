@@ -81,7 +81,7 @@ function help_intro() {
 	</head>
 	<body>
 				
-				<div id="main"><ul class="mainList"><li><?php help_intro(); ?></li></ul></div>
+				<div id="main"><ul style="background:url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twBg.png') repeat-y scroll 100% 100% !important;" class="mainList"><li><?php help_intro(); ?></li></ul></div>
 				
 				<!-- AddThis Button END -->
 				</body>

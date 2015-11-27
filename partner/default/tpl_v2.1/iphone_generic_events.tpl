@@ -147,7 +147,7 @@ if(isset($_REQUEST['category_id']) && $_REQUEST['category_id'] != ''){
 		}
 	}?>
 
-<ul id="eventList" class="mainList" ontouchstart="touchStart(event,'eventList');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
+<ul style="background: url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twBg.png') repeat-y scroll 100% 100% !important;" id="eventList" class="mainList" ontouchstart="touchStart(event,'eventList');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 	<?php 
 	$n = 0;
 	if($seachStartDate == $searchEndDate || !isset($_REQUEST['eventdate']) || $_REQUEST['eventdate'] == ''){

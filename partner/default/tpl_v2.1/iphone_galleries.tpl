@@ -1,7 +1,7 @@
 <div id="main" role="main"> 
 	<div id="zigzag" style="vertical-align:bottom;"> </div>
 	<div id="content">
-		<ul class="mainList" id="placesList">
+		<ul style="background:url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twBg.png') repeat-y scroll 100% 100% !important;" class="mainList" id="placesList">
 			<?php 
 				foreach($galleries as $v){
 					if(isset($v['avatar']) && trim($v['avatar']) != '') {?>

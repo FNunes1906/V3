@@ -62,7 +62,7 @@ $pagemeta =mysql_fetch_array($pagemeta_res);
 				<?php m_show_banner('iphone-news-screen'); ?>
 			</div>
   <?php } ?>
-  <ul id="placesList" class="mainList offer">
+  <ul style="background:url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twBg.png') repeat-y scroll 100% 100% !important;" id="placesList" class="mainList offer">
 		<?php
 			$data = '';
 			if($param) 
