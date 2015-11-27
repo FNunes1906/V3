@@ -17,7 +17,7 @@
 		 <?php } ?>
 	</div>
 	<div id="content">
-		<ul style="background:url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twBg.png') repeat-y scroll 100% 100% !important;" class="mainList" id="placesList">
+		<ul style="background:url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twbg.png') repeat-y scroll 100% 100% !important;" class="mainList" id="placesList">
 			<li class="textbox" style="text-align:center;">
 			    <?php
 				  	    $j=0;

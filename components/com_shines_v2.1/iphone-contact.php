@@ -82,6 +82,6 @@ function contact_intro() {
 	<?php include($_SERVER['DOCUMENT_ROOT']."/ga.php"); ?>
 	</head>
 	<body>
-				<div id="main"><ul style="background:url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twBg.png') repeat-y scroll 100% 100% !important;" class="mainList"><li><?php contact_intro(); ?></li></ul></div>
+				<div id="main"><ul style="background:url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twbg.png') repeat-y scroll 100% 100% !important;" class="mainList"><li><?php contact_intro(); ?></li></ul></div>
 	</body>
 </html>

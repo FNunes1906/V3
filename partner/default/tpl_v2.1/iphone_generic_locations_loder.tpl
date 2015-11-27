@@ -180,7 +180,7 @@ else {
 		<?php # Search input box and submit button END ?>
 	</div>
 	
-	<ul style="background: url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twBg.png') repeat-y scroll 100% 100% !important;" id="placesList" class="mainList">
+	<ul style="background: url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twbg.png') repeat-y scroll 100% 100% !important;" id="placesList" class="mainList">
 		<?php # If search value is NOT entered in search box BEGIN
 		if(isset($_POST['search_rcd'])!= JText::_('SEARCH')) { 
 			$default_values = array(

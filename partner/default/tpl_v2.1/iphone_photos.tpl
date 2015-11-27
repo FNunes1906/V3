@@ -22,7 +22,7 @@
 
 	</div>
 	<div id="content" style="text-align:center;">
-	  <ul style="background:url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twBg.png') repeat-y scroll 100% 100% !important;" class="mainList" id="placesList">
+	  <ul style="background:url('/partner/<?php echo $_SESSION['partner_folder_name']?>/images/twbg.png') repeat-y scroll 100% 100% !important;" class="mainList" id="placesList">
 	    <li class="textbox">
 	      <?php 	$j=0;
 	   			while($row=mysql_fetch_array($rec)) {
