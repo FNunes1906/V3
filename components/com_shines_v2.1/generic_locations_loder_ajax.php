@@ -32,7 +32,8 @@ if(mysql_num_rows($rec) > 0){
 					
 		$distance = distance($lat1, $lon1, $geolat,  $geolon, $dunit);
 		$distance		= round($distance,1);
-		$description 	= showBrief(strip_tags($row['description']),30);
+		//$description 	= showBrief(strip_tags($row['description']),30);
+		$description 	= stripJunk(showBrief($row['description'],30));
 		
 		$code = "<li>
 				<h1>$title</h1>
@@ -71,10 +72,25 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 	}
 }
 
-function showBrief($str, $length) {
+/*function showBrief($str, $length) {
 	$str = strip_tags($str);
 	$str = explode(" ", $str);
 	return implode(" " , array_slice($str, 0, $length));
+}*/
+
+function showBrief($str, $length) {
+	//$str = strip_tags($str);
+    $str = preg_replace("/<img[^>]+\>/i", "", $str);
+	$str = explode(" ", $str);
+	return implode(" " , array_slice($str, 0, $length));
 }
+
+function stripJunk($string) { 
+	$cleanedString = preg_replace("/[^A-Za-z0-9\s\.\-\/+\!;\n\t\r\(\)\'\"._\?>,~\*<}{\[\]\=\&\@\#\$\%\^` ]:/","", $string); 
+	$cleanedString = preg_replace("/\s+/"," ",$cleanedString); 
+	return $cleanedString; 
+}
+
+
 
 ?>

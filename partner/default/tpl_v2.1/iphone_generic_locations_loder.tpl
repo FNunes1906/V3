@@ -8,7 +8,7 @@
 			$imagecount = 0;
 			$templocid = array();
 			$finalDescription = "";
-			while($fealoc=mysql_fetch_array($featured_loc)){
+			while($fealoc = mysql_fetch_array($featured_loc)){
 
 			/*Image FEtched for slide show*/
 				if($fealoc['image'] == ""){
