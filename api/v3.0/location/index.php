@@ -79,7 +79,7 @@ API Request	: /location/?category_id=151
 
 if(isset($catId) && $catId != ''){
 	
-	$select_query	= "SELECT loc.loc_id, loc.imagetitle, loc.postcode, loc.street, loc.phone, loc.url, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
+	$select_query	= "SELECT loc.loc_id, loc.image, loc.postcode, loc.street, loc.phone, loc.url, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
 	$select_query .= "AND cate.parent_id  = $catId ";
 	
 	/* Query for Featured parameter if featured = 1 in URL */
@@ -114,7 +114,7 @@ if(isset($catId) && $catId != ''){
 		$value['location']['website']		= $row['url'];
 		$value['location']['description']	= $row['description'];
 
-		$value['image_url'] = ($row['imagetitle'] != '')?$imagePath.$row['imagetitle']:NULL;
+		$value['image_url'] = ($row['image'] != '')?$imagePath.$row['image']:NULL;
 		$value['is_featured_location'] = $row['value'];
 
 		/* Assigning Array values to $data array variable */
@@ -166,7 +166,7 @@ API Request	: /event/?id=1
 			$value['location']['website']		= $row['url'];
 			$value['location']['description']	= $row['description'];
 			
-			$value['image_url'] = ($row['imagetitle'] != '')?$imagePath.$row['imagetitle']:NULL;
+			$value['image_url'] = ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] = $row['value'];
 			
 			/* Assigning Array values to $data array variable */
@@ -194,7 +194,7 @@ API Request	: /event/
 }else{
 
 	//$select_query	= "SELECT loc.loc_id, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
-	$select_query	= "SELECT loc.loc_id, loc.imagetitle, loc.postcode, loc.street, loc.phone, loc.url, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
+	$select_query	= "SELECT loc.loc_id, loc.image, loc.postcode, loc.street, loc.phone, loc.url, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
 	
 	/* Query for Featured parameter if featured = 1 in URL */
 	if(isset($featured) && $featured == 1){
@@ -225,7 +225,7 @@ API Request	: /event/
 			$value['location']['website']		= $row['url'];
 			$value['location']['description']	= $row['description'];
 			
-			$value['image_url'] = ($row['imagetitle'] != '')?$imagePath.$row['imagetitle']:NULL;
+			$value['image_url'] = ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] = $row['value'];
 			
 			/* Assigning Array values to $data array variable */
