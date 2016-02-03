@@ -19,6 +19,9 @@ $offset		= isset($_GET['offset']) ? $_GET['offset']:0;
 $limit		= isset($_GET['limit']) ? $_GET['limit']:0;
 $featured	= isset($_GET['featured']) ? $_GET['featured']:0;
 
+/* Image URL Path variable setting : Yogi  */
+$imagePath = "http://".$_SERVER['HTTP_HOST']."/partner/".PARTNER_FOLDER_NAME."/images/stories/jevents/jevlocations/";
+
 /* 
 Code Begin 
 Result  : display banner for category
@@ -76,13 +79,16 @@ API Request	: /location/?category_id=151
 
 if(isset($catId) && $catId != ''){
 	
-	$select_query	= "SELECT loc.loc_id, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
+	$select_query	= "SELECT loc.loc_id, loc.imagetitle, loc.postcode, loc.street, loc.phone, loc.url, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
 	$select_query .= "AND cate.parent_id  = $catId ";
 	
 	/* Query for Featured parameter if featured = 1 in URL */
 	if(isset($featured) && $featured == 1){
 		$select_query .= "AND loc.loc_id = cf.target_id AND cf.value = 1 ";
-	}	
+	}else{
+		$select_query .= "AND loc.loc_id = cf.target_id ";
+	}
+		
 	$select_query .= "GROUP BY loc.loc_id ORDER BY `cate`.`title` ASC";
 
 	// Creaeating data set variable from Mysql query	
@@ -97,7 +103,7 @@ if(isset($catId) && $catId != ''){
 		//$value['category_id']				= (int)$row['loccat'];
 		//$value['category_id']				= $row['catid_list'];
 		$value['categories']				= catNameFromID($row['catid_list']);
-		//$value['category'] 					= utf8_encode($row['category']);
+		//$value['category'] 				= utf8_encode($row['category']);
 		$value['location']['latitude']		= (float)$lat2;
 		$value['location']['longitude']		= (float)$lon2;
 		$value['location']['distance']		= distance($lat1, $lon1, $lat2, $lon2, $dunit);
@@ -107,6 +113,9 @@ if(isset($catId) && $catId != ''){
 		$value['location']['phone']			= $row['phone'];
 		$value['location']['website']		= $row['url'];
 		$value['location']['description']	= $row['description'];
+
+		$value['image_url'] = ($row['imagetitle'] != '')?$imagePath.$row['imagetitle']:NULL;
+		$value['is_featured_location'] = $row['value'];
 
 		/* Assigning Array values to $data array variable */
 		$data[] = $value;
@@ -157,6 +166,9 @@ API Request	: /event/?id=1
 			$value['location']['website']		= $row['url'];
 			$value['location']['description']	= $row['description'];
 			
+			$value['image_url'] = ($row['imagetitle'] != '')?$imagePath.$row['imagetitle']:NULL;
+			$value['is_featured_location'] = $row['value'];
+			
 			/* Assigning Array values to $data array variable */
 			$data[] = $value;
 	}
@@ -182,11 +194,13 @@ API Request	: /event/
 }else{
 
 	//$select_query	= "SELECT loc.loc_id, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
-	$select_query	= "SELECT loc.loc_id, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
+	$select_query	= "SELECT loc.loc_id, loc.imagetitle, loc.postcode, loc.street, loc.phone, loc.url, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
 	
 	/* Query for Featured parameter if featured = 1 in URL */
 	if(isset($featured) && $featured == 1){
 		$select_query .= "AND loc.loc_id = cf.target_id AND cf.value = 1 ";
+	}else{
+		$select_query .= "AND loc.loc_id = cf.target_id ";
 	}	
 	$select_query .= "GROUP BY loc.loc_id ORDER BY `cate`.`title` ASC";
 	
@@ -211,6 +225,9 @@ API Request	: /event/
 			$value['location']['website']		= $row['url'];
 			$value['location']['description']	= $row['description'];
 			
+			$value['image_url'] = ($row['imagetitle'] != '')?$imagePath.$row['imagetitle']:NULL;
+			$value['is_featured_location'] = $row['value'];
+			
 			/* Assigning Array values to $data array variable */
 			$data[] = $value;
 	}
@@ -225,9 +242,6 @@ API Request	: /event/
 	)
 	);
 	header('Content-type: application/json');
-/*	echo "<pre>";
-	print_r($response);
-	echo "</pre>";*/
 	echo json_encode($response);
 	
 }

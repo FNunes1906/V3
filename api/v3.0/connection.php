@@ -15,21 +15,24 @@ define(DB_HOST,$jconfig->host);
 define(DB_USER,$jconfig->user);
 define(DB_PASSWORD,$jconfig->password);
 define(DB_NAME,$jconfig->db);
+define(PARTNER_FOLDER_NAME,$jconfig->sitename );
 
-$conn		=	mysql_connect(DB_HOST,DB_USER,DB_PASSWORD) or die(mysql_error());
-$db			=	mysql_select_db(DB_NAME) or die(mysql_error());
+/* DB Connection */
+$conn					=	mysql_connect(DB_HOST,DB_USER,DB_PASSWORD) or die(mysql_error());
+$db						=	mysql_select_db(DB_NAME) or die(mysql_error());
 
-$rec 		=	mysql_query("select * from `jos_pageglobal`");
-$pageglobal	=	mysql_fetch_array($rec);
+/* Fetch data from DB */
+$rec 					=	mysql_query("select * from `jos_pageglobal`");
+$pageglobal				=	mysql_fetch_array($rec);
 
-$gmapkeys	=	explode('googlemapskey=',$pagejevent['params']);
-$gmapkeys1	=	explode("\n",$gmapkeys[1]);
-$site_name	=	$pageglobal['site_name'];
-$beach		=	$pageglobal['beach'];
-$email		=	$pageglobal['email'];
+$gmapkeys				=	explode('googlemapskey=',$pagejevent['params']);
+$gmapkeys1				=	explode("\n",$gmapkeys[1]);
+$site_name				=	$pageglobal['site_name'];
+$beach					=	$pageglobal['beach'];
+$email					=	$pageglobal['email'];
 $googgle_map_api_keys	=	$gmapkeys1[0];
 $location_code			=	$pageglobal['location_code'];
-$dunit		=	$pageglobal['distance_unit'];
+$dunit					=	$pageglobal['distance_unit'];
 
 $var->googgle_analytics	=	$pageglobal['googgle_map_api_keys'];
 
