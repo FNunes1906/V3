@@ -20,7 +20,7 @@ $limit		= isset($_GET['limit']) ? $_GET['limit']:0;
 $featured	= isset($_GET['featured']) ? $_GET['featured']:0;
 
 /* Image URL Path variable setting : Yogi  */
-$imagePath = "http://".$_SERVER['HTTP_HOST']."/partner/".PARTNER_FOLDER_NAME."/images/stories/jevents/jevlocations/";
+$imagePath = "http://".$_SERVER['HTTP_HOST']."/partner/".strtolower(PARTNER_FOLDER_NAME)."/images/stories/jevents/jevlocations/";
 
 /* 
 Code Begin 
