@@ -29,8 +29,9 @@ Request : Fetching Title from category id
 Developer:Rinkal 
 Last update Date:02-01-2013
 */
-	
-$res = mysql_query("select title from jos_categories where id=".$catId."");
+
+$cat_query = "select title from jos_categories where id=".$catId;
+$res = mysql_query($cat_query);
 while($bann_cat_name = mysql_fetch_array($res)){
 	$banner_cat_name = $bann_cat_name['title'];
 }
@@ -79,8 +80,11 @@ API Request	: /location/?category_id=151
 
 if(isset($catId) && $catId != ''){
 	
-	$select_query	= "SELECT loc.loc_id, loc.image, loc.postcode, loc.street, loc.phone, loc.url, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
-	$select_query .= "AND cate.parent_id  = $catId ";
+	//$select_query	= "SELECT loc.loc_id, loc.image, loc.postcode, loc.street, loc.phone, loc.url, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
+	//$select_query .= "AND cate.parent_id  = $catId ";
+	
+	$select_query	= "SELECT loc.*, cf.value FROM jos_jev_locations as loc, jos_jev_customfields3 as cf WHERE FIND_IN_SET($catId,loc.catid_list) AND loc.published = 1 ";	
+	
 	
 	/* Query for Featured parameter if featured = 1 in URL */
 	if(isset($featured) && $featured == 1){
@@ -89,7 +93,7 @@ if(isset($catId) && $catId != ''){
 		$select_query .= "AND loc.loc_id = cf.target_id ";
 	}
 		
-	$select_query .= "GROUP BY loc.loc_id ORDER BY `cate`.`title` ASC";
+	$select_query .= "GROUP BY loc.loc_id ORDER BY loc.title ASC";
 
 	// Creaeating data set variable from Mysql query	
 	$result			= mysql_query($select_query);
