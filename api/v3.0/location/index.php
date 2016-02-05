@@ -205,19 +205,20 @@ API Request	: /event/
 }else{
 
 	//$select_query	= "SELECT loc.loc_id, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
-	$select_query	= "SELECT loc.loc_id, loc.image, loc.postcode, loc.street, loc.phone, loc.url, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
+	$select_query	= "SELECT `jos_jev_locations`.*, `jos_jev_customfields3`.`value` FROM `jos_jev_locations`
+						INNER JOIN `jos_jev_customfields3`
+							ON (`jos_jev_locations`.`loc_id` = `jos_jev_customfields3`.`target_id`)
+						WHERE (`jos_jev_locations`.`published` = 1)";
 	
 	/* Query for Featured parameter if featured = 1 in URL */
 	if(isset($featured) && $featured == 1){
-		$select_query .= "AND loc.loc_id = cf.target_id AND cf.value = 1 ";
-	}else{
-		$select_query .= "AND loc.loc_id = cf.target_id ";
-	}	
-	$select_query .= "GROUP BY loc.loc_id ORDER BY `cate`.`title` ASC";
-	
-		$result			= mysql_query($select_query);
-		$num_records	= mysql_num_rows($result);
-	
+		$select_query .= "AND `jos_jev_customfields3`.`value` = 1 ";
+	}
+	$select_query .= "GROUP BY `jos_jev_locations`.`loc_id` ORDER BY `jos_jev_locations`.`title` ASC";
+
+	$result			= mysql_query($select_query);
+	$num_records	= mysql_num_rows($result);
+
 	while($row = mysql_fetch_array($result)){
 		
 			$lat2								= $row['geolat'];
