@@ -77,7 +77,7 @@ if(isset($catId) && $catId != ''){
 		$value['short_description']		= utf8_encode($row['introtext']);
 		$value['description']			= utf8_encode($row['fulltext']);
 		$value['category']				= catNameFromID($row['catid']);
-		$value['is_featured_article']	= 1;
+		$value['is_featured_article']	= ($row['content_id'] != '')?1:0;
 	
 		# Image operation START
 		# Extract Image URL from introtext
