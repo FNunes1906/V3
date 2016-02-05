@@ -1,22 +1,19 @@
 <?php
-/*PARAMETERS CAN BE USED LIKE
-api/v2.1/location/								=	list all locations
-api/v2.1/location/?id=534						=	list perticular location	
-api/v2.1/location/?featured=1					=	list all featured locations
-api/v2.1/location/?category_id=151				=	list all locations from specific category
-api/v2.1/location/?category_id=151&featured=1	=	list all featured locations from specific category
-*/
-
 include("../connection.php");
 include("../iadbanner.php");
+
+# include simple_html_dom to extract image tag from description
+include("../simple_html_dom.php");
+
 
 /* All REQUEST paramter variable  */
 $catId		= isset($_GET['category_id']) ? $_GET['category_id']:'';
 $offset		= isset($_GET['offset']) ? $_GET['offset']:0;
 $limit		= isset($_GET['limit']) ? $_GET['limit']:0;
 
-/* Image URL Path variable setting : Yogi  */
-$imagePath = "http://".$_SERVER['HTTP_HOST']."/partner/".strtolower(PARTNER_FOLDER_NAME)."/images/stories/";
+/* Date Settings: Yogi  */
+$todaydate	= date("Y-m-j",strtotime("+1 day"));
+$today 		= date("Y-m-d G:i:s");
 
 /* 
 Code Begin 
@@ -48,29 +45,132 @@ API Request	: /content/?category_id=151
 
 if(isset($catId) && $catId != ''){
 	
-/*------------------------------------*/
-/* 
-
-CASE: 2
-Result		: Listing of All Articles
-Parameter	: N/A
-API Request	: /content/
-*/
-}else{
-
-	$select_query	= "SELECT * from jos_content where state = 1";
+	$select_query = "SELECT jc.*, jcf.ordering, jcf.content_id
+						FROM jos_content AS jc
+						LEFT JOIN jos_content_frontpage AS jcf
+							ON jc.id = jcf.content_id
+						LEFT JOIN jos_categories AS jcs
+							ON jcs.id = jc.catid
+						WHERE jc.catid = $catId
+							AND jc.state = 1
+							AND (jc.publish_down > '$today'
+								OR jc.publish_down = '0000-00-00 00:00:00')
+							AND (jc.publish_up <= '$todaydate'
+								OR jc.publish_up = '0000-00-00 00:00:00')
+						GROUP BY jc.id
+						ORDER BY jcf.ordering";					
+	
+	# To check if Limit is given then apply in query
+	if(isset($limit) && $limit != 0){
+		if(isset($offset) && $offset != 0)
+			$select_query .= " limit $offset,$limit";
+		else	
+			$select_query .= " limit $limit";
+	}
+						
 	$result			= mysql_query($select_query);
 	$num_records	= mysql_num_rows($result);
 
 	while($row = mysql_fetch_array($result)){
-		$value['title']					= utf8_encode($row['title']);
-		$value['description']			= $row['fulltext'];
-		$value['short_description']		= $row['introtext'];
-		$value['image_url']				= $row['introtext'];
-		$value['category']				= $row['catid'];
-		$value['is_featured_article']	= $row['introtext'];
 		
-			
+		$value['title']					= utf8_encode($row['title']);
+		$value['short_description']		= utf8_encode($row['introtext']);
+		$value['description']			= utf8_encode($row['fulltext']);
+		$value['category']				= catNameFromID($row['catid']);
+		$value['is_featured_article']	= 1;
+	
+		# Image operation START
+		# Extract Image URL from introtext
+		$html = str_get_html($row['introtext']);
+		$images = $html->find("img");
+		
+		# Extract Image URL from fulltext
+		if(count($images) == 0){ // No Image found in introtext then search in fulltext
+			$html = str_get_html($row['fulltext']);
+			$images = $html->find("img");
+		}
+		$links = array();
+		foreach($images as $image){
+			$links[] = $image->src;
+		}
+		$value['image_url'] = $links[0];
+		# Image operations END	
+		
+	# Assigning Array values to $data array variable
+		$data[] = $value;		
+	}
+	
+	$response = array(
+	'data' => $data,
+	'ad' => $banner_code,
+	'meta' => array(
+		'total' => $num_records,
+		'limit' => $limit != 0?(int)$limit:(int)$num_records,
+		'offset' => $offset != 0?(int)$offset:(int)0
+	)
+	);
+	header('Content-type: application/json');
+	echo json_encode($response);
+
+}else{
+	/*------------------------------------*/
+	/* 
+
+	CASE: 2
+	Result		: Listing of All Articles
+	Parameter	: N/A
+	API Request	: /content/
+	*/
+	$select_query	= " SELECT jc.*, jcf.ordering
+						FROM `jos_content` jc,
+							`jos_categories` jcs,
+							`jos_content_frontpage` jcf
+						WHERE jc.id = jcf.content_id
+							AND (jcs.id = jc.catid || jc.catid = 0)
+							AND jc.state = 1
+							AND (jc.publish_down > '$today'
+								OR jc.publish_down = '0000-00-00 00:00:00')
+							AND (jc.publish_up <= '$todaydate'
+								OR jc.publish_up = '0000-00-00 00:00:00')
+						GROUP BY jc.id
+						ORDER BY jcf.ordering";
+	
+	# To check if Limit is given then apply in query
+	if(isset($limit) && $limit != 0){
+		if(isset($offset) && $offset != 0)
+			$select_query .= " limit $offset,$limit";
+		else	
+			$select_query .= " limit $limit";
+	}
+	$result			= mysql_query($select_query);
+	$num_records	= mysql_num_rows($result);
+
+	while($row = mysql_fetch_array($result)){
+		
+		$value['title']					= utf8_encode($row['title']);
+		$value['short_description']		= utf8_encode($row['introtext']);
+		$value['description']			= utf8_encode($row['fulltext']);
+		$value['category']				= catNameFromID($row['catid']);
+		$value['is_featured_article']	= 1;
+	
+		# Image operation START
+		# Extract Image URL from introtext
+		$html = str_get_html($row['introtext']);
+		$images = $html->find("img");
+		
+		# Extract Image URL from fulltext
+		if(count($images) == 0){ // No Image found in introtext then search in fulltext
+			$html = str_get_html($row['fulltext']);
+			$images = $html->find("img");
+		}
+		$links = array();
+		foreach($images as $image){
+			$links[] = $image->src;
+		}
+		
+		$value['image_url'] = $links[0];
+		# Image operations END	
+		
 	# Assigning Array values to $data array variable
 		$data[] = $value;		
 	}
@@ -99,9 +199,9 @@ API Request	: /content/
 		$result			= mysql_query($select_query);
 		$num_records	= mysql_num_rows($result);
 		while($catrow = mysql_fetch_array($result)){
-			$categoryNameArray[] = $catrow['title'];
+			$categoryName = $catrow['title'];
 		}
-		return $categoryNameArray;
+		return $categoryName;
 	}
 	
 ?>
