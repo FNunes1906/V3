@@ -86,23 +86,73 @@ if(isset($catId) && $catId != ''){
 	//$select_query	= "SELECT loc.*, cat.id, cf.value FROM jos_jev_locations as loc, jos_categories as cat, jos_jev_customfields3 as cf WHERE FIND_IN_SET($catId,loc.catid_list) AND loc.published = 1 ";	
 	//$select_query .= "AND cat.parent_id = $catId ";
 	
-	$select_query = "SELECT `jos_jev_locations`.*, `jos_jev_customfields3`.`value` FROM `jos_jev_locations`
+	# QUERY START
+	/*$select_query = "SELECT `jos_jev_locations`.*, `jos_jev_customfields3`.`value` FROM `jos_jev_locations`
 				INNER JOIN `jos_categories`
 					ON (`jos_jev_locations`.`catid_list` = `jos_categories`.`id`)
 				INNER JOIN `jos_jev_customfields3`
 					ON (`jos_jev_customfields3`.`target_id` = `jos_jev_locations`.`loc_id`)
 				WHERE (`jos_categories`.`id` = $catId)
 					OR (`jos_categories`.`parent_id` = $catId)";
-	
-	/* Query for Featured parameter if featured = 1 in URL */
+	# Query for Featured parameter if featured = 1 in URL
 	if(isset($featured) && $featured == 1){
 		//$select_query .= "AND loc.loc_id = cf.target_id AND cf.value = 1 ";
+		$select_query .= "AND `jos_jev_customfields3`.`value` = 1 ";
+	}
+	$select_query .= "GROUP BY `jos_jev_locations`.`loc_id` ORDER BY `jos_jev_locations`.`title` ASC";*/
+	# QUERY END
+	
+	# NEW QUERY START
+	$fetch_cat_id_query = " SELECT c.id FROM jos_categories AS c
+							LEFT JOIN jos_categories AS pc
+								ON c.parent_id = pc.id
+							LEFT JOIN jos_categories AS mc
+								ON pc.parent_id = mc.id
+							LEFT JOIN jos_categories AS gpc
+								ON mc.parent_id = gpc.id
+							WHERE c.section = 'com_jevlocations2'
+								AND (c.id = $catId OR pc.id = $catId OR mc.id = $catId OR gpc.id = $catId)
+								AND c.published = 1";
+	$fetch_cat_id_result		= mysql_query($fetch_cat_id_query);
+	$fetch_cat_id_num_records	= mysql_num_rows($fetch_cat_id_result);
+	
+	# Create category ID array
+	if($fetch_cat_id_num_records > 0){
+		while($catData = mysql_fetch_assoc($fetch_cat_id_result)){ 
+			$catIdArray[] = $catData['id'];
+		}
+	}
+	
+	# Fetch all location data for category array
+	$select_query = "	SELECT `jos_jev_locations`.*, `jos_jev_customfields3`.`value` FROM `jos_jev_locations`
+						INNER JOIN `jos_jev_customfields3` ON (`jos_jev_customfields3`.`target_id` = `jos_jev_locations`.`loc_id`)
+						WHERE `jos_jev_locations`.`published` = 1 AND ";
+						
+	# Concate Category ID query to fetch location for category
+	for($k = 0; $k < count($catIdArray) ; $k++){	
+		$select_query .= " FIND_IN_SET(".$catIdArray[$k].",`jos_jev_locations`.`catid_list` )";
+		if($k < count($catIdArray)-1 ){
+			$select_query .=" or";
+		}
+	}
+	
+	# Concate query for Features location parameter
+	if(isset($featured) && $featured == 1){
 		$select_query .= "AND `jos_jev_customfields3`.`value` = 1 ";
 	}
 	
 	$select_query .= "GROUP BY `jos_jev_locations`.`loc_id` ORDER BY `jos_jev_locations`.`title` ASC";
 	
-	// Creaeating data set variable from Mysql query	
+	# To check if Limit is given then apply in query
+	if(isset($limit) && $limit != 0){
+		if(isset($offset) && $offset != 0)
+			$select_query .= " limit $offset,$limit";
+		else	
+			$select_query .= " limit $limit";
+	}
+	# NEW QUERY END
+	
+	# Creating data set variable from Mysql query	
 	$result			= mysql_query($select_query);
 	$num_records	= mysql_num_rows($result);
 	
@@ -128,7 +178,7 @@ if(isset($catId) && $catId != ''){
 		$value['image_url'] = ($row['image'] != '')?$imagePath.$row['image']:NULL;
 		$value['is_featured_location'] = $row['value'];
 
-		/* Assigning Array values to $data array variable */
+		# Assigning Array values to $data array variable
 		$data[] = $value;
 	}
 	
@@ -137,8 +187,8 @@ if(isset($catId) && $catId != ''){
 	'ad' => $banner_code,
 	'meta' => array(
 		'total' => $num_records,
-		'limit' => $limit != 0?(int)$limit:(int)$num_records,
-		'offset' => $offset != 0?(int)$offset:(int)0
+		'offset' => $offset != 0?(int)$offset:(int)0,
+		'limit' => $limit != 0?(int)$limit:(int)$num_records
 	)
 	);
 	header('Content-type: application/json');
@@ -155,6 +205,14 @@ API Request	: /event/?id=1
 
 	$select_query = "select * from jos_jev_locations where loc_id=".$locId." ";
 
+	# To check if Limit is given then apply in query
+	if(isset($limit) && $limit != 0){
+		if(isset($offset) && $offset != 0)
+			$select_query .= " limit $offset,$limit";
+		else	
+			$select_query .= " limit $limit";
+	}
+	
 	// Creaeating data set variable from Mysql query	
 	$result			= mysql_query($select_query);
 //	echo $num_records	= mysql_num_rows($result);
@@ -189,8 +247,8 @@ API Request	: /event/?id=1
 	'ad' => $banner_code,
 	'meta' => array(
 		'total' => $num_records,
-		'limit' => $limit != 0?(int)$limit:(int)$num_records,
-		'offset' => $offset != 0?(int)$offset:(int)0
+		'offset' => $offset != 0?(int)$offset:(int)0,
+		'limit' => $limit != 0?(int)$limit:(int)$num_records
 	)
 	);
 	header('Content-type: application/json');
@@ -215,6 +273,14 @@ API Request	: /event/
 		$select_query .= "AND `jos_jev_customfields3`.`value` = 1 ";
 	}
 	$select_query .= "GROUP BY `jos_jev_locations`.`loc_id` ORDER BY `jos_jev_locations`.`title` ASC";
+
+	# To check if Limit is given then apply in query
+	if(isset($limit) && $limit != 0){
+		if(isset($offset) && $offset != 0)
+			$select_query .= " limit $offset,$limit";
+		else	
+			$select_query .= " limit $limit";
+	}
 
 	$result			= mysql_query($select_query);
 	$num_records	= mysql_num_rows($result);
@@ -249,8 +315,8 @@ API Request	: /event/
 	'ad' => $banner_code,
 	'meta' => array(
 		'total' => $num_records,
-		'limit' => $limit != 0?(int)$limit:(int)$num_records,
-		'offset' => $offset != 0?(int)$offset:(int)0
+		'offset' => $offset != 0?(int)$offset:(int)0,
+		'limit' => $limit != 0?(int)$limit:(int)$num_records
 	)
 	);
 	header('Content-type: application/json');
