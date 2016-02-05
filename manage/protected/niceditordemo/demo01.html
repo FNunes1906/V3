@@ -1,0 +1,20 @@
+<div id="sample">
+	<div id="myArea1" style="width: 1000px; height: 100px; border: 1px solid #000;">
+		CONTENT
+	</div>
+
+<script src="nicEdit.js" type="text/javascript"></script>
+<script>
+var area1;
+bkLib.onDomLoaded(function() { toggleArea1(); });
+
+function toggleArea1() {
+	if(!area1) {
+		area1 = new nicEditor({fullPanel : true}).panelInstance('myArea1',{hasPanel : true});
+	} else {
+		area1.removeInstance('myArea1');
+		area1 = null;
+	}
+}
+</script>	
+</div>
