@@ -133,7 +133,7 @@ class LocationsController extends Controller
 				Yii::app()->user->setFlash('success', '<i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i><strong>Success!</strong> Location created Successfully.');
 				# Redirect to Location/index page after insert operation				
 				
-				if($_GET['type']=='com_jevents'){
+				if(isset($_GET['type']) && $_GET['type']=='com_jevents'){
 					$this->redirect($_POST['Locations']['last_url']);
 				}else{
 					$pre_url_sep = explode('?', $_POST['Locations']['last_url']);
