@@ -5,7 +5,6 @@ include("../iadbanner.php");
 # include simple_html_dom to extract image tag from description
 include("../simple_html_dom.php");
 
-
 /* All REQUEST paramter variable  */
 $catId		= isset($_GET['category_id']) ? $_GET['category_id']:'';
 $offset		= isset($_GET['offset']) ? $_GET['offset']:0;
@@ -23,19 +22,26 @@ Developer:Rinkal
 Last update Date:02-01-2013
 */
 
-$cat_query = "select title from jos_categories where id=".$catId;
-$res = mysql_query($cat_query);
-while($bann_cat_name = mysql_fetch_array($res)){
-	$banner_cat_name = $bann_cat_name['title'];
+if($catId != ''){
+	$cat_query = "select title from jos_categories where id=".$catId;
+	$res = mysql_query($cat_query);
+	if(mysql_num_rows($res) > 0){
+		while($bann_cat_name = mysql_fetch_array($res)){
+			$banner_cat_name = $bann_cat_name['title'];
+		}
+	}
 }
+
 
 $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-if(stripos($ua,'android') == True) {
-	$banner_code =  m_show_banner('android-'.$banner_cat_name.'-screen');
-}else{
-	$banner_code = m_show_banner('iphone-'.$banner_cat_name.'-screen');
-}
 
+if(isset($banner_cat_name) && $banner_cat_name != ''){
+	if(stripos($ua,'android') == True) {
+		$banner_code =  m_show_banner('android-'.$banner_cat_name.'-screen');
+	}else{
+		$banner_code = m_show_banner('iphone-'.$banner_cat_name.'-screen');
+	}
+}
 /* 
 CASE: 1
 Result		: Listing of Articles from CATEGORY ID
@@ -72,37 +78,45 @@ if(isset($catId) && $catId != ''){
 	$num_records	= mysql_num_rows($result);
 
 	while($row = mysql_fetch_array($result)){
-		
 		$value['title']					= utf8_encode($row['title']);
 		$value['short_description']		= utf8_encode($row['introtext']);
 		$value['description']			= utf8_encode($row['fulltext']);
 		$value['category']				= catNameFromID($row['catid']);
 		$value['is_featured_article']	= ($row['content_id'] != '')?1:0;
 	
-		# Image operation START
+		# Image operation START **************************
 		# Extract Image URL from introtext
-		$html = str_get_html($row['introtext']);
-		$images = $html->find("img");
+		if($row['introtext'] != ''){
+			$html = str_get_html($row['introtext']);
+			$images = $html->find("img");
+		}
 		
 		# Extract Image URL from fulltext
 		if(count($images) == 0){ // No Image found in introtext then search in fulltext
-			$html = str_get_html($row['fulltext']);
-			$images = $html->find("img");
+			if($row['fulltext'] != ''){
+				$html = str_get_html($row['fulltext']);
+				$images = $html->find("img");
+			}
 		}
+		
 		$links = array();
-		foreach($images as $image){
-			$links[] = $image->src;
+		if(count($images) > 0){
+			foreach($images as $image){
+				$links[] = $image->src;
+			}
 		}
-		$value['image_url'] = $links[0];
-		# Image operations END	
+		
+		$value['image_url'] = (count($links) > 0)?$links[0]:'';
+		# Image operations END	************************
+		
 		
 	# Assigning Array values to $data array variable
 		$data[] = $value;		
 	}
 	
 	$response = array(
-	'data' => $data,
-	'ad' => $banner_code,
+	'data' => isset($data)?$data:null,
+	'ad' => isset($banner_code)?$banner_code:null,
 	'meta' => array(
 		'total' => $num_records,
 		'limit' => $limit != 0?(int)$limit:(int)$num_records,
@@ -153,31 +167,38 @@ if(isset($catId) && $catId != ''){
 		$value['category']				= catNameFromID($row['catid']);
 		$value['is_featured_article']	= 1;
 	
-		# Image operation START
+		# Image operation START **************************
 		# Extract Image URL from introtext
-		$html = str_get_html($row['introtext']);
-		$images = $html->find("img");
+		if($row['introtext'] != ''){
+			$html = str_get_html($row['introtext']);
+			$images = $html->find("img");
+		}
 		
 		# Extract Image URL from fulltext
 		if(count($images) == 0){ // No Image found in introtext then search in fulltext
-			$html = str_get_html($row['fulltext']);
-			$images = $html->find("img");
-		}
-		$links = array();
-		foreach($images as $image){
-			$links[] = $image->src;
+			if($row['fulltext'] != ''){
+				$html = str_get_html($row['fulltext']);
+				$images = $html->find("img");
+			}
 		}
 		
-		$value['image_url'] = $links[0];
-		# Image operations END	
+		$links = array();
+		if(count($images) > 0){
+			foreach($images as $image){
+				$links[] = $image->src;
+			}
+		}
+		
+		$value['image_url'] = (count($links) > 0)?$links[0]:'';
+		# Image operations END	************************
 		
 	# Assigning Array values to $data array variable
 		$data[] = $value;		
 	}
 	
 	$response = array(
-	'data' => $data,
-	'ad' => $banner_code,
+	'data' => isset($data)?$data:null,
+	'ad' => isset($banner_code)?$banner_code:null,
 	'meta' => array(
 		'total' => $num_records,
 		'limit' => $limit != 0?(int)$limit:(int)$num_records,
@@ -201,7 +222,9 @@ if(isset($catId) && $catId != ''){
 		while($catrow = mysql_fetch_array($result)){
 			$categoryName = $catrow['title'];
 		}
-		return $categoryName;
+		if(isset($categoryName)){
+			return $categoryName;
+		}
 	}
 	
 ?>
