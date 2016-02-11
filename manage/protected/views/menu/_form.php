@@ -225,7 +225,7 @@ for($i=0; $i < count($params); $i++){
 				//echo $form->error($model,'EventcatData',array('style'=>'color:#a94442;'));
 				
 				# Code to add New Category
-				echo "<li style='margin:0% -1%' title='Add New Category' data-placement='top' data-toggle='tooltip' class='$btnArticle'>".CHtml::link('<span style="color:#69BD69;font-size:15pt;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>',Yii::app()->createAbsoluteUrl('categories').'/create?type=com_jevents')."</li>";  
+				echo "<li style='margin:0% -1%' title='Add New Category' data-placement='top' data-toggle='tooltip' class='$btnArticle'>".CHtml::link('<span style="color:#69BD69;font-size:15pt;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add new category',Yii::app()->createAbsoluteUrl('categories').'/create?type=com_jevents')."</li>";  
 				?>
 			</div>
 		</div>
@@ -253,7 +253,7 @@ for($i=0; $i < count($params); $i++){
 			echo $form->error($model,'location category',array('style'=>'color:#a94442;'));
 			
 			# Code to add New Category
-			echo "<li style='margin:0% -1%' title='Add New Category' data-placement='top' data-toggle='tooltip' class='$btnArticle'>".CHtml::link('<span style="color:#69BD69;font-size:15pt;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>',Yii::app()->createAbsoluteUrl('categories').'/create?type=com_jevlocations2')."</li>";  
+			echo "<li style='margin:0% -1%' title='Add New Category' data-placement='top' data-toggle='tooltip' class='$btnArticle'>".CHtml::link('<span style="color:#69BD69;font-size:15pt;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add new category',Yii::app()->createAbsoluteUrl('categories').'/create?type=com_jevlocations2')."</li>";  
 			?>
 		</div>
 		</div>
@@ -294,7 +294,7 @@ for($i=0; $i < count($params); $i++){
 					echo $form->error($model,'phota category',array('style'=>'color:#a94442;'));
 					
 					# Code to add New Category
-					echo "<li style='margin:0% -1%' title='Add New Category' data-placement='top' data-toggle='tooltip' class='$btnArticle'>".CHtml::link('<span style="color:#69BD69;font-size:15pt;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>',Yii::app()->createAbsoluteUrl('phocaCategories').'/create')."</li>";  					
+					echo "<li style='margin:0% -1%' title='Add New Category' data-placement='top' data-toggle='tooltip' class='$btnArticle'>".CHtml::link('<span style="color:#69BD69;font-size:15pt;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add new category',Yii::app()->createAbsoluteUrl('phocaCategories').'/create')."</li>";  					
 					?>
 				</div>
 			</div>
@@ -330,7 +330,7 @@ for($i=0; $i < count($params); $i++){
 						echo $form->error($model,'section',array('style'=>'color:#a94442;'));
 						
 						# Code to add New Category
-						echo "<li style='margin:0% -1%' title='Add New Category' data-placement='top' data-toggle='tooltip' class='$btnArticle'>".CHtml::link('<span style="color:#69BD69;font-size:15pt;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>',Yii::app()->createAbsoluteUrl('sections').'/create')."</li>";  
+						echo "<li style='margin:0% -1%' title='Add New Category' data-placement='top' data-toggle='tooltip' class='$btnArticle'>".CHtml::link('<span style="color:#69BD69;font-size:15pt;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add new category',Yii::app()->createAbsoluteUrl('sections').'/create')."</li>";  
 
 						?>
 					</div>

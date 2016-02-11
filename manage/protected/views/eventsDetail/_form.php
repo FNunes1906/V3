@@ -268,7 +268,7 @@
 	<div class="form-group clearfix">
 		<?php
 		# Code to add New Location
-		echo "<li style='margin:-1%;padding-top:1%;}' title='Add New Location' data-placement='top' data-toggle='tooltip' class='btn'>".CHtml::link('<span style="color:#69BD69;font-size:16pt;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>',Yii::app()->createAbsoluteUrl('locations').'/create?type=com_jevents')."</li>"; 
+		echo "<li style='margin:-1%;padding-top:1%;}' title='Add New Location' data-placement='top' data-toggle='tooltip' class='btn'>".CHtml::link('<span style="color:#69BD69;font-size:16pt;" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add new location',Yii::app()->createAbsoluteUrl('locations').'/create?type=com_jevents')."</li>"; 
 		?>
 		
 		<label for="location" class="col-md-2"><?php echo $form->labelEx($model,'location'); ?></label>
