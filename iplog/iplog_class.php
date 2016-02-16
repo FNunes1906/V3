@@ -5,7 +5,8 @@ ini_set("display_errors",1);
 # Global variable initialization
 define("FAILED_LOGIN_ATTEMPTS_ALLOWED",5); // Maximum failed login attempt allowed
 define("FAILED_ATTEMPTS_TIME_WINDOW",30);// In minutes
-define("LOCKOUT_TIME_WINDOW",1440); // in minutes, Default value 1440 = 24 hours
+//define("LOCKOUT_TIME_WINDOW",1440); // in minutes, Default value 1440 = 24 hours
+define("LOCKOUT_TIME_WINDOW",14400); // in minutes, Default value 14400 = 10 Days
 
 # DB varialbe
 define("HOST",'localhost');

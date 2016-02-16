@@ -126,7 +126,7 @@ if(isset($catId) && $catId != ''){
 	# Fetch all location data for category array
 	$select_query = "	SELECT `jos_jev_locations`.*, `jos_jev_customfields3`.`value` FROM `jos_jev_locations`
 						INNER JOIN `jos_jev_customfields3` ON (`jos_jev_customfields3`.`target_id` = `jos_jev_locations`.`loc_id`)
-						WHERE `jos_jev_locations`.`published` = 1 AND ";
+						WHERE (`jos_jev_locations`.`published` = 1) AND ";
 						
 	# Concate Category ID query to fetch location for category
 	for($k = 0; $k < count($catIdArray) ; $k++){	
@@ -141,7 +141,7 @@ if(isset($catId) && $catId != ''){
 		$select_query .= "AND `jos_jev_customfields3`.`value` = 1 ";
 	}
 	
-	$select_query .= "GROUP BY `jos_jev_locations`.`loc_id` ORDER BY `jos_jev_locations`.`title` ASC";
+	$select_query .= " GROUP BY `jos_jev_locations`.`loc_id` ORDER BY `jos_jev_locations`.`title` ASC";
 	
 	# To check if Limit is given then apply in query
 	if(isset($limit) && $limit != 0){
@@ -151,32 +151,35 @@ if(isset($catId) && $catId != ''){
 			$select_query .= " limit $limit";
 	}
 	# NEW QUERY END
-	
+
 	# Creating data set variable from Mysql query	
 	$result			= mysql_query($select_query);
-	$num_records	= mysql_num_rows($result);
-	
+	//$num_records	= mysql_num_rows($result);
+	$num_records = 0;
 	while($row = mysql_fetch_array($result)){
-		$lat2								= $row['geolat'];
-		$lon2								= $row['geolon'];
-		$value['id'] 						= (int)$row['loc_id'];
-		$value['title'] 				 	= utf8_encode($row['title']);
-		//$value['category_id']				= (int)$row['loccat'];
-		//$value['category_id']				= $row['catid_list'];
-		$value['categories']				= catNameFromID($row['catid_list']);
-		//$value['category'] 				= utf8_encode($row['category']);
-		$value['location']['latitude']		= (float)$lat2;
-		$value['location']['longitude']		= (float)$lon2;
-		$value['location']['distance']		= distance($lat1, $lon1, $lat2, $lon2, $dunit);
-		$value['location']['zip']			= $row['postcode'];
-		$value['location']['address']		= $row['street'];
-		$value['location']['name']			= $row['title'];
-		$value['location']['phone']			= $row['phone'];
-		$value['location']['website']		= $row['url'];
-		$value['location']['description']	= $row['description'];
-
-		$value['image_url'] = ($row['image'] != '')?$imagePath.$row['image']:NULL;
-		$value['is_featured_location'] = $row['value'];
+		if($row['published'] != 0){ // If location is published then only add to json array
+			$lat2								= $row['geolat'];
+			$lon2								= $row['geolon'];
+			$value['id'] 						= (int)$row['loc_id'];
+			$value['title'] 				 	= utf8_encode($row['title']);
+			//$value['category_id']				= (int)$row['loccat'];
+			//$value['category_id']				= $row['catid_list'];
+			$value['categories']				= catNameFromID($row['catid_list']);
+			//$value['category'] 				= utf8_encode($row['category']);
+			$value['location']['latitude']		= (float)$lat2;
+			$value['location']['longitude']		= (float)$lon2;
+			$value['location']['distance']		= distance($lat1, $lon1, $lat2, $lon2, $dunit);
+			$value['location']['zip']			= $row['postcode'];
+			$value['location']['city']			= $row['city'];
+			$value['location']['address']		= $row['street'];
+			$value['location']['name']			= $row['title'];
+			$value['location']['phone']			= $row['phone'];
+			$value['location']['website']		= $row['url'];
+			$value['location']['description']	= $row['description'];
+			$value['image_url'] 				= ($row['image'] != '')?$imagePath.$row['image']:NULL;
+			$value['is_featured_location'] 		= $row['value'];
+			$num_records++;
+		}
 
 		# Assigning Array values to $data array variable
 		$data[] = $value;
@@ -229,6 +232,7 @@ API Request	: /event/?id=1
 			$value['location']['longitude']		= (float)$lon2;
 			$value['location']['distance']		= distance($lat1, $lon1, $lat2, $lon2, $dunit);
 			$value['location']['zip']			= $row['postcode'];
+			$value['location']['city']			= $row['city'];
 			$value['location']['address']		= $row['street'];
 			$value['location']['name']			= $row['title'];
 			$value['location']['phone']			= $row['phone'];
@@ -272,7 +276,7 @@ API Request	: /event/
 	if(isset($featured) && $featured == 1){
 		$select_query .= "AND `jos_jev_customfields3`.`value` = 1 ";
 	}
-	$select_query .= "GROUP BY `jos_jev_locations`.`loc_id` ORDER BY `jos_jev_locations`.`title` ASC";
+	$select_query .= " GROUP BY `jos_jev_locations`.`loc_id` ORDER BY `jos_jev_locations`.`title` ASC";
 
 	# To check if Limit is given then apply in query
 	if(isset($limit) && $limit != 0){
@@ -297,6 +301,7 @@ API Request	: /event/
 			$value['location']['longitude']		= (float)$lon2;			
 			$value['location']['distance']		= distance($lat1, $lon1, $lat2, $lon2, $dunit);
 			$value['location']['zip']			= $row['postcode'];
+			$value['location']['city']			= $row['city'];
 			$value['location']['address']		= $row['street'];
 			$value['location']['name']			= $row['title'];
 			$value['location']['phone']			= $row['phone'];
