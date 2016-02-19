@@ -9,6 +9,7 @@ include("../simple_html_dom.php");
 $catId		= isset($_GET['category_id']) ? $_GET['category_id']:'';
 $offset		= isset($_GET['offset']) ? $_GET['offset']:0;
 $limit		= isset($_GET['limit']) ? $_GET['limit']:0;
+$order		= isset($_GET['order']) ? $_GET['order']:0;
 
 /* Date Settings: Yogi  */
 $todaydate	= date("Y-m-j",strtotime("+1 day"));
@@ -63,8 +64,14 @@ if(isset($catId) && $catId != ''){
 								OR jc.publish_down = '0000-00-00 00:00:00')
 							AND (jc.publish_up <= '$todaydate'
 								OR jc.publish_up = '0000-00-00 00:00:00')
-						GROUP BY jc.id
-						ORDER BY jcf.ordering";					
+						GROUP BY jc.id ";
+						
+						if(isset($order) && $order == 1)
+							$select_query.= "ORDER BY jc.ordering";
+						else
+							$select_query.= "ORDER BY jc.id DESC";
+						
+											
 	
 	# To check if Limit is given then apply in query
 	if(isset($limit) && $limit != 0){
@@ -146,8 +153,12 @@ if(isset($catId) && $catId != ''){
 								OR jc.publish_down = '0000-00-00 00:00:00')
 							AND (jc.publish_up <= '$todaydate'
 								OR jc.publish_up = '0000-00-00 00:00:00')
-						GROUP BY jc.id
-						ORDER BY jcf.ordering";
+						GROUP BY jc.id ";
+						
+						if(isset($order) && $order == 1)
+							$select_query.= "ORDER BY jc.ordering";
+						else
+							$select_query.= "ORDER BY jc.id DESC";
 	
 	# To check if Limit is given then apply in query
 	if(isset($limit) && $limit != 0){
