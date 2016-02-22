@@ -105,7 +105,10 @@ $lc_geolat 		= $data->_jevlocation->geolat;
 $lc_geozoom 	= $data->_jevlocation->geozoom;
 $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
 ?>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&callback=initialize&language=<?php echo $map_lang;?>"></script>
+
+<!--MAP CODE START-->
+
+<!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&callback=initialize&language=<?php echo $map_lang;?>"></script>
 <script>
     function initialize() {
       var myLatlng = new google.maps.LatLng(<?php echo $lc_geolat;?>,<?php echo $lc_geolon;?>);
@@ -113,8 +116,31 @@ $lc_image 		= TOWNWIZARD_LOCATION_IMAGE_PATH.$data->_jevlocation->image;
       var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 	  marker = new google.maps.Marker({draggable: true, position: myLatlng,  map: map, title: "Your location" });
     }
-</script>
+</script>-->
 
+<!--MAP CODE END-->
+
+<!-- NEW MAP CODE END-->
+<script src="http://maps.googleapis.com/maps/api/js?language=en"></script>
+<script>
+	var myCenter=new google.maps.LatLng(<?php echo $lc_geolat;?>,<?php echo $lc_geolon;?>);
+
+	function initialize(){
+		var mapProp = {
+			center:myCenter,
+			zoom:14,
+			mapTypeId:google.maps.MapTypeId.ROADMAP
+		};
+		var map=new google.maps.Map(document.getElementById("map_canvas"),mapProp);
+		var marker=new google.maps.Marker({
+		position:myCenter,
+		});
+
+		marker.setMap(map);
+	}
+	google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<!-- NEW MAP CODE END-->
 
 <div id="eventContainer" itemtype="http://schema.org/Event" itemscope="">
 	<h2 itemprop="name"><?php echo $ev_title; ?></h2>
