@@ -1027,6 +1027,14 @@ width: 61%;
 	max-width:300px;
 	clear: right;
 }
+
+/* Added for banner issue 22 Feb 2016 : YOGI START */
+#rightBanners .banneritem{
+ margin-bottom: 6px;
+}
+/* Added for banner issue 22 Feb 2016 : YOGI END */
+
+
 #rightBanners ul, #rightBanners ul li, #rightBanners img{
 	width: 100%;
 }
