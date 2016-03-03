@@ -59,7 +59,7 @@ if(count($secData)>0)
 <div class="row">
 	<ul class="nav navbar-nav nav-pills loc_menu main-menu">
 		<li title="Articles" data-placement="bottom" data-toggle="tooltip"><a href="<?php echo Yii::app()->createAbsoluteUrl('contents')."?menu_id=".$m_id."&cat_id=".$c_id; ?>"><i class="glyphicon glyphicon-book"></i></a></li>
-		<li title="Manage Categories" data-placement="bottom" data-toggle="tooltip"><a href="<?php echo Yii::app()->createAbsoluteUrl('sections')."?menu_id=".$m_id."&cat_id=".$c_id; ?>"><i class="glyphicon glyphicon-server"></i></a></li>
+		<li title="Manage Categories" data-placement="bottom" data-toggle="tooltip"><a href="<?php echo Yii::app()->createAbsoluteUrl('sections')."?menu_id=".$m_id."&cat_id=".$c_id; ?>"><i class="glyphicon glyphicon-list"></i></a></li>
 		<!--<li title="Home Articles" data-placement="bottom" data-toggle="tooltip"><a href="<?php echo Yii::app()->createAbsoluteUrl('contents/front'); ?>"><i class="glyphicon glyphicon-home"></i></a></li>
 		<li title="Categories" data-placement="bottom" data-toggle="tooltip"><a href="<?php echo Yii::app()->createAbsoluteUrl('categories/index',array('type'=>'com_content')); ?>"><i class="glyphicon glyphicon-list"></i></a></li>-->
 	</ul>
@@ -208,7 +208,7 @@ if(count($secData)>0)
 			'header'=>'Action',
 			'buttons' => array(
 				'update' => array(
-					'options' => array('rel' => 'tooltip', 'data-toggle' => 'tooltip', 'title' => Yii::t('app', 'Update')),
+					'options' => array('rel' => 'tooltip', 'data-toggle' => 'tooltip', 'title' => Yii::t('app', 'Edit')),
 					'label' => '<i class="glyphicon glyphicon-edit icon-white" style="padding-right: 10px"></i>',
 					'imageUrl' => false,
 					

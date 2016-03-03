@@ -148,7 +148,7 @@ if(isset($_REQUEST["menu_id"])){
 			'header'=>'Action',
 			'buttons' => array(
 				'update' => array(
-					'options' => array('rel' => 'tooltip', 'data-toggle' => 'tooltip', 'title' => Yii::t('app', 'Update')),
+					'options' => array('rel' => 'tooltip', 'data-toggle' => 'tooltip', 'title' => Yii::t('app', 'Edit')),
 					'label' => '<i class="glyphicon glyphicon-edit icon-white" style="padding-right: 10px"></i>',
 					'imageUrl' => false,
 					'url'=>'CController::createUrl("/Categories/update",array("id"=>$data->id,"type"=>"com_jevents"))',

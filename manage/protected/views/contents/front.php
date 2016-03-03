@@ -156,7 +156,7 @@ if(count($secData)>0)
 			'header'=>'Action',
 			'buttons' => array(
 				'update' => array(
-					'options' => array('rel' => 'tooltip', 'data-toggle' => 'tooltip', 'title' => Yii::t('app', 'Update')),
+					'options' => array('rel' => 'tooltip', 'data-toggle' => 'tooltip', 'title' => Yii::t('app', 'Edit')),
 					'label' => '<i class="glyphicon glyphicon-edit icon-white" style="padding-right: 0px"></i>',
 					'imageUrl' => false,
 					'url'=>'CController::createUrl("/contents/update",array("id"=>$data->id,"front"=>1,"menu_id"=>$_REQUEST["menu_id"]))',

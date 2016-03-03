@@ -76,7 +76,7 @@ $this->breadcrumbs=array(
 			'template'=>'{update}{delete}',
 			'buttons' => array(
 				'update' => array(
-					'options' => array('rel' => 'tooltip', 'data-toggle' => 'tooltip', 'title' => Yii::t('app', 'Update')),
+					'options' => array('rel' => 'tooltip', 'data-toggle' => 'tooltip', 'title' => Yii::t('app', 'Edit')),
 					'label' => '<i class="glyphicon glyphicon-edit icon-white" style="padding-right: 10px"></i>',
 					'imageUrl' => false,
 					

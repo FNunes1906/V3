@@ -182,7 +182,7 @@ if(isset($_REQUEST["menu_id"])){
 			'header'=>'Actions',
 			'buttons' => array(
 				'update' => array(
-					'options' => array('rel' => 'tooltip', 'data-toggle' => 'tooltip', 'title' => Yii::t('app', 'Update')),
+					'options' => array('rel' => 'tooltip', 'data-toggle' => 'tooltip', 'title' => Yii::t('app', 'Edit')),
 					'label' => '<i class="glyphicon glyphicon-edit icon-white" style="padding-right: 10px"></i>',
 					'imageUrl' => false,
 					'url'=>'CController::createUrl("/eventsDetail/update",array("id"=>$data->eventsDetaildata->evdet_id))',
