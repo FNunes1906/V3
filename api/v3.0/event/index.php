@@ -1,5 +1,5 @@
 <?php
-ini_set('display_errors',1);
+//ini_set('display_errors',1);
 include("../connection.php");
 include("../iadbanner.php");
 
@@ -61,7 +61,7 @@ API Request	: /event/?category_id=1
 if(isset($catId) && $catId != ''){
 	
 	//$today = date('d'); $tomonth = date('m'); $toyear = date('Y');
-	$select_query	= "SELECT ev.ev_id,rpt.rp_id,rpt.startrepeat,rpt.endrepeat,ev.catid,cat.title,evd.description,evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND rpt.eventdetail_id = evd.evdet_id AND rpt.eventdetail_id = cf.evdet_id";
+	$select_query	= "SELECT ev.rawdata,ev.ev_id,rpt.rp_id,rpt.startrepeat,rpt.endrepeat,ev.catid,cat.title,evd.description,evd.location,evd.summary,cf.value FROM jos_jevents_vevent AS ev,jos_jevents_vevdetail AS evd, jos_categories AS cat,jos_jevents_repetition AS rpt,jos_jev_customfields AS cf WHERE rpt.eventid = ev.ev_id AND rpt.eventdetail_id = evd.evdet_id AND rpt.eventdetail_id = cf.evdet_id";
 	
 	/* When Start Date & End Date provided */
 	if((isset($dfrom) && $dfrom != 0) && (isset($dto) && $dto != 0)){
@@ -171,6 +171,13 @@ if(isset($catId) && $catId != ''){
 			$value['image_url']				= $singleImage;
 			$value['start_time']			= $rs_ev_tbl['startrepeat'];
 			$value['end_time']				= $rs_ev_tbl['endrepeat'];
+			
+			# Code to check all day event or not
+			if(strpos($rs_ev_tbl['rawdata'], ':"on"') !== false) { 
+    			$value['duration'] = 'All Day Event';
+			}else{
+    			unset($value['duration']);
+			}
 			
 			/* Assigning Array values to $data array variable */
 			$data[] = $value;

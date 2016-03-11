@@ -182,11 +182,14 @@ if(isset($catId) && $catId != ''){
 		}
 
 		# Assigning Array values to $data array variable
-		$data[] = $value;
+		
+		if(isset($value) && count($value) > 0 ){
+			$data[] = $value;
+		}
 	}
 	
 	$response = array(
-	'data' => $data,
+	'data' => count($data) > 1?$data:'',
 	'ad' => $banner_code,
 	'meta' => array(
 		'total' => $num_records,
