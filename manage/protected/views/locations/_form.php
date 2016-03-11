@@ -131,7 +131,7 @@
 		</div>
 	</div>	
 	<div class="form-group clearfix">
-		<label for="Published" class="col-md-2"><?php echo $form->labelEx($model,'Published'); ?></label>
+		<label for="Published" class="col-md-2"><?php echo $form->labelEx($model,'published'); ?></label>
 		<div class="col-md-9">
 			<?php echo  $form->radioButtonList($model,'published',array('1'=>'Yes','0'=>'No'),array('separator'=>'','labelOptions'=>array('style'=>'margin-right: 10px;'))); ?>			
 		</div>

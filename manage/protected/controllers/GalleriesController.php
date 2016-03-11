@@ -64,7 +64,9 @@ class GalleriesController extends Controller
 	public function actionCreate()
 	{
 		$model = new Galleries;
-
+		$model->published = 1;
+		$model->approved = 1;
+		
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 

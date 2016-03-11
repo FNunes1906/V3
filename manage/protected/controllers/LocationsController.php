@@ -64,7 +64,7 @@ class LocationsController extends Controller
 	{
 		# Creating class object
 		$model = new Locations;
-
+		$model->published = 1;
 		# Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 

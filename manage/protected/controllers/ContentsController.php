@@ -62,8 +62,8 @@ class ContentsController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Contents;
-
+		$model = new Contents;
+		$model->state = 1;
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 		

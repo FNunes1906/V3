@@ -130,7 +130,7 @@ class Locations extends CActiveRecord
 			'priority' => 'Priority',
 			'ordering' => 'Ordering',
 			'access' => 'Access',
-			'published' => 'Status',
+			'published' => 'Published',
 			'created' => 'Created',
 			'created_by' => 'Created By',
 			'created_by_alias' => 'Created By Alias',

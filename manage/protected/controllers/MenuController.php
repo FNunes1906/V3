@@ -63,7 +63,7 @@ class MenuController extends Controller
 	public function actionCreate()
 	{
 		$model = new Menu;
-
+		$model->published = 1;
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
