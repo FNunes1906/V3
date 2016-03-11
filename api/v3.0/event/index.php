@@ -85,6 +85,8 @@ if(isset($catId) && $catId != ''){
 	/* Query for Featured parameter if featured = 1 in URL */
 	if(isset($featured) && $featured == 1){
 		$select_query .= " AND cf.value = 1 GROUP BY ev.ev_id,rpt.startrepeat ORDER BY rpt.startrepeat";
+	}else{
+		$select_query .= " GROUP BY ev.ev_id,rpt.startrepeat ORDER BY rpt.startrepeat";
 	}	
 	/* To check if Limit is given then apply in query */
 	if(isset($limit) && $limit != 0){
