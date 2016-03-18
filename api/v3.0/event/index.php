@@ -32,7 +32,7 @@ $glon		= isset($_REQUEST['longitude']) ? $_REQUEST['longitude']:'';
 $dfrom		= isset($_REQUEST['from']) ? $_REQUEST['from']:0;
 $dto		= isset($_REQUEST['to']) ? $_REQUEST['to']:0;
 $offset		= isset($_REQUEST['offset']) ? $_REQUEST['offset']:0;
-$limit		= isset($_REQUEST['limit']) ? $_REQUEST['limit']:0;
+$limit		= isset($_REQUEST['limit']) ? $_REQUEST['limit']:50;
 $featured	= isset($_REQUEST['featured']) ? $_REQUEST['featured']:0;
 $startDate		= explode('-',$dfrom);
 $endDate		= explode('-',$dto);
@@ -168,7 +168,14 @@ if(isset($catId) && $catId != ''){
 			}else{
 				$value['location']['distance'] = '';
 			}
-			$value['is_featured_event']		= (int)$rs_ev_tbl['value'];
+			
+			if(in_array($rs_ev_tbl['ev_id'],$ev_id_array)){
+				$value['is_featured_event']	= 0;
+			}else{
+				$value['is_featured_event']	= (int)$rs_ev_tbl['value'];
+			}
+			$ev_id_array[] = $rs_ev_tbl['ev_id'];
+			
 			$value['description']			= utf8_encode($rs_ev_tbl['description']);
 			$value['image_url']				= $singleImage;
 			$value['start_time']			= $rs_ev_tbl['startrepeat'];
@@ -190,13 +197,19 @@ if(isset($catId) && $catId != ''){
 					break;
 			}
 		}	
+		
+		# Coding for Next URL
+	    $nextUrlOffset = $offset + $limit + 1;
+		
 		$response = array(
-	    	'data' => $data,
-			'ad' => $banner_code,
-	    	'meta' => array(
-	        'total' => $num_records,
-	        'limit' => $limit != 0?(int)$limit:(int)$num_records,
-	        'offset' => $offset != 0?(int)$offset:(int)0
+	    	'data'		=> $data,
+			'ad' 		=> $banner_code,
+	    	'meta'		=> array(
+	        'total'		=> $num_records,
+	        'offset' 	=> $offset != 0?(int)$offset:(int)0,
+	        'limit' 	=> $limit != 0?(int)$limit:(int)$num_records,
+	        # Added below for Next page url
+	        'nexturl'	=> "http://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]?offset=$nextUrlOffset&limit=$limit"
 	    	)
 		);
 		

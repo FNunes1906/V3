@@ -8,7 +8,7 @@ include("../simple_html_dom.php");
 /* All REQUEST paramter variable  */
 $catId		= isset($_GET['category_id']) ? $_GET['category_id']:'';
 $offset		= isset($_GET['offset']) ? $_GET['offset']:0;
-$limit		= isset($_GET['limit']) ? $_GET['limit']:0;
+$limit		= isset($_GET['limit']) ? $_GET['limit']:50;
 $order		= isset($_GET['order']) ? $_GET['order']:0;
 
 /* Date Settings: Yogi  */
@@ -121,13 +121,18 @@ if(isset($catId) && $catId != ''){
 		$data[] = $value;		
 	}
 	
+	# Coding for Next URL
+	$nextUrlOffset = $offset + $limit + 1;
+	    
 	$response = array(
 	'data' => isset($data)?$data:null,
 	'ad' => isset($banner_code)?$banner_code:null,
 	'meta' => array(
 		'total' => $num_records,
 		'limit' => $limit != 0?(int)$limit:(int)$num_records,
-		'offset' => $offset != 0?(int)$offset:(int)0
+		'offset' => $offset != 0?(int)$offset:(int)0,
+		# Added below for Next page url
+	    'nexturl'	=> "http://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]?offset=$nextUrlOffset&limit=$limit"
 	)
 	);
 	header('Content-type: application/json');
@@ -206,6 +211,8 @@ if(isset($catId) && $catId != ''){
 	# Assigning Array values to $data array variable
 		$data[] = $value;		
 	}
+	# Coding for Next URL
+	$nextUrlOffset = $offset + $limit + 1;
 	
 	$response = array(
 	'data' => isset($data)?$data:null,
@@ -213,7 +220,9 @@ if(isset($catId) && $catId != ''){
 	'meta' => array(
 		'total' => $num_records,
 		'limit' => $limit != 0?(int)$limit:(int)$num_records,
-		'offset' => $offset != 0?(int)$offset:(int)0
+		'offset' => $offset != 0?(int)$offset:(int)0,
+		# Added below for Next page url
+	    'nexturl'	=> "http://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]?offset=$nextUrlOffset&limit=$limit"		
 	)
 	);
 	header('Content-type: application/json');
