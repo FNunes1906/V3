@@ -67,7 +67,7 @@ if(isset($catId) && $catId != ''){
 						GROUP BY jc.id ";
 						
 						if(isset($order) && $order == 1)
-							$select_query.= "ORDER BY jcf.ordering";
+							$select_query.= "ORDER BY jc.ordering";
 						else
 							$select_query.= "ORDER BY jc.id DESC";
 						
