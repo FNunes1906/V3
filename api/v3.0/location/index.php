@@ -161,9 +161,14 @@ if(isset($catId) && $catId != ''){
 			$lat2								= $row['geolat'];
 			$lon2								= $row['geolon'];
 			$value['id'] 						= (int)$row['loc_id'];
-			$value['title'] 				 	= utf8_encode($row['title']);
-			//$value['category_id']				= (int)$row['loccat'];
-			//$value['category_id']				= $row['catid_list'];
+			
+			# Process Start for title : Yogi
+			$enc = utf8_decode($row['title']);
+			$new_title = utf8_encode($enc);
+			$new_title = (str_replace("?","'",$new_title));
+			$value['title'] = $new_title;
+			# Process End for title : Yogi
+			
 			$value['categories']				= catNameFromID($row['catid_list']);
 			//$value['category'] 				= utf8_encode($row['category']);
 			$value['location']['latitude']		= (float)$lat2;
@@ -172,10 +177,10 @@ if(isset($catId) && $catId != ''){
 			$value['location']['zip']			= $row['postcode'];
 			$value['location']['city']			= $row['city'];
 			$value['location']['address']		= $row['street'];
-			$value['location']['name']			= $row['title'];
 			$value['location']['phone']			= $row['phone'];
 			$value['location']['website']		= $row['url'];
-			$value['location']['description']	= $row['description'];
+			//$value['location']['description']	= $row['description'];
+			$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
 			$value['image_url'] 				= ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] 		= $row['value'];
 			$num_records++;
@@ -219,7 +224,7 @@ API Request	: /event/?id=1
 			$select_query .= " limit $limit";
 	}
 	
-	// Creaeating data set variable from Mysql query	
+	// Creaeating data set variable from Mysql query	s
 	$result			= mysql_query($select_query);
 //	echo $num_records	= mysql_num_rows($result);
 	
@@ -227,9 +232,14 @@ API Request	: /event/?id=1
 			$lat2								= $row['geolat'];
 			$lon2								= $row['geolon'];
 			$value['id'] 						= (int)$row['loc_id'];
-			$value['title'] 				 	= utf8_encode($row['title']);
-			//$value['category_id']				= (int)$row['loccat'];
-			//$value['category_id']				= $row['catid_list'];
+			
+			# Process Start for title : Yogi
+			$enc = utf8_decode($row['title']);
+			$new_title = utf8_encode($enc);
+			$new_title = (str_replace("?","'",$new_title));
+			$value['title'] = $new_title;
+			# Process End for title : Yogi
+			
 			$value['categories']				= catNameFromID($row['catid_list']);			
 			$value['location']['latitude']		= (float)$lat2;
 			$value['location']['longitude']		= (float)$lon2;
@@ -237,10 +247,10 @@ API Request	: /event/?id=1
 			$value['location']['zip']			= $row['postcode'];
 			$value['location']['city']			= $row['city'];
 			$value['location']['address']		= $row['street'];
-			$value['location']['name']			= $row['title'];
 			$value['location']['phone']			= $row['phone'];
 			$value['location']['website']		= $row['url'];
-			$value['location']['description']	= $row['description'];
+			//$value['location']['description']	= $row['description'];
+			$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
 			
 			$value['image_url'] = ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] = $row['value'];
@@ -268,7 +278,6 @@ Parameter	: N/A
 API Request	: /event/
 */
 }else{
-
 	//$select_query	= "SELECT loc.loc_id, loc.title, loc.alias, loc.description, loc.image, loc.geolat, loc.geolon, loc.catid_list, cate.title as category, cf.value FROM  jos_jev_locations as loc, jos_categories as cate, jos_jev_customfields3 as cf WHERE loc.loccat = cate.id AND loc.published = 1 ";
 	$select_query	= "SELECT `jos_jev_locations`.*, `jos_jev_customfields3`.`value` FROM `jos_jev_locations`
 						INNER JOIN `jos_jev_customfields3`
@@ -297,8 +306,13 @@ API Request	: /event/
 			$lat2								= $row['geolat'];
 			$lon2								= $row['geolon'];
 			$value['id'] 						= (int)$row['loc_id'];
-			$value['title'] 				 	= utf8_encode($row['title']);
-			//$value['category_id']				= $row['catid_list'];
+			
+			# Process Start for title : Yogi
+			$enc = utf8_decode($row['title']);
+			$new_title = utf8_encode($enc);
+			$new_title = (str_replace("?","'",$new_title));
+			$value['title'] = $new_title;
+			# Process End for title : Yogi
 			$value['categories']				= catNameFromID($row['catid_list']);
 			$value['location']['latitude']		= (float)$lat2;
 			$value['location']['longitude']		= (float)$lon2;			
@@ -306,10 +320,10 @@ API Request	: /event/
 			$value['location']['zip']			= $row['postcode'];
 			$value['location']['city']			= $row['city'];
 			$value['location']['address']		= $row['street'];
-			$value['location']['name']			= $row['title'];
 			$value['location']['phone']			= $row['phone'];
 			$value['location']['website']		= $row['url'];
-			$value['location']['description']	= $row['description'];
+			//$value['location']['description']	= $row['description'];
+			$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
 			
 			$value['image_url'] = ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] = $row['value'];
@@ -327,6 +341,7 @@ API Request	: /event/
 		'limit' => $limit != 0?(int)$limit:(int)$num_records
 	)
 	);
+	
 	header('Content-type: application/json');
 	echo json_encode($response);
 	
