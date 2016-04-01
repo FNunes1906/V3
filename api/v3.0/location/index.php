@@ -156,6 +156,7 @@ if(isset($catId) && $catId != ''){
 	$result			= mysql_query($select_query);
 	//$num_records	= mysql_num_rows($result);
 	$num_records = 0;
+	$data = array();
 	while($row = mysql_fetch_array($result)){
 		if($row['published'] != 0){ // If location is published then only add to json array
 			$lat2								= $row['geolat'];
@@ -256,11 +257,13 @@ API Request	: /event/?id=1
 			$value['is_featured_location'] = $row['value'];
 			
 			/* Assigning Array values to $data array variable */
-			$data[] = $value;
+			if(isset($value) && count($value) > 0 ){
+				$data[] = $value;
+			}
 	}
 	
 	$response = array(
-	'data' => $data,
+	'data' => count($data) > 1?$data:'',
 	'ad' => $banner_code,
 	'meta' => array(
 		'total' => $num_records,
@@ -300,7 +303,7 @@ API Request	: /event/
 
 	$result			= mysql_query($select_query);
 	$num_records	= mysql_num_rows($result);
-
+	$data = array();
 	while($row = mysql_fetch_array($result)){
 		
 			$lat2								= $row['geolat'];
@@ -329,11 +332,13 @@ API Request	: /event/
 			$value['is_featured_location'] = $row['value'];
 			
 			/* Assigning Array values to $data array variable */
-			$data[] = $value;
+			if(isset($value) && count($value) > 0 ){
+				$data[] = $value;
+			}
 	}
 	
 	$response = array(
-	'data' => $data,
+	'data' => count($data) > 1?$data:'',
 	'ad' => $banner_code,
 	'meta' => array(
 		'total' => $num_records,
