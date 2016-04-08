@@ -115,6 +115,12 @@ if(isset($catId) && $catId != ''){
 		
 	if($num_records > 0){
 	
+	$data = array();
+	# Code for banner Start
+	if($banner_code['url'] != '')
+		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+	# Code for banner End
+	
 		/* Looping for Event Data */
 		while($rs_ev_tbl = mysql_fetch_array($result)){
 			
@@ -203,7 +209,7 @@ if(isset($catId) && $catId != ''){
 		
 		$response = array(
 	    	'data'		=> $data,
-			'ad' 		=> $banner_code,
+			//'ad' 		=> $banner_code,
 	    	'meta'		=> array(
 	        'total'		=> $num_records,
 	        'offset' 	=> $offset != 0?(int)$offset:(int)0,
@@ -236,6 +242,12 @@ API Request	: /event/?id=1
 	$num_records	= mysql_num_rows($result);
 
 	if($num_records > 0){
+
+	$data = array();
+	# Code for banner Start
+	if($banner_code['url'] != '')
+		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+	# Code for banner End
 
 		//Looping Repetation table data
 		while($rs_ev_tbl = mysql_fetch_array($result)){
@@ -360,6 +372,12 @@ API Request	: /event/
 	
 	if($num_records > 0){
 	
+	$data = array();
+	# Code for banner Start
+	if($banner_code['url'] != '')
+		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+	# Code for banner End
+
 		/* Looping for Event Data */
 		while($rs_ev_tbl = mysql_fetch_array($result)){
 			
@@ -436,7 +454,7 @@ API Request	: /event/
 		}	
 		$response = array(
 	    	'data' => $data,
-	    	'ad' => $banner_code,
+	    	//'ad' => $banner_code,
 			'meta' => array(
 	        'total' => $num_records,
 	        'limit' => $limit != 0?(int)$limit:(int)$num_records,

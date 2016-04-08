@@ -43,6 +43,13 @@ if(stripos($ua,'android') == True) {
 	$banner_code = m_show_banner('iphone-'.$banner_cat_name.'-screen');
 }
 
+/*echo "<pre>";
+print_r($banner_code);
+echo $banner_code['url'];
+echo $banner_code['banner'];
+echo "</pre>";*/
+
+
 // Session varialbe set for Latitute to calculate distance
 if (isset($_SESSION['lat_device1']) && $_REQUEST['lat']!="")
 	$lat1 = $_SESSION['lat_device1'];
@@ -157,6 +164,11 @@ if(isset($catId) && $catId != ''){
 	//$num_records	= mysql_num_rows($result);
 	$num_records = 0;
 	$data = array();
+	
+	# Code for banner Start
+	$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+	# Code for banner End
+	
 	while($row = mysql_fetch_array($result)){
 		if($row['published'] != 0){ // If location is published then only add to json array
 			$lat2								= $row['geolat'];
@@ -186,17 +198,15 @@ if(isset($catId) && $catId != ''){
 			$value['is_featured_location'] 		= $row['value'];
 			$num_records++;
 		}
-
-		# Assigning Array values to $data array variable
-		
-		if(isset($value) && count($value) > 0 ){
-			$data[] = $value;
-		}
+			if(isset($value) && count($value) > 0 ){
+				$data[] = $value;
+			}
 	}
-	
+
+	# Assigning Array values to $data array variable
 	$response = array(
 	'data' => count($data) > 1?$data:'',
-	'ad' => $banner_code,
+	//'ad' => $banner_code,
 	'meta' => array(
 		'total' => $num_records,
 		'offset' => $offset != 0?(int)$offset:(int)0,
@@ -264,7 +274,7 @@ API Request	: /event/?id=1
 	
 	$response = array(
 	'data' => count($data) > 1?$data:'',
-	'ad' => $banner_code,
+	//'ad' => $banner_code,
 	'meta' => array(
 		'total' => $num_records,
 		'offset' => $offset != 0?(int)$offset:(int)0,
@@ -304,6 +314,10 @@ API Request	: /event/
 	$result			= mysql_query($select_query);
 	$num_records	= mysql_num_rows($result);
 	$data = array();
+	# Code for banner Start
+	if($banner_code['url'] != '')
+		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+	# Code for banner End
 	while($row = mysql_fetch_array($result)){
 		
 			$lat2								= $row['geolat'];

@@ -84,6 +84,12 @@ if(isset($catId) && $catId != ''){
 	$result			= mysql_query($select_query);
 	$num_records	= mysql_num_rows($result);
 
+	$data = array();
+	# Code for banner Start
+	if($banner_code['url'] != '')
+		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+	# Code for banner End
+	
 	while($row = mysql_fetch_array($result)){
 		$value['title']					= utf8_encode($row['title']);
 		$value['short_description']		= utf8_encode($row['introtext']);
@@ -126,7 +132,7 @@ if(isset($catId) && $catId != ''){
 	    
 	$response = array(
 	'data' => isset($data)?$data:null,
-	'ad' => isset($banner_code)?$banner_code:null,
+	//'ad' => isset($banner_code)?$banner_code:null,
 	'meta' => array(
 		'total' => $num_records,
 		'limit' => $limit != 0?(int)$limit:(int)$num_records,
@@ -175,6 +181,12 @@ if(isset($catId) && $catId != ''){
 	$result			= mysql_query($select_query);
 	$num_records	= mysql_num_rows($result);
 
+	$data = array();
+	# Code for banner Start
+	if($banner_code['url'] != '')
+		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+	# Code for banner End
+	
 	while($row = mysql_fetch_array($result)){
 		
 		$value['title']					= utf8_encode($row['title']);
@@ -216,7 +228,7 @@ if(isset($catId) && $catId != ''){
 	
 	$response = array(
 	'data' => isset($data)?$data:null,
-	'ad' => isset($banner_code)?$banner_code:null,
+	//'ad' => isset($banner_code)?$banner_code:null,
 	'meta' => array(
 		'total' => $num_records,
 		'limit' => $limit != 0?(int)$limit:(int)$num_records,
