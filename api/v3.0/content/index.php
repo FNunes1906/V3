@@ -42,6 +42,12 @@ if(isset($banner_cat_name) && $banner_cat_name != ''){
 	}else{
 		$banner_code = m_show_banner('iphone-'.$banner_cat_name.'-screen');
 	}
+}else{
+	if(stripos($ua,'android') == True) {
+		$banner_code =  m_show_banner('android-news-screen');
+	}else{
+		$banner_code = m_show_banner('iphone-news-screen');
+	}
 }
 /* 
 CASE: 1

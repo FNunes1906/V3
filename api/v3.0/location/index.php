@@ -163,10 +163,11 @@ if(isset($catId) && $catId != ''){
 	$result			= mysql_query($select_query);
 	//$num_records	= mysql_num_rows($result);
 	$num_records = 0;
+
 	$data = array();
-	
 	# Code for banner Start
-	$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+	if($banner_code['url'] != '')
+		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
 	# Code for banner End
 	
 	while($row = mysql_fetch_array($result)){
@@ -239,6 +240,12 @@ API Request	: /event/?id=1
 	$result			= mysql_query($select_query);
 //	echo $num_records	= mysql_num_rows($result);
 	
+	$data = array();
+	# Code for banner Start
+	if($banner_code['url'] != '')
+		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+	# Code for banner End
+		
 	while($row = mysql_fetch_array($result)){
 			$lat2								= $row['geolat'];
 			$lon2								= $row['geolon'];
@@ -318,6 +325,7 @@ API Request	: /event/
 	if($banner_code['url'] != '')
 		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
 	# Code for banner End
+	
 	while($row = mysql_fetch_array($result)){
 		
 			$lat2								= $row['geolat'];
