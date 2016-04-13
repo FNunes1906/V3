@@ -1282,7 +1282,7 @@ height: 100%;
 } */
 
 #middleColumn .contentpaneopen img{
-    max-width: 100% !important;
+    width: 100% !important;
     margin-bottom:10px;
     max-height: 100% !important;
 }
