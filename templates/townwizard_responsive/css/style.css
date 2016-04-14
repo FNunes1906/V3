@@ -32,6 +32,15 @@ body {margin:0;
       padding:0;
       width:100%;
 }
+table{
+	table-layout: fixed;
+}
+
+img{
+	max-width: 100% important;
+	height:100% important;
+}
+
 html,h1,h2,h3,h4,a,body,ul,ol,li,img,div,article,section,aside, a,span, p, dd, dt, dl,footer{
 	    margin:0;
         padding:0;
@@ -1276,17 +1285,11 @@ height: 100%;
 	width: 100%;
 	text-align: left;
 }
-/* #middleColumn .contentpaneopen img{
-    width:100%; 
-    margin-bottom:10px;         
-} */
-
 #middleColumn .contentpaneopen img{
-    width: 100% !important;
-    margin-bottom:10px;
-    max-height: 100% !important;
+    max-width:100% !important; 
+    margin-bottom:10px; 
+    height: 100% !important;
 }
-
 #mainContent .contentpaneopen .readon,#mainContentwhite .contentpaneopen .readon{
 	border: 1px solid #CCCCCC;
     border-radius: 5px;
