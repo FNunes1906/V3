@@ -1288,7 +1288,7 @@ height: 100%;
 #middleColumn .contentpaneopen img{
     max-width:100% !important; 
     margin-bottom:10px; 
-    height: 100% !important;
+    height: auto !important;
 }
 #mainContent .contentpaneopen .readon,#mainContentwhite .contentpaneopen .readon{
 	border: 1px solid #CCCCCC;

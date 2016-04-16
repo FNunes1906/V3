@@ -43,13 +43,6 @@ if(stripos($ua,'android') == True) {
 	$banner_code = m_show_banner('iphone-'.$banner_cat_name.'-screen');
 }
 
-/*echo "<pre>";
-print_r($banner_code);
-echo $banner_code['url'];
-echo $banner_code['banner'];
-echo "</pre>";*/
-
-
 // Session varialbe set for Latitute to calculate distance
 if (isset($_SESSION['lat_device1']) && $_REQUEST['lat']!="")
 	$lat1 = $_SESSION['lat_device1'];
@@ -167,7 +160,7 @@ if(isset($catId) && $catId != ''){
 	$data = array();
 	# Code for banner Start
 	if($banner_code['url'] != '')
-		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+		$data[]['banner_add'] = "<a href='$banner_code[url]'><img src='$banner_code[banner]'></a>";
 	# Code for banner End
 	
 	while($row = mysql_fetch_array($result)){
@@ -193,8 +186,8 @@ if(isset($catId) && $catId != ''){
 			$value['location']['address']		= $row['street'];
 			$value['location']['phone']			= $row['phone'];
 			$value['location']['website']		= $row['url'];
-			//$value['location']['description']	= $row['description'];
-			$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+			$value['location']['description']	= utf8_encode($row['description']);
+			//$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
 			$value['image_url'] 				= ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] 		= $row['value'];
 			$num_records++;
@@ -243,7 +236,7 @@ API Request	: /event/?id=1
 	$data = array();
 	# Code for banner Start
 	if($banner_code['url'] != '')
-		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+		$data[]['banner_add'] = "<a href='$banner_code[url]'><img src='$banner_code[banner]'></a>";
 	# Code for banner End
 		
 	while($row = mysql_fetch_array($result)){
@@ -267,8 +260,8 @@ API Request	: /event/?id=1
 			$value['location']['address']		= $row['street'];
 			$value['location']['phone']			= $row['phone'];
 			$value['location']['website']		= $row['url'];
-			//$value['location']['description']	= $row['description'];
-			$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+			$value['location']['description']	= utf8_encode($row['description']);
+			//$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
 			
 			$value['image_url'] = ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] = $row['value'];
@@ -323,7 +316,7 @@ API Request	: /event/
 	$data = array();
 	# Code for banner Start
 	if($banner_code['url'] != '')
-		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+		$data[]['banner_add'] = "<a href='$banner_code[url]'><img src='$banner_code[banner]'></a>";
 	# Code for banner End
 	
 	while($row = mysql_fetch_array($result)){
@@ -347,8 +340,8 @@ API Request	: /event/
 			$value['location']['address']		= $row['street'];
 			$value['location']['phone']			= $row['phone'];
 			$value['location']['website']		= $row['url'];
-			//$value['location']['description']	= $row['description'];
-			$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+			$value['location']['description']	= utf8_encode($row['description']);
+			//$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
 			
 			$value['image_url'] = ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] = $row['value'];

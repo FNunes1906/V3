@@ -93,11 +93,17 @@ if(isset($catId) && $catId != ''){
 	$data = array();
 	# Code for banner Start
 	if($banner_code['url'] != '')
-		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+		$data[]['banner_add'] = "<a href='$banner_code[url]'><img src='$banner_code[banner]'></a>";
 	# Code for banner End
 	
 	while($row = mysql_fetch_array($result)){
-		$value['title']					= utf8_encode($row['title']);
+		# Process Start for title : Yogi
+		$enc = utf8_decode($row['title']);
+		$new_title = utf8_encode($enc);
+		$new_title = (str_replace("?","'",$new_title));
+		$value['title'] = $new_title;
+		# Process End for title : Yogi
+		
 		$value['short_description']		= utf8_encode($row['introtext']);
 		$value['description']			= utf8_encode($row['fulltext']);
 		$value['category']				= catNameFromID($row['catid']);
@@ -190,12 +196,18 @@ if(isset($catId) && $catId != ''){
 	$data = array();
 	# Code for banner Start
 	if($banner_code['url'] != '')
-		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+		$data[]['banner_add'] = "<a href='$banner_code[url]'><img src='$banner_code[banner]'></a>";
 	# Code for banner End
 	
 	while($row = mysql_fetch_array($result)){
 		
-		$value['title']					= utf8_encode($row['title']);
+		# Process Start for title : Yogi
+		$enc = utf8_decode($row['title']);
+		$new_title = utf8_encode($enc);
+		$new_title = (str_replace("?","'",$new_title));
+		$value['title'] = $new_title;
+		# Process End for title : Yogi
+		
 		$value['short_description']		= utf8_encode($row['introtext']);
 		$value['description']			= utf8_encode($row['fulltext']);
 		$value['category']				= catNameFromID($row['catid']);

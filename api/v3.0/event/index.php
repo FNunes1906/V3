@@ -118,7 +118,7 @@ if(isset($catId) && $catId != ''){
 	$data = array();
 	# Code for banner Start
 	if($banner_code['url'] != '')
-		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+		$data[]['banner_add'] = "<a href='$banner_code[url]'><img src='$banner_code[banner]'></a>";
 	# Code for banner End
 	
 		/* Looping for Event Data */
@@ -159,7 +159,14 @@ if(isset($catId) && $catId != ''){
 			}
 			/* Creating Jason Array variable $data */
 			$value['id'] 					= (int)$rs_ev_tbl['rp_id'];
-			$value['title'] 				= utf8_encode($rs_ev_tbl['summary']);
+			//$value['title'] 				= utf8_encode($rs_ev_tbl['summary']);
+			# Process Start for title : Yogi
+			$enc = utf8_decode($rs_ev_tbl['summary']);
+			$new_title = utf8_encode($enc);
+			$new_title = (str_replace("?","'",$new_title));
+			$value['title'] = $new_title;
+			# Process End for title : Yogi
+			
 			$value['category'] 				= utf8_encode($rs_ev_tbl['title']);
 			$value['category_id']			= (int)$rs_ev_tbl['catid'];
 			$value['location']['latitude']	= (float)$lat2;
@@ -246,7 +253,7 @@ API Request	: /event/?id=1
 	$data = array();
 	# Code for banner Start
 	if($banner_code['url'] != '')
-		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+		$data[]['banner_add'] = "<a href='$banner_code[url]'><img src='$banner_code[banner]'></a>";
 	# Code for banner End
 
 		//Looping Repetation table data
@@ -278,7 +285,14 @@ API Request	: /event/?id=1
 
 			// Creating Jason Array variable $data	
 			$data['id'] 					= (int)$rs_ev_tbl['rp_id'];
-			$data['title'] 					= utf8_encode($rs_ev_tbl['summary']);
+			//$data['title'] 				= utf8_encode($rs_ev_tbl['summary']);
+			# Process Start for title : Yogi
+			$enc = utf8_decode($rs_ev_tbl['summary']);
+			$new_title = utf8_encode($enc);
+			$new_title = (str_replace("?","'",$new_title));
+			$data['title'] = $new_title;
+			# Process End for title : Yogi
+			
 			$data['category'] 				= utf8_encode($rs_ev_tbl['title']);
 			$data['category_id']			= (int)$rs_ev_tbl['catid'];
 			$data['location']['latitude']	= (float)$lat2;
@@ -375,7 +389,7 @@ API Request	: /event/
 	$data = array();
 	# Code for banner Start
 	if($banner_code['url'] != '')
-		$data[]['banner_add'] = "<p><a href='$banner_code[url]'><img src='$banner_code[banner]'></a></p>";
+		$data[]['banner_add'] = "<a href='$banner_code[url]'><img src='$banner_code[banner]'></a>";
 	# Code for banner End
 
 		/* Looping for Event Data */
@@ -417,7 +431,14 @@ API Request	: /event/
 			}
 			/* Creating Jason Array variable $data */
 			$value['id'] 					= (int)$rs_ev_tbl['rp_id'];
-			$value['title'] 				= utf8_encode($rs_ev_tbl['summary']);
+			//$value['title'] 				= utf8_encode($rs_ev_tbl['summary']);
+			# Process Start for title : Yogi
+			$enc = utf8_decode($rs_ev_tbl['summary']);
+			$new_title = utf8_encode($enc);
+			$new_title = (str_replace("?","'",$new_title));
+			$value['title'] = $new_title;
+			# Process End for title : Yogi
+			
 			$value['category'] 				= utf8_encode($rs_ev_tbl['title']);
 			$value['category_id']			= (int)$rs_ev_tbl['catid'];
 			$value['location']['latitude']	= (float)$lat2;
