@@ -186,8 +186,8 @@ if(isset($catId) && $catId != ''){
 			$value['location']['address']		= $row['street'];
 			$value['location']['phone']			= $row['phone'];
 			$value['location']['website']		= $row['url'];
-			$value['location']['description']	= utf8_encode($row['description']);
-			//$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+			//$value['location']['description']	= utf8_encode($row['description']);
+			$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
 			$value['image_url'] 				= ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] 		= $row['value'];
 			$num_records++;
@@ -260,8 +260,8 @@ API Request	: /event/?id=1
 			$value['location']['address']		= $row['street'];
 			$value['location']['phone']			= $row['phone'];
 			$value['location']['website']		= $row['url'];
-			$value['location']['description']	= utf8_encode($row['description']);
-			//$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+			//$value['location']['description']	= utf8_encode($row['description']);
+			$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
 			
 			$value['image_url'] = ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] = $row['value'];
@@ -340,8 +340,8 @@ API Request	: /event/
 			$value['location']['address']		= $row['street'];
 			$value['location']['phone']			= $row['phone'];
 			$value['location']['website']		= $row['url'];
-			$value['location']['description']	= utf8_encode($row['description']);
-			//$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+			//$value['location']['description']	= utf8_encode($row['description']);
+			$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
 			
 			$value['image_url'] = ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] = $row['value'];
