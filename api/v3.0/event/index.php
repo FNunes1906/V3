@@ -190,7 +190,7 @@ if(isset($catId) && $catId != ''){
 			$ev_id_array[] = $rs_ev_tbl['ev_id'];
 			
 			//$value['description']			= utf8_encode($rs_ev_tbl['description']);
-			$value['description']			= htmlentities($rs_ev_tbl['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+			$value['description']			= html_entity_decode(htmlentities($rs_ev_tbl['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 			$value['image_url']				= $singleImage;
 			$value['start_time']			= $rs_ev_tbl['startrepeat'];
 			$value['end_time']				= $rs_ev_tbl['endrepeat'];
@@ -312,7 +312,7 @@ API Request	: /event/?id=1
 			
 			$data['is_featured_event']		= (int)$rs_ev_tbl['value'];
 			//$data['description']			= utf8_encode($rs_ev_tbl['description']);
-			$data['description']			= htmlentities($rs_ev_tbl['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+			$data['description']			= html_entity_decode(htmlentities($rs_ev_tbl['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 			$data['image_url']				= $singleImage;
 			$data['start_time']				= $rs_ev_tbl['startrepeat'];
 			$data['end_time']				= $rs_ev_tbl['endrepeat'];
@@ -462,7 +462,7 @@ API Request	: /event/
 			
 			$value['is_featured_event']		= (int)$rs_ev_tbl['value'];
 			//$value['description']			= utf8_encode($rs_ev_tbl['description']);
-			$value['description']			= htmlentities($rs_ev_tbl['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+			$value['description']			= html_entity_decode(htmlentities($rs_ev_tbl['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 			$value['image_url']				= $singleImage;
 			$value['start_time']			= $rs_ev_tbl['startrepeat'];
 			$value['end_time']				= $rs_ev_tbl['endrepeat'];

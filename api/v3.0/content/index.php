@@ -105,9 +105,9 @@ if(isset($catId) && $catId != ''){
 		# Process End for title : Yogi
 		
 		//$value['short_description']	= utf8_encode($row['introtext']);
-		$value['short_description']		= htmlentities($row['introtext'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+		$value['short_description']		= html_entity_decode(htmlentities($row['introtext'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 		//$value['description']			= utf8_encode($row['fulltext']);
-		$value['description']			= htmlentities($row['fulltext'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+		$value['description']			= html_entity_decode(htmlentities($row['fulltext'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 		
 		$value['category']				= catNameFromID($row['catid']);
 		$value['is_featured_article']	= ($row['content_id'] != '')?1:0;
@@ -212,9 +212,9 @@ if(isset($catId) && $catId != ''){
 		# Process End for title : Yogi
 		
 		//$value['short_description']	= utf8_encode($row['introtext']);
-		$value['short_description']		= htmlentities($row['introtext'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+		$value['short_description']		= html_entity_decode(htmlentities($row['introtext'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 		//$value['description']			= utf8_encode($row['fulltext']);
-		$value['description']			= htmlentities($row['fulltext'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+		$value['description']			= html_entity_decode(htmlentities($row['fulltext'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 		
 		$value['category']				= catNameFromID($row['catid']);
 		$value['is_featured_article']	= 1;

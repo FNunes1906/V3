@@ -187,7 +187,7 @@ if(isset($catId) && $catId != ''){
 			$value['location']['phone']			= $row['phone'];
 			$value['location']['website']		= $row['url'];
 			//$value['location']['description']	= utf8_encode($row['description']);
-			$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+			$value['location']['description']	= html_entity_decode(htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 			$value['image_url'] 				= ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] 		= $row['value'];
 			$num_records++;
@@ -261,7 +261,7 @@ API Request	: /event/?id=1
 			$value['location']['phone']			= $row['phone'];
 			$value['location']['website']		= $row['url'];
 			//$value['location']['description']	= utf8_encode($row['description']);
-			$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+			$value['location']['description']	= html_entity_decode(htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 			
 			$value['image_url'] = ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] = $row['value'];
@@ -341,7 +341,8 @@ API Request	: /event/
 			$value['location']['phone']			= $row['phone'];
 			$value['location']['website']		= $row['url'];
 			//$value['location']['description']	= utf8_encode($row['description']);
-			$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+			//$value['location']['description']	= htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8");
+			$value['location']['description']	= html_entity_decode(htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "ISO-8859-1"));
 			
 			$value['image_url'] = ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] = $row['value'];
