@@ -145,7 +145,9 @@ if(isset($catId) && $catId != ''){
 						$singleImage 	= strstr($imgArray[$i],'" />',true); // As of PHP 5.3.0
 					else
 						$evImageArray[] = strstr($imgArray[$i],'" />',true); // As of PHP 5.3.0	
-						
+					
+					# Remove all other parameters from image tag and keep only image URL : Yogi - 6 may 2016
+					$singleImage = strstr($singleImage,'"',true);		
 				}	
 			}
 			
@@ -271,7 +273,9 @@ API Request	: /event/?id=1
 						$singleImage 	= strstr($imgArray[$i],'" />',true); // As of PHP 5.3.0
 					else
 						$evImageArray[] = strstr($imgArray[$i],'" />',true); // As of PHP 5.3.0	
-						
+					
+					# Remove all other parameters from image tag and keep only image URL : Yogi - 6 may 2016
+					$singleImage = strstr($singleImage,'"',true);		
 				}	
 			}	
 				
@@ -419,7 +423,9 @@ API Request	: /event/
 						$singleImage 	= strstr($imgArray[$i],'" />',true); // As of PHP 5.3.0
 					else
 						$evImageArray[] = strstr($imgArray[$i],'" />',true); // As of PHP 5.3.0	
-						
+					
+					# Remove all other parameters from image tag and keep only image URL : Yogi - 6 may 2016
+					$singleImage = strstr($singleImage,'"',true);		
 				}	
 			}
 			
