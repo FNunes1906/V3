@@ -5,7 +5,7 @@ ini_set('display_errors',1);
 /* HIDE iadbanner -- YOGI */
 include("class.paggination.php");
 include("connection.php");
-
+include("common_function.php");
 
 
 /* No need */

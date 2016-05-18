@@ -24,6 +24,7 @@
 		}
 
 include("connection.php");
+include("common_function.php");
 
 $menuname	=  isset($_GET['name']) ? $_GET['name']:'';
 

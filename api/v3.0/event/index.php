@@ -2,6 +2,7 @@
 //ini_set('display_errors',1);
 include("../connection.php");
 include("../iadbanner.php");
+include("../common_function.php");
 
 /* Assigning Timezone Session varialble to $timezoneValue vriable */
 $timezoneValue 	= $_SESSION['tw_timezone'];
@@ -168,19 +169,20 @@ if(isset($catId) && $catId != ''){
 			$value['id'] 					= (int)$rs_ev_tbl['rp_id'];
 			//$value['title'] 				= utf8_encode($rs_ev_tbl['summary']);
 			# Process Start for title : Yogi
-			$enc = utf8_decode($rs_ev_tbl['summary']);
+/*			$enc = utf8_decode($rs_ev_tbl['summary']);
 			$new_title = utf8_encode($enc);
 			$new_title = (str_replace("?","'",$new_title));
 			$value['title'] = $new_title;
-			# Process End for title : Yogi
+*/			# Process End for title : Yogi
 			
-			$value['category'] 				= utf8_encode($rs_ev_tbl['title']);
+			$value['title']					= handleSpecialChar($rs_ev_tbl['summary']);
+			$value['category'] 				= handleSpecialChar($rs_ev_tbl['title']);
 			$value['category_id']			= (int)$rs_ev_tbl['catid'];
 			$value['location']['latitude']	= (float)$lat2;
 			$value['location']['longitude']	= (float)$lon2;
 			$value['location']['zip']		= $rs_loc_tbl['postcode'];
-			$value['location']['address']	= $rs_loc_tbl['street'];
-			$value['location']['name']		= $rs_loc_tbl['title'];
+			$value['location']['address']	= handleSpecialChar($rs_loc_tbl['street']);
+			$value['location']['name']		= handleSpecialChar($rs_loc_tbl['title']);
 			$value['location']['phone']		= $rs_loc_tbl['phone'];
 			$value['location']['website']	= $rs_loc_tbl['url'];
 			if($_SESSION['lat_device1'] != '' && $_SESSION['lon_device1']){
@@ -297,19 +299,20 @@ API Request	: /event/?id=1
 			$data['id'] 					= (int)$rs_ev_tbl['rp_id'];
 			//$data['title'] 				= utf8_encode($rs_ev_tbl['summary']);
 			# Process Start for title : Yogi
-			$enc = utf8_decode($rs_ev_tbl['summary']);
+/*			$enc = utf8_decode($rs_ev_tbl['summary']);
 			$new_title = utf8_encode($enc);
 			$new_title = (str_replace("?","'",$new_title));
 			$data['title'] = $new_title;
-			# Process End for title : Yogi
+*/			# Process End for title : Yogi
 			
-			$data['category'] 				= utf8_encode($rs_ev_tbl['title']);
+			$data['title']					= handleSpecialChar($rs_ev_tbl['summary']);
+			$data['category'] 				= handleSpecialChar($rs_ev_tbl['title']);
 			$data['category_id']			= (int)$rs_ev_tbl['catid'];
 			$data['location']['latitude']	= (float)$lat2;
 			$data['location']['longitude']	= (float)$lon2;
 			$data['location']['zip']		= $rs_loc_tbl['postcode'];
-			$data['location']['address']	= $rs_loc_tbl['street'];
-			$data['location']['name']		= $rs_loc_tbl['title'];
+			$data['location']['address']	= handleSpecialChar($rs_loc_tbl['street']);
+			$data['location']['name']		= handleSpecialChar($rs_loc_tbl['title']);
 			$data['location']['phone']		= $rs_loc_tbl['phone'];
 			$data['location']['website']	= $rs_loc_tbl['url'];
 			
@@ -320,7 +323,6 @@ API Request	: /event/?id=1
 			}
 			
 			$data['is_featured_event']		= (int)$rs_ev_tbl['value'];
-			//$data['description']			= utf8_encode($rs_ev_tbl['description']);
 			$data['description']			= html_entity_decode(htmlentities($rs_ev_tbl['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 			$data['image_url']				= $singleImage;
 			$data['start_time']				= $rs_ev_tbl['startrepeat'];
@@ -446,19 +448,20 @@ API Request	: /event/
 			$value['id'] 					= (int)$rs_ev_tbl['rp_id'];
 			//$value['title'] 				= utf8_encode($rs_ev_tbl['summary']);
 			# Process Start for title : Yogi
-			$enc = utf8_decode($rs_ev_tbl['summary']);
+			/*$enc = utf8_decode($rs_ev_tbl['summary']);
 			$new_title = utf8_encode($enc);
 			$new_title = (str_replace("?","'",$new_title));
-			$value['title'] = $new_title;
+			$value['title'] = $new_title;*/
 			# Process End for title : Yogi
 			
-			$value['category'] 				= utf8_encode($rs_ev_tbl['title']);
+			$value['title']					= handleSpecialChar($rs_ev_tbl['summary']);
+			$value['category'] 				= handleSpecialChar($rs_ev_tbl['title']);
 			$value['category_id']			= (int)$rs_ev_tbl['catid'];
 			$value['location']['latitude']	= (float)$lat2;
 			$value['location']['longitude']	= (float)$lon2;
 			$value['location']['zip']		= $rs_loc_tbl['postcode'];
-			$value['location']['address']	= $rs_loc_tbl['street'];
-			$value['location']['name']		= $rs_loc_tbl['title'];
+			$value['location']['address']	= handleSpecialChar($rs_loc_tbl['street']);
+			$value['location']['name']		= handleSpecialChar($rs_loc_tbl['title']);
 			$value['location']['phone']		= $rs_loc_tbl['phone'];
 			$value['location']['website']	= $rs_loc_tbl['url'];
 			
@@ -469,7 +472,6 @@ API Request	: /event/
 				/* For Bhavan to set distanc as N/A */
 				// $value['location']['distance'] = "N/A";
 			}
-			
 			
 			$value['is_featured_event']		= (int)$rs_ev_tbl['value'];
 			//$value['description']			= utf8_encode($rs_ev_tbl['description']);
@@ -508,27 +510,5 @@ API Request	: /event/
 		echo json_encode($data);
 	}
 }	
-
-
-/* ************************************************************ */
-/* All Useful Functions */
-
-// Function to calculate Location Distance
-function distance($lat1, $lon1, $lat2, $lon2, $unit) { 
-
-	$theta = $lon1 - $lon2; 
-	$dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)); 
-	$dist = acos($dist); 
-	$dist = rad2deg($dist); 
-	$miles = $dist * 60 * 1.1515;
-	$unit = strtoupper($unit);
-	if($unit == "KM") {
-		return ($miles * 1.609344); 
-	}else if($unit == "N"){
-		return ($miles * 0.8684);
-	}else{
-		return $miles;
-	}
-}
 
 ?>

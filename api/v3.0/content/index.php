@@ -1,6 +1,7 @@
 <?php
 include("../connection.php");
 include("../iadbanner.php");
+include("../common_function.php");
 
 # include simple_html_dom to extract image tag from description
 include("../simple_html_dom.php");
@@ -98,18 +99,17 @@ if(isset($catId) && $catId != ''){
 	
 	while($row = mysql_fetch_array($result)){
 		# Process Start for title : Yogi
-		$enc = utf8_decode($row['title']);
+/*		$enc = utf8_decode($row['title']);
 		$new_title = utf8_encode($enc);
 		$new_title = (str_replace("?","'",$new_title));
 		$value['title'] = $new_title;
-		# Process End for title : Yogi
+*/		# Process End for title : Yogi
 		
-		//$value['short_description']	= utf8_encode($row['introtext']);
+		$value['title']					= handleSpecialChar($row['title']);
 		$value['short_description']		= html_entity_decode(htmlentities($row['introtext'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
-		//$value['description']			= utf8_encode($row['fulltext']);
 		$value['description']			= html_entity_decode(htmlentities($row['fulltext'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 		
-		$value['category']				= catNameFromID($row['catid']);
+		$value['category']				= singleCatNameFromID($row['catid']);
 		$value['is_featured_article']	= ($row['content_id'] != '')?1:0;
 	
 		# Image operation START **************************
@@ -205,18 +205,17 @@ if(isset($catId) && $catId != ''){
 	while($row = mysql_fetch_array($result)){
 		
 		# Process Start for title : Yogi
-		$enc = utf8_decode($row['title']);
+/*		$enc = utf8_decode($row['title']);
 		$new_title = utf8_encode($enc);
 		$new_title = (str_replace("?","'",$new_title));
 		$value['title'] = $new_title;
-		# Process End for title : Yogi
+*/		# Process End for title : Yogi
 		
-		//$value['short_description']	= utf8_encode($row['introtext']);
+		$value['title']					= handleSpecialChar($row['title']);
 		$value['short_description']		= html_entity_decode(htmlentities($row['introtext'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
-		//$value['description']			= utf8_encode($row['fulltext']);
 		$value['description']			= html_entity_decode(htmlentities($row['fulltext'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 		
-		$value['category']				= catNameFromID($row['catid']);
+		$value['category']				= singleCatNameFromID($row['catid']);
 		$value['is_featured_article']	= 1;
 	
 		# Image operation START **************************
@@ -266,21 +265,4 @@ if(isset($catId) && $catId != ''){
 	
 }
 
-	/**
-	* Fucntion to find Cateogory name from category ID
-	* Developer: Yogi
-	*/	
-	function catNameFromID($caterogyIDs){
-		
-		$select_query	= "SELECT title from jos_categories WHERE id IN ($caterogyIDs) ";
-		$result			= mysql_query($select_query);
-		$num_records	= mysql_num_rows($result);
-		while($catrow = mysql_fetch_array($result)){
-			$categoryName = $catrow['title'];
-		}
-		if(isset($categoryName)){
-			return $categoryName;
-		}
-	}
-	
 ?>

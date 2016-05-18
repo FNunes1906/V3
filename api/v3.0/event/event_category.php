@@ -2,6 +2,7 @@
 ini_set('error_reporting',1);
 ini_set('display_errors',1);
 include("../connection.php");
+include("../common_function.php");
 
 // Display all published category from J_Events component
 if(isset($_REQUEST['category_id'])){

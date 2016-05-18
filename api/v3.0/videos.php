@@ -1,5 +1,6 @@
 <?php
 include("connection.php");
+include("common_function.php");
 
 $query="select title as name, filename, videocode from jos_phocagallery where catid=2 AND published = 1 order by id desc";
 

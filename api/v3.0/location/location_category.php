@@ -5,6 +5,7 @@ api/v2.1/location/location_category.php?category_id=152	=	list all sub categorie
 */
 
 include("../connection.php");
+include("../common_function.php");
 
 // Display all published category from J_Events component
 if(isset($_REQUEST['category_id'])){
