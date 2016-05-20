@@ -11,6 +11,7 @@ include("../connection.php");
 include("../iadbanner.php");
 include("../common_function.php");
 
+
 /* All REQUEST paramter variable  */
 $catId		= isset($_GET['category_id']) ? $_GET['category_id']:'';
 $locId		= isset($_GET['id']) ? $_GET['id']:'';
@@ -54,23 +55,6 @@ if (isset($_SESSION['lon_device1']) && $_REQUEST['lon']!="")
 	$lon1 = $_SESSION['lon_device1']; 
 else
 	$lon1=0;
-
-function distance($lat1, $lon1, $lat2, $lon2, $unit){ 
-	$theta	= $lon1 - $lon2; 
-	$dist	= sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-	$dist	= acos($dist); 
-	$dist	= rad2deg($dist); 
-	$miles	= $dist * 60 * 1.1515;
-	$unit	= strtoupper($unit);
-	
-	if($unit == "KM") {
-		return round($miles * 1.609344); 
-	}else if($unit == "Miles"){
-		return round($miles * 0.8684);
-	}else{
-		return round($miles);
-	}
-}
 
 /* 
 CASE: 1
@@ -179,7 +163,6 @@ if(isset($catId) && $catId != ''){
 			
 			$value['title'] 					= handleSpecialChar($row['title']);
 			$value['categories']				= catNameFromID($row['catid_list']);
-			//$value['category'] 				= utf8_encode($row['category']);
 			$value['location']['latitude']		= (float)$lat2;
 			$value['location']['longitude']		= (float)$lon2;
 			$value['location']['distance']		= distance($lat1, $lon1, $lat2, $lon2, $dunit);
