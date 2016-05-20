@@ -7,8 +7,8 @@
 function handleSpecialChar($string){
 
 	# Process START
-	$enc		= utf8_decode($string);
-	$new_title	= utf8_encode($enc);
+	//$enc		= utf8_decode($string);
+	$new_title	= utf8_encode($string);
 	$new_title	= (str_replace("?","'",$new_title));
 	return $new_title;
 	# Process END

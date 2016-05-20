@@ -157,7 +157,9 @@ if(isset($catId) && $catId != ''){
 	)
 	);
 	header('Content-type: application/json');
-	echo json_encode($response);
+	$jsonData = json_encode($response);
+	$jsonData = (str_replace("\u0080","\u20AC",$jsonData));
+	echo $jsonData;
 
 }else{
 	/*------------------------------------*/
@@ -261,7 +263,9 @@ if(isset($catId) && $catId != ''){
 	)
 	);
 	header('Content-type: application/json');
-	echo json_encode($response);
+	$jsonData = json_encode($response);
+	$jsonData = (str_replace("\u0080","\u20AC",$jsonData));
+	echo $jsonData;
 	
 }
 

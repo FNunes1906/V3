@@ -237,7 +237,9 @@ if(isset($catId) && $catId != ''){
 		);
 		
 		header('Content-type: application/json');
-		echo json_encode($response);
+		$jsonData = json_encode($response);
+		$jsonData = (str_replace("\u0080","\u20AC",$jsonData));
+		echo $jsonData;
 	}else{
 		$data["error"] = "Not Found";
 		header('Content-type: application/json');
@@ -333,7 +335,9 @@ API Request	: /event/?id=1
 		$data["error"] = "Not Found";
 	}	
 	header('Content-type: application/json');
-	echo json_encode($data);
+	$jsonData = json_encode($data);
+	$jsonData = (str_replace("\u0080","\u20AC",$jsonData));
+	echo $jsonData;
 /*------------------------------------*/
 /* 
 CASE: 0
@@ -499,7 +503,9 @@ API Request	: /event/
 	    	)
 		);
 		header('Content-type: application/json');
-		echo json_encode($response);
+		$jsonData = json_encode($response);
+		$jsonData = (str_replace("\u0080","\u20AC",$jsonData));
+		echo $jsonData;
 	}else{
 		if($dto < $dfrom){
 			$data["error"] = "Bad Request";
