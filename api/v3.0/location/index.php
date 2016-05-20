@@ -355,9 +355,7 @@ API Request	: /location/
 	$jsonData = json_encode($response);
 	$jsonData = (str_replace("\u0080","\u20AC",$jsonData));
 	echo $jsonData;
-	
-	
-	
+
 }
 	
 ?>
