@@ -193,7 +193,7 @@ if(isset($catId) && $catId != ''){
 	);
 	header('Content-type: application/json');
 	$jsonData = json_encode($response);
-	$jsonData = (str_replace("\u0080","\u20AC",$jsonData));
+	//$jsonData = (str_replace("\u0080","\u20AC",$jsonData));
 	echo $jsonData;
 
 /*------------------------------------*/
@@ -269,7 +269,7 @@ API Request	: /event/?id=1
 	);
 	header('Content-type: application/json');
 	$jsonData = json_encode($response);
-	$jsonData = (str_replace("\u0080","\u20AC",$jsonData));
+	//$jsonData = (str_replace("\u0080","\u20AC",$jsonData));
 	echo $jsonData;
 /*------------------------------------*/
 /* 
@@ -353,7 +353,7 @@ API Request	: /location/
 	
 	header('Content-type: application/json');
 	$jsonData = json_encode($response);
-	$jsonData = (str_replace("\u0080","\u20AC",$jsonData));
+	//$jsonData = (str_replace("\u0080","\u20AC",$jsonData));
 	echo $jsonData;
 
 }
