@@ -3186,11 +3186,21 @@ class RSFormProHelper
 	
 	function sendMail($from, $fromname, $recipient, $subject, $body, $mode=0, $cc=null, $bcc=null, $attachment=null, $replyto=null, $replytoname=null)
 	{
-		
+		/** AMAZON SES CODE START :YOGI June 2016 **/
+		include_once(JPATH_BASE .DS.'twmailer.php');
+
+		# Send Email to Admin
+		$sendmail = sendTwMail($recipient,$subject,$body,'no-reply@townwizard.com');
+
+		# Send Email to Admin
+		$sendmailAdmin = sendTwMail($recipient,$subject,$body,'no-reply@townwizard.com');
+
 		# START Return True by Yogi Ignoring Joomla Email funciton for Amazon SES : Yogi June 2016
 		return TRUE;
 		# END Return True by Yogi Ignoring Joomla Email funciton for Amazon SES : Yogi June 2016
 	
+		/** AMAZON SES CODE END :YOGI June 2016 **/
+		
 		// for 1.5 use the default sendMail() which works correctly
 		if (!RSFormProHelper::isJ16())
 			return JUtility::sendMail($from, $fromname, $recipient, $subject, $body, $mode, $cc, $bcc, $attachment, $replyto, $replytoname);
