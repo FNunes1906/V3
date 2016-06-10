@@ -3186,6 +3186,11 @@ class RSFormProHelper
 	
 	function sendMail($from, $fromname, $recipient, $subject, $body, $mode=0, $cc=null, $bcc=null, $attachment=null, $replyto=null, $replytoname=null)
 	{
+		
+		# START Return True by Yogi Ignoring Joomla Email funciton for Amazon SES : Yogi June 2016
+		return TRUE;
+		# END Return True by Yogi Ignoring Joomla Email funciton for Amazon SES : Yogi June 2016
+	
 		// for 1.5 use the default sendMail() which works correctly
 		if (!RSFormProHelper::isJ16())
 			return JUtility::sendMail($from, $fromname, $recipient, $subject, $body, $mode, $cc, $bcc, $attachment, $replyto, $replytoname);
