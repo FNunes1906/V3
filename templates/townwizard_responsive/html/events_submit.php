@@ -1,4 +1,3 @@
-
 <?php
 //define( '_JEXEC', 1 );
 //define('JPATH_BASE', dirname(__FILE__) );
@@ -19,6 +18,8 @@ require_once(JPATH_BASE .DS."configuration.php");
 global $var;
 include_once(JPATH_BASE .DS.'/inc/var.php');
 include_once(JPATH_BASE .DS.'/inc/base.php');
+
+
 _init();
 // end v2 code
 $jconfig = new JConfig();
@@ -185,10 +186,28 @@ if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']==
 				$headers .= 'From: TownWizard<no-reply@partneremail.townwizard.com>' . "\r\n";
 				$headers .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
 				// Email Notification to Administrator
-				mail($adminEmail,$subject,$message,$headers);
+				
+				# New file added by Yogi for Email functioanlity as per AMAZONE
+				# Date: 25 May 2016
+
+				include_once(JPATH_BASE .DS.'twmailer.php');
+				# Send Email to Admin
+				$mail_status_admin = sendTwMail($adminEmail,$subject,$message,'no-reply@townwizard.com');
+				
+				# Send Email to event submitter
+				$mail_status_user = sendTwMail($custom_anonemail,$subject,$ack_message,'no-reply@townwizard.com');
+				
+				//send the message, check for errors
+				if(isset($mail_status_admin) && ($mail_status_admin == 'success')){
+				    $mailMessage = JText::_('THANKS_MSG');
+				} else {
+				    $mailMessage = "Sorry! Failed to submit your event";
+				}
+
+				//mail($adminEmail,$subject,$message,$headers);
 				
 				// Acknowledgement Email to the Event Creator. 
-				mail($custom_anonemail,$subject,$ack_message,$headers);
+				//mail($custom_anonemail,$subject,$ack_message,$headers);
 				
 				$_SESSION['title']="";
 				$_SESSION['catid']="";
@@ -206,6 +225,10 @@ if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']==
 				$_SESSION['custom_anonemail']="";
 				$_SESSION['custom_field4']="";
 				$_SESSION['start_ampm']="";
+				
+				#Redire event submit page after email  : Yogi June 2016
+				header("location:http://".$_SERVER["HTTP_HOST"]."/submit-your-event?mailmsg=".$mailMessage);
+				exit();
 			}
 	}else{
 				$_SESSION['title']=$_POST['title'];
@@ -446,19 +469,17 @@ function form_validation() {
 @media only screen and (max-width:370px){.locationcont {left:5%;width:90%;}} 
 @media only screen and (min-width : 1440px){.locationcont .close {right: -28px;top: -26px;}}
 </style>
+
 <?php
 // Print Message after event form submission starts.
-if($msg!='') {?>
-
-<div id="Darkness" style="display: block"></div>
-<div id="systemmsg" class="takeOverlay">
-	<a class="close">x</a>
-	<span>
-		<?php echo $msg ;?>
-	</span>
-</div>	
+//if($msg!='') {
+if(isset($_GET['mailmsg']) && $_GET['mailmsg'] != '') {?>
+	<div id="Darkness" style="display: block"></div>
+	<div id="systemmsg" class="takeOverlay">
+		<a class="close">x</a>
+		<span><?php echo $_GET['mailmsg'];?></span>
+	</div>	
 <?php } ?>
-
 
 <!--Jevent Form Starts-->
 <h2 id="sendEventsHeader"><?php echo JText::_('JEV_SENDEVNTS'); ?></h2>

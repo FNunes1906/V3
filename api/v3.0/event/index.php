@@ -238,7 +238,8 @@ if(isset($catId) && $catId != ''){
 		
 		header('Content-type: application/json');
 		$jsonData = json_encode($response);
-		//$jsonData = (str_replace("\u0080","\u20AC",$jsonData));
+		$jsonData = (str_replace("\u0080","\u20AC",$jsonData));
+		$jsonData = (str_replace("\u0092","\u0027",$jsonData));
 		echo $jsonData;
 	}else{
 		$data["error"] = "Not Found";

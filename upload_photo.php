@@ -126,8 +126,25 @@
 				$headers .= 'From: TownWizard <no-reply@partneremail.townwizard.com>' . "\r\n";
 				$headers .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
 				// Email Notification to Administrator
-				$sendmail = mail($adminEmail,$subject,$message,$headers);
+				//$sendmail = mail($adminEmail,$subject,$message,$headers);
 				//$sendmail = true;
+				
+				/******AMAZON SES EMAIL CODE by Yogi : June 2016 START */
+				include_once(JPATH_BASE .DS.'twmailer.php');
+				# Send Email to Admin
+				$sendmail = sendTwMail($adminEmail,$subject,$message,'no-reply@townwizard.com');
+				
+				//send the message, check for errors
+				if(isset($sendmail) && ($sendmail == 'success')){
+				    $mailMessage = JText::_('THANKYOU');
+				} else {
+				    $mailMessage = "Sorry! Failed to Upload your Photo";
+				}
+
+				header("location:http://".$_SERVER["HTTP_HOST"]."/photo-upload?mailmsg=".$mailMessage);
+				exit();
+				/******AMAZON SES EMAIL CODE by Yogi : June 2016 END */
+				
 		    }
 			
 		}else{
@@ -148,7 +165,13 @@
 		echo "<div style='color:green;font-size: 14px;'>".JText::_('THANKYOU')."</div><br />"; 
 		$_POST = "";
 	}
-	?>
+	
+	# Mail function header parameter
+	if(isset($_REQUEST['mailmsg']) && $_REQUEST['mailmsg'] != ''){
+		echo "<div style='color:green;font-size: 14px;'>".JText::_('THANKYOU')."</div><br />"; 
+		$_POST = "";
+	}?>
+	
 <div id="jevents" style="font-size: 12px;">
 <form id="uploadForm" name="uploadForm" action="" method="post" enctype='multipart/form-data' onSubmit="return form_validation()">
   <div id="uploadphoto">
