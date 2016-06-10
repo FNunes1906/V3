@@ -3192,9 +3192,6 @@ class RSFormProHelper
 		# Send Email to Admin
 		$sendmail = sendTwMail($recipient,$subject,$body,'no-reply@townwizard.com');
 
-		# Send Email to Admin
-		$sendmailAdmin = sendTwMail($recipient,$subject,$body,'no-reply@townwizard.com');
-
 		# START Return True by Yogi Ignoring Joomla Email funciton for Amazon SES : Yogi June 2016
 		return TRUE;
 		# END Return True by Yogi Ignoring Joomla Email funciton for Amazon SES : Yogi June 2016
