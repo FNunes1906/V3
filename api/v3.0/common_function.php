@@ -71,4 +71,17 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit){
 }
 
 
+
+/**
+* Fucntion to find NEXT PAGE URL form Limit & number of records
+* Developer: Yogi
+*/	
+function nextPageURL($limit,$num_records,$nextUrlOffset){
+	if($num_records >= $limit){
+		return $nextpageURL = "http://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]?offset=$nextUrlOffset&limit=$limit";
+	}else{
+		return $nextpageURL = '';
+	}
+}	
+
 ?>

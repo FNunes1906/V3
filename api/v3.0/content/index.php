@@ -144,6 +144,7 @@ if(isset($catId) && $catId != ''){
 	
 	# Coding for Next URL
 	$nextUrlOffset = $offset + $limit + 1;
+	$nextPageURL = nextPageURL($limit,$num_records,$nextUrlOffset);
 	    
 	$response = array(
 	'data' => isset($data)?$data:null,
@@ -153,7 +154,8 @@ if(isset($catId) && $catId != ''){
 		'limit' => $limit != 0?(int)$limit:(int)$num_records,
 		'offset' => $offset != 0?(int)$offset:(int)0,
 		# Added below for Next page url
-	    'nexturl'	=> "http://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]?offset=$nextUrlOffset&limit=$limit"
+	    //'nexturl'	=> "http://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]?offset=$nextUrlOffset&limit=$limit"
+	    'nexturl'	=> $nextPageURL
 	)
 	);
 	header('Content-type: application/json');
@@ -250,6 +252,7 @@ if(isset($catId) && $catId != ''){
 	}
 	# Coding for Next URL
 	$nextUrlOffset = $offset + $limit + 1;
+	$nextPageURL = nextPageURL($limit,$num_records,$nextUrlOffset);
 	
 	$response = array(
 	'data' => isset($data)?$data:null,
@@ -258,8 +261,7 @@ if(isset($catId) && $catId != ''){
 		'total' => $num_records,
 		'limit' => $limit != 0?(int)$limit:(int)$num_records,
 		'offset' => $offset != 0?(int)$offset:(int)0,
-		# Added below for Next page url
-	    'nexturl'	=> "http://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]?offset=$nextUrlOffset&limit=$limit"		
+	    'nexturl'	=> $nextPageURL		
 	)
 	);
 	header('Content-type: application/json');

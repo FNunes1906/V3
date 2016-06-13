@@ -223,6 +223,7 @@ if(isset($catId) && $catId != ''){
 		
 		# Coding for Next URL
 	    $nextUrlOffset = $offset + $limit + 1;
+		$nextPageURL = nextPageURL($limit,$num_records,$nextUrlOffset);
 		
 		$response = array(
 	    	'data'		=> $data,
@@ -232,7 +233,8 @@ if(isset($catId) && $catId != ''){
 	        'offset' 	=> $offset != 0?(int)$offset:(int)0,
 	        'limit' 	=> $limit != 0?(int)$limit:(int)$num_records,
 	        # Added below for Next page url
-	        'nexturl'	=> "http://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]?offset=$nextUrlOffset&limit=$limit"
+	        //'nexturl'	=> "http://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]?offset=$nextUrlOffset&limit=$limit"
+	        'nexturl'	=> $nextPageURL
 	    	)
 		);
 		
