@@ -110,8 +110,7 @@ if(isset($catId) && $catId != ''){
 	
 	# Fetch all location data for category array
 	$select_query = "	SELECT `jos_jev_locations`.*, `jos_jev_customfields3`.`value` FROM `jos_jev_locations`
-						INNER JOIN `jos_jev_customfields3` ON (`jos_jev_customfields3`.`target_id` = `jos_jev_locations`.`loc_id`)
-						WHERE (`jos_jev_locations`.`published` = 1) AND ";
+						INNER JOIN `jos_jev_customfields3` ON (`jos_jev_customfields3`.`target_id` = `jos_jev_locations`.`loc_id`) AND ";
 						
 	# Concate Category ID query to fetch location for category
 	for($k = 0; $k < count($catIdArray) ; $k++){	
@@ -126,7 +125,7 @@ if(isset($catId) && $catId != ''){
 		$select_query .= "AND `jos_jev_customfields3`.`value` = 1 ";
 	}
 	
-	$select_query .= " GROUP BY `jos_jev_locations`.`loc_id` ORDER BY `jos_jev_locations`.`title` ASC";
+	$select_query .= " WHERE (`jos_jev_locations`.`published` = 1) GROUP BY `jos_jev_locations`.`loc_id` ORDER BY `jos_jev_locations`.`title` ASC";
 	
 	# To check if Limit is given then apply in query
 	if(isset($limit) && $limit != 0){
@@ -136,7 +135,7 @@ if(isset($catId) && $catId != ''){
 			$select_query .= " limit $limit";
 	}
 	# NEW QUERY END
-
+/*	exit($select_query);*/
 	# Creating data set variable from Mysql query	
 	$result			= mysql_query($select_query);
 	//$num_records	= mysql_num_rows($result);
