@@ -11,7 +11,7 @@ $catId		= isset($_GET['category_id']) ? $_GET['category_id']:'';
 $offset		= isset($_GET['offset']) ? $_GET['offset']:0;
 $limit		= isset($_GET['limit']) ? $_GET['limit']:50;
 $order		= isset($_GET['order']) ? $_GET['order']:0;
-
+$menu		= isset($_GET['menu']) ? $_GET['menu']:'';
 /* Date Settings: Yogi  */
 $todaydate	= date("Y-m-j",strtotime("+1 day"));
 $today 		= date("Y-m-d G:i:s");
@@ -149,6 +149,7 @@ if(isset($catId) && $catId != ''){
 	$response = array(
 	'data' => isset($data)?$data:null,
 	//'ad' => isset($banner_code)?$banner_code:null,
+	'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
 	'meta' => array(
 		'total' => $num_records,
 		'limit' => $limit != 0?(int)$limit:(int)$num_records,
@@ -257,6 +258,7 @@ if(isset($catId) && $catId != ''){
 	$response = array(
 	'data' => isset($data)?$data:null,
 	//'ad' => isset($banner_code)?$banner_code:null,
+	'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
 	'meta' => array(
 		'total' => $num_records,
 		'limit' => $limit != 0?(int)$limit:(int)$num_records,

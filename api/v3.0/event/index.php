@@ -35,8 +35,9 @@ $dto		= isset($_REQUEST['to']) ? $_REQUEST['to']:0;
 $offset		= isset($_REQUEST['offset']) ? $_REQUEST['offset']:0;
 $limit		= isset($_REQUEST['limit']) ? $_REQUEST['limit']:50;
 $featured	= isset($_REQUEST['featured']) ? $_REQUEST['featured']:0;
-$startDate		= explode('-',$dfrom);
-$endDate		= explode('-',$dto);
+$startDate	= explode('-',$dfrom);
+$endDate	= explode('-',$dto);
+$menu		= isset($_GET['menu']) ? $_GET['menu']:'';
 /*$today_date = date('Y-m-d');
 $td_array 	= explode('-',$today_date);*/
 
@@ -232,6 +233,7 @@ if(isset($catId) && $catId != ''){
 	        'total'		=> $num_records,
 	        'offset' 	=> $offset != 0?(int)$offset:(int)0,
 	        'limit' 	=> $limit != 0?(int)$limit:(int)$num_records,
+	        'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
 	        # Added below for Next page url
 	        //'nexturl'	=> "http://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]?offset=$nextUrlOffset&limit=$limit"
 	        'nexturl'	=> $nextPageURL
@@ -499,6 +501,7 @@ API Request	: /event/
 		$response = array(
 	    	'data' => $data,
 	    	//'ad' => $banner_code,
+			'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
 			'meta' => array(
 	        'total' => $num_records,
 	        'limit' => $limit != 0?(int)$limit:(int)$num_records,

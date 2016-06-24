@@ -20,6 +20,7 @@ $glon		= isset($_GET['longitude']) ? $_GET['longitude']:'';
 $offset		= isset($_GET['offset']) ? $_GET['offset']:0;
 $limit		= isset($_GET['limit']) ? $_GET['limit']:0;
 $featured	= isset($_GET['featured']) ? $_GET['featured']:0;
+$menu		= isset($_GET['menu']) ? $_GET['menu']:'';
 
 /* Image URL Path variable setting : Yogi  */
 $imagePath = "http://".$_SERVER['HTTP_HOST']."/partner/".strtolower(PARTNER_FOLDER_NAME)."/images/stories/jevents/jevlocations/";
@@ -184,6 +185,7 @@ if(isset($catId) && $catId != ''){
 	$response = array(
 	'data' => count($data) > 1?$data:'',
 	//'ad' => $banner_code,
+	'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
 	'meta' => array(
 		'total' => $num_records,
 		'offset' => $offset != 0?(int)$offset:(int)0,
@@ -260,6 +262,7 @@ API Request	: /event/?id=1
 	$response = array(
 	'data' => count($data) > 1?$data:'',
 	//'ad' => $banner_code,
+	'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
 	'meta' => array(
 		'total' => $num_records,
 		'offset' => $offset != 0?(int)$offset:(int)0,
@@ -343,6 +346,7 @@ API Request	: /location/
 	$response = array(
 	'data' => count($data) > 1?$data:'',
 	'ad' => $banner_code,
+	'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
 	'meta' => array(
 		'total' => $num_records,
 		'offset' => $offset != 0?(int)$offset:(int)0,
