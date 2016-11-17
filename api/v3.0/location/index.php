@@ -175,6 +175,9 @@ if(isset($catId) && $catId != ''){
 			$value['location']['description']	= html_entity_decode(htmlentities($row['description'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 			$value['image_url'] 				= ($row['image'] != '')?$imagePath.$row['image']:NULL;
 			$value['is_featured_location'] 		= $row['value'];
+			# Share URL
+			$value['shareurl'] = shareURL($menu,$value['title'],$row['loc_id'],'location');
+			
 			$num_records++;
 			
 			if(isset($value) && count($value) > 0 ){

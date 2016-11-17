@@ -84,4 +84,48 @@ function nextPageURL($limit,$num_records,$nextUrlOffset){
 	}
 }	
 
+
+
+/**
+* Fucntion to create shareURL 
+* Developer: Yogi
+* @$menu:Menu Name, @$title:Title, @$id:id, @$type:Componenet type (Event, Locaiton, content etc) 
+*/	
+function shareURL($menu,$title,$id,$type){
+	
+	if(isset($menu) && $menu != ''){
+		# If menu is there in URL
+		if($type == 'location'){
+			# Type : Location
+			//$title = str_replace(' ', '-', strtolower($title)); // Convert spaces to dash and lowercase
+			$title = seoUrl($title); // Convert spaces to dash and lowercase
+			
+			$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$menu."/detail/".$id."/1/".$title;
+			return $shareURL;
+		
+		}elseif($menu == 'event'){
+			# Type : Event
+			// Event code
+		
+		}elseif($menu == 'content'){
+			# Type : Content
+			// Content code
+		}
+	}else{ //If menu is not in URL
+		return '';
+	}	
+} // Function end tag
+
+function seoUrl($string) {
+    //Lower case everything
+    $string = strtolower($string);
+    //Make alphanumeric (removes all other characters)
+    $string = preg_replace("/[^a-z0-9_\s-]/", "", $string);
+    //Clean up multiple dashes or whitespaces
+    $string = preg_replace("/[\s-]+/", " ", $string);
+    //Convert whitespaces and underscore to dash
+    $string = preg_replace("/[\s_]/", "-", $string);
+    return $string;
+}
+
 ?>
