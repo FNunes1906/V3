@@ -105,10 +105,12 @@ if(isset($catId) && $catId != ''){
 		$value['title'] = $new_title;
 */		# Process End for title : Yogi
 		
+		#Artilce Title
 		$value['title']					= handleSpecialChar($row['title']);
 		$value['short_description']		= html_entity_decode(htmlentities($row['introtext'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 		$value['description']			= html_entity_decode(htmlentities($row['fulltext'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 		
+		# Category Name
 		$value['category']				= singleCatNameFromID($row['catid']);
 		$value['is_featured_article']	= ($row['content_id'] != '')?1:0;
 	
@@ -137,6 +139,8 @@ if(isset($catId) && $catId != ''){
 		$value['image_url'] = (count($links) > 0)?$links[0]:'';
 		# Image operations END	************************
 		
+		# Share URL added by Yogi on Nov 30 2016
+		$value['shareurl'] = shareURL($menu,$value['title'],$row['id'],'content',$value['category'],$catId);
 		
 	# Assigning Array values to $data array variable
 		$data[] = $value;		
@@ -149,7 +153,6 @@ if(isset($catId) && $catId != ''){
 	$response = array(
 	'data' => isset($data)?$data:null,
 	//'ad' => isset($banner_code)?$banner_code:null,
-	'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
 	'meta' => array(
 		'total' => $num_records,
 		'limit' => $limit != 0?(int)$limit:(int)$num_records,
@@ -258,7 +261,6 @@ if(isset($catId) && $catId != ''){
 	$response = array(
 	'data' => isset($data)?$data:null,
 	//'ad' => isset($banner_code)?$banner_code:null,
-	'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
 	'meta' => array(
 		'total' => $num_records,
 		'limit' => $limit != 0?(int)$limit:(int)$num_records,

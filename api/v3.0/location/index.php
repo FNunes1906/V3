@@ -190,7 +190,6 @@ if(isset($catId) && $catId != ''){
 	$response = array(
 	'data' => count($data) > 1?$data:'',
 	//'ad' => $banner_code,
-	'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
 	'meta' => array(
 		'total' => $num_records,
 		'offset' => $offset != 0?(int)$offset:(int)0,
@@ -267,7 +266,6 @@ API Request	: /event/?id=1
 	$response = array(
 	'data' => count($data) > 1?$data:'',
 	//'ad' => $banner_code,
-	'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
 	'meta' => array(
 		'total' => $num_records,
 		'offset' => $offset != 0?(int)$offset:(int)0,
@@ -351,7 +349,6 @@ API Request	: /location/
 	$response = array(
 	'data' => count($data) > 1?$data:'',
 	'ad' => $banner_code,
-	'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
 	'meta' => array(
 		'total' => $num_records,
 		'offset' => $offset != 0?(int)$offset:(int)0,

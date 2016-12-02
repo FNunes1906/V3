@@ -84,15 +84,13 @@ function nextPageURL($limit,$num_records,$nextUrlOffset){
 	}
 }	
 
-
-
 /**
 * Fucntion to create shareURL 
 * Developer: Yogi
 * @$menu:Menu Name, @$title:Title, @$id:id, @$type:Componenet type (Event, Locaiton, content etc) 
 */	
-function shareURL($menu,$title,$id,$type){
-	
+function shareURL($menu,$title,$id,$type,$cname = NULL,$cid = NULL){
+
 	if(isset($menu) && $menu != ''){
 		# If menu is there in URL
 		if($type == 'location'){
@@ -103,13 +101,17 @@ function shareURL($menu,$title,$id,$type){
 			$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$menu."/detail/".$id."/1/".$title;
 			return $shareURL;
 		
-		}elseif($menu == 'event'){
+		}elseif($type == 'event'){
 			# Type : Event
 			// Event code
 		
-		}elseif($menu == 'content'){
+		}elseif($type == 'content'){
 			# Type : Content
-			// Content code
+			//$title = str_replace(' ', '-', strtolower($title)); // Convert spaces to dash and lowercase
+			$title = seoUrl($title); // Convert spaces to dash and lowercase
+			
+			$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$menu."/".$cid."-".strtolower($cname)."/".$id."-".$title;
+			return $shareURL;
 		}
 	}else{ //If menu is not in URL
 		return '';
