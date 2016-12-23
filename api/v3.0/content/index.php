@@ -251,7 +251,10 @@ if(isset($catId) && $catId != ''){
 		$value['image_url'] = (count($links) > 0)?$links[0]:'';
 		# Image operations END	************************
 		
+		# Share URL added by Yogi on Nov 30 2016
+		$value['shareurl'] = shareURL($menu,$value['title'],$row['id'],'content',$value['category'],$catId);
 	# Assigning Array values to $data array variable
+		
 		$data[] = $value;		
 	}
 	# Coding for Next URL

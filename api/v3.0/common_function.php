@@ -52,6 +52,44 @@ function singleCatNameFromID($caterogyIDs){
 }
 
 
+/**
+* Fucntion to find Cateogory ID from category NAME
+* Developer: Yogi
+*/	
+function fetchCatIdFromName($cat_name){
+	
+	$select_query	= "SELECT id from jos_categories WHERE title = '$cat_name' ";
+	$result			= mysql_query($select_query);
+	$num_records	= mysql_num_rows($result);
+	
+	while($catrow = mysql_fetch_array($result)){
+		$categoryID = handleSpecialChar($catrow['id']);
+	}
+	
+	if(isset($categoryID)){ return $categoryID; }
+}
+
+/**
+* Fucntion to get Menu name from Category ID for Article / Blog
+* Developer: Yogi
+*/	
+function fetchMenuNameFromCatID($categoty_id){
+	$select_query	= "SELECT name from jos_menu WHERE link LIKE '%index.php?option=com_content&view=category&layout=blog&id=$categoty_id%' AND menutype LIKE 'leftmenu' ";
+	$result			= mysql_query($select_query);
+	$num_records	= mysql_num_rows($result);
+	
+	while($menurow = mysql_fetch_array($result)){
+		$menu_name = handleSpecialChar($menurow['name']);
+	}
+	
+	if(isset($menu_name)){ 
+		return strtolower($menu_name);
+	}else{
+		return 'home';
+	}
+}
+
+
 /* Function to calculate Location Distance */
 function distance($lat1, $lon1, $lat2, $lon2, $unit){ 
 	$theta	= $lon1 - $lon2; 
@@ -110,7 +148,11 @@ function shareURL($menu,$title,$id,$type,$cname = NULL,$cid = NULL){
 			//$title = str_replace(' ', '-', strtolower($title)); // Convert spaces to dash and lowercase
 			$title = seoUrl($title); // Convert spaces to dash and lowercase
 			
-			$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$menu."/".$cid."-".strtolower($cname)."/".$id."-".$title;
+			if(isset($cid) && $cid != ''){
+				$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$menu."/".$cid."-".strtolower($cname)."/".$id."-".$title;
+			}else{
+				$shareURL = "http://".$_SERVER['HTTP_HOST']."/".fetchMenuNameFromCatID(fetchCatIdFromName($cname))."/".fetchCatIdFromName($cname)."-".strtolower($cname)."/".$id."-".$title;
+			}
 			return $shareURL;
 		}
 	}else{ //If menu is not in URL
