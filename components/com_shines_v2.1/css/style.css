@@ -378,7 +378,7 @@ td { vertical-align: top; }
 		/* End */
 		ul.mainList{
 			margin: 0 0 10px 0; list-style: none;padding: 0px;
-			background: url(../images/l/twBg.png) repeat-y scroll 100% 100%;
+			/* background: url(../images/l/twBg.png) repeat-y scroll 100% 100%; */
 		}
 		#main ul.mainList h1{
 			background: none;text-transform: none;font-weight: bold; font-size: 1.3em;
@@ -520,10 +520,10 @@ only screen and (min-device-pixel-ratio: 1.5) {
 			background-size: 73px 30px ;
 	}	
   ul.mainList{
-		background: url(../images/h/twBg.png) no-repeat bottom right;
+		/*background: url(../images/h/twBg.png) no-repeat bottom right;
 		-webkit-background-size: 272px 249px ;  
 		-moz-background-size: 272px 249px ;  
-		background-size: 272px 249px ;
+		background-size: 272px 249px ;*/
 	}    
 	#main ul.mainList h3.hasRSVP{
 		background: url(../images/h/check@2x.png) no-repeat right 9px;

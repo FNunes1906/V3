@@ -152,6 +152,14 @@ if (!empty($this->items)) {
 			$rawvid = $value->videocode;
 			$pieces = explode("?", $rawvid);
 			$piece = explode("v/", $pieces[0]);
+			
+			#VIDEO_CODE START
+			preg_match('/src="([^"]+)"/', $rawvid, $match);
+			if(count($match) > 0){
+				$url = explode('/',$match[1]);
+				$piece[1] = $url[count($url)-1];
+			}
+			
 			//echo "<img src='http://img.youtube.com/vi/".$piece[1]."/0.jpg'>";
 			echo '<dt><a href="http://youtu.be/'.$piece[1].'" data-poptrox="youtube,800x480"><img src="http://img.youtube.com/vi/'.$piece[1].'/0.jpg" title="'.PhocaGalleryText::wordDelete($value->title, $this->tmpl['charlengthname'], '...').'"></a></dt>';
 		}else{
@@ -223,6 +231,14 @@ if (!empty($this->items)) {
 					$rawvid = $value->videocode;
 					$pieces = explode("?", $rawvid);
 					$piece = explode("v/", $pieces[0]);
+					
+					#VIDEO_CODE
+					preg_match('/src="([^"]+)"/', $rawvid, $match);
+					if(count($match) > 0){
+						$url = explode('/',$match[1]);
+						$piece[1] = $url[count($url)-1];
+					}
+					
 					echo "<img src='http://img.youtube.com/vi/".$piece[1]."/0.jpg'>";
 					//echo '<a href="http://youtu.be/'.$piece[1].' data-poptrox="youtube,800x480">video</a>';
 				}else{
