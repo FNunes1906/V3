@@ -232,6 +232,8 @@ class ContentsController extends Controller
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));*/
+		
+
 		$model=new Contents('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Contents']))
@@ -244,6 +246,14 @@ class ContentsController extends Controller
 	
 	public function actionFront()
 	{
+		# CODE FOR SET PAGE SIZE START
+		if ( isset( $_GET[ 'pageSize' ] ) )
+		{
+			Yii::app()->user->setState( 'pageSize', (int) $_GET[ 'pageSize' ] );
+			unset( $_GET[ 'pageSize' ] );
+		}
+		# CODE FOR SET PAGE SIZE END
+
 		$model=new Contents('searchFront');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Contents']))
