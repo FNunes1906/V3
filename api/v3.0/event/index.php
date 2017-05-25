@@ -212,6 +212,9 @@ if(isset($catId) && $catId != ''){
     			unset($value['duration']);
 			}
 			
+			# Generate share Url
+			$value['shareurl']				= shareURL('icalrepeat.detail',$value['title'],$value['id'],$menu,null,$value['category_id'],$value['start_time']);
+
 			/* Assigning Array values to $data array variable */
 			$data[] = $value;
 			

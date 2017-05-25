@@ -127,8 +127,7 @@ function nextPageURL($limit,$num_records,$nextUrlOffset){
 * Developer: Yogi
 * @$menu:Menu Name, @$title:Title, @$id:id, @$type:Componenet type (Event, Locaiton, content etc) 
 */	
-function shareURL($menu,$title,$id,$type,$cname = NULL,$cid = NULL){
-
+function shareURL($menu,$title,$id,$type,$cname = NULL,$cid = NULL,$start_date = NULL){
 	if(isset($menu) && $menu != ''){
 		# If menu is there in URL
 		if($type == 'location'){
@@ -139,15 +138,18 @@ function shareURL($menu,$title,$id,$type,$cname = NULL,$cid = NULL){
 			$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$menu."/detail/".$id."/1/".$title;
 			return $shareURL;
 		
-		}elseif($type == 'event'){
+		}elseif(strtolower($type) == 'events'){
 			# Type : Event
 			// Event code
-		
+			$title = seoUrl($title); // Convert spaces to dash and lowercase
+			$date=seoDate($start_date);
+			$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$type."/".$menu."/".$date."/".$id."/".$cid."/".$title;
+			$shareURL = strtolower($shareURL);
+			return $shareURL;
 		}elseif($type == 'content'){
 			# Type : Content
 			//$title = str_replace(' ', '-', strtolower($title)); // Convert spaces to dash and lowercase
 			$title = seoUrl($title); // Convert spaces to dash and lowercase
-			
 			if(isset($cid) && $cid != ''){
 				$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$menu."/".$cid."-".strtolower($cname)."/".$id."-".$title;
 			}else{
@@ -160,6 +162,7 @@ function shareURL($menu,$title,$id,$type,$cname = NULL,$cid = NULL){
 	}	
 } // Function end tag
 
+
 function seoUrl($string) {
     //Lower case everything
     $string = strtolower($string);
@@ -170,6 +173,9 @@ function seoUrl($string) {
     //Convert whitespaces and underscore to dash
     $string = preg_replace("/[\s_]/", "-", $string);
     return $string;
+}
+function seoDate($date){
+	return date('Y/m/d',strtotime($date));
 }
 
 ?>
