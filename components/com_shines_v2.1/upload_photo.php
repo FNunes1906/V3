@@ -3,6 +3,16 @@
 	define(ABS_SRV_PATH,'../../');
 	define(DS,'/'); 
 ?>
+<style>
+.alert {padding: 20px;background-color: #f44336;color: white;opacity: 1;transition: opacity 0.6s;margin-bottom: 15px;}
+
+.alert.success {background-color: #4CAF50;}
+.alert.info {background-color: #2196F3;}
+.alert.warning {background-color: #ff9800;}
+
+.closebtn {margin-left: 15px;color: white;font-weight: bold;float: right;font-size: 22px;line-height: 20px;cursor: pointer;transition: 0.3s;}
+.closebtn:hover {color: black;}
+</style>
 <script type="text/javascript" language="javascript">
 	  
 	  function form_validation() {
@@ -10,13 +20,19 @@
 		var ext = filename.substring(filename.lastIndexOf('.') + 1);
 		//var iSize = document.getElementById('userphoto').files[0].size;
 		if(filename == ""){
-			alert ("<?php echo JText::_('CHOOSE_IMAGE') ?>");
+			//setAlertMessage('CHOOSE_IMAGE');
+			document.getElementById('CHOOSE_IMAGE').style.display  = "block";
+			document.getElementById('CHOOSE_IMAGE').style.opacity  = 1;
+			//alert ("<?php echo JText::_('CHOOSE_IMAGE') ?>");
 			document.uploadForm.userphoto.focus();
 			return false;
 	 	}else if(ext == "gif" || ext == "GIF" || ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG" || ext == "PNG" || ext == "png"){
 			return true;
 		}else{
-			alert ("<?php echo JText::_('FILE_TYPE') ?>");
+			//setAlertMessage('FILE_TYPE');
+			document.getElementById('FILE_TYPE').style.display  = "block";
+			document.getElementById('FILE_TYPE').style.opacity  = 1;
+			//alert ("<?php echo JText::_('FILE_TYPE') ?>");
 			document.uploadForm.userphoto.value="";
 			document.uploadForm.userphoto.focus();
 			return false;
@@ -26,8 +42,11 @@
 <?php 
 if(isset($_FILES['userphoto'])) {
     if($_FILES['userphoto']['size'] > 2097152) { //2 MB (size is also in bytes) ?> 
+		
        <script>
-				alert ("<?php echo JText::_('GREATER_FILE_SIZE') ?>");
+	   	document.getElementById('GREATER_FILE_SIZE').style.display  = "block";
+			document.getElementById('GREATER_FILE_SIZE').style.opacity  = 1;
+				//alert ("<?php echo JText::_('GREATER_FILE_SIZE') ?>");
 		</script>
 	  <!-- echo JText::_('GREATER_FILE_SIZE');-->
  <?php  } else {
@@ -142,9 +161,11 @@ if(isset($_FILES['userphoto'])) {
 		 
 		}
 		if($photo_upload == True){ ?>
-			<script>
-				alert ("<?php echo JText::_('THANKYOU'); ?>");
-				window.location.href = "galleries.php";
+			<script type="text/javascript" language="javascript">
+				document.getElementById('THANKYOU').style.display  = "block";
+				document.getElementById('THANKYOU').style.opacity  = 1;	
+				setTimeout(function(){window.location.href = "galleries.php";},3000);
+				//alert ("<?php echo JText::_('THANKYOU'); ?>");
 			</script>
 		<?php } 
     }
@@ -160,7 +181,6 @@ if(isset($_FILES['userphoto'])) {
 <!--<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />-->
 <meta name="viewport" content="width=280, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <link href="/components/com_shines_v2.1/css/style.css" rel="stylesheet" media="screen" type="text/css" />
-
 <title><?php echo JText::_('UP_YR_PT');?></title>
 
 <!--<link href="pics/startup.png" rel="apple-touch-startup-image" /> -->
@@ -212,9 +232,32 @@ if(isset($_FILES['userphoto'])) {
 			background: linear-gradient(to bottom,  #6abc43 0%,#4b832f 100%);
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6abc43', endColorstr='#4b832f',GradientType=0 );
 		}
+		.modal {display: none; position: fixed;z-index: 1;left: 0;top: 0;width: 100%;height: 100%;overflow: auto;background-color: rgb(0,0,0);background-color: rgba(0,0,0,0.4); }
+.modal-content {background-color: #fefefe;margin: 15% auto;padding: 20px;border: 1px solid #888;width: 80%;}
+.close {color: #aaa;float: right;font-size: 28px;font-weight: bold;}
+.close:hover,.close:focus {color: black;text-decoration: none;cursor: pointer;}
+
 </style>
 </head>
 <body>
+<div id="GREATER_FILE_SIZE" class="alert info" style="display: none;">
+  <span class="closebtn">&times;</span>  
+  <?php echo JText::_('GREATER_FILE_SIZE'); ?>
+</div>
+<div id="THANKYOU" class="alert success" style="display: none;">
+  <span class="closebtn">&times;</span>  
+  <?php echo JText::_('THANKYOU'); ?>
+</div>
+<div id="FILE_TYPE" class="alert info" style="display: none;">
+  <span class="closebtn">&times;</span>  
+  <?php echo JText::_('FILE_TYPE') ?>
+
+</div>
+<div id="CHOOSE_IMAGE" class="alert warning" style="display: none;">
+  <span class="closebtn">&times;</span>  
+<?php echo JText::_('CHOOSE_IMAGE') ?>
+</div>
+			
 <h1 class="display upload"><?php echo JText::_('UP_YR_PT');?></h1>
     
 <div id="main" role="main">
@@ -258,3 +301,14 @@ if(isset($_FILES['userphoto'])) {
 </div>
 </body>
 </html>
+<script>
+var close = document.getElementsByClassName("closebtn");
+var i;
+for (i = 0; i < close.length; i++) {
+    close[i].onclick = function(){
+        var div = this.parentElement;
+        div.style.opacity = "0";
+        setTimeout(function(){ div.style.display = "none"; }, 600);
+    }
+}
+</script>
