@@ -176,6 +176,15 @@ class EventsController extends Controller
 			'dataProvider'=>$dataProvider,
 		));*/
 		
+		# CODE FOR SET PAGE SIZE START
+		if ( isset( $_GET[ 'pageSize' ] ) )
+		{
+			Yii::app()->user->setState( 'pageSize', (int) $_GET[ 'pageSize' ] );
+			unset( $_GET[ 'pageSize' ] );
+		}
+		# CODE FOR SET PAGE SIZE END 
+
+		
 		$model=new Events('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Events']))

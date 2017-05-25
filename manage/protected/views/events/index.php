@@ -83,6 +83,26 @@ if(isset($_REQUEST["menu_id"])){
 <!-- TABLE HEADING END -->
 
 <div class="box-content ">
+<?php 
+	# CODE FOR SET PAGE SIZE START
+	$pageSize = Yii::app()->user->getState( 'pageSize', Yii::app()->params[ 'defaultPageSize' ] );
+	$pageSizeDropDown = CHtml::dropDownList(
+		'pageSize',
+		$pageSize,
+		array( 10 => 10, 25 => 25, 50 => 50, 100 => 100 ),
+		array(
+			'class'    => 'change-pagesize', 
+			'onchange' => "$.fn.yiiGridView.update('events-grid',{data:{pageSize:$(this).val()}});",
+		)
+	);
+
+?>
+<div class="page-size-wrap">
+	<span>Display </span><?php echo  $pageSizeDropDown; ?> Records
+</div>
+<?php Yii::app()->clientScript->registerCss( 'initPageSizeCSS', '.page-size-wrap{text-align: right;}' ); 
+	# CODE FOR SET PAGE SIZE END ?>
+
 
 <?php $this->widget('zii.widgets.grid.CGridView',array_merge(CommonController::CGridViewCommonSettings(),array(
 

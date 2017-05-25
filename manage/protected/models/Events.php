@@ -193,6 +193,9 @@ class Events extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination' => array( # CODE FOR SET PAGE SIZE START
+				'pageSize' => Yii::app()->user->getState( 'pageSize', Yii::app()->params[ 'defaultPageSize' ] ),
+			), # CODE FOR SET PAGE SIZE END 
 			'sort'=>array(
 		        'defaultOrder'=>'t.ev_id DESC',
 				'attributes'=>array(
