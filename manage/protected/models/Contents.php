@@ -181,7 +181,7 @@ class Contents extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'pagination' => array( # CODE FOR SET PAGE SIZE START
-				'pageSize' => Yii::app()->user->getState( 'pageSize', Yii::app()->params[ 'defaultPageSize' ] ),
+				'pageSize' => Yii::app()->user->getState( 'pageSize'.__CLASS__, Yii::app()->params[ 'defaultPageSize' ] ),
 			), # CODE FOR SET PAGE SIZE END 
 			
 			'sort'=>array(
@@ -261,7 +261,10 @@ class Contents extends CActiveRecord
 		
 		$criteria->addCondition("state <> -2");
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria'=>$criteria,			
+			'pagination' => array( # CODE FOR SET PAGE SIZE START
+				'pageSize' => Yii::app()->user->getState( 'pageSizeContents', Yii::app()->params[ 'defaultPageSize' ] ),
+			), # CODE FOR SET PAGE SIZE END 
 			'sort'=>array(
 		        'defaultOrder'=>'frontpage.ordering ASC',
 				'attributes'=>array(

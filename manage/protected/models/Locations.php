@@ -212,6 +212,10 @@ class Locations extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination' => array( # CODE FOR SET PAGE SIZE START
+				'pageSize' => Yii::app()->user->getState( 'pageSizeLocations', Yii::app()->params[ 'defaultPageSize' ] ),
+			), # CODE FOR SET PAGE SIZE END 
+			
 			'sort'=>array(
 		        'defaultOrder'=>'loc_id DESC',
 				),

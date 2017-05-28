@@ -652,6 +652,14 @@ if(isset($page_metas) AND $page_metas!=''){
 	 */
 	public function actionIndex()
 	{
+		# CODE FOR SET PAGE SIZE START
+		if ( isset( $_GET[ 'pageSize' ] ) )
+		{
+			Yii::app()->user->setState( 'pageSizeMenu', (int) $_GET[ 'pageSize' ] );
+			unset( $_GET[ 'pageSize' ] );
+		}
+		# CODE FOR SET PAGE SIZE END
+		
 		$model=new Menu('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Menu']))

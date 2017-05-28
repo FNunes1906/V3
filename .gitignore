@@ -1,3 +1,12 @@
 .DS_Store
 v3.clpprj
-configuration.php
+TW.clpprj
+logs/error_example1.log
+yii
+partner/images/
+partner/masterdefaultv3/
+partner/masterdefaultspanishv3/
+partner/masterdefaultv3/images
+manage/assets/
+partner/pcola/
+partner/masterdefaultv3old/

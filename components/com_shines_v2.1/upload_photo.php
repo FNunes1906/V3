@@ -1,8 +1,14 @@
+
 <?php
 	include("connection.php");
 	define(ABS_SRV_PATH,'../../');
 	define(DS,'/'); 
 ?>
+<div id="THANKYOU" class="alert success" style="display: none;">
+  <span class="closebtn">&times;</span>  
+  <?php echo JText::_('THANKYOU'); ?>
+</div>
+
 <style>
 .alert {padding: 20px;background-color: #f44336;color: white;opacity: 1;transition: opacity 0.6s;margin-bottom: 15px;}
 
@@ -243,10 +249,6 @@ if(isset($_FILES['userphoto'])) {
 <div id="GREATER_FILE_SIZE" class="alert info" style="display: none;">
   <span class="closebtn">&times;</span>  
   <?php echo JText::_('GREATER_FILE_SIZE'); ?>
-</div>
-<div id="THANKYOU" class="alert success" style="display: none;">
-  <span class="closebtn">&times;</span>  
-  <?php echo JText::_('THANKYOU'); ?>
 </div>
 <div id="FILE_TYPE" class="alert info" style="display: none;">
   <span class="closebtn">&times;</span>  

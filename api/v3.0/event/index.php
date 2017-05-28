@@ -504,7 +504,7 @@ API Request	: /event/
 		$response = array(
 	    	'data' => $data,
 	    	//'ad' => $banner_code,
-			'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
+			//'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
 			'meta' => array(
 	        'total' => $num_records,
 	        'limit' => $limit != 0?(int)$limit:(int)$num_records,

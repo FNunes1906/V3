@@ -186,6 +186,14 @@ class CategoriesController extends Controller
 	/* Listing of all banner categories */
 	public function actionBanner_cat()
 	{
+		# CODE FOR SET PAGE SIZE START
+		if ( isset( $_GET[ 'pageSize' ] ) )
+		{
+			Yii::app()->user->setState( 'pageSizeEventsCat', (int) $_GET[ 'pageSize' ] );
+			unset( $_GET[ 'pageSize' ] );
+		}
+		# CODE FOR SET PAGE SIZE END
+		
 		$model=new Categories('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Categories']))
@@ -211,6 +219,14 @@ class CategoriesController extends Controller
 	/* Listing of all Event categories */
 	public function actionEvents_cat()
 	{
+		# CODE FOR SET PAGE SIZE START
+		if ( isset( $_GET[ 'pageSize' ] ) )
+		{
+			Yii::app()->user->setState( 'pageSizeEventsCat', (int) $_GET[ 'pageSize' ] );
+			unset( $_GET[ 'pageSize' ] );
+		}
+		# CODE FOR SET PAGE SIZE END
+		
 		$model=new Categories('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Categories']))

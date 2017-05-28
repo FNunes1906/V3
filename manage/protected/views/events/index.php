@@ -85,7 +85,7 @@ if(isset($_REQUEST["menu_id"])){
 <div class="box-content ">
 <?php 
 	# CODE FOR SET PAGE SIZE START
-	$pageSize = Yii::app()->user->getState( 'pageSize', Yii::app()->params[ 'defaultPageSize' ] );
+	$pageSize = Yii::app()->user->getState( 'pageSizeEvents', Yii::app()->params[ 'defaultPageSize' ] );
 	$pageSizeDropDown = CHtml::dropDownList(
 		'pageSize',
 		$pageSize,

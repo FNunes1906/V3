@@ -206,6 +206,13 @@ class BannersController extends Controller
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));*/
+		# CODE FOR SET PAGE SIZE START
+		if ( isset( $_GET[ 'pageSize' ] ) )
+		{
+			Yii::app()->user->setState( 'pageSizeBanner', (int) $_GET[ 'pageSize' ] );
+			unset( $_GET[ 'pageSize' ] );
+		}
+		# CODE FOR SET PAGE SIZE END
 		
 		$model=new Banners('search');
 		$model->unsetAttributes();  // clear any default values

@@ -68,6 +68,26 @@ $this->breadcrumbs=array(
 			
 
 <div class="box-content ">
+<?php 
+	# CODE FOR SET PAGE SIZE START
+	$pageSize = Yii::app()->user->getState( 'pageSizeBanner', Yii::app()->params[ 'defaultPageSize' ] );
+	$pageSizeDropDown = CHtml::dropDownList(
+		'pageSize',
+		$pageSize,
+		array( 10 => 10, 25 => 25, 50 => 50, 100 => 100),
+		array(
+			'class'    => 'change-pagesize', 
+			'onchange' => "$.fn.yiiGridView.update('banners-grid',{data:{pageSize:$(this).val()}});",
+		)
+	);
+
+?>
+<div class="page-size-wrap">
+	<span>Display </span><?php echo  $pageSizeDropDown; ?> Records
+</div>
+<?php Yii::app()->clientScript->registerCss( 'initPageSizeCSS', '.page-size-wrap{text-align: right;}' ); 
+	# CODE FOR SET PAGE SIZE END ?>
+
 <!--<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>-->
 	<div class="search-form" style="display:none">
 		<?php $this->renderPartial('_search',array('model'=>$model,)); ?>

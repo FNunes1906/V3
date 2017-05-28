@@ -90,7 +90,7 @@ if(count($secData)>0)
 <div class="box-content ">
 <?php 
 	# CODE FOR SET PAGE SIZE START
-	$pageSize = Yii::app()->user->getState( 'pageSize', Yii::app()->params[ 'defaultPageSize' ] );
+	$pageSize = Yii::app()->user->getState( 'pageSizeContents', Yii::app()->params[ 'defaultPageSize' ] );
 	$pageSizeDropDown = CHtml::dropDownList(
 		'pageSize',
 		$pageSize,

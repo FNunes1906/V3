@@ -287,7 +287,13 @@ class LocationsController extends Controller
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));*/
-		
+		# CODE FOR SET PAGE SIZE START
+		if ( isset( $_GET[ 'pageSize' ] ) )
+		{
+			Yii::app()->user->setState( 'pageSizeLocations', (int) $_GET[ 'pageSize' ] );
+			unset( $_GET[ 'pageSize' ] );
+		}
+		# CODE FOR SET PAGE SIZE END
 		$model=new Locations('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Locations']))

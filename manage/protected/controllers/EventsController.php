@@ -179,7 +179,7 @@ class EventsController extends Controller
 		# CODE FOR SET PAGE SIZE START
 		if ( isset( $_GET[ 'pageSize' ] ) )
 		{
-			Yii::app()->user->setState( 'pageSize', (int) $_GET[ 'pageSize' ] );
+			Yii::app()->user->setState( 'pageSizeEvents', (int) $_GET[ 'pageSize' ] );
 			unset( $_GET[ 'pageSize' ] );
 		}
 		# CODE FOR SET PAGE SIZE END 

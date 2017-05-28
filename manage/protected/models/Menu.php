@@ -164,9 +164,13 @@ class Menu extends CActiveRecord
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			'pagination'=>array(
+			'pagination' => array( # CODE FOR SET PAGE SIZE START
+				'pageSize' => Yii::app()->user->getState( 'pageSizeMenu', Yii::app()->params[ 'defaultPageSize' ] ),
+			), # CODE FOR SET PAGE SIZE END 
+			
+			/*'pagination'=>array(
     				'pageSize'=>500,
-   			 ),
+   			 ),*/
 			'sort'=>array(
 		        'defaultOrder'=>'t.ordering ASC,t.id ASC',
 				),

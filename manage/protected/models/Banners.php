@@ -155,6 +155,9 @@ class Banners extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination' => array( # CODE FOR SET PAGE SIZE START
+				'pageSize' => Yii::app()->user->getState( 'pageSizeBanner', Yii::app()->params[ 'defaultPageSize' ] ),
+			), # CODE FOR SET PAGE SIZE END 
 			'sort'=>array(
 		        'defaultOrder'=>'ordering ASC',
 		    ),
