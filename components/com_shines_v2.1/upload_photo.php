@@ -8,15 +8,18 @@
   <span class="closebtn">&times;</span>  
   <?php echo JText::_('THANKYOU'); ?>
 </div>
-
+<div id="GREATER_FILE_SIZE" class="alert info" style="display: none;">
+  <span class="closebtn">&times;</span>  
+  <?php echo JText::_('GREATER_FILE_SIZE'); ?>
+</div>
 <style>
-.alert {padding: 20px;background-color: #f44336;color: white;opacity: 1;transition: opacity 0.6s;margin-bottom: 15px;}
+.alert {padding: 20px;background-color: #fff;opacity: 1;transition: opacity 0.6s;margin-bottom: 15px;border-bottom: 1px solid #dfdfdf}
 
-.alert.success {background-color: #4CAF50;}
-.alert.info {background-color: #2196F3;}
-.alert.warning {background-color: #ff9800;}
+.alert.success {color: #4CAF50;}
+.alert.info {color: #FF0000;}
+.alert.warning {color: #FF0000;}
 
-.closebtn {margin-left: 15px;color: white;font-weight: bold;float: right;font-size: 22px;line-height: 20px;cursor: pointer;transition: 0.3s;}
+.closebtn {margin-left: 15px;color: #222;font-weight: bold;float: right;font-size: 22px;line-height: 20px;cursor: pointer;transition: 0.3s;}
 .closebtn:hover {color: black;}
 </style>
 <script type="text/javascript" language="javascript">
@@ -24,21 +27,24 @@
 	  function form_validation() {
 		var filename=document.uploadForm.userphoto.value;
 		var ext = filename.substring(filename.lastIndexOf('.') + 1);
-		//var iSize = document.getElementById('userphoto').files[0].size;
+		var iSize = document.getElementById('userphoto').files[0].size;
+		if(iSize > 2097152){
+			document.getElementById('GREATER_FILE_SIZE').style.display  = "block";
+			document.getElementById('GREATER_FILE_SIZE').style.opacity  = 1;
+			document.uploadForm.userphoto.value="";
+			document.uploadForm.userphoto.focus();
+			return false;
+		}
 		if(filename == ""){
-			//setAlertMessage('CHOOSE_IMAGE');
 			document.getElementById('CHOOSE_IMAGE').style.display  = "block";
 			document.getElementById('CHOOSE_IMAGE').style.opacity  = 1;
-			//alert ("<?php echo JText::_('CHOOSE_IMAGE') ?>");
 			document.uploadForm.userphoto.focus();
 			return false;
 	 	}else if(ext == "gif" || ext == "GIF" || ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG" || ext == "PNG" || ext == "png"){
 			return true;
 		}else{
-			//setAlertMessage('FILE_TYPE');
 			document.getElementById('FILE_TYPE').style.display  = "block";
 			document.getElementById('FILE_TYPE').style.opacity  = 1;
-			//alert ("<?php echo JText::_('FILE_TYPE') ?>");
 			document.uploadForm.userphoto.value="";
 			document.uploadForm.userphoto.focus();
 			return false;
@@ -51,7 +57,7 @@ if(isset($_FILES['userphoto'])) {
 		
        <script>
 	   	document.getElementById('GREATER_FILE_SIZE').style.display  = "block";
-			document.getElementById('GREATER_FILE_SIZE').style.opacity  = 1;
+		document.getElementById('GREATER_FILE_SIZE').style.opacity  = 1;
 				//alert ("<?php echo JText::_('GREATER_FILE_SIZE') ?>");
 		</script>
 	  <!-- echo JText::_('GREATER_FILE_SIZE');-->
@@ -246,10 +252,7 @@ if(isset($_FILES['userphoto'])) {
 </style>
 </head>
 <body>
-<div id="GREATER_FILE_SIZE" class="alert info" style="display: none;">
-  <span class="closebtn">&times;</span>  
-  <?php echo JText::_('GREATER_FILE_SIZE'); ?>
-</div>
+
 <div id="FILE_TYPE" class="alert info" style="display: none;">
   <span class="closebtn">&times;</span>  
   <?php echo JText::_('FILE_TYPE') ?>
