@@ -12,6 +12,16 @@
   <span class="closebtn">&times;</span>  
   <?php echo JText::_('GREATER_FILE_SIZE'); ?>
 </div>
+
+<div id="FILE_TYPE" class="alert info" style="display: none;">
+  <span class="closebtn">&times;</span>  
+  <?php echo JText::_('FILE_TYPE') ?>
+
+</div>
+<div id="CHOOSE_IMAGE" class="alert warning" style="display: none;">
+  <span class="closebtn">&times;</span>  
+<?php echo JText::_('CHOOSE_IMAGE') ?>
+</div>
 <style>
 .alert {padding: 20px;background-color: #fff;opacity: 1;transition: opacity 0.6s;margin-bottom: 15px;border-bottom: 1px solid #dfdfdf}
 
@@ -23,30 +33,30 @@
 .closebtn:hover {color: black;}
 </style>
 <script type="text/javascript" language="javascript">
-	  
+	  function setAlertMessage(displayId){
+	  	document.getElementById('GREATER_FILE_SIZE').style.display  = "none";
+	  	document.getElementById('FILE_TYPE').style.display  = "none";
+	  	document.getElementById('CHOOSE_IMAGE').style.display  = "none";
+	  	document.getElementById(displayId).style.display  = "block";
+		document.getElementById(displayId).style.opacity  = 1;
+	  	document.getElementById('userphoto').value = "";
+	  	document.getElementById('userphoto').focus();
+	  }
 	  function form_validation() {
 		var filename=document.uploadForm.userphoto.value;
 		var ext = filename.substring(filename.lastIndexOf('.') + 1);
-		var iSize = document.getElementById('userphoto').files[0].size;
-		if(iSize > 2097152){
-			document.getElementById('GREATER_FILE_SIZE').style.display  = "block";
-			document.getElementById('GREATER_FILE_SIZE').style.opacity  = 1;
-			document.uploadForm.userphoto.value="";
-			document.uploadForm.userphoto.focus();
-			return false;
-		}
 		if(filename == ""){
-			document.getElementById('CHOOSE_IMAGE').style.display  = "block";
-			document.getElementById('CHOOSE_IMAGE').style.opacity  = 1;
-			document.uploadForm.userphoto.focus();
+			setAlertMessage('CHOOSE_IMAGE');
 			return false;
 	 	}else if(ext == "gif" || ext == "GIF" || ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG" || ext == "PNG" || ext == "png"){
+			var iSize = document.getElementById('userphoto').files[0].size;
+			if(iSize > 2097152){
+				setAlertMessage('GREATER_FILE_SIZE');
+				return false;
+			}
 			return true;
 		}else{
-			document.getElementById('FILE_TYPE').style.display  = "block";
-			document.getElementById('FILE_TYPE').style.opacity  = 1;
-			document.uploadForm.userphoto.value="";
-			document.uploadForm.userphoto.focus();
+			setAlertMessage('FILE_TYPE');
 			return false;
 		}
 	}
@@ -253,15 +263,6 @@ if(isset($_FILES['userphoto'])) {
 </head>
 <body>
 
-<div id="FILE_TYPE" class="alert info" style="display: none;">
-  <span class="closebtn">&times;</span>  
-  <?php echo JText::_('FILE_TYPE') ?>
-
-</div>
-<div id="CHOOSE_IMAGE" class="alert warning" style="display: none;">
-  <span class="closebtn">&times;</span>  
-<?php echo JText::_('CHOOSE_IMAGE') ?>
-</div>
 			
 <h1 class="display upload"><?php echo JText::_('UP_YR_PT');?></h1>
     
