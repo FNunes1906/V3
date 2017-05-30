@@ -213,7 +213,7 @@ if(isset($catId) && $catId != ''){
 			}
 			
 			# Generate share Url
-			$value['shareurl']				= shareURL('icalrepeat.detail',$value['title'],$value['id'],$menu,null,$value['category_id'],$value['start_time']);
+			$value['shareurl']				= shareURL($menu,$value['title'],$value['id'],'events',null,$value['category_id'],$value['start_time']);
 
 			/* Assigning Array values to $data array variable */
 			$data[] = $value;
@@ -236,7 +236,7 @@ if(isset($catId) && $catId != ''){
 	        'total'		=> $num_records,
 	        'offset' 	=> $offset != 0?(int)$offset:(int)0,
 	        'limit' 	=> $limit != 0?(int)$limit:(int)$num_records,
-	        'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
+	        //'shareurl' => ($menu != '')?"http://".$_SERVER['HTTP_HOST']."/".$menu:'',
 	        # Added below for Next page url
 	        //'nexturl'	=> "http://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]?offset=$nextUrlOffset&limit=$limit"
 	        'nexturl'	=> $nextPageURL

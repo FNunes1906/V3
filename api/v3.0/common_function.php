@@ -138,12 +138,12 @@ function shareURL($menu,$title,$id,$type,$cname = NULL,$cid = NULL,$start_date =
 			$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$menu."/detail/".$id."/1/".$title;
 			return $shareURL;
 		
-		}elseif(strtolower($type) == 'events'){
+		}elseif($type == 'events'){
 			# Type : Event
 			// Event code
 			$title = seoUrl($title); // Convert spaces to dash and lowercase
 			$date=seoDate($start_date);
-			$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$type."/".$menu."/".$date."/".$id."/".$cid."/".$title;
+			$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$menu."/icalrepeat.detail/".$date."/".$id."/".$cid."/".$title;
 			$shareURL = strtolower($shareURL);
 			return $shareURL;
 		}elseif($type == 'content'){
