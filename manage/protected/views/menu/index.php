@@ -86,7 +86,7 @@ function updateLink($link) {
 	$pageSizeDropDown = CHtml::dropDownList(
 		'pageSize',
 		$pageSize,
-		array( 10 => 10, 25 => 25, 50 => 50, 100 => 100,200 => 200, 500 => 500 ),
+		array( 10 => 10, 25 => 25, 50 => 50, 100 => 100),
 		array(
 			'class'    => 'change-pagesize', 
 			'onchange' => "$.fn.yiiGridView.update('menus-grid',{data:{pageSize:$(this).val()}});",
