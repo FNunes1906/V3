@@ -4,6 +4,16 @@
 	define(ABS_SRV_PATH,'../../');
 	define(DS,'/'); 
 ?>
+<style>
+	.buttonbar{display:block;margin: 5px 0;clear: both;width: 100%;border-bottom:1px solid #d6d6d6;height: auto;min-height: 42px;}
+	.loader{position: fixed;width: 100%; height:100%; top:0; z-index:99;background: #5a5a5a;opacity: 0.8;}
+	.loader > .loading {vertical-align: middle;display: block; margin:50% auto;	}
+</style>
+
+<div id="loader" class="loader" style="display: none;">
+	<img class="loading" src="images/loading.gif"/>
+</div>
+
 <div id="THANKYOU" class="alert success" style="display: none;">
   <span class="closebtn">&times;</span>  
   <?php echo JText::_('THANKYOU'); ?>
@@ -24,11 +34,9 @@
 </div>
 <style>
 .alert {padding: 20px;background-color: #fff;opacity: 1;transition: opacity 0.6s;margin-bottom: 15px;border-bottom: 1px solid #dfdfdf}
-
 .alert.success {color: #4CAF50;}
 .alert.info {color: #FF0000;}
 .alert.warning {color: #FF0000;}
-
 .closebtn {margin-left: 15px;color: #222;font-weight: bold;float: right;font-size: 22px;line-height: 20px;cursor: pointer;transition: 0.3s;}
 .closebtn:hover {color: black;}
 </style>
@@ -40,9 +48,18 @@
 	  	document.getElementById(displayId).style.display  = "block";
 		document.getElementById(displayId).style.opacity  = 1;
 	  	document.getElementById('userphoto').value = "";
+		hideLoader();	  	
 	  	document.getElementById('userphoto').focus();
+		
+	  }
+	  function showLoader(){
+	  	document.getElementById('loader').style.display  = 'block';
+	  }
+	  function hideLoader(){
+	  	document.getElementById('loader').style.display  = 'none';
 	  }
 	  function form_validation() {
+		showLoader();	  	
 		var filename=document.uploadForm.userphoto.value;
 		var ext = filename.substring(filename.lastIndexOf('.') + 1);
 		if(filename == ""){
@@ -184,6 +201,7 @@ if(isset($_FILES['userphoto'])) {
 		}
 		if($photo_upload == True){ ?>
 			<script type="text/javascript" language="javascript">
+			hideLoader();
 				document.getElementById('THANKYOU').style.display  = "block";
 				document.getElementById('THANKYOU').style.opacity  = 1;	
 				setTimeout(function(){window.location.href = "galleries.php";},3000);
@@ -262,13 +280,16 @@ if(isset($_FILES['userphoto'])) {
 </style>
 </head>
 <body>
-
 			
 <h1 class="display upload"><?php echo JText::_('UP_YR_PT');?></h1>
     
 <div id="main" role="main">
 	<div id="zigzag" style="vertical-align:bottom;"> </div>
-	<div id="content">
+	<div id="leftnav" style="margin-left: 10px;" class="buttonbar">
+		<a href="galleries.php"></a>
+	</div>
+		
+		<div id="content">
 		<ul class="mainList" id="placesList">
 			<form id="uploadForm" name="uploadForm" action="" method="post" enctype='multipart/form-data' onSubmit="return form_validation();">
 			  <div id="uploadphoto">
