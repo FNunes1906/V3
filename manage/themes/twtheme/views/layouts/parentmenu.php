@@ -21,6 +21,7 @@
 					{ 
 						foreach($get_parent_menus as $menu_name ){
 							$params = preg_split('/\s+/', $menu_name['params']);
+							$selectedClass = (isset($_REQUEST['menu_id']) && $_REQUEST['menu_id'] == $menu_name['id'])?"active":"";
 							for($i=0; $i < count($params); $i++){
 								$temp =	explode('=',$params[$i]);
 
@@ -32,28 +33,28 @@
 								$cat_param = '';
 							}
 							if($menu_name['link'] == 'index.php?option=com_jevlocations&task=locations.locations'){
-							echo "<li><a href=".Yii::app()->createAbsoluteUrl('locations')."?menu_id=$menu_name[id]&cat_id=$prmsArr[catfilter]>$menu_name[name]</a></li>";	
+							echo "<li class='$selectedClass'><a href=".Yii::app()->createAbsoluteUrl('locations')."?menu_id=$menu_name[id]&cat_id=$prmsArr[catfilter]>$menu_name[name]</a></li>";	
 							}else if($menu_name['link'] == 'index.php?option=com_jevents&view=week&task=week.listevents'){
-								echo "<li><a href=".Yii::app()->createAbsoluteUrl('events')."?menu_id=$menu_name[id]&cat_id=$prmsArr[catid0]>$menu_name[name]</a></li>";
+								echo "<li class='$selectedClass'><a href=".Yii::app()->createAbsoluteUrl('events')."?menu_id=$menu_name[id]&cat_id=$prmsArr[catid0]>$menu_name[name]</a></li>";
 								$prmsArr['catid0'] = '';
 							}else if($menu_name['link'] == 'index.php?option=com_jevents&view=range&task=range.listevents'){
 								$weekend_cat_id = isset($prmsArr['catid0'])?$prmsArr['catid0']:'';
-								echo "<li><a href=".Yii::app()->createAbsoluteUrl('events')."?menu_id=$menu_name[id]&cat_id=$weekend_cat_id>$menu_name[name]</a></li>";
+								echo "<li class='$selectedClass'><a href=".Yii::app()->createAbsoluteUrl('events')."?menu_id=$menu_name[id]&cat_id=$weekend_cat_id>$menu_name[name]</a></li>";
 							}else if($menu_name['link'] == 'index.php?option=com_phocagallery&view=categories'){
-								echo "<li><a href=".Yii::app()->createAbsoluteUrl('galleries')."?menu_id=$menu_name[id]".$cat_param.">$menu_name[name]</a></li>";
+								echo "<li class='$selectedClass'><a href=".Yii::app()->createAbsoluteUrl('galleries')."?menu_id=$menu_name[id]".$cat_param.">$menu_name[name]</a></li>";
 							}else if($menu_name['link'] == 'index.php?option=com_content&view=frontpage'){
-								echo "<li><a href=".Yii::app()->createAbsoluteUrl('contents')."/front?menu_id=$menu_name[id]>$menu_name[name]</a></li>";
+								echo "<li class='$selectedClass'><a href=".Yii::app()->createAbsoluteUrl('contents')."/front?menu_id=$menu_name[id]>$menu_name[name]</a></li>";
 							}else{
 								$menu_link_sep = explode('id=',$menu_name['link']);
 								if($menu_link_sep[0] == 'index.php?option=com_phocagallery&view=category&'){
 									$cat_name = PhocaCategories::model()->findAll("id=".$menu_link_sep[1]." and published=1");	
-									echo "<li><a href=".Yii::app()->createAbsoluteUrl('galleries')."?menu_id=$menu_name[id]&cat_id=$menu_link_sep[1]&cat_name=".$cat_name[0]->title.">$menu_name[name]</a></li>";
+									echo "<li class='$selectedClass'><a href=".Yii::app()->createAbsoluteUrl('galleries')."?menu_id=$menu_name[id]&cat_id=$menu_link_sep[1]&cat_name=".$cat_name[0]->title.">$menu_name[name]</a></li>";
 								}else if($menu_link_sep[0] == 'index.php?option=com_content&view=category&layout=blog&'){
-									echo "<li><a href=".Yii::app()->createAbsoluteUrl('contents')."?menu_id=$menu_name[id]&cat_id=$menu_link_sep[1]>$menu_name[name]</a></li>";
+									echo "<li class='$selectedClass'><a href=".Yii::app()->createAbsoluteUrl('contents')."?menu_id=$menu_name[id]&cat_id=$menu_link_sep[1]>$menu_name[name]</a></li>";
 								}else if($menu_link_sep[0] == 'index.php?option=com_content&view=article&'){
-									echo "<li><a href=".Yii::app()->createAbsoluteUrl('contents')."/update/".$menu_link_sep[1].">$menu_name[name]</a></li>";
+									echo "<li class='$selectedClass'><a href=".Yii::app()->createAbsoluteUrl('contents')."/update/".$menu_link_sep[1].">$menu_name[name]</a></li>";
 								}else{
-									echo "<li><a target='_blank' href=".$menu_name['link'].">$menu_name[name]</a></li>";
+									echo "<li class='$selectedClass'><a target='_blank' href=".$menu_name['link'].">$menu_name[name]</a></li>";
 								}
 								
 							}
