@@ -252,9 +252,10 @@ if(isset($catId) && $catId != ''){
 		# Image operations END	************************
 		
 		# Share URL added by Yogi on Nov 30 2016
+		$catId = ($catId != '')?$catId:$row['catid'];
 		$value['shareurl'] = shareURL($menu,$value['title'],$row['id'],'content',$value['category'],$catId);
-	# Assigning Array values to $data array variable
 		
+		# Assigning Array values to $data array variable
 		$data[] = $value;		
 	}
 	# Coding for Next URL
