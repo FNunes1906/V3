@@ -151,7 +151,8 @@ function shareURL($menu,$title,$id,$type,$cname = NULL,$cid = NULL,$start_date =
 			//$title = str_replace(' ', '-', strtolower($title)); // Convert spaces to dash and lowercase
 			$title = seoUrl($title); // Convert spaces to dash and lowercase
 			if(isset($cid) && $cid != ''){
-				$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$menu."/".$cid."-".strtolower($cname)."/".$id."-".$title;
+				//$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$menu."/".$cid."-".strtolower($cname)."/".$id."-".$title;
+				$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$menu."/".$id."-".$title;
 			}else{
 				$shareURL = "http://".$_SERVER['HTTP_HOST']."/".fetchMenuNameFromCatID(fetchCatIdFromName($cname))."/".fetchCatIdFromName($cname)."-".strtolower($cname)."/".$id."-".$title;
 			}
