@@ -82,6 +82,17 @@ function fetchMenuNameFromCatID($categoty_id){
 		$menu_name = handleSpecialChar($menurow['name']);
 	}
 	
+	# CODE FOR GET HOMEPAGE CAT NAME 
+	if(!isset($menu_name)){
+		$select_query	= "SELECT name from jos_menu WHERE link LIKE '%index.php?option=com_content&view=frontpage%' AND menutype LIKE 'leftmenu' ";
+		$result			= mysql_query($select_query);
+		$num_records	= mysql_num_rows($result);
+		
+		while($menurow = mysql_fetch_array($result)){
+			$menu_name = handleSpecialChar($menurow['name']);
+		}
+	}
+	
 	if(isset($menu_name)){ 
 		return strtolower($menu_name);
 	}else{
@@ -152,10 +163,10 @@ function shareURL($menu,$title,$id,$type,$cname = NULL,$cid = NULL,$start_date =
 			$title = seoUrl($title); // Convert spaces to dash and lowercase
 			if(isset($cid) && $cid != ''){
 				//$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$menu."/".$cid."-".strtolower($cname)."/".$id."-".$title;
-				$originMenu = fetchMenuNameFromCatID($cid);
-				$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$originMenu."/".$id."-".$title;
+				$shareURL = "http://".$_SERVER['HTTP_HOST']."/".$menu."/".$id."-".$title;
 			}else{
-				$shareURL = "http://".$_SERVER['HTTP_HOST']."/".fetchMenuNameFromCatID(fetchCatIdFromName($cname))."/".fetchCatIdFromName($cname)."-".strtolower($cname)."/".$id."-".$title;
+				//$shareURL = "http://".$_SERVER['HTTP_HOST']."/".fetchMenuNameFromCatID(fetchCatIdFromName($cname))."/".fetchCatIdFromName($cname)."-".strtolower($cname)."/".$id."-".$title;
+				$shareURL = "http://".$_SERVER['HTTP_HOST']."/".fetchMenuNameFromCatID(fetchCatIdFromName($cname))."/".$id."-".$title;
 			}
 			return $shareURL;
 		}

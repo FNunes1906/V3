@@ -211,7 +211,6 @@ if(isset($catId) && $catId != ''){
 	# Code for banner End
 	
 	while($row = mysql_fetch_array($result)){
-		
 		# Process Start for title : Yogi
 /*		$enc = utf8_decode($row['title']);
 		$new_title = utf8_encode($enc);
@@ -225,6 +224,7 @@ if(isset($catId) && $catId != ''){
 		
 		$value['category']				= singleCatNameFromID($row['catid']);
 		$value['is_featured_article']	= 1;
+		
 	
 		# Image operation START **************************
 		# Extract Image URL from introtext
@@ -252,7 +252,6 @@ if(isset($catId) && $catId != ''){
 		# Image operations END	************************
 		
 		# Share URL added by Yogi on Nov 30 2016
-		$catId = ($catId != '')?$catId:$row['catid'];
 		$value['shareurl'] = shareURL($menu,$value['title'],$row['id'],'content',$value['category'],$catId);
 		
 		# Assigning Array values to $data array variable
