@@ -109,7 +109,7 @@ class JConfig {
 			mysql_close($conn);
 			mysql_close($link);
 		}else{
-			header("location:thanks.php");
+			header("location:../thanks.php");
 			exit;
 		}
 	}

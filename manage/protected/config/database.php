@@ -29,6 +29,9 @@ if (mysql_num_rows($result)>0) {
 	$_SESSION['partner_folder_name'] 	= $row['partner_folder_name'];
 	
 	mysql_close($link);
+}else{
+	header("location:../thanks.php");
+			exit;
 }
 
 
