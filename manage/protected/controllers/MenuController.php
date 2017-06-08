@@ -36,7 +36,7 @@ class MenuController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','updatestatus','ajaxupdate'),
+				'actions'=>array('admin','delete','updatestatus','ajaxupdate','findchildren'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -621,12 +621,14 @@ if(isset($page_metas) AND $page_metas!=''){
 	public function actionDelete($id)
 	{
 		$model = $this->loadModel($id);
-		
 		# IF default menu is set then you can not delete
 		if($model->home == 1){
 			 echo '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> You can not delete default menu.</span>';
 		}elseif(strpos($model->link,'view=frontpage') !== false){
 			 echo '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> You can not delete front page menu.</span>';
+		}elseif($this->actionFindChildren($id)){
+			$menuName = $model->name;
+			echo '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contain Articles. There may currently be Articles within the Article Trash Manager which you must delete first..</span>';
 		}else{
 			try{
 			    $this->loadModel($id)->delete();
@@ -750,14 +752,17 @@ if(isset($page_metas) AND $page_metas!=''){
 		            $model = $this->loadModel($autoId);
 		            if($act == 'doDelete'){
 						if($model->home == 1){
-								$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> You can not delete default menu.</span>';
+							$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> You can not delete default menu.</span>';
 						}elseif(strpos($model->link,'view=frontpage') !== false){
-								$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> You can not delete front page menu.</span>';
+							$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> You can not delete front page menu.</span>';
+						}elseif($this->actionFindChildren($autoId)){
+							$menuName = $model->name;
+							$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contain Articles. There may currently be Articles within the Article Trash Manager which you must delete first..</span>';
 						}else{
-								$model->delete();
-							 	$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong> Your Menu deleted successfully.';
-							}
+							$model->delete();
+							$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong> Your Menu deleted successfully.';
 						}
+					}
 		            if($act == 'doActive'){
 		                $model->published = '1';
 						$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong> Your Menu published successfully.';					
@@ -789,4 +794,29 @@ if(isset($page_metas) AND $page_metas!=''){
 		}
 	} // Ending Function
 	
+	/**
+	* check menu if it has child cat or not
+	* @param int $id
+	* @param int $level
+	* 
+	* @return bool true if child else false
+	*/
+	public function actionFindChildren($id,$level = 0)
+	{
+		$return = FALSE;
+		if((int)$level > 0){
+			$return = true;
+		}
+		if((int)$level == 0){
+			$criteria = new CDbCriteria;
+	        $criteria->condition='parent=:id';
+	        $criteria->params=array(':id'=>$id);
+	        $model = Menu::model()->findAll($criteria);
+			foreach ($model as $key) {
+				$return = $this->actionFindChildren($key->id, (int)$level+1);
+			}
+		}
+		return $return;
+	}
+
 }
