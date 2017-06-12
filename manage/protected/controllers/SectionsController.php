@@ -28,7 +28,7 @@ class SectionsController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','updatestatus','ajaxupdate'),
+				'actions'=>array('index','view','updatestatus','ajaxupdate','findchildren'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -107,28 +107,39 @@ class SectionsController extends Controller
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Sections'])){
+			$parentCatId = explode('cat_id=',$_POST['Sections']['last_url']);
+			$model_categories = Categories::model()->findByAttributes(array('section'=>$model->id));
 			
 			$model->attributes = $_POST['Sections'];
 			$model->alias = strtolower($_POST['Sections']['title']);
-			if($model->save()){
-				
-				$parentCatId = explode('cat_id=',$_POST['Sections']['last_url']);
-				$model_categories = Categories::model()->findByAttributes(array('section'=>$model->id));
+			if($_POST['Sections']['published'] == '0'){
 				if(isset($model_categories) AND $model_categories!=''){
-					$model_categories->parent_id 		= isset($parentCatId[1])?$parentCatId[1]:0;
-	   				$model_categories->title 			= $model->title;
-	   				$model_categories->alias 			= $model->title;
-	   				$model_categories->section 			= $model->id;
-	   				$model_categories->image_position 	= 'left';
-	   				$model_categories->published 		= $model->published;
-					$model_categories->save();
+					if($this->actionFindChildren($model_categories->id)){
+						Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true"></span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Sorry!</strong> Your Can not Unpublished Category Assigned to Menu.');
+					}else{
+						if($model->save()){
+							Yii::app()->user->setFlash('success', '<i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i><strong>&nbsp; Success!</strong> Your Category updated successfully.');
+						}
+					}
 				}
-   				
-				Yii::app()->user->setFlash('success', '<i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i><strong>&nbsp; Success!</strong> Your Category updated successfully.');
-				//$this->redirect(array('/sections'));
-				$pre_url_sep = explode('?', $_POST['Sections']['last_url']);
-				$this->redirect(array('/sections?'.$pre_url_sep[1]));
+			}else{
+				if($model->save()){
+					if(isset($model_categories) AND $model_categories!=''){
+						$model_categories->parent_id 		= isset($parentCatId[1])?$parentCatId[1]:0;
+		   				$model_categories->title 			= $model->title;
+		   				$model_categories->alias 			= $model->title;
+		   				$model_categories->section 			= $model->id;
+		   				$model_categories->image_position 	= 'left';
+		   				$model_categories->published 		= $model->published;
+						$model_categories->save();
+					}
+	   				
+					Yii::app()->user->setFlash('success', '<i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i><strong>&nbsp; Success!</strong> Your Category updated successfully.');
+					//$this->redirect(array('/sections'));
+				}
 			}
+			$pre_url_sep = explode('?', $_POST['Sections']['last_url']);
+			$this->redirect(array('/sections?'.$pre_url_sep[1]));
 		}
 
 		$this->render('update',array(
@@ -230,27 +241,38 @@ class SectionsController extends Controller
 	
 	public function actionUpdatestatus($id) {
 		$newStatus = ($_REQUEST['status'] == 1)?0:1;
-		
+		$model = Sections::model()->findByAttributes(array('id'=>$id));
         # Code to unpublish/Publish category in jos_categories table
 		$model_categories = Categories::model()->findByAttributes(array('section'=>$id));
 		
+		# code for unpublish
 		if(isset($model_categories) AND $model_categories != ''){
-			if($model_categories->id == $_REQUEST['cat_id']){
-				Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true"></span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Sorry!</strong> Your Can not Unpublished Category Assigned to Menu.');
-			}else{
-				# unpublish/Publish category in jos_category table
-				$model_categories->published = $newStatus;
-				$model_categories->save();
+			$model->published = $newStatus;
+			$model_categories->published = $newStatus;
+
+			if($newStatus == 0){
+				if($this->actionFindChildren($model_categories->id)){
+					Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true"></span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Sorry!</strong> Your Can not Unpublished Category Assigned to Menu.');
+				}else{
+					$model->save();
+					Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true"></span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong>Category Unpublished Successfully!');
+				}
 				
-				# Code to unpublish/Publish category in jos_sections table
-				$model = Sections::model()->findByAttributes(array('id'=>$id));
-		        $model->published = $newStatus;
-		        $model->save();
-		        
-		        if($newStatus == 1)
-		        	Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true"></span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong>Category Published Successfully!');
-		        else
-		        	Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true"></span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong>Category Unpublished Successfully!');
+			}else{
+				if($model_categories->id == $_REQUEST['cat_id']){
+					Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true"></span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Sorry!</strong> Your Can not Unpublished Category Assigned to Menu.');
+				}else{
+					# unpublish/Publish category in jos_category table
+					$model_categories->save();
+					
+					# Code to unpublish/Publish category in jos_sections table
+					$model->save();
+			        
+			        if($newStatus == 1)
+			        	Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true"></span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong>Category Published Successfully!');
+			        else
+			        	Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true"></span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong>Category Unpublished Successfully!');
+				}
 			}
 		}
 		 
@@ -259,7 +281,7 @@ class SectionsController extends Controller
     }
 	
 	public function actionAjaxupdate(){
-
+		$success = FALSE;
 		$act = $_GET['act'];
 		if($act=='doSortOrder'){
 		    $sortOrderAll = $_POST['ordering'];
@@ -291,21 +313,33 @@ class SectionsController extends Controller
 							$model_categories->published = 1;
 							$model_categories->save();
 						}
+						$model->save();
+						
 						$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong> Your Category published successfully.';
 					}
 		            if($act=='doInactive'){
 						$model->published = '0';  
 						$model_categories = Categories::model()->findByAttributes(array('section'=>$model->id));
 						if(isset($model_categories) AND $model_categories!=''){
-							$model_categories->published = 0;
-							$model_categories->save();
+							# CHECK IF ARTICLE ASSIGNED TO THIS CATEGORY OR NOT
+							# IF YES THEN NOT ABLE TO UNPUBLISH
+							if($this->actionFindChildren($model_categories->id)){
+								$menuName = $model->title;
+								$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contain Articles. There may currently be Articles within the Article Trash Manager which you must delete first..</span>';
+							}else{
+								/*$model_categories->published = 0;
+								$model_categories->save();*/
+								$model->save();
+								$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong> Your Category unpublished successfully.';
+							}
 						}
-						$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong> Your Category unpublished successfully.';
+						
 					}
-		            if($model->save())
+					
+		            /*if($model->save())
 		                echo '';
 		            else
-		                throw new Exception("Sorry",500);
+		                throw new Exception("Sorry",500);*/
 
 		        }
 				echo $msg;
@@ -313,4 +347,30 @@ class SectionsController extends Controller
 		}
 		
 	} // Ending Function
+	
+	/**
+	* check category if it has child article or not
+	* @param int $id
+	* @param int $level
+	* 
+	* @return bool true if child else false
+	*/
+	public function actionFindChildren($id,$level = 0)
+	{
+		$return = FALSE;
+		if((int)$level > 0){
+			$return = true;
+		}
+		if((int)$level == 0){
+			$criteria = new CDbCriteria;
+	        $criteria->condition='catid=:id';
+	        $criteria->params=array(':id'=>$id);
+	        $model = Contents::model()->findAll($criteria);
+			foreach ($model as $key) {
+				$return = $this->actionFindChildren($key->id, (int)$level+1);
+			}
+		}
+		return $return;
+	}
+
 }
