@@ -28,7 +28,7 @@ class PhocaCategoriesController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','updatestatus','ajaxupdate','approvedstatus'),
+				'actions'=>array('index','view','updatestatus','ajaxupdate','approvedstatus','findchildren'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -104,11 +104,21 @@ class PhocaCategoriesController extends Controller
 			if(isset($_POST['PhocaCategories']['title'])){
 				$model->alias = $_POST['PhocaCategories']['title'];
 			}
-			if($model->save()){
-				Yii::app()->user->setFlash('success', '<i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"></i><strong>Success!</strong> Your Category updated successfully.');
-				$pre_url_sep = explode('?', $_POST['PhocaCategories']['last_url']);
-				$this->redirect(array('/phocaCategories?'.$pre_url_sep[1]));
+			if($_POST['PhocaCategories']['published'] == '0'){
+				if($this->actionFindChildren($model->id)){
+					Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true"></span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Sorry!</strong> Your Can not Unpublished Category Assigned to Menu.');
+				}else{
+					if($model->save()){
+						Yii::app()->user->setFlash('success', '<i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i><strong>&nbsp; Success!</strong> Your Category updated successfully.');
+					}
+				}
+			}else{
+				if($model->save()){
+					Yii::app()->user->setFlash('success', '<i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"></i><strong>Success!</strong> Your Category updated successfully.');
+				}
 			}
+			$pre_url_sep = explode('?', $_POST['PhocaCategories']['last_url']);
+			$this->redirect(array('/phocaCategories?'.$pre_url_sep[1]));
 		}
 
 		$this->render('update',array(
@@ -124,11 +134,20 @@ class PhocaCategoriesController extends Controller
 	public function actionDelete($id)
 	{
 		try{
-		    $this->loadModel($id)->delete();
-		    if(!isset($_GET['ajax']))
-		        Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i><strong>Success!</strong> Your Category deleted successfully.');
-		    else
-		        echo '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"></i><strong>Success!</strong> Your Category deleted successfully.';
+			if($this->actionFindChildren($id)){
+				$model = $this->loadModel($id);
+				$menuName = $model->title;
+				if(!isset($_GET['ajax']))
+			        Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contain Articles. There may currently be Articles within the Article Trash Manager which you must delete first..</span>');
+			    else
+			        echo '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contain Articles. There may currently be Articles within the Article Trash Manager which you must delete first..</span>';
+			}else{
+			    $this->loadModel($id)->delete();
+			    if(!isset($_GET['ajax']))
+			        Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i><strong>Success!</strong> Your Category deleted successfully.');
+			    else
+			        echo '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"></i><strong>Success!</strong> Your Category deleted successfully.';
+			}
 		}catch(CDbException $e){
 			    if(!isset($_GET['ajax']))
 			        Yii::app()->user->setFlash('error','Normal - error message');
@@ -200,7 +219,19 @@ class PhocaCategoriesController extends Controller
 		$newStatus = ($_REQUEST['status'] == 1)?0:1;
         $model = PhocaCategories::model()->findByPk($id);
         $model->published = $newStatus;
-        $model->save();
+		
+		if($newStatus == 0){
+			if($this->actionFindChildren($id)){
+				Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true"></span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Sorry!</strong> Your Can not Unpublished Category Assigned to Menu.');
+			}else{
+				$model->save();
+				Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true"></span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong>Category Unpublished Successfully!');
+			}
+		}else{
+    	    $model->save();
+			Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true"></span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong>Category Unpublished Successfully!');
+		}
+		
 		//$this->redirect(array('categories/index?type=com_content'));
 		$this->redirect($_SERVER['HTTP_REFERER']);
     }
@@ -232,25 +263,66 @@ class PhocaCategoriesController extends Controller
 		        foreach($autoIdAll as $autoId){
 		            $model=$this->loadModel($autoId);
 		            if($act=='doDelete'){
-						$model->delete();
-						$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong> Your category deleted successfully.';
+						if($this->actionFindChildren($autoId)){
+							$menuName = $model->title;
+							$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contain Articles. There may currently be Articles within the Article Trash Manager which you must delete first..</span>';
+						}else{
+							$model->delete();
+							$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong> Your Category deleted successfully.';
+						}
+						
 					}
 		            if($act=='doActive'){
 		                $model->published = '1';
+						$model->save();
 						$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong> Your category published successfully.';	
 					}
 		            if($act=='doInactive'){
-		                $model->published = '0';                     
-						$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong> Your category unpublished successfully.';			   
+						$model->published = '0';  
+						# CHECK IF ARTICLE ASSIGNED TO THIS CATEGORY OR NOT
+						# IF YES THEN NOT ABLE TO UNPUBLISH
+						if($this->actionFindChildren($autoId)){
+							$menuName = $model->title;
+							$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contain Articles. There may currently be Articles within the Article Trash Manager which you must delete first..</span>';
+						}else{
+							$model->save();
+							$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong> Your Category unpublished successfully.';
+						}
 					}               
-		            if($model->save())
+		            /*if($model->save())
 		                echo '';
 		            else
-		                throw new Exception("Sorry",500);
+		                throw new Exception("Sorry",500);*/
 
 		        }
 				echo $msg;
 		    }
 		}
 	} // Ending Function
+	
+	/**
+	* check category if it has child article or not
+	* @param int $id
+	* @param int $level
+	* 
+	* @return bool true if child else false
+	*/
+	public function actionFindChildren($id,$level = 0)
+	{
+		$return = FALSE;
+		if((int)$level > 0){
+			$return = true;
+		}
+		if((int)$level == 0){
+			$criteria = new CDbCriteria;
+	        $criteria->condition='parent_id=:id';
+	        $criteria->params=array(':id'=>$id);
+	        $model = PhocaCategories::model()->findAll($criteria);
+			foreach ($model as $key) {
+				$return = $this->actionFindChildren($key->id, (int)$level+1);
+			}
+		}
+		return $return;
+	}
+
 }
