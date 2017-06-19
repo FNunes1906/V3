@@ -300,12 +300,12 @@ JevrRequiredFields.fields.push({'name':'custom_field4', 'default' :'0' ,'reqmsg'
     });
 function jInsertEditorText(text,editor){JContentEditor.insert(editor,text);}
 var rokboxPath = '/plugins/system/rokbox/';
-window.addEvent('domready', function() {
+/*window.addEvent('domready', function() {
   var modules = ['rt-block'];
   var header = ['h3','h2','h1'];
   GantryBuildSpans(modules, header);
-});
-window.addEvent('load', function() {
+});*/
+/*window.addEvent('load', function() {
   new Fusion('ul.menutop', {
     pill: 0,
     effect: 'slide and fade',
@@ -317,8 +317,8 @@ window.addEvent('load', function() {
     menuFx: {duration: 200, transition: Fx.Transitions.Sine.easeOut},
     pillFx: {duration: 400, transition: Fx.Transitions.Back.easeOut}
   });
-});
-window.addEvent((window.webkit) ? 'load' : 'domready', function() {
+});*/
+/*window.addEvent((window.webkit) ? 'load' : 'domready', function() {
   window.rokajaxsearch = new RokAjaxSearch({
     'results': ' Results',
     'close': '',
@@ -351,7 +351,7 @@ window.addEvent((window.webkit) ? 'load' : 'domready', function() {
     'showreadmore': 1,
     'showdescription': 1
   });
-});
+});*/
 
 var jax_live_site = 'http://tapdestin.com/index.php';
 var jax_site_type = '1.5';

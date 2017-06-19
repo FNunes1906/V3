@@ -161,7 +161,8 @@ if(isset($_REQUEST["menu_id"])){
 			'name'=>'eventsDetaildata.dtstart',
 			'header'=>'Event Date',
 			'type' => 'raw',
-			'value'=>'"From: ".date("Y-m-d H:i:s",$data->eventsDetaildata->dtstart)."<br>End: ".date("Y-m-d H:i:s",$data->eventsDetaildata->dtend)',
+			//'value'=>'"From: ".date("Y-m-d H:i:s",$data->eventsDetaildata->dtstart)."<br>End: ".date("Y-m-d H:i:s",$data->eventsDetaildata->dtend)',
+			'value'=>'"From: ".checkDateEventDate($data->eventsDetaildata->dtstart) ."<br/>End: ". checkDateEventDate($data->eventsDetaildata->dtend)',
 			'htmlOptions'=>array('style' => 'width: 18%;vertical-align: middle;text-align:left;'),
 		),
 		array( 
@@ -246,3 +247,22 @@ function reloadGrid(data) {
 </div>
 </div>
 </div>
+<?php
+/**
+* check date time same as old admin
+* @param date $date
+* 
+* @return date
+*/
+function checkDateEventDate($date){
+	if(date('H:i:s',$date) == '23:59:59'){
+		$date = date('Y-m-d',$date); 
+	}elseif(date('H:i:s',$date) == '00:00:00'){
+		$date = date('Y-m-d',$date); 
+	}else{
+		$date = date('Y-m-d H:i:s',$date); 
+	}
+	return $date;
+}
+
+ ?>

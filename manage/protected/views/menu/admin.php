@@ -26,7 +26,6 @@ $this->breadcrumbs=array(
 				<li title="Page Global" data-placement="bottom" data-toggle="tooltip"><a href="<?php echo Yii::app()->createAbsoluteUrl('pageglobal'); ?>"><i class="glyphicon glyphicon-wrench"></i></a></li>
 			</ul>
 	</div>
-
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'menu-grid',
 	'dataProvider'=>$model->search(),

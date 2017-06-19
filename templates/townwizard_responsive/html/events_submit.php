@@ -493,14 +493,13 @@ if(isset($_GET['mailmsg']) && $_GET['mailmsg'] != '') {?>
 	<select name="catid" id="catid">
 		<option value="0" ><?php echo JText::_('JEV_CHOOSE'); ?></option>
 		<?php while($row=mysql_fetch_array($cat_query)) { 
-		echo $row['name'];
 		if($_SESSION['catid'] == $row['id']){
 			$selectedVal = 'selected';
 		}else{
 			$selectedVal = '';
 		}
 		?>
-		<option value="<?php echo $row['id']?>" <?php echo $selectedVal?> ><?php echo $row['name']?></option>
+		<option value="<?php echo $row['id']?>" <?php echo $selectedVal?> ><?php echo $row['title']?></option>
 		<?php } ?>
 	</select>
 	<span><input type="hidden" name="ics_id" value="<?php echo $ics?>" /></span>

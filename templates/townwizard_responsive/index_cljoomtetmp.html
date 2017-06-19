@@ -1,0 +1,506 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		 
+		<meta http-equiv="content-type" content="text/html; charset=" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="description" content="" />
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		
+							<meta property="og:description" content=""/>
+							<meta id="ogimage" property="og:image" content=""/>
+					
+							<meta property="og:description" content=""/>
+							<meta id="ogimage" property="og:image" content=""/>
+					
+                        <meta property="og:description" content=""/>
+                        <meta id="ogimage" property="og:image" content=""/>
+                
+        <meta property="og:description" content="&nbsp;"/>
+        <meta property="og:image" content="/images/logo/logo.png"/>
+		
+	
+	
+		<meta charset="utf-8">
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+		
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/images/favicon.ico" />
+
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		
+		<link rel="stylesheet" type="text/css" href="file://D:/wamp/www/v3/templates/townwizard_responsive/css/style.css" media="screen, projection">
+		
+<!-- Townwizard Ad banner for free product start -->
+
+<!--<script type='text/javascript'>
+	var googletag = googletag || {};
+	googletag.cmd = googletag.cmd || [];
+	(function() {
+		var gads = document.createElement('script');
+		gads.async = true;
+		gads.type = 'text/javascript';
+		var useSSL = 'https:' == document.location.protocol;
+		gads.src = (useSSL ? 'https:' : 'http:') +
+		'//www.googletagservices.com/tag/js/gpt.js';
+		var node = document.getElementsByTagName('script')[0];
+		node.parentNode.insertBefore(gads, node);
+	})();
+</script>-->
+
+<!--<script type='text/javascript'>
+	googletag.cmd.push(function() {
+		googletag.defineSlot('/44090425/TownWizard-Left-180', [180, 150], 'div-gpt-ad-1403199524717-0').addService(googletag.pubads());
+		googletag.defineSlot('/44090425/TownWizard-Right-300', [300, 250], 'div-gpt-ad-1403199524717-1').addService(googletag.pubads());
+		googletag.defineSlot('/44090425/TownWizard-Top-468', [468, 60], 'div-gpt-ad-1403199524717-2').addService(googletag.pubads());
+		googletag.pubads().enableSingleRequest();
+		googletag.enableServices();
+	});
+</script>-->
+
+<!-- Townwizard Ad banner for free product end -->
+
+
+
+<!--  Town wizard Google Analytic code -->
+
+<style>
+	.right-side-testing-ad{width: 300px; height: 250px;}
+	@media(max-width: 500px){.right-side-testing-ad{width: 180px; height: 150px;}}
+	@media(max-width: 636px){.right-side-testing-ad{width: 200px; height: 200px;}}
+	@media(max-width: 1023px){.right-side-testing-ad{width: 200px; height: 200px;}}
+	.left-side-testing-ad {width: 180px; height: 150px;}
+	@media(max-width: 600px){.left-side-testing-ad {width: 180px; height: 150px;}}
+	@media(max-width: 800px){.left-side-testing-ad {width: 125px; height: 125px;}}
+	.top-testing-ad {width:  468px; height: 60px;}
+	@media(max-width: 600px){.top-testing-ad {width: 320px; height: 50px;}}
+</style>
+</head>
+
+<body>
+	<div id="fb-root"></div>
+	<script type="text/javascript">(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		fjs.parentNode.insertBefore(js, fjs);	
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="TopBar" style="background-color:<?php echo $var->Header_color; ?>;">
+		
+		<div class="create">
+			<div><a href="http://www.townwizard.com" target="_blank"><span style="font-size: 12px; text-align: center; font-weight: bold; text-transform: capitalize; font-family: arial;color: #fff">TW_FREE_GUIDE</span><img style="vertical-align: middle;padding: 0 5px 5px;" alt="townwizard" src="file://D:/wamp/www/v3/templates/townwizard_responsive/images/header/twBanner.png"></a></div>
+		</div>
+	
+		
+	</div>
+		
+	<div id="pageContent">
+				
+		<header id="mainHeader">
+				<div id="mobNav">
+				
+		    <div id="mobileMenuBttn">
+		<p>Menu <span class="indicator">+</span></p>
+		    </div>
+			<!-- SOCIAL LOGIN START -->
+			
+			<ul id="loginBttns">
+				<div id="LoggedIn" class="fl" style="font-size:11.5px; width:270px; text-align: right;">
+				<img style="float:right;padding:0px;width:38px;" src="">
+				<span style="padding-right:60px; display: block;">TW_WELCOME!</span>
+				<a style="padding-right:60px;"   class="logOut" href="javascript:void(0)" onclick="tw_logout();">TW_CLICKHERE_SIGHOUT</a>
+				                      				
+				</div>	
+			</ul>
+			
+		    <ul id="loginBttns">
+				<li id="fbLogin"><a href="javascript:void(0)" onclick="fb_login();">TW_LOGIN_WITH</a></li>
+				<li id="twtLogin"><a href="javascript:void(0)" onclick="twitter_login();">TW_LOGIN_WITH</a></li>
+				<li id="helpBtn"><a class="helpBtn" style="cursor:pointer"><img src="file://D:/wamp/www/v3/templates/townwizard_responsive/images/header/helpBtn.png" alt="Help"></a></li>
+			</ul>
+			
+			
+			    <div class="searchbar">
+			  	<div><h3>Module at Pos search</h3> Module Content</div>
+		        </div>
+         		
+			</div>
+			
+			<div id="siteLogo">
+				<a href="file://D:/wamp/www/v3" title="HOME"> <img alt="Site logo" src="file://D:/wamp/www/v3/images/logo/logo.png"/> </a>
+			</div>
+			
+			
+			
+			
+			
+			<div id="weather">  				
+				
+			</div>
+			<strong></strong>
+		</header>				
+				
+				
+			<div id="leftColumn">
+			<nav id="mainNav">	
+			<h2>Site Main Navigation</h2>
+				
+				<div><h3>Module at Pos menu</h3> Module Content</div>
+				
+			</nav>
+				
+				
+                				
+				<aside id="downloadApps">
+					<h2>TW_MOBILE!</h2>
+					<ul>
+						
+						<li><a class="iphone_img" href="" target="_blank">
+							<span>DOWNLOAD</span>
+							<b>Iphone/Ipad</b></a>
+						</li>
+						
+					  
+						<li><a class="android_img" href="" target="_blank">
+							<span>DOWNLOAD</span>
+							<b>Android</b></a>
+						  </li>
+					  
+					  </ul>
+				</aside>
+				
+								
+				<aside id="downloadApps">
+					<h2>TW_FOLLOWUS</h2>
+					<ul>
+						
+						<li><a class="twitter" href="" target="_blank"><img alt="Follow us on Twitter" src="file://D:/wamp/www/v3/templates/townwizard_responsive/images/sidebar/twtFollowBtn.png" /></a>
+						</li>
+                  
+                  
+						<li><a class="youtube" href="" target="_blank"><img alt="Follow us on YouTube" src="file://D:/wamp/www/v3/templates/townwizard_responsive/images/sidebar/ytFollowBtn.png" /></a>
+						</li>
+                  
+						
+					</ul>
+				</aside>
+				
+
+				
+				
+				
+				<aside id="leftBanners">
+					 <div><h3>Module at Pos banner2</h3> Module Content</div>
+				</aside>
+				
+     				<img alt="Default Banner" src="file://D:/wamp/www/v3/templates/townwizard_responsive/images/header/Left_banner.png" />
+               
+			   <!-- TW Banner Ad start -->
+			
+				<aside id="leftBanners">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Left Side Testing Ad -->
+<ins class="adsbygoogle left-side-testing-ad"
+     style="display:inline-block"
+     data-ad-client="ca-pub-7206979589656043"
+     data-ad-slot="3428266646"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+	<div><h3>Module at Pos banner2</h3> Module Content</div>
+
+	<img alt="Default Banner" src="file://D:/wamp/www/v3/templates/townwizard_responsive/images/header/Left_banner.png" />
+
+				</aside>
+			
+			<!-- TW Banner Ad End -->
+			</div>
+			
+
+			
+		
+			<section id="topSlider" class="frontPage">
+				<div><h3>Module at Pos FrontSlider</h3> Module Content</div>
+			</section><!--top Events Slider closing tag-->
+		
+		
+		
+			
+				<section id="topSlider" class="otherPages">
+					<div><h3>Module at Pos slider</h3> Module Content</div>
+				</section><!--top Events Slider closing tag-->
+					
+			
+		
+		
+			
+				<section id="topSlider" class="otherPages">
+					<div><h3>Module at Pos loc_slider</h3> Module Content</div>
+				</section><!--top Events Slider closing tag-->
+					
+			
+		
+	
+		<div id="rightColumn">
+			<!--Used for Sharethis module begin -->
+			
+				
+		            <aside id="topRightAside">
+		             	<div><h3>Module at Pos ev_right</h3> Module Content</div>
+		            </aside>  
+				
+					
+			<!--Used for Sharethis module end --> 		
+			<!-- event_submit and photo upload start-->
+			
+				
+				<aside id="topRightAside">
+					<div><h3>Module at Pos right</h3> Module Content</div>
+				</aside>   
+				
+			
+
+			<aside id="rightBanners">
+			
+				
+					<div><h3>Module at Pos banner3</h3> Module Content</div>
+				
+					<img alt="Default Banner" src="file://D:/wamp/www/v3/templates/townwizard_responsive/images/header/Right_banner.png" />
+				
+			<!-- TW Banner Ad start -->
+			 
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Right Side Testing Ad -->
+<ins class="adsbygoogle right-side-testing-ad"
+     style="display:inline-block"
+     data-ad-client="ca-pub-7206979589656043"
+     data-ad-slot="9474800247"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+	<div><h3>Module at Pos banner3</h3> Module Content</div>
+
+	<img alt="Default Banner" src="file://D:/wamp/www/v3/templates/townwizard_responsive/images/header/Right_banner.png" />
+
+			
+			<!-- TW Banner Ad End -->
+			</aside>
+		</div>
+	
+	
+	
+		
+			<nav id="eventsCategoriesSearch">
+				<div><h3>Module at Pos searchevent</h3> Module Content</div>
+			</nav>
+		
+	
+	
+	
+		
+			<nav id="eventsCategoriesSearch">
+				<div><h3>Module at Pos searchres</h3> Module Content</div>
+			</nav>
+		
+	
+	
+	<div id="middleColumn">
+		
+		<div id="topBanner">
+		<!-- TW Banner Ad start -->
+	  	
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- Top Testing Ad -->
+				<ins class="adsbygoogle top-testing-ad"
+				     style="display:inline-block"
+				     data-ad-client="ca-pub-7206979589656043"
+				     data-ad-slot="4904999847"></ins>
+				<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+		<!-- TW Banner Ad End -->
+		
+			
+				<div><h3>Module at Pos banner1</h3> Module Content</div>
+			
+				<img alt="Default Banner" src="file://D:/wamp/www/v3/templates/townwizard_responsive/images/header/default_banner.png" />
+			
+		
+		</div>
+		
+		
+		<section id="mainContent">
+		
+		<section id="mainContentwhite">
+		
+		
+		 
+			<div id="Darkness" style="display: block"></div>
+			<div id="systemmsg" class="takeOverlay">
+				<a class="close">x</a>
+				<span>
+					&lt;jdoc:include type=&quot;message&quot;&gt;
+				</span>
+			</div>
+		
+
+			<span>JDoc Statement</span>
+		</section>
+		
+		<!-- Code for Location category count module begin -->
+		
+		<aside id="cuisinePlacesType">
+			<div><h3>Module at Pos user1</h3> Module Content</div>
+		</aside>
+		
+		<!-- Code for Location category count module end -->	
+					
+	</div><!--middle Column Closing Tag-->
+    
+		
+	</div><!--page content cloasing tag-->
+		
+		<div id="pageFooterContainer">
+		<footer id="pageFooter">
+			
+			<div id="about">
+			<h2>TW_ABOUT</h2>
+			<div><h3>Module at Pos footer1</h3> Module Content</div>
+           </div>
+			
+			
+			
+			<div id="connect">
+				<h3 class="display"> TW_CONNECT_WITH</h3>
+				<div><h3>Module at Pos footer3</h3> Module Content</div>
+			</div>
+			
+			
+			
+			<div id="poweredBy">
+			<h3> - <span>TW_POWERED_BY</span>
+				<a class="footer_tw" href="" target="_blank"><img alt="townwizard" src="file://D:/wamp/www/v3/templates/townwizard_responsive/images/header/twBanner.png" /></a>
+			</h3>
+			<a style="margin-top: 24px; clear: both;" class="all" href="" target="_blank">TW_COMMUNITY</a>
+			<!-- <jdoc:include type="modules" name="footer2" />-->
+			<a class="all" href="" target="_blank">TW_WANT</a>
+			</div>
+			
+			
+			
+			<div id="termsOfUse">
+			<h3><div><h3>Module at Pos footer</h3> Module Content</div></h3>
+			 
+			
+			</div>
+			<span id="copyRight">&copy;  </span>
+			</footer>	
+		</div>
+		
+<!-- Tooltip Overlay Start -->
+	<div id="Darkness"></div>
+
+	<div id="HelpTT" class="takeOverlay">
+		<a class="close">x</a>
+		<span>
+	  		TW_TOOLTIP<br /><br />TW_RSVP
+	  		<div class="socialLinks cb">
+	   			<a class="fbLogin" href="javascript:void(0)" onclick="fb_login();"><span>TW_LOGIN_WITH</span></a>
+	   			<a class="twtLogin" href="javascript:void(0)" onclick="twitter_login();"><span>TW_LOGIN_WITH</span></a>
+	  		</div>
+		</span>
+	</div>
+<!-- Tooltip Overlay End -->
+
+<!-- Share This -->
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">
+	stLight.options({
+		publisher:'fe72f22e-436e-4b4e-9486-bbcb87276adc',
+	});
+</script>
+
+<!-- Code for Print Icon begin -->
+<script type="text/javascript">     
+        function PrintDiv() {    
+           var divToPrint = document.getElementById('placeContainer');
+     if (divToPrint == null){ divToPrint = document.getElementById('eventContainer');}
+           var popupWin = window.open('', 'My Event', 'width=550,height=450');
+           popupWin.document.open();
+           popupWin.document.write('<html><head><title>My Event</title><link rel="stylesheet" type="text/css" href="<?php echo TOWNWIZARD_TMPL_PATH ?>/css/print.css" /></head><body>' + '<input class="printBtn" type="button" value="" onclick="window.print();" /><div id="placeContainer">' + divToPrint.innerHTML +  '</div></html>');
+            popupWin.document.close();
+                }
+</script>
+<!-- Code for Print Icon end -->
+
+<!-- Share This End-->
+	
+  		<script src="file://D:/wamp/www/v3/templates/townwizard_responsive/js/jQuery.js"></script>
+
+ 	
+	 
+	  <script src="file://D:/wamp/www/v3/templates/townwizard_responsive/js/script.js"></script>
+	 
+	  <script src="file://D:/wamp/www/v3/templates/townwizard_responsive/js/script2.js"></script>
+	 
+ 
+	<!--  CODE for SAFARI BROWSER DETECTION BEGIN -->
+
+	<script type="text/javascript">
+	 // First Time Visit Processing
+	 // copyright 10th January 2006, Stephen Chapman
+	 // permission to use this Javascript on your web page is granted
+	 // provided that all of the below code in this script (including this
+	 // comment) is used without any alteration
+	 function rC(nam) {var tC = document.cookie.split('; '); for (var i = tC.length - 1; i >= 0; i--) {var x = tC[i].split('='); if (nam == x[0]) return unescape(x[1]);} return '~';} function wC(nam,val) {document.cookie = nam + '=' + escape(val);} function lC(nam,pg) {var val = rC(nam); if (val.indexOf('~'+pg+'~') != -1) return false; val += pg + '~'; wC(nam,val); return true;} function firstTime(cN) {return lC('pWrD4jBo',cN);} function thisPage() {var page = location.href.substring(location.href.lastIndexOf('\/')+1); pos = page.indexOf('.');if (pos > -1) {page = page.substr(0,pos);} return page;}
+
+	 // example code to call it - you may modify this as required
+	 function start() {
+	    if (firstTime(thisPage())) {
+	       // this code only runs for first visit
+	      if((navigator.userAgent.match(/iphone/i)) || (navigator.userAgent.match(/ipad/i)) || (navigator.userAgent.match(/ipod/i))) {
+	     var r=confirm("We have an iPhone app too! Click OK to install the app.");
+	      if (r==true){window.location = "<?php echo $var->iphone?>";}
+	      }else if (navigator.userAgent.match(/android/i)) {
+	      var r=confirm("We have an Android app too! Click OK to install the app.");
+	      if (r==true){location.href="<?php echo $var->android?>";}
+	   }else {}
+	    }
+	    // other code to run every time once page is loaded goes here
+	 }
+	 onload = start;
+
+	 </script>
+	
+	<!--  CODE for SAFARI BROWSER DETECTION END --> 
+ 
+	<script type="text/javascript">
+		/* Facebook login function */
+		function fb_login() {
+			window.open("/townwizard-db-api/fb-login.php", "_blank", "height=400,width=600,status=no,toolbar=no,menubar=no");
+		}
+
+		/* Twitter login function */
+		function twitter_login() {
+			window.open("/townwizard-db-api/twitter-login.php", "_blank", "height=400,width=600,status=no,toolbar=no,menubar=no");
+		}
+		
+		function tw_logout() {
+			jQuery.ajax({
+				url: "townwizard-db-api/logout.php",
+				type: "get",
+				complete: function() {
+				window.location.reload();
+				}
+			});
+		}
+
+	</script>
+		
+	</body>
+</html>

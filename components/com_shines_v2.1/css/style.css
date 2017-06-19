@@ -137,7 +137,7 @@ figure { margin: 0; }
    ========================================================================== */
 
 form { margin: 0; }
-fieldset { border: 0; margin: 0; padding: 0; }
+/*fieldset { border: 0; margin: 0; padding: 0; }*/
 
 /* Indicate that 'label' will shift focus to the associated form element */
 label { cursor: pointer; }
@@ -850,3 +850,271 @@ ul.btnList2 li span {display: block; text-decoration: none;}
 }
 #main ul.mainList ul.share-inner-wrpr li{border: none;float: left;padding: 0 9px;}
 #main ul.mainList ul.share-inner-wrpr{margin: 0 auto; overflow: hidden; padding: 0;width: 136px;}
+
+/*Events list starts here*/
+.dayEventsSeparator .eventsContainer:last-child{
+    border-bottom: 1px solid #000000;
+    padding-bottom:13px;
+}
+.eventsContainer{
+	
+	padding:0 2% 0 14.0476190476190000000%;
+	position:relative;
+	margin:13px 0 0 3.5%;
+    width: 80.3%;
+    clear: both;
+    text-align: left;
+}
+.eventsContainer h3{
+  width:100%;
+  height:auto;
+  text-align: left;
+}
+.eventsContainer h3 a{
+	color: #00467F;
+    font-family: 'AllerBold',Arial,sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 10px;
+    text-decoration: underline;
+}
+.eventsContainer .date{
+	left:-5%;
+	height:12px;
+	width:19.047619047619%;
+	text-align: center;
+	position:absolute;
+	top: 7px;
+}
+/*Events list Ends here*/
+/*submit events starts here*/
+#sendEventsHeader{
+	font-size: 18px;
+	width:97.5%;
+	margin:5px 0 10px 2.5%;
+	font-family: 'AllerDisplayRegular',Arial,sans-serif;
+    text-transform: capitalize;
+    line-height:30px;
+    font-weight: normal;
+    float: left;
+	text-align: center;
+}
+
+#mainContent form,#mainContentwhite #submitevent{
+	width: 97.5%;
+	margin-left:2.5%;
+	float: left;
+}
+#mainContent form span,#mainContentwhite #submitevent span{
+	width: 38%;
+	float: left;
+	display: block;
+	margin-bottom:10px;
+	padding-top:5px;
+}
+#mainContent form input:first-of-type,#mainContentwhite #submitevent input:first-of-type{
+	width: 50%;
+	margin-bottom:10px;
+	float: right;
+	display: block;
+	float: left;
+	text-align: left;
+}
+#mainContent form select:first-of-type,#mainContentwhite #submitevent select:first-of-type{
+	margin-bottom:20px;
+	float: left;
+	width: auto;
+}
+#mainFieldset{
+	width: 96%;
+}
+#mainContent form fieldset legend:nth-of-type(2),#mainContentwhite #submitevent fieldset legend:nth-of-type(2) {
+	float: left;
+	line-height: 20px;
+}
+#mainContent form input[name=allDayEvent],#mainContentwhite #submitevent input[name=allDayEvent]{
+	width:15px;
+	float: left;
+	margin: 4px 0 10px;
+}
+#mainContent form input[name=publish_up],#mainContentwhite #submitevent input[name=publish_up]{
+	width:83px;
+	float: left;
+	text-align: center;
+}
+#mainContent form input[name=publish_down],#mainContentwhite #submitevent input[name=publish_down]{
+	width:83px;
+	float: left;
+	text-align: center;
+}
+#mainContent form fieldset,#mainContentwhite #submitevent fieldset{
+	float:left;
+	width: 95%;
+	margin:0 0 10px 0;
+}
+#mainContent form fieldset button,#mainContentwhite #submitevent fieldset button{
+	width:20px;
+	height: 20px;
+	background:url('../images/header/dashboard-icon.gif') no-repeat;
+	cursor: pointer;
+	border: none;
+	float: left;
+	margin-left:5px;
+	transition:.3s;
+	margin-top: 2px;
+}
+#mainContent form fieldset button:hover,#mainContentwhite #submitevent fieldset button:hover{
+	background-position:0 -20px;
+}
+#mainContent form button + span,#mainContentwhite #submitevent button + span{
+	float: left;
+	margin-left: 5px;
+	width: 57px;
+}
+#mainContent form .inputbox,#mainContentwhite #submitevent .inputbox{
+	width: 34px;
+	text-align: center;
+	float: left;
+}
+#mainContent #eventDescription,#mainContentwhite #submitevent #eventDescription{
+	width: 100%;
+}
+#mainContent textarea,#mainContentwhite #submitevent textarea{
+	width:100%;
+	max-width: 100%;
+	min-width:100%;
+	height:200px; 
+	margin-bottom:10px;
+}
+#mainContent form #formBottom input:nth-of-type(1),#mainContentwhite #submitevent #formBottom input:nth-of-type(1){ 
+    width: 30%;
+    margin-left:0;
+    margin-right: 5px;
+}
+#noendtime {
+    clear: left;
+    float: left;
+    margin: 5px 0 0;
+    padding: 0;
+}
+#mainContent #noSpecTime,#mainContentwhite #noSpecTime {
+    margin: 5px 0 0 !important;
+    padding: 0 !important;
+    width: 52% !important;
+}
+#formBottom a.button {
+  background: none repeat scroll 0 0 #dadada;
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px #666;
+  color: #666666;
+  font-size: 11px;
+  margin-left: 5px;
+  padding: 3px 6px;
+  line-height: 23px;
+}
+#formBottom a.button:hover{
+	color:#000000;
+}
+#formBottom p{
+	width: 51%;
+	float: left;
+	font-size: 10px;
+	clear: both;
+	margin-bottom: 10px;
+	padding-left: 30%;
+	padding-right:12% 
+}
+.osolCaptchaBlock table{
+	float: left;
+	margin-left: 17%;
+}
+#mainContent form #formBottom span,#mainContentwhite #submitevent #formBottom span{
+	display: block;
+	float: left;
+	width:30%;
+}
+#mainContent form #formBottom span:last-of-type,#mainContentwhite #submitevent #formBottom span:last-of-type{
+	margin-top:-23px;
+}
+/*#formBottom input{
+	float: left;
+	width: 50%;
+}*/
+/*#custom_anonemail{
+ margin-top:10px;
+}*/
+#formBottom img{
+	/*float: left;*/
+}
+#formBottom #captchaCode0{
+	margin-left:30%;
+}
+#mainContentwhite #osolCatchaTxt0{
+	width: 170px !important; 
+	clear: both;
+	margin-top: 10px; 
+	margin:10px 50px 10px 30% !important;
+}
+#formBottom input[type=submit] {
+    background: none repeat scroll 0 0 #000000;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 5px 8px;
+    width: 97px;
+    margin-left:10px;
+	margin-bottom: 10PX;
+}   
+#mainContentwhite .osolCaptchaBlock > label:first-of-type{
+  clear: both;
+  float: left;
+  font-size: 10px;
+  margin-bottom: 10px;
+  padding-left: 30%;
+  padding-right: 12%;
+  width: 51%;
+}
+#systemmsg{
+ display: block;
+}
+#mainContentwhite #systemmsg dl{
+  width: auto;
+  margin: 0px;
+}
+#mainContentwhite #systemmsg dl dt{
+ font-weight: bold;
+ max-width: initial;
+}
+#mainContentwhite #systemmsg dl dd{
+ max-width: initial;
+}
+/*submit events ends here*/
+
+/* ALERT MESSAGE START */
+.alert {padding: 20px;background-color: #fff;opacity: 1;transition: opacity 0.6s;margin-bottom: 15px;border-bottom: 1px solid #dfdfdf}
+.alert.success {color: #4CAF50;}
+.alert.info {color: #FF0000;}
+.alert.warning {color: #FF0000;}
+.closebtn {margin-left: 15px;color: #222;font-weight: bold;float: right;font-size: 22px;line-height: 20px;cursor: pointer;transition: 0.3s;}
+.closebtn:hover {color: black;}
+.loader{position: fixed;width: 100%; height:100%; top:0; z-index:99;background: #5a5a5a;opacity: 0.8;}
+.loader > .loading {vertical-align: middle;display: block; margin:50% auto;	}
+h1 {
+	    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+	    font-size: 1.3em;
+	    font-weight: bold;
+	    padding: 0;
+	    text-transform: none;
+		padding: 10px;
+		margin: 0px;
+	}
+	#content{padding: 10px;}
+	label{font-size: 12px;}
+	input,textarea{font-size: 12px;margin-bottom: 10px;}
+	.modal {display: none; position: fixed;z-index: 1;left: 0;top: 0;width: 100%;height: 100%;overflow: auto;background-color: rgb(0,0,0);background-color: rgba(0,0,0,0.4); }
+	.modal-content {background-color: #fefefe;margin: 15% auto;padding: 20px;border: 1px solid #888;width: 80%;}
+	.close {color: #aaa;float: right;font-size: 28px;font-weight: bold;}
+	.close:hover,.close:focus {color: black;text-decoration: none;cursor: pointer;}
+
+/* ALERT MESSAGE END */
