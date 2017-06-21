@@ -52,6 +52,14 @@ function displayData($row,$menu_ids){ ?>
 	<?php }?>
 					
 <?php } 
+function displayArticles($row,$link){ ?>
+	<h3 itemprop="name"><a href="<?php echo $link; ?>"><?php echo $row['title'] ?></a></h3>
+	<span class="placesCategorie">
+		<?php echo $row['menu']; ?>
+	</span>
+	<p><?php echo $row['introtext'];?></p>
+<?php } 
+
 // display results for events
 function displayEvents($ev_res,$menu_ids,$format_res){ 
 				$displayTime = '';
@@ -90,7 +98,8 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 	</div>
 <?php } ?>
 
-<?php if(isset($_REQUEST['m_id']) && $_REQUEST['m_id']!=''){ //search for particular menu item like places and restaurants
+<?php 
+  if(isset($_REQUEST['m_id']) && $_REQUEST['m_id']!=''){ //search for particular menu item like places and restaurants
 		$db =& JFactory::getDBO();
 		$ser = $_REQUEST['searchword'];
 		$cat_id = $_REQUEST['m_id'];
@@ -193,6 +202,13 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 					
 					$db->setQuery($sql);
 					$rows=$db->query();
+					
+					/*fetching contents*/
+					$sql1 = 'SELECT *,cat.title as menu FROM jos_content AS cont LEFT JOIN jos_categories as cat ON cat.id = cont.catid where (cont.title LIKE "%'.addslashes($ser).'%" OR cont.introtext LIKE "%'.addslashes($ser).'%" OR cont.fulltext LIKE "%'.addslashes($ser).'%") AND (cont.publish_down >=  CURDATE() OR cont.publish_down = "0000-00-00 00:00:00" ) order by cont.title,cont.ordering';
+					$db->setQuery($sql1);
+					$rows1=$db->query();
+					
+					
 					/*fetching events */
 					$dateformat = "SELECT date_format,time_format FROM jos_pageglobal LIMIT 1";
 					$db->setQuery($dateformat);
@@ -207,7 +223,8 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 					$rows2=$db->query();
 				}
 				?>
-				<?php if (mysql_num_rows($rows)!= 0 || mysql_num_rows($rows2)!= 0){ // checking results are null or not 
+				<?php 
+				if (mysql_num_rows($rows)!= 0 || mysql_num_rows($rows2)!= 0 || mysql_num_rows($rows1)!= 0){ // checking results are null or not 
 						if(mysql_num_rows($rows2)!= 0){	//check events exist or not ?> 
 								<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 									<?php echo JText::_("TW_LIST_OF_EVENTS");?>
@@ -280,7 +297,25 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 										 </div>
 								 	 <?php } ?>
 									  </ul>
-				<?php } 
+				<?php }
+				if(mysql_num_rows($rows1)!= 0){ //check articles exist or not ?>
+								<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
+									List of Articles
+								</div>
+								<section id="mainContentwhite">
+									<ul id="SearchResults">
+									<?php while($row = mysql_fetch_array($rows1)){ ?>
+										<div class="placesContainer" itemtype="http://schema.org/Organisation" itemscope="">
+											<?php 
+											$link = "http://".$_SERVER['HTTP_HOST']."/".$row['menu']."/".$row['id'].'-'.$row['title'];
+											displayArticles($row,$link);
+											?>
+										 </div>
+								 	 <?php } ?>
+									  </ul>
+									  </section>
+				<?php }
+				 
 				} else { ?>
 					<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 						<?php echo JText::_("TW_RES");?>
@@ -289,3 +324,8 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 					<h3 style="clear: both;padding-top: 20px;"><?php echo JText::_("LOC_RES");?></h3>
 				<?php }
 			}?>
+<style>
+.placesContainer img{
+    max-width: 100%;
+}
+</style>
