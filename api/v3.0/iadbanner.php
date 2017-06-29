@@ -11,7 +11,6 @@ function m_show_banner($cat) {
 	$sql = "select b.* from `jos_banner` b, `jos_categories` c where c.title = '".$cat."' and c.id = b.catid and b.showBanner = 1";
 	$data = db_fetch12($sql, true, true);
 	$d = array();
-
 	//Coundition for the Count the Data array to check the Banner add
 	$showad = true;
 	if($data != null){
@@ -38,7 +37,7 @@ function m_show_banner($cat) {
 			$ad['url']	= 'http://'.$_SERVER["HTTP_HOST"].'/adsclick.php?option=com_banners&task=click&bid='.$d['bid'];
 			$ad['banner']		= 'http://'.$_SERVER["HTTP_HOST"].'/partner/'.$partnerBannerImg.'/images/banners/'.$d["imageurl"];
 		}
-		
+		$ad['clickurl'] = $d['clickurl'];
 		// for Impressions: track the number of times the banner is displayed to web site visitors.
 		$sql = 'UPDATE jos_banner SET impmade = impmade + 1 WHERE bid =' .$d['bid'];
 		db_update($sql); 
@@ -46,6 +45,7 @@ function m_show_banner($cat) {
 		$ad['type'] = ""; 
 		$ad['url'] = ""; 
 		$ad['banner'] = ""; 
+		$ad['clickurl'] = "";
 	} 
 	return $ad;
 }

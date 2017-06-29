@@ -50,6 +50,7 @@ if(isset($banner_cat_name) && $banner_cat_name != ''){
 		$banner_code = m_show_banner('iphone-news-screen');
 	}
 }
+
 /* 
 CASE: 1
 Result		: Listing of Articles from CATEGORY ID
@@ -93,10 +94,11 @@ if(isset($catId) && $catId != ''){
 
 	$data = array();
 	# Code for banner Start
-	if($banner_code['url'] != '')
+	if($banner_code['url'] != ''){
 		$data[]['banner_add'] = "<a href='$banner_code[url]'><img src='$banner_code[banner]'></a>";
+	}
+	$data[]['clickurl'] = $banner_code['clickurl'];
 	# Code for banner End
-	
 	while($row = mysql_fetch_array($result)){
 		# Process Start for title : Yogi
 /*		$enc = utf8_decode($row['title']);
@@ -206,8 +208,11 @@ if(isset($catId) && $catId != ''){
 
 	$data = array();
 	# Code for banner Start
-	if($banner_code['url'] != '')
+	if($banner_code['url'] != ''){
 		$data[]['banner_add'] = "<a href='$banner_code[url]'><img src='$banner_code[banner]'></a>";
+	}
+	$data[0]['clickurl'] = $banner_code['clickurl'];
+
 	# Code for banner End
 	
 	while($row = mysql_fetch_array($result)){
@@ -217,7 +222,6 @@ if(isset($catId) && $catId != ''){
 		$new_title = (str_replace("?","'",$new_title));
 		$value['title'] = $new_title;
 */		# Process End for title : Yogi
-		
 		$value['title']					= handleSpecialChar($row['title']);
 		$value['short_description']		= html_entity_decode(htmlentities($row['introtext'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 		$value['description']			= html_entity_decode(htmlentities($row['fulltext'], ENT_QUOTES | ENT_IGNORE, "UTF-8"));
