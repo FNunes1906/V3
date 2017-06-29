@@ -145,8 +145,10 @@ if(isset($catId) && $catId != ''){
 
 	$data = array();
 	# Code for banner Start
-	if($banner_code['url'] != '')
+	if($banner_code['url'] != ''){
 		$data[]['banner_add'] = "<a href='$banner_code[url]'><img src='$banner_code[banner]'></a>";
+	}
+	$data[0]['clickurl'] = "<a href='" . $banner_code['clickurl'] . "'> ".$banner_code['clickurl']." </a>";
 	# Code for banner End
 	
 	while($row = mysql_fetch_array($result)){
@@ -226,8 +228,10 @@ API Request	: /event/?id=1
 	
 	$data = array();
 	# Code for banner Start
-	if($banner_code['url'] != '')
+	if($banner_code['url'] != ''){
 		$data[]['banner_add'] = "<a href='$banner_code[url]'><img src='$banner_code[banner]'></a>";
+	}
+	$data[0]['clickurl'] = "<a href='" . $banner_code['clickurl'] . "'> ".$banner_code['clickurl']." </a>";
 	# Code for banner End
 		
 	while($row = mysql_fetch_array($result)){

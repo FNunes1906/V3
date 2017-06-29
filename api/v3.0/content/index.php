@@ -97,7 +97,7 @@ if(isset($catId) && $catId != ''){
 	if($banner_code['url'] != ''){
 		$data[]['banner_add'] = "<a href='$banner_code[url]'><img src='$banner_code[banner]'></a>";
 	}
-	$data[]['clickurl'] = $banner_code['clickurl'];
+	$data[0]['clickurl'] = "<a href='" . $banner_code['clickurl'] . "'> ".$banner_code['clickurl']." </a>";
 	# Code for banner End
 	while($row = mysql_fetch_array($result)){
 		# Process Start for title : Yogi
@@ -211,7 +211,7 @@ if(isset($catId) && $catId != ''){
 	if($banner_code['url'] != ''){
 		$data[]['banner_add'] = "<a href='$banner_code[url]'><img src='$banner_code[banner]'></a>";
 	}
-	$data[0]['clickurl'] = $banner_code['clickurl'];
+	$data[0]['clickurl'] = "<a href='" . $banner_code['clickurl'] . "'> ".$banner_code['clickurl']." </a>";
 
 	# Code for banner End
 	
