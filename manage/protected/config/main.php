@@ -91,7 +91,10 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		
+		// enable cookie 
+		'request'=>array(
+            'enableCookieValidation'=>true,
+        ),
 
 		// database settings are configured in database.php
 		'db'=>require(dirname(__FILE__).'/database.php'),

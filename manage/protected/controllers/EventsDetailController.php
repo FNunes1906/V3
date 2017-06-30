@@ -277,6 +277,12 @@ class EventsDetailController extends Controller
 				
 				Yii::app()->user->setFlash('success', '<i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i><strong>Success!</strong> Your Event added Successfully.');
 				//$this->redirect(array('/events'));
+				
+				// remove addloation session after add event
+				if(Yii::app()->session['addLocationFromEvent']){
+					unset(Yii::app()->session['addLocationFromEvent']);
+				}
+
 				$previousURL = explode('?', $_POST['EventsDetail']['last_url']);
 				$this->redirect(array('/events?'.$previousURL[1]));
 			}

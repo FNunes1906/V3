@@ -14,7 +14,7 @@
             <p style="font-size: 12px; text-align: left;">Please enter the email address you used to create your account, and we will send you a link to reset your password.</p>
 			<h2 class="modal-title" id="myModalLabel" style="text-align:left;">Forgot Password?</h2>
         </div>
-        <div id='messageTxtDiv' class="alert fade in margin-top-5px margin-bottom-5px margin-left-5px margin-right-5px" role="alert" style='display: none;'><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><span id='messageTxt'></span></div>
+        <div id='messageTxtDiv' class="alert fade in margin-top-5px margin-bottom-5px margin-left-5px margin-right-5px" role="alert" style='display: none;'><button type="button" class="close" data-dismiss="alert"><span class="sr-only">Close</span></button><span id='messageTxt'></span></div>
         <div class="form">
             <?php
             $form = $this->beginWidget('CActiveForm', array(

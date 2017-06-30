@@ -10,6 +10,12 @@
 				 $('#location-name').val($('#title_'+id).text());
 			     $('#myModal').modal('hide');
 		};
+		$(document).ready(function(){
+			var addLocationFromEvent = "<?php echo Yii::app()->session['addLocationFromEvent']; ?>";
+			if(addLocationFromEvent){
+////				insertlocationid(addLocationFromEvent);
+			}
+		});
 </script>
 <div class="form">
 

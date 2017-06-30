@@ -134,6 +134,7 @@ class LocationsController extends Controller
 				# Redirect to Location/index page after insert operation				
 				
 				if(isset($_GET['type']) && $_GET['type']=='com_jevents'){
+					Yii::app()->session['addLocationFromEvent'] = $model->loc_id;
 					$this->redirect($_POST['Locations']['last_url']);
 				}else{
 					$pre_url_sep = explode('?', $_POST['Locations']['last_url']);

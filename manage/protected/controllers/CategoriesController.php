@@ -82,6 +82,8 @@ class CategoriesController extends Controller
 					$this->redirect($_POST['Categories']['last_url']);
 					//$this->redirect(array('index?type='.$_GET['type']));
 				}else if($_GET['type']=='com_jevents'){
+					// 
+					Yii::app()->session['addCatFromMenu'] = $model->id;
 					//$pre_url_sep = explode('?', $_POST['Categories']['last_url']);
 					$this->redirect($_POST['Categories']['last_url']);
 					//$this->redirect(array('events_cat?type='.$_GET['type']));

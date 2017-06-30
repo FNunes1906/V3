@@ -338,6 +338,10 @@ secure=0";
 			$model->attributes=$_POST['Menu'];
 			
 			if($model->save()){
+				// remove addloation session after add event
+				if(Yii::app()->session['addCatFromMenu']){
+					unset(Yii::app()->session['addCatFromMenu']);
+				}
 				Yii::app()->user->setFlash('success', '<i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i><strong>Success!</strong> Your Menu created successfully.');
 				$this->redirect(array('/menu'));
 			}

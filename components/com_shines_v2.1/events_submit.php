@@ -272,7 +272,7 @@ function checkPostParameter($postValue){
 <script type="text/javascript" src="../../../administrator/components/com_jevlocations/assets/js/locations.js"></script>
 <script type="text/javascript" src="../../../plugins/system/pc_includes/ajax_1.3.js"></script>
 <script type="text/javascript" src="../../../common/js/event_submit.js"></script>
-<script src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=g7jjmuv19bcqluqx2y33xljlsj4ep23fxoofxavks6an9ubz'></script>
+<!--<script src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=g7jjmuv19bcqluqx2y33xljlsj4ep23fxoofxavks6an9ubz'></script>-->
   
  
 <script type="text/javascript" language="javascript">
@@ -721,8 +721,9 @@ if(isset($_FILES['userphoto'])) {
 					</fieldset>
 				</fieldset>
 				<span id="eventDescription"><?php echo JText::_('JEV_DES'); ?>:</span>
-				<div name="jevcontent" id="jevcontent" style="background: #fff;min-height: 50px;"> <?php if(isset($_SESSION['jevcontent'])) echo $_SESSION['jevcontent'];?></div>
-				<!--<textarea name="jevcontent" id="jevcontent" cols="70" rows="5" style="width:99%;" ></textarea>-->
+				<!--<div name="jevcontent" id="jevcontent" style="background: #fff;min-height: 50px;"> <?php if(isset($_SESSION['jevcontent'])) echo $_SESSION['jevcontent'];?></div>-->
+				<input type="file" name="userphoto" />
+				<textarea name="jevcontent" id="jevcontent" cols="70" rows="5" style="width:99%;" ></textarea>
 				<div id="formBottom">
 					<span><?php echo JText::_('JEV_LOC'); ?></span>
 					
@@ -771,7 +772,7 @@ for (i = 0; i < close.length; i++) {
 	document.getElementById('THANKYOU').style.opacity  = 1;	
 </script>
 <?php } ?>
-<script>
+<!--<script>
   tinymce.init({
   selector: '#jevcontent',
   menubar: false,
@@ -819,4 +820,4 @@ for (i = 0; i < close.length; i++) {
   }
 });
   
-  </script>
+  </script>-->

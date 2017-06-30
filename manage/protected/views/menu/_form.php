@@ -122,7 +122,6 @@ for($i=0; $i < count($params); $i++){
 			}
 			$criteria1->condition .= " ORDER BY name ASC";
 			$secData = CHtml::listData(Menu::model()->findAll($criteria1),'id','name');
-			
 			if(isset($_REQUEST['menu_id']) && $_REQUEST['menu_id']!=''){
 				$model->parent = $_REQUEST['menu_id'];
 			}
@@ -221,7 +220,11 @@ for($i=0; $i < count($params); $i++){
 				$EventcatData = CHtml::listData(Categories::model()->findAll($criteria,array('order'=>'title')),'id','title');
 				# Sort Category Name
 				natcasesort($EventcatData);
-				echo CHtml::dropDownList('EventcatData',isset($prmsArr['catid0'])?$prmsArr['catid0']:'',$EventcatData,array('required'=>'required','class'=>'form-control','data-rel'=>'chosen','empty' => "Please Select"));
+				
+				if(Yii::app()->session['addCatFromMenu']){
+					$selected[Yii::app()->session['addCatFromMenu']] = array('selected' => 'selected');
+				}
+				echo CHtml::dropDownList('EventcatData',isset($prmsArr['catid0'])?$prmsArr['catid0']:'',$EventcatData,array('required'=>'required','options' =>isset($selected)?$selected:'','class'=>'form-control','data-rel'=>'chosen','empty' => "Please Select"));
 				//echo $form->error($model,'EventcatData',array('style'=>'color:#a94442;'));
 				
 				# Code to add New Category

@@ -54,7 +54,7 @@ $this->setPageTitle(Yii::app()->name.' - Website Settings');
 	<div class="form-group clearfix">
 		<label for="email" class="col-md-3"><?php echo $form->labelEx($model,'email'); ?></label>
 		<div class="col-md-9">
-			<?php echo $form->emailField($model,'email',array('class'=>'form-control')); ?>
+			<?php echo $form->textField($model,'email',array('class'=>'form-control')); ?>
 			<?php echo $form->error($model,'email',array('style'=>'color:#a94442;')); ?>
 		</div>
 	</div>

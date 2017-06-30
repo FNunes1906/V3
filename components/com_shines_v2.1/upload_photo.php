@@ -1,4 +1,3 @@
-
 <?php
 	include("connection.php");
 	define(ABS_SRV_PATH,'../../');
