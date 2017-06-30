@@ -34,7 +34,8 @@ function m_show_banner($cat) {
 		}else{
 			 // $url=$d['clickurl'];
 			$ad['type']			= 'internal';
-			$ad['url']	= 'http://'.$_SERVER["HTTP_HOST"].'/adsclick.php?option=com_banners&task=click&bid='.$d['bid'];
+			//$ad['url']	= 'http://'.$_SERVER["HTTP_HOST"].'/adsclick.php?option=com_banners&task=click&bid='.$d['bid'];
+			$ad['url']	= $d['clickurl'];
 			$ad['banner']		= 'http://'.$_SERVER["HTTP_HOST"].'/partner/'.$partnerBannerImg.'/images/banners/'.$d["imageurl"];
 		}
 		$ad['clickurl'] = $d['clickurl'];
