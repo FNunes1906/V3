@@ -24,6 +24,7 @@ $button_text	 = $params->get('button_text', JText::_('Search'));
 $width			 = intval($params->get('width', 20));
 $maxlength		 = $width > 20 ? $width : 20;
 $text			 = $params->get('text', JText::_('search...'));
+$text = 'Search Events, Locations and Articles';
 $set_Itemid		 = intval($params->get('set_itemid', 0));
 $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 

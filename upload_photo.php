@@ -132,7 +132,10 @@
 				/******AMAZON SES EMAIL CODE by Yogi : June 2016 START */
 				include_once(JPATH_BASE .DS.'twmailer.php');
 				# Send Email to Admin
-				$sendmail = sendTwMail($adminEmail,$subject,$message,'no-reply@townwizard.com');
+				$allEmail = explode(',',$adminEmail);
+				foreach($allEmail as $to_email){
+					$sendmail = sendTwMail($to_email,$subject,$message,'no-reply@townwizard.com');
+				}
 				
 				//send the message, check for errors
 				if(isset($sendmail) && ($sendmail == 'success')){

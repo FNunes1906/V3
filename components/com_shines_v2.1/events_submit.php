@@ -202,7 +202,11 @@ if (isset($_POST['action'])){
 					# Date: 25 May 2016
 					include_once(JPATH_BASE .DS.'twmailer.php');
 					# Send Email to Admin
-					$mail_status_admin = sendTwMail($adminEmail,$subject,$message,'no-reply@townwizard.com');
+					// # code for send email to multiple user/email
+					$allEmail = explode(',',$adminEmail);
+					foreach($allEmail as $to_email){
+						$mail_status_admin = sendTwMail($to_email,$subject,$message,'no-reply@townwizard.com');
+					}
 					
 					# Send Email to event submitter
 					$mail_status_user = sendTwMail($custom_anonemail,$subject,$ack_message,'no-reply@townwizard.com');
