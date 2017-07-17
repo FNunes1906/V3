@@ -31,7 +31,6 @@ function displayData($row,$menu_ids){ ?>
 							$counter++;
 						}
 					}
-					
 					?>
 	</span>
 	<ul itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address">

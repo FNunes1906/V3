@@ -23,20 +23,48 @@ $ics_res=mysql_fetch_array($ics_query);
 $ics=$ics_res['ics_id'];
 global $msg;
 $msg="";
+if(isset($_FILES['userphoto'])) {
+    if($_FILES['userphoto']['size'] > 2097152) { //2 MB (size is also in bytes) ?> 
+		
+       <script>
+	   	document.getElementById('GREATER_FILE_SIZE').style.display  = "block";
+		document.getElementById('GREATER_FILE_SIZE').style.opacity  = 1;
+				//alert ("<?php echo JText::_('GREATER_FILE_SIZE') ?>");
+		</script>
+	  <!-- echo JText::_('GREATER_FILE_SIZE');-->
+ <?php  } else {
+ 	error_reporting(E_ALL);
+		if(($image = file_upload(array(
+			'name'      => 'userphoto',
+		  'path'      => ABS_SRV_PATH.'partner/'.$_SESSION["partner_folder_name"].'/images/thumbs/stories/',
+		  'savename'  => $_FILES['userphoto']['name']
+		))) != FALSE) {
 
+		  image_convert(array(
+		    'path'  => ABS_SRV_PATH.'partner/'.$_SESSION["partner_folder_name"].'/images/thumbs/stories/',
+		    'name'  => $image,
+		    'size'  => array(
+		      'phoca_thumb_l_' => '600px',
+		      'phoca_thumb_m_' => '180px',
+		      'phoca_thumb_s_' => '60px',
+		    ),
+		  ));
+		  $photo_upload = True;
+		  $imageContent = "<img src='http://".$_SERVER["HTTP_HOST"]."/partner/".$_SESSION["partner_folder_name"].'/images/stories/'.$image."' /> <br/>";
+		}
+    }
+}
 if (isset($_POST['action'])){
 	if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']=='Spremi' || $_POST['action']=='Bewaar' || $_POST['action']=='Salve' ||  $_POST['action']=='Sauvegarder'){
 		
 		$postRecheck = checkPostParameter($_POST);
 		
 		if($postRecheck){
-		
 			$title = addslashes($_POST['title']);
 			$allDayEvent=$_POST['allDayEvent'];
 			$custom_field4=$_POST['custom_field4'];
 			$publish_up=$_POST['publish_up'];
 			$publish_down=$_POST['publish_down'];
-			
 				if($_POST['allDayEvent']=='on') {
 					$datem=$publish_up." ".'00:00:00';
 					$datee=$publish_down." ".'23:59:59';
@@ -63,7 +91,7 @@ if (isset($_POST['action'])){
 			$cat_id=$_POST['catid'];
 			
 			$ics_id=$_POST['ics_id'];
-			$jevcontent=addslashes($_POST['jevcontent']);
+			$jevcontent= addslashes($imageContent.$_POST['jevcontent']);
 			$location=$_POST['location'];
 			$custom_anonusername=$_POST['custom_anonusername'];
 			$custom_anonemail=$_POST['custom_anonemail'];
@@ -93,13 +121,12 @@ if (isset($_POST['action'])){
 			
 			// Data insertion in event detail table  // 
 			$ins_query=mysql_query("insert into jos_jevents_vevdetail(dtstart,duration,dtend,description,geolon,geolat,location,priority,summary,sequence,state,multiday,hits,noendtime,modified) values('".$start_12h."','0','".$end_12h."','".$jevcontent."','0','0','".$location."','0','".$title."','0','".$custom_field4."','1','0','".$noend."',now())");
-			
+
 			// Query for last record id of detail table
 			$last_id_query=mysql_query("SELECT LAST_INSERT_ID() as last_id");
 			$result_lastid=mysql_fetch_array($last_id_query);
 			$last_id=$result_lastid['last_id'];
-			
-			
+
 			// Data insertion in event table
 			$ins_query1=mysql_query("insert into jos_jevents_vevent(icsid,catid,uid,created,created_by,rawdata,detail_id,state,access,lockevent,author_notified) values('".$ics_id."','".$cat_id."','".$userid."',now(),'".$uid."','".$rawdata."','".$last_id."','".$custom_field4."','0','0','0')");
 			
@@ -108,7 +135,7 @@ if (isset($_POST['action'])){
 			$last_id_query1=mysql_query("SELECT LAST_INSERT_ID() as last_id1");
 			$result_lastid1=mysql_fetch_array($last_id_query1);
 			$last_id1=$result_lastid1['last_id1'];
-			
+
 			//#DD#
 			if($last_id1>0){
 				$ins_query0=mysql_query("insert into jos_jev_anoncreator(ev_id ,name,email) values('".$last_id1."','".$custom_anonusername."','".$custom_anonemail."')"); 
@@ -121,13 +148,11 @@ if (isset($_POST['action'])){
 			// Data insertion in event repetition table 
 			$ins_query3=mysql_query("insert into jos_jevents_repetition(eventid,eventdetail_id,duplicatecheck,startrepeat,endrepeat) values('".$last_id1."','".$last_id."','".$duplicate_value."','".$datem."','".$datee."')");
 			
-			
 			$db =& JFactory::getDBO();
 			$vevent->icsid = $ics_id;
 			$abc=JLoader::register('JEventsCategory',JEV_ADMINPATH."/libraries/categoryClass.php");
 			$cat = new JEventsCategory($db);
 			$cat->load($vevent->catid);
-			
 				if(!empty($last_id) && (!empty($last_id1))) {
 					//require_once($var->tpl_path."events_submit_mail.tpl");
 					$msg=JText::_('THANKS_MSG');
@@ -175,14 +200,12 @@ if (isset($_POST['action'])){
 					
 					# New file added by Yogi for Email functioanlity as per AMAZONE
 					# Date: 25 May 2016
-
 					include_once(JPATH_BASE .DS.'twmailer.php');
 					# Send Email to Admin
 					$mail_status_admin = sendTwMail($adminEmail,$subject,$message,'no-reply@townwizard.com');
 					
 					# Send Email to event submitter
 					$mail_status_user = sendTwMail($custom_anonemail,$subject,$ack_message,'no-reply@townwizard.com');
-					
 					//send the message, check for errors
 					if(isset($mail_status_admin) && ($mail_status_admin == 'success')){
 					    $mailMessage = JText::_('THANKS_MSG');
@@ -418,6 +441,22 @@ function form_validation() {
 		document.adminForm.custom_anonemail.focus();
 		return false;
 	}
+	
+	var filename=document.adminForm.userphoto.value;
+	var ext = filename.substring(filename.lastIndexOf('.') + 1);
+	if(filename != ""){
+ 		if(ext == "gif" || ext == "GIF" || ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG" || ext == "PNG" || ext == "png"){
+			var iSize = document.getElementById('userphoto').files[0].size;
+			if(iSize > 2097152){
+				setAlertMessage('GREATER_FILE_SIZE');
+				return false;
+			}
+			return true;
+		}else{
+			setAlertMessage('FILE_TYPE');
+			return false;
+		}
+	}
 }
 </script>
 <style>
@@ -448,6 +487,16 @@ function form_validation() {
   <span class="closebtn">&times;</span>  
 <?php echo JText::_('VALID_EMAIL') ?>
 </div>
+<div id="GREATER_FILE_SIZE" class="alert info" style="display: none;">
+  <span class="closebtn">&times;</span>  
+  <?php echo JText::_('GREATER_FILE_SIZE'); ?>
+</div>
+
+<div id="FILE_TYPE" class="alert info" style="display: none;">
+  <span class="closebtn">&times;</span>  
+  <?php echo JText::_('FILE_TYPE') ?>
+
+</div>
 
 <script type="text/javascript" language="javascript">
 	  function setAlertMessage(displayId){
@@ -455,6 +504,8 @@ function form_validation() {
 	  	document.getElementById('VALID_EV_CAT').style.display  = "none";
 	  	document.getElementById('VALID_EV_USER').style.display  = "none";
 	  	document.getElementById('VALID_EMAIL').style.display  = "none";
+		document.getElementById('GREATER_FILE_SIZE').style.display  = "none";
+	  	document.getElementById('FILE_TYPE').style.display  = "none";
 	  	document.getElementById(displayId).style.display  = "block";
 		document.getElementById(displayId).style.opacity  = 1;
 		hideLoader();	  	
@@ -468,113 +519,7 @@ function form_validation() {
 	  
 </script>
 <?php 
-if(isset($_FILES['userphoto'])) {
-    if($_FILES['userphoto']['size'] > 2097152) { //2 MB (size is also in bytes) ?> 
-		
-       <script>
-	   	document.getElementById('GREATER_FILE_SIZE').style.display  = "block";
-		document.getElementById('GREATER_FILE_SIZE').style.opacity  = 1;
-				//alert ("<?php echo JText::_('GREATER_FILE_SIZE') ?>");
-		</script>
-	  <!-- echo JText::_('GREATER_FILE_SIZE');-->
- <?php  } else {
-        function file_upload($param){
-		  if(isset($_FILES[$param['name']]['name'])) {
-		    $name = $param['savename'];
-		    if(@move_uploaded_file($_FILES[$param['name']]['tmp_name'], $param['path'].$name)) {
-		      return $name;
-		    }
-		  }
-		  return false;
-		}
 
-		function image_convert($param) {
-		  ini_set('max_execution_time', 40);
-		  ini_set('memory_limit', "128M");
-		  if(!is_file($param['path'].$param['name'])) {
-		    return false;
-		  }
-		  if(false == ($prop = @getimagesize($param['path'].$param['name']))) {
-		    return false;
-		  }
-		  switch($prop[2]) {
-		    case 1: //GIF
-		      $image = imagecreatefromgif($param['path'].$param['name']);
-		    break;
-		    case 2: //JPG
-		      $image = imagecreatefromjpeg($param['path'].$param['name']);
-		    break;
-		    case 3: //PNG
-		      $image = imagecreatefrompng($param['path'].$param['name']);
-		    break;
-		    case 15: //WBMP
-		      $image = imagecreatefromwbmp($param['path'].$param['name']);
-		    break;
-		  }
-			
-		  $name = str_replace('o', '', $param['name']);
-		  $src_w = $prop[0];
-		  $src_h = $prop[1];
-		  $percent = $src_h/$src_w;
-		  //fprint($prop); _x('image_convert');
-		  foreach($param['size'] as $key => $dst_w) {
-		    if($dst_w <= $src_w) {
-		      $dst_h = intval($dst_w * $percent);
-		    } else {
-		      $dst_w = $src_w;
-		      $dst_h = $src_h;
-		    }
-		    $canvas = imagecreatetruecolor($dst_w, $dst_h);
-		    imagecopyresampled($canvas, $image, 0, 0, 0, 0, $dst_w, $dst_h, $src_w, $src_h);
-		    $name_arr = explode(DS, $param['path'].$name);
-		    $new_name = array_pop($name_arr);
-		    $new_name = $key.$new_name;
-		    unset($name_arr);
-		    imagejpeg($canvas, $param['path'].$new_name);
-		    imagedestroy($canvas);
-		  }
-		  return true;
-		}
-
-		function _clean($param) {
-		  return mysql_real_escape_string(trim($param));
-		}
-
-		if(($image = file_upload(array(
-		  'name'      => 'userphoto',
-		  'path'      => ABS_SRV_PATH.'partner/'.$_SESSION["partner_folder_name"].'/images'.DS.'phocagallery'.DS.'thumbs'.DS,
-		  'savename'  => $_FILES['userphoto']['name']
-		))) != false) {
-		  image_convert(array(
-		    'path'  => ABS_SRV_PATH.'partner/'.$_SESSION["partner_folder_name"].'/images'.DS.'phocagallery'.DS.'thumbs'.DS,
-		    'name'  => $image,
-		    'size'  => array(
-		      'phoca_thumb_l_' => '600px',
-		      'phoca_thumb_m_' => '180px',
-		      'phoca_thumb_s_' => '60px',
-		    ),
-		  ));
-		  $metadesc = array(
-		    'username' => $_POST['username'],
-		    'location' => $_POST['useremail']
-		  );
-			$image1=rand().$image;
-		 $sql = "insert into `jos_phocagallery` set 
-		      `catid` = 1, 
-		      `title` = '"._clean($_POST['caption'] ?: 'No Caption')."', 
-		      `alias` = '"._clean(str_replace(' ', '-', strtolower(trim($_POST['caption']))))."', 
-		      `filename` = '".$image1."', 
-		      `approved` = 0, 
-		      `description` = '"._clean($_POST['description'])."', 
-		      `metadesc` = '".serialize($metadesc)."'";
-		  //fprint($sql);
-		  mysql_query($sql);
-		  @copy(ABS_SRV_PATH.'partner/'.$_SESSION["partner_folder_name"].'/images'.DS.'phocagallery'.DS.'thumbs'.DS.$image, ABS_SRV_PATH.'partner/'.$_SESSION["partner_folder_name"].'/images'.DS.'phocagallery'.DS.$image1);
-		  @unlink(ABS_SRV_PATH.'partner/'.$_SESSION["partner_folder_name"].'/images'.DS.'phocagallery'.DS.'thumbs'.DS.$image);
-		  $photo_upload = True;
-		}
-    }
-}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -772,52 +717,3 @@ for (i = 0; i < close.length; i++) {
 	document.getElementById('THANKYOU').style.opacity  = 1;	
 </script>
 <?php } ?>
-<!--<script>
-  tinymce.init({
-  selector: '#jevcontent',
-  menubar: false,
-	inline: true,
-  plugins: 'image',
-  toolbar: 'image',
-  // enable title field in the Image dialog
-  image_title: true, 
-  // enable automatic uploads of images represented by blob or data URIs
-  automatic_uploads: true,
-  // URL of our upload handler (for more details check: https://www.tinymce.com/docs/configure/file-image-upload/#images_upload_url)
-  images_upload_url: 'postAcceptor.php',
-  // here we add custom filepicker only to Image dialog
-  file_picker_types: 'image', 
-  // and here's our custom image picker
-  file_picker_callback: function(cb, value, meta) {
-    var input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    
-    // Note: In modern browsers input[type="file"] is functional without 
-    // even adding it to the DOM, but that might not be the case in some older
-    // or quirky browsers like IE, so you might want to add it to the DOM
-    // just in case, and visually hide it. And do not forget do remove it
-    // once you do not need it anymore.
-
-    input.onchange = function() {
-      var file = this.files[0];
-      
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = function () {
-        var id = 'blobid' + (new Date()).getTime();
-        var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-        var base64 = reader.result.split(',')[1];
-        var blobInfo = blobCache.create(id, file, base64);
-        blobCache.add(blobInfo);
-
-        // call the callback and populate the Title field with the file name
-        cb(blobInfo.blobUri(), { title: file.name });
-      };
-    };
-    
-    input.click();
-  }
-});
-  
-  </script>-->

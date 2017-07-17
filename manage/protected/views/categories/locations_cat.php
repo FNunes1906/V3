@@ -166,8 +166,6 @@ if(isset($_REQUEST["menu_id"])){
 					'label' => '<i class="glyphicon glyphicon-trash icon-white"></i>',
 					'imageUrl' => false,
 					'csrf'=>true,
-					# To HIDE delete button keep visible = false 
-					'visible'=>'false',
 				),
 			)	
 		),

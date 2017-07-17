@@ -86,14 +86,14 @@ for($i=0; $i < count($params); $i++){
 		</div>
 	</div>-->
 <div class="adminform">
-	
+
 <div class="col-md-12">
 	<legend>Menu Settings</legend>
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 	<div class="form-group clearfix">
 		<label for="menu-title" class="col-md-2"><?php echo $form->labelEx($model,'name'); ?></label>
 		<div class="col-md-10">
-			<?php echo $form->textField($model,'name',array('class'=>'form-control','placeholder'=>'Enter Title')); ?>
+			<?php echo $form->textField($model,'name',array('class'=>'form-control','placeholder'=>'Enter Title','value'=>$name,'onchange'=>'storeToSession("name",$(this).val())')); ?>
 			<?php echo $form->error($model,'name',array('style'=>'color:#a94442;')); ?>
 		</div>
 	</div>
@@ -124,8 +124,11 @@ for($i=0; $i < count($params); $i++){
 			$secData = CHtml::listData(Menu::model()->findAll($criteria1),'id','name');
 			if(isset($_REQUEST['menu_id']) && $_REQUEST['menu_id']!=''){
 				$model->parent = $_REQUEST['menu_id'];
+			}elseif(Yii::app()->session['Menu[parent]']){
+				$model->parent = Yii::app()->session['Menu[parent]'];
 			}
-			echo $form->dropDownList($model,'parent',$secData,array('class'=>'form-control','data-rel'=>'chosen','empty' => "Please Select",'onchange'=>"return hideMenuicon(this.value);"));
+
+			echo $form->dropDownList($model,'parent',$secData,array('options' => array($model->parent => array('selected'=>true)),'class'=>'form-control','data-rel'=>'chosen','empty' => "Please Select",'onchange'=>"return hideMenuicon(this.value);"));
 			echo $form->error($model,'parent',array('style'=>'color:#a94442;'));
 			?>
 		</div>
@@ -742,3 +745,16 @@ for($i=0; $i < count($params); $i++){
  
 </script>
 </div><!-- form -->
+<script>
+	function storeValueToSession(){
+		var txt_name = ''; 
+		var txt_value = ''; 
+		var storeToSession = '';
+		$('.form-control').each(function(){
+			txt_name = $(this).attr('name');
+			txt_value = $(this).val();
+			storeToSession = "<?php Yii::app()->session['"+txt_name+"'] = "+txt_value+"; ?>";
+		});
+		return;
+	}
+</script>

@@ -171,22 +171,22 @@ if(count($secData)>0)
 		array(
 			'class'=>'TWButtonColumn',
 			'afterDelete'=>'function(link,success,data){ if(success) $("#status_msg").html(data);$("#status_msg").show();$("#status_msg").animate({opacity: 1.0}, 5000).fadeOut("slow");}',
-			'template'=>'{update}',
+			'template'=>'{update} {delete}',
 			'header'=>'Action',
 			'buttons' => array(
 				'update' => array(
 					'options' => array('rel' => 'tooltip', 'data-toggle' => 'tooltip', 'title' => Yii::t('app', 'Edit')),
-					'label' => '<i class="glyphicon glyphicon-edit icon-white" style="padding-right: 0px"></i>',
+					'label' => '<i class="glyphicon glyphicon-edit icon-white" style="padding-right: 10px"></i>',
 					'imageUrl' => false,
 					'url'=>'CController::createUrl("/contents/update",array("id"=>$data->id,"front"=>1,"menu_id"=>$_REQUEST["menu_id"]))',
 					
 				),
-				/*'delete' => array(
+				'delete' => array(
 					'options' => array('rel' => 'tooltip', 'data-toggle' => 'tooltip', 'title' => Yii::t('app', 'Delete')),
 					'label' => '<i class="glyphicon glyphicon-trash icon-white"></i>',
 					'imageUrl' => false,
 					'csrf'=>true,
-				),*/
+				),
 			),
 			'htmlOptions' => array('style' => 'vertical-align: middle;text-align: center;'),	
 		),

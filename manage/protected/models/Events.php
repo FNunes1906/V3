@@ -24,6 +24,7 @@
 class Events extends CActiveRecord
 {
 	public $event_search;
+	public $event_rule;
 	public $event_feature;
 	/**
 	 * @return string the associated database table name
@@ -50,7 +51,7 @@ class Events extends CActiveRecord
 			array('refreshed, created', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('ev_id, icsid, catid, uid, refreshed, created, created_by, created_by_alias, modified_by, rawdata, recurrence_id, detail_id, state, access, lockevent, author_notified,event_feature,event_search', 'safe', 'on'=>'search'),
+			array('ev_id, icsid, catid, uid, refreshed, created, created_by, created_by_alias, modified_by, rawdata, recurrence_id, detail_id, state, access, lockevent, author_notified,event_feature,event_search,event_rule', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,6 +65,7 @@ class Events extends CActiveRecord
 		return array(
 		'categoriesCat' => array(self::BELONGS_TO,'Categories','catid'),
 		'eventsDetaildata' => array(self::BELONGS_TO,'EventsDetail','detail_id'),
+		'eventsRuledata' => array(self::BELONGS_TO,'EventsRule','ev_id'),
 		'eventsrepeatdata' => array(self::BELONGS_TO,'Eventsrepetition','ev_id'),
 		'eventfeatured' => array(self::BELONGS_TO,'Eventcustomfields',array('detail_id'=>'evdet_id')),
 		'usersData' => array(self::BELONGS_TO,'Users','created_by'),
@@ -93,6 +95,7 @@ class Events extends CActiveRecord
 			'lockevent' => 'Lockevent',
 			'author_notified' => 'Author Notified',
 			'eventsDetaildata.summary' => 'Event Summary',
+			'eventsRuledata' => 'Event Rule Summary',
 		);
 	}
 
@@ -116,8 +119,8 @@ class Events extends CActiveRecord
 	
 		$criteria->with = array('eventsDetaildata','eventfeatured');
 		$criteria->compare('eventsDetaildata.summary',$this->event_search, TRUE );
-		
-		
+		$criteria->with = array('eventsRuledata','eventsRuledata');
+		$criteria->compare('eventsRuledata',$this->event_rule, TRUE );
 		
 		# Yogi: Code to hide or show past event START ****************
 		if(!isset($_REQUEST['past']) || $_REQUEST['past'] == 0){

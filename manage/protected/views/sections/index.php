@@ -142,8 +142,6 @@ if(isset($_REQUEST["menu_id"])){
 					'imageUrl' => false,
 					'url'=>'CController::createUrl("/sections/delete",array("id"=>$data->id,"cat_id"=>$_REQUEST["cat_id"]))',
 					'csrf'=>true,
-					# To HIDE delete button keep visible = false 
-					'visible'=>'false',
 				),
 			),
 			'htmlOptions' => array('style' => 'vertical-align: middle;'),	

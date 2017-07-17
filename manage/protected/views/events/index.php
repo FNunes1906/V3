@@ -162,7 +162,8 @@ if(isset($_REQUEST["menu_id"])){
 			'header'=>'Event Date',
 			'type' => 'raw',
 			//'value'=>'"From: ".date("Y-m-d H:i:s",$data->eventsDetaildata->dtstart)."<br>End: ".date("Y-m-d H:i:s",$data->eventsDetaildata->dtend)',
-			'value'=>'"From: ".checkDateEventDate($data->eventsDetaildata->dtstart) ."<br/>End: ". checkDateEventDate($data->eventsDetaildata->dtend)',
+			//'value'=>'"From: ".checkDateEventDate($data) ."<br/>End: ". checkDateEventDate($data->eventsDetaildata->dtend)',
+			'value'=>'checkDateEventDate($data->eventsRuledata,$data->ev_id)',
 			'htmlOptions'=>array('style' => 'width: 18%;vertical-align: middle;text-align:left;'),
 		),
 		array( 
@@ -254,15 +255,32 @@ function reloadGrid(data) {
 * 
 * @return date
 */
-function checkDateEventDate($date){
-	if(date('H:i:s',$date) == '23:59:59'){
-		$date = date('Y-m-d',$date); 
-	}elseif(date('H:i:s',$date) == '00:00:00'){
-		$date = date('Y-m-d',$date); 
-	}else{
-		$date = date('Y-m-d H:i:s',$date); 
+
+function checkDateEventDate($rule,$eventid){
+	$sqlProvider = new CSqlDataProvider("SELECT MIN(startrepeat) as startDate, MAX(endrepeat) as endDate FROM jos_jevents_repetition WHERE eventid = $eventid GROUP BY eventid");
+	$sqlProvider = $sqlProvider->getData();
+	$stdate = $sqlProvider[0]['startDate'];
+	$enddate = $sqlProvider[0]['endDate'];
+	switch($rule->freq){
+		case "DAILY":
+			$start_date = date('Y-m-d', strtotime("-1 days"));
+			break;
+		
+		default:
+			$start_date = $stdate;
+			break;
 	}
-	return $date;
+	
+	$start_date = date('Y-m-d', strtotime($start_date)) ;
+	$stop_date = date('Y-m-d',strtotime($enddate));
+	$start_time = date('H:i:s',strtotime($stdate));
+	$stop_time = date('H:i:s',strtotime($enddate));
+	
+	$start_time = ($start_time == '00:00:00')?NULL:$start_time;
+	$stop_time = ($stop_time == '23:59:59')?NULL:$stop_time;
+	
+	echo 'From : ' . $start_date.' '.$start_time . '<br />To : ' . $stop_date.' '.$stop_time . '<br/>';
+	
 }
 
  ?>

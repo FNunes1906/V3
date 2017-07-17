@@ -169,9 +169,16 @@ class CategoriesController extends Controller
 				$model = $this->loadModel($id);
 				$menuName = $model->title;
 				if(!isset($_GET['ajax']))
-			        Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contain Articles. There may currently be Articles within the Article Trash Manager which you must delete first..</span>');
+			        Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contains subcategory - delete the sub categories first</span>');
 			    else
-			        echo '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contain Articles. There may currently be Articles within the Article Trash Manager which you must delete first..</span>';
+			        echo '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contains subcategory - delete the sub categories first</span>';
+			}elseif($this->actionFindMenu($id)){
+				$model = $this->loadModel($id);
+				$menuName = $model->title;
+				if(!isset($_GET['ajax']))
+			        Yii::app()->user->setFlash('success','<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contains menu - delete the menu first</span>');
+			    else
+			        echo '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contains menu - delete the menu first</span>';
 			}else{
 			    $this->loadModel($id)->delete();
 			    if(!isset($_GET['ajax']))
@@ -340,6 +347,9 @@ class CategoriesController extends Controller
 						if($this->actionFindChildren($autoId)){
 							$menuName = $model->title;
 							$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contain Articles. There may currently be Articles within the Article Trash Manager which you must delete first..</span>';
+						}elseif($this->actionFindMenu($autoId)){
+							$menuName = $model->title;
+							$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-circle-exclamation-mark" style="color:#d9534f;font-size: 16px;"></i><span style="color:#d9534f;"><strong> Sorry!! </strong> Category(ies): '.$menuName.' cannot be removed as they contains menu - delete the menu first</span>';
 						}else{
 							$model->delete();
 							$msg = '<button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">&nbsp;×</span><span class="sr-only">Close</span></button><i class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"> </i>&nbsp;<strong>Success!</strong> Your Category deleted successfully.';
@@ -397,5 +407,21 @@ class CategoriesController extends Controller
 		}
 		return $return;
 	}
-
+	
+	public function actionFindMenu($id,$level = 0){
+		$return = FALSE;
+		if((int)$level > 0){
+			$return = true;
+		}
+		if((int)$level == 0){
+			$criteria = new CDbCriteria;
+	        $criteria->condition="params not LIKE '%catid0=:id%'";
+	        $criteria->params=array(':id'=>$id);
+	        $model = Menu::model()->findAll($criteria);
+			foreach ($model as $key) {
+				$return = $this->actionFindMenu($key->id, (int)$level+1);
+			}
+		}
+		return $return;
+	}
 }

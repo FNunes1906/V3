@@ -19,7 +19,6 @@ global $var;
 include_once(JPATH_BASE .DS.'/inc/var.php');
 include_once(JPATH_BASE .DS.'/inc/base.php');
 
-
 _init();
 // end v2 code
 $jconfig = new JConfig();
@@ -151,6 +150,7 @@ if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']==
 				$rec		= mysql_query("select * from `jos_pageglobal`");
 				$pageglobal	= mysql_fetch_array($rec);
 				$adminEmail = $pageglobal['email'];				
+
 				$sitename =  $jconfig->sitename;
 				
 				$message = '
@@ -192,7 +192,12 @@ if($_POST['action']=='Save' || $_POST['action']=='Guardar' || $_POST['action']==
 
 				include_once(JPATH_BASE .DS.'twmailer.php');
 				# Send Email to Admin
-				$mail_status_admin = sendTwMail($adminEmail,$subject,$message,'no-reply@townwizard.com');
+				
+				// # code for send email to multiple user/email
+				$allEmail = explode(',',$adminEmail);
+				foreach($allEmail as $to_email){
+					$mail_status_admin = sendTwMail($to_email,$subject,$message,'no-reply@townwizard.com');
+				}
 				
 				# Send Email to event submitter
 				$mail_status_user = sendTwMail($custom_anonemail,$subject,$ack_message,'no-reply@townwizard.com');

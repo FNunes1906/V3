@@ -307,4 +307,17 @@ class EventsController extends Controller
 	    }
 	} // Ending Function
 	
+	public function getStartEndDate($event_id){
+		//$date = Eventsrepetition::model()->find("evdet_id ='" . $event_id . "'");
+		/*$row = (new \yii\db\Query())
+			    ->select('MIN(startrepeat) as startDate, MAX(endrepeat) as endDate')
+			    ->from('jos_jevents_repetition')
+			    ->where('eventid')
+			    ->groupBy('eventid')
+			    ->one();
+				echo "<pre>";
+				var_dump($row);
+				echo "</pre>";*/
+	}
+	
 }

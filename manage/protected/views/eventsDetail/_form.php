@@ -13,7 +13,7 @@
 		$(document).ready(function(){
 			var addLocationFromEvent = "<?php echo Yii::app()->session['addLocationFromEvent']; ?>";
 			if(addLocationFromEvent){
-////				insertlocationid(addLocationFromEvent);
+				insertlocationid(addLocationFromEvent);
 			}
 		});
 </script>

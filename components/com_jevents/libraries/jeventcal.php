@@ -177,8 +177,8 @@ class jEventCal {
 	function sdn() { return $this->_sdn; }
 
 
-	function publish_up() {return$this->_publish_up;}
-	function publish_down() {return$this->_publish_down;}
+	function publish_up() {return $this->_publish_up;}
+	function publish_down() {return $this->_publish_down;}
 
 	function reccurtype() {	return $this->_reccurtype;	}
 	function reccurday() {	return $this->_reccurday;	}
