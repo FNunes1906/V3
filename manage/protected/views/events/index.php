@@ -265,6 +265,9 @@ function checkDateEventDate($rule,$eventid){
 		case "DAILY":
 			$start_date = date('Y-m-d', strtotime("-1 days"));
 			break;
+		case "none":
+			$start_date = date('Y-m-d', strtotime($stdate));
+			break;
 		
 		default:
 			$start_date = $stdate;
