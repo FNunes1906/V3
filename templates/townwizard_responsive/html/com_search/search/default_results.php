@@ -1,4 +1,17 @@
 <?php defined('_JEXEC') or die('Restricted access'); 
+
+function seoUrl($string) {
+    //Lower case everything
+    $string = strtolower($string);
+    //Make alphanumeric (removes all other characters)
+    $string = preg_replace("/[^a-z0-9_\s-]/", "", $string);
+    //Clean up multiple dashes or whitespaces
+    $string = preg_replace("/[\s-]+/", " ", $string);
+    //Convert whitespaces and underscore to dash
+    $string = preg_replace("/[\s_]/", "-", $string);
+    return $string;
+}
+
 // display search result for common search
 function displayData($row,$menu_ids){ ?>
 		<?php if($row['locimg']!='') {?>
@@ -56,7 +69,7 @@ function displayArticles($row,$link){ ?>
 	<span class="placesCategorie">
 		<?php echo $row['menu']; ?>
 	</span>
-	<p><?php echo $row['introtext'];?></p>
+	<p><?php echo $row['introtext']; ?></p>
 <?php } 
 
 // display results for events
@@ -203,7 +216,7 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 					$rows=$db->query();
 					
 					/*fetching contents*/
-					$sql1 = 'SELECT *,cat.title as menu FROM jos_content AS cont LEFT JOIN jos_categories as cat ON cat.id = cont.catid where (cont.title LIKE "%'.addslashes($ser).'%" OR cont.introtext LIKE "%'.addslashes($ser).'%" OR cont.fulltext LIKE "%'.addslashes($ser).'%") AND (cont.publish_down >=  CURDATE() OR cont.publish_down = "0000-00-00 00:00:00" ) order by cont.title,cont.ordering';
+					$sql1 = 'SELECT cont.*,cat.title as menu FROM jos_content AS cont LEFT JOIN jos_categories as cat ON cat.id = cont.catid where (cont.title LIKE "%'.addslashes($ser).'%" OR cont.introtext LIKE "%'.addslashes($ser).'%" OR cont.fulltext LIKE "%'.addslashes($ser).'%") AND (cont.publish_down >=  CURDATE() OR cont.publish_down = "0000-00-00 00:00:00" ) order by cont.title,cont.ordering';
 					$db->setQuery($sql1);
 					$rows1=$db->query();
 					
@@ -306,7 +319,7 @@ function displayEvents($ev_res,$menu_ids,$format_res){
 									<?php while($row = mysql_fetch_array($rows1)){ ?>
 										<div class="placesContainer" itemtype="http://schema.org/Organisation" itemscope="">
 											<?php 
-											$link = "http://".$_SERVER['HTTP_HOST']."/".$row['menu']."/".$row['id'].'-'.$row['title'];
+											$link = "http://".$_SERVER['HTTP_HOST']."/".strtolower($row['menu'])."/".$row['id'].'-'.seoUrl($row['title']) ;
 											displayArticles($row,$link);
 											?>
 										 </div>
