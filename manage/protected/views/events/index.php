@@ -257,16 +257,49 @@ function reloadGrid(data) {
 */
 
 function checkDateEventDate($rule,$eventid){
+	// check for show past event or not
+	if(isset($_GET['past']) && $_GET['past'] == 1){
+		$showPast = TRUE;
+	}else{
+		$showPast = FALSE;
+	}
+	
 	$sqlProvider = new CSqlDataProvider("SELECT MIN(startrepeat) as startDate, MAX(endrepeat) as endDate FROM jos_jevents_repetition WHERE eventid = $eventid GROUP BY eventid");
 	$sqlProvider = $sqlProvider->getData();
 	$stdate = $sqlProvider[0]['startDate'];
 	$enddate = $sqlProvider[0]['endDate'];
+	//SU,MO,TU,WE,TH,FR,SA
+	$days = array('SU'=>'sunday','MO'=>'monday','TU'=>'tuesday','WE'=>'wednesday','TH'=>'thursday','FR'=>'friday','SA'=>'saturday',
+	'Sun'=>'sunday','Mon'=>'monday','Tue'=>'tuesday','Wed'=>'wednesday','Thu'=>'thursday','Fri'=>'friday','Sat'=>'saturday');
 	switch($rule->freq){
 		case "DAILY":
-			$start_date = date('Y-m-d', strtotime("-1 days"));
+			if(date('Y-m-d') < date('Y-m-d',strtotime($stdate))){
+				$start_date = date('Y-m-d',strtotime($stdate));
+			}elseif($showPast){
+				$start_date = date('Y-m-d', strtotime($stdate));
+			}else{
+				$start_date = date('Y-m-d', strtotime("-1 days"));
+			}
 			break;
+		case "WEEKLY":
+			if(date('Y-m-d') < date('Y-m-d',strtotime($stdate))){
+				$start_date = date('Y-m-d',strtotime($stdate));
+			}elseif($showPast){
+				$start_date = date('Y-m-d', strtotime($stdate));
+			}else{
+				$rule->byday = ($rule->byday)?$rule->byday:date('D', strtotime("-1 days"));
+				$startDay = explode(',',$rule->byday);
+				$nextDay = strtotime("next ".$days[$startDay[0]]);
+				$start_date = date('Y-m-d', $nextDay);
+			}
+			break;
+			
 		case "none":
-			$start_date = date('Y-m-d', strtotime($stdate));
+			if(date('Y-m-d') < date('Y-m-d',strtotime($stdate))){
+				$start_date = date('Y-m-d',strtotime($stdate));
+			}else{
+				$start_date = date('Y-m-d', strtotime($stdate));
+			}
 			break;
 		
 		default:
