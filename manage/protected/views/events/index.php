@@ -269,8 +269,11 @@ function checkDateEventDate($rule,$eventid){
 	$stdate = $sqlProvider[0]['startDate'];
 	$enddate = $sqlProvider[0]['endDate'];
 	//SU,MO,TU,WE,TH,FR,SA
-	$days = array('SU'=>'sunday','MO'=>'monday','TU'=>'tuesday','WE'=>'wednesday','TH'=>'thursday','FR'=>'friday','SA'=>'saturday',
-	'Sun'=>'sunday','Mon'=>'monday','Tue'=>'tuesday','Wed'=>'wednesday','Thu'=>'thursday','Fri'=>'friday','Sat'=>'saturday');
+	$days = array(	'SU'=>'sunday','MO'=>'monday','TU'=>'tuesday','WE'=>'wednesday',
+					'TH'=>'thursday','FR'=>'friday','SA'=>'saturday',
+					'Sun'=>'sunday','Mon'=>'monday','Tue'=>'tuesday','Wed'=>'wednesday',
+					'Thu'=>'thursday','Fri'=>'friday','Sat'=>'saturday');
+	
 	switch($rule->freq){
 		case "DAILY":
 			if(date('Y-m-d') < date('Y-m-d',strtotime($stdate))){
@@ -291,6 +294,25 @@ function checkDateEventDate($rule,$eventid){
 				$startDay = explode(',',$rule->byday);
 				$nextDay = strtotime("next ".$days[$startDay[0]]);
 				$start_date = date('Y-m-d', $nextDay);
+			}
+			break;
+		case "MONTHLY":
+			if(date('Y-m-d') < date('Y-m-d',strtotime($stdate))){
+				$start_date = date('Y-m-d',strtotime($stdate));
+			}elseif($showPast){
+				$start_date = date('Y-m-d', strtotime($stdate));
+			}else{
+				$start_date = date("Y-m-d",strtotime("next month",mktime(0,0,0,date('m'),rtrim($rule->bymonthday,'+'),date('Y'))));
+			}
+			break;
+		case "YEARLY":
+			if(date('Y-m-d') < date('Y-m-d',strtotime($stdate))){
+				$start_date = date('Y-m-d',strtotime($stdate));
+			}elseif($showPast){
+				$start_date = date('Y-m-d', strtotime($stdate));
+			}else{
+				//$rule->byyearday
+				$start_date = date("Y-m-d",strtotime("this month next year",mktime(0,0,0,1,rtrim($rule->byyearday,'+'),date('Y'))));
 			}
 			break;
 			
