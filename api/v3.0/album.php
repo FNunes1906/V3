@@ -5,7 +5,7 @@ ini_set('display_errors',1);
 /* HIDE iadbanner -- YOGI */
 include("class.paggination.php");
 include("connection.php");
-include("common_function.php");
+
 
 
 /* No need */
@@ -127,22 +127,25 @@ if(isset($_GET['id']) && $_GET['id'] != 0){
 				$v['photos'][] = $r1;
 			}
 					
-			$id = rand(0, (count($v['photos']) - 1));
-			$tmp_arr = explode('/', $v['photos'][$id]['filename']);
-			$userfolder = '';
-			$filename = $v['photos'][$id]['filename'];
-		
-			if(count($tmp_arr) > 1){
-				$userfolder = $tmp_arr[0].'/';
-				$filename = $tmp_arr[1];
+			//$id = rand(0, (count($v['photos']) - 1));
+			foreach($v['photos'] as $photo){
+				$tmp_arr    = explode('/', $photo['filename']);
+				$userfolder = '';
+				$filename   = $photo['filename'];
+
+				if(count($tmp_arr) > 1){
+					$userfolder = $tmp_arr[0].'/';
+					$filename   = $tmp_arr[1];
+				}
+				unset($tmp_arr);
+
+				if(trim($userfolder) == '' && trim($filename) == ''){
+					$data[$num_records]['thumb'][] = '';
+				}else{
+					$data[$num_records]['thumb'][] = 'http://'.$_SERVER['SERVER_NAME'].'/partner/'.$_SESSION['partner_folder_name'].'/images/phocagallery/'.$userfolder.'thumbs/phoca_thumb_m_'.$filename;
+				}
 			}
-			unset($tmp_arr);
 			
-			if(trim($userfolder) == '' && trim($filename) == ''){
-				$data[$num_records]['thumb'] = '';
-			}else{
-				$data[$num_records]['thumb'] = 'http://'.$_SERVER['SERVER_NAME'].'/partner/'.$_SESSION['partner_folder_name'].'/images/phocagallery/'.$userfolder.'thumbs/phoca_thumb_m_'.$filename;
-			}
 			$data[$num_records]['num_photos'] = mysql_num_rows($rec1);
 			++$num_records;
 		}			
